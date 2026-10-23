@@ -1,0 +1,26 @@
+[
+  {
+    "file": "hkust-official-phd-sample.pdf",
+    "source_url": "https://fytgs.hkust.edu.hk/system/files/thesis_sample_page_phd.pdf",
+    "sha256": "e2f497f6184c31a60be073936d4d0660d02fdc5a4084f84ebef5293af989a930",
+    "bytes": 218004,
+    "note": "官方博士示例页，8 页",
+    "access_date": "2026-10-23"
+  },
+  {
+    "file": "yu-peng-2012-phd.pdf",
+    "source_url": "https://home.cse.ust.hk/~raywong/PGGuideline/defense/Thesis-Template.zip",
+    "sha256": "c303cd438646557bbc0998c759a6dce56f67e28c75523125932863d6d6ee6f63",
+    "bytes": 821762,
+    "note": "从 Thesis/GracePhDThesis.pdf 提取，167 页",
+    "access_date": "2026-10-23"
+  },
+  {
+    "file": "tianqing-fang-2024-phd.pdf",
+    "source_url": "https://tqfang.github.io/files/Tianqing_Ph_D__thesis.pdf",
+    "sha256": "54cceaaecf3b2b160a67608d7ae4603edf83941faaa3236228ba94f536c75687",
+    "bytes": 2500064,
+    "note": "作者公开博士论文，155 页",
+    "access_date": "2026-10-23"
+  }
+]
