@@ -1,0 +1,23 @@
+% Exact active-source transcription, numerical values retained.
+\begin{table}[ht!]
+	\centering   
+	\caption{Statistics of the tested datasets, where we divide their original labels into multiple rounds. We achieve a balanced testing set on the IFS-Rel datasets by assigning each label 40 testing samples.}
+	\label{tab:gorag:dataset}
+	
+	\resizebox{\linewidth}{!}{
+		\begin{tabular}{l|c|c|c|c|c|c|c|c|c|c} 
+			\hline\hline
+			\multirow{2}{*}{\textbf{Dataset}} & \multirow{2}{*}{\textbf{Avg. Text Token}} & \multicolumn{2}{c|}{\textbf{R1}} & \multicolumn{2}{c|}{\textbf{R2}} & \multicolumn{2}{c|}{\textbf{R3}} & \multicolumn{2}{c|}{\textbf{R4}} & \textbf{Total}  \\ 
+			\cline{3-11}
+			&                                           & Testing data & Label \#          & Testing data & Label \#          & Testing data & Label \#          & Testing data & Label \#          & Testing data    \\ 
+			\hline
+			CAD \cite{gorag-vidgen2021introducing}      & 154                                       & 240        & 4                & 60        & 3                & 286        & 3                & 231        & 3                & 817           \\ \hline
+			WOS \cite{gorag-kowsari2017hdltex}      & 200                                       & 2,417        & 32                & 2,842        & 53                & 2,251        & 30                & 1,886        & 18                & 9,396           \\ 
+			\hline
+			
+			IFS-Rel \cite{gorag-xia-etal-2021-incremental}      & 105                                       & 640        & 16               & 640        & 16                & 640        & 16                & 640        & 16                & 2,560           \\ 
+			\hline\hline
+		\end{tabular}
+	}
+	
+\end{table}

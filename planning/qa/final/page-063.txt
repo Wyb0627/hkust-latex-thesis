@@ -1,0 +1,35 @@
+Table4.2: WOSclassificationaccuracywithonesupportexampleperlabel. Qwen2.5-7Bisthe
+RAGbackbone. ValuesandemphasisreproducethecorrespondingcolumnsofGORAG’smain
+table.
+Method Round1 Round2 Round3 Round4
+Entailment 0.3695 0.3994 0.4510 0.4030
+NaiveRAG 0.3885 0.2267 0.1821 0.1653
+LongLLMLingua 0.3806 0.2155 0.1770 0.1468
+GraphRAG 0.3852 0.2213 0.1816 0.1641
+LightRAG 0.3930 0.2202 0.1743 0.1625
+HippoRAG2 0.4133 0.2552 0.2205 0.1906
+GORAG 0.4866 0.4790 0.4736 0.4420
+4.5.1 Compared methods and controls
+The study compares six baselines. Entailment constructs text–label entailment pairs and fine-
+tunes a classifier [36]. NaiveRAG retrieves text chunks from the indexed support information.
+Retrieved context is compressed by LongLLMLingua before classification [41]. GraphRAG,
+LightRAG, and HippoRAG2 supply graph-based retrieval alternatives [17, 19, 42]. Their clas-
+sificationresultsaremeasurementsoftheadaptationsusedinthisstudy.
+EntailmentusesRoBERTa-largeforfivetrainingepochs,abatchsizeof16,alearningrateof
+10−6, and Adam. LongLLMLingua is evaluated with compression rates of 0.75, 0.8, and 0.85,
+with 0.8 selected in the reported comparison. GraphRAG and LightRAG use local search. The
+source uses the nano-graphrag implementation for GraphRAG and NaiveRAG and the other
+baselines’ oﬀicial implementations. These choices identify the systems that produced the re-
+portedresults.
+The baseline collection tests several ways of allocating external context. NaiveRAG selects
+passages. LongLLMLingua changes which tokens remain in that context. The graph base-
+lines select graph-associated information. GORAG explicitly selects labels through a connec-
+tion structure and expands its lexical index online. These differences motivate the comparison,
+whiletheablationsisolatechangeswithinGORAG’sownpipelinemoredirectly.
+4.6 Classification Results
+ThetablesbeginningwithTables4.2and4.5preservetheWOSandIFS-Relportionsofthemain
+accuracytable. Eachdatasetissplitintoone-,five-,andten-shottables,withroundsascolumns.
+Eachvalueisafractionalaccuracy,andthelabelsavailabletothemodelexpandwiththeround.
+The tables should be read by comparing methods under the same dataset, round, support size,
+andbackbone.
+49

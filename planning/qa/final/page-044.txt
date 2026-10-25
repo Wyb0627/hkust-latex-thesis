@@ -1,0 +1,4 @@
+Figure 3.5: Contextual type-representation training with masked and ground-truth table inputs.
+Thetrue-typetableisconstructedduringtraining. OriginalimagereproducedfromKGLink[1],
+Fig.6.
+30

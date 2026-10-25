@@ -1,0 +1,18 @@
+{\small
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{lrrrrr}
+\caption{MMQA component ablations, reproduced from published Table 9, p.~2490~\cite{mgrag-paper}. Time is in hours.}\label{tab:mgrag:ablation}\\
+\toprule
+Model & SIM. & ACC. & ROG. & BLEU & Time\\
+\midrule\endfirsthead
+\multicolumn{6}{c}{\tablename\ \thetable\ (continued)}\\
+\toprule
+Model & SIM. & ACC. & ROG. & BLEU & Time\\
+\midrule\endhead
+\bottomrule\endfoot
+Without graph matching        & 0.8362          & 0.7260          & 0.6657          & 0.5774          & \underline{4.4 h}       \\
+With CLIP encoder  & \underline{0.8513}  & \underline{0.7376}  & \underline{0.6744}  & \underline{0.7008}  & 4.5 h               \\
+Vanilla MGRAG, $k=5$         &           0.8260      &    0.6887             &         0.6266        &            0.5773     &       4.7 h              \\
+\textbf{MGRAG} & \textbf{0.8533} & \textbf{0.7442} & \textbf{0.6763} & \textbf{0.7215} & \textbf{4.3 h}      \\
+\end{longtable}
+}

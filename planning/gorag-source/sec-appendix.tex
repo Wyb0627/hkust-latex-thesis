@@ -1,0 +1,264 @@
+\section{Notations}
+\label{sec:notations}
+
+Due to the space limitations, we put the summary table on important notations here in \autoref{tab:notation}. 
+
+\begin{table}[h]
+	
+	\centering
+	\caption{Summary on Important Notations.}
+	\label{tab:notation}
+	\setlength\tabcolsep{4pt}
+	\resizebox{\linewidth}{!}{
+		\begin{tabular}{l|p{7cm}}
+			\hline\hline
+			
+			\textbf{Notations}   & \textbf{Meanings}  \\ 
+			\hline
+			
+			$t$ & Text. \\  \hline
+			
+			$w$ & The edge weight.  \\ 		\hline
+			
+			$r$ & The round of label updating.   \\ \hline
+			
+			$\tau$ & The keyword extraction threshold.   \\ \hline
+			
+			$y \in \mathcal{Y}^r$ & The target label at round $r$.  \\ \hline
+			
+			$k$  &  The number of labeled data provided per target label. \\ \hline
+			
+			
+			$f^r_\theta$ & The function that learn all target labels' score for texts. \\ 		\hline
+			
+			$\mathbf{s}^r$ &  The score for all target labels at round $r$. \\ \hline
+			
+			$y^{r*}$ &   	The predicted label for the text at round $r$.\\ 	\hline
+			
+			$\mathcal{G}^r(\mathcal{V},\mathcal{E})$ & weighted graph with node set  $\mathcal{V}$ and edge set $\mathcal{E}. $ \\ \hline
+			
+			$\mathcal{Y}^r$ &  New target labels at round $r$. \\ \hline
+			
+			
+			
+			$\mathcal{D}^r$ & The labeled training text for all new labels at round $r$.  \\ \hline
+			
+			
+			
+			$	\mathcal{T}^r$ &	Unlabeled texts at round $r$. \\ 		\hline		
+			
+			
+			$	\mathcal{T}_{test}^r$ & The query text for at round $r$.	\\ 		\hline	
+			
+			$	\mathcal{K}^r$ &	The extracted keyword set for new labels of round $r$.	\\ \hline					
+			
+			
+			$	\mathcal{V}_{new}^r$ & The set of new graph nodes to be added in round $r$.	\\ 		\hline					
+			$\mathcal{N}(\cdot)$& The neighbor set of a node in the weighted graph.	\\ 		\hline		
+			
+			$p_{extract}$&	The extraction instruction prompt.	\\ \hline					
+			$p_{gen}$& The generation instruction prompt. 	\\ 	\hline		
+			$p_{classify}$&The classification instruction prompt. 	\\ 	\hline		
+			
+			$CS(\cdot)$ &  	The correlation score between keywords and labels. \\ 		\hline			
+			
+			$w^r_{v,y}$&  The weight of edge $e_{v,y}$ in round $r$.	\\ 		\hline			
+			$P_{u,v}$&  The shortest path between node $u$ and node $v$.	\\ 		\hline			
+			$\mathcal{V}^t_{exist}$& The keywords extracted from $t$ and exist in graph.	\\ 		\hline		
+			
+			$\mathcal{V}^t_{notexist}$ & The keywords extracted from $t$ and not exist in graph.	\\ 		\hline		
+			
+			
+			$\mathcal{E}_{oi}^t$ &  Edges added based on text $t$. \\ 
+			\hline\hline
+		\end{tabular}
+	}
+	
+\end{table}
+
+
+
+\section{Proof}
+\label{sec:proof}
+Here we prove our Adaptive Candidate Label Generation problem can be reduced from the NP-hard Steiner Tree problem \cite{Su2020}.
+\begin{theorem}
+	The Adaptive Candidate Label Generation problem is NP-hard. 
+\end{theorem}
+\begin{proof}
+	
+		To demonstrate that the Adaptive Candidate Label Generation problem is NP-hard, we provide a simple reduction of our problem from the Steiner Tree problem. Since the Steiner Tree problem is already proven to be NP-hard \cite{Su2020}, we show that there is a solution for the Steiner Tree problem if and only if there is a solution for our problem. Firstly, given a solution $S$ for our problem, we can construct a Steiner Tree by generating a minimum spanning tree for all nodes in $S$ on graph $\mathcal{G}^r$ then connecting all nodes from $\mathcal{V}_{exist}^t$ to their closest neighbor nodes in $S$. Secondly, any Steiner Tree $ST$ that contains any node $y\in\mathcal{V}^r_t$ is also a solution of our problem with $|\{y\in\mathcal{V}^r_t\}|$ nodes.
+		Thus, we prove that the adaptive candidate type generation problem is NP-hard. 
+		
+\end{proof}	
+
+
+\section{Pseudo Code of GORAG}
+\label{sec:pseduo_code}
+In this section, we provide the pseudo code of GORAG's graph construction and adaptive candidate type generation algorithm in \autoref{alg:graph_construction} and \autoref{alg:mehlhorn}, respectively. 
+
+\section{Complexity Analysis}
+\label{sec:complexity}
+
+Firstly, we analyze the time and space complexity of GORAG's graph construction. For the text keyword extraction procedure, the time complexity would be $O(|\mathcal{D}^r|)$; If label names are available, the time complexity of generating label descriptions and extract label keywords would be $O(|\mathcal{Y}^r|)$; Calculating the TFIDF and indexing edges to graph would require $O(|\mathcal{V}_{new}^r||\mathcal{D}^r|)$ times, and merging graph requires $O(|\mathcal{Y}^r||\mathcal{Y}^{r-1}|)$. Hence, the total time complexity of GORAG's graph construction at the $r$-th round would be: 
+
+\begin{center}
+	$O(|\mathcal{Y}^r||\mathcal{Y}^{r-1}|+|\mathcal{V}_{new}^r||\mathcal{D}^r|)$. 
+\end{center}
+
+
+For the space complexity, the graph is stored with the weighted adjacency matrix, hence needs $O(|\mathcal{E}^r|)$ space; Storing the training corpus at the $r$-th round would need $O(|\mathcal{D}^r|)$ space; 
+
+Storing the representative keywords $\mathcal{K}_{\hat{\mathcal{Y}_t^r}}$ would need $O(|\mathcal{K}_{\hat{\mathcal{Y}_t^r}}|)$ space. Hence the total space complexity of GORAG's graph construction at the $r$-th round would be: 
+
+\begin{center}
+	$O(|\mathcal{E}^r|+|\mathcal{D}^r|+|\mathcal{K}_{\hat{\mathcal{Y}_t^r}}|)$. 
+\end{center}
+
+
+
+The time complexity of GORAG's adaptive candidate type generation algorithm is the same with the Mehlhorn algorithm, which is $O(|\mathcal{E}^r|+|\mathcal{V}^r|log|\mathcal{V}^r|)$ \cite{MEHLHORN1988125}; The time complexity of the online indexing mechanism would cost $|\mathcal{V}_{notexist}^r||\mathcal{T}_{test}^r|$; 
+
+Hence, the total time complexity of GORAG's adaptive retrieval can be denoted as
+\begin{center} $O(|\mathcal{T}_{test}^r|(|\mathcal{E}^r|+|\mathcal{V}_{notexist}^r||\mathcal{T}_{test}^r|+|\mathcal{V}^r|log|\mathcal{V}^r|)).$
+\end{center}
+
+
+For the space complexity, $O(|\mathcal{E}^r|)$ to store the graph, and $O(|\mathcal{T}_{test}^r|)$ space is needed to store the testing corpus. Hence, the total space complexity of GORAG's Retrieval and Classification procedure is 
+\begin{center}
+	$O(|\mathcal{E}^r|+|\mathcal{T}_{test}^r|).$
+\end{center}
+
+
+\begin{algorithm}[t]
+	\caption{Graph Construction Algorithm of GORAG at round $r$}\label{alg:graph_construction}
+	\begin{algorithmic}[1]
+		\REQUIRE $\mathcal{D}^r$: Training text set at the $r$-th round and the provided label $y_i \in \mathcal{Y}^r$ for each training text $t_j$; 
+		
+		$p_{extraction},\ p_{gen}$: The extraction and description generation instruction prompt; 
+		
+		$\mathcal{G}^{r-1}$: Weighted graph of the previous round $r-1$.
+		\ENSURE $\mathcal{G}^r$: Constructed weighted graph at the $r$-th round.
+		\STATE Let $\mathcal{V}_{text}^r=\emptyset$, $\mathcal{V}_{label}^r=\emptyset$, $\mathcal{E}_{new}^r=\emptyset$
+		\FOR{each text $t\in \mathcal{T}^r$}
+		\STATE $\mathcal{V}_{text}^r=\mathcal{V}_{text}^r\cup KeywordExtract(t) \cup y_t$
+		
+		\ENDFOR
+		\IF{label names are available}
+		\FOR{each label $y_i\in \mathcal{Y}^r$}
+		\STATE Get some label related keywords $\mathcal{V}_{label}^r=LLM(p_{gen},\mathcal{D}^r)\cup \mathcal{V}_{label}^r$.
+		
+		
+		\ENDFOR
+		\ENDIF
+		\STATE Let $\mathcal{V}_{new}^r=\mathcal{V}_{text}^r \cup \mathcal{Y}^r_{new} \cup \mathcal{V}_{label}^r$ be the new node set at the $r$-th round.
+		\FOR{each node $v\in\mathcal{V}_{new}^r$}
+		\STATE $\mathcal{E}_{new}^r=\mathcal{E}_{new}^r\cup e_{v,y_i}$
+		\STATE $\mathcal{W}_{new}^r=\mathcal{W}_{new}^r\cup w_{v,y_i}^r$
+		\ENDFOR
+		\STATE Let $\mathcal{G}^r_{new}=(\mathcal{V}_{new}^r,\mathcal{E}_{new}^r)$ be the newly constructed graph for at the $r$-th round.
+		\STATE Let $\mathcal{G}^r=Merge(\mathcal{G}^r_{new}, \mathcal{G}^{r-1})$ be the final constructed graph at the $r$-th round.
+		\RETURN  $\mathcal{G}^r$
+	\end{algorithmic}
+\end{algorithm}
+
+
+
+
+\section{Experiment Details}\label{sec:exp_detail}
+\subsection{Introduction of chosen baselines}
+\label{sec:baselines}
+	As shown in \autoref{tab:main_exp},  we compare GORAG's performance with 7 baselines from 3 technical categories for few-shot experiments, they are NN-based Entailment \cite{xia-etal-2021-incremental}, Long Context-based NaiveRAG \cite{gao2023retrieval}, LongLLMLingua \cite{jiang-etal-2024-longllmlingua}, and Graph-based  GraphRAG \cite{edge2024local}, LightRAG \cite{guo2024lightrag}, and HippoRAG2 \cite{gutiérrez2025ragmemory}.
+
+	\noindent \textbf{NN-based Models}
+	\begin{itemize}[leftmargin=10pt]
+		\item \textbf{Entailment} \cite{xia-etal-2021-incremental}: Entailment concatenates the text data with each of the label names to form multiple entailment pairs with one text sample, hence increasing the number of training data and enhance its finetuning of a RoBERTa PLM \cite{liu2019roberta}. 
+		
+		
+		
+		
+		
+	\end{itemize} 
+	\noindent \textbf{Long Context RAG Models}
+	\begin{itemize}[leftmargin=10pt]
+		\item \textbf{NaiveRAG} \cite{gao2023retrieval}: It acts as a foundational baseline of current RAG models. When indexing, it stores text segments in a vector database using text embeddings. When querying, retrieves the side information based on their vector similarity to the query.
+		
+		\item \textbf{LongLLMLingua} \cite{jiang-etal-2024-longllmlingua}: LongLLMLingua is a instruction aware prompt compressor model, it applies LLM's generation perplexity to filter out un-important tokens of the model input based on the retrieved side information and the task instruction. 
+		
+		
+	\end{itemize} 
+	\noindent \textbf{Graph-based RAG Models}
+	\begin{itemize}[leftmargin=10pt]
+		\item \textbf{GraphRAG} \cite{edge2024local}: It employs LLM for graph construction. When retrieval, it aggregates nodes into communities w.r.t. the query, and generates community reports to encapsulate global information from texts.
+		
+		\item \textbf{LightRAG} \cite{guo2024lightrag}: 
+		
+		It calculates the vector similarity between query extracted entities and graph nodes, achieving a one-to-one mapping from entities to graph nodes, then retrieve these nodes' graph neighborhood.
+		
+		
+		
+		
+		
+		\item \textbf{HippoRAG2} \cite{gutiérrez2025ragmemory}: 
+		
+		It employs LLM for graph construction, and also add the text chunks as nodes in the graph.  
+		
+		As a result, it directly retrieves Top-k text chunks based on their respective nodes' PPR score.
+	\end{itemize} 
+
+	\begin{algorithm}[t!]
+	\caption{Adaptive Candidate Type Generation Algorithm}
+	\label{alg:mehlhorn}
+	\begin{algorithmic}[1]
+		\REQUIRE $\mathcal{G}^r (\mathcal{V}^r, \mathcal{E}^r,\mathcal{W}^r)$: The constructed weighted graph;
+		
+		$\mathcal{V}_{exist}^t \subseteq \mathcal{V}^r$: A set of keyword nodes extracted from text $t$ and can be mapped to graph $\mathcal{G}$; 
+		
+		$\mathcal{Y}^r$: The target label set at the $r$-th round.
+		\ENSURE $\hat{\mathcal{Y}}^r_t$: The candidate type retrieved for text $t$.
+		\STATE Compute a minimum spanning tree $MST$ of the graph $\mathcal{G}$.
+		\STATE Let $\mathcal{V}_{term} = \mathcal{V}_{exist}^t \cap  \mathcal{V}(MST)$ be the terminal nodes in $MST$
+		\STATE Construct a weighted auxiliary graph $H$: $ \mathcal{V}(H) = \mathcal{V}_{term}$
+		\FOR{each pair of terminals $u, v \in \mathcal{V}_{term}$}
+		\STATE Find the shortest path $P_{uv}$ in $MST$ from $u$ to $v$
+		\STATE Let $w^H_{u, v} = \sum_{e \in P_{uv}} w_e$
+		\ENDFOR
+		\STATE Compute a minimum spanning tree $MST'$ of the auxiliary graph $H$
+		\STATE Let $ST = \emptyset$
+		\FOR{each edge $e_{u, v} \in MST'$}
+		\STATE Add the shortest path $P_{uv}$ in $MST$ to $ST$
+		\ENDFOR
+		\STATE Let $\hat{\mathcal{Y}}^r_t =ST \cap \mathcal{Y}^r$
+		\RETURN $\hat{\mathcal{Y}}^r_t$
+	\end{algorithmic}
+\end{algorithm}
+
+\subsection{Hardware Settings}
+All experiments are conducted on an Intel(R) Xeon(R) Gold 5220R @ 2.20GHz CPU and a single NVIDIA A100-SXM4-40GB GPU.
+\subsection{Case Study}
+\label{ssec:exp:case}
+
+
+In this section, we dig into a test case from the CAD social media abuse detection dataset to demonstrate the ability of GORAG to provide graph-grounded clues, to explain its classification result.
+
+
+As shown in \autoref{fig:case_study}, the keyword entity \textcolor{red}{feminists} and \textcolor{red}{sexual predators} are extracted from the input unlabeled text and mapped to the graph. 
+GORAG then generates a Minimum Cost Steiner Tree through these mapped entities, which also spans through the candidate label \textbf{Insult}. 
+The structure and involved nodes of this generated Steiner Tree (edges in \textcolor{red}{red}) serve as an explicit clue, helping the LLM to classify the text correctly as Insulting Content.
+
+
+
+
+
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=0.9\linewidth]{figures/new_case}
+	\caption{A case from the CAD dataset, where the generated Steiner Tree serves as an explicit clue, helping the LLM to classify the text correctly.}
+	\label{fig:case_study}
+	\vspace{-10px}
+\end{figure}
+
+
+
+
+

@@ -1,0 +1,432 @@
+
+\vspace{-5px}
+\section{Experiments}\label{sec:experiment}
+
+
+
+\begin{table*}[t]
+	\centering
+	\renewcommand{\arraystretch}{1.1}
+	\caption{Classification accuracy on CAD, WOS, and IFS-Rel benchmarks.
+	}
+	\label{tab:main_exp}
+	\vspace{-10px}
+	\setlength\tabcolsep{3pt}
+	\resizebox{\linewidth}{!}{
+		\begin{tabular}{l|l|l|ccc|ccc|ccc|ccc} 
+			\hline\hline
+			\multirow{2}{*}{\textbf{Dataset}} & \multirow{2}{*}{\textbf{Category}} & \multirow{2}{*}{\textbf{Model}} &
+			
+			
+			
+			\multicolumn{3}{c|}{\textbf{Round 1 }}                    & \multicolumn{3}{c|}{\textbf{Round 2 }}                    & \multicolumn{3}{c|}{\textbf{Round 3 }}                    & \multicolumn{3}{c}{\textbf{Round 4 }}                      \\ 
+			\cline{4-15}
+			&                                     &                                  & \textbf{1-shot} & \textbf{5-shot} & \textbf{10-shot} & \textbf{1-shot} & \textbf{5-shot} & \textbf{10-shot} & \textbf{1-shot} & \textbf{5-shot} & \textbf{10-shot} & \textbf{1-shot} & \textbf{5-shot} & \textbf{10-shot}  \\ 
+			\hline
+			\multirow{7}{*}{\textbf{CAD}}     & \multirow{1}{*}{NN-based}           & Entailment    \cite{xia-etal-2021-incremental}                   &     0.2125  &    0.2000  &    0.1208    &     0.1700      &   0.1060    &      0.1634   &   0.1177   &   0.0836      &    0.0785     &  0.0857       &   0.0700       &    0.0529       \\
+			\cline{2-15}
+			& \multirow{2}{*}{Long Context RAG}   & NaiveRAG      \cite{gao2023retrieval}                      &     0.1875  &     0.1375 &  0.0958      &  0.1500         &       0.1100 &     0.0766    &  0.0802    &      0.0563  &   0.0392      &   0.0600      &   0.0405       &    0.0281     \\
+			
+			&   & LongLLMLingua        \cite{jiang-etal-2024-longllmlingua}              &     0.1667  &   0.2417   &     0.2417   &        0.1709   &    0.2167   &     0.2200    & 0.1370     &  0.1587       &    0.1552     &   0.1092      &    0.1359      &     0.1285    \\ \cline{2-15}
+			&         \multirow{4}{*}{Graph-based RAG}                              & GraphRAG       \cite{edge2024local}                  &   \underline{0.3958}    &      \underline{0.3625} &     {0.3292}   &    \underline{0.3167}       &    \underline{0.2933}   &      \underline{0.2833}   & 0.1587     &   \underline{0.1621}      &   \underline{0.1706}      &     0.1200    &   \underline{0.1236}       &        \underline{0.1322}    \\
+			&                                     & LightRAG      \cite{guo2024lightrag}                     &   0.3875	    &   0.3583   &      \underline{0.3373}   &      0.3133     &     0.2867 &   0.2867      &  0.1638    &      0.1502    &      0.1571   &     0.1175    &   0.1102       &    0.1188      \\
+			&                                     & HippoRAG2     \cite{gutiérrez2025ragmemory}               &    0.3667   &     0.2250 &    0.1792    &   0.2953        &    0.2000    &    0.1458    &     \underline{0.1820} &     0.1032    &    0.0746     &    \underline{0.1435}     &         0.0668 &    0.0535    \\ 
+			&                                     & \textbf{GORAG}            &   \textbf{0.6125}    &   \textbf{0.6125}      &     \textbf{0.6125}       &  \textbf{ 0.5867}    &  \textbf{0.5833}     &    \textbf{0.5882}       &     \textbf{0.3993}    &   \textbf{0.4010}      &     \textbf{0.4001}        &       \textbf{0.3133}  &    \textbf{0.3146}        &        \textbf{03139}            \\ \hline\hline
+			\multirow{7}{*}{\textbf{WOS}}     & \multirow{1}{*}{NN-based}           & Entailment    \cite{xia-etal-2021-incremental}                   & {0.3695}          & {0.3823}          & {0.4187}           & \underline{0.3994}          & \underline{0.4471}          & \underline{0.4222}           & \underline{0.4510}          & \underline{0.4857}          & \underline{0.4787}           & \underline{0.4030}          & \underline{0.4387}          & \underline{0.4442}            \\
+			\cline{2-15}
+			& \multirow{2}{*}{Long Context RAG}   & NaiveRAG      \cite{gao2023retrieval}                   & 0.3885          & {0.3904}          & 0.3897           & 0.2267          & 0.2154          & 0.2187           & 0.1821          & 0.1475          & 0.1799           & 0.1653          & 0.1556          & 0.1649            \\
+			
+			
+			&   & LongLLMLingua        \cite{jiang-etal-2024-longllmlingua}            & 0.3806          &          0.3823       &       0.3901           & 0.2155          &          0.2202       &      0.2198            & 0.1770          &        0.1567        &       0.1608        & 0.1468          &         0.1382       &       0.1493            \\ \cline{2-15}
+			&                 \multirow{4}{*}{Graph-based RAG}                      & GraphRAG       \cite{edge2024local}                  & 0.3852          & 0.3897          & 0.3906           & 0.2213          & 0.2197          & 0.2219           & 0.1816          & 0.1770          & 0.1786           & 0.1641          & 0.1634          & 0.1625            \\
+			&                                     & LightRAG      \cite{guo2024lightrag}                   & {0.3930}          & 0.3806          & 0.3815           & 0.2202          & 0.2216          & 0.2145           & 0.1743          & 0.1767          & 0.1799           & 0.1625          & 0.1626          & 0.1632            \\
+			&                                     & HippoRAG2    \cite{gutiérrez2025ragmemory}               &  \underline{0.4133}    &     \underline{0.4245}   &   \underline{0.4208}     &  0.2552    &    0.2656  &     0.2666    &    0.2205  &  0.2210  &   0.2242   &  0.1906     &   0.1860 &      0.1915    \\
+			&                                     & \textbf{GORAG}                   &     \textbf{0.4866}            &        \textbf{0.4990}            &    \textbf{0.5134}              &       \textbf{0.4790}           &        \textbf{0.5109}            &        \textbf{0.5284}          &            \textbf{0.4736}      &       \textbf{0.4996}          &     \textbf{0.5234}              &          \textbf{0.4420}        &         \textbf{0.4717}         &       \textbf{0.4929}             \\ 
+			\hline\hline
+			
+			
+			
+		
+			
+			
+			
+			
+			
+			\multirow{7}{*}{\textbf{IFS-Rel} } & \multirow{1}{*}{NN-based}           & Entailment          \cite{xia-etal-2021-incremental}           & 0.3391          & {0.6046}          & {0.5859}           & {0.4008}          & {0.5516}          & \underline{0.5828}           & {0.3061}          & {0.4703}          & {0.5193}           & {0.2971}          & {0.4395}          & {0.4895}            \\\cline{2-15}
+			& \multirow{2}{*}{Long Context RAG}   & NaiveRAG        \cite{gao2023retrieval}               &{0.7343}          & 0.7344          & 0.7406           & 0.5394          & 0.5406          & 0.5469           & \underline{0.4719}          & 0.4719          & 0.4688           & 0.5233          & {0.4938}         & 0.5000            \\
+		
+			&    & LongLLMLingua       \cite{jiang-etal-2024-longllmlingua}              & \underline{0.8750}          &        \underline{0.8906}         & \underline{0.9219}           & \underline{0.5734}          &         \underline{0.5922}        & 0.5806           & 0.4703          &   \underline{0.4741}              & \underline{0.5225}           & \underline{0.5819}          &      0.4903           & \underline{0.5038}            \\	\cline{2-15}
+			&             \multirow{4}{*}{Graph-based RAG}                         & GraphRAG      \cite{edge2024local}                     & 0.6406     &    0.7813   &   0.8125    &   0.4406    &     0.4688    &   0.4719     &     0.3828   &   0.3734    &     0.3141      &  0.4297   &    0.4422    &   0.3922           \\
+			&                                     & LightRAG    \cite{guo2024lightrag}               & 0.7578     &    0.8281   &    0.8594    &  0.4906    &  0.5155    &    0.5156     &  0.3802    &  0.4010  &  0.4427    &   0.4531    & 0.4804   &  0.4610        \\
+			&                                     & HippoRAG2    \cite{gutiérrez2025ragmemory}               & 0.7313     &     0.7375  &     0.7406   &    0.4875  &    0.5016  &    0.4938     &    0.4297  &   0.4328 & 0.4438     &     0.4984  &   \underline{0.5008} &    0.4953      \\
+			&                                     & \textbf{GORAG}                                      & \textbf{0.9688}   & \textbf{0.9688}   &   \textbf{0.9688}&\textbf{0.5938}  &\textbf{0.6172} & \textbf{0.6250} & \textbf{0.4844}  & \textbf{0.4948} &\textbf{0.5344}  &\textbf{0.6165} & \textbf{0.4988}  & \textbf{0.5469}  \\
+			\hline\hline
+		\end{tabular}
+	}
+	\vspace{-10px}
+\end{table*}
+
+
+In this section,
+we evaluate GORAG's performance on the DFSTC task.
+
+Section~\ref{ssec:exp:setting} introduces the experimental setup, while Section~\ref{ssec:exp:main} presents results on effectiveness and efficiency. Section~\ref{ssec:exp:ablation} covers ablation studies, and Section~\ref{ssec:exp:gen} discusses generalization. 
+	Due to space limitation, we put experiment details, such as hardware settings and case study in \autoref{sec:exp_detail}.
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Experiment Settings}\label{ssec:exp:setting}
+ 
+\subsubsection{\textbf{Few-shot setting}} 
+In this paper, we employ 1-shot, 5-shot, and 10-shot settings for few-shot training, where each setting corresponds to using 1, 5, and 10 labeled training samples per class, respectively. 
+We omit experiments with more than 10 labeled samples per class, as for WOS dataset, there are already over 1300 labeled training data under 10-shot setting. 
+ 
+\subsubsection{\textbf{Datasets}}
+We select the CAD \cite{vidgen2021introducing}, WOS \cite{kowsari2017hdltex}, 
+
+and IFS-Rel \cite{xia-etal-2021-incremental} benchmark to test GORAG's performance. 
+The texts in CAD are social media posts that potentially have different kinds of hate speech and abuse. 
+The texts in the 
+
+IFS-Rel benchmark are segments from web news, and their classifications help detect misinformation. 
+The texts from the WOS benchmark are abstracts or introductions from academic papers, as the WOS dataset contains a vast number of candidate labels and has a large word count for each text; these characteristics make it a challenging benchmark for text classification models. The statistics of these benchmarks are shown in  \autoref{tab:data_stat}.
+
+
+Due to the space limitations, we mainly display our experinents on the 4 rounds split version of all datasets in \autoref{tab:main_exp}, and further experiment results of 6 and 8 rounds are shown in \autoref{fig:robust}.
+
+
+ 
+
+
+
+\noindent\underline{\textit{\textbf{Ethical Disclaimer.}}}
+This research involves sensitive content. All datasets are publicly available, and our study adheres to institutional ethical guidelines to ensure that no personally identifiable information is disclosed. Examples shown in this paper are for illustrative purposes only and do not reflect the authors' views.
+\subsubsection{\textbf{Evaluation Metrics}}
+In this paper, aligning with previous DFSTC models \cite{xia-etal-2021-incremental, meng2020text}, 
+we use classification accuracy as the evaluation metric. 
+Given that LLMs can generate arbitrary outputs that may not precisely match the provided labels, we consider a classification correct only if the LLM's output exactly matches the ground-truth label name or label number.
+
+
+
+
+	
+	
+
+\subsubsection{\textbf{Baselines}}
+
+	
+	We compare six baselines from three types as follows.
+	The details of selected baselines are in Appendix~\ref{sec:baselines}. 
+	\begin{itemize}[leftmargin=*]
+		\item 	 \textbf{One NN-based model: } \textit{Entailment} \cite{xia-etal-2021-incremental}, which converts the task to binary classification, and creates entailment pairs with the labeled data for training. 
+		
+		\item 	 \textbf{Two Long Context RAG models:  }
+		\textit{NaiveRAG} \cite{gao2023retrieval} splits few-shot labeled data into chunks and retrieves the most query similar chunks to augment LLM classification.
+		\textit{LongLLMLingua} \cite{jiang-etal-2024-longllmlingua} further compresses the split chunks of NaiveRAG by filtering out chunk tokens regarding their LLM generation perplexity.
+		
+		\item 	 \textbf{Three Graph-based RAG models: }
+		\textit{GraphRAG} \cite{edge2024local} extracts entities and relations from few-shot training data, and uses LLM to summarize graph neighborhoods as communities for retrieval. 
+		\textit{LightRAG} \cite{guo2024lightrag} drops the community-related procedure and solely retrieves the 1-hop neighborhood of the unlabeled text mapped entities on the graph.
+		\textit{HippoRAG2} \cite{gutiérrez2025ragmemory} retrieves the Top-k candidate labels and their training texts based on their Personalized PageRank (PPR) score on the graph.
+		
+	\end{itemize}
+	
+
+	
+
+
+
+
+Furthermore, as solely put the labeled text within the LLM context can greatly increase costs and affect LLM performance
+
+\cite{chen2023dense,jiang-etal-2024-longllmlingua,liu2024lost}, 
+ 
+we compare the performance of solely using LLM for classification with GORAG under 0-shot setting in \autoref{tab:0_shot}. 
+
+
+ 
+
+\subsubsection{\textbf{Hyperparameter Settings}}
+
+
+
+
+
+Following the exact setting in Entailment's original paper \cite{xia-etal-2021-incremental}, we train the Entailment model with the RoBERTa-large PLM for 5 epochs with a batch size of 16, a learning rate of $1 \times 10^{-6}$, and the Adam optimizer~\cite{kingma2014adam}.
+
+For LongLLMLingua, we test the compression rate within ${0.75, 0.8, 0.85}$ and select 0.8, as it achieves the best overall classification accuracy.
+For all RAG-based baselines, we set all their hyperparameter the same as in their original paper, if not further illustrated.
+For GraphRAG and LightRAG, we use their local search mode, as it achieves the highest classification accuracy on the most complex WOS dataset. 
+
+
+For GraphRAG and NaiveRAG, we use the implementation from \cite{nanographrag}, which optimizes their original code and achieves better time efficiency while not affect the performance.
+
+For all other baselines, we use their official implementations. 
+
+
+	
+
+	
+
+
+
+
+
+\subsection{Few-shot Experiments}\label{ssec:exp:main}
+
+
+
+
+
+
+\begin{figure}[t]
+	\hspace{-11px}
+	\subfigure[\footnotesize{Time cost on WOS dataset.}]{
+		\label{fig:eff_wos}
+		\includegraphics[width=0.5\linewidth]{figures/runtime_wos}
+	}
+	\hspace{-10px}
+	\subfigure[\footnotesize{Time cost on CAD dataset.}]{
+		\label{fig:eff_cad}
+		\includegraphics[width=0.5\linewidth]{figures/runtime_cad}
+	}
+	\vspace{-10px}
+	\caption{Total time cost on 2 datasets under 1-shot setting.}
+	\label{fig:time_cost}
+	\vspace{-10px}
+\end{figure}
+\subsubsection{\textbf{Effectiveness Evaluation}}\label{sec:effectiveness}
+	In \autoref{tab:main_exp}, we apply Qwen2.5-7B backbone for CAD and WOS benchmark. 
+	Due to cost and API risk control (failing to respond when detecting dirty words) reasons, we only use the GPT-4o backbone on the IFS-Rel news benchmark. 
+As shown in \autoref{tab:main_exp}, GORAG achieves the best classification accuracy over all dynamic rounds on all benchmarks. 
+Based on the experiment results, 
+
+
+
+
+
+
+we have the following observations: 
+
+\begin{itemize}[leftmargin=*]
+\item Firstly, with the training data increase (R1 to R4), NN-based Entailment suffers from performance decrease on CAD datasets.
+
+This is because the CAD datasets have an unbalanced label distribution, 
+
+
+as noted in prior studies \cite{liu2023pre,liu2024liberating,lei2023tart}, 
+
+
+
+
+
+NN-based models that apply data augmentation techniques are prone to overfit when the ground truth label distribution are unbalanced.
+
+
+
+
+
+
+\item Secondly,
+NaiveRAG performs better than Entailment in round 1 of the WOS and IFS-Rel datasets by avoiding overfitting, but its long inputs hinder its ability to adapt to dynamic label updates, leading to a significant performance drop from R1 to R4. 
+
+
+
+
+
+
+
+
+
+
+\item Thirdly, 
+Graph-based RAG baselines 
+
+only slightly improve performance across datasets. They struggle with dynamic label updates due to issues like uniform indexing, threshold dependency, and narrow sources, leading to inaccurate retrievals. 
+
+
+
+
+
+\item Lastly, 
+
+from R1 to R4, GORAG adapts better to dynamic label updates, addresses the issues of Graph-based RAG models, and achieve better performance than all tested baselines. 
+
+\end{itemize}
+\begin{table}[t]
+	\centering
+	\caption{Graph incremental trends and memory usage on IFS-Rel dataset round 1 with GPT-4o LLM.}
+	\label{tab:memory_cost}
+	\vspace{-10px}
+	\resizebox{\linewidth}{!}{
+		\begin{tabular}{l|c|c|c|c} 
+			\hline\hline
+			\textbf{Object} & \textbf{25\%} & \textbf{50\%} & \textbf{75\%} & \textbf{100\%}  \\ 
+			\hline
+			Nodes           & 1644          & 3238 (+1394)  & 4482 (+1244)  & 5299 (+817)     \\
+			Edges           & 1771          & 3265 (+1494)  & 4597 (+1332)  & 5503 (+906)     \\
+			Memory          & 13.3 KB       & 27.6 KB       & 37.0 KB       & 46.4 KB         \\
+			\hline\hline
+		\end{tabular}
+	}
+	\vspace{-15px}
+\end{table}
+\subsubsection{\textbf{Efficiency Evaluation}}\label{sec:efficiency}
+
+To evaluate the efficiency of GORAG, we compare the total time cost of GORAG and other baselines on the 4 round split version of WOS and CAD datasets with Qwen2.5-7B backbone, the results are 
+
+shown in Figure \autoref{fig:eff_wos} and \autoref{fig:eff_cad}. 
+
+
+
+Although GORAG's online indexing mechanism introduces a vast amount of knowledge into the weighted graph, we can still achieve comparable or better time efficiency with other baselines. 
+We also list the token usage comparison between GORAG and other baselines in \autoref{tab:token_cost}, and the graph's memory usage and incremental trends in \autoref{tab:memory_cost}, where GORAG consumes fewer tokens than current RAG baselines, and only introduce less than 50KB memory cost compared with solely applying LLMs.
+
+\subsection{Ablation Study}\label{ssec:exp:ablation}
+{\color{black}To further analyze GORAG's performance, 
+we conduct an extensive ablation study under 1-shot setting with Qwen2.5-7B backbone}, as RAG models show similar performance across shot settings. Specifically, we examine how different GORAG components impact classification performance using its variants. GORAG \textit{offline} removes the online indexing mechanism. 
+GORAG \textit{unit}  removes the edge weighting mechanism, every edge in this variant is assigned with weight 1. 
+GORAG \textit{keyword} only uses the keyword extracted from the text to create LLM classification input, rather than the whole text. 
+
+\begin{table}[t]
+	\centering
+	\caption{Token cost on IFS-Rel dataset with 1-shot setting.}
+	\label{tab:token_cost}
+	\vspace{-10px}
+	\resizebox{\linewidth}{!}{
+		\begin{tabular}{l|c|c} 
+			\hline\hline
+			\textbf{Model} & \textbf{AVG Token per Query} & \textbf{AVG Cost per Query (USD)}  \\ 
+			\hline
+			GPT-4o         & 634.6                        & \$0.005                               \\
+			LongLLMLingua  & 2771.3                       & \$0.021                               \\
+			NaiveRAG       & 4537.4                       & \$0.034                               \\
+			LightRAG       & 7866.3                       & \$0.059                               \\
+			GraphRAG       & 9296.3                       & \$0.070                               \\
+			\textbf{GORAG} & \textbf{557.5}               & \textbf{\$0.004}                      \\
+			\hline\hline
+		\end{tabular}
+	}
+	\vspace{-10px}
+\end{table}
+As shown in \autoref{tab:exp_abl}, firstly,
+
+
+GORAG \textit{offline} achieves the worst accuracy, because it lacks a comprehensive retrieval source, making its generated candidate labels inaccurate, hence limits its performance. 
+Secondly, GORAG \textit{unit} outperforms GORAG \textit{offline}, but still sub-optimal to GORAG, demonstrates the importance of modeling the varying importance between keywords and each label, which leads to accurate retrievals. 
+Lastly, GORAG \textit{keywords} demonstrates the important information for text classification are mostly text keywords, as it achieves comparable or better performance than other ablated baselines. 
+
+
+ 
+
+
+
+\begin{table}[t]
+	\centering
+	\caption{Ablation experiments on WOS for GORAG's variants.}
+	\vspace{-10px}
+	\label{tab:exp_abl}
+	\resizebox{\linewidth}{!}{
+		\begin{tabular}{l|l|c|c|c|c} 
+			\hline\hline
+			\multirow{2}{*}{\textbf{Dataset}} & \multirow{2}{*}{\textbf{Model}} & \multicolumn{4}{c}{\textbf{Round}}                                        \\ 
+			\cline{3-6}
+			& & R1              & R2         & R3           & R4  \\ 
+			\hline
+			\multirow{5}{*}{\textbf{WOS}} 
+			& GORAG \textit{offline\&unit}          &     0.2979            &     0.2287            &       0.2645          &      0.2249                        \\
+			& GORAG \textit{offline}          &     0.3063            &     0.2302            &       0.2455          &      0.2156                        \\
+			&  GORAG \textit{unit}             & 0.4706          & 0.4394          & 0.4407          & 0.3899                      \\
+			& GORAG \textit{keyword}         & \underline{0.4746}          & \underline{0.4606}          & \underline{0.4455}          & \underline{0.4030}             \\ 
+			& \textbf{GORAG}                           & \textbf{0.4862}          &  \textbf{0.4649}              &     \textbf{0.4814}            &       \textbf{0.4210}                    \\
+			\hline\hline
+			
+			
+			
+			
+			
+			
+		\end{tabular}
+	}
+	\vspace{-10px}
+\end{table}
+
+
+\subsection{More Generalization Evaluations}
+\label{ssec:exp:gen}
+\subsubsection{Zero-shot Experiments}
+To further study GORAG's 0-shot ability, we compare GORAG's performance with the original powerful LLM GPT-4o \cite{hurst2024gpt} without RAG approaches, and some RAG baselines that are applicable to the 0-shot scenario in \autoref{tab:0_shot}. 
+
+Due to cost constraints, we conducted experiments on the second largest IFS-Rel dataset by providing only the label names, without any labeled data to GORAG for creating the graph.
+
+
+In the 0-shot setting, we input the labels and their LLM generated descriptions as system prompt for each model, 
+and GORAG would extract keywords from label descriptions, without using any information from labeled texts. 
+Note that the Entailment model cannot be applied in this setting, as they require labeled data for training. For other RAG-based baselines, they are considered equivalent to their base LLMs in the 0-shot setting due to a lack of external information.
+
+According to \autoref{tab:0_shot}, GORAG can still achieve better performance than all tested baselines.
+
+
+
+
+
+
+\subsubsection{Round Generalization Evaluation}\label{sec:robuestness}
+	To evaluate GORAG's ability to generalize to a larger number of dynamic rounds, 
+we conducted additional experiments on the 6 and 8 round split versions of the WOS dataset under 1-shot and 5-shot settings, as the WOS dataset contains more testing data and labels than CAD dataset, and more lengthy, complex texts than the IFS-Rel dataset.
+In \autoref{fig:robust}, the results for rounds 1 to 4 are obtained from the 4-round split version, rounds 5 and 6 are obtained from the 6-round split version, and rounds 7 and 8 are obtained from the 8-round split version of the WOS dataset. 
+This setting can ensure a sufficient amount of testing data at each round,
+As illustrated in \autoref{fig:robust}, the classification accuracy of GraphRAG and NaiveRAG drops significantly from round 1 to 8, 
+while GORAG maintains competitive classification accuracy as the number of rounds increases through 1 to 8, with both 1 and 5-shot setting, 
+demonstrating the importance of a more precise retrieval.
+
+
+
+\begin{table}[t]
+	\centering
+	\caption{0-shot experiments for GORAG and RAG baselines on IFS-Rel dataset under 0-shot setting.}
+	\label{tab:0_shot}
+	\vspace{-10px}
+	\resizebox{\linewidth}{!}{
+		\begin{tabular}{l|c|c|c|c} 
+			\hline\hline
+			\textbf{Model}          & \textbf{R1}              & \textbf{R2}              & \textbf{R3}              & \textbf{R4}               \\ 
+			\hline
+			GPT-4o \cite{hurst2024gpt}                  & 0.9219                   & 0.5109                   & 0.4063                   & \underline{0.5936}                    \\ 
+			LongLLMLingua \cite{jiang-etal-2024-longllmlingua}          & \underline{0.9281}                   & \underline{0.5297}                   & \underline{0.4234}                   & 0.5806                    \\
+			LightRAG \cite{guo2024lightrag}                & 0.6718                   & 0.3047                   & 0.2135                   & 0.0977                    \\ 
+			GraphRAG \cite{edge2024local}                & 0.5625                   & 0.1875                   & 0.1458                   & 0.0938                    \\
+			\textbf{\textbf{GORAG}} & \textbf{\textbf{0.9328}} & \textbf{\textbf{0.5406}} & \textbf{\textbf{0.4375}} & \textbf{\textbf{0.6063}}  \\
+			\hline\hline
+		\end{tabular}
+	}
+	\vspace{-10px}
+\end{table}
+\begin{figure}[t]
+	\centering
+	\subfigure[1-shot setting.]{
+		\label{fig:robust_1shot}
+		\includegraphics[width=0.49\linewidth]{figures/wos_4_round_1}
+	}
+	\hspace{-9px}
+	\subfigure[{5-shot setting.}]{
+		\label{fig:robust_5shot}
+		\includegraphics[width=0.49\linewidth]{figures/wos_4_round_5}
+	}
+	\vspace{-15px}
+	\caption{Experiment result of WOS dataset under 1-shot and 5-shot settings for at most 8 rounds.}
+	\label{fig:robust}
+	\vspace{-10px}
+\end{figure}
+
+
+
+

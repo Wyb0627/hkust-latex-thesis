@@ -1,0 +1,31 @@
+A related study on hyper-relational knowledge graphs examines information preservation
+duringstructuralrepresentation. Itdistinguishesqualifierinformationfromgraphreceptionand
+develops FormerGNN in response. This published work appears as a separate section in the
+backgroundchapter. Itsroleistoinformtheanalysisofwhatastructuralrepresentationretains.
+The experiments concern knowledge-graph embedding rather than language-model augmenta-
+tion.
+1.2.3 The evidence interface as a design choice
+The methods can also be understood by asking what information is available at each decision
+point. Before prediction, KGLink observes the table and linked knowledge but uses a masked
+type position in the inference sequence. GORAG observes the supervision available in a round
+andthegraphstateproducedbyearlierpermittedupdates. AGRAGobservestheindexedcorpus
+andthecurrentquery. MGRAGobservesrankedmultimodalchunksandprogressivelyextracts
+facts relevant to its query graph. These information boundaries determine which structural op-
+erationsarepossible.
+1.3 Research Questions
+1.3.1 RQ1: External knowledge for table understanding
+Thefirstresearchquestionaskshowgraph-derivedinformationandapre-trainedlanguagemodel
+canbecombinedwhenatablelacksinformativecontextandthegraph’stypevocabularydiffers
+fromtheannotationtask. Theinputconsistsofatable,anexternalknowledgegraph,andlabeled
+columnsfromthetargettask. Theoutputisasemantictypeforeachtargetcolumn.
+Two diﬀiculties motivate the question. Knowledge-graph linking can return multiple candi-
+date descriptions at different granularities. The target task may require a different abstraction
+fromagraph’savailabletypes. Meanwhile,atableencodercanonlydirectlyreadthecontentin
+its input sequence. Surrounding dates or numeric values may provide little evidence about an
+entity’soccupationorrole. Themethodmustexposeexternalinformationwhilelearninghowit
+relatestothetask’slabels.
+KGLinkanswersthequestionthroughcelllinking,cross-columnneighborhoodfiltering,row
+selection,candidate-typeconstruction,andgraph-derivedfeaturesequences. Thesecomponents
+supply evidence to the table encoder. Contextual masked-type representation training relates
+thatevidencetothetargetannotationvocabulary. Chapter3explainsthemethodandreportsthe
+4

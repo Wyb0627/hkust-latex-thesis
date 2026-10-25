@@ -1,0 +1,31 @@
+These methods establish that table context and column contents supply distinct information for
+typeinference.
+Pre-trained language models offer another way to compute contextual representations. Do-
+duo serializes multiple columns for a language model and learns column annotations from the
+resultingrepresentations[11]. Itscolumn-typeandcolumn-propertytasksrelateindividualcat-
+egories to relationships between columns. The input organization determines which values can
+interact through the encoder. A multi-column sequence lets the representation of one column
+depend on another, subject to the model’s sequence-length constraints. This differs from ap-
+pendingatable-levelfeatureafterindependentlyencodingeachcolumn.
+Knowledge-based methods obtain evidence through a different route. HNN combines
+learned table features with knowledge-base lookup and inter-column semantics [12]. A
+knowledge resource can identify a relation between mentioned objects that the table’s strings
+do not explain. RECA uses related tables as an additional contextual source [13]. These
+approaches show two choices for extending the information available within the target table:
+retrieving external semantic facts and identifying evidence from other tables. Their retrieval
+unitsandpreparationcostsdifferaccordingly.
+KGLinkexaminesthecorrespondencebetweenKG-deriveddescriptionsandadataset’star-
+getlabels[1]. Itretrievescandidatesforcellmentions,usesgraphconnectionsbetweencolumns
+to filter them, and learns from candidate-type text and a separate KG feature sequence. A con-
+textual type-representation task helps the model use graph descriptions when their granularity
+differs from the dataset’s labels. Chapter 3 develops this method and its evidence. The contri-
+butionislocatedattheinterfacebetweenevidenceselectionandrepresentationlearning,where
+graphfactsbecomeinputstoasupervisedannotationdecision.
+These lines of work differ in what makes two values mutually informative. Statistical fea-
+turessummarizeadistribution,topicfeaturesdescribeatable,contextualencodingallowstoken
+interactions, related-table retrieval supplies other examples, and graph lookup exposes explicit
+relations. The differences are relevant even when all methods predict the same label set. They
+determine which information can resolve an ambiguous cell and what happens when one evi-
+dence source has little coverage. The experimental discussion in Chapter 3 retains the selected
+datasets,labelschemes,andbaselinesettingswhencomparingtheiroutcomes.
+11

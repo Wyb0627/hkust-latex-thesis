@@ -1,0 +1,33 @@
+Anevolvingcollectionaddsamaintenanceproblem. Newlyavailabledocuments,examples,
+or labels must enter the index before retrieval can use them. Updating stored evidence can in-
+volve new embeddings, new graph nodes, changed edge weights, or derived summaries. The
+information supplied by an update also matters. A labeled support example carries a provided
+class, while a query processed online may carry only a model prediction. GORAG makes this
+distinction part of its dynamic classification protocol [2]. Its index expands as observations
+arrive,andretrievalusesthegraphstateavailableatthecurrentprediction.
+Context budgets also affect comparison between retrieval procedures. Returning more pas-
+sages can increase coverage and processing cost at the same time, while changing their orga-
+nization can alter repetition or access to supporting relationships. An experiment that fixes a
+generator and corpus can still change the information supplied to that generator through its re-
+trievalbudget. Thestudiesintheresearchchaptersreporttheiractualretrievallimitsandgener-
+ation inputs, alongside task-specific scores. These conditions specify the evidence available for
+apredictionandthecomputationalsettinginwhichitsqualitywasmeasured.
+This view of RAG separates the update unit, the retrieval unit, and the context supplied to
+themodel. Theycanbedifferentobjects. Adocumentcancontributeseveralgraphfacts;graph
+traversal can return a label set; and the final prompt can include both selected structures and
+source passages. The following section reviews methods that use these distinctions to retrieve
+evidencebeyondindependentlyrankedchunks.
+2.4 Graph-based Evidence Retrieval
+A graph index makes relationships among evidence items available during retrieval. Its nodes
+can denote entities, passages, labels, or other task-specific objects. Its edges can represent ex-
+tractedfacts,sharedmentions,semanticsimilarity,oranassociationobservedinexamples. The
+graph representation therefore includes a choice about what information should be connected.
+Queryprocessingthenmakesanotherchoiceaboutwhichofthoseconnectionsshouldinfluence
+thecurrentcontext.
+GraphRAGconstructsanentitygraphandcommunitysummariestosupportquery-focused
+summarization [17]. Its organizationis relevantto questions whose answer requiresan account
+ofacorpus’sthemesratherthanonelocalfact. Community-leveldescriptionsprovidearetrieval
+andsummarizationunitaboveindividualpassages. Thisdiffersfromreturningtheneighborsof
+asinglementionedentity. Thegraphalsosupportsthepreparationofderivedtextualsummaries
+thatcanlaterenterquestionanswering.
+13

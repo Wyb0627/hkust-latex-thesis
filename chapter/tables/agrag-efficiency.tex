@@ -1,0 +1,48 @@
+\begin{table}[tbp]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\caption{Indexing / querying time in minutes. Qwen2.5-14B-Instruct; original paired measurements are preserved.}
+\label{tab:agrag:efficiency}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+Method & Novel & Medical & WOS & IFS-Rel\\
+\midrule
+NaiveRAG & 13 / 371 & 7 / 245 & 2 / 292 & 2 / 225\\
+L.LLMLingua & 51 / 360 & 37 / 305 & 4 / 358 & 3 / 315\\
+RAPTOR & 464 / 250 & 117 / 319 & 30 / 162 & 24 / 121\\
+SiReRAG & 85 / 233 & 40 / 207 & 26 / 139 & 18 / 117\\
+G-Retriever & 19 / 119 & 12 / 145 & 8 / 158 & 3 / 164\\
+MIXRAG & 17 / 388 & 11 / 453 & 5 /  257 & 2 / 193\\
+GraphRAG & 347 / 205 & 194 / 158 & 85 / 240 & 64 / 217\\
+LightRAG & 166 / 221 & 116 / 164 & 42 / 211 & 31 / 197\\
+HippoRAG2 & 95 / 134 & 46 / 130 & 19 / 140 & 15 / 127\\
+F.GraphRAG & 106 / 198 & 48 / 173 & 29 / 186 & 27 / 164\\
+\textbf{AGRAG} & 65 / 142 & 16 / 138 & 16 / 132 & 14 / 124\\
+\bottomrule
+\end{tabular}}
+\end{table}
+\begin{table}[tbp]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\caption{Input / output tokens per query. Same source experiment as the preceding time table.}
+\label{tab:agrag:efficiency-tokens}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+Method & Novel & Medical & WOS & IFS-Rel\\
+\midrule
+NaiveRAG & 9,437 / 1,708 & 7,473 / 379 & 7,292 / 29 & 4,521 / 16\\
+L.LLMLingua & 8,466 / 1,750 & 5,686 / 390 & 5,861 / 31 & 2,757 / 14\\
+RAPTOR & 7,243 / 777 & 4,817 / 695 & 6,007 / 41 & 3,807 / 33\\
+SiReRAG & 7,759 / 800 & 4,918 / 701 & 6,012 / 47 & 3,821 / 36\\
+G-Retriever & 6,344 / 116 & 6,290 / 157 & 6,762 / 12 & 4,002 / 21\\
+MIXRAG & 6,083 / 237 & 4,238 / 230 & 4,193 / 31 & 3,597 / 29\\
+GraphRAG & 12,686 / 2,109 & 8,385 / 1,017 & 11,809 / 351 & 9,009 / 287\\
+LightRAG & 13,145 / 1,233 & 9,535 / 426 & 11,510 / 227 & 7,667 / 199\\
+HippoRAG2 & 8,138 / 1,073 & 6,264 / 595 & 5,066 / 93 & 2,440 / 102\\
+F.GraphRAG & 7,490 / 1,252 & 6,475 / 384 & 4,957 / 35 & 2,217 / 20\\
+\textbf{AGRAG} & 6,487 / 1,140 & 5,145 / 413 & 3,970 / 101 & 1,890 / 93\\
+\bottomrule
+\end{tabular}}
+\end{table}

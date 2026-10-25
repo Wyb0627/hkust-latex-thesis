@@ -1,0 +1,33 @@
+Neighborhoodaggregationcanenrichanentityrepresentation,apathcanprovideevidencecon-
+necting two mentioned entities, and a subgraph can organize several facts relevant to a ques-
+tion. Their usefulness depends on the interpretation of the edges. A factual relation, a lexical-
+similarityedge,andakeyword–labelassociationimposedifferentmeaningsonatraversedcon-
+nection.
+Languagemodelsprovideacomplementaryrepresentation. TheTransformerusesattention
+to compute token representations from their context [7]. BERT pre-trains bidirectional con-
+textual representations and can be fine-tuned with a task-specific output layer [8]. In column
+annotation, contextual token vectors can represent a column and feed a classifier. Generative
+language models instead produce an answer sequence conditioned on the query and supplied
+context. This thesis uses the term language model for both roles and specifies the relevant pre-
+dictioninterfaceineachresearchchapter.
+Knowledgestoredinlearnedparametersandevidencesuppliedatpredictiontimeenterthese
+interfacesdifferently. Fine-tuningmodifiesmodelparametersusinglabeledexamples. Retrieval
+selectsmaterialfromanexternalindexandplacesitinthemodel’sinput. Amodelcancombine
+both, as in KGLink’s learned annotation model with graph-derived features. The later RAG
+systemsemphasizetheselectionofexternalevidenceforagenerator. Comparingthesemethods
+thereforerequiresidentifyingthesourceofevidence,theoperationthatselectsit,andthemodel
+componentthatusestheselectedrepresentation.
+2.2 Knowledge-enhanced Table Understanding
+Column-type annotation assigns semantic labels to table columns. A column of names, num-
+bers,ordatesmaysupportseveralplausibleinterpretations,andsurroundingcolumnscandisam-
+biguate them. The target vocabulary is part of the task definition. Predicting a broad category
+such as Name and predicting a narrower occupation category require different decisions even
+whentheunderlyingvaluesareidentical. Thismakestableannotationausefulsettingforexam-
+ininghowexternalfactsandlearnedrepresentationsinteract.
+Sherlockrepresentscolumnvaluesusingstatisticalproperties,characterdistributions,word
+embeddings,andparagraphvectors,thentrainsaneuraltypedetector[9]. Theapproachmakes
+distributional properties of a column available to the classifier. Its prediction unit is the col-
+umn, so the available features differ from a representation that encodes the whole table jointly.
+Sato adds table context through topic modeling and structured prediction [10]. It combines
+evidence about the values with contextual signals about which semantic types occur together.
+10

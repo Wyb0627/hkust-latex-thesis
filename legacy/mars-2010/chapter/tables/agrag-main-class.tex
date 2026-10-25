@@ -1,0 +1,25 @@
+\begin{table}[tbp]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\caption{Text classification results from the main AGRAG experiment with Qwen2.5-14B-Instruct. Values and emphasis reproduce the corresponding columns of the source paper\cite{agrag-paper}, Table III.}
+\label{tab:agrag:main-class}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+Method & WOS ACC & WOS REC & IFS-REL ACC & IFS-REL REC\\
+\midrule
+NaiveRAG & 0.237 & 0.257 & 0.351 & 0.197\\
+L.LLMLingua & 0.274 & 0.231 & 0.378 & 0.220\\
+RAPTOR & 0.409 & 0.290 & 0.293 & 0.212\\
+SiReRAG & \uline{0.430} & \uline{0.294} & 0.325 & 0.220\\
+G-retriever & 0.188 & 0.129 & 0.311 & 0.185\\
+MIXRAG & 0.244 & 0.235 & 0.362 & 0.203\\
+GraphRAG & 0.253 & 0.201 & 0.279 & 0.202\\
+LightRAG & 0.273 & 0.224 & 0.265 & 0.220\\
+HippoRAG2 & 0.424 & 0.270 & \uline{0.389} & \uline{0.246}\\
+F.GraphRAG & 0.283 & 0.245 & 0.307 & 0.221\\
+\textbf{AGRAG} & \textbf{0.438} & \textbf{0.307} & \textbf{0.403} & \textbf{0.251}\\
+\bottomrule
+\end{tabular}}
+\end{table}

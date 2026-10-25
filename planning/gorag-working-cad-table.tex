@@ -1,0 +1,22 @@
+% Exact active-source transcription. Author-confirmed publication-equivalent PDF comparison recorded in ledger.
+\begin{table}[p]
+\centering
+\caption{Classification accuracy on CAD under the four-round protocol. Qwen2.5-7B is the RAG backbone. Each round lists 1-, 5-, and 10-shot results in that order. This is the CAD block of the original main table.}
+\label{tab:gorag:main-cad}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{l|ccc|ccc|ccc|ccc}
+\hline
+Method & \multicolumn{3}{c|}{Round 1} & \multicolumn{3}{c|}{Round 2} & \multicolumn{3}{c|}{Round 3} & \multicolumn{3}{c}{Round 4}\\
+ & 1-shot & 5-shot & 10-shot & 1-shot & 5-shot & 10-shot & 1-shot & 5-shot & 10-shot & 1-shot & 5-shot & 10-shot\\
+\hline
+Entailment & 0.2125 & 0.2000 & 0.1208 & 0.1700 & 0.1060 & 0.1634 & 0.1177 & 0.0836 & 0.0785 & 0.0857 & 0.0700 & 0.0529 \\
+NaiveRAG & 0.1875 & 0.1375 & 0.0958 & 0.1500 & 0.1100 & 0.0766 & 0.0802 & 0.0563 & 0.0392 & 0.0600 & 0.0405 & 0.0281 \\
+LongLLMLingua & 0.1667 & 0.2417 & 0.2417 & 0.1709 & 0.2167 & 0.2200 & 0.1370 & 0.1587 & 0.1552 & 0.1092 & 0.1359 & 0.1285 \\
+GraphRAG & \underline{0.3958} & \underline{0.3625} & {0.3292} & \underline{0.3167} & \underline{0.2933} & \underline{0.2833} & 0.1587 & \underline{0.1621} & \underline{0.1706} & 0.1200 & \underline{0.1236} & \underline{0.1322} \\
+LightRAG & 0.3875 & 0.3583 & \underline{0.3373} & 0.3133 & 0.2867 & 0.2867 & 0.1638 & 0.1502 & 0.1571 & 0.1175 & 0.1102 & 0.1188 \\
+HippoRAG2 & 0.3667 & 0.2250 & 0.1792 & 0.2953 & 0.2000 & 0.1458 & \underline{0.1820} & 0.1032 & 0.0746 & \underline{0.1435} & 0.0668 & 0.0535 \\
+GORAG & \textbf{0.6125} & \textbf{0.6125} & \textbf{0.6125} & \textbf{ 0.5867} & \textbf{0.5833} & \textbf{0.5882} & \textbf{0.3993} & \textbf{0.4010} & \textbf{0.4001} & \textbf{0.3133} & \textbf{0.3146} & \textbf{03139} \\
+\hline
+\end{tabular}}
+\end{table}
+\noindent\textit{Working-draft audit note.} The selected source prints \texttt{03139} in the final GORAG cell. This transcription preserves that text; the cell is excluded from thesis quantitative interpretation pending author clarification.

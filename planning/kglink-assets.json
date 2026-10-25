@@ -1,0 +1,92 @@
+[
+  {
+    "source_path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/figures/tg_issue_small.pdf",
+    "target_path": "figures/kglink/tg_issue_small.pdf",
+    "sha256": "732464fa46a52bdb63090f1d737e730447c034dfc7334b9b746821e760806c24",
+    "published_figure_number": "2(a)",
+    "published_page": 3,
+    "target_chapter": 3,
+    "verified_by": "KGLink agent: visual comparison of author-confirmed publication-equivalent PDF, plus source-file SHA256 copy check",
+    "source_status": "AUTHOR_CONFIRMED_PUBLICATION_EQUIVALENT"
+  },
+  {
+    "source_path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/figures/DL_NotWell_small.pdf",
+    "target_path": "figures/kglink/DL_NotWell_small.pdf",
+    "sha256": "5461aad91a3ebcdd3b8f213664ec40dc585b49b7d443966650be8af510e6ede7",
+    "published_figure_number": "2(b)",
+    "published_page": 3,
+    "target_chapter": 3,
+    "verified_by": "KGLink agent: visual comparison of author-confirmed publication-equivalent PDF, plus source-file SHA256 copy check",
+    "source_status": "AUTHOR_CONFIRMED_PUBLICATION_EQUIVALENT"
+  },
+  {
+    "source_path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/figures/kglink_new_overview.png",
+    "target_path": "figures/kglink/kglink_new_overview.png",
+    "sha256": "cca22e629d750bc621dcf575c28fbe4c1c1ff8ab3d22117ced31b83f79f73ac7",
+    "published_figure_number": "3",
+    "published_page": 4,
+    "target_chapter": 3,
+    "verified_by": "KGLink agent: visual comparison of author-confirmed publication-equivalent PDF, plus source-file SHA256 copy check",
+    "source_status": "AUTHOR_CONFIRMED_PUBLICATION_EQUIVALENT"
+  },
+  {
+    "source_path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/figures/KG_part.pdf",
+    "target_path": "figures/kglink/KG_part.pdf",
+    "sha256": "0ba3b254f1316a7f9bebdf36c06aaeb1388a241c17309e86098ba307f1379707",
+    "published_figure_number": "4",
+    "published_page": 5,
+    "target_chapter": 3,
+    "verified_by": "KGLink agent: visual comparison of author-confirmed publication-equivalent PDF, plus source-file SHA256 copy check",
+    "source_status": "AUTHOR_CONFIRMED_PUBLICATION_EQUIVALENT"
+  },
+  {
+    "source_path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/figures/overlap.png",
+    "target_path": "figures/kglink/overlap.png",
+    "sha256": "e690fca34184c617d516cd5245ae0ff41ffb0697418ec3c6c472dc4e348df275",
+    "published_figure_number": "5",
+    "published_page": 6,
+    "target_chapter": 3,
+    "verified_by": "KGLink agent: visual comparison of author-confirmed publication-equivalent PDF, plus source-file SHA256 copy check",
+    "source_status": "AUTHOR_CONFIRMED_PUBLICATION_EQUIVALENT"
+  },
+  {
+    "source_path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/figures/dmlm.png",
+    "target_path": "figures/kglink/dmlm.png",
+    "sha256": "b517e89e2207e53d094cf3366420d78f26420d3b001ec746e1ffb3b5bfab52c2",
+    "published_figure_number": "6",
+    "published_page": 7,
+    "target_chapter": 3,
+    "verified_by": "KGLink agent: visual comparison of author-confirmed publication-equivalent PDF, plus source-file SHA256 copy check",
+    "source_status": "AUTHOR_CONFIRMED_PUBLICATION_EQUIVALENT"
+  },
+  {
+    "source_path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/figures/runtime.pdf",
+    "target_path": "figures/kglink/runtime.pdf",
+    "sha256": "557c5c321a4af3e19e91e2f225977550c633f822f3c374d15a21c9219d32b0e9",
+    "published_figure_number": "7",
+    "published_page": 9,
+    "target_chapter": 3,
+    "verified_by": "KGLink agent: visual comparison of author-confirmed publication-equivalent PDF, plus source-file SHA256 copy check",
+    "source_status": "AUTHOR_CONFIRMED_PUBLICATION_EQUIVALENT"
+  },
+  {
+    "source_path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/figures/F1_k.pdf",
+    "target_path": "figures/kglink/F1_k.pdf",
+    "sha256": "a4b4c34c3f3bc990e9288e74bee283ffe5c22582493482f09ea76fa2f6691725",
+    "published_figure_number": "10(a)",
+    "published_page": 12,
+    "target_chapter": 3,
+    "verified_by": "KGLink agent: visual comparison of author-confirmed publication-equivalent PDF, plus source-file SHA256 copy check",
+    "source_status": "AUTHOR_CONFIRMED_PUBLICATION_EQUIVALENT"
+  },
+  {
+    "source_path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/figures/k_time.pdf",
+    "target_path": "figures/kglink/k_time.pdf",
+    "sha256": "9aad276fc818ee9ddc7f3a1c29860b4126583701129959de979995a0f95dd3a0",
+    "published_figure_number": "10(b)",
+    "published_page": 12,
+    "target_chapter": 3,
+    "verified_by": "KGLink agent: visual comparison of author-confirmed publication-equivalent PDF, plus source-file SHA256 copy check",
+    "source_status": "AUTHOR_CONFIRMED_PUBLICATION_EQUIVALENT"
+  }
+]

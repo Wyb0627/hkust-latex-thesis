@@ -1,0 +1,306 @@
+
+\section{Methodology}\label{sec:methdology}
+\subsection{Framework Overview}
+
+
+	To address the aforementioned Uniform-indexing, Non-adaptive Retrieval, and Narrow-source issues,
+	
+we propose GORAG, a novel approach that achieves adaptive retrieval by extracting valuable side information from a minimum-cost spanning tree generated on the constructed graph. 
+As shown in \autoref{fig:Gorag}, GORAG consists of three core parts, i.e., \textcolor{myblue}{\textbf{Offline Graph Indexing}}, \textcolor{myorange}{\textbf{Graph Retrieval}}, and \textcolor{mygreen}{\textbf{Classification \& Online Graph Indexing}}.
+ 
+
+
+\noindent\textbf{Part 1: Offline Graph Indexing. } 
+It targets to construct the weighted graph $\mathcal{G}^r_{new}(\mathcal{V}^r_{new}, \mathcal{E}^r_{new},\mathcal{W}^r_{new})$ based on the labeled data $\mathcal{D}^r=\cup_{y_i \in \mathcal{Y}^r}\{t_j,y_i\}_{j=1}^k$ 
+	at the $r$-th round. 
+	An example weighted graph created is shown in \autoref{fig:Gorag}, this graph will be used to provide retrieved-augmented information as contexts for query texts, 
+	enabling LLMs to better understand query texts and accurately classify them.
+	Specifically, with the new labeled data $\mathcal{D}^r$ at the $r$-th round, we first extract keywords $\mathcal{K}^r \in \{t_j\}_{j=1}^{|\mathcal{D}^r|}$.
+	 
+	Then, we will assign an edge $e^r_{v,y} \in \mathcal{E}^r_{new}$ between each keyword  $v \in \mathcal{K}^r$ and their respective text's label $y\in \mathcal{Y}^r$, {\color{black}where $\mathcal{Y}^r = \bigcup_{i=1}^r \mathcal{Y}^i_{new}$ denotes the union label set 
+		of all new labels $\mathcal{Y}^i_{new}$ from round $i\in\{1, 2, \dots, r\}$.}
+	We then compute the weight $w^r_{v,y} \in \mathcal{W}^r_{new}$ for each edge $e^r_{v,y} \in \mathcal{E}^r_{new}$ based on the keyword's importance within the text corpus and keyword relatedness to the label $y$. 
+	At last, we merge all graphs $\mathcal{G}^r_{new}(\mathcal{V}^r_{new}, \mathcal{E}^r_{new},\mathcal{W}^r_{new})$ at each round $r$ as the full graph $\mathcal{G}^r(\mathcal{V}^r, \mathcal{E}^r,\mathcal{W}^r)$.
+	More details can refer to Section~\ref{sec:gc}.
+	
+	
+	
+	\noindent\textbf{Part 2: Graph Retrieval.} 
+	The Graph Retrieval process maps the extracted keyword nodes $\mathcal{V}^t$ from the query text $t$ to the constructed weighted graph $\mathcal{G}^r$ 
+	and generates a minimum-cost spanning tree on $\mathcal{G}^r$ that includes all mapped keywords in $\mathcal{V}^t$. 
+	From this minimum-cost spanning tree (MST), the candidate label set $\hat{\mathcal{Y}}_t^r$ at the current round $r$ is obtained, 
+	which is a reduced subset of the original target label set $\mathcal{Y}^r$ at the current round $r$. 
+	As this MST solely depends on the graph itself and the text extracted keywords, we can eliminate any human-defined thresholds and achieve adaptive retrieval. 
+	For more details, please  refer to Section~\ref{sec:gr}.
+	
+	
+	
+	
+	
+	\noindent\textbf{Part 3: Classification \& Online Graph Indexing.} 
+	
+	
+	
+	In the Classification part, we create LLM input with the query text $t$, the candidate labels $\hat{\mathcal{Y}}_t^r$ retrieved from the weighted graph $\mathcal{G}^r$, and descriptions $\mathcal{K}_{y_i}$ associated with each candidate label $y_i \in \hat{\mathcal{Y}}_t^r$ if 
+	
+	available. 
+	The LLM will carry out classification with this input. 
+	
+	After classification, the online graph indexing procedure dynamically adds keywords $\mathcal{V}_{notexist}^t$, which are extracted from the query text $t$ but are not in the existing graph $\mathcal{G}^r$, as new graph nodes to further enrich the graph. 
+	We then 
+	
+	assign edge weights based on these newly added keywords' importance within the text corpus and their relatedness to the predicted label $y^*_t$ for the query text $t$.
+	By penalizing the edges between nodes and their semantically irrelevant labels, GORAG can reduce the error introduced by inaccurate classification.
+	The Online Graph Indexing procedure improves the model classification ability by updating the graph in real-time with new keywords. 
+	For more details, please refer to Section~\ref{sec:oi}.
+	Due to space limitations, we put the time and space complexity analysis of GORAG to \autoref{sec:complexity}.
+	\vspace{-5px}
+
+
+
+\subsection{Part 1: Offline Graph Indexing} \label{sec:gc}
+
+
+In this subsection, we introduce the graph construction procedure of GORAG, which includes a novel edge-weighting mechanism to address the uniform indexing issue. 
+The pseudo code of graph construction is shown in Algorithm \autoref{alg:graph_construction} in \autoref{sec:pseduo_code}.
+
+
+
+
+
+For each round $r$,
+given its respective labeled training texts $\mathcal{D}^r=\cup_{y_i \in \mathcal{Y}^r}\{t_j,y_i\}_{j=1}^k$, 
+GORAG first extracts text keywords $\mathcal{K}^r$ from 
+$\mathcal{D}^r$. 
+
+Specifically, it
+calculates the normalized TFIDF score \cite{tfidf} as the correlation score $CS(v,t)$ for texts' each word and phrase with less than 3 words \cite{wang2025agrag}. 
+\vspace{-3px}
+\begin{equation}\label{eq:tfidf_ke}
+	\vspace{-4px}
+	CS(v,t)=\frac{count(v,t)}{|t|log(|\mathcal{T}^r|+1)}\times log\frac{|\mathcal{T}^r|+1}{|t_j:v\in t_j, \ t_j \in \mathcal{T}^r|+1}, 
+\end{equation}
+where $ \mathcal{T}^r=\cup_{i=1}^r \mathcal{T}^i$ denotes all training and query texts seen so far, 
+$count(v, t)$ is the number of times
+that the term $v$ appears in the text $t$, 
+and $|t_j : v \in t_j, \ t_j \in \mathcal{T}^r|$ denotes the number of texts in the corpus $\mathcal{T}^r$ that contain the keyword $v$. 
+Here, we will extract words or phrases with $CS(v,t)>\tau$ as our keyword. 
+We set $\tau=0.5$ following the keyword extraction setting in \cite{wang2025agrag}.
+These keywords serve as graph nodes, and we denote them as keyword nodes.
+
+
+
+Also, GORAG incorporates new labels $\mathcal{Y}^r_{new}=\mathcal{Y}^r\setminus\mathcal{Y}^{r-1}$ at the $r$-th round as graph nodes, denoted as label nodes, where $\mathcal{Y}^r$ is the total label set at round $r$. Hence, the graph node set $\mathcal{V}^r_{new}$ at the $r$-th round can be obtained as follows. 
+\begin{equation}
+	\vspace{-5px}
+	\mathcal{V}_{new}^r=\mathcal{K}^r \cup\mathcal{Y}^r_{new}.
+\end{equation}
+Then, GORAG adds edges between each keyword node $v \in \mathcal{K}^r$ to its corresponding label node $y \in \mathcal{Y}^r$, indicating that the keyword $v$ appears in texts associated with the label $y$.
+
+
+
+
+Next, 
+
+considering the keywords $\mathcal{K}^r$ from the labeled text are not uniformly related to the text's label in $\mathcal{Y}^r$, 
+we apply an edge weighting mechanism to assign a weight $w_{v,y}$ to each keyword-label edge between any two nodes $v$ and $y$.
+This weight can reflect the correlation between keywords and each label.
+
+Firstly, 
+we apply the correlation score $CS(v,t)$ assigned by Equation~\eqref{eq:tfidf_ke} to measure the importance and relatedness of a particular keyword $v \in \mathcal{K}^r$ w.r.t. 
+
+the text $t$ 
+
+it extracted from.
+
+
+
+
+
+As the keyword $v$ can be extracted from multiple texts with different labels in different rounds, the final edge weight $w_{v,y}^r$ of edge $e_{v,y}$ 
+at the $r$-th round is calculated as an average of all weights from all seen texts with label $y$:
+
+\vspace{-5px}
+\begin{equation}\label{eq:edge_weigting}
+	
+	w_{v,y}^r=\frac{\sum_{t_j \in \mathcal{T}^{r,v,y} }1-CS(v,t_j)}{
+|\mathcal{T}^{r,v,y} |
+	}, 
+\end{equation}
+where $\mathcal{T}^{r,v,y}  = \{t_j|   v\in t_j \land t_j \in \mathcal{T}^{r,y}\}$ is the text that contains keyword $v$ and labeled $y$. 
+
+We denote the generated weighted graph for $\mathcal{K}_{new}^r$ and $\mathcal{Y}_{new}^r$ at the $r$-th round as $\mathcal{G}^r_{new}(\mathcal{V}_{new}^r,\mathcal{E}_{new}^r, \mathcal{W}_{new}^r)$, 
+where $\mathcal{V}^r_{new}$, $\mathcal{E}^r_{new}$, and $\mathcal{W}^r_{new}$ denotes the node, edge and edge weight set respectively.
+Lastly, $\mathcal{G}^r_{new}$ will be merged into the graph from previous rounds $\mathcal{G}^{r-1}$ to form the full graph $\mathcal{G}^r$ at round $r$: 
+\begin{align}
+	&\mathcal{G}^r(\mathcal{V}^r,\mathcal{E}^r,\mathcal{W}^r),\\ \mathcal{V}^{r}=\mathcal{V}^{r}_{new}\cup \mathcal{V}^{r-1}, &\ \mathcal{E}^{r}=\mathcal{E}^{r}_{new}\cup \mathcal{E}^{r-1},\  \mathcal{W}^{r}=\mathcal{W}^{r}_{new}\cup \mathcal{W}^{r-1}.\notag 
+\end{align}
+
+
+
+
+
+
+
+Particularly, we define $\mathcal{G}^0=\emptyset$ and $\ r\geq 1$. 
+
+Also, to guarantee the graph connectivity of the resulting graph, 
+
+we add edges between every new label node $y_{n}\in \mathcal{Y}_{new}^r$, 
+and each old label node $y_{o}\in \mathcal{Y}^{r-1}$, 
+the edge weight $w_{y_n,y_o}^r$ of edge $e_{y_n,y_o}$ at round $r$ is defined as the weighted average of all edge weights that link keyword nodes with label node $y_n$ or $y_o$: 
+\vspace{-3px}
+\begin{equation}
+	\vspace{-5px}
+	\mathcal{M}_y^r=\{v\ |\ v\in \mathcal{N}^r(y)\ \land\ v\notin \mathcal{Y}^r\}
+	\vspace{-5px}
+\end{equation}
+
+\begin{equation}
+	\vspace{-3px}
+	w_{y_n,y_o}^r=\frac{1}{2}\Big(\frac{\sum_{v\in \mathcal{M}_{y_n}^r}w_{v,y_n}^r}{2\times|\mathcal{M}_{y_n}^r|}+\frac{\sum_{v\in \mathcal{M}_{y_o}^r}w_{v,y_o}^r}{2\times|\mathcal{M}_{y_o}^r|}\Big),
+	
+\end{equation}
+
+
+
+
+\noindent where $\mathcal{N}^r(y)$ denote the neighbor nodes of label node $y$ in $\mathcal{G}^r$.
+
+
+
+After merge, the graph $\mathcal{G}^r$ would be used for future retrieval, and be further updated by GORAG's online indexing mechanism.
+
+
+
+
+
+\subsection{Part 2: Graph Retrieval}\label{sec:gr}
+
+
+
+	In this subsection, we introduce the graph retrieval procedure of GORAG. With the graph constructed in Part 1, GORAG can adaptively retrieve a set of candidate class labels with keywords extracted from query texts without any human-defined thresholds, addressing the threshold dependent issue.
+
+To begin with, GORAG extracts keywords $\mathcal{V}_{test}^t$ for each query text $t\in \mathcal{T}_{test}$ in the same manner with Equation~\eqref{eq:tfidf_ke}, then, $\mathcal{V}_{test}^t$ would be split into two subsets: 
+\begin{equation}
+	\mathcal{V}_{exist}^t \cup \mathcal{V}_{notexist}^t  =\mathcal{V}_{test}^t,\ \mathcal{V}_{exist}^t \cap \mathcal{V}_{notexist}^t  = \emptyset, 
+\end{equation}
+where $\mathcal{V}_{exist}^t $ and $\mathcal{V}_{notexist}^t$ denotes the keywords in $\mathcal{V}_{test}^t$ that already exist and not yet exist in $\mathcal{G}^r$ at current round $r$ respectively. Later, $\mathcal{V}_{exist}^t $ would be applied for achieving adaptive retrieval, and $\mathcal{V}_{notexist}^t$ would be applied for online indexing to further enrich the constructed graph (Further illustrated in Section~\ref{sec:oi}).
+
+
+To achieve the adaptive retrieval, GORAG tries to find the minimum cost spanning tree (MST) that contain all keyword nodes within $\mathcal{V}_{exist}^t$, 
+and then retrieves all label nodes within the generated MST as candidate labels.
+The intuition behind this approach is that an MST spans the entire graph to cover all given nodes with the smallest possible spanning cost. Consequently, label nodes within the generated MST can be considered important for demonstrating the features of the given keyword node set. As the generation of an MST is a classical combinatorial optimization problem with an optimal solution determined solely by the set of given nodes. 
+By generating the MST and retrieving all label nodes within it, we eliminate the need for any human-defined thresholds, achieving adaptive retrieval.
+
+
+\begin{table*}[ht!]
+	\centering   
+	\caption{Statistics of the tested datasets, where we divide their original labels into multiple rounds. We achieve a balanced testing set on the IFS-Rel datasets by assigning each label 40 testing samples.}
+	\label{tab:data_stat}
+	\vspace{-10px}
+	\resizebox{\linewidth}{!}{
+		\begin{tabular}{l|c|c|c|c|c|c|c|c|c|c} 
+			\hline\hline
+			\multirow{2}{*}{\textbf{Dataset}} & \multirow{2}{*}{\textbf{Avg. Text Token}} & \multicolumn{2}{c|}{\textbf{R1}} & \multicolumn{2}{c|}{\textbf{R2}} & \multicolumn{2}{c|}{\textbf{R3}} & \multicolumn{2}{c|}{\textbf{R4}} & \textbf{Total}  \\ 
+			\cline{3-11}
+			&                                           & Testing data & Label \#          & Testing data & Label \#          & Testing data & Label \#          & Testing data & Label \#          & Testing data    \\ 
+			\hline
+			CAD \cite{vidgen2021introducing}      & 154                                       & 240        & 4                & 60        & 3                & 286        & 3                & 231        & 3                & 817           \\ \hline
+			WOS \cite{kowsari2017hdltex}      & 200                                       & 2,417        & 32                & 2,842        & 53                & 2,251        & 30                & 1,886        & 18                & 9,396           \\ 
+			\hline
+			
+			IFS-Rel \cite{xia-etal-2021-incremental}      & 105                                       & 640        & 16               & 640        & 16                & 640        & 16                & 640        & 16                & 2,560           \\ 
+			\hline\hline
+		\end{tabular}
+	}
+	\vspace{-10px}
+\end{table*}
+
+\begin{definition} [Adaptive Candidate Label Generation Problem]  
+	Given an undirected weighted connected graph $\mathcal{G}^r(\mathcal{V}^r,\mathcal{E}^r,\mathcal{W}^r)$, a set of keywords $\mathcal{V}_{exist}^t$ extracted from text $t$ that can be mapped to nodes in $\mathcal{V}^r$, and the target label set $\mathcal{Y}^r\in \mathcal{V}^r$ at the $r$-th round, our target is to find a set of labels nodes ${\mathcal{Y}}^r_t \in {\mathcal{Y}}^r$. 
+	Firstly, we identify a subgraph $\mathcal{G}^r_t(\mathcal{V}^r_t, \mathcal{E}^r_t, \mathcal{W}^r_t)$ of $\mathcal{G}^r$ by minimizing the edge weight sum as follows.
+	\vspace{-10px}
+	\begin{align}
+	&	\min_{e^r_{u.v} \in \mathcal{E}^r_t}w^r_{u,v} \notag\\
+			s.t. \  &v \in \mathcal{V}^r_t, \forall v \in \mathcal{V}_{exist}^t 
+	\end{align}
+Then, since the subgraph node  $\mathcal{V}^r_t$ set contains both keyword nodes and label nodes,
+we define the candidate label set $\hat{\mathcal{Y}}^r_t \in \mathcal{V}^r_t$ as the label nodes in the generated sub-graph for the text $t$ at round $r$.
+\end{definition}
+\vspace{-5px}
+
+ Due to space limitations, we put the proof of the Adaptive Candidate Label Generation Problem to be NP-hard to \autoref{sec:proof}. 
+
+As the problem is NP-hard, it is infeasible to obtain the optimal result in polynomial time.
+Therefore, 
+to solve this problem, we propose a greedy algorithm based on the Melhorn's algorithm \cite{mehlhorn1988faster}. Our algorithm generates the candidate label set $\hat{\mathcal{Y}}^r_t \subseteq \mathcal{Y}^r$ for text $t$ at the $r$-th round.
+The pseudo code 
+
+of our algorithm is shown 
+in Algorithm \autoref{alg:mehlhorn} in \autoref{sec:pseduo_code}
+
+, following the Melhorn's algorithm, our algorithm can also achieve 2-Approximate.
+
+
+Firstly, we calculate the shortest path between each keyword node $v$ in $\mathcal{V}_{exist}^t$ to all other nodes in $\mathcal{G}^r$ by calculating the minimum spanning tree $MST$ of $\mathcal{G}^r$ 
+
+Here, the keyword nodes $v$ in $\mathcal{V}_{exist}^t$ serve as terminal nodes that determines the final generated candidate labels w.r.t. to the weighted graph $\mathcal{G}^r$.
+Secondly, we create a new auxiliary graph $H$ where the edges represent the shortest paths between the closest terminal nodes. 
+
+Thirdly, we construct the minimum spanning tree $MST'$ of the auxiliary graph $H$ 
+
+, and then add the shortest paths between each two nodes in $MST'$ to the Steiner Tree $ST$.
+
+Lastly our candidate labels $\hat{\mathcal{Y}}^r_t$ for text $t$ are calculated as the intersection of $ST$ and all target labels $\mathcal{Y}^r$ at round $r$: $ST\cap\mathcal{Y}^r$.
+
+
+
+
+
+
+
+\subsection{Part 3: Classification \& Online Indexing}\label{sec:oi}
+
+
+In this subsection, we first introduce GORAG's classification and online graph indexing procedure, where it classifies the texts and further enriches the weighted graph by adding query text information to the created graph, addressing the narrow source issue.
+To begin with, we introduce how GORAG performs text classification based the LLM. 
+
+	
+Specifically,
+given each unlabeled query text $t$, GORAG utilizes LLM to predict its class label $y^*$ by constructing an input prompt $c_t$ as follows: 
+\begin{align}
+	c_t=Concat(t, \mathcal{K}^t, \hat{\mathcal{Y}}^r_t, \mathcal{K}_{\hat{\mathcal{Y}}^r_t}). 
+\end{align}
+ $c_t$ can be considered as the text concatenation of the extracted keywords $\mathcal{K}^t$ from the text $t$, and the candidate labels $\hat{\mathcal{Y}}^r_t$ obtained by Algorithm~\ref{alg:mehlhorn} in \autoref{sec:pseduo_code}, we omit the more complex input structures as they rarely improve performance, but lead to higher costs \cite{zhou2023lima,liu2024lost}.
+ Also, the $\mathcal{K}_{\hat{\mathcal{Y}}^r_t}=\{\mathcal{K}_{y_i}\}_{i=1}^{|\hat{\mathcal{Y}}^r_t|}$
+ and $\mathcal{K}_{y_i}$ are the representative keywords of each label $y_i\in \hat{\mathcal{Y}}^r_t$. 
+
+\begin{equation}
+	\mathcal{K}_{y_i}=LLM(p_{gen},\mathcal{D}^r), 
+\end{equation}
+which were generated by LLM with the label's semantic label name if available. 
+Next, with a classification instruction prompt $p_{classify}$. 
+
+
+
+
+\begin{equation}
+	y^*_t=LLM(p_{classify}, c_t), 
+\end{equation}
+the LLM would try to select the best-suited label $y^*_t \in \mathcal{Y}^r$ to annotate the text $t$. 
+
+
+
+
+
+
+To fully leverage the text-extracted keywords, GORAG utilizes an online indexing mechanism to incrementally update keywords that do not yet exist in the weighted graph $\mathcal{G}^r$ at the $r$-th round to $\mathcal{G}^r$ based on the text $t$'s predicted label $y^*_t$. 
+To be specific, each keyword node $v\in \mathcal{V}_{notexist}^t$ would be added to the original graph's node set $\mathcal{V}^r$ and be assigned with an edge $e_{v,y}$ connecting it with the text $t$'s predicted label $y_t^*$:  
+\vspace{-3px}
+\begin{equation}
+	\vspace{-3px}
+	\mathcal{V}^r = \mathcal{V}^r \cup \mathcal{V}_{notexist}^t,\ \mathcal{E}^r = \mathcal{E}^r \cup \mathcal{E}_{oi}^t, 
+\end{equation}
+where $\mathcal{E}_{oi}^t=\{e_{v,y_t^*}| v\in \mathcal{V}_{notexist}^t\}$ denotes the set of all newly assigned edges $e_{v,y}$ between keyword node $v$ and its predicted label $y_t^*$, for these newly assigned edges, their weight is calculated with the edge weighting mechanism illustrated in Equation~\eqref{eq:edge_weigting}.
+The edge weights can reflect the semantic relevance of keywords to labels, and reduce the noise introduced by inaccurate LLM classification.

@@ -1,0 +1,31 @@
+Indexing and query costs also need to remain separate. KGLink reports preprocessing and
+model-processing costs for annotation. GORAG reports the resource demands of its evolving
+index and retrieval. AGRAG separates corpus indexing from querying. MGRAG reports con-
+struction,matching,answer-generation,andend-to-endcosts. Atimemeasuredononebackbone
+and accelerator is evidence about that configuration. The chapter comparisons use these costs
+toexplainthecomputationsinvolvedratherthantorankheterogeneoushardwaresettings.
+7.4 Information Preservation and Semantic Granularity
+The hyper-relational study in Chapter 2 supplies another perspective on structural representa-
+tions. Amaintripleanditsqualifiersexpressdifferentaspectsofafact. Decomposingthatrepre-
+sentationcanretainsomerelationshipswhilelosingtheassociationthatgivesthemtheirmean-
+ing. The study examines this issue through decomposition methods, qualifier capture, graph
+reception,andlink-predictionresults.
+Arelateddesignquestionappearsineachcorechapter. KGLinkmusttranslategraph-derived
+type descriptions into the annotation task’s vocabulary. GORAG associates words with labels
+whoserelevancedependsontheclassificationtask. AGRAGselectsagraphserializationwhile
+retaining a passage channel for information absent from that serialization. MGRAG matches
+relations to paths that can express a corresponding meaning through a different topology. Each
+methodspecifiesanevidenceunitandawaytorelatethatunittothetask.
+Thegranularityoftheevidencecanaffectbothselectionandinterpretation. Acolumnvector
+summarizes a sequence of cells. A candidate label summarizes a possible class assignment. A
+graph fact identifies an entity relation. A path combines several relations. A passage or image
+contains contextual details beyond its extracted graph representation. Moving between these
+units changes what information is explicit and which distinctions the next computation must
+recover.
+The contribution of structure therefore depends on the representation’s fidelity to the re-
+quireddecision. Connectivityaloneestablishesthatitemsarerelatedwithinanindex. Semantic
+matching evaluates whether the represented relationship corresponds to a query requirement.
+Task supervision identifies which labels are appropriate. The hyper-relational study motivates
+attention to preservation, while the core chapters test particular mechanisms at their own evi-
+denceinterfaces.
+109

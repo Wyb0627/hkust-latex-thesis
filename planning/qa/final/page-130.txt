@@ -1,0 +1,48 @@
+[15] S. Robertson et al., “The probabilistic relevance framework: Bm25 and beyond,” Foundations
+and Trends in Information Retrieval, vol. 3, no. 4, pp. 333–389, 2009. DOI: 10 . 1561 /
+1500000019(cit.onpp.12,24,65).
+[16] V.Karpukhinetal.,“Densepassageretrievalforopen-domainquestionanswering,”inProceedings
+ofthe2020ConferenceonEmpiricalMethodsinNaturalLanguageProcessing(EMNLP),2020,
+pp.6769–6781.DOI:10.18653/v1/2020.emnlp-main.550(cit.onpp.12,14).
+[17] D. Edge et al., “From local to global: A graph rag approach to query-focused summarization,”
+arXivpreprintarXiv:2404.16130,2024(cit.onpp.13,14,49,54,67).
+[18] B. Jiménez Gutiérrez et al., “HippoRAG: Neurobiologically inspired long-term memory for
+large language models,” in Advances in Neural Information Processing Systems, vol. 37, 2024,
+pp.59532–59569(cit.onp.14).
+[19] Z. Guo et al., “Lightrag: Simple and fast retrieval-augmented generation,” in Findings of the As-
+sociationforComputationalLinguistics:EMNLP2025,Suzhou,China,2025,pp.10746–10761.
+DOI:10.18653/v1/2025.findings-emnlp.568(cit.onpp.14,49,54,67).
+[20] A. Talmor et al., “Multimodalqa: Complex question answering over text, tables and images,” in
+InternationalConferenceonLearningRepresentations,2021(cit.onpp.15,92).
+[21] Q. Yu et al., “Mramg-bench: A comprehensive benchmark for advancing multimodal retrieval-
+augmentedmultimodalgeneration,”inProceedingsofthe48thInternationalACMSIGIRConfer-
+enceonResearchandDevelopmentinInformationRetrieval,2025,pp.3616–3626(cit.onpp.15,
+92).
+[22] J. Yao et al., “Cacheblend: Fast large language model serving for rag with cached knowledge fu-
+sion,”inProceedingsoftheTwentiethEuropeanConferenceonComputerSystems,2025,pp.94–
+109.DOI:10.1145/3689031.3696098(cit.onpp.16,92).
+[23] Y.Liuetal.,“Cachegen:Kvcachecompressionandstreamingforfastlargelanguagemodelserv-
+ing,”inProceedingsoftheACMSIGCOMM2024Conference,2024,pp.38–56.DOI:10.1145/
+3651890.3672274(cit.onp.16).
+[24] M. Galkin et al., “Message passing for hyper-relational knowledge graphs,” in Proceedings of
+the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP), 2020,
+pp.7346–7359.DOI:10.18653/v1/2020.emnlp-main.596(cit.onp.17).
+[25] S.Vashishthetal.,“Composition-basedmulti-relationalgraphconvolutionalnetworks,”inInter-
+nationalConferenceonLearningRepresentations,2020(cit.onp.18).
+[26] Z.Zhuetal.,“Neuralbellman-fordnetworks:Ageneralgraphneuralnetworkframeworkforlink
+prediction,”AdvancesinNeuralInformationProcessingSystems,vol.34,pp.29476–29490,2021
+(cit.onpp.18,19).
+[27] Z.Huetal.,“Hyperformer:Enhancingentityandrelationinteractionforhyper-relationalknowl-
+edgegraphcompletion,”inProceedingsofthe32ndACMInternationalConferenceonInformation
+andKnowledgeManagement,2023,pp.803–812.DOI:10.1145/3583780.3614922(cit.
+onp.19).
+[28] Q.Wangetal.,“Learningtoextractattributevaluefromproductviaquestionanswering:Amulti-
+taskapproach,”inProceedingsofthe26thACMSIGKDDInternationalConferenceonKnowledge
+Discovery&DataMining,2020,pp.47–55(cit.onp.29).
+[29] A. Kendall et al., “Multi-task learning using uncertainty to weigh losses for scene geometry and
+semantics,” in Proceedings of the IEEE conference on computer vision and pattern recognition,
+2018,pp.7482–7491(cit.onp.31).
+[30] O. Hassanzadeh et al., SemTab 2019: Semantic Web Challenge on Tabular Data to Knowledge
+GraphMatchingDataSets,version2019,Zenodo,2019.DOI:10.5281/zenodo.3518539
+(cit.onp.33).
+116

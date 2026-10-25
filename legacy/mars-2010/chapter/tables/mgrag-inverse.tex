@@ -1,0 +1,24 @@
+{\small
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{lrrrrr}
+\caption{MMQA inverse ablations, reproduced from published Table 10, p.~2491~\cite{mgrag-paper}. PSGM and GKV denote path-based semantic graph matching and graph-aware KV recomputation. Time is in hours.}\label{tab:mgrag:inverse}\\
+\toprule
+Model & SIM. & ACC. & ROG. & BLEU & Time\\
+\midrule\endfirsthead
+\multicolumn{6}{c}{\tablename\ \thetable\ (continued)}\\
+\toprule
+Model & SIM. & ACC. & ROG. & BLEU & Time\\
+\midrule\endhead
+\bottomrule\endfoot
+Hippo.            & 0.8381          & 0.6335          & 0.6659          & 0.5917          & 7.5 h           \\
+Hippo.+GKV        & 0.8392          & 0.6855          & 0.6651          & 0.7013          & 7.6 h           \\
+Hippo.+PSGM       & 0.8416          & \underline{0.7372}  & \underline{0.6720}  & \underline{0.7128}  & \underline{4.1 h}   \\
+Hippo.+PSGM+GKV   & \textbf{0.8533} & \textbf{0.7442} & \textbf{0.6763} & \textbf{0.7215} & 4.3 h           \\
+\midrule
+Vanilla.          & 0.8362          & 0.7053          & 0.5942          & 0.6645          & \textbf{2.6 h}  \\
+Vanilla.+PSGM     & 0.8460          & 0.7175          & 0.6466          & 0.6973          & 4.7 h           \\
+Vanilla.+PSGM+GKV & \underline{0.8485}  & 0.7232          & 0.6563          & 0.7001          & 4.8 h           \\
+\midrule
+\textbf{MGRAG}    & \textbf{0.8533} & \textbf{0.7442} & \textbf{0.6763} & \textbf{0.7215} & 4.3 h           \\
+\end{longtable}
+}

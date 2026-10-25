@@ -1,0 +1,21 @@
+{
+  "version": "v0.11.6",
+  "release_url": "https://github.com/HKFoggyU/hkust-thesis/releases/tag/v0.11.6",
+  "commit_short": "1a9230d",
+  "retrieved": "2026-10-24",
+  "retrieval": "GitHub contents API with ref=v0.11.6; class extracted with xetex hkustthesis.dtx",
+  "files": {
+    "template/hkust-thesis-v0.11.6/LICENSE": "5f05fcf6ef25a6c31bccd2df7c0c46b23107bbeb2ce5cdba74efb5cc357f4dbb",
+    "template/hkust-thesis-v0.11.6/hkustthesis.cls": "09edd06793a3b1f2956e229042b34b834fde5b2f1a8abc2fd225daa9b63f9775",
+    "template/hkust-thesis-v0.11.6/README.md": "42631b6d0fda9cdd9a1dfa5dcb7a2a9e2f43fc4b0abba43953e94b891340fb99",
+    "template/hkust-thesis-v0.11.6/hkustthesis.ins": "b886e59d00cb7620810fc62ca5a433c8af78905447b9521b662751c08ebad072",
+    "template/hkust-thesis-v0.11.6/hkustthesis.dtx": "1ef3bd58acc47f003e787f220ed1bbe0f1a2f95880296b12f7ac6331012ad7ff"
+  },
+  "smoke_asset": {
+    "path": "template/assets/pipeline_new.pdf",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/VLDB_MGRAG/pvldbstyle-master/figures/pipeline_new.pdf",
+    "published_figure_number": 2,
+    "published_page": 2484,
+    "sha256": "71ecdb7b516429517ecfee00ca890072f03bc02a43c0b18bd32ae63866a3c54b"
+  }
+}

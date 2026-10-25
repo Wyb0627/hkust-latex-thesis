@@ -1,0 +1,25 @@
+\begin{table}[tbp]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\caption{Fact retrieval results from the main AGRAG experiment with Qwen2.5-14B-Instruct. Values and emphasis reproduce the corresponding columns of the source paper\cite{agrag-paper}, Table III.}
+\label{tab:agrag:main-fact}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+Method & Novel ROG & Novel ACC & Medical ROG & Medical ACC\\
+\midrule
+NaiveRAG & 0.117 & 0.431 & 0.182 & 0.604\\
+L.LLMLingua & 0.115 & 0.420 & 0.105 & 0.591\\
+RAPTOR & 0.133 & 0.465 & 0.132 & 0.609\\
+SiReRAG & 0.311 & 0.451 & 0.349 & 0.558\\
+G-retriever & 0.199 & 0.209 & 0.148 & 0.326\\
+MIXRAG & 0.102 & 0.366 & 0.160 & 0.463\\
+GraphRAG & 0.240 & 0.445 & 0.217 & 0.521\\
+LightRAG & 0.253 & 0.460 & 0.283 & 0.607\\
+HippoRAG2 & 0.310 & \uline{0.470} & 0.343 & 0.598\\
+F.GraphRAG & \uline{0.318} & 0.439 & \uline{0.352} & \uline{0.610}\\
+\textbf{AGRAG} & \textbf{0.324} & \textbf{0.490} & \textbf{0.357} & \textbf{0.628}\\
+\bottomrule
+\end{tabular}}
+\end{table}

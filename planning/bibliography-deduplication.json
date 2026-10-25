@@ -1,0 +1,981 @@
+[
+  {
+    "canonical": "agrag-tfidf",
+    "aliases": [
+      "gorag-tfidf"
+    ],
+    "source_entries": [
+      {
+        "type": "inbook",
+        "key": "agrag-tfidf",
+        "fields": {
+          "editor": "Sammut, Claude\n\tand Webb, Geoffrey I.",
+          "title": "TF--IDF",
+          "booktitle": "Encyclopedia of Machine Learning",
+          "year": "2010",
+          "publisher": "Springer US",
+          "address": "Boston, MA",
+          "pages": "986--987",
+          "isbn": "978-0-387-30164-8",
+          "doi": "10.1007/978-0-387-30164-8_832",
+          "url": "https://doi.org/10.1007/978-0-387-30164-8_832"
+        },
+        "source": "bibliography/agrag-related.bib"
+      },
+      {
+        "type": "inbook",
+        "key": "gorag-tfidf",
+        "fields": {
+          "editor": "Sammut, Claude\n\tand Webb, Geoffrey I.",
+          "title": "TF--IDF",
+          "booktitle": "Encyclopedia of Machine Learning",
+          "year": "2010",
+          "publisher": "Springer US",
+          "address": "Boston, MA",
+          "pages": "986--987",
+          "isbn": "978-0-387-30164-8",
+          "doi": "10.1007/978-0-387-30164-8_832",
+          "url": "https://doi.org/10.1007/978-0-387-30164-8_832"
+        },
+        "source": "bibliography/gorag.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "bg-bm25",
+    "aliases": [
+      "agrag-robertson2009probabilistic",
+      "kglink-robertson2009probabilistic"
+    ],
+    "source_entries": [
+      {
+        "type": "article",
+        "key": "bg-bm25",
+        "fields": {
+          "title": "The probabilistic relevance framework: BM25 and beyond",
+          "author": "Robertson, Stephen and Zaragoza, Hugo",
+          "journal": "Foundations and Trends in Information Retrieval",
+          "volume": "3",
+          "number": "4",
+          "pages": "333--389",
+          "year": "2009",
+          "publisher": "Now Publishers, Inc.",
+          "doi": "10.1561/1500000019"
+        },
+        "source": "bibliography/background.bib"
+      },
+      {
+        "type": "article",
+        "key": "agrag-robertson2009probabilistic",
+        "fields": {
+          "title": "The probabilistic relevance framework: BM25 and beyond",
+          "author": "Robertson, Stephen and Zaragoza, Hugo",
+          "journal": "Foundations and Trends in Information Retrieval",
+          "volume": "3",
+          "number": "4",
+          "pages": "333--389",
+          "year": "2009",
+          "publisher": "Now Publishers, Inc.",
+          "doi": "10.1561/1500000019"
+        },
+        "source": "bibliography/agrag-related.bib"
+      },
+      {
+        "type": "article",
+        "key": "kglink-robertson2009probabilistic",
+        "fields": {
+          "title": "The probabilistic relevance framework: BM25 and beyond",
+          "author": "Robertson, Stephen and Zaragoza, Hugo",
+          "journal": "Foundations and Trends in Information Retrieval",
+          "volume": "3",
+          "number": "4",
+          "pages": "333--389",
+          "year": "2009",
+          "publisher": "Now Publishers, Inc.",
+          "doi": "10.1561/1500000019"
+        },
+        "source": "bibliography/kglink.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "gorag-mehlhorn1988faster",
+    "aliases": [
+      "agrag-mehlhorn1988faster"
+    ],
+    "source_entries": [
+      {
+        "type": "article",
+        "key": "gorag-mehlhorn1988faster",
+        "fields": {
+          "title": "A faster approximation algorithm for the Steiner problem in graphs",
+          "author": "Mehlhorn, Kurt",
+          "journal": "Information Processing Letters",
+          "volume": "27",
+          "number": "3",
+          "pages": "125--128",
+          "year": "1988",
+          "publisher": "Elsevier",
+          "doi": "10.1016/0020-0190(88)90066-X"
+        },
+        "source": "bibliography/gorag.bib"
+      },
+      {
+        "type": "article",
+        "key": "agrag-mehlhorn1988faster",
+        "fields": {
+          "title": "A faster approximation algorithm for the Steiner problem in graphs",
+          "author": "Mehlhorn, Kurt",
+          "journal": "Information Processing Letters",
+          "volume": "27",
+          "number": "3",
+          "pages": "125--128",
+          "year": "1988",
+          "publisher": "Elsevier"
+        },
+        "source": "bibliography/agrag-related.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "agrag-izacardunsupervised",
+    "aliases": [
+      "mgrag-izacardunsupervised"
+    ],
+    "source_entries": [
+      {
+        "type": "article",
+        "key": "agrag-izacardunsupervised",
+        "fields": {
+          "title": "Unsupervised Dense Information Retrieval with Contrastive Learning",
+          "author": "Izacard, Gautier and Caron, Mathilde and Hosseini, Lucas and Riedel, Sebastian and Bojanowski, Piotr and Joulin, Armand and Grave, Edouard",
+          "journal": "Transactions on Machine Learning Research",
+          "year": "2022",
+          "url": "https://openreview.net/forum?id=jKN1pXi7b0"
+        },
+        "source": "bibliography/agrag-related.bib"
+      },
+      {
+        "type": "article",
+        "key": "mgrag-izacardunsupervised",
+        "fields": {
+          "title": "Unsupervised Dense Information Retrieval with Contrastive Learning",
+          "author": "Izacard, Gautier and Caron, Mathilde and Hosseini, Lucas and Riedel, Sebastian and Bojanowski, Piotr and Joulin, Armand and Grave, Edouard",
+          "journal": "Transactions on Machine Learning Research",
+          "year": "2022",
+          "url": "https://openreview.net/forum?id=jKN1pXi7b0"
+        },
+        "source": "bibliography/mgrag.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "mgrag-kwon2023efficient",
+    "aliases": [
+      "agrag-kwon2023efficient"
+    ],
+    "source_entries": [
+      {
+        "type": "inproceedings",
+        "key": "mgrag-kwon2023efficient",
+        "fields": {
+          "title": "Efficient memory management for large language model serving with pagedattention",
+          "author": "Kwon, Woosuk and Li, Zhuohan and Zhuang, Siyuan and Sheng, Ying and Zheng, Lianmin and Yu, Cody Hao and Gonzalez, Joseph and Zhang, Hao and Stoica, Ion",
+          "booktitle": "Proceedings of the 29th symposium on operating systems principles",
+          "pages": "611--626",
+          "year": "2023"
+        },
+        "source": "bibliography/mgrag.bib"
+      },
+      {
+        "type": "inproceedings",
+        "key": "agrag-kwon2023efficient",
+        "fields": {
+          "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention",
+          "author": "Woosuk Kwon and Zhuohan Li and Siyuan Zhuang and Ying Sheng and Lianmin Zheng and Cody Hao Yu and Joseph E. Gonzalez and Hao Zhang and Ion Stoica",
+          "booktitle": "Proceedings of the ACM SIGOPS 29th Symposium on Operating Systems Principles",
+          "year": "2023"
+        },
+        "source": "bibliography/agrag-related.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "agrag-bge_embedding",
+    "aliases": [
+      "mgrag-bge_embedding"
+    ],
+    "source_entries": [
+      {
+        "type": "misc",
+        "key": "agrag-bge_embedding",
+        "fields": {
+          "title": "C-Pack: Packaged Resources To Advance General Chinese Embedding",
+          "author": "Shitao Xiao and Zheng Liu and Peitian Zhang and Niklas Muennighoff",
+          "year": "2023",
+          "eprint": "2309.07597",
+          "archiveprefix": "arXiv",
+          "primaryclass": "cs.CL"
+        },
+        "source": "bibliography/agrag-related.bib"
+      },
+      {
+        "type": "misc",
+        "key": "mgrag-bge_embedding",
+        "fields": {
+          "title": "{C-Pack}: Packaged Resources To Advance General Chinese Embedding",
+          "author": "Shitao Xiao and Zheng Liu and Peitian Zhang and Niklas Muennighoff",
+          "year": "2023",
+          "eprint": "2309.07597",
+          "archiveprefix": "arXiv",
+          "primaryclass": "cs.CL"
+        },
+        "source": "bibliography/mgrag.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "agrag-kowsari2017hdltex",
+    "aliases": [
+      "gorag-kowsari2017hdltex"
+    ],
+    "source_entries": [
+      {
+        "type": "inproceedings",
+        "key": "agrag-kowsari2017hdltex",
+        "fields": {
+          "title": "Hdltex: Hierarchical deep learning for text classification",
+          "author": "Kowsari, Kamran and Brown, Donald E and Heidarysafa, Mojtaba and Meimandi, Kiana Jafari and Gerber, Matthew S and Barnes, Laura E",
+          "booktitle": "2017 16th IEEE international conference on machine learning and applications (ICMLA)",
+          "pages": "364--371",
+          "year": "2017",
+          "organization": "IEEE"
+        },
+        "source": "bibliography/agrag-related.bib"
+      },
+      {
+        "type": "inproceedings",
+        "key": "gorag-kowsari2017hdltex",
+        "fields": {
+          "title": "Hdltex: Hierarchical deep learning for text classification",
+          "author": "Kowsari, Kamran and Brown, Donald E and Heidarysafa, Mojtaba and Meimandi, Kiana Jafari and Gerber, Matthew S and Barnes, Laura E",
+          "booktitle": "2017 16th IEEE international conference on machine learning and applications (ICMLA)",
+          "pages": "364--371",
+          "year": "2017",
+          "organization": "IEEE"
+        },
+        "source": "bibliography/gorag.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "agrag-xia-etal-2021-incremental",
+    "aliases": [
+      "gorag-xia-etal-2021-incremental"
+    ],
+    "source_entries": [
+      {
+        "type": "inproceedings",
+        "key": "agrag-xia-etal-2021-incremental",
+        "fields": {
+          "author": "Congying Xia and\n\tWenpeng Yin and\n\tYihao Feng and\n\tPhilip S. Yu",
+          "editor": "Kristina Toutanova and\n\tAnna Rumshisky and\n\tLuke Zettlemoyer and\n\tDilek Hakkani{-}T{\\\"{u}}r and\n\tIz Beltagy and\n\tSteven Bethard and\n\tRyan Cotterell and\n\tTanmoy Chakraborty and\n\tYichao Zhou",
+          "title": "Incremental Few-shot Text Classification with Multi-round New Classes:\n\tFormulation, Dataset and System",
+          "booktitle": "Proceedings of the 2021 Conference of the North American Chapter of\n\tthe Association for Computational Linguistics: Human Language Technologies,\n\t{NAACL-HLT} 2021, Online, June 6-11, 2021",
+          "pages": "1351--1360",
+          "publisher": "Association for Computational Linguistics",
+          "year": "2021",
+          "url": "https://doi.org/10.18653/v1/2021.naacl-main.106",
+          "doi": "10.18653/V1/2021.NAACL-MAIN.106",
+          "timestamp": "Sat, 09 Apr 2022 12:40:23 +0200",
+          "biburl": "https://dblp.org/rec/conf/naacl/XiaYFY21.bib",
+          "bibsource": "dblp computer science bibliography, https://dblp.org"
+        },
+        "source": "bibliography/agrag-related.bib"
+      },
+      {
+        "type": "inproceedings",
+        "key": "gorag-xia-etal-2021-incremental",
+        "fields": {
+          "title": "Incremental Few-shot Text Classification with Multi-round New Classes: Formulation, Dataset and System",
+          "author": "Xia, Congying  and\n      Yin, Wenpeng  and\n      Feng, Yihao  and\n      Yu, Philip",
+          "editor": "Toutanova, Kristina  and\n      Rumshisky, Anna  and\n      Zettlemoyer, Luke  and\n      Hakkani-Tur, Dilek  and\n      Beltagy, Iz  and\n      Bethard, Steven  and\n      Cotterell, Ryan  and\n      Chakraborty, Tanmoy  and\n      Zhou, Yichao",
+          "booktitle": "Proceedings of the 2021 Conference of the {N}orth {A}merican Chapter of the {A}ssociation for {C}omputational {L}inguistics: Human Language Technologies",
+          "month": "6",
+          "year": "2021",
+          "address": "Online",
+          "publisher": "Association for Computational Linguistics",
+          "url": "https://aclanthology.org/2021.naacl-main.106/",
+          "doi": "10.18653/v1/2021.naacl-main.106",
+          "pages": "1351--1360"
+        },
+        "source": "bibliography/gorag.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "agrag-lin2004rouge",
+    "aliases": [
+      "mgrag-lin2004rouge"
+    ],
+    "source_entries": [
+      {
+        "type": "inproceedings",
+        "key": "agrag-lin2004rouge",
+        "fields": {
+          "title": "ROUGE: A Package for Automatic Evaluation of Summaries",
+          "author": "Lin, Chin-Yew",
+          "booktitle": "Text Summarization Branches Out",
+          "month": "7",
+          "year": "2004",
+          "address": "Barcelona, Spain",
+          "publisher": "Association for Computational Linguistics",
+          "url": "https://aclanthology.org/W04-1013/",
+          "pages": "74--81"
+        },
+        "source": "bibliography/agrag-related.bib"
+      },
+      {
+        "type": "inproceedings",
+        "key": "mgrag-lin2004rouge",
+        "fields": {
+          "title": "ROUGE: A Package for Automatic Evaluation of Summaries",
+          "author": "Lin, Chin-Yew",
+          "booktitle": "Text Summarization Branches Out",
+          "month": "7",
+          "year": "2004",
+          "address": "Barcelona, Spain",
+          "publisher": "Association for Computational Linguistics",
+          "url": "https://aclanthology.org/W04-1013/",
+          "pages": "74--81"
+        },
+        "source": "bibliography/mgrag.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "bg-graphrag",
+    "aliases": [
+      "agrag-edge2024local",
+      "gorag-edge2024local",
+      "mgrag-edge2024local"
+    ],
+    "source_entries": [
+      {
+        "type": "article",
+        "key": "bg-graphrag",
+        "fields": {
+          "title": "From local to global: A graph rag approach to query-focused summarization",
+          "author": "Edge, Darren and Trinh, Ha and Cheng, Newman and Bradley, Joshua and Chao, Alex and Mody, Apurva and Truitt, Steven and Larson, Jonathan",
+          "journal": "arXiv preprint arXiv:2404.16130",
+          "year": "2024"
+        },
+        "source": "bibliography/background.bib"
+      },
+      {
+        "type": "article",
+        "key": "agrag-edge2024local",
+        "fields": {
+          "title": "From local to global: A graph rag approach to query-focused summarization",
+          "author": "Edge, Darren and Trinh, Ha and Cheng, Newman and Bradley, Joshua and Chao, Alex and Mody, Apurva and Truitt, Steven and Larson, Jonathan",
+          "journal": "arXiv preprint arXiv:2404.16130",
+          "year": "2024"
+        },
+        "source": "bibliography/agrag-related.bib"
+      },
+      {
+        "type": "article",
+        "key": "gorag-edge2024local",
+        "fields": {
+          "title": "From local to global: A graph rag approach to query-focused summarization",
+          "author": "Edge, Darren and Trinh, Ha and Cheng, Newman and Bradley, Joshua and Chao, Alex and Mody, Apurva and Truitt, Steven and Larson, Jonathan",
+          "journal": "arXiv preprint arXiv:2404.16130",
+          "year": "2024"
+        },
+        "source": "bibliography/gorag.bib"
+      },
+      {
+        "type": "article",
+        "key": "mgrag-edge2024local",
+        "fields": {
+          "title": "From local to global: A graph rag approach to query-focused summarization",
+          "author": "Edge, Darren and Trinh, Ha and Cheng, Newman and Bradley, Joshua and Chao, Alex and Mody, Apurva and Truitt, Steven and Larson, Jonathan",
+          "journal": "arXiv preprint arXiv:2404.16130",
+          "year": "2024"
+        },
+        "source": "bibliography/mgrag.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "bg-lightrag",
+    "aliases": [
+      "agrag-guo2024lightrag",
+      "gorag-guo2024lightrag",
+      "mgrag-guo2024lightrag"
+    ],
+    "source_entries": [
+      {
+        "type": "inproceedings",
+        "key": "bg-lightrag",
+        "fields": {
+          "author": "Guo, Zirui and Xia, Lianghao and Yu, Yanhua and Ao, Tu and Huang, Chao",
+          "title": "LightRAG: Simple and Fast Retrieval-Augmented Generation",
+          "booktitle": "Findings of the Association for Computational Linguistics: EMNLP 2025",
+          "year": "2025",
+          "doi": "10.18653/v1/2025.findings-emnlp.568",
+          "pages": "10746--10761"
+        },
+        "source": "bibliography/background.bib"
+      },
+      {
+        "type": "inproceedings",
+        "key": "agrag-guo2024lightrag",
+        "fields": {
+          "title": "LightRAG: Simple and Fast Retrieval-Augmented Generation",
+          "author": "Zirui Guo and Lianghao Xia and Yanhua Yu and Tu Ao and Chao Huang",
+          "year": "2025",
+          "booktitle": "Findings of the Association for Computational Linguistics: EMNLP 2025",
+          "doi": "10.18653/v1/2025.findings-emnlp.568",
+          "pages": "10746--10761"
+        },
+        "source": "bibliography/agrag-related.bib"
+      },
+      {
+        "type": "inproceedings",
+        "key": "gorag-guo2024lightrag",
+        "fields": {
+          "title": "{L}ight{RAG}: Simple and Fast Retrieval-Augmented Generation",
+          "author": "Guo, Zirui  and\n      Xia, Lianghao  and\n      Yu, Yanhua  and\n      Ao, Tu  and\n      Huang, Chao",
+          "editor": "Christodoulopoulos, Christos  and\n      Chakraborty, Tanmoy  and\n      Rose, Carolyn  and\n      Peng, Violet",
+          "booktitle": "Findings of the {A}ssociation for {C}omputational {L}inguistics: {EMNLP} 2025",
+          "month": "11",
+          "year": "2025",
+          "address": "Suzhou, China",
+          "publisher": "Association for Computational Linguistics",
+          "url": "https://aclanthology.org/2025.findings-emnlp.568/",
+          "doi": "10.18653/v1/2025.findings-emnlp.568",
+          "pages": "10746--10761"
+        },
+        "source": "bibliography/gorag.bib"
+      },
+      {
+        "type": "inproceedings",
+        "key": "mgrag-guo2024lightrag",
+        "fields": {
+          "title": "LightRAG: Simple and Fast Retrieval-Augmented Generation",
+          "author": "Zirui Guo and Lianghao Xia and Yanhua Yu and Tu Ao and Chao Huang",
+          "year": "2025",
+          "booktitle": "Proceedings of the 2025 conference on empirical methods in natural language processing"
+        },
+        "source": "bibliography/mgrag.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "gorag-gutierrez2025memory",
+    "aliases": [
+      "agrag-gutiérrez2025ragmemory",
+      "mgrag-gutiérrez2025ragmemory"
+    ],
+    "source_entries": [
+      {
+        "type": "inproceedings",
+        "key": "gorag-gutierrez2025memory",
+        "fields": {
+          "title": "From {RAG} to Memory: Non-Parametric Continual Learning for Large Language Models",
+          "author": "Guti\\'errez, Bernal Jim\\'enez and Shu, Yiheng and Qi, Weijian and Zhou, Sizhe and Su, Yu",
+          "booktitle": "Proceedings of the 42nd International Conference on Machine Learning",
+          "pages": "21497--21515",
+          "year": "2025",
+          "volume": "267",
+          "series": "Proceedings of Machine Learning Research",
+          "publisher": "PMLR",
+          "url": "https://proceedings.mlr.press/v267/gutierrez25a.html"
+        },
+        "source": "bibliography/gorag.bib"
+      },
+      {
+        "type": "article",
+        "key": "agrag-gutiérrez2025ragmemory",
+        "fields": {
+          "title": "From RAG to Memory: Non-Parametric Continual Learning for Large Language Models",
+          "author": "Bernal Jiménez Gutiérrez and Yiheng Shu and Weijian Qi and Sizhe Zhou and Yu Su",
+          "year": "2025",
+          "journal": "Forty-second International Conference on Machine Learning"
+        },
+        "source": "bibliography/agrag-related.bib"
+      },
+      {
+        "type": "article",
+        "key": "mgrag-gutiérrez2025ragmemory",
+        "fields": {
+          "title": "From RAG to Memory: Non-Parametric Continual Learning for Large Language Models",
+          "author": "Bernal Jiménez Gutiérrez and Yiheng Shu and Weijian Qi and Sizhe Zhou and Yu Su",
+          "year": "2025",
+          "journal": "Forty-second International Conference on Machine Learning"
+        },
+        "source": "bibliography/mgrag.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "agrag-jiang-etal-2024-longllmlingua",
+    "aliases": [
+      "gorag-jiang-etal-2024-longllmlingua"
+    ],
+    "source_entries": [
+      {
+        "type": "inproceedings",
+        "key": "agrag-jiang-etal-2024-longllmlingua",
+        "fields": {
+          "title": "LongLLMLingua: Accelerating and Enhancing {LLM}s in Long Context Scenarios via Prompt Compression",
+          "author": "Jiang, Huiqiang and Wu, Qianhui and Luo, Xufang and Li, Dongsheng and Lin, Chin-Yew and Yang, Yuqing and Qiu, Lili",
+          "editor": "Ku, Lun-Wei  and\n\tMartins, Andre  and\n\tSrikumar, Vivek",
+          "booktitle": "Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+          "month": "8",
+          "year": "2024",
+          "address": "Bangkok, Thailand",
+          "publisher": "Association for Computational Linguistics",
+          "url": "https://aclanthology.org/2024.acl-long.91/",
+          "pages": "1658--1677",
+          "doi": "10.18653/v1/2024.acl-long.91"
+        },
+        "source": "bibliography/agrag-related.bib"
+      },
+      {
+        "type": "inproceedings",
+        "key": "gorag-jiang-etal-2024-longllmlingua",
+        "fields": {
+          "title": "{L}ong{LLML}ingua: Accelerating and Enhancing {LLM}s in Long Context Scenarios via Prompt Compression",
+          "author": "Jiang, Huiqiang and Wu, Qianhui and Luo, Xufang and Li, Dongsheng and Lin, Chin-Yew and Yang, Yuqing and Qiu, Lili",
+          "editor": "Ku, Lun-Wei  and\n      Martins, Andre  and\n      Srikumar, Vivek",
+          "booktitle": "Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+          "month": "8",
+          "year": "2024",
+          "address": "Bangkok, Thailand",
+          "publisher": "Association for Computational Linguistics",
+          "url": "https://aclanthology.org/2024.acl-long.91/",
+          "doi": "10.18653/v1/2024.acl-long.91",
+          "pages": "1658--1677"
+        },
+        "source": "bibliography/gorag.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "bg-agrag",
+    "aliases": [
+      "agrag-paper"
+    ],
+    "source_entries": [
+      {
+        "type": "inproceedings",
+        "key": "bg-agrag",
+        "fields": {
+          "author": "Wang, Yubo and Li, Haoyang and Teng, Fei and Chen, Lei",
+          "title": "{AGRAG}: Advanced Graph-based Retrieval-Augmented Generation for {LLMs}",
+          "booktitle": "2026 IEEE 42nd International Conference on Data Engineering (ICDE)",
+          "year": "2026",
+          "doi": "10.1109/ICDE65706.2026.00110",
+          "publisher": "IEEE"
+        },
+        "source": "bibliography/background.bib"
+      },
+      {
+        "type": "inproceedings",
+        "key": "agrag-paper",
+        "fields": {
+          "author": "Wang, Yubo and Li, Haoyang and Teng, Fei and Chen, Lei",
+          "title": "{AGRAG}: Advanced Graph-based Retrieval-Augmented Generation for {LLMs}",
+          "booktitle": "2026 IEEE 42nd International Conference on Data Engineering (ICDE)",
+          "year": "2026",
+          "doi": "10.1109/ICDE65706.2026.00110",
+          "publisher": "IEEE"
+        },
+        "source": "bibliography/agrag.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "bg-cacheblend",
+    "aliases": [
+      "mgrag-yao2025cacheblend"
+    ],
+    "source_entries": [
+      {
+        "type": "inproceedings",
+        "key": "bg-cacheblend",
+        "fields": {
+          "author": "Yao, Jiayi and Li, Hanchen and Liu, Yuhan and Ray, Siddhant and Cheng, Yihua and Zhang, Qizheng and Du, Kuntai and Lu, Shan and Jiang, Junchen",
+          "title": "CacheBlend: Fast Large Language Model Serving for RAG with Cached Knowledge Fusion",
+          "booktitle": "Proceedings of the Twentieth European Conference on Computer Systems",
+          "year": "2025",
+          "doi": "10.1145/3689031.3696098",
+          "pages": "94--109"
+        },
+        "source": "bibliography/background.bib"
+      },
+      {
+        "type": "inproceedings",
+        "key": "mgrag-yao2025cacheblend",
+        "fields": {
+          "title": "CacheBlend: Fast large language model serving for RAG with cached knowledge fusion",
+          "author": "Yao, Jiayi and Li, Hanchen and Liu, Yuhan and Ray, Siddhant and Cheng, Yihua and Zhang, Qizheng and Du, Kuntai and Lu, Shan and Jiang, Junchen",
+          "booktitle": "Proceedings of the Twentieth European Conference on Computer Systems",
+          "pages": "94--109",
+          "year": "2025"
+        },
+        "source": "bibliography/mgrag.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "bg-reca",
+    "aliases": [
+      "kglink-sun2023reca"
+    ],
+    "source_entries": [
+      {
+        "type": "article",
+        "key": "bg-reca",
+        "fields": {
+          "author": "Sun, Yushi and Xin, Hao and Chen, Lei",
+          "title": "RECA: Related Tables Enhanced Column Semantic Type Annotation Framework",
+          "journal": "Proceedings of the VLDB Endowment",
+          "year": "2023",
+          "doi": "10.14778/3583140.3583149",
+          "pages": "1319--1331",
+          "volume": "16",
+          "number": "6"
+        },
+        "source": "bibliography/background.bib"
+      },
+      {
+        "type": "article",
+        "key": "kglink-sun2023reca",
+        "fields": {
+          "title": "RECA: Related Tables Enhanced Column Semantic Type Annotation Framework",
+          "author": "Sun, Yushi and Xin, Hao and Chen, Lei",
+          "journal": "Proceedings of the VLDB Endowment",
+          "volume": "16",
+          "number": "6",
+          "pages": "1319--1331",
+          "year": "2023",
+          "publisher": "VLDB Endowment"
+        },
+        "source": "bibliography/kglink.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "bg-sato",
+    "aliases": [
+      "kglink-zhang2020sato"
+    ],
+    "source_entries": [
+      {
+        "type": "article",
+        "key": "bg-sato",
+        "fields": {
+          "title": "Sato: Contextual Semantic Type Detection in Tables",
+          "author": "Dan Zhang and \n            Yoshihiko Suhara and \n            Jinfeng Li and \n            Madelon Hulsebos and \n            {\\c{C}}a{\\u{g}}atay Demiralp and \n            Wang-Chiew Tan",
+          "year": "2020",
+          "volume": "13",
+          "number": "12",
+          "journal": "Proc. VLDB Endow.",
+          "pages": "1835–1848",
+          "numpages": "14",
+          "url": "https://doi.org/10.14778/3407790.3407793"
+        },
+        "source": "bibliography/background.bib"
+      },
+      {
+        "type": "article",
+        "key": "kglink-zhang2020sato",
+        "fields": {
+          "title": "Sato: Contextual Semantic Type Detection in Tables",
+          "author": "Dan Zhang and \n            Yoshihiko Suhara and \n            Jinfeng Li and \n            Madelon Hulsebos and \n            {\\c{C}}a{\\u{g}}atay Demiralp and \n            Wang-Chiew Tan",
+          "year": "2020",
+          "volume": "13",
+          "number": "12",
+          "journal": "Proc. VLDB Endow.",
+          "pages": "1835–1848",
+          "numpages": "14",
+          "url": "https://doi.org/10.14778/3407790.3407793"
+        },
+        "source": "bibliography/kglink.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "bg-doduo",
+    "aliases": [
+      "kglink-suhara2022annotating"
+    ],
+    "source_entries": [
+      {
+        "type": "inproceedings",
+        "key": "bg-doduo",
+        "fields": {
+          "title": "Annotating columns with pre-trained language models",
+          "author": "Suhara, Yoshihiko and Li, Jinfeng and Li, Yuliang and Zhang, Dan and Demiralp, {\\c{C}}a{\\u{g}}atay and Chen, Chen and Tan, Wang-Chiew",
+          "booktitle": "Proceedings of the 2022 International Conference on Management of Data",
+          "pages": "1493--1503",
+          "year": "2022"
+        },
+        "source": "bibliography/background.bib"
+      },
+      {
+        "type": "inproceedings",
+        "key": "kglink-suhara2022annotating",
+        "fields": {
+          "title": "Annotating columns with pre-trained language models",
+          "author": "Suhara, Yoshihiko and Li, Jinfeng and Li, Yuliang and Zhang, Dan and Demiralp, {\\c{C}}a{\\u{g}}atay and Chen, Chen and Tan, Wang-Chiew",
+          "booktitle": "Proceedings of the 2022 International Conference on Management of Data",
+          "pages": "1493--1503",
+          "year": "2022"
+        },
+        "source": "bibliography/kglink.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "bg-hnn",
+    "aliases": [
+      "kglink-chen2019learning"
+    ],
+    "source_entries": [
+      {
+        "type": "inproceedings",
+        "key": "bg-hnn",
+        "fields": {
+          "title": "Learning semantic annotations for tabular data",
+          "author": "Chen, Jiaoyan and Jim{\\'e}nez-Ruiz, Ernesto and Horrocks, Ian and Sutton, Charles",
+          "booktitle": "Proceedings of the 28th International Joint Conference on Artificial Intelligence",
+          "pages": "2088--2094",
+          "year": "2019"
+        },
+        "source": "bibliography/background.bib"
+      },
+      {
+        "type": "inproceedings",
+        "key": "kglink-chen2019learning",
+        "fields": {
+          "title": "Learning semantic annotations for tabular data",
+          "author": "Chen, Jiaoyan and Jim{\\'e}nez-Ruiz, Ernesto and Horrocks, Ian and Sutton, Charles",
+          "booktitle": "Proceedings of the 28th International Joint Conference on Artificial Intelligence",
+          "pages": "2088--2094",
+          "year": "2019"
+        },
+        "source": "bibliography/kglink.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "bg-mmqa",
+    "aliases": [
+      "mgrag-talmor2021multimodalqa"
+    ],
+    "source_entries": [
+      {
+        "type": "inproceedings",
+        "key": "bg-mmqa",
+        "fields": {
+          "title": "Multimodalqa: Complex question answering over text, tables and images",
+          "author": "Talmor, Alon and Yoran, Ori and Catav, Amnon and Lahav, Dan and Wang, Yizhong and Asai, Akari and Ilharco, Gabriel and Hajishirzi, Hannaneh and Berant, Jonathan",
+          "booktitle": "International Conference on Learning Representations",
+          "year": "2021",
+          "url": "https://openreview.net/forum?id=ee6W5UgQLa"
+        },
+        "source": "bibliography/background.bib"
+      },
+      {
+        "type": "article",
+        "key": "mgrag-talmor2021multimodalqa",
+        "fields": {
+          "title": "Multimodalqa: Complex question answering over text, tables and images",
+          "author": "Talmor, Alon and Yoran, Ori and Catav, Amnon and Lahav, Dan and Wang, Yizhong and Asai, Akari and Ilharco, Gabriel and Hajishirzi, Hannaneh and Berant, Jonathan",
+          "journal": "International Conference on Learning Representations",
+          "year": "2021"
+        },
+        "source": "bibliography/mgrag.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "bg-mramg",
+    "aliases": [
+      "mgrag-yu2025mramg"
+    ],
+    "source_entries": [
+      {
+        "type": "inproceedings",
+        "key": "bg-mramg",
+        "fields": {
+          "title": "MRAMG-Bench: A Comprehensive Benchmark for Advancing Multimodal Retrieval-Augmented Multimodal Generation",
+          "author": "Yu, Qinhan and Xiao, Zhiyou and Li, Binghui and Wang, Zhengren and Chen, Chong and Zhang, Wentao",
+          "booktitle": "Proceedings of the 48th International ACM SIGIR Conference on Research and Development in Information Retrieval",
+          "pages": "3616--3626",
+          "year": "2025"
+        },
+        "source": "bibliography/background.bib"
+      },
+      {
+        "type": "inproceedings",
+        "key": "mgrag-yu2025mramg",
+        "fields": {
+          "title": "MRAMG-Bench: A Comprehensive Benchmark for Advancing Multimodal Retrieval-Augmented Multimodal Generation",
+          "author": "Yu, Qinhan and Xiao, Zhiyou and Li, Binghui and Wang, Zhengren and Chen, Chong and Zhang, Wentao",
+          "booktitle": "Proceedings of the 48th International ACM SIGIR Conference on Research and Development in Information Retrieval",
+          "pages": "3616--3626",
+          "year": "2025"
+        },
+        "source": "bibliography/mgrag.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "bg-bert",
+    "aliases": [
+      "kglink-devlin2018bert"
+    ],
+    "source_entries": [
+      {
+        "type": "inproceedings",
+        "key": "bg-bert",
+        "fields": {
+          "author": "Devlin, Jacob and Chang, Ming-Wei and Lee, Kenton and Toutanova, Kristina",
+          "title": "{BERT}: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+          "booktitle": "Proceedings of NAACL-HLT 2019",
+          "year": "2019",
+          "pages": "4171--4186",
+          "doi": "10.18653/v1/N19-1423",
+          "url": "https://aclanthology.org/N19-1423/"
+        },
+        "source": "bibliography/background.bib"
+      },
+      {
+        "type": "article",
+        "key": "kglink-devlin2018bert",
+        "fields": {
+          "title": "Bert: Pre-training of deep bidirectional transformers for language understanding",
+          "author": "Devlin, Jacob and Chang, Ming-Wei and Lee, Kenton and Toutanova, Kristina",
+          "journal": "arXiv preprint arXiv:1810.04805",
+          "year": "2018"
+        },
+        "source": "bibliography/kglink.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "bg-kglink",
+    "aliases": [
+      "kglink-publication"
+    ],
+    "source_entries": [
+      {
+        "type": "inproceedings",
+        "key": "bg-kglink",
+        "fields": {
+          "author": "Wang, Yubo and Xin, Hao and Chen, Lei",
+          "title": "{KGLink}: A Column Type Annotation Method that Combines Knowledge Graph and Pre-Trained Language Model",
+          "booktitle": "2024 IEEE 40th International Conference on Data Engineering (ICDE)",
+          "year": "2024",
+          "pages": "1023--1035",
+          "publisher": "IEEE",
+          "doi": "10.1109/ICDE60146.2024.00083"
+        },
+        "source": "bibliography/background.bib"
+      },
+      {
+        "type": "inproceedings",
+        "key": "kglink-publication",
+        "fields": {
+          "author": "Wang, Yubo and Xin, Hao and Chen, Lei",
+          "title": "{KGLink}: A Column Type Annotation Method that Combines Knowledge Graph and Pre-Trained Language Model",
+          "booktitle": "2024 IEEE 40th International Conference on Data Engineering (ICDE)",
+          "year": "2024",
+          "pages": "1023--1035",
+          "publisher": "IEEE",
+          "doi": "10.1109/ICDE60146.2024.00083"
+        },
+        "source": "bibliography/kglink.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "bg-gorag",
+    "aliases": [
+      "gorag-paper"
+    ],
+    "source_entries": [
+      {
+        "type": "inproceedings",
+        "key": "bg-gorag",
+        "fields": {
+          "author": "Wang, Yubo and Li, Haoyang and Teng, Fei and Chen, Lei",
+          "title": "{GORAG}: Graph-based Online Retrieval Augmented Generation for Dynamic Few-shot Social Media Text Classification",
+          "booktitle": "Proceedings of the ACM Web Conference 2026",
+          "year": "2026",
+          "pages": "9148--9159",
+          "publisher": "Association for Computing Machinery",
+          "doi": "10.1145/3774904.3793011"
+        },
+        "source": "bibliography/background.bib"
+      },
+      {
+        "type": "inproceedings",
+        "key": "gorag-paper",
+        "fields": {
+          "author": "Wang, Yubo and Li, Haoyang and Teng, Fei and Chen, Lei",
+          "title": "{GORAG}: Graph-based Online Retrieval Augmented Generation for Dynamic Few-shot Social Media Text Classification",
+          "booktitle": "Proceedings of the ACM Web Conference 2026",
+          "year": "2026",
+          "pages": "9148--9159",
+          "publisher": "Association for Computing Machinery",
+          "doi": "10.1145/3774904.3793011"
+        },
+        "source": "bibliography/gorag.bib"
+      }
+    ]
+  },
+  {
+    "canonical": "bg-mgrag",
+    "aliases": [
+      "mgrag-paper"
+    ],
+    "source_entries": [
+      {
+        "type": "article",
+        "key": "bg-mgrag",
+        "fields": {
+          "author": "Wang, Yubo and Li, Haoyang and Chen, Lei",
+          "title": "{MGRAG}: Semantic Subgraph Matching and Graph-Aware Caching for Multimodal Retrieval-Augmented Generation",
+          "journal": "Proceedings of the VLDB Endowment",
+          "volume": "19",
+          "number": "9",
+          "pages": "2480--2493",
+          "year": "2026",
+          "doi": "10.14778/3819518.3819565"
+        },
+        "source": "bibliography/background.bib"
+      },
+      {
+        "type": "article",
+        "key": "mgrag-paper",
+        "fields": {
+          "author": "Wang, Yubo and Li, Haoyang and Chen, Lei",
+          "title": "{MGRAG}: Semantic Subgraph Matching and Graph-Aware Caching for Multimodal Retrieval-Augmented Generation",
+          "journal": "Proceedings of the VLDB Endowment",
+          "volume": "19",
+          "number": "9",
+          "pages": "2480--2493",
+          "year": "2026",
+          "doi": "10.14778/3819518.3819565"
+        },
+        "source": "bibliography/mgrag.bib"
+      }
+    ]
+  }
+]

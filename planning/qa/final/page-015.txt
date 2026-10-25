@@ -1,0 +1,30 @@
+CHAPTER 1
+INTRODUCTION
+1.1 Motivation
+Language-model pipelines use text, table cells, and images as evidence for prediction or gen-
+eration. The usefulness of that context depends on which evidence was selected and how its
+parts relate to one another. A table column may contain names while omitting the occupations
+neededtoidentifyitssemantictype. Aclassificationquerymayrefertoalabelintroducedafter
+theinitialindexwasconstructed. Ananswermaydependonfactsdistributedacrosspassages. A
+multimodalquestionmayexpressarelationshipthatcorrespondstoseveralfactsintheevidence.
+Thesesettingsrequiredecisionsaboutevidencebeforethemodelproducesitsprediction.
+This thesis studies explicit structure as a means of making those decisions. A knowledge
+graph connects an entity to descriptions and relations beyond a table. A task graph connects
+keywords to labels and can be updated as classification proceeds. An evidence graph supports
+the selection of connected facts for text generation. A query graph specifies relationships to
+be matched against multimodal evidence. The central question is how these structures should
+participateinthecomputationthatsuppliescontexttoalanguagemodel.
+Thefirstsettingiscolumntypeannotation. Consideracolumnofpeopleaccompaniedonly
+bybirthanddeathdates. Amodelthatencodesthetablecanusethedatesascontext,butthetable
+may not identify a common occupation. Linking the names to a knowledge graph can supply
+that information. Conversely, the knowledge graph may associate a person with several valid
+types, while a dataset expects a particular label vocabulary. KGLink combines external graph
+information with a pre-trained language model and supervision from the annotation task [1].
+Thestructuresuppliesevidence;thetaskdeterminesthelabeltopredict.
+Thesecondsettingconcernsdynamicfew-shottextclassification. Alabelsetcangrowover
+rounds,withonlyafewexamplesavailableforeachlabel. Theretrievalindexmustrepresentthe
+available supervision and provide candidates for the current text. Adding every observed word
+uniformlydoesnotdistinguishusefulassociationsfromincidentalones. Returningafixednum-
+ber of semantically similar passages also leaves the candidate label decision implicit. GORAG
+constructs and updates weighted keyword–label relations and retrieves labels through connec-
+1

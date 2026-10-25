@@ -1,0 +1,72 @@
+[
+  {
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/WWW_CR/figures/DFSTC_task.pdf",
+    "target_path": "figures/gorag/DFSTC_task.pdf",
+    "sha256": "de51f123932dc9e8868670bb0e9d54730320942cffbd5ae5eafb5ccf4dad7d05",
+    "published_figure_number": "1",
+    "published_page": 1,
+    "target_chapter": 4,
+    "verified_by": "gorag agent; source and author-confirmed publication-equivalent PDF visual/text comparison",
+    "status": "MATCH_AUTHOR_CONFIRMED_PUBLICATION_EQUIVALENT_VISUAL_AND_SHA256"
+  },
+  {
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/WWW_CR/figures/GORAG_pipeline_example_new.pdf",
+    "target_path": "figures/gorag/GORAG_pipeline_example_new.pdf",
+    "sha256": "5c8bdcbe435f1390315934d108efba01da25dc4510c4df329b619f5a7a976643",
+    "published_figure_number": "2",
+    "published_page": 4,
+    "target_chapter": 4,
+    "verified_by": "gorag agent; source and author-confirmed publication-equivalent PDF visual/text comparison",
+    "status": "MATCH_AUTHOR_CONFIRMED_PUBLICATION_EQUIVALENT_VISUAL_AND_SHA256"
+  },
+  {
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/WWW_CR/figures/runtime_wos.pdf",
+    "target_path": "figures/gorag/runtime_wos.pdf",
+    "sha256": "d3785ab84db6f968b941bc0208cd5b1dd9c10c2cf172b291b2eec5bf949de9f1",
+    "published_figure_number": "3a",
+    "published_page": 7,
+    "target_chapter": 4,
+    "verified_by": "gorag agent; source and author-confirmed publication-equivalent PDF visual/text comparison",
+    "status": "MATCH_AUTHOR_CONFIRMED_PUBLICATION_EQUIVALENT_VISUAL_AND_SHA256"
+  },
+  {
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/WWW_CR/figures/runtime_cad.pdf",
+    "target_path": "figures/gorag/runtime_cad.pdf",
+    "sha256": "428b95b762d42a80dff00236445dcfa6979ca2454fd90da4da9d3eae13c81452",
+    "published_figure_number": "3b",
+    "published_page": 7,
+    "target_chapter": 4,
+    "verified_by": "gorag agent; source and author-confirmed publication-equivalent PDF visual/text comparison",
+    "status": "MATCH_AUTHOR_CONFIRMED_PUBLICATION_EQUIVALENT_VISUAL_AND_SHA256"
+  },
+  {
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/WWW_CR/figures/wos_4_round_1.pdf",
+    "target_path": "figures/gorag/wos_4_round_1.pdf",
+    "sha256": "617c6987ba51373e9b466b0b14cc3f2a9d0a56691f03a152543903d7620bc070",
+    "published_figure_number": "4a",
+    "published_page": 8,
+    "target_chapter": 4,
+    "verified_by": "gorag agent; source and author-confirmed publication-equivalent PDF visual/text comparison",
+    "status": "MATCH_AUTHOR_CONFIRMED_PUBLICATION_EQUIVALENT_VISUAL_AND_SHA256"
+  },
+  {
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/WWW_CR/figures/wos_4_round_5.pdf",
+    "target_path": "figures/gorag/wos_4_round_5.pdf",
+    "sha256": "a51c0eaa96de3069488894498e69b4f8183620dc296dfba694550d302b214580",
+    "published_figure_number": "4b",
+    "published_page": 8,
+    "target_chapter": 4,
+    "verified_by": "gorag agent; source and author-confirmed publication-equivalent PDF visual/text comparison",
+    "status": "MATCH_AUTHOR_CONFIRMED_PUBLICATION_EQUIVALENT_VISUAL_AND_SHA256"
+  },
+  {
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/WWW_CR/figures/new_case.pdf",
+    "target_path": "figures/gorag/new_case.pdf",
+    "sha256": "2ae2d9768c279ca37f819b59a4ce8ecb3617286ec1d7873c5cc6bfb16e3dc9c2",
+    "published_figure_number": "5",
+    "published_page": 12,
+    "target_chapter": 4,
+    "verified_by": "gorag agent; source and author-confirmed publication-equivalent PDF visual/text comparison",
+    "status": "MATCH_AUTHOR_CONFIRMED_PUBLICATION_EQUIVALENT_VISUAL_AND_SHA256"
+  }
+]

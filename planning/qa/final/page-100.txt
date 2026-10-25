@@ -1,0 +1,44 @@
+6.5 Path-based Semantic Subgraph Matching
+6.5.1 From edges to paths
+A relation in the query graph can be expressed by several relations in the evidence graph.
+MGRAG assigns text embeddings to entity and relation descriptions. For a path 𝑃(𝑢,𝑣) con-
+taining relations 𝑟 ,…,𝑟 , it defines a semantic representation by aggregating the relation em-
+1 𝑘
+beddings,
+𝑘
+𝐡 = 𝐡 . (6.6)
+𝑃(𝑢,𝑣) ⨁ 𝑟 𝑗
+𝑗=1
+Theaggregationoperatorcanusemeanpooling. Thisoperationprovidesarepresentationofthe
+composed evidence relation that can be compared with a query relation. The published greedy
+expansion further evaluates a joint representation containing the current path, candidate edge,
+and candidate endpoint. These are the path representation and extension test used at different
+stepsoftheprocedure.
+Let 𝐼 ∶ 𝒱̂ → 𝒱 be a candidate entity mapping. For a query edge (𝑢,𝑟,̂ 𝑣), the candidate
+𝑞 𝑞
+evidence paths run from 𝐼(𝑢) to 𝐼(𝑣). Denote this collection by 𝒫(𝐼(𝑢),𝐼(𝑣)). The matching
+objectiveis
+max
+∑
+max cos(𝐡
+𝑟
+,
+̂
+𝐡 𝑃). (6.7)
+𝐼 𝑃∈𝒫(𝐼(𝑢),𝐼(𝑣))
+(𝑢,𝑟,̂𝑣)∈ℰ̂
+𝑞
+Candidatemappingsmustsatisfythesemanticthreshold𝜃 forthemappedentitiesandforevery
+queryrelation’ssupportingpath,
+cos(𝐡 𝑢 ,𝐡 𝐼(𝑢)) > 𝜃 forall𝑢 ∈ 𝒱̂ 𝑞 , (6.8)
+max cos(𝐡 𝑟 , ̂ 𝐡 𝑃) > 𝜃 forall(𝑢,𝑟,̂ 𝑣) ∈ ℰ̂ 𝑞 . (6.9)
+𝑃∈𝒫(𝐼(𝑢),𝐼(𝑣))
+The constraints validate each query edge against an associated evidence path. The selected
+evidenceisthesubgraphformedfromthemappedentitiesandacceptedpaths,whichcaninclude
+intermediateentitiesabsentfromthequerygraph.
+Forafixedcandidatemapping, theinnermaximizationin Equation6.7selectsasupporting
+path for each query relation. The outer search compares entity mappings after those relation
+scoreshavebeenobtained. Theselevelsdistinguishtheproblemoflocatingthequery’sentities
+fromtheproblemofexplainingtheirrelationships. Twomappingscanhavesimilarendpointem-
+beddingsyetdifferinwhethertheirconnectingpathssatisfytherequestedrelation. Conversely,
+86

@@ -1,0 +1,43 @@
+Thefirsttermexpressesinteractionwiththecurrentquestion. Thesecondexpressesinteraction
+with the selected relational context. The third assigns the structural feature of the associated
+graphfact. Theresultingsumdetermineswhichtokenstatesconsumetherecomputationbudget.
+The publication compares the policy with vLLM prefix caching [47] and CacheBlend [22].
+Their retrieval pipelines and cache variants are identified separately in the evaluation. The in-
+verse ablations also evaluate graph-aware recomputation within an existing retrieval pipeline.
+These comparisons expose answer-quality and time changes under several compositions of re-
+trievalandcaching.
+6.7 Computational Cost
+The published offline encoding cost is 𝑂(|𝒞|𝑑 𝑙2), with embedding dimension 𝑑 . Using
+emb 𝑐 emb
+𝑘 processed chunks, query-graph vertex and edge sets 𝒱̂and ℰ̂, evidence-graph sets 𝒱 and
+ℰ, maximum path length 𝑙 , and language-model hidden dimension 𝑑 , its reported online
+𝑝 LLM
+boundis
+𝑂(𝑑
+emb
+𝑘𝑙
+𝑐
+2 +𝑙
+𝑝
+|ℰ̂||𝒱||𝒱̂|+1 +|𝒱||ℰ|
+(6.14)
++𝑑
+LLM
+(|𝑆
+𝑟
+|2 +|𝑞|2)).
+Themapping-enumerationtermisexponentialinquery-graphsize. Query-specificconstruction
+andaboundedpathlengthrestrictthegraphsprocessedintheevaluatedsetting. Actualmodule
+costs provide the complementary evidence about where runtime is spent. In particular, graph
+construction calls the language model repeatedly, whereas matching operates on the extracted
+graph. Section6.10reportsthesecostsindividually.
+6.8 Experimental Protocol
+The evaluation uses MMQA [20] and the Arxiv, Manual, Web, Wiki, Wit, and Recipe subsets
+of MRAMG-Bench [21]. Table 6.1 preserves the published dataset statistics. MMQA includes
+textual and image queries. The six MRAMG subsets contain textual queries over multimodal
+corpora. Theirquery-hoprangesandcorpussizesdiffer,soresultsarereportedbydataset.
+The shared generation backbone is Qwen2.5-VL-7B-Instruct [60]. The experiments run on
+an Intel Xeon Gold 5220R CPU at 2.20 GHz and one NVIDIA A100-SXM4 GPU with 40 GB
+memory. Theretrievalamountissettofive,textchunksuse256tokens,andoverlapis32tokens.
+HippoRAG2 uses Contriever for dense passage retrieval [48]; the other reported embedding
+92

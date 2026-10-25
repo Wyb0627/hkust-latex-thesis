@@ -1,0 +1,32 @@
+SemTabandVizNetexperiments,ablations,no-linkagecases,andeﬀiciencyevidence.
+1.3.2 RQ2: Evidence maintenance under evolving labels
+Thesecondquestionaskshowaretrievalindexcanmaintaintask-specificrelationshipsandselect
+relevantlabelsasafew-shotclassificationproblemevolves. Theinputincludestheexamplesand
+labels available at the current round, an existing graph index, and an unseen text. The output is
+alabelpredictionandtheprescribedindexupdateforsubsequentprocessing.
+Anevolvinglabelsetchangesthemeaningofevidenceretrieval. Acandidatemustbelongto
+thetask’savailablelabels,andthegraphmustincorporatenewsupervisionwithoutrebuildingits
+wholerepresentationforeveryprediction. Withinaround,predictedinformationcanaffectlater
+queriesifthemethodperformsonlineindexing. Itstiminganduseofpredictedlabelstherefore
+belongtotheexperimentalprotocol.
+GORAG answers this question through weighted keyword–label indexing, terminal-based
+connected retrieval, and online updates after classification. Its candidate set is selected for the
+currentinputratherthanspecifiedonlybyafixedretrievalcount. Chapter4describestheround
+andshotsettings,theretrievalconstruction,andtheCAD,WOS,andIFS-Relresults. Thechap-
+teralsoexaminesthecostofindexingandretrievalandtheeffectoftheproposedcomponents.
+1.3.3 RQ3: Connected evidence for textual generation
+Thethirdquestionaskshowtoselectevidencethatreflectsbothitsrelevancetoaqueryandthe
+connections among its facts. The input is a text corpus and a query whose answer can involve
+several information items. The output includes an evidence subgraph, passage context, and the
+generatedanswer.
+A graph-ranking score identifies relevant nodes but does not by itself specify an evidence
+structure. Conversely, a small structure connecting query anchors may omit additional facts
+neededforasummary. Thesystemmustalsoaccountforinformationthatremainsintheoriginal
+text after graph extraction. These requirements motivate a combination of graph selection and
+passageretrieval.
+AGRAG answers the question by constructing a graph with statistically selected entities,
+extractedrelations,passagenodes,andsynonymlinks. Query-mappedfactsconditiontheinflu-
+encescores;semanticsimilaritysuppliesedgecosts. Themethodconstructsaninitialterminal-
+connecting structure and expands it according to the reported cost-score rule. A hybrid dense
+andBM25channelsuppliesadditionalpassages. Chapter5evaluatesthesechoicesacrosstextual
+5

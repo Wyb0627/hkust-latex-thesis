@@ -1,0 +1,33 @@
+Table4.10: 0-shotexperimentsforGORAGandRAGbaselinesonIFS-Reldatasetunder0-shot
+setting.
+Model R1 R2 R3 R4
+GPT-4o[43] 0.9219 0.5109 0.4063 0.5936
+LongLLMLingua[41] 0.9281 0.5297 0.4234 0.5806
+LightRAG[19] 0.6718 0.3047 0.2135 0.0977
+GraphRAG[17] 0.5625 0.1875 0.1458 0.0938
+GORAG 0.9328 0.5406 0.4375 0.6063
+4.8 Zero-shot and Round Generalization
+Thezero-shotIFS-Relexperimentsupplieslabelnamesandlanguage-model-generateddescrip-
+tions without annotated support texts. GORAG extracts keywords from these descriptions to
+initializeitsgraph. Theexperimentconsequentlytestswhetherdescription-derivedassociations
+cansupportcandidateselectionandsubsequentclassification.
+GORAG reports zero-shot accuracies of 0.9328, 0.5406, 0.4375, and 0.6063. The direct
+GPT-4o comparison reports 0.9219, 0.5109, 0.4063, and 0.5936. LongLLMLingua reports
+0.9281, 0.5297, 0.4234, and 0.5806. The graph-based comparisons in the same table are lower
+underthisinitializationprotocol. Thesevaluessupporttheuseoflabeldescriptionsasaninitial
+retrievalsourceforthisexperiment.
+The round-generalization study uses WOS split into four, six, and eight rounds under one-
+and five-shot settings. The displayed curve combines rounds one to four from the four-round
+split, rounds five and six from the six-round split, and rounds seven and eight from the eight-
+roundsplit. Thesepointsrepresentresultsfromdifferentpartitionsofthelabelset. Theydonot
+formthetrajectoryofoneindexupdatedthrougheightconsecutiverounds.
+4.8.1 A retrieved classification case
+Figure 4.5 reproduces a contextual-abuse example from the original study. The query contains
+the terms highlighted in red. These terms map to keyword nodes, and the selected connecting
+structure passes through an insult label. The classifier outputs the abuse category shown in
+the figure. This example exposes the relationship between the extracted query evidence, the
+intermediatelabelnode,andthefinalclassification.
+The useful property of the example is that candidate selection has a visible provenance.
+The label is connected to more than one term in the indexed representation. The displayed
+nonterminal neighbor also shows that a keyword neighborhood can contain more information
+54

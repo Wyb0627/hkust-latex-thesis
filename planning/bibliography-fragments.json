@@ -1,0 +1,26 @@
+[
+  {
+    "path": "bibliography/agrag-related.bib",
+    "sha256": "c823b751f10208776bf1aa63e9501eac31722265e70fed86cbbd2524fec107dd"
+  },
+  {
+    "path": "bibliography/agrag.bib",
+    "sha256": "1e80b827144a23c9c116891fa970b30d179a9e8c15f21ab4a5f01e75bf3160d1"
+  },
+  {
+    "path": "bibliography/background.bib",
+    "sha256": "2b7e094bc1bda86660f36aa952577a9f5c49091c9de1c3c873b1211e1d771ffd"
+  },
+  {
+    "path": "bibliography/gorag.bib",
+    "sha256": "e085af430383988cf73135519e34431bfd426391c9f621cd6100d36f5ffa2ce0"
+  },
+  {
+    "path": "bibliography/kglink.bib",
+    "sha256": "b3598f8b6608bcabab1bb35ed40c80575aac1299c21c63944d40eb501e033214"
+  },
+  {
+    "path": "bibliography/mgrag.bib",
+    "sha256": "a19a1d4695059881c7d55cb49da37ce0188fb2610ec894806b714c5c237f7609"
+  }
+]

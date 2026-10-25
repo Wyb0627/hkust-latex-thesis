@@ -1,0 +1,32 @@
+supporting evidence and presenting the response. The MGRAG evaluation uses six MRAMG
+subsets together with MMQA. The source benchmark and the evaluated application should be
+distinguished because a system can use a benchmark’s evidence collection while applying its
+own retrieval and answer-assessment protocol. Chapter 6 gives the precise datasets, generator,
+andmetricsusedinthatstudy.
+Onceevidenceisretrieved,thesystemmustprocessitasmodelcontext. Inanautoregressive
+Transformer, the prefill stage computes representations for the supplied input, and decoding
+generatesanswertokens. Keyandvaluetensorsfromprocessedinputpositionscanbecachedfor
+later attention computation [7, 22]. Reusing these tensors concerns the computation associated
+with selected evidence. It is a separate decision from choosing which evidence belongs in the
+context.
+CacheGen addresses the storage and transfer of context caches through compression and
+streaming[23]. Therelevantresourceincludesthecostoffetchingcachedtensorsaswellascom-
+puting context representations. CacheBlend studies combining precomputed caches for several
+chunksbyselectivelyrecomputingpartoftheirkeyandvaluestates[22]. Itsmotivationincludes
+interactions between chunks that were not present when their caches were independently com-
+puted. Thesemethodsplacecontextservingwithintheevidencepipeline,whereretrievalorder
+andtheassembledinputcanaffectthecomputationrequiredforgeneration.
+MGRAG brings graph information into selective recomputation [4]. Its retrieved structure
+contributes information about which evidence tokens participate in relevant relationships, to-
+getherwithattention-basedsignals. Thisextendsstructuralaugmentationfromrepresentingand
+selecting context to allocating computation within it. The cache contribution is consequently
+partofthechapter’smainanalysis. Itsevaluationretainsanswerquality,token-relatedmeasure-
+ments, latency, and recomputation settings because those quantities describe the quality–cost
+relationshipbeingstudied.
+2.6 Structural Information in Hyper-relational Knowledge
+Graphs
+This section presents the author’s published work Understanding the Embedding Models on
+Hyper-relationalKnowledgeGraph,publishedatCIKM2025[5]. Itexamineshowgraphrepre-
+sentationsandembeddingarchitecturespreserveinformationusedforlinkprediction. Thestudy
+providesaseparateperspectiveonstructuralinformationwithinthethesis. Itsexperimentscon-
+16

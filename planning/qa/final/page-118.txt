@@ -1,0 +1,24 @@
+relational requirements of the query. Graph features then influence the selection of token states
+forrecomputation. Thegraphisconsequentlyinvolvedinconstructing,selecting,andprocessing
+evidence,ratherthanservingonlyasastorefromwhichafixednumberofitemsisretrieved.
+The experiments support this design at several levels. Complete-system results report the
+highestvaluesacrossthesevendatasets’fouranswermetrics. Constructionandmatchingsubsti-
+tutions evaluate the evidence representation and correspondence choices. The hop-group com-
+parison shows additional quality gains for questions requiring more relational steps, together
+with added time. Cache comparisons and inverse ablations retain the context-serving contribu-
+tionandexposeitsdependenceonthesurroundingretrievalpipeline.
+Several conditions delimit the interpretation. Captions influence the coarse order of image
+evidence,andmodel-generatedextractiondetermineswhichfactsareavailableformatching. A
+valid semantic match is assessed against the extracted query graph and an embedding thresh-
+old;answercorrectnessisevaluateddownstream. Themaximumconstructionandpathbudgets
+restrictthesearch. Thepublishedruntimemeasurementsuseonehardwareandmodelconfigura-
+tion,andthetablesdonotprovidethefixednumericalrecomputationbudgetneededtoattribute
+a cost to a particular 𝑏 value. These conditions identify the representation and computation
+choicesonwhichthereportedresultsdepend.
+Forthethesis’scentralquestion,thechapterestablishesaconcreteextensionfromconnected
+textual evidence to query-dependent multimodal evidence. Semantic paths allow relations to
+be represented at different granularities across the query and evidence graphs. Selective KV
+recomputationshowsafurtheruseoftheretrievedstructureincontextprocessing. Thefollowing
+discussioncomparestheseroleswiththerepresentationsandretrievalobjectsstudiedinKGLink,
+GORAG,andAGRAG,usingtheirrespectivetasksandpublishedevidence.
+104

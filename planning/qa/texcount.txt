@@ -1,0 +1,376 @@
+File: main.tex
+Encoding: ascii
+Words in text: 0
+Words in headers: 1
+Words outside text (captions, etc.): 0
+Number of headers: 1
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/front-abstract.tex
+Encoding: ascii
+Words in text: 261
+Words in headers: 0
+Words outside text (captions, etc.): 0
+Number of headers: 0
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/front-acknowledgements.tex
+Encoding: ascii
+Words in text: 42
+Words in headers: 0
+Words outside text (captions, etc.): 0
+Number of headers: 0
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/ch01-introduction.tex
+Encoding: ascii
+Words in text: 2489
+Words in headers: 58
+Words outside text (captions, etc.): 36
+Number of headers: 13
+Number of floats/tables/figures: 2
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/ch02-background.tex
+Encoding: ascii
+Words in text: 3892
+Words in headers: 46
+Words outside text (captions, etc.): 83
+Number of headers: 11
+Number of floats/tables/figures: 3
+Number of math inlines: 10
+Number of math displayed: 1
+
+Included file: ./chapter/ch03-kglink.tex
+Encoding: utf8
+Words in text: 4337
+Words in headers: 88
+Words outside text (captions, etc.): 234
+Number of headers: 22
+Number of floats/tables/figures: 11
+Number of math inlines: 43
+Number of math displayed: 9
+
+Included file: ./chapter/ch04-gorag.tex
+Encoding: ascii
+Words in text: 4162
+Words in headers: 73
+Words outside text (captions, etc.): 129
+Number of headers: 19
+Number of floats/tables/figures: 5
+Number of math inlines: 41
+Number of math displayed: 8
+
+Included file: ./chapter/ch05-agrag.tex
+Encoding: utf8
+Words in text: 4568
+Words in headers: 90
+Words outside text (captions, etc.): 85
+Number of headers: 21
+Number of floats/tables/figures: 3
+Number of math inlines: 56
+Number of math displayed: 17
+
+Included file: ./chapter/ch06-mgrag.tex
+Encoding: ascii
+Words in text: 5763
+Words in headers: 116
+Words outside text (captions, etc.): 116
+Number of headers: 30
+Number of floats/tables/figures: 5
+Number of math inlines: 90
+Number of math displayed: 12
+
+Included file: ./chapter/ch07-discussion.tex
+Encoding: ascii
+Words in text: 1907
+Words in headers: 30
+Words outside text (captions, etc.): 47
+Number of headers: 7
+Number of floats/tables/figures: 2
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/ch08-conclusion.tex
+Encoding: ascii
+Words in text: 725
+Words in headers: 20
+Words outside text (captions, etc.): 0
+Number of headers: 6
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/tables/gorag-dataset-table.tex
+Encoding: ascii
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 26
+Number of headers: 0
+Number of floats/tables/figures: 1
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/tables/gorag-main-tables.tex
+Encoding: ascii
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 150
+Number of headers: 0
+Number of floats/tables/figures: 6
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/tables/gorag-ablation-table.tex
+Encoding: ascii
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 7
+Number of headers: 0
+Number of floats/tables/figures: 1
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/tables/gorag-token-table.tex
+Encoding: ascii
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 8
+Number of headers: 0
+Number of floats/tables/figures: 1
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/tables/gorag-zero-table.tex
+Encoding: ascii
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 13
+Number of headers: 0
+Number of floats/tables/figures: 1
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/tables/agrag-main-creative.tex
+Encoding: ascii
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 10
+Number of headers: 0
+Number of floats/tables/figures: 1
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/tables/agrag-main-summary.tex
+Encoding: ascii
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 10
+Number of headers: 0
+Number of floats/tables/figures: 1
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/tables/agrag-main-complex.tex
+Encoding: ascii
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 10
+Number of headers: 0
+Number of floats/tables/figures: 1
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/tables/agrag-main-fact.tex
+Encoding: ascii
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 10
+Number of headers: 0
+Number of floats/tables/figures: 1
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/tables/agrag-main-class.tex
+Encoding: ascii
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 10
+Number of headers: 0
+Number of floats/tables/figures: 1
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/tables/agrag-efficiency.tex
+Encoding: ascii
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 24
+Number of headers: 0
+Number of floats/tables/figures: 2
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/tables/agrag-ablation.tex
+Encoding: ascii
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 73
+Number of headers: 0
+Number of floats/tables/figures: 5
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/tables/agrag-low-resource.tex
+Encoding: ascii
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 64
+Number of headers: 0
+Number of floats/tables/figures: 4
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/tables/agrag-low-resource-efficiency.tex
+Encoding: ascii
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 18
+Number of headers: 0
+Number of floats/tables/figures: 2
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/tables/mgrag-datasets.tex
+Encoding: ascii
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 26
+Number of headers: 0
+Number of floats/tables/figures: 1
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/tables/mgrag-main.tex
+Encoding: ascii
+Words in text: 234
+Words in headers: 0
+Words outside text (captions, etc.): 46
+Number of headers: 0
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/tables/mgrag-matching.tex
+Encoding: ascii
+Words in text: 518
+Words in headers: 0
+Words outside text (captions, etc.): 40
+Number of headers: 0
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/tables/mgrag-hops.tex
+Encoding: ascii
+Words in text: 104
+Words in headers: 0
+Words outside text (captions, etc.): 32
+Number of headers: 0
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/tables/mgrag-cache.tex
+Encoding: ascii
+Words in text: 65
+Words in headers: 0
+Words outside text (captions, etc.): 30
+Number of headers: 0
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/tables/mgrag-breakdown.tex
+Encoding: ascii
+Words in text: 99
+Words in headers: 0
+Words outside text (captions, etc.): 44
+Number of headers: 0
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapter/tables/mgrag-ablation.tex
+Encoding: ascii
+Words in text: 47
+Words in headers: 0
+Words outside text (captions, etc.): 14
+Number of headers: 0
+Number of floats/tables/figures: 0
+Number of math inlines: 1
+Number of math displayed: 0
+
+Included file: ./chapter/tables/mgrag-inverse.tex
+Encoding: ascii
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 26
+Number of headers: 0
+Number of floats/tables/figures: 1
+Number of math inlines: 0
+Number of math displayed: 0
+
+Sum of files: main.tex
+File(s) total: main.tex
+Words in text: 29213
+Words in headers: 522
+Words outside text (captions, etc.): 1421
+Number of headers: 130
+Number of floats/tables/figures: 61
+Number of math inlines: 241
+Number of math displayed: 47
+Files: 33
+Subcounts:
+  text+headers+captions (#headers/#floats/#inlines/#displayed)
+  0+1+0 (1/0/0/0) File: main.tex
+  261+0+0 (0/0/0/0) Included file: ./chapter/front-abstract.tex
+  42+0+0 (0/0/0/0) Included file: ./chapter/front-acknowledgements.tex
+  2489+58+36 (13/2/0/0) Included file: ./chapter/ch01-introduction.tex
+  3892+46+83 (11/3/10/1) Included file: ./chapter/ch02-background.tex
+  4337+88+234 (22/11/43/9) Included file: ./chapter/ch03-kglink.tex
+  4162+73+129 (19/5/41/8) Included file: ./chapter/ch04-gorag.tex
+  4568+90+85 (21/3/56/17) Included file: ./chapter/ch05-agrag.tex
+  5763+116+116 (30/5/90/12) Included file: ./chapter/ch06-mgrag.tex
+  1907+30+47 (7/2/0/0) Included file: ./chapter/ch07-discussion.tex
+  725+20+0 (6/0/0/0) Included file: ./chapter/ch08-conclusion.tex
+  0+0+26 (0/1/0/0) Included file: ./chapter/tables/gorag-dataset-table.tex
+  0+0+150 (0/6/0/0) Included file: ./chapter/tables/gorag-main-tables.tex
+  0+0+7 (0/1/0/0) Included file: ./chapter/tables/gorag-ablation-table.tex
+  0+0+8 (0/1/0/0) Included file: ./chapter/tables/gorag-token-table.tex
+  0+0+13 (0/1/0/0) Included file: ./chapter/tables/gorag-zero-table.tex
+  0+0+10 (0/1/0/0) Included file: ./chapter/tables/agrag-main-creative.tex
+  0+0+10 (0/1/0/0) Included file: ./chapter/tables/agrag-main-summary.tex
+  0+0+10 (0/1/0/0) Included file: ./chapter/tables/agrag-main-complex.tex
+  0+0+10 (0/1/0/0) Included file: ./chapter/tables/agrag-main-fact.tex
+  0+0+10 (0/1/0/0) Included file: ./chapter/tables/agrag-main-class.tex
+  0+0+24 (0/2/0/0) Included file: ./chapter/tables/agrag-efficiency.tex
+  0+0+73 (0/5/0/0) Included file: ./chapter/tables/agrag-ablation.tex
+  0+0+64 (0/4/0/0) Included file: ./chapter/tables/agrag-low-resource.tex
+  0+0+18 (0/2/0/0) Included file: ./chapter/tables/agrag-low-resource-efficiency.tex
+  0+0+26 (0/1/0/0) Included file: ./chapter/tables/mgrag-datasets.tex
+  234+0+46 (0/0/0/0) Included file: ./chapter/tables/mgrag-main.tex
+  518+0+40 (0/0/0/0) Included file: ./chapter/tables/mgrag-matching.tex
+  104+0+32 (0/0/0/0) Included file: ./chapter/tables/mgrag-hops.tex
+  65+0+30 (0/0/0/0) Included file: ./chapter/tables/mgrag-cache.tex
+  99+0+44 (0/0/0/0) Included file: ./chapter/tables/mgrag-breakdown.tex
+  47+0+14 (0/0/1/0) Included file: ./chapter/tables/mgrag-ablation.tex
+  0+0+26 (0/1/0/0) Included file: ./chapter/tables/mgrag-inverse.tex
+

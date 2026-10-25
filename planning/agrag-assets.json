@@ -1,0 +1,42 @@
+[
+  {
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/figures/AGRAG_pipeline.pdf",
+    "target": "figures/agrag/AGRAG_pipeline.pdf",
+    "sha256": "84de949296d180d41981827640d998124070d804c7189ffc26daf77f7aa203ee",
+    "status": "MATCH_AUTHOR_SELECTED_LOCAL_COMPLETE_VISUAL_AND_SHA256",
+    "source_figure_number": 1,
+    "pdf_physical_page": 4,
+    "reference_pdf": "planning/published/agrag-local-complete.pdf",
+    "verification": "Independent source/PDF comparison in verification-agrag.md; actual integrated figure review by main agent in final PDF QA."
+  },
+  {
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/figures/GERAG_example.pdf",
+    "target": "figures/agrag/GERAG_example.pdf",
+    "sha256": "05240a54e06bfb2de9c2ef2bb9baea2cd5ce52977bb740aa925adc71a32402f0",
+    "status": "MATCH_AUTHOR_SELECTED_LOCAL_COMPLETE_VISUAL_AND_SHA256",
+    "source_figure_number": 2,
+    "pdf_physical_page": 5,
+    "reference_pdf": "planning/published/agrag-local-complete.pdf",
+    "verification": "Independent source/PDF comparison in verification-agrag.md; actual integrated figure review by main agent in final PDF QA."
+  },
+  {
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/figures/heatmap_novel.pdf",
+    "target": "figures/agrag/heatmap_novel.pdf",
+    "sha256": "b57050eba05cf56e7a49cca85ef6a95eb6221c13d339e744ef20492a2c455981",
+    "status": "MATCH_AUTHOR_SELECTED_LOCAL_COMPLETE_VISUAL_AND_SHA256",
+    "source_figure_number": "3a",
+    "pdf_physical_page": 12,
+    "reference_pdf": "planning/published/agrag-local-complete.pdf",
+    "verification": "Independent source/PDF comparison in verification-agrag.md; actual integrated figure review by main agent in final PDF QA."
+  },
+  {
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/figures/heatmap_medical.pdf",
+    "target": "figures/agrag/heatmap_medical.pdf",
+    "sha256": "3a473d3af15987a0cc70c3f55d072da3881c25dd6a4eb4f4a7060c38a9519634",
+    "status": "MATCH_AUTHOR_SELECTED_LOCAL_COMPLETE_VISUAL_AND_SHA256",
+    "source_figure_number": "3b",
+    "pdf_physical_page": 12,
+    "reference_pdf": "planning/published/agrag-local-complete.pdf",
+    "verification": "Independent source/PDF comparison in verification-agrag.md; actual integrated figure review by main agent in final PDF QA."
+  }
+]

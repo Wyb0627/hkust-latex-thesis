@@ -1,0 +1,764 @@
+        Understanding the Embedding Models on Hyper-relational
+                           Knowledge Graph
+               Yubo Wang                                       Shimin Di∗                              Zhili Wang                           Haoyang Li
+      ywangnx@connect.ust.hk                            shimin.di@seu.edu.cn                    zwangeo@connect.ust.hk                       haoyang-
+             HKUST                                       Southeast University                          HKUST                           comp.li@polyu.edu.hk
+        Hong Kong, China                                   Nanjing, China                          Hong Kong, China                           PolyU
+                                                                                                                                         Hong Kong, China
+
+                                          Fei Teng                                       Hao Xin                           Lei Chen
+                                fteng@connect.ust.hk                            haoxin@tencent.com                  leichen@cse.ust.hk
+                                      HKUST                                           Tencent                      HKUST & HKUST(GZ)
+                                  Hong Kong, China                               Guangzhou, China                   Guangzhou, China
+
+ABSTRACT                                                                                        KEYWORDS
+Recently, Hyper-relational Knowledge Graphs (HKGs) have been                                    Hyper-relational Knowledge Graph, Link Prediction, Graph Neural
+proposed as an extension of traditional Knowledge Graphs (KGs)                                  Network
+to better represent real-world facts with additional qualifiers. As                             ACM Reference Format:
+a result, researchers have attempted to adapt classical Knowledge                               Yubo Wang, Shimin Di, Zhili Wang, Haoyang Li, Fei Teng, Hao Xin, and Lei
+Graph Embedding (KGE) models for HKGs by designing extra qual-                                  Chen. 2025. Understanding the Embedding Models on Hyper-relational
+ifier processing modules. However, it remains unclear whether the                               Knowledge Graph. In Proceedings of the 34th ACM International Conference
+superior performance of Hyper-relational KGE (HKGE) models                                      on Information and Knowledge Management (CIKM ’25), November 10–14,
+arises from their base KGE model or the specially designed ex-                                  2025, Seoul, Republic of Korea. ACM, New York, NY, USA, 11 pages. https:
+tension module. In this paper, we data-wise convert HKGs to KG                                  //doi.org/10.1145/3746252.3761370
+format using decomposition methods and then evaluate several
+classical KGE models’ performance on HKGs. Our results show                                     1    INTRODUCTION
+that some KGE models achieve comparable performance to HKGE                                     Knowledge Graphs (KGs) [18, 33] are powerful tools for orga-
+models. Upon further analysis, we find that the decomposition                                   nizing and leveraging human knowledge. They have facilitated
+methods alter the original HKG topology and fail to fully preserve                              a wide range of web applications, including question answering
+HKG information. Moreover, we observe that current HKGE models                                  [14, 39, 46], semantic search [15, 25, 38], and recommendation sys-
+are either insufficient in capturing the graph’s long-range depen-                              tems [10, 21, 43, 44]. Similar to the prune decomposition method
+dency or struggle to integrate main-triple and qualifier information                            shown in Figure 1-(a), KGs store factual information in the form of
+due to the information compression issue. To further justify our                                triplets (𝑠, 𝑟, 𝑜), where entities 𝑠 and 𝑜 are connected by a relation 𝑟 .
+findings and provide a direction for HKGE research, we propose                                  However, this triplet format has been criticized for being insufficient
+FormerGNN, which employs a qualifier integrator to preserve the                                 and prone to information loss [8, 19, 20, 22, 24, 26, 36]. To address
+original HKG topology, a GNN-based graph encoder to capture                                     this limitation, researchers have extended KGs by incorporating
+the graph’s long-range dependencies, and an improved approach                                   hyper-relational facts. These are represented by adding a qualifier
+for integrating main-triple and qualifier information to mitigate                               set Q, which contains extra entity-relation pairs (𝑞𝑟, 𝑞𝑒) to more
+compression issues. Our experimental results demonstrate that                                   accurately reflect real-world facts, leading to the development of
+FormerGNN outperforms existing HKGE models.                                                     Hyper-relational KGs (HKGs). An example of the hyper-relational
+                                                                                                fact is shown in Figure 2, where the qualifiers with relations De-
+CCS CONCEPTS                                                                                    gree and Major helps to identify the each university that Albert
+• Computing methodologies → Knowledge representation                                            Einstein graduated from. Given HKGs’ practicalities, they were
+and reasoning;                                                                                  widely applied in many real-world applications. For example, HKGs
+                                                                                                enable reasoning over time-dependent facts on temporal graphs
+∗ Corresponding author
+                                                                                                by incorporating temporal qualifiers into relationships [6], aiding
+                                                                                                applications like historical event analysis [12] or forecasting [11].
+Permission to make digital or hard copies of all or part of this work for personal or
+classroom use is granted without fee provided that copies are not made or distributed              Given the importance of HKGs, researchers have focused on de-
+for profit or commercial advantage and that copies bear this notice and the full citation       veloping embedding models specifically for them, known as Hyper-
+on the first page. Copyrights for components of this work owned by others than the              relational Knowledge Graph Embedding (HKGE) models. Most cur-
+author(s) must be honored. Abstracting with credit is permitted. To copy otherwise, or
+republish, to post on servers or to redistribute to lists, requires prior specific permission   rent HKGE models are extensions of existing KG embedding (KGE)
+and/or a fee. Request permissions from permissions@acm.org.                                     models. For instance, the well-known GNN-based HKGE model
+CIKM ’25, November 10–14, 2025, Seoul, Republic of Korea                                        StarE [8] is built upon KGE model CompGCN [31].
+© 2025 Copyright held by the owner/author(s). Publication rights licensed to ACM.
+ACM ISBN 979-8-4007-2040-6/2025/11. . . $15.00                                                     Since most classic HKGE models are extended from KGE models,
+https://doi.org/10.1145/3746252.3761370                                                         this inevitably raises a question: Are their effectivenesses because of
+CIKM ’25, November 10–14, 2025, Seoul, Republic of Korea                                                                                              Yubo Wang et al.
+
+
+   Hyper-relational facts                 (a). Prune                     (b). Direct               (c). Hyper                 (d). DB Reification
+           𝒒𝒆𝟐                                                            𝒒𝒆𝟐                        𝒒𝒆𝟐                                         𝒓
+                                                                                                            𝒓|𝒒𝒓𝟐
+                                                                                                                                           𝒓𝒑𝒓𝒆
+     𝒔 𝒒𝒓𝟐                 𝒐               𝒔           𝒓             𝒐             𝒒𝒓𝟐       𝒐   𝒒𝒓𝟐                      𝒐    𝒔                     𝒓𝒐𝒃𝒋     𝒐
+                                                                                                                                       𝒓𝒔𝒖𝒃
+                                                                         𝒔                        𝒔
+         𝒓                                                                         𝒒𝒓𝟏 𝒓         𝒒𝒓𝟏              𝒓
+                         𝒒𝒓𝟏                                                                                                                   𝒑𝒆
+                                                                                                                𝒓|𝒒𝒓𝟏                  𝒒𝒓𝟏           𝒒𝒓𝟐
+              𝒒𝒆𝟏                                                            𝒒𝒆𝟏                        𝒒𝒆𝟏                   𝒒𝒆𝟏                            𝒒𝒆𝟐
+
+                                               Relation         Entity         Newly created relation         Newly created entity
+
+Figure 1: Illustration of our 3 decomposition methods (sub-figure (a) to (c)) and the DB reification method by [2] (sub-figure
+(d)). In (c), 𝑟 |𝑞𝑟 1 and 𝑟 |𝑞𝑟 2 represents new relationships constructed from the main relation 𝑟 and qualifier relation 𝑞𝑟 . In (d),
+𝑟 𝑝𝑟𝑒 , 𝑟𝑠𝑢𝑏 , 𝑟𝑜𝑏 𝑗 represents the newly generated relationships, and 𝑝𝑒 represents the newly generated pseudo entity.
+  : Main-triple Entity                                                                       on HKGs. As discussed in section 3, our preliminary experimental
+  : Main-triple Rel.           Bachelor                    Doctorate
+                                                                                             results demonstrate that KGE models can still achieve comparable
+  : Qualifier Entity
+                               Degree                       Degree
+                                                                                             performance to those specially designed HKGE models on HKGs.
+  : Qualifier Rel.
+                                                                                                As the innovation of most of the HKGE model is their specially
+                                            Albert
+  University of Zurich     Educated at
+                                           Einstein
+                                                       Educated at       ETH Zurich          designed qualifier capturing modules, two questions naturally arise
+                                                                                             from the results:
+                                Major                       Major
+                                                                                                 (1) Is it necessary to develop various HKGEs?
+                               Physics                 Mathematics                               (2) What information are current HKGEs overlooking?
+                                                                                             In section 4, we further delve deeper into the model performance
+Figure 2: An HKG example, without the qualifiers of relation                                 comparison between KGE and HKGE models to answer these two
+Degree and Major, the difference between entity University of                                questions. Firstly, we examine how these models capture quali-
+Zurich and ETH Zurich w.r.t. Albert Einstein is hard to detect,                              fiers, as the key distinction between KGE and HKGE models lies
+as Einstein were educated at both of these universities.                                     in the inclusion of specialized modules designed to handle quali-
+                                                                                             fiers. Our findings show that HKGE models are still necessary, as
+their KGE base model, or the specially designed qualifier processing                         KGE models with decomposition methods shift the original HKG
+module? Although pioneer work [2] has found specially designed                               topology and are inadequate for capturing qualifiers in HKGs. As a
+HKGE models are sometimes not better than KGE with the sim-                                  result, on HKG, KGE models suffer from information loss, such as
+ple DB reification method. It claims that this phenomenon shows                              semantic shifts and misinterpretations. Secondly, to identify the in-
+the robustness of their specially designed decoder modules, while                            formation missed by HKGE models, we analyze the graph reception
+ignoring KGE base models. Furthermore, it only focuses on one                                approach of both HKGE and KGE models. By “graph reception," we
+GNN-based KGE model CompGCN [31] and its HKG extension                                       refer to how models receive and integrate information from the
+StarE [8]. With the development of the KGE and HKGE research,                                HKG, including both main-triple and qualifier information. Our
+various novel models with new technical routines are proposed                                analysis reveals that current HKGE models often suffer from a
+[13, 47], do these novel HKGE models also perform similarily with                            limited receptive field, which restricts their ability to capture the
+more recent KGE models? Therefore, we dig into the performance                               graph’s multi-hop topology. This limitation weakens their capacity
+of KGE and HKGE models on HKGs to answer this question.                                      to model the graph’s long-range dependency, which is crucial for
+   To make fair comparasions between KGE and HKGE models on                                  many tasks. Furthermore, while some HKGE models have broader
+HKGs, we need to make KGE models runnable on HKGs. Previous                                  receptive fields, they still compress qualifier information into fixed-
+researchers apply model-wise extension on KGE model, which                                   sized main triple embedding matrices, leading to the information
+focus on upgrading KGE models to model HKG [7, 8, 23, 26, 28, 34,                            compression issue.
+36]. In this paper, we turn to another view to data-wise extend                                  The above experiments are all based on an experimental obser-
+HKG to KG format. As shown in Figure 1-(d), DB reification [2]                               vation of current works. Therefore, we propose a new framework
+converts main-triple relation into entity and then add pseudo nodes                          FormerGNN to incorporate several key mechanisms to justify the
+and relations to represent hyper-relational facts. It cannot preserve                        above speculations on qualifier capture and graph reception. Firstly,
+the most important main triplets, and hinders us from incrementally                          FormerGNN employs a transformer-based qualifier integrator to
+studying the effect of each HKG component. Consequently, we                                  capture the original topology of the HKG within the 1-hop neighbor-
+propose three decomposition methods that can convert HKG to                                  hood, eliminating the need for decomposition methods. Secondly,
+KG’s triplet format while keeping the original format of HKG main-                           it uses a GNN-based graph encoder to maintain a broad receptive
+triples and preserving the HKG information to different extents.                             field for main triples and effectively capture the graph’s long-range
+In this paper, we divide the preserved HKG information into 3                                dependencies. Finally, FormerGNN performs predictions jointly
+parts: main triple, intra-qualifier, and inter-qualifier information                         with the main-triple and qualifier embedding matrix, without the
+(The detailed definition of them are in subsection 3.1). Through                             need to compress one into another, mitigating the inofmation com-
+such a data-wise way, we can easily test conventional KGE models                             pression issue. Experimental results demonstrate that FormerGNN
+Understanding the Embedding Models on Hyper-relational Knowledge Graph                                                       CIKM ’25, November 10–14, 2025, Seoul, Republic of Korea
+
+
+Table 1: Overview of existing HKG embedding models and how they receive graph topology information and integrate qualifiers.
+                                                                                                      P
+𝑙 denotes the number of layers; ⟨·⟩ denotes the multi-linear product; 𝑟 denotes the projection matrix of relation 𝑟 ; 𝐻𝑇 denotes
+the qualifier integration function of the HyTransformer [40]; Other notations can be refered from Table 2.
+
+                                                                                                           Key component modeling HKG
+ Category           KGE Model          HKGE Model
+                                                                   Receptive Field                                           Qualifier Integration Function
+ Tensor             SimplE [16]        HypE [7]                                                                    ⟨ℎ𝑟 , 𝐶𝑜𝑛𝑣 1 (ℎ𝑠 ), 𝐶𝑜𝑛𝑣 2 (ℎ𝑞1 ), . . . , 𝐶𝑜𝑛𝑣𝑎𝑟 (ℎ𝑞𝑎𝑟 −1 )⟩
+ Decomposition      ComplEx [30]       RAM [23]                                                                  Σ𝑎𝑖=1
+                                                                                                                    𝑟
+                                                                                                                       ⟨ℎ𝑖𝑟 , 𝑃𝑟𝑖 [1, :]ℎ𝑠 , 𝑃𝑟𝑖 [2, :]ℎ𝑞𝑒1 , . . . , 𝑃𝑟𝑖 [𝑎𝑟 , :]ℎ𝑞𝑒𝑎𝑟 −1 ⟩
+                                       NaLP_fix [34]                                                                         𝑀𝐿𝑃 (𝐶𝑜𝑛𝑣 (ℎ𝑠 , ℎ𝑟 , ℎ𝑞𝑟 1 , ℎ𝑞𝑒1 , · · · ))
+ Simple NN          ConvE [5]                                    Fact level (≤1-hop):
+                                       Hinge [26]                                                                  𝐶𝑎𝑡 (𝐶𝑜𝑛𝑣 1 (ℎ𝑠 , ℎ𝑟 ), 𝐶𝑜𝑛𝑣 2 (ℎ𝑠 , ℎ𝑟 , ℎ𝑞𝑟 1 , ℎ𝑞𝑒1 , · · · ))
+
+ Geometric
+                    TransH [35]        m-TransH [34]
+                                                                          𝐹 (𝑠, 𝑟, Q)
+                                                                                                                                    Σ𝑎𝑖=1
+                                                                                                                                       𝑟
+                                                                                                                                                    P
+                                                                                                                                         𝑊𝑖 𝑟 (ℎ𝑖 ) + 𝑏𝑟
+                    -                  ShrinkE [37]                                                           min (𝑞𝑟,𝑞𝑒 ) ∈ Q (𝜙 (𝑀𝐿𝑃1 (ℎ𝑟 , ℎ𝑞𝑟 , ℎ𝑞𝑒 ), 𝑀𝐿𝑃 2 (ℎ𝑟 , ℎ𝑞𝑟 , ℎ𝑞𝑒 )))
+                                       HyTransformer [40]                                                                     𝑇𝑟𝑚(𝐶𝑎𝑡 (ℎ𝑠 , ℎ𝑟 , ℎ𝑞𝑟 1 , ℎ𝑞𝑒1 , · · · ))
+ Transformer        -                                            Node level (=1-hop):                                              Σ (𝑠,𝑟 ′ ,Q ′ ) ∈N (𝑠 ) 𝑇 𝑟𝑚 (𝐹 (𝑠,𝑟 ′ ,Q ′ ) )
+                                       HyperFormer [13]                                                   𝐶𝑜𝑛𝑣 (𝐻𝑇 (𝑠, 𝑟, Q), 𝛾                        | N (𝑠 ) |                  , 𝛾 (ℎ𝑞𝑟 1 , ℎ𝑞𝑒1 , · · · ))
+                                                                Σ𝑟 ′ ,Q ′ ∈ N (𝑠 )   (𝑠, 𝑟 ′, Q ′ )
+                                       HAHE [24]                                                                𝑀𝐿𝑃 (𝐶𝑎𝑡 (𝑇𝑟𝑚(𝐶𝑎𝑡 (ℎ𝑠 , ℎ𝑟 , ℎ𝑞𝑟 1 , ℎ𝑞𝑒1 , · · · )), ℎ𝑟 , 𝑏𝑒 , 𝑏𝑟 ))
+                                                                Graph level (>1-hop):
+                                       StarE [8]                                                                                   𝜙 (ℎ𝑠 , 𝛾 (ℎ𝑟 , ℎ𝑞𝑟 1 , ℎ𝑞𝑒1 , · · · ))
+                                                                Σ𝑟 ′ ,Q ′ ∈ N (𝑠 ) (𝑠, 𝑟 ′, Q ′ )
+                                                                                                  𝑙
+ GNN                CompGCN [31]
+                                       QUAD [28]                                                                                  𝛾 (𝜙 (ℎ𝑠 , ℎ𝑟 ), ℎ𝑞𝑟 1 , ℎ𝑞𝑒1 , · · · )
+
+achieves state-of-the-art performance across all HKGE models on                                               Table 2: Summary of Important Notations.
+the Cleaned JF17k and WD50k benchmarks.
+                                                                                                 Notations          Meanings
+   Our contributions can be summarized as follows:
+                                                                                                 𝑠                  The subject entity of main-triple.
+• Although various HKG embedding models have been developed,                                     𝑟                  The relation of main-triple.
+  the source of their notable performance is yet cleared. In this                                𝑞𝑒                 The qualifier entity.
+  papers, we conduct a comprehensive analysis, to systematically                                 𝑞𝑟                 The qualifier relation.
+  evaluate whether their performance is due to their specially                                   ℎ∗                 The embedding matrix of an entity or a relation.
+  designed qualifier processing module, or their KGE base model.                                 𝑊                  The learnable weight matrix.
+• To data-wise extend HKG to KG format and analyse the perfor-                                   𝑏                  The learnable bias.
+  mance of KGE model on HKG, we proposed three HKG decompo-                                      G(V, R, F )        The knowledge graph with node set V, edge set R, and
+  sition methods that can preserve HKG information to different                                                     fact set F .
+  extents, while maintaining HKG’s original main-triple topology.                                𝐹 (𝑠, 𝑟, Q)        The hyper-relational fact.
+• To justify our claims while also providing a possible better HKGE                              Q                  The qualifier set.
+  research direction, we propose FormerGNN1 , which leverages                                    N (·)              The 1-hop graph neighborhood of an entity.
+                                                                                                 𝐶𝑜𝑛𝑣               The convolutional operation.
+  a transformer based qualifier integrator that can capture HKG’s
+                                                                                                 𝐶𝑎𝑡                The matrix concatenation operation.
+  original topology, a GNN graph encoder to capture the graph’s
+                                                                                                 𝜙                  The message passing function.
+  long range dependency, and predict jointly with all obtained
+                                                                                                 ⊕                  The aggregration function.
+  embeddings and mitigate GNNs’ information compression issue.                                   𝛾                  The composition operation.
+                                                                                                 𝑇 𝑟𝑚               The transformer layers.
+2 PRELIMINARY                                                                                    [𝑀𝑆𝐾]              The MASK token of the transformer.
+2.1 Further HKG Backgrounds
+As illustrated, KG’s triplet format alone may suffer from information                          𝐹 (𝑠, 𝑟, Q) := (𝑠, 𝑟, 𝑜, {(𝑞𝑟𝑖 , 𝑞𝑒𝑖 )}𝑛𝑖=1 ) ∈ F , with V representing the
+loss [36], and are hard to represent the facts with more than two en-                          entity set (node set), R representing the relation set (edge set), and
+tities [26]. Hence, to address the shortcomings of conventional KGs,                           F representing the fact set. In this paper, we denote scalars by
+the facts within these KGs have been extended to hyper-relational                              lowercase letters 𝑟 , and its respective vector by ℎ𝑟 .
+facts [8] (Figure 1) by adding multiple key-value pairs named quali-
+fiers, and form HKGs. In this paper, following [8], we denote the
+hyper-relational facts 𝐹 (𝑠, 𝑟, 𝑜, Q) as a main triplet along the quali-
+                                                                                               2.2         Specially Designed HKG Embedding Models
+fier set which contains 𝑛 qualifiers: Q := {(𝑞𝑟𝑖 , 𝑞𝑒𝑖 )}𝑛𝑖=1 . For triplet                   In this paper, we categorize current HKGE methods into five cat-
+facts, they can be considered hyper-relational facts with the num-                            egories based on their approach to integrating qualifiers. We will
+ber of qualifiers 𝑛 = 0, in this paper, we represent them as subject-                         primarily focus on the following HKGE models, which represent
+relation-object triples: (𝑠, 𝑟, 𝑜), and formally formulate HKGs as:                           the key methodologies in these categories.
+G(V, R, F ), where 𝑠, 𝑜, 𝑞𝑒 1, . . . , 𝑞𝑒𝑛 ∈ V, 𝑟, 𝑞𝑟 1, . . . , 𝑞𝑟𝑛 ∈ R, and                 Tensor Decomposition Models These models decompose the ba-
+                                                                                              sis matrix into several matrices, to represent entities and relations
+1 Github: https://github.com/Wyb0627/GraphEmbedding                                           in KGs and HKGs. For example, RAM [23] is a tensor decomposition
+CIKM ’25, November 10–14, 2025, Seoul, Republic of Korea                                                                                                  Yubo Wang et al.
+
+
+model based on the classic bilinear KGE model ComplEx [30]. Com-                       fact-level receptive field. Furthermore, a qualifier prediction subtask
+pared with ComplEx, it further considers the main triple and quali-                    is applied to enhance its link prediction performance. GRAN [34]
+fiers as different roles of the hyper-relational facts and models them                 treats the hyper-relational fact as a heterogeneous graph and main-
+with role-specific pattern matrices. On the other hand, HypE [7]                       tains the connectivity between qualifiers through the attention
+extends another bilinear KGE model SimplE [16] by considering                          mechanism of the transformer.
+additional qualifier positions and applying a abstract relation to                        Building upon HyTransformer, HyperFormer [13] further in-
+loosely represent a combination of all qualifier relations of the                      corporates additional aggregators to capture local-level sequential
+original hyper-relational fact.                                                        information. It also applies convolutional operations to integrate
+   This category of models treats each fact independently and ag-                      information from multiple aggregators:
+gregates the information at the end. Consequently, according to
+Table 1, they only directly receive information within facts and have                            ℎ𝑜 =𝐶𝑜𝑛𝑣 (ℎ [𝑀𝑆𝐾 ] , 𝛾𝑟𝑞 (ℎ𝑞𝑟 1 , ℎ𝑞𝑒1 , · · · ),                     (2)
+a receptive field less or equal to the graph’s 1-hop neighborhood.                                    𝛾𝑒𝑛 (Σ (𝑠,𝑟 ′ ,Q ′ ) ∈ N (𝑠 ) 𝑇𝑟𝑚(𝑠, 𝑟 ′, Q ′ )/|N (𝑠)|)),
+Simple NN-based Models These models apply simple, lightweight
+neural network structures, such as Convolutional Neural Networks                       where 𝐶𝑜𝑛𝑣 denote the convolutional operator, ℎ [𝑀𝑆𝐾 ] is the same
+(CNNs) or Multi-layer Perceptrons (MLPs), directly to the feature                      as in Equation 2.2, 𝛾𝑟𝑞 and 𝛾𝑒𝑛 are composition operations of Hy-
+matrices of facts to learn their semantic information. For example,                    perFormer’s relation qualifier and entity neighbor aggregator, re-
+NaLP [34] and Hinge [26] extend their base KGE model, ConvE [5],                       spectively. Consequently, HyperFormer can directly receive graph
+by further appending the feature matrices of qualifiers to those                       information within the graph’s 1-hop neighborhood, rather than
+of main-triples to create the feature matrices of hyper-relational                     the fact only.
+facts. Then they apply CNN or MLP layers to these feature matrices                        On the other hand, to increase the model’s graph receptive field,
+to encode hyper-relational facts and then aggregate these facts                        HAHE [24] utilizes the graph transformer [27, 41, 42] to aggregrate
+w.r.t. their subject entities and relations for the graph’s entity and                 the HKG’s global dependency into node embeddings, and then
+relation embeddings.                                                                   model the HKG’s local dependency as bias injected to the hyper-
+   Similar to Tensor Decomposition Models, Simple NN-based mod-                        relational fact embedding:
+els also treat each fact independently and have receptive field less
+                                                                                             𝑀𝐿𝑃 (𝐶𝑎𝑡 (𝑇𝑟𝑚(𝐶𝑎𝑡 (ℎ𝑠 , ℎ𝑟 , ℎ𝑞𝑟 1 , ℎ𝑞𝑒1 , · · · )), ℎ𝑟 , 𝑏𝑒 , 𝑏𝑟 )).    (3)
+or equal to the graph’s 1-hop neighborhood.
+Geometric Models These models embed KGs or HKGs by pro-                                where 𝑏𝑒 and 𝑏𝑟 denotes the entity and relation bias, respectively.
+jecting entities and relations onto hyperplanes and trying to opti-                    Graph Neural Network Models Current Graph Neural Network
+mize the model based on the geometric cost functions. KGE model                        (GNN)-based KGE models can be classified into two groups: neighbor-
+TransH [35] only applies the cost function for the main triple. In                     aggregated models, and path-aggregated models. Given a KG G(V, R, F ),
+order to model HKGs, m-TransH [36] extends TransH by consid-                           neighbor-aggregated KGE model (Neighbor-GNN in Table 3) CompGCN
+ering the separate cost functions for entity-relation pairs within                     [31] extends GNNs to multi-relational graphs and propose the node
+hyper-relational facts and calculating a weighted sum of their cost                    representation
+together. ShrinkE [37] is a model specifically designed to model                                                Ê
+HKG, it maps main triples to boxes in the geometric hyperplane,                                     ℎ𝑜 = 𝑎𝑐𝑡 (          ({𝑊𝜆 (𝑟 ) 𝜙 (ℎ𝑠 , ℎ𝑟 )})),     (4)
+then considers the qualifiers as geometric shrinkings of the box                                                   (𝑠,𝑟 ) ∈ N (𝑠 )
+and uses this extra information further to reduce the search space                            É
+for the answer.                                                                        where       denotes the aggregation function; ℎ𝑜 and ℎ𝑟 denote the
+   As Geometric Models model each fact independently, according                        embedding vector of entity 𝑜 and relation 𝑟 respectively, 𝜙 (·) : R𝑑 ×
+to Table 1, they also have a receptive field less or equal to the graph’s              R𝑑 → R𝑑 is the message passing function, 𝑊𝜆 (𝑟 ) is the direction-
+1-hop neighborhood.                                                                    specific weighting matrix, and N (𝑠) denotes the neighborhood of
+Transformer-based Models This category of models focuses on                            node 𝑠.
+applying the dense parameter transformer [32] on feature hyper-                           Based on CompGCN, HKGE model StarE [8] was proposed. It
+relational facts’ feature matrices to integrate qualifiers and the                     adapts to HKGs by further generate embeddings ℎ𝑞 for each quali-
+main-triple and directly carry out prediction with the transformer’s                   fier pair 𝑞 as the embedding aggregation of the qualifier entity ℎ𝑞𝑒
+last layer output. Among this category, HyTransformer [40] is a                        and qualifier relation ℎ𝑞𝑟 :
+simple method that treats hyper-relational fact as a sequence of
+entities and relations, and does not apply any special approach to                                     ℎ𝑞 = 𝑊 (𝑠𝑢𝑚{𝜙𝑞 (ℎ𝑞𝑟 , ℎ𝑞𝑒 )} (𝑞𝑟,𝑞𝑒 ) ∈ Q ).                    (5)
+deal with qualifiers:
+                                                                                       Next, StarE would aggregate ℎ𝑞 into the main triple’s relation em-
+     ℎ𝑜 = ℎ [𝑀𝑆𝐾 ] = 𝑇𝑟𝑚(𝐹 (𝑠, 𝑟, [𝑀𝑆𝐾], Q))                                     (1)   bedding matrix ℎ𝑟 :
+                      = 𝑇𝑟𝑚(𝐶𝑎𝑡 (ℎ𝑠 , ℎ𝑟 , ℎ [𝑀𝑆𝐾 ] , ℎ𝑞𝑟 1 , ℎ𝑞𝑒1 , · · · )),                              Ê
+                                                                                                 ℎ𝑜 = 𝑎𝑐𝑡 (        ({𝑊𝜆 (𝑟 ) 𝜙 (ℎ𝑠 , 𝛾 (ℎ𝑟 , ℎ𝑞 ))})), (6)
+ where the embedding generated from the mask token [𝑀𝑆𝐾] is con-                                              (𝑠,𝑟 ) ∈ N (𝑠 )
+sidered as the embedding ℎ𝑜 of the predict target entity 𝑜, and 𝐶𝑎𝑡
+denotes the concatenation operation. HyTransformer substitutes                         where 𝜙𝑞 can be any entity-relation function akin to 𝜙; 𝛾 can be any
+the GNN in StarE with Layer Normalization and Dropout layers and                       function that combines multiple embeddings, such as the weighted
+only uses the Transformer decoder for prediction, to achieve the                       sum or simple average.
+Understanding the Embedding Models on Hyper-relational Knowledge Graph                                 CIKM ’25, November 10–14, 2025, Seoul, Republic of Korea
+
+
+              Table 3: Performance of KG/HKG embedding methods on two most representative HKG benchmarks.
+                                                         HKGE Model            Receptive      Cleaned JF17k [8]              WD50K [8]
+         Category               KGE Model
+                                                         / Modules               Field      MRR H@1 H@10                MRR H@1 H@10
+         Tensor                 SimplE [16]              HypE [7]                           0.295 0.211 0.454             -     -      -
+         Decomposition          ComplEx [30]             RAM [23]                           0.342 0.257 0.505           0.300 0.236 0.422
+                                                         NaLP_fix [34]                      0.067 0.044 0.108           0.177 0.131 0.264
+         Simple NN              ConvE [5]
+                                                         Hinge [26]                         0.272 0.178 0.461           0.243 0.176 0.377
+                                                                                ≤ 1-hop
+                                TransH [35]              m-TransH [36]                      0.262 0.188 0.393             -     -      -
+         Geometric
+                                -                        ShrinkE [37]                       0.343 0.257 0.510           0.323 0.260 0.441
+                                                         HyTransformer [40]                 0.368 0.265 0.592           0.348 0.272 0.489
+         Transformer            -                        HAHE [24]                          0.405 0.310 0.585           0.360 0.288 0.496
+                                                         HyperFormer [13]                   0.425 0.328 0.613           0.372 0.293 0.522
+                                                         StarE [8]                          0.381 0.284 0.577           0.346 0.268 0.494
+         Neighbor-GNN           CompGCN [31]                                    >1-hop
+                                                         QUAD [28]                          0.402 0.305 0.602           0.349 0.275 0.487
+                                                         Pruned                             0.112 0.079 0.173           0.103 0.058 0.194
+         Tensor
+                                ComplEx [30]             Direct                             0.103 0.074 0.156           0.102 0.057 0.188
+         Decomposition
+                                                         Hyper                              0.111 0.076 0.174           0.134 0.087 0.225
+                                                         Pruned                             0.120 0.074 0.210           0.042 0.014 0.096
+         Simple NN              ConvE [5]                Direct                 ≤1-hop      0.131 0.084 0.219           0.033 0.015 0.066
+                                                         Hyper                              0.138 0.078 0.248           0.041 0.017 0.103
+                                                         Pruned                             0.118 0.031 0.307           0.167 0.008 0.347
+         Geometric              TransH [35]              Direct                             0.130 0.037 0.335           0.169 0.008 0.352
+                                                         Hyper                              0.136 0.042 0.345           0.171 0.008 0.354
+                                                         Pruned                             0.415 0.313 0.630           0.360 0.271 0.530
+         Path-GNN               NBFNet [47]              Direct                             0.412 0.308 0.623           0.351 0.261 0.523
+                                                         Hyper                              0.396 0.299 0.580           0.346 0.257 0.517
+                                                                                >1-hop
+                                                         Pruned                             0.383 0.291 0.577           0.348 0.273 0.487
+         Neighbor-GNN           CompGCN [31]             Direct                             0.382 0.290 0.579           0.350 0.277 0.488
+                                                         Hyper                              0.389 0.294 0.590           0.350 0.277 0.488
+
+   Based on StarE, QUAD [28] aggregates the qualifier information                     Benefiting from the message passing mechanism [17], GNN-
+into the entity and relation embedding of the main triple:                         based models can directly receive graph information within the
+                       Ê                                                           graph’s multi-hop neighborhood.
+          ℎ𝑜 = 𝑎𝑐𝑡 (          ({𝑊𝜆 (𝑟 ) 𝜙 (𝛾 (ℎ𝑠 , ℎ𝑟 ), ℎ𝑞 )})), (7)
+                                                                                      In this paper, we focus on Cleaned JF17k [8] and WD50k [8], two
+                      (𝑠,𝑟 ) ∈ N (𝑠 )
+                                                                                   widely used datasets that have moderate qualifier density and graph
+where 𝛾 (·) denote the weighted sum. For the extra qualifier aggre-                scale, and are considered HKGs to have the most representative
+gator, QUAD introduces main triple embedding:                                      characteristics. Cleaned JF17k, which was proposed based on the
+                     ℎ𝑡 = 𝑊 (𝐶𝑎𝑡 (ℎ𝑠 , ℎ𝑟 , ℎ𝑜 )) + 𝑏,                   (8)       original JF17k [36], further addresses the data leakage issue.
+                                                                                      On the other hand, we also conducted experiments with the
+and treat ℎ𝑡 the same as entity embeddings to take part in the later               Wikipeople [9] and FBAUTO [7] datasets, which exhibit distinct
+message passing, enabling qualifiers to receive information from                   HKG characteristics. As shown in Table 4, Wikipeople has a low
+the main triple.                                                                   qualifier density (less than 3%), while FBAUTO is small in graph
+   For the path-aggregated GNN-based KG embedding model (Path-                     scale, containing only 2,094 unique entities and 8 unique relations.
+GNN in Table 3) NBFNet [47], a distinct approach is employed.
+Rather than aggregating the neighborhood of a specific entity on
+the KG, NBFNet aggregates paths from one entity to another within
+its multi-hop graph neighborhood. The pair embedding is then                       3      MODEL PERFORMANCE ON HKG
+created by aggregating path representations between entities 𝑠 and                 In this section, we experimented the performance of KGE and HKGE
+𝑜 w.r.t. query relation 𝑟 :                                                        models on HKG, to see whether KGE can still perform silmilarly
+                               Ê         Ö|
+                                         |𝑃
+                                                                                   with HKGE nowadays. Different from most of previous researches,
+                   ℎ𝑟 (𝑠, 𝑜) =      (𝜙 (    ℎ𝑟𝑖 )),              (9)               we data-wise decompose HKG into KG format, to analyse the ca-
+                                    𝑃 ∈ P (𝑠,𝑜 )   𝑖=1
+                                                                                   pability of KGE models on HKG. To achieve this, we propose the 3
+where P (𝑠, 𝑜) denotes the set of path from entity 𝑠 to entity 𝑜;                  decomposition methods in subsection 3.1. With the help of these
+ℎ𝑟𝑖 denotes the 𝑖-th relation within path 𝑃. The path-GNN is the                   methods, we carry out experiment with KGE models from 5 techni-
+most popular technique in current KGE research and has led to the                  cal categories, interestingly, in subsection 3.3, we find some KGE
+development of many novel models [4, 45].                                          can perform comparably with HKGE.
+CIKM ’25, November 10–14, 2025, Seoul, Republic of Korea                                                                         Yubo Wang et al.
+
+
+Table 4: HKG Dataset Statistics. “#Qual.” denotes the range of             Table 5: HKG information preserved by different decomposi-
+the number of qualifier entity-relation pairs, “Tri.” denotes              tion methods.
+the triplet facts with no qualifiers, and “HR” denotes the                                                  Preserved Information
+hyper-relational facts.                                                         Method
+                                                                                                 Main Triple Intra-Qualifier Inter-Qualifier
+ Dataset             |V | |R| #Qual. #Tra. #Val. #Tst. #Tri. #HR            Prune                    ✓
+ Cleaned JF17k [8] 25,092 320 0-4 49,120 12,280 17,635 54,551 24,484        Direct                   ✓              ✓
+ WD50k [8]         47,155 531 0-65 166,435 23,913 46,159 204,340 32,167     Hyper                    ✓              ✓                ✓
+ Wikipeople [9] 31,038 171 0-7 262,301 33,838 33,806 257,693 4,608          DB reification [2]                      ✓                ✓
+ FBAUTO [7]         2,094 8 0-3 6,778 2,255 2,180 3,786 7,427
+                                                                           and parameters were either kept consistent with the original repos-
+3.1     Decomposition Methods                                              itories or tuned using grid search when dataset-specific parameters
+Although [2] applied the DB reification method to convert HKG              were not available.
+to KG format, as introduced, it can greatly shift the original HKG            As shown in Table 3, compared to more advanced GNN-based
+topology, even for the important main triples. As a result, we cannot      KGE models, Tensor Decomposition (TD)-based KGE models are
+analyse the HKG’s each component with its DB reification method.           significantly outperformed by their respective HKGE extensions.
+Hence, to data-wise adapt KGE models to HKG and to better study            On one hand, when applied to the pruned method, the HKG main
+the impact of different HKG information on KGE models, we de-              triples differ from the KG main triples in that they do not contain
+sign 3 simple decomposition methods that can preserve the HKG              complete information about HKG facts, as they lack supporting
+information to different extent:                                           qualifier information. As a result, when coping TD-based KGE mod-
+• Prune method prunes all qualifiers, only preserves the main-             els with HKG decomposition methods, the main-triple embeddings
+  triple information:                                                      were affected by the information that should exist in the quali-
+                                                                           fiers. Hence, the decomposition from the basis matrix into the main
+                           𝑇𝑝𝑟𝑢𝑛𝑒 := {(𝑠, 𝑟, 𝑜)};                   (10)   triple’s embedding makes no sense and can severely bring noise. On
+                                                                           the other hand, the GNN-based KGE models aggregate the respec-
+• Direct method directly links the qualifiers to the subject entity
+                                                                           tive graph neighborhood for generating main triple embeddings. In
+  of the main triple:
+                                                                           that case, the qualifier information just missing, rather than being
+                 𝑇𝑑𝑖𝑟𝑒𝑐𝑡 := {(𝑠, 𝑟, 𝑜), {(𝑠, 𝑞𝑟𝑖 , 𝑞𝑒𝑖 )}𝑛𝑖=1 },    (11)   simply injected into the main triple embedding and serving as noise.
+                                                                           Hence, the negative effect of the prune decomposition method is
+  compared with the prune method, it further considers qualifiers          less severe. Furthermore, since GNN-based KGE models separate
+  the same as main triples and further preserve the intra-qualifier        their encoder and decoder modules, their performance can benefit
+  information, including qualifier entities and relations.                 from HKG-oriented decoders [2] when using the direct and hyper
+• Hyper method creates new relation 𝑟 ||𝑞𝑟𝑖 for every qualfier             methods. This makes GNN-based KGE models the most effective
+  (𝑞𝑟𝑖 , 𝑞𝑒𝑖 ) with the name concatenation of relation 𝑟 and qualifier     choice for applying to HKGs.
+  relation 𝑞𝑟𝑖 :                                                              More importantly, when applying the three decomposition meth-
+                  𝑇ℎ𝑦𝑝𝑒𝑟 := {(𝑠, 𝑟, 𝑜), {(𝑠, 𝑞𝑟𝑖 , 𝑞𝑒𝑖 )}𝑛𝑖=1,             ods, the KGE models CompGCN [31] and NBFNet [47] achieve
+                                                                           performance that is comparable to, or even better than, some popu-
+                                     {(𝑞𝑒𝑖 , 𝑟 ||𝑞𝑟𝑖 , 𝑜)}𝑛𝑖=1 }.   (12)
+                                                                           lar HKGE models, such as CompGCN’s HKG extension StarE [8].
+   Compared to the direct method, this approach better preserves           These results introduce a need to further analyze the strengths and
+   inter-qualifier information, including the relation between qual-       weaknesses of some of the best-performed KGE and HKGE models,
+   ifiers and the main triple, as well as between qualifiers within        and raise two questions.
+   the same hyper-relational fact.                                         (1) Consider the key difference between KGE and HKGE is whether
+Overall, the decomposition methods keep the KGE models’ original               they apply specially designed modules to capture qualifiers, is
+receptive field and make KGE models aggregate qualifiers similarly             it necessary to develop various HKGEs?
+with aggregating main-triple information.                                  (2) Why would current HKGE models not perform better? What
+                                                                               important information are they overlooking?
+3.2     HKG datasets                                                       To answer these questions, we study current KG and HKG models
+                                                                           regarding their qualifier capture and graph reception ability in the
+3.3     Interesting Findings
+                                                                           next section.
+In this paper, we evaluate several HKGE models alongside KGE mod-
+els using our simple decomposition methods, as shown in Table 3.           4   QUALIFIER CAPTURE AND GRAPH
+The results for NaLP_fix and Hinge on WD50k are taken from [37],
+while the results for ComplEx, ConvE, and TransH were reproduced
+                                                                               RECEPTION
+using PyKeen [1]. Other results were obtained from the original            As introduced, to answer two questions raised in the previous
+GitHub repositories. Since StarE, QUAD, and HyTransformer use              section, we need to analyze current KGE and HKGE models’ ability
+the Transformer decoder, we replace the decoder in CompGCN                 from two parts: Qualifier Capture and Graph Reception.
+with a Transformer to ensure consistency with these models. All            • In subsection 4.1, after analyzing the performance of several best-
+experiments were conducted on a single NVIDIA A100-40GB GPU,                 performed KGE models with the three decomposition methods,
+Understanding the Embedding Models on Hyper-relational Knowledge Graph                                  CIKM ’25, November 10–14, 2025, Seoul, Republic of Korea
+
+
+    (a). Qualifier Aggregation              (b). Qualifier Aggregation          (c). Qualifier Integration                   (d). Qualifier Integration
+         Scheme of StarE                         Scheme of QUAD                      Scheme of HAHE                               Scheme of FormerGNN
+
+
+
+
+                                                                                ℎ!       ℎ"       ℎ#$        ℎ#"
+                                                                                                                                          !       ℎ#$      ℎ#"
+  ℎ!       ℎ"       ℎ#$      ℎ#"       ℎ!          ℎ"         ℎ#$        ℎ#"                                            ℎ!       ℎ"      ℎ%&
+
+
+                                                                                                             𝑏$
+
+
+                                                                                                             𝑏"
+
+
+
+Figure 3: The qualifier aggregation scheme of StarE, QUAD, and HAHE compared with our FormerGNN framework, where E.
+Aggregate and R. Aggregate represent QUAD’s qualifier entity and relation aggregation operation, respectively. Compared with
+StarE, QUAD, and HAHE, FormerGNN does not aggregate qualifier information in ℎ𝑞𝑒 and ℎ𝑞𝑟 into the main-triple’s embeddings
+                                                                                                  𝑠 , then jointly and directly
+ℎ𝑠 or ℎ𝑟 . Instead, FormerGNN stores the graph’s long-range dependency information separately in ℎ𝑔𝑡
+                             𝑠
+carries out prediction with ℎ𝑔𝑡 , and information from the main-triple and qualifiers embedding matrixes.
+
+  we claim it is still necessary to develop more novel HKGEs,                  4.2    Graph Reception
+  as the ability of decomposition methods to preserve the HKG                  To point out what important information are current HKGE models
+  information is still insufficient.                                           overlooking, in this section, we analyze current KGE and HKGE
+• In subsection 4.2, after analyzing the graph reception ability               models’ graph reception ability. With the following observations
+  of current HKGE models, we find these models are either in-                  from Table 3, we claim some of the current HKGEs overlook the
+  sufficient in capturing the graph’s long-range dependency or                 capture graph’s long-range dependency.
+  suffer from information compression issues when aggregating
+                                                                               • Firstly, with an additional GNN graph encoder capturing the
+  qualifiers with the main triple.
+                                                                                 graph’s long-range dependency, QUAD [28], and even CompGCN
+                                                                                 [31] achieves better performance than HyTransformer [40] on
+4.1    Qualifier Capture                                                         Cleaned JF17k and WD50k, which does not align with the claim
+In this section, we analyze the ability of KGE and HKGE models to                of previous researches [13, 40].
+capture qualifiers to address the question of whether it is necessary          • Secondly, by employing the latest path-GNN KGE technique,
+to develop various HKGEs. Based on the following observations, we                NBFNet [47] is the best at capturing the graph’s long-range de-
+argue that HKGEs are still needed, as the decomposition methods                  pendencies among all tested KGE models. As a result, it achieves
+are insufficient in integrating qualifiers.                                      the second-best performance on Cleaned JF17k and WD50k, even
+                                                                                 when using the prune method and lack of qualifier information.
+• Firstly, the path-GNN KGE model NBFNet, when preserving
+  more HKG information, can suffer from a performance drop on                  We claim the reason behind these results as these models only
+  Cleaned JF17k and WD50k.                                                     achieve a limited receptive field. Specifically, a wide receptive field
+• Secondly, for neighbor-GNN KGE model CompGCN, when pre-                      is beneficial for capturing the graph’s long-range dependencies,
+  serving more information, its performance remains similar or                 which in turn contribute to improved model performance. Although
+  only marginally increase on two most representative dataset.                 the reason behind these results has been widely studied in the KGE
+• Thirdly, the Transformer-based HKGE model HyperFormer achieves               field [45, 47], on HKGs, researchers usually overlook the importance
+  the SOTA performance on two most representative dataset, this                of a wide receptive field and consider the qualifiers as a substitution
+  also shows the importance of a properly and specially designed               [13, 34, 37, 40]. In this paper, we argue that a wide receptive field
+  qualifier capturing mechanism, to learn the qualifier together               is also crucial for HKGs as a complement to qualifier information,
+  with the main triple, rather than inject one into another.                   rather than a substitution. As the main-triples typically contain
+                                                                               much more important information than qualifiers [26], the long-
+   These phenomena occur because qualifiers are often contain less             range dependencies formed by main-triples are also crucial.
+important information than the main triple [26]. Hence, the direct                On the other hand, although some HKGE models have wide
+and hyper methods may introduce noise paths or neighborhoods                   receptive fields and better capture the graph’s long-range depen-
+formed by qualifiers, which can interfere with capturing the more              dencies, as shown in Figure 3, they can suffer from information
+important main-triple information.                                             compression issues. This occurs when they aggregate qualifier in-
+   To further support our claim, we enhance the qualifier capture              formation in ℎ𝑞𝑒 and ℎ𝑞𝑟 into the fixed-sized main-triple entity
+approach of the top-performing KGE model, NBFNet, resulting                    and relation embedding matrices ℎ𝑠 and ℎ𝑟 . This not only limits
+in an improved model called FormerGNN. FormerGNN integrates                    the models’ ability to integrate qualifiers but also introduces noise
+a Transformer-based qualifier capturing module with NBFNet to                  into the main-triple embedding matrices where the graph’s long-
+capture the original HKG topology. A more detailed analysis of                 range dependencies are stored. Our claim can be justified with the
+FormerGNN are in section 5.                                                    following observations from Table 3:
+CIKM ’25, November 10–14, 2025, Seoul, Republic of Korea                                                                                     Yubo Wang et al.
+
+
+
+                                                           ℎ!"#
+
+                                                                                            %
+                                                                                𝐶𝑎𝑡(ℎ!"# , ℎ$# )
+
+
+
+
+                                                             %
+                                                            ℎ$#
+
+
+
+
+Figure 4: The pipeline the FormerGNN framework, it involves concatenating the main-triple and qualifier embeddings, generated
+by the Qualifier Integrator with the original HKG topology, and the graph topology embeddings generated by the Graph
+Encoder with the HKG after applying the prune decomposition method.
+    Table 6: The performance of FormerGNN and several best performed KG and HKG embedding models on 4 HKG datasets.
+
+                              Cleaned JF17k [8]     WD50k [8]       Wikipeople [9]     FBAUTO [7]
+         Model
+                              MRR H@1 H@10 MRR H@1 H@10 MRR H@1 H@10 MRR H@1 H@10
+         StarE [8]            0.381 0.284 0.577 0.346 0.268 0.494 0.491 0.401 0.646 0.346 0.268 0.494
+         QUAD [28]            0.402 0.305 0.602 0.349 0.275 0.487 0.493 0.422 0.619 0.868 0.836 0.921
+         HAHE [24]            0.405 0.310 0.585 0.360 0.288 0.496 0.479 0.430 0.627 0.848 0.817 0.906
+         HyperFormer [13]     0.425 0.328 0.613 0.372 0.293 0.522 0.488 0.382 0.652 0.819 0.789 0.873
+         NBFNet + Prune [47]  0.415 0.313 0.630 0.360 0.271 0.530 0.513 0.444 0.644 0.767 0.700 0.888
+         CompGCN + Hyper [31] 0.389 0.294 0.590 0.350 0.277 0.488 0.511 0.439 0.639 0.857 0.834 0.903
+         FormerGNN            0.432 0.335 0.624 0.377 0.299 0.527 0.494 0.392 0.653 0.855 0.828 0.903
+
+ • Firstly, although having a wide receptive field, the performance     original HKG topology, achieve a wide receptive field, and improve
+   of StarE, QUAD and HAHE still falls behind HyperFormer on            the integration of qualifiers and main triples while avoiding in-
+   Cleaned JF17k and WD50k dataset.                                     formation compression. To address these challenges, we propose
+ • Secondly, the KGE model CompGCN with the hyper method can            the FormerGNN framework. FormerGNN combines a Transformer-
+   also perform comparably or even better than its HKG extension        based qualifier integrator to capture qualifier information from the
+   StarE and QUAD.                                                      original HKG, along with a GNN-based graph encoder to capture
+The reason for these results is that StarE, QUAD, and HAHE simply       the graph’s long-range dependencies. Finally, it performs predic-
+aggregate qualifiers into the fixed-sized entity or relation embed-     tions by jointly using main-triple and qualifier information without
+ding matrix. This aggregation compresses the noise from qualifiers      aggregating them into fix-sized embedding matrixes.
+into the main-triple embeddings. For StarE and QUAD, these em-           • Firstly, FormerGNN’s graph encoder 𝐺𝐸 would generate a graph
+beddings were later used for GNN message passing, which even               topology embedding matrix ℎ𝑔𝑡  𝑠 of the subject entity 𝑠 with the
+further affects the model’s ability to capture the information of          decomposed HKG by the prune method 𝑇𝑝𝑟𝑢𝑛𝑒 :
+the whole graph. This issue, known as over-squashing [29] in KG                                    𝑠
+                                                                                                  ℎ𝑔𝑡 = 𝐺𝐸 (𝑇𝑝𝑟𝑢𝑛𝑒 (G)).                                (13)
+(Further details of over-squashing are discussed in Appendix A),
+can be even more pronounced in HKGs, as qualifier information             Where 𝐺𝐸 would generate the embedding of all main-triple enti-
+can overwhelm the more important main triple information in the           ties, and then apply a linear transformation to make the gener-
+generated embedding matrices.                                             ated matrix align with other embedding matrixes generated by
+   To further justify our claim, as well as propose a future research     the qualifier integrator.
+direction, we propose FormerGNN in section 5, which can be con-         • Secondly, the graph topology embedding matrix would be con-
+sidered a qualifier integrator plus a graph encoder to capture the        catenated with the main-triple embedding matrixes ℎ𝑠 , ℎ𝑟 , ℎ [𝑀𝑆𝐾 ]
+graph’s long-range dependency formed by main-triples, as well as          and qualifier embedding matrixes ℎ𝑞𝑟 , ℎ𝑞𝑒 , · · · , from the qualifier
+the best-performed KGE NBFNet with a better approach to inte-             integrator 𝑄𝐼 to form the decoder input ℎ𝑐𝑎𝑡 for joint prediction:
+grating qualifier and main-triple.                                                     ℎ𝑠 , ℎ𝑟 , ℎ [𝑀𝑆𝐾 ] , ℎ𝑞𝑟 1 , ℎ𝑞𝑒1 , · · · ← 𝑄𝐼 (𝐹 )              (14)
+5     FORMERGNN                                                                                                                            𝑠
+                                                                                  ℎ𝑐𝑎𝑡 = 𝐶𝑎𝑡 (ℎ𝑠 , ℎ𝑟 , ℎ [𝑀𝑆𝐾 ] , ℎ𝑞𝑟 1 , ℎ𝑞𝑒1 , · · · , ℎ𝑔𝑡 ).        (15)
+As discussed in previous sections, to support our claims and sug-       • Lastly, this concatenation would be passed to the transformer
+gest a future direction for HKGE research, we need to capture the         decoder to generate the distribution 𝐷 V over the graph node set
+Understanding the Embedding Models on Hyper-relational Knowledge Graph                              CIKM ’25, November 10–14, 2025, Seoul, Republic of Korea
+
+
+    V from the embedding matrix of the mask token [𝑀𝑆𝐾], avoid
+    any direct aggregation:
+
+                     𝐷 V = 𝑇𝑟𝑚(ℎ𝑐𝑎𝑡 ) [𝑀𝑆𝐾 ] ⊙ 𝑉 .                       (16)
+    As shown in Table 6, FormerGNN benefits from the advance-
+ments discussed earlier and shows improved performance com-
+pared to current HKGE models. When using NBFNet as the graph
+encoder and HyperFormer as the qualifier integrator, FormerGNN
+                                                                                        (a) Cleaned JF17k                       (b) Wikipeople
+achieves state-of-the-art performance on both Cleaned JF17k and
+WD50k, highlighting the importance of the previously mentioned
+aspects. Note that both the qualifier integrator and the graph en-
+coder can be substituted with more advanced transformer-based
+models and KG encoders. FormerGNN can easily benefit from the
+advances in fact or node level HKG and KGE research.
+    On Wikipeople, which consists mostly of triples without quali-
+fiers, the HKG-specific module of HyperFormer struggles to train
+effectively due to the lack of qualifiers, resulting in sub-optimal                        (c) WD50k                             (d) FBAUTO
+performance compared to KGE models NBFNet and CompGCN that
+apply appropriate decomposition methods. However, FormerGNN                     Figure 5: Curvature distribution for three decomposition
+still achieves comparable or better performance than all other tested           methods on four datasets
+HKGE models.                                                                    U22B2060, Guangdong-Hong Kong Technology Innovation Joint
+    On FBAUTO, which only has over 8000 entities and 8 relations,               Funding Scheme Project No. 2024A0505040012, the Hong Kong
+the lightweight QUAD model performs best. However, FormerGNN                    RGC GRF Project 16213620, RIF Project R6020-19, AOE Project
+still outperforms both HyperFormer and NBFNet on this dataset.                  AoE/E-603/18, Theme-based project TRS T41-603/20R, CRF Project
+These results further emphasize the significance of capturing HKG’s             C2004-21G, Key Areas Special Project of Guangdong Provincial
+original topology, capturing long-range dependencies, and integrat-             Universities 2024ZDZX1006, Guangdong Province Science and
+ing qualifier information without simple aggregation.                           Technology Plan Project 2023A0505030011, Guangzhou munici-
+                                                                                pality big data intelligence key lab, 2023A03J0012, Hong Kong ITC
+6    CONCLUSION                                                                 ITF grants MHX/078/21 and PRP/004/22FX, Zhujiang scholar pro-
+In this paper, we investigate the performance of embedding models               gram 2021JC02X170, Microsoft Research Asia Collaborative Re-
+on HKGs to determine whether HKGEs notable performance is due                   search Grant, HKUST-Webank joint research lab and 2023 HKUST
+to the KGE base model or the specially designed qualifier processing            Shenzhen-Hong Kong Collaborative Innovation Institute Green
+module. To conduct this study, we convert HKGs into KG format                   Sustainability Special Fund, from Shui On Xintiandi and the In-
+with three decomposition methods that preserve HKG information                  noSpace GBA. Shimin Di’s work is supported by National Science
+to varying degrees.                                                             Foundation of China (NSFC) under Grant No. 62506075.
+   The results show that some novel GNN-based KGE models per-
+form comparably to classic HKGE models. However, upon further
+                                                                                A    APPENDIX: OVER-SQUASHING
+analysis, we find that HKGE models are still necessary, as the de-              In detail, the over-squashing issue refers to the phenomenon of
+composition methods disrupt the original HKG topology and can                   severe information compression that occurs in neighbor-aggregated
+lead to information loss. Additionally, the sub-optimal performance             GNNs when propagating messages from distant entities, which can
+of HKGE models can be attributed to either insufficient capture of              lead to a loss of graph’s multi-hop topology information. It tends to
+the graph’s long-range dependencies or the information compres-                 occur because exponentially expanded amount of messages from
+sion issue caused by their aggregation of qualifier information into            distant entities need to be compressed into fixed-sized vectors when
+fix-sized main-triple embedding matrices.                                       passing to the target entity [3, 29].
+   To further support our claims and suggest a potential future                    Figure 5 displays the curvature distribution of three decomposi-
+direction for HKGE research, we propose the FormerGNN frame-                    tion methods across four datasets. The x-tick represents the edges
+work. This framework addresses the issues present in current KGE                numbered in ascending order of their curvature, the y-tick repre-
+and HKGE models applied to HKGs. Experimental results show                      sents the curvature of edges. When the curvature of an edge is
+that FormerGNN achieves comparable or better performance than                   less than or equal to 0, we consider it to have an over-squashing
+existing KGE and HKGE models on HKGs, and can easily benefit                    issue. Since our direct and hyper decomposition methods partially
+from the future advances of KGE models as the graph encoder.                    introduce new nodes and edges to the graph topology and treat
+                                                                                these newly introduced triples in the same manner as main-triples,
+7    ACKNOWLEDGEMENTS                                                           they can further exacerbate the over-squashing issue compared to
+                                                                                other GNN-based HKG embedding methods.
+Lei Chen’s work is partially supported by National Key Research
+and Development Program of China Grant No. 2023YFF0725100,
+National Science Foundation of China (NSFC) under Grant No.
+CIKM ’25, November 10–14, 2025, Seoul, Republic of Korea                                                                                                     Yubo Wang et al.
+
+
+GENAI USAGE DISCLOSURE                                                                        Knowledge Management. 1326–1335.
+                                                                                         [22] Yi Liu, Hongrui Xuan, Bohan Li, Meng Wang, Tong Chen, and Hongzhi Yin. 2023.
+The authors only used Grammarly to improve this paper’s spelling,                             Self-supervised dynamic hypergraph recommendation based on hyper-relational
+grammar, punctuation, clarity, and engagement. No sections or                                 knowledge graph. In Proceedings of the 32nd ACM International Conference on
+                                                                                              Information and Knowledge Management. 1617–1626.
+subsections in this paper are solely generated by AI.                                    [23] Yu Liu, Quanming Yao, and Yong Li. 2021. Role-aware modeling for n-ary
+                                                                                              relational knowledge bases. In Proceedings of the Web Conference 2021. 2660–
+REFERENCES                                                                                    2671.
+                                                                                         [24] Haoran Luo, Yuhao Yang, Yikai Guo, Mingzhi Sun, Tianyu Yao, Zichen Tang,
+ [1] Mehdi Ali, Max Berrendorf, Charles Tapley Hoyt, Laurent Vermue, Sahand Shar-
+                                                                                              Kaiyang Wan, Meina Song, Wei Lin, et al. 2023. HAHE: Hierarchical Attention for
+     ifzadeh, Volker Tresp, and Jens Lehmann. 2021. PyKEEN 1.0: A Python Library
+                                                                                              Hyper-Relational Knowledge Graphs in Global and Local Level. arXiv preprint
+     for Training and Evaluating Knowledge Graph Embeddings. Journal of Machine
+                                                                                              arXiv:2305.06588 (2023).
+     Learning Research 22, 82 (2021), 1–6. http://jmlr.org/papers/v22/20-825.html
+                                                                                         [25] Vardaan Pahuja, Weidi Luo, Yu Gu, Cheng-Hao Tu, Hong-You Chen, Tanya Berger-
+ [2] Dimitrios Alivanistos, Max Berrendorf, Michael Cochez, and Mikhail Galkin.
+                                                                                              Wolf, Charles Stewart, Song Gao, Wei-Lun Chao, and Yu Su. 2024. Reviving the
+     2022. Query Embedding on Hyper-Relational Knowledge Graphs. In International
+                                                                                              Context: Camera Trap Species Classification as Link Prediction on Multimodal
+     Conference on Learning Representations.
+                                                                                              Knowledge Graphs. In Proceedings of the 33rd ACM International Conference on
+ [3] Uri Alon and Eran Yahav. 2021. On the Bottleneck of Graph Neural Networks
+                                                                                              Information and Knowledge Management. 1825–1835.
+     and its Practical Implications. arXiv:2006.05205 [cs.LG]
+                                                                                         [26] Paolo Rosso, Dingqi Yang, and Philippe Cudré-Mauroux. 2020. Beyond triplets:
+ [4] Heng Chang, Jiangnan Ye, Alejo Lopez-Avila, Jinhua Du, and Jia Li. 2024. Path-
+                                                                                              hyper-relational knowledge graph embedding for link prediction. In Proceedings
+     based explanation for knowledge graph completion. In Proceedings of the 30th
+                                                                                              of the web conference 2020. 1885–1896.
+     ACM SIGKDD Conference on Knowledge Discovery and Data Mining. 231–242.
+                                                                                         [27] Ahsan Shehzad, Feng Xia, Shagufta Abid, Ciyuan Peng, Shuo Yu, Dongyu Zhang,
+ [5] Tim Dettmers, Pasquale Minervini, Pontus Stenetorp, and Sebastian Riedel. 2018.
+                                                                                              and Karin Verspoor. 2024. Graph transformers: A survey. arXiv preprint
+     Convolutional 2d knowledge graph embeddings. In Proceedings of the AAAI
+                                                                                              arXiv:2407.09777 (2024).
+     conference on artificial intelligence, Vol. 32.
+                                                                                         [28] Harry Shomer, Wei Jin, Juanhui Li, Yao Ma, and Hui Liu. 2023. Learning represen-
+ [6] Zifeng Ding, Jingcheng Wu, Jingpei Wu, Yan Xia, Bo Xiong, and Volker Tresp.
+                                                                                              tations for hyper-relational knowledge graphs. In Proceedings of the International
+     2024. Temporal Fact Reasoning over Hyper-Relational Knowledge Graphs. In
+                                                                                              Conference on Advances in Social Networks Analysis and Mining. 253–257.
+     Findings of the Association for Computational Linguistics: EMNLP 2024. 355–373.
+                                                                                         [29] Jake Topping, Francesco Di Giovanni, Benjamin Paul Chamberlain, Xiaowen
+ [7] Bahare Fatemi, Perouz Taslakian, David Vazquez, and David Poole. 2021. Knowl-
+                                                                                              Dong, and Michael M Bronstein. 2022. Understanding over-squashing and bot-
+     edge hypergraphs: prediction beyond binary relations. In Proceedings of the
+                                                                                              tlenecks on graphs via curvature. In International Conference on Learning Repre-
+     Twenty-Ninth International Conference on International Joint Conferences on Arti-
+                                                                                              sentations.
+     ficial Intelligence. 2191–2197.
+                                                                                         [30] Théo Trouillon, Johannes Welbl, Sebastian Riedel, Éric Gaussier, and Guillaume
+ [8] Mikhail Galkin, Priyansh Trivedi, Gaurav Maheshwari, Ricardo Usbeck, and Jens
+                                                                                              Bouchard. 2016. Complex embeddings for simple link prediction. In International
+     Lehmann. 2020. Message Passing for Hyper-Relational Knowledge Graphs. In
+                                                                                              conference on machine learning. PMLR, 2071–2080.
+     Proceedings of the 2020 Conference on Empirical Methods in Natural Language
+                                                                                         [31] Shikhar Vashishth, Soumya Sanyal, Vikram Nitin, and Partha Talukdar. 2019.
+     Processing (EMNLP). 7346–7359.
+                                                                                              Composition-based Multi-Relational Graph Convolutional Networks. In Interna-
+ [9] Saiping Guan, Xiaolong Jin, Yuanzhuo Wang, and Xueqi Cheng. 2019. Link
+                                                                                              tional Conference on Learning Representations.
+     prediction on n-ary relational data. In The world wide web conference. 583–593.
+                                                                                         [32] A Vaswani. 2017. Attention is all you need. Advances in Neural Information
+[10] Saiping Guan, Jiyao Wei, Xiaolong Jin, Jiafeng Guo, and Xueqi Cheng. 2024.
+                                                                                              Processing Systems (2017).
+     Look Globally and Reason: Two-stage Path Reasoning over Sparse Knowledge
+                                                                                         [33] Denny Vrandečić and Markus Krötzsch. 2014. Wikidata: a free collaborative
+     Graphs. In Proceedings of the 33rd ACM International Conference on Information
+                                                                                              knowledgebase. Commun. ACM 57, 10 (2014), 78–85.
+     and Knowledge Management. 695–705.
+                                                                                         [34] Quan Wang, Haifeng Wang, Yajuan Lyu, and Yong Zhu. 2021. Link Prediction on
+[11] Zhen Han, Peng Chen, Yunpu Ma, and Volker Tresp. 2020. Explainable sub-
+                                                                                              N-ary Relational Facts: A Graph-based Approach. In Findings of the Association
+     graph reasoning for forecasting on temporal knowledge graphs. In International
+                                                                                              for Computational Linguistics: ACL-IJCNLP 2021. 396–407.
+     conference on learning representations.
+                                                                                         [35] Zhen Wang, Jianwen Zhang, Jianlin Feng, and Zheng Chen. 2014. Knowledge
+[12] Zhongni Hou, Xiaolong Jin, Zixuan Li, Long Bai, Saiping Guan, Yutao Zeng,
+                                                                                              graph embedding by translating on hyperplanes. In Proceedings of the AAAI
+     Jiafeng Guo, and Xueqi Cheng. 2023. Temporal knowledge graph reasoning
+                                                                                              conference on artificial intelligence, Vol. 28.
+     based on n-tuple modeling. In Findings of the Association for Computational
+                                                                                         [36] Jianfeng Wen, Jianxin Li, Yongyi Mao, Shini Chen, and Richong Zhang. 2016. On
+     Linguistics: EMNLP 2023. 1090–1100.
+                                                                                              the representation and embedding of knowledge bases beyond binary relations.
+[13] Zhiwei Hu, Víctor Gutiérrez-Basulto, Zhiliang Xiang, Ru Li, and Jeff Z Pan. 2023.
+                                                                                              In Proceedings of the Twenty-Fifth International Joint Conference on Artificial
+     HyperFormer: Enhancing entity and relation interaction for hyper-relational
+                                                                                              Intelligence. 1300–1307.
+     knowledge graph completion. In Proceedings of the 32nd ACM International Con-
+                                                                                         [37] Bo Xiong, Mojtaba Nayyeri, Shirui Pan, and Steffen Staab. 2023. Shrinking
+     ference on Information and Knowledge Management. 803–812.
+                                                                                              Embeddings for Hyper-Relational Knowledge Graphs. In Proceedings of the 61st
+[14] Yubo Huang and Guosun Zeng. 2024. RD-P: A Trustworthy Retrieval-Augmented
+                                                                                              Annual Meeting of the Association for Computational Linguistics (Volume 1: Long
+     Prompter with Knowledge Graphs for LLMs. In Proceedings of the 33rd ACM
+                                                                                              Papers). 13306–13320.
+     International Conference on Information and Knowledge Management. 942–952.
+                                                                                         [38] Chenyan Xiong, Russell Power, and Jamie Callan. 2017. Explicit semantic ranking
+[15] Louis Mozart Kamdem Teyou, Caglar Demir, and Axel-Cyrille Ngonga Ngomo.
+                                                                                              for academic search via knowledge graph embedding. In Proceedings of the 26th
+     2024. Embedding Knowledge Graphs in Function Spaces. In Proceedings of the
+                                                                                              international conference on world wide web. 1271–1279.
+     33rd ACM International Conference on Information and Knowledge Management.
+                                                                                         [39] Scott Wen-tau Yih, Ming-Wei Chang, Xiaodong He, and Jianfeng Gao. 2015. Se-
+     1070–1079.
+                                                                                              mantic parsing via staged query graph generation: Question answering with
+[16] Seyed Mehran Kazemi and David Poole. 2018. Simple embedding for link predic-
+                                                                                              knowledge base. In Proceedings of the Joint Conference of the 53rd Annual Meet-
+     tion in knowledge graphs. Advances in neural information processing systems 31
+                                                                                              ing of the ACL and the 7th International Joint Conference on Natural Language
+     (2018).
+                                                                                              Processing of the AFNLP.
+[17] Thomas N Kipf and Max Welling. 2022. Semi-Supervised Classification with
+                                                                                         [40] Donghan Yu and Yiming Yang. 2021. Improving hyper-relational knowledge
+     Graph Convolutional Networks. In International Conference on Learning Repre-
+                                                                                              graph completion. arXiv preprint arXiv:2104.08167 (2021).
+     sentations.
+                                                                                         [41] Chaohao Yuan, Kangfei Zhao, Ercan Engin Kuruoglu, Liang Wang, Tingyang
+[18] Jens Lehmann, Robert Isele, Max Jakob, Anja Jentzsch, Dimitris Kontokostas,
+                                                                                              Xu, Wenbing Huang, Deli Zhao, Hong Cheng, and Yu Rong. 2025. A survey
+     Pablo N Mendes, Sebastian Hellmann, Mohamed Morsey, Patrick Van Kleef, Sören
+                                                                                              of graph transformers: Architectures, theories and applications. arXiv preprint
+     Auer, et al. 2015. Dbpedia–a large-scale, multilingual knowledge base extracted
+                                                                                              arXiv:2502.16533 (2025).
+     from wikipedia. Semantic web 6, 2 (2015), 167–195.
+                                                                                         [42] Seongjun Yun, Minbyul Jeong, Raehyun Kim, Jaewoo Kang, and Hyunwoo J Kim.
+[19] Jiecheng Li, Xudong Luo, Guangquan Lu, and Shichao Zhang. 2025. Hyper-
+                                                                                              2019. Graph transformer networks. Advances in neural information processing
+     Relational Knowledge Representation Learning with Multi-Hypergraph Disen-
+                                                                                              systems 32 (2019).
+     tanglement. In Proceedings of the ACM on Web Conference 2025. 3288–3299.
+                                                                                         [43] Fuzheng Zhang, Nicholas Jing Yuan, Defu Lian, Xing Xie, and Wei-Ying Ma.
+[20] Lijie Li, Hui Wang, Jiahang Li, Xiaodi Xu, Ye Wang, and Tao Ren. 2024. Inte-
+                                                                                              2016. Collaborative knowledge base embedding for recommender systems. In
+     grating Structure and Text for Enhancing Hyper-relational Knowledge Graph
+                                                                                              Proceedings of the 22nd ACM SIGKDD international conference on knowledge
+     Representation via Structure Soft Prompt Tuning. In Proceedings of the 33rd ACM
+                                                                                              discovery and data mining. 353–362.
+     International Conference on Information and Knowledge Management. 1226–1234.
+[21] Zhuofeng Li, Haoxiang Zhang, Qiannan Zhang, Ziyi Kou, and Shichao Pei. 2024.        [44] Tianli Zhang, Tongya Zheng, Zhenbang Xiao, Zulong Chen, Liangyue Li, Zunlei
+     Learning from novel knowledge: Continual few-shot knowledge graph comple-                Feng, Dongxiang Zhang, and Mingli Song. 2024. Language Models-enhanced
+     tion. In Proceedings of the 33rd ACM International Conference on Information and         Semantic Topology Representation Learning For Temporal Knowledge Graph
+Understanding the Embedding Models on Hyper-relational Knowledge Graph                                          CIKM ’25, November 10–14, 2025, Seoul, Republic of Korea
+
+
+     Extrapolation. In Proceedings of the 33rd ACM International Conference on Infor-        In Proceedings of the 33rd ACM International Conference on Information and
+     mation and Knowledge Management. 3227–3236.                                             Knowledge Management. 3300–3309.
+[45] Yongqi Zhang, Zhanke Zhou, Quanming Yao, Xiaowen Chu, and Bo Han. 2023.            [47] Zhaocheng Zhu, Zuobai Zhang, Louis-Pascal Xhonneux, and Jian Tang. 2021.
+     Adaprop: Learning adaptive propagation for graph neural network based knowl-            Neural bellman-ford networks: A general graph neural network framework for
+     edge graph reasoning. In Proceedings of the 29th ACM SIGKDD Conference on               link prediction. Advances in Neural Information Processing Systems 34 (2021),
+     Knowledge Discovery and Data Mining. 3446–3457.                                         29476–29490.
+[46] Zhiqiang Zhang, Liqiang Wen, and Wen Zhao. 2024. A gail fine-tuned llm
+     enhanced framework for low-resource knowledge graph question answering.
+

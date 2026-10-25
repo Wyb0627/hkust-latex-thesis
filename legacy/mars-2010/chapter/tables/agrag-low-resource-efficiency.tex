@@ -1,0 +1,25 @@
+\begin{table}
+	\centering
+	\caption{Low resource experiment efficiency with Qwen3-4B-Instruct-2507 LLM on 2080Ti GPU, where -L denotes low resource setting.}
+	\label{tab:agrag:low-resource-efficiency}
+	\setlength\tabcolsep{1.5pt}{
+		\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|cc|cc|cc|cc} 
+			\hline\hline
+			\multirow{2}{*}{\textbf{Dataset}} & \multicolumn{4}{c|}{\textbf{Novel}}                                                    & \multicolumn{4}{c}{\textbf{Medical }}                                                                  \\ 
+			\cline{2-9}
+			& \multicolumn{2}{c|}{\textbf{Time (mins) }} & \multicolumn{2}{c|}{\textbf{AVG.~Token }} & \multicolumn{2}{c|}{\textbf{\textbf{Time (mins)}}} & \multicolumn{2}{c}{\textbf{\textbf{AVG. Token}}}  \\ 
+			\hline
+			\textbf{Metric}                   & \textbf{Index} & \textbf{Query}            & \textbf{In}    & \textbf{Out}             & \textbf{\textbf{Index}} & \textbf{\textbf{Query}}  & \textbf{\textbf{In}} & \textbf{\textbf{Out}}      \\ 
+			\hline\hline
+			SiReRAG-L                         & \underline{52.0}   & 183.5                     & \underline{7,898}  & \textbf{1,003}           & 18.1                    & 182.3                    & \textbf{5,113}       & 827                        \\
+			HippoRAG2-L                       & 55.7           & \textbf{131.2}            & 7,964          & 1,354                    & \underline{21.8}            & \textbf{162.4}           & 5,577                & \underline{584}                \\
+			\textbf{AGRAG-L}                  & \textbf{44.7}  & \underline{132.1}             & \textbf{6,625} & \underline{1,172}            & \textbf{14.4}           & \underline{167.3}            & \underline{5,282}        & \textbf{534}               \\ 
+			\hline\hline
+			
+			
+			
+		\end{tabular}}
+
+	}
+\end{table}

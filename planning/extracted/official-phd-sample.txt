@@ -1,0 +1,318 @@
+       25mm                                                                                              25mm
+
+
+25mm                                                                                                            25mm
+                                              [SAMPLE TITLE PAGE]
+
+
+
+                       [Thesis Title with the first letter of all words capitalized, except for
+              prepositions, articles and coordinate conjunctions that do not appear as the first word]
+
+
+
+
+                                                      (5 lines)
+
+
+
+
+                                                     by
+                                                                  (single line)
+                     [Your name as found in official HKUST records, excluding any titles]
+
+
+
+
+                                                      (5 lines)
+
+
+
+
+                                               A Thesis Submitted to
+                             The Hong Kong University of Science and Technology
+                                  in Partial Fulfillment of the Requirements for
+                                       the Degree of Doctor of Philosophy
+                                               in [Name of Program]
+
+
+                                                      (3 lines)
+
+
+                                          [month and year], Hong Kong
+
+
+
+
+                     [Adjust spacing so that all Title Page information appears on one page.]
+
+
+
+
+25mm                                                                                                            25mm
+                                                          i
+
+       25mm                                                                                              25mm
+                          [SAMPLE ABSTRACT PAGE]
+
+
+
+         [Thesis Title with the first letter of all words capitalized, except for
+prepositions, articles and coordinate conjunctions that do not appear as the first word]
+
+
+      by [Your name as found in official HKUST records, excluding any titles]
+
+
+
+
+                   [Name of Department/Division/Program Office]
+
+
+               The Hong Kong University of Science and Technology
+
+
+
+
+                                        Abstract
+
+
+                           [Abstract text, 300 words or less]
+
+
+
+
+                                          ii
+                             [SAMPLE AUTHORIZATION PAGE]
+
+                                           Authorization
+
+
+
+       I hereby declare that I am the sole author of the thesis.
+
+
+       I authorize the Hong Kong University of Science and Technology to lend this thesis to
+other institutions or individuals for the purpose of scholarly research.
+
+
+       I further authorize the Hong Kong University of Science and Technology to reproduce
+the thesis by photocopying or by other means, in total or in part, at the request of other
+institutions or individuals for the purpose of scholarly research.
+
+
+
+
+                     ___________________________________________
+          [type under signature line your name as found in official HKUST records,
+                                      excluding any titles]
+
+
+                                  [Date, e.g. 31 August 2015]
+
+
+
+
+                                              iii
+                            [SAMPLE SIGNATURE PAGE]
+
+         [Thesis Title with the first letter of all words capitalized, except for
+prepositions, articles and coordinate conjunctions that do not appear as the first word]
+
+
+
+
+                                           by
+
+
+       [Your name as found in official HKUST records, excluding any titles]
+
+
+
+
+             This is to certify that I have examined the above PhD thesis
+          and have found that it is complete and satisfactory in all respects,
+                      and that any and all revisions required by
+                 the thesis examination committee have been made.
+
+
+
+
+                 _________________________________________
+               [name of your thesis supervisor beneath signature line]
+
+
+
+
+                 _________________________________________
+              [name of your Department/Division/Program Office Head
+                                beneath signature line]
+
+
+                   [Name of Department/Division/Program Office]
+                              [Date, e.g. 31 August 2015]
+
+
+
+
+                                          iv
+                                 [SAMPLE CONTENTS PAGE]
+
+
+
+TABLE OF CONTENTS
+
+Title Page                                                 i
+Abstract                                                   ii
+Authorization Page                                        iii
+Signature Page                                            iv
+Acknowledgements                                           v
+Table of Contents                                         vi
+List of Figures                                           vii
+List of Tables                                            viii
+Chapter 1        Introduction                              1
+                 1.1      Sections                         1
+                 1.2      Sections                         1
+                          1.2.1 Subsection                 1
+                          1.2.2 Subsection                12
+Chapter 2        Chapter Title                            17
+Chapter 3        Chapter Title                            35
+Chapter 4        Chapter Title                            57
+Chapter 5        Chapter Title                            80
+Chapter 6        Conclusions                              95
+Bibliography and References                               110
+Appendix A        Title                                   115
+Appendix B        Title                                   117
+
+
+
+
+                                             vi
+                                          [THE THESIS BODY]
+
+                                             CHAPTER 1
+
+
+                                          INTRODUCTION
+
+
+
+1.1       Sections
+
+
+          White A4 paper of good quality (80 to 90 gsm woodfree paper, i.e. photocopying paper)
+          is to be used. Lines should be one-and-a-half line spaced throughout the thesis, except
+          for abstracts, indented quotations or footnotes where single line spacing may be used.
+          Each page should begin with a new paragraph. The IEEE style* is recommended for the
+          references. Reference citations within the text should be in the form of numbers within
+          square brackets (e.g. [1]).
+
+
+          All margins should be consistently 25mm (or a maximum of 30mm) in width. The
+          same margins should be used throughout a thesis.             All preliminary pages (title,
+          approval, abstract, acknowledgement, etc.) should be numbered using lowercase Roman
+          numerals (e.g. i, ii, iii, iv, …) but i is not shown on the title page. On all other pages use
+          Arabic numerals, i.e. 1, 2, 3, 4, …
+
+
+1.2       Sections
+
+
+       1.2.1 Subsection
+
+
+* References should be in a separate section at the end of the thesis, with items referred to by
+numerals in square brackets, using the IEEE style as follows:
+
+
+Papers :      Author(s) (first initials followed by last name), title, periodical, volume, inclusive
+              page numbers, month, year.
+
+
+Books :       Author(s) (first initials followed by last name), title, location, publisher, year,
+              chapter, page numbers.
+
+
+                                                    1
+       25mm                                                                                     25mm
+
+
+25mm                                                                                                   25mm
+
+              This is a sample page. This is a sample page. This is a sample page. This is a sample
+         page. This is a sample page. This is a sample page. This is a sample page. This is a sample
+         page. This is a sample page. This is a sample page. This is a sample page.
+
+
+              This is a sample page. This is a sample page. This is a sample page. This is a sample
+         page. This is a sample page. This is a sample page. This is a sample page. This is a sample
+         page. This is a sample page. This is a sample page. This is a sample page. This is a sample
+         page. This is a sample page. This is a sample page. This is a sample page. This is a sample
+         page. This is a sample page. This is a sample page. This is a sample page. This is a sample
+         page.
+
+
+                              Column 1            Column 2          Column 3      Column 4
+                 Row 1           0.23               0.46               0.14           0.91
+                 Row 2           0.59               0.21               0.16           0.82
+                 Row 3           0.89               0.67               0.84           0.37
+                 Row 4           0.47               0.91               0.58           0.76
+                 Row 5           0.67               0.24               0.26           0.51
+                 Row 6           0.15               0.34               0.36           0.67
+                 Row 7           0.58               0.16               0.56           0.66
+                 Row 8           0.56               0.84               0.46           0.49
+                 Total           4.14               3.83               3.36           5.19
+
+
+              This is a sample page. This is a sample page. This is a sample page. This is a sample
+         page. This is a sample page. This is a sample page. This is a sample page. This is a sample
+         page. This is a sample page. This is a sample page. This is a sample page. This is a sample
+         page. This is a sample page. This is a sample page. This is a sample page. This is a sample
+         page. This is a sample page. This is a sample page. This is a sample page. This is a sample
+         page. This is a sample page. This is a sample page. This is a sample page. This is a sample
+         page. This is a sample page. This is a sample page.
+
+
+
+
+25mm                                    Sample page: A text page with a table
+
+                                                                                                       25mm
+       25mm
+                                                        19                                      25mm
+        25mm
+       25mm                                                                                  25mm
+
+
+25mm                                                                                                  25mm
+
+                                       Figure 2. The Pictures
+
+
+
+
+         (a) Top left.          ABC.             This is a sample page.   This is a sample page.
+                                                 This is a sample page.
+
+
+         (b) Top right.         DEF.             This is a sample page.   This is a sample page.
+                                                 This is a sample page.
+
+
+         (c) Bottom left.       GHI.             This is a sample page.   This is a sample page.
+                                                 This is a sample page.
+
+
+         (d) Bottom right.      JKL.             This is a sample page.   This is a sample page.
+                                                 This is a sample page.
+
+
+
+
+                             Sample page: A page of illustrations with legends
+
+
+25mm                                                                                                  25mm
+                                                  20
+        25mm                                                                                   25mm
+

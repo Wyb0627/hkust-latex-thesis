@@ -1,0 +1,30 @@
+\begin{table}[t]
+	\centering
+	\caption{The hallucinated prediction rate on WOS dataset.}
+	\label{tab:agrag:hallucination}
+	
+	{
+		\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|l|c} 
+			\hline\hline
+			\textbf{Category }                                                             & \textbf{Model }         & \textbf{Hallucinated Rate}       \\ 
+			\hline
+			\multirow{1}{*}{Pure LLM}      & Qwen-2.5-14B                &          36.88\%        \\ \hline
+			\multirow{2}{*}{Traditional RAG}      & NaiveRAG                & 9.96\%                    \\
+			& L.LLMLingua             & 21.96\%                   \\ 
+			\hline
+			\multirow{2}{*}{Tree-based RAG}       & RAPTOR                  & 7.40\%                    \\
+			& SiReRAG                 & 7.36\%                    \\ 
+			\hline
+			\multirow{2}{*}{Community-based RAG} & GraphRAG                & 6.90\%                    \\
+			& LightRAG                & 5.89\%                    \\ 
+			\hline
+			\multirow{3}{*}{Walking-based RAG}                                               & HippoRAG2               &                4.25\%           \\
+			& F.GraphRAG              &          6.06\%                 \\
+			& {\textbf{AGRAG}} & {\textbf{0.40\%}}  \\
+			\hline\hline
+		\end{tabular}}
+
+	}
+	
+\end{table}

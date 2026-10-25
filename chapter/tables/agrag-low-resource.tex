@@ -1,0 +1,64 @@
+\begin{table}[tbp]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\caption{Creative generation in the low-resource setting. Qwen3-4B-Instruct-2507 on two 2080 Ti GPUs; values and emphasis preserved.}
+\label{tab:agrag:low-resource}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrr}
+\toprule
+Method & Novel FS & Novel ACC & Novel COV & Medical FS & Medical ACC & Medical COV\\
+\midrule
+SiReRAG-L & 0.324 & 0.412 & 0.299 & 0.421 & \underline{0.758} & \underline{0.475}\\
+HippoRAG2-L & \underline{0.433} & \underline{0.481} & \underline{0.335} & \underline{0.425} & 0.755 & 0.433\\
+\textbf{AGRAG-L} & \textbf{0.441} & \textbf{0.519} & \textbf{0.354} & \textbf{0.436} & \textbf{0.777} & \textbf{0.490}\\
+\bottomrule
+\end{tabular}}
+\end{table}
+\begin{table}[tbp]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\caption{Contextual summarization in the low-resource setting. Qwen3-4B-Instruct-2507 on two 2080 Ti GPUs; values and emphasis preserved.}
+\label{tab:agrag:low-resource-summary}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+Method & Novel COV & Novel ACC & Medical COV & Medical ACC\\
+\midrule
+SiReRAG-L & 0.647 & \underline{0.673} & \underline{0.536} & \underline{0.738}\\
+HippoRAG2-L & \underline{0.696} & 0.657 & 0.522 & 0.731\\
+\textbf{AGRAG-L} & \textbf{0.745} & \textbf{0.706} & \textbf{0.545} & \textbf{0.751}\\
+\bottomrule
+\end{tabular}}
+\end{table}
+\begin{table}[tbp]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\caption{Complex reasoning in the low-resource setting. Qwen3-4B-Instruct-2507 on two 2080 Ti GPUs; values and emphasis preserved.}
+\label{tab:agrag:low-resource-complex}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+Method & Novel ROG & Novel ACC & Medical ROG & Medical ACC\\
+\midrule
+SiReRAG-L & 0.260 & 0.426 & \underline{0.308} & \underline{0.698}\\
+HippoRAG2-L & \underline{0.280} & \underline{0.507} & 0.298 & 0.681\\
+\textbf{AGRAG-L} & \textbf{0.293} & \textbf{0.552} & \textbf{0.312} & \textbf{0.739}\\
+\bottomrule
+\end{tabular}}
+\end{table}
+\begin{table}[tbp]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\caption{Fact retrieval in the low-resource setting. Qwen3-4B-Instruct-2507 on two 2080 Ti GPUs; values and emphasis preserved.}
+\label{tab:agrag:low-resource-fact}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+Method & Novel ROG & Novel ACC & Medical ROG & Medical ACC\\
+\midrule
+SiReRAG-L & 0.271 & 0.416 & \underline{0.343} & \underline{0.661}\\
+HippoRAG2-L & \underline{0.288} & \underline{0.513} & 0.338 & 0.654\\
+\textbf{AGRAG-L} & \textbf{0.297} & \textbf{0.560} & \textbf{0.351} & \textbf{0.701}\\
+\bottomrule
+\end{tabular}}
+\end{table}

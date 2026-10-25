@@ -1,0 +1,42 @@
+LIST OF FIGURES
+Figure2.1 Original comparison of hyper-relational decomposition methods. Prune
+retains the main triple; Direct adds subject–qualifier links; Hyper adds
+combined relations; database reification introduces auxiliary objects.
+ReproducedfromFig.1oftheCIKMstudy[5]. 17
+Figure3.1 Two annotation diﬀiculties in the original KGLink examples. A graph
+description such as Athlete can differ from the target label Name, while
+datesbesideaperson’snameprovidelittleoccupationinformation. Orig-
+inalsubfiguresreproducedfromKGLink[1],Fig.2. 22
+Figure3.2 KGLink’s graph-processing and language-model components.
+Candidate-type text, column feature vectors, and a contextual type-
+representation objective connect external knowledge to annotation.
+OriginalimagereproducedfromKGLink[1],Fig.3. 23
+Figure3.3 The original KG-processing pipeline. Cell linking is followed by entity
+filtering,rowselection,andcandidate-typegeneration. Reproducedfrom
+KGLink[1],Fig.4. 25
+Figure3.4 Cross-column evidence in the original album-and-musician example.
+Graph links connect candidate interpretations of cell mentions in the
+samerow. OriginalimagereproducedfromKGLink[1],Fig.5. 26
+Figure3.5 Contextual type-representation training with masked and ground-truth
+tableinputs. Thetrue-typetableisconstructedduringtraining. Original
+imagereproducedfromKGLink[1],Fig.6. 30
+Figure3.6 Reported effect of the retained row budget 𝑘. The original two subfig-
+ures compare annotation quality and time cost on SemTab and VizNet.
+ReproducedfromKGLink[1],Fig.10. 37
+Figure3.7 Training and inference time reported on VizNet. Original image repro-
+ducedfromKGLink[1],Fig.7. 38
+Figure4.1 Two rounds of the dynamic classification task. New abuse categories
+extendtheavailablelabels. ReproducedfromFigure1ofGORAG[2]. 41
+Figure4.2 GORAG’sofflineindexing,query-dependentretrieval,classification,and
+online update. New query keywords are associated with the predicted
+classafterclassification. ReproducedfromFigure2ofGORAG[2]. 43
+Figure4.3 Total time in minutes for the one-shot four-round experiments with
+Qwen2.5-7B. The original R1–R4 legend in panel (b) applies to both
+panels. ReproducedfromFigure3ofGORAG[2]. 53
+Figure4.4 WOS classification across the reported round splits. Points 1–4 use the
+four-round split, 5–6 the six-round split, and 7–8 the eight-round split.
+Thelegendinpanel (b)applies toboth panels. Reproducedfrom Figure
+4ofGORAG[2]. 55
+Figure4.5 A contextual-abuse example and its selected graph connections. Repro-
+ducedfromFigure5ofGORAG[2]. 56
+x

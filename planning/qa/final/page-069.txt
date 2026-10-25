@@ -1,0 +1,45 @@
+0.5
+0.4
+0.3
+0.2
+1 2 3 4 5 6 7 8
+Round
+ccA
+0.5
+0.4
+0.3
+0.2
+1 2 3 4 5 6 7 8
+Round
+(a)One-shot.
+ccA
+Entailment
+Naïve RAG
+GraphRAG
+HippoRAG2
+GORAG
+(b)Five-shot.
+Figure 4.4: WOS classification across the reported round splits. Points 1–4 use the four-round
+split, 5–6 the six-round split, and 7–8 the eight-round split. The legend in panel (b) applies to
+bothpanels. ReproducedfromFigure4ofGORAG[2].
+thantheconnectionchosenforthecurrenttext. Selectingastructuredistinguishestheevidence
+usedtoconnectthequerytermsfromotherassociationspresentaroundthesamelabel.
+4.9 Discussion and Chapter Summary
+GORAG places structure between the observation of text and the construction of a language
+model’s classification instruction. Keywords connect the current text to an accumulated graph.
+Edgecostsandterminalconnectionsselectasubsetoflabelalternatives. Themodelthenclassi-
+fiestheoriginaltextwiththesealternativesandtheirrepresentativeinformation. Structureserves
+asatask-specificevidence-selectionmechanism.
+Theofflineablationshowsthecontributionofexpandingtheindexbeyondthesupportsam-
+ple. Because these additions carry predicted labels, the method couples current classification
+withtheevidenceavailabletolaterqueries.
+The graph’s paths provide a trace of the index connections used for retrieval. They can
+reveal which keywords and labels were linked by the selected structure. This trace explains the
+provenanceofcandidateselectionintheconstructedgraph. Thefinalclassifierstillreceivestext
+andmakesalanguage-modelprediction;theretrievedpathisanexternalevidenceobjectrather
+thananobservationofthemodel’sinternalcomputation.
+Several conditions bound the interpretation of the chapter’s evidence. Keyword extraction
+determineswhichpartsofaquerycanbecometerminals. Sparsesupportdataandlimitedlabel
+descriptionsdetermineinitialcoverage. Predicted-labelinsertioncanaddincorrectassociations.
+Theaccuracytablesuseexactlabelmatchinganddifferentbackbonesfordifferentdatasets. Each
+55

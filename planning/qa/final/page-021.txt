@@ -1,0 +1,36 @@
+3. Influence-aware connected evidence selection. AGRAG combines statistical entity se-
+lection, query-conditioned influence, semantic edge costs, an expanded evidence sub-
+graph,andhybridpassageretrieval.
+4. Query-aware multimodal matching and recomputation. MGRAG incrementally con-
+structsevidencegraphsforindividualqueries,matchesqueryrelationstosemanticpaths,
+andusesgraphinformationinselectiveKVrecomputation.
+Table 1.1: Research questions, structural operations, and evidence locations. Each row corre-
+spondstoaseparatestudy.
+RQ Structuraloperation Methodlocation Publishedevaluation
+RQ1 KG-derivedcandidate Chapter3,graphprocessing SemTabandVizNet
+typesandfeatures andmodelintegration annotation,ablations,
+eﬀiciency
+RQ2 Weightedonline Chapter4,indexingand CAD,WOS,IFS-Rel;
+keyword–labelretrieval connectedretrieval rounds,shots,andcosts
+RQ3 Influenceandcost-guided Sections5.2–5.5 Section5.7;QAand
+evidencesubgraph classification
+RQ4 Query-awareconstruction, Chapter6,matchingand MMQAandsixMRAMG
+semanticpaths,andKV recomputation subsets,matchingandcache
+scores studies
+The published measurements provide quantitative answers to these research questions. On
+VizNet,KGLinkobtainsaweightedF1of96.07comparedwith95.06forDoduo,usingtheper-
+centagescaleoftheannotationexperiment. InGORAG’sfourthWOSround,accuracywithten
+support examples per label is 0.4929 using Qwen2.5-7B; the one-shot result in the same round
+is 0.4420. AGRAG obtains Medical contextual-summarization coverage of 0.690 and accuracy
+of 0.604 with Qwen2.5-14B-Instruct. Its hybrid-retrieval ablation reduces coverage in that task
+to 0.420, linking the answer’s information coverage to the passage channel. MGRAG reaches
+MMQAaccuracyof0.7442withQwen2.5-VL-7B-Instruct. Theassociatedservingcomparison
+reports 4.3 hours for MGRAG and 8.8 hours for vLLM with HippoRAG2. These experiments
+measure the complete prediction or generation pipeline, while the ablations examine changes
+toparticularcomponents. Theresearchchaptersdeveloptheexperimentalcontrolsandmethod
+comparisonsbehindthesemeasurements,connectingthestructuraldecisionstoannotation,clas-
+sification,answercoverage,andcontext-processingcost.
+Theaccompanyinghyper-relationalstudycontributesaseparateanalysisofstructuralinfor-
+mation preservation and the FormerGNN design. It provides a representation-level perspective
+on the thesis theme. The background chapter identifies it explicitly as the author’s published
+7

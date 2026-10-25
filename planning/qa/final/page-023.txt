@@ -1,0 +1,29 @@
+CHAPTER 2
+BACKGROUND AND RELATED WORK
+The methods in this thesis use structure to determine which information a language model
+receives and how that information enters prediction. Their structures have different origins. A
+knowledgegraphrecordsexternalentitiesandrelations;aclassificationindexconnectskeywords
+with labels; an evidence graph links facts and passages; and a query graph expresses the rela-
+tionshipsrequestedbyaquestion. Thischapterestablishestheconceptsneededtocomparethese
+representationsandreviewsworkontableunderstanding,retrieval-augmentedgeneration,graph
+retrieval, and multimodal context processing. Section 2.6 presents the author’s published study
+ofinformationpreservationinhyper-relationalknowledgegraphs.
+2.1 Knowledge Graphs and Language Models
+A knowledge graph represents entities and their relationships explicitly. In a conventional rela-
+tional representation, a fact is a triple (𝑠,𝑟,𝑜), where 𝑠 is a subject entity, 𝑟 a relation, and 𝑜 an
+object entity. A set of these facts forms a directed graph whose edge labels identify relations.
+Wikidata provides a collaborative knowledge resource in which structured statements and their
+qualifierscandescribeentitiesbeyondthecontentofasingledocument[6]. Amodelaccessing
+thisgraphcanretrieverelationsassociatedwithamentionedentity,includinginformationabsent
+fromitsimmediateinput.
+The graph representation separates an entity’s identity from the strings used to mention it.
+Atablecellorquerycontainsamention,whileanentitynodereferstoanindexedobject. Entity
+linking establishes a correspondence between the two. A short name may match several enti-
+ties,soaretrievalscoreandacontextualdisambiguationrulecaninfluencewhichfactsbecome
+available. Thedistinctionremainsrelevantwhenagraphisextractedfromtext: repeatedstrings,
+aliases, and synonyms affect whether different passages share a node. These indexing choices
+determinepossiblepathsbeforeaquery-specificselectionalgorithmbegins.
+Graph topology records the connections available to a computation. A neighborhood iden-
+tifies adjacent entities and relations; a path composes a sequence of such connections; and a
+subgraph retains a selected set of nodes and edges. These objects support different operations.
+9

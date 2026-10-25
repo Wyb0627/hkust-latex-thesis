@@ -1,0 +1,30 @@
+report accuracies 0.6335 and 0.6267, with total times of 8.8 and 8.3 hours. These are distinct
+retrieval-and-cachecompositions,eachidentifiedinthetable.
+Table 6.5: Cache-system comparison on MMQA, reproduced from published Table 6,
+p. 2489 [4]. V. and H. identify VanillaRAG and HippoRAG2 retrieval pipelines. TTFT is in
+secondsandtotaltimeisinhours.
+System SIM. ACC. ROG. BLEU TTFT Time
+vLLM(V.) 0.8315 0.6593 0.6277 0.5867 3.2s 4.5h
+CacheBlend(V.) 0.8315 0.6601 0.6417 0.5964 3.1s 4.5h
+vLLM(H.) 0.8381 0.6335 0.6659 0.5917 4.6s 8.8h
+CacheBlend(H.) 0.8415 0.6267 0.6636 0.5917 4.4s 8.3h
+MGRAG 0.8533 0.7442 0.6763 0.7215 3.2s 4.3h
+Time to first token (TTFT) gives a different view from total time. CacheBlend with Vanil-
+laRAG reports 3.1 seconds, while MGRAG and vLLM with VanillaRAG report 3.2 seconds.
+MGRAGcombinesthehighestanswer-qualityvalueswithatotaltimeof4.3hours;CacheBlend
+with VanillaRAG has the shortest TTFT. The two latency measures should be read alongside
+theirqualitymeasurements,becauseasystemcanchangeonewithoutchangingtheotherinthe
+samedirection.
+Theinverse-ablation table also measures qualitywhen graph-awarerecomputation is added
+after path matching. Within the HippoRAG2 composition, accuracy changes from 0.7372 with
+path matching to 0.7442 with both components, while the total time changes from 4.1 to 4.3
+hours. The additional computation is accompanied by changesin answerquality. Its purpose is
+toallocaterepeatedcomputationtotokenstatesselectedbythecombinedscore.
+Section6.11comparesthesecomponentadditionswithintheHippoRAG2andVanillaRAG
+pipelines.
+Table6.6reportstimeandtokencostsbymodule. OnMMQA,graphconstructionaccounts
+for 193.0 minutes, matching for 0.14 minutes, and answer generation for 8.9 minutes; the re-
+ported end-to-end time is 248.1 minutes. The construction and generation token entries are
+3,085and1,431,withend-to-endtokenentry4,516. Thelistedmoduletimesdonotsumtothe
+reportedend-to-endtotal;thepublicationdoesnotreconcilethedifferenceinthisbreakdown.
+100

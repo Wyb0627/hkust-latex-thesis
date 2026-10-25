@@ -1,0 +1,34 @@
+Table5.7: Input/outputtokensperquery. Samesourceexperimentastheprecedingtimetable.
+Method Novel Medical WOS IFS-Rel
+NaiveRAG 9,437 / 1,708 7,473 / 379 7,292 / 29 4,521 / 16
+L.LLMLingua 8,466 / 1,750 5,686 / 390 5,861 / 31 2,757 / 14
+RAPTOR 7,243 / 777 4,817 / 695 6,007 / 41 3,807 / 33
+SiReRAG 7,759 / 800 4,918 / 701 6,012 / 47 3,821 / 36
+G-Retriever 6,344 / 116 6,290 / 157 6,762 / 12 4,002 / 21
+MIXRAG 6,083 / 237 4,238 / 230 4,193 / 31 3,597 / 29
+GraphRAG 12,686 / 2,109 8,385 / 1,017 11,809 / 351 9,009 / 287
+LightRAG 13,145 / 1,233 9,535 / 426 11,510 / 227 7,667 / 199
+HippoRAG2 8,138 / 1,073 6,264 / 595 5,066 / 93 2,440 / 102
+F.GraphRAG 7,490 / 1,252 6,475 / 384 4,957 / 35 2,217 / 20
+AGRAG 6,487 / 1,140 5,145 / 413 3,970 / 101 1,890 / 93
+Table 5.8: Creative generation ablation with Qwen2.5-14B-Instruct. Values retain the original
+sourceablationprecision.
+Method NovelFS NovelACC NovelCOV MedicalFS MedicalACC MedicalCOV
+AGRAGw. HROnly 0.491 0.322 0.378 0.303 0.526 0.549
+AGRAGw. LLMER 0.428 0.302 0.365 0.352 0.526 0.587
+AGRAGw.o. HR 0.519 0.306 0.343 0.342 0.521 0.570
+AGRAGw.o. MCMI 0.488 0.332 0.358 0.351 0.530 0.575
+AGRAGw.o. Cle. 0.478 0.311 0.361 0.336 0.517 0.569
+AGRAG 0.513 0.339 0.386 0.356 0.598 0.589
+5.7.5 Component ablations
+Theablation compares hybrid retrievalalone, language-modelentity extraction, graph retrieval
+without hybrid context, an initial tree without MCMI expansion, and retrieval without the raw-
+triplet filtering step. These interventions act on different parts of the pipeline. They therefore
+givemorespecificevidencethanthecomparisonbetweencompletesystems.
+The hybrid-only variant has Novel creative-generation faithfulness 0.491, accuracy 0.322,
+and coverage 0.378. Full AGRAG reports 0.513, 0.339, and 0.386. For Novel contextual sum-
+marization, hybrid-only coverage and accuracy are 0.739 and 0.522, compared with 0.778 and
+0.643forthecompletesystem. Thegraph-containingconfigurationprovidesanobservedbenefit
+underthesesettings,particularlyforthesummarizationaccuracyscore.
+Removing hybrid retrieval produces a different pattern. Novel creative-generation faithful-
+73

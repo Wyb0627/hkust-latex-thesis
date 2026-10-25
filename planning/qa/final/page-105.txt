@@ -1,0 +1,45 @@
+Event User Query
+TokenSequence
+IrandhirSantos acts inThe Assailant ... Cross Attention
+IrandhirSantos acts
+In
+Man MidAir
+𝜙 𝑡 not in top 𝑏% Output
+Do
+KV Reuse
+MartialArtsKick LLMGraph Construction
+Query-awareKG |(!|
+!𝑎
+X !'
+Graph Sequence 𝑆 ! "%&
+|$|
+!𝑎
+X !"
+User Query
+"%&
+"
+𝐺𝐹 + 𝜙 𝑡
+!
+Figure 6.4: Graph features supplement attention in token recomputation scoring. The diagram
+retainstheoriginalgraphicalcontent. OriginalFigure4,p.2487[4].
+Thetoken-to-factassociation followsthe entityand relationtokenspansin theserialized repre-
+sentation. Tokensreferringtothesamefactthereforereceiveasharedstructuralcomponent.
+The graph feature concerns an entity’s position in the query-specific graph. A node that
+connects several extracted facts can carry a different score from an isolated endpoint. Because
+extraction is query-dependent, the feature is calculated from a representation already selected
+forthatquery. Itsmeaningisrelationalimportancewithinthatgraph,ratherthanacorpus-wide
+importancemeasure.
+Thepublishedgraphsaresmall,withfewerthantwentyentitiesonaverageaccordingtothe
+report. Averaging four graph statistics provides a direct structural feature for these graphs. The
+recomputationscoreusesgraphandattentioninformationavailableduringprocessing.
+6.6.3 Combined recomputation score
+Let 𝑎 denote attention between token 𝑡 and token 𝑗, and let |𝑞| and |𝑆 | denote the query and
+𝑡𝑗 𝑟
+serialized-graphlengths. Thescoreis
+|𝑞| |𝑆 |
+𝑟
+𝑞
+𝜙(𝑡) = 𝑎 + 𝑎 +𝐺𝐹 . (6.13)
+∑ 𝑡𝑗 ∑ 𝑡𝑘 𝑡
+𝑗=1 𝑘=1
+91

@@ -1,0 +1,195 @@
+        Proof Sketch for “AGRAG: Advanced Graph-based
+           Retrieval-Augmented Generation for LLMs”
+                                        Supplementary Material
+
+
+Overview
+This document serves as the supplementary proof sketch for the paper “AGRAG: Advanced Graph-
+based Retrieval-Augmented Generation for LLMs”. It provides the formal definition of the Minimum
+Cost Maximum Influence (MCMI) subgraph generation problem and the detailed proofs for the theorems
+regarding its complexity and the approximation guarantees of our proposed algorithm.
+
+
+1    Problem Definition
+We first assign node score SV and edge cost CE to Knowledge Graph (KG) G. Based on the mapped
+triplet facts F and the KG structure, we calculate the Personalized PageRank (PPR) [1] score as our
+node influence score s for node set V:
+
+                       s = lim PPRi ,     PPRi = (1 − d) × p + d × P · PPRi−1 ,                         (1)
+                            i→∞
+
+and the node score set SV is:
+                                           SV = {s[v] | v ∈ V}                                          (2)
+To align with [2], we set the damping factor d to 0.5, and converge the PPR calculation when it changes
+less than 10−7 ; p ∈ R|V| denotes the personalization vector that depends on the mapped triples F:
+                                                (
+                                                  1, if u ∈ F,
+                                        p[u] =                                                      (3)
+                                                  0, otherwise.
+
+The P ∈ R|V×V| in Equation (1) denotes the transition probability matrix, and can be obtained by:
+                                           (
+                                                1
+                                                (u)| , if e(u,v) ∈ E,
+                                P[u][v] = |N  1
+                                                                                                  (4)
+                                             |V| ,     otherwise,
+
+where N (u) denotes the 1-hop neighbor set of node u in the KG.
+    To ensure the PPR’s faster convergence and more stable iterative computation [3], as well as nor-
+                                                                                                        1
+malizing the score distribution [4]. Following [2], we set the transition probability for non-edges to |V| ,
+and after calculate the PPR score, we multiply the PPR score of all passage nodes by a balance factor
+0.05, to avoid over concentration on them. After that, we can obtain the node influence score sv for each
+node v ∈ V as follow:
+                                          sv = s[v], ∀v ∈ V.                                            (5)
+At last, we calculate the edge cost CE based on the similarity between query q’s representation q and
+relation edge e’s respective triplet facts fe ’s representation fe :
+
+                                                                      1 − MS(q, fe(u,v) )
+                       CE = {ce(u,v) | e(u,v) ∈ E},       ce(u,v) =                         .           (6)
+                                                                              2
+
+                                                      1
+Definition 1 (Minimum Cost Maximum Influence (MCMI) Subgraph Generation Problem). Given a
+node-weighted and edge-weighted, connected graph G(V, E, SV , CE ) and a set of mapped triples F, let
+Vterm be the set of nodes in F, called terminals. Let r ∈ Vterm be a designated root terminal. The goal is
+to generate a subgraph GMCMI (V ′ , E ′ , SV′ , CE′ ) that contains all terminals Vterm such that every terminal
+v ∈ Vterm is reachable from root terminal r, while minimizing the total cost-score ratio r(GMCMI ):
+                                                         X         ce(u,v)
+                                       r(GMCMI ) =                           .                              (7)
+                                                                   su + sv
+                                                     e(u,v) ∈E ′
+
+
+sv = s[v] denotes the Personalized PageRank (PPR) score of node v, as defined in Equation (1), and
+ce(u,v) represents the edge cost of e(u,v) , as defined in Equation (6).
+
+
+2     Theorems and Proofs
+2.1   Hardness of MCMI Generation
+Theorem 1. The MCMI subgraph generation problem is NP-hard.
+
+Proof. We first establish the equivalence between the MCMI problem and the classical Steiner Tree
+problem [5]. Let us define a transformed weight function w : E → R+ for the graph G, where the
+                                                   ce
+weight of an edge e(u,v) is given by w(e(u,v) ) =Psu(u,v)
+                                                      +sv . Substituting this into the MCMI objective func-
+tion (Equation (7)), we obtain r(GM CM I ) = e∈E ′ w(e). This transformation establishes a bijection
+between the MCMI problem and the Steiner Tree problem on G with weights w. Since the connectivity
+constraints are topological, a subgraph G ′ connects the terminal set Vterm in the MCMI instance if and
+only if it connects Vterm in the Steiner Tree instance. Thus, a solution exists for one problem if and only
+if it exists for the other.
+      Furthermore, regarding the approximation bound, the standard 2-approximation for Steiner Trees
+relies on the triangle inequality of edge weights. However, the effective weight in MCMI, defined as:
+                                                           ce(u,v)
+                                             we(u,v) =               .                                      (8)
+                                                           su + sv
+depends on independent variables ce(u,v) ∈ (0, 1) and sv ∈ (0, 1). We can construct an instance where
+su , sv → 0, causing we(u,v) → ∞ regardless of a fixed small ce(u,v) . This independence allows arbitrary
+violations of the triangle inequality, implying that the effective weights are not bounded by input costs,
+thus invalidating the metric-based constant approximation ratio.
+
+
+
+2.2   Effectiveness Guarantee
+We further prove our MCMI generation algorithm’s MCST generation step (Lines 1-10 in Algorithm
+1) can still have a 2-approximation rate in Theorem 2. And its MCMI generation step (Lines 11-15 in
+Algorithm 1) strictly monotonically gains information and terminates with in at most |Ω| iterations in
+Theorem 3.
+
+Theorem 2. The Minimum Cost Steiner Tree (MCST) generation step (Lines 1-10 in Algorithm 1) guar-
+antees a 2-approximation.
+
+Proof. Proof. Let γ and γ ∗ denote the costs of the generated subgraph GMCST and the optimal Steiner
+tree G ∗ , respectively. The algorithm computes an MST on the auxiliary graph H, where edge costs
+cH
+ e(u,v) of e(u,v) in auxiliary graph H correspond to shortest path costs between node u and node v in
+the original knowledge graph G. Consider a depth-first traversal of G ∗ , which traverses each edge in E ∗
+twice, yielding a total cost of 2γ ∗ . As in the auxiliary graph H, any path between two node u, v that pass
+
+                                                       2
+ Algorithm 1: MCMI Subgraph Generation Algorithm
+   Input : KG(V, E, SV , CE ): The weighted KG;
+              F: A set of query-mapped triplet facts in KG.
+   Output : GMCMI (VMCMI , EMCMI ): The MCMI subgraph.
+ 1 Compute an approximated minimum cost Steiner tree (MCST) G of KG;
+ 2 Let Vterm ← F ∩ VMCST be the terminal nodes in MCST;
+ 3 Construct weighted auxiliary graph H: VH ← Vterm ;
+ 4 for each pair of terminal nodes u, v ∈ Vterm do
+ 5     Find the shortest path P(u,v) in G from u to v;
+       Let cH
+                     P
+ 6          (u,v) ←    e∈P(u,v) ce , where ce ∈ CE ;
+
+ 7 Compute an approximated MCST G ′ of H;
+ 8 Let VMCMI ← ∅, EMCMI ← ∅;
+ 9 for each edge e(u,v) ∈ G ′ do
+10     Add nodes and edges from shortest path P(u,v) in MCST to VMCMI and EMCMI ;
+11 Calculate r(GMCMI ) with Equation (7);
+12 while the node v in MCMI’s 1-hop neighborhood with lowest ce(MCMI,v) /sv satisfies
+     ce(MCMI,v) /sv < r(GMCMI ) do
+13      Recalculate r(GMCMI ) with Equation (7);
+14      VMCMI ← VMCMI ∪ {v};
+15      EMCMI ← EMCMI ∪ {e(MCMI,v) };
+16 return GMCMI (VMCMI , EMCMI );
+
+
+
+
+another node o has cost cH           H         H
+                           e(u,o) + ce(o,v) ≥ ce(u,v) , the triangle inequality was satisfied. By the triangle
+inequality, shortcutting this traversal to visit only the terminals forms a Hamiltonian cycle in H have
+cost at most 2γ ∗ [5]. Since γ represents the minimum weight tree connecting these terminals in H, it
+is strictly bounded by the cost of this cycle. Thus, γ ≤ 2γ ∗ , the MCST generation step (Lines 1-10 in
+Algorithm 1) guarantees a 2-approximation.
+
+
+Theorem 3. The greedy expansion of the MCMI generation step (Lines 11-15 in Algorithm 1) strictly
+monotonically gains information and terminates within at most |Ω| iterations, where Ω denotes the
+candidate edge set of MCMI:
+                                                   ce(u,v)
+                                                                      
+                         Ω = e(u,v) ∈ E \ EMCST |          < r(GMCST )                        (9)
+                                                     sv
+
+Proof. Let ce(u,v) /sv be the marginal cost-score ratio of edge e. The greedy expansion of the MCMI
+generation step adds edge e if and only if its marginal cost-score ratio strictly smaller than the current
+graph’s cost-score ratio of MCMI, i.e., ce(u,v) /sv < r(GMCMI ), where:
+                                                       X          ce(u,v)
+                                      r(GMCMI ) =                           .                            (10)
+                                                                  su + sv
+                                                    e(u,v) ∈E ′
+
+
+Since only the edges whose marginal cost-score ratio smaller than r(GMCMI ) will be added, and all of the
+node scores su , sv and edge costs ce(u,v) are greater than 0, r(GMCMI ) monotonically decreases, which
+means the increase in influence score su , sv and decrease in total edge cost ce(u,v) . After generates
+MCST, let Ω be the set of edges whose cost-score ratio smaller than the MCST’s cost-score ratio by
+R-Equation (10) and does not belong to MCST. The greedy expansion of the MCMI generation step
+takes at most |Ω| iterations to process each candidate edge.
+
+
+                                                      3
+References
+[1] T. H. Haveliwala, “Topic-sensitive pagerank,” in Proceedings of the 11th international conference
+    on World Wide Web, 2002, pp. 517–526.
+
+[2] B. J. Gutiérrez, Y. Shu, W. Qi, S. Zhou, and Y. Su, “From rag to memory: Non-parametric continual
+    learning for large language models,” Forty-second International Conference on Machine Learning,
+    2025.
+
+[3] P. Boldi, M. Santini, and S. Vigna, “Pagerank as a function of the damping factor,” in Proceedings
+    of the 14th international conference on World Wide Web, 2005, pp. 557–566.
+
+[4] R. Baeza-Yates, P. Boldi, and C. Castillo, “Generic damping functions for propagating importance
+    in link-based ranking,” Internet Mathematics, vol. 3, no. 4, pp. 445–478, 2006.
+
+[5] E. N. Gilbert and H. O. Pollak, “Steiner minimal trees,” SIAM Journal on Applied Mathematics,
+    vol. 16, no. 1, pp. 1–29, 1968.
+
+
+
+
+                                                  4
+

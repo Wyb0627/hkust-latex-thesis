@@ -1,0 +1,137 @@
+
+\section{Introduction}
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=1\linewidth]{figures/DFSTC_task}
+	\vspace{-18px}
+	\caption{An example of DFSTC task with 2 rounds. 
+		In Round 1, the text is classified as \textit{Threatening Language}.
+		In Round 2, another text is classified as a new label: \textit{Identity Insults}.
+		
+	}
+	\label{fig:dfstc_task}
+	\vspace{-15px}
+\end{figure}
+
+Text content classification is a fundamental task for various social media applications, 
+such as hate speech detection
+
+\cite{geissler2025analyzing,hee2024brinjal,chen2024hate,djuric2015hate,subramanyam2024triage,mandal2024contrastive,cao2024modularized,ji2024capalign,guo2024bayesian},
+misinformation/disinformation detection 
+\cite{luo2024message,nesterov2024contentious,liu2025modality,toughrai2025fake,cinus2025exposing,ashkinaze2024dynamics,chen2022cross,shang2024mmadapt,ye2024susceptibility}
+, and suicide risk detection
+\cite{kang2024scenedapr,li2025dynaprotect,naseem2025digri,Ge_2025}. 
+In recent years, Neural Network (NN)-based models~\cite{johnson2015semi,liu2016recurrent, dieng2017topicrnn,wang2017bilateral,johnson2017deep,peters-etal-2018-deep,wang2018sentiment,yang2019xlnet}, such BERT~\cite{devlin2018bert} and RoBERTa \cite{liu2019roberta},  have demonstrated impressive performance on social media text content classification tasks. 
+
+However, the effectiveness of these NN-based approaches \cite{johnson2015semi,liu2016recurrent, dieng2017topicrnn,wang2017bilateral,johnson2017deep,peters-etal-2018-deep,wang2018sentiment,yang2019xlnet} depends on abundant labeled training data, which requires significant time and human efforts~\cite{meng2018weakly,nguyen2024human}. 
+{Furthermore, in real-world applications, such as 
+Abuse Detection \cite{vidgen2021introducing}, new kinds of social media abuse can frequently appear with the changing needs of user analytics and progress in social research development, 
+introducing the need to classify texts into new, extra labels
+
+\cite{xia-etal-2021-incremental}, leading to the \textbf{D}ynamic \textbf{F}ew-shot \textbf{S}ocial media \textbf{T}ext \textbf{C}lassification (DFSTC) task. }
+As shown in Figure~\ref{fig:dfstc_task}, the DFSTC task starts with an initial set of classes (e.g., \textit{Threatening Language}). As new classes like \textit{Identity Insults} emerge in later rounds, it becomes challenging to obtain extensive labeled data for these new categories.
+ Models must therefore adapt to such changes and accurately classify new examples with limited labeled data. 
+Developing methods to dynamically classify text with limited labeled data remains a crucial and open problem.
+
+
+Depending on the technique for 
+
+the DFSTC task,
+current models can be mainly categorized into two types, i.e.,
+data augmentation-based models and RAG-based models.
+Firstly,
+data augmentation-based models~\cite{meng2018weakly,meng2020text,xia-etal-2021-incremental} create additional data for fine-tuning small language models (e.g., RoBERTa \cite{liu2019roberta}), by mixing the pairs of the few-shot labeled data and assigning mixed labels indicating the validity for these created data based on the labels of each data pairs~\cite{xia-etal-2021-incremental}.
+
+
+However, due to the limited labeled data, 
+and the label names may not always be available;
+furthermore, the additional data created can have very limited patterns. 
+Consequently, the classification models trained with these created data may over-fit and are not generalizable~\cite{liu2023pre,liu2024liberating,lei2023tart}.
+
+
+Recently, Large Language Models (LLMs) \cite{sun2021ernie, jiang2023mistral, touvron2023llama, achiam2023gpt, yang2024qwen2} have excelled in social media text classification through their superior understanding abilities. However, they often struggle with task-specific knowledge \cite{gao2023retrieval,zhang2023siren} and lack accurate reasoning clues to explain responses \cite{peng2024graph,wang2024kglink,dong2025understand,qian2025memorag}. In domains like hate speech or misinformation detection, these flaws can lead to undetected harmful content or wrongful penalties. Consequently, Long Context RAG models \cite{chen2023dense, sarthi2024raptor,xia-etal-2021-incremental,yoon2024compact} were proposed to integrate retrieved side information (e.g., label descriptions) as external clues for more accurate classification.
+However, the incorporation of side information can further increase the input size \cite{chen2023dense}, which often overwhelms critical details with noises. As the key clues of hate speech or misinformation are usually short sentences within long contexts, the ignorance of fine-grained, entity-level information can degrade LLM classification performance. Although proprietary LLMs \cite{hurst2024gpt} can handle such extended inputs, they inevitably suffer from high token costs.
+
+
+To achieve finer-grained RAG, and better preserve the entity-level information, Graph-based RAG approaches~\cite{edge2024local,guo2024lightrag,gutierrez2024hipporag,peng2024graph,zhang2025survey,han2024retrieval,gutiérrez2025ragmemory}, such as GraphRAG~\cite{edge2024local} and LightRAG~\cite{guo2024lightrag}, 
+	propose to index the unstructured texts into the structured graphs. 
+	These approaches extract entities and relations from texts as graph nodes and edges, and their retrievals are based on the graph components mapped from the query text.
+	
+	
+	 However, existing Graph-based RAG approaches~\cite{edge2024local,guo2024lightrag,gutierrez2024hipporag} still have three issues in the DFSTC task.
+ 
+
+ 
+
+\begin{enumerate}[leftmargin=10pt]
+	
+	\item 
+	\textbf{Uniform-indexing
+		issue:}
+	Some of these approaches construct graphs by indexing extracted text chunks uniformly.
+	They do not consider the varying importance of each text and extraction confidence of keyword entity.
+		For example, in \autoref{fig:dfstc_task}, keyword \textit{lazy} is related to all round 2 labels with different importance. Hence, 
+	uniform-indexing may provide inaccurate graph context for LLM classification.
+	
+
+	\item \textbf{Non-adaptive Retrieval issue:} These approaches select relevant information for each input text based on a globally predefined threshold. 
+	However, the optimal retrieval threshold can vary across different query text and different rounds; hence, this non-adaptive retrieval approach can be suboptimal.
+	
+ 
+	\item	\textbf{Narrow-source issue:} These approaches only retrieve side information from a limited number of few-shot training text and ignore the important information among query texts. 
+	Since the new keywords related to certain labels in hate speech or misinformation detection emerge frequently in social media, this issue consequently limits models' retrieval comprehensiveness. 
+	
+ 
+
+	
+\end{enumerate}
+
+	
+
+To address these issues, we propose a novel 
+\textbf{G}raph-based \textbf{O}nline \textbf{R}etrieval \textbf{A}ugmented \textbf{G}eneration framework for dynamic few-shot social media text classification, called GORAG.
+
+In general, GORAG constructs and maintains an adaptive online weighted graph by extracting side information from all target texts, and tailoring the graph retrieval for each input.
+
+Firstly, GORAG constructs a weighted graph with keywords extracted from labeled texts as keyword nodes, and text labels as label nodes, to help the model better capture graph topology \cite{yang2024effective,zhao2024pre,lin2024psmc}. To model relationships, GORAG employs an edge-weighting mechanism to assign different weights to edges, representing keywords' importance and relevance to the respective text's label. Secondly, GORAG constructs a minimum-cost spanning tree based on query keywords and retrieves the label nodes within it as candidate labels. Since this MST is determined solely by the constructed graph and the keywords of the query text, GORAG achieves adaptive retrieval without human-defined thresholds, ensuring precision for each input. Finally, GORAG applies an online indexing mechanism to enrich the graph with keywords from query texts. By calculating weights that reflect the semantic relevance of keywords to labels, GORAG effectively reduces the potential noise introduced by inaccurate LLM classification during real-time updates, ensuring the graph remains a robust and comprehensive retrieval source
+
+
+
+We summarize our novel contributions as follows.
+
+\begin{itemize}[leftmargin=10pt]
+\item 
+We present an
+
+online RAG framework for DFSTC tasks, namely GORAG, which consists of three steps: Graph Construction, Candidate Label Retrieval, and Text Classification, aiming to address the Uniform-indexing, Non-adaptive Retrieval, and Narrow-source issues.
+
+
+
+
+
+
+
+\item We develop a novel graph edge weighting mechanism based on the text keywords' importance within the text corpus, 
+
+which enables our approach to effectively model the relevance between keywords and labels, 
+thereby helping the more accurate retrieval.
+
+\item To achieve adaptive retrieval, 
+we formulate the candidate label retrieval problem which is akin to the NP-hard Steiner Tree problem, 
+and 
+
+
+provide an efficient and effective solution based on the greedy algorithm.
+
+
+
+\item  Extensive experiments from the social media contextual abuse benchmark and the web news misinformation detection benchmark demonstrate the effectiveness and efficiency of GORAG.
+
+
+
+
+
+
+\end{itemize} 
+ 
+

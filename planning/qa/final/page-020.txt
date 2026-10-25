@@ -1,0 +1,31 @@
+QAtasksandclassification,retainingthedistinctmeaningsoftheirmetrics.
+1.3.4 RQ4: Semantic matching and computation over multimodal evi-
+dence
+The fourth question asks how to construct and match evidence for a multimodal query when
+the query and evidence graphs express related information through different topologies, and
+howthatstructurecanguidecontextrecomputation. Theinputincludesamultimodalcorpus,a
+query,andthemodelstatesavailableforreuse. Theoutputisamatchedevidencesubgraphand
+ananswergeneratedundertheselectedrecomputationpolicy.
+A query can contain unknown entities, represented by semantically meaningful placehold-
+ers. Evidence may express the requested relation through intermediate entities. The relevant
+details can also depend on the question posed about an image. These conditions make both the
+constructionofthegraphandthematchingoperationquery-dependent. Onceselectedevidence
+enters the generator, tokens associated with connected events supply information about which
+computationstorefresh.
+MGRAG answers the question through caption-based coarse ranking, incremental query-
+awaregraphconstruction,andpath-basedsemanticsubgraphmatching. Itthencombinesquery
+attention,graph-sequenceattention,andgraphtopologicalfeaturestoscoretokensforselective
+KV recomputation. Chapter 6 reports QA results on MMQA and six MRAMG subsets, com-
+parisonsofmatchingmethods,componentablations,andcachequality–costmeasurements.
+1.4 Contributions and Evidence
+The thesis makes four core contributions corresponding to these questions. Each contribution
+combinesaspecificstructuraloperationwithalanguage-modeltaskandapublishedevaluation.
+Table1.1identifieswherethemethodandevidencearedeveloped.
+1. Knowledge-enrichedcolumn representations. KGLink selects graph-derived evidence
+usingtablerelationshipsandintegratesthatevidencewithapre-trainedtableencoder. Its
+contextualrepresentationtaskconnectsthegraphinformationtotheannotationlabels.
+2. Online structured label retrieval. GORAG maintains weighted associations between
+keywords and labels and uses a connected retrieval procedure to generate input-specific
+candidate labels. Its online indexing incorporates information according to the dynamic
+classificationprotocol.
+6

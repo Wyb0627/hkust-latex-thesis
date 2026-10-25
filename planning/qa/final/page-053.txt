@@ -1,0 +1,13 @@
+Eachobservationcorrespondstoanexplicitcomponentorinputconditioninthearchitecture.
+Knowledge coverage and annotation vocabulary remain material conditions. The graph-
+processing stage can use only entities and relations available to its linker and neighborhood
+retrieval. The supervised predictor learns the type set represented in training. The evaluated
+datasets use single-label column annotation and bounded table inputs. Those conditions deter-
+minetheinterpretationofthereportedaccuracyandweightedF1,includingwhyasemantically
+reasonablegraphdescriptioncanstillfailanexact-labelevaluation.
+The chapter answers the thesis’s first research question by showing how graph-derived
+knowledge can augment a column representation while a learned model handles the target
+label granularity. The next chapter changes the evidence-maintenance problem. It studies
+classification when labels and observed examples arrive over successive rounds, using a
+task-specificgraphtoretrievecandidatelabelsandupdatetheavailableevidenceonline.
+39

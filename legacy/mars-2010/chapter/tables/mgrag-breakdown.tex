@@ -1,0 +1,21 @@
+{\small
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{lrrrrr}
+\caption{Module costs reproduced from published Table 5, p.~2489~\cite{mgrag-paper}. Time is in minutes. KGC, QA, and E2E cells retain the published time/token pairs for graph construction, answering, and end-to-end processing. Match denotes matching time. Token counts and E2E totals are preserved as reported.}\label{tab:mgrag:breakdown}\\
+\toprule
+Dataset & Queries & KGC & Match & QA & E2E\\
+\midrule\endfirsthead
+\multicolumn{6}{c}{\tablename\ \thetable\ (continued)}\\
+\toprule
+Dataset & Queries & KGC & Match & QA & E2E\\
+\midrule\endhead
+\bottomrule\endfoot
+MMQA             & 951               & 193.0 / 3,085 & 0.14           & 8.9 / 1,431  & 248.1 / 4,516   \\
+Arxiv            & 200               & 61.9 / 3,946  & 0.23           & 16.2 / 2,944  & 83.9 / 6,890    \\
+Manual           & 390               & 76.1 / 4,285  & 0.04           & 23.9 / 2,556 & 109.7 / 6,841    \\
+Web              & 750               & 143.8 / 4,623  & 0.27           & 42.9 / 3,101 & 196.5 / 7,723   \\
+Wiki             & 500               & 164.2 / 6,629  & 0.30           & 52.1 / 6,267 & 241.5 / 12,896  \\
+Wit              & 600               & 140.6 / 7,660  & 0.21           & 42.6 / 6,539 & 196.5 / 14,199  \\
+Recipe           & 2,360             & 525.7 / 4,351 & 1.74           & 191.3 / 3,173 & 808.7 / 7,525   \\
+\end{longtable}
+}

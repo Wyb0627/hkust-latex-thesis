@@ -1,0 +1,268 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\documentclass[sigconf]{acmart}
+\usepackage{multirow}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{enumerate}
+\usepackage{subfigure}
+\usepackage{makecell}
+\usepackage{enumitem}
+
+\usepackage{balance}
+\usepackage{xcolor}
+
+\definecolor{mygreen}{RGB}{126,172,85}
+\definecolor{myblue}{RGB}{78,113,190}
+\definecolor{myorange}{RGB}{184,96,41}
+
+
+\AtBeginDocument{
+  \providecommand\BibTeX{{
+    Bib\TeX}}}
+
+
+
+
+
+
+
+\copyrightyear{2026}
+\acmYear{2026}
+\setcopyright{cc}
+\setcctype{by}
+\acmConference[WWW '26]{Proceedings of the ACM Web Conference 2026}{April 13--17, 2026}{Dubai, United Arab Emirates}
+\acmBooktitle{Proceedings of the ACM Web Conference 2026 (WWW '26), April 13--17, 2026, Dubai, United Arab Emirates}
+
+\acmDOI{10.1145/3774904.3793011}
+\acmISBN{979-8-4007-2307-0/2026/04}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{document}
+
+
+
+
+\title[GORAG: Graph-based Online Retrieval Augmented Generation for Dynamic Few-shot Social \\ Media Text Classification]{GORAG: Graph-based Online Retrieval Augmented Generation for Dynamic Few-shot Social Media Text Classification}
+\settopmatter{authorsperrow=4,printacmref=true}
+
+
+
+
+
+
+\author{Yubo Wang}
+\affiliation{
+	\institution{The Hong Kong University of Science and Technology}
+	
+	\city{Hong Kong SAR}
+	
+	\country{China}
+	
+}
+\email{ywangnx@connect.ust.hk}
+
+\author{Haoyang Li}
+\authornote{Corresponding author}
+\affiliation{
+	\institution{The Hong Kong Polytechnic University}
+	
+	\city{Hong Kong SAR}
+	
+	\country{China}
+	
+}
+\email{haoyang-comp.li@polyu.edu.hk}
+
+\author{Fei Teng}
+\affiliation{
+	\institution{The Hong Kong University of Science and Technology}
+	
+	\city{Hong Kong SAR}
+	
+	\country{China}
+	
+}
+\email{fteng@connect.ust.hk}
+
+\author{Lei Chen}
+\affiliation{
+	
+	\institution{The Hong Kong University of Science and Technology (Guangzhou)}
+	
+	\city{Guangzhou}
+	
+	\country{China}
+}
+\affiliation{
+	
+	\institution{Guangzhou HKUST Fok Ying Tung Research Institute}
+	
+	\city{Guangzhou}
+	
+	\country{China}
+}
+\email{leichen@hkust-gz.edu.cn}
+
+
+
+
+
+
+
+\renewcommand{\shortauthors}{Yubo Wang, Haoyang Li, Fei Teng, and Lei Chen}
+
+
+
+
+\begin{abstract}
+
+
+
+Text classification is vital for Web for Good applications like hate speech and misinformation detection. However, traditional models (e.g., BERT) often fail in dynamic few-shot settings where labeled data are scarce, and target labels frequently evolve. While Large Language Models (LLMs) show promise in few-shot settings, their performance is often hindered by increased input size in dynamic evolving scenarios. To address these issues, we propose \textbf{GORAG}, a \textbf{G}raph-based \textbf{O}nline \textbf{R}etrieval-\textbf{A}ugmented \textbf{G}eneration framework for dynamic few-shot text classification. GORAG constructs and maintains a weighted graph of keywords and text labels, representing their correlations as edges. To model these correlations, GORAG employs an edge weighting mechanism to prioritize the importance and reliability of extracted information and dynamically retrieves relevant context using a tailored minimum-cost spanning tree for each input. Empirical evaluations show GORAG outperforms existing approaches by providing more comprehensive and precise contextual information. 
+Our code is released at: \url{https://github.com/Wyb0627/GORAG}.
+\end{abstract}
+
+
+
+
+
+\begin{CCSXML}
+	<ccs2012>
+	<concept>
+	<concept_id>10002951.10003260.10003282.10003292</concept_id>
+	<concept_desc>Information systems~Social networks</concept_desc>
+	<concept_significance>500</concept_significance>
+	</concept>
+	<concept>
+	<concept_id>10002951.10003317.10003347.10003356</concept_id>
+	<concept_desc>Information systems~Clustering and classification</concept_desc>
+	<concept_significance>500</concept_significance>
+	</concept>
+	<concept>
+	<concept_id>10002951.10003317.10003338</concept_id>
+	<concept_desc>Information systems~Retrieval models and ranking</concept_desc>
+	<concept_significance>300</concept_significance>
+	</concept>
+	</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Information systems~Social networks}
+\ccsdesc[500]{Information systems~Clustering and classification}
+\ccsdesc[300]{Information systems~Retrieval models and ranking}
+
+
+
+
+
+\keywords{Large Language Model, Retrieval-Augmented Generation, Few-shot Text Classification, Hate Speech Detection, Social Media}
+
+
+
+
+
+
+
+
+
+
+
+\maketitle
+\vfill\eject
+\input{section/sec-introduction.tex}
+\input{section/sec-related_work.tex}
+\input{section/sec-method.tex}
+\input{section/sec-experiment_results.tex}
+\input{section/sec-conclusion.tex}
+\section{Acknowledgements}
+Lei Chen’s work is partially supported by National Key Research and Development Program of China Grant No. 2023YFF0725100, National Science Foundation of China (NSFC) under Grant No. U22B2060, Guangdong-Hong Kong Technology Innovation Joint Funding Scheme Project No. 2024A0505040012, AOE Project AoE/E-603/18, Theme-based project TRS T41-603/20R, CRF Project C2004-21G, Key Areas Special Project of Guangdong Provincial Universities 2024ZDZX1006,  Guangdong Province Science and Technology Plan Project 2023A0505030011, Guangzhou municipality big data intelligence key lab, 2023A03J0012, HKUST(GZ) - CMCC(Guangzhou Branch) Metaverse Joint Innovation Lab under Grant No. P00659, Hong Kong ITC ITF grant PRP/004/22FX, Zhujiang scholar program 2021JC02X170, HKUST-Webank joint research lab.
+\clearpage
+
+\bibliographystyle{ACM-Reference-Format}
+\balance
+\bibliography{GraphRAG_FSCIL}
+\clearpage
+\appendix
+\input{section/sec-appendix.tex}
+\end{document}
+\endinput
+

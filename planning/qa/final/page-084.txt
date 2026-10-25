@@ -1,0 +1,29 @@
+Table 5.3: Complex reasoning with Qwen2.5-14B-Instruct. Results from the AGRAG main
+experiment[3].
+Method Novel ROG Novel ACC Medical ROG Medical ACC
+NaiveRAG 0.120 0.447 0.117 0.635
+L.LLMLingua 0.092 0.434 0.080 0.633
+RAPTOR 0.290 0.460 0.185 0.649
+SiReRAG 0.307 0.459 0.269 0.646
+G-retriever 0.146 0.441 0.102 0.396
+MIXRAG 0.109 0.386 0.156 0.434
+GraphRAG 0.246 0.449 0.250 0.606
+LightRAG 0.223 0.448 0.255 0.637
+HippoRAG2 0.314 0.453 0.332 0.622
+F.GraphRAG 0.237 0.371 0.262 0.643
+AGRAG 0.319 0.467 0.343 0.665
+Table 5.4: Fact retrieval with Qwen2.5-14B-Instruct. Results from the AGRAG main experi-
+ment[3].
+Method Novel ROG Novel ACC Medical ROG Medical ACC
+NaiveRAG 0.117 0.431 0.182 0.604
+L.LLMLingua 0.115 0.420 0.105 0.591
+RAPTOR 0.133 0.465 0.132 0.609
+SiReRAG 0.311 0.451 0.349 0.558
+G-retriever 0.199 0.209 0.148 0.326
+MIXRAG 0.102 0.366 0.160 0.463
+GraphRAG 0.240 0.445 0.217 0.521
+LightRAG 0.253 0.460 0.283 0.607
+HippoRAG2 0.310 0.470 0.343 0.598
+F.GraphRAG 0.318 0.439 0.352 0.610
+AGRAG 0.324 0.490 0.357 0.628
+70

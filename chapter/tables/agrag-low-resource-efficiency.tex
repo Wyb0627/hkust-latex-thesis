@@ -1,0 +1,32 @@
+\begin{table}[tbp]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\caption{Novel low-resource efficiency. Qwen3-4B-Instruct-2507 on two 2080 Ti GPUs.}
+\label{tab:agrag:low-resource-efficiency}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+Method & Index min & Query min & Input tokens & Output tokens\\
+\midrule
+SiReRAG-L & \underline{52.0} & 183.5 & \underline{7,898} & \textbf{1,003}\\
+HippoRAG2-L & 55.7 & \textbf{131.2} & 7,964 & 1,354\\
+\textbf{AGRAG-L} & \textbf{44.7} & \underline{132.1} & \textbf{6,625} & \underline{1,172}\\
+\bottomrule
+\end{tabular}}
+\end{table}
+\begin{table}[tbp]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\caption{Medical low-resource efficiency. Qwen3-4B-Instruct-2507 on two 2080 Ti GPUs.}
+\label{tab:agrag:low-resource-efficiency-medical}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+Method & Index min & Query min & Input tokens & Output tokens\\
+\midrule
+SiReRAG-L & 18.1 & 182.3 & \textbf{5,113} & 827\\
+HippoRAG2-L & \underline{21.8} & \textbf{162.4} & 5,577 & \underline{584}\\
+\textbf{AGRAG-L} & \textbf{14.4} & \underline{167.3} & \underline{5,282} & \textbf{534}\\
+\bottomrule
+\end{tabular}}
+\end{table}

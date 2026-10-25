@@ -25,3 +25,10 @@
 *.maf
 *.mtc
 *.mtc0
+
+# Generated XeLaTeX/Biber intermediates
+*.bcf
+*.fls
+*.run.xml
+*.xdv
+__pycache__/

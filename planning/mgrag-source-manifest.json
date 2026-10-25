@@ -1,0 +1,14 @@
+{
+  "retrieved": "2026-10-24",
+  "publisher_pdf": "https://www.vldb.org/pvldb/vol19/p2480-wang.pdf",
+  "code_tree_sha": "7fc670cd0ccd0d61f845bbfd8b062f7d0a31db70",
+  "files": {
+    "planning/published/mgrag-pvldb-2026.pdf": "523ea970332fc8826037fa8e2966bf896e12d69f03ab8367a3d61bc6501f4a16",
+    "planning/mgrag-tech_report.pdf": "e14f1d7a907f9698598dfbb0003f73a7d00b849c89434c2af30dece4ff4ff86c",
+    "planning/mgrag-code-tree.json": "307997d6b07e727f8979f18d67189464da2c07c91d6e6ee97a9f56d7a878be63",
+    "planning/mgrag-MMRAG.py": "d9af68d9d446190f03edecd813c775395f016a00714a55fe6d5da2e956748e8e",
+    "planning/mgrag-run.py": "619060c0118455cd07c76dc3dad3753ae82ffe9111080c73ecb9aee22dae02d6",
+    "planning/mgrag-cache-lmcache_config.py": "21bb06ce819644372ca1e8bb59f1407dbc2f9f5b7d52deb713850daa2017fbee",
+    "planning/mgrag-cache-lmcache_model_config.py": "d6aa19b3cd232dfb53bd594a8203398987097925d4159c376f7f64998d0a71a2"
+  }
+}

@@ -1,0 +1,32 @@
+tionsamongquerykeywords[2].
+Thethirdsettingconcernstextualquestionansweringandgeneration. Asystemcanretrieve
+individually relevant chunks without telling the generator how their facts connect. An answer
+requiring a summary may also need more information than an economical path between query
+anchors contains. AGRAG constructs a text evidence graph, scores nodes by query-dependent
+influence,assignssemanticcoststoedges,andselectsaconnectedsubgraph. Itshybridpassage
+retriever supplies additional contextual material [3]. The generator receives both the selected
+relationalstructureandtext.
+The fourth setting introduces multimodal evidence. Images and text can describe the same
+event with different levels of detail. A direct relation in a question may correspond to a path
+throughseveralentitiesintheevidencegraph. Aquery-independentgraphcanalsoomitdetails
+relevanttoaparticularquestion. MGRAGbuildsanevidencegraphincrementallyforthequery,
+usespath-based semantic matchingtoidentify corresponding evidence,and incorporates graph
+features when selecting cached states for recomputation [4]. Structure influences both retrieval
+andtheprocessingoftheretrievedcontext.
+Thecommonquestionishowexplicitrelationshipsshouldconstraintheevidenceusedfora
+task. KGLink selects descriptions for a supervised representation; GORAG selects labels from
+an evolving index; AGRAG selects connected facts and source context; and MGRAG matches
+query relations and allocates computation over the selected evidence. Across these studies, the
+thesisexamineswherestructureisobtained,whenitisadapted,andwhichdownstreamdecision
+itcontrols.
+1.2 Research Scope and Structural Augmentation
+1.2.1 Evidence, structure, and model roles
+Inthisthesis,structuralaugmentationmeansusingexplicitrelationshipsamongevidenceitems
+inalanguage-modelpipeline. Theitemsincludeentities,types,keywords,labels,passages,and
+query components. The relationships include knowledge-graph edges, keyword–label associa-
+tions, passage-to-entity links, and paths that express a query requirement. The term describes
+wherestructureparticipatesinthepipeline;theconcreterepresentationisdefinedseparatelyfor
+eachstudy.
+There are three distinctions that organize the scope. First, a graph representation and a
+learned representation serve different purposes. A graph records named items and their con-
+2

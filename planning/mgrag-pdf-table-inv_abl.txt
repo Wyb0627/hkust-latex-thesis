@@ -1,0 +1,20 @@
+Table 10: The inverse ablation of MGRAG’s path-based seman-
+tic subgraph matching (PSGM) and graph-based KV (GKV)
+cache mechanism, with two best-performing RAG system
+HippoRAG2 [25] and VanillaRAG [20] on MMQA.
+Model SIM. ACC. ROG. BLEU Time
+Hippo. 0.8381 0.6335 0.6659 0.5917 7.5 h
+Hippo.+GKV 0.8392 0.6855 0.6651 0.7013 7.6 h
+Hippo.+PSGM 0.8416 0.7372 0.6720 0.7128 4.1 h
+Hippo.+PSGM+GKV 0.8533 0.7442 0.6763 0.7215 4.3 h
+Vanilla. 0.8362 0.7053 0.5942 0.6645 2.6 h
+Vanilla.+PSGM 0.8460 0.7175 0.6466 0.6973 4.7 h
+Vanilla.+PSGM+GKV 0.8485 0.7232 0.6563 0.7001 4.8 h
+MGRAG 0.8533 0.7442 0.6763 0.7215 4.3 h
+aligned with the finding in [22], MGRAG w. MM Encoder achieves
+worse performance than MGRAG, which uses image caption as a
+proxy for multimodal input. This demonstrates the limited encod-
+ing ability of current multimodal encoders, which causes more
+information loss than converting the image to text and using text
+encoders to generate representation vectors.
+We carry out inverse ablations of MGRAG’s

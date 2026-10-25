@@ -1,0 +1,33 @@
+providethecommonansweringconditions.
+Componentsubstitutionsevaluategraphconstruction,semanticmatching,andcachepolicy
+withinMGRAG.Inverseablationsaddmatchingandrecomputationtootherretrievalsystems.
+6.9 Answer Quality and Structural Retrieval
+6.9.1 Complete-system comparisons
+Table 6.2 reproduces the complete-system results. MGRAG has the highest reported value in
+eachofthefourmetricrowsforeachdataset. OnMMQA,itsaccuracyis0.7442,comparedwith
+0.7053forVanillaRAGand0.6335forHippoRAG2. Itssemanticsimilarityis0.8533,ROUGE-
+L is 0.6763, and BLEU-1 is 0.7215. GraphRAG and LightRAG have missing MMQA entries
+becausethoseexperimentsexceededthreedays. Thedashrecordsthetimelimitandsuppliesno
+qualitymeasurementforthosesystems.
+Table 6.2: Answer quality with Qwen2.5-VL-7B-Instruct, reproduced from published Table
+4, p. 2489 [4]. Vanilla., R1., Graph., Light., and Hippo. denote VanillaRAG, R1-Searcher,
+GraphRAG, LightRAG, and HippoRAG2. A dash means that the experiment exceeded three
+days;itisnotazeroscore. Boldandunderliningretainthepublication’shighlighting.
+Dataset Metric Vanilla. R1. Graph. Light. Hippo. MGRAG
+MMQA SIM. 0.8362 0.5478 - - 0.8381 0.8533
+MMQA ACC. 0.7053 0.3567 - - 0.6335 0.7442
+MMQA ROG. 0.5942 0.1041 - - 0.6659 0.6763
+MMQA BLEU 0.6645 0.0817 - - 0.5917 0.7215
+Arxiv SIM. 0.8664 0.7051 0.7943 0.7404 0.8293 0.8760
+Arxiv ACC. 0.6638 0.3775 0.2350 0.3813 0.4688 0.6800
+Arxiv ROG. 0.2713 0.1189 0.1553 0.1580 0.2331 0.2726
+Arxiv BLEU 0.2452 0.1092 0.1690 0.1370 0.1281 0.2498
+Manual SIM. 0.8166 0.6046 0.5453 0.7255 0.6852 0.8221
+Manual ACC. 0.5881 0.2071 0.1436 0.4096 0.2641 0.6173
+Manual ROG. 0.3509 0.1078 0.0974 0.1595 0.2047 0.3839
+Manual BLEU 0.2767 0.0740 0.0718 0.1385 0.1314 0.3093
+Web SIM. 0.6937 0.6620 0.5470 0.5513 0.5642 0.7009
+Web ACC. 0.4703 0.4200 0.1053 0.2000 0.3607 0.5123
+Web ROG. 0.1508 0.1142 0.1133 0.0905 0.0616 0.1664
+Web BLEU 0.0326 0.0785 0.1031 0.0206 0.0133 0.1456
+94

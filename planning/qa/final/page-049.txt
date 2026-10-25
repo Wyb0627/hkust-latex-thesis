@@ -1,0 +1,35 @@
+Table 3.2: Reported KGLink variant scores. The table reproduces the numeric columns and
+variantnamesoftheoriginalablationtable.
+SemTab VizNet
+Variant Accuracy WeightedF1 Accuracy WeightedF1
+KGLink𝑤/𝑜𝑚𝑠𝑘 86.14 84.54 95.95 95.67
+KGLink𝑤/𝑜𝑐𝑡 86.27 84.56 95.83 95.48
+KGLink𝑤/𝑜𝑓𝑣 87.02 85.68 95.98 95.70
+KGLinkDeBERTa 87.24 85.81 96.98 96.37
+KGLink 87.12 85.78 96.28 96.07
+Table 3.3: Reported accuracy on the VizNet test subset whose tables have no extracted KG
+information.
+Model Numericaccuracy Non-numericaccuracy
+KGLink 97.04 90.92
+HNN 44.05 18.37
+TaBERT 96.57 90.27
+Doduo 96.28 89.50
+RECA 96.89 61.54
+Sudowoodo 96.21 67.72
+description. It obtains 87.02 accuracy and 85.68 weighted F1 on SemTab, and 95.98 accuracy
+and 95.70 weighted F1 on VizNet. Candidate types provide the remaining KG input in this
+configuration. Thefullmodelreportshigherscoresonbothdatasets.
+ReplacingBERTwithDeBERTaproducesthefourthvariant[35]. Itobtains87.24/85.81on
+SemTab and 96.98/96.37 on VizNet. The architecture uses the same graph-processing design
+withadifferentencoderinthisexperiment.
+The representation and graph ablations answer related but separate questions. Removing
+the auxiliary task tests its training contribution while retaining graph inputs. Removing both
+KG pathways tests external information while preserving the representation task. The reported
+valuesareaveragesoverthreeruns.
+3.6.4 Annotation without Retrieved Knowledge
+The original study constructs a test subset from VizNet in which the entire table has no KG
+linkage. This condition is stricter than requiring only the target column to lack a link. With
+multi-columnencoding,atargetcolumncanotherwisebenefitfromgraphinformationretrieved
+foritsneighbors. Thesubsetcontains315tablesand612columnsacross26labels,comprising
+556numericcolumnsand56non-numericcolumns.
+35

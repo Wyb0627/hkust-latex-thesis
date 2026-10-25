@@ -1,0 +1,1114 @@
+        MGRAG: Semantic Subgraph Matching and Graph-Aware
+        Caching for Multimodal Retrieval-Augmented Generation
+                     Yubo Wang                                               Haoyang Li∗                                           Lei Chen
+    The Hong Kong University of Science                           The Hong Kong Polytechnic                         The Hong Kong University of Science
+             and Technology                                               University                                   and Technology (Guangzhou)
+          Hong Kong SAR, China                                      Hong Kong SAR, China                                     Guangzhou, China
+         ywangnx@connect.ust.hk                                  haoyang-comp.li@polyu.edu.hk                            leichen@hkust-gz.edu.cn
+
+ABSTRACT                                                                                      image documents, the system is expected to retrieve the minimal
+Answering complex queries over large and heterogeneous multi-                                 set of fine-grained, entity-level evidence that is both sufficient and
+modal document corpora is a central challenge in data manage-                                 precise for answering the query, and serve the retrieved context
+ment, requiring fine-grained, entity-level evidence retrieval and                             to a generative model efficiently, especially when many queries
+efficient context serving. Graph-based Retrieval-Augmented Gener-                             share overlapping evidence. The first step is fundamentally a query-
+ation (RAG) systems achieve promising effectiveness by organiz-                               retrieval problem over structured or semi-structured data, closely
+ing multimodal documents as knowledge graphs (KGs); however,                                  related to subgraph matching [30, 66] and query processing over
+they still face three limitations: (1) query-agnostic KG construc-                            knowledge graphs [32] studied extensively in the database commu-
+tion, where corpus-wide graphs overwhelm query-relevant entities                              nity. The second is a cache-management problem for intermediate
+with irrelevant noise; (2) inflexible graph matching, which relies on                         computation states, akin to buffer and view management in query
+rigid topological matching and misses path-level semantic equiva-                             processing systems [33, 59]. While modern large language models
+lences; (3) event-agnostic KV re-computation, which scores tokens                             (LLMs) such as GPT4 [4] and Qwen2.5 [8] serve as powerful genera-
+independently of graph topology, failing to preserve event-level                              tion backends, the quality of their answers is ultimately bounded by
+semantic structure. To address these issues, we propose MGRAG.                                the quality of the retrieved evidence [18, 36, 38, 65]. This motivates
+First, MGRAG incrementally builds query-specific KGs on demand                                the design of more principled retrieval and caching mechanisms as
+via a lazy, top-down construction strategy. Second, we formulate                              core data-management contributions, with LLMs positioned as the
+graph retrieval as a path-based semantic subgraph matching prob-                              downstream consumer of the retrieved results.
+lem, prove it NP-hard, and design an efficient greedy algorithm                                   Multimodal retrieval-augmented generation (RAG) [15, 19, 20,
+for flexible, semantics-aware retrieval. Third, MGRAG employs                                 23–25] provides a general framework for this task: an indexing mod-
+an event-aware KV caching mechanism to selectively recompute                                  ule organizes the corpus, a retrieval module selects partial content
+tokens critical to query-related events. Experiments on seven real-                           across modalities, and an LLM generates the final answer. A key
+world multimodal QA datasets show that MGRAG achieves superior                                data-management challenge is to retrieve information that is both
+effectiveness and efficiency compared to state-of-the-art RAG, sub-                           fine-grained enough to support multi-hop reasoning and compact
+graph matching, and KV caching baselines.                                                     enough to avoid the noise and latency penalties of overly lengthy
+                                                                                              contexts [31, 40, 43, 65]. Depending on their indexing and retrieval
+PVLDB Reference Format:                                                                       strategies, current multimodal RAG systems fall into two categories.
+Yubo Wang, Haoyang Li, and Lei Chen. MGRAG: Semantic Subgraph                                 Similarity-based RAG systems [20, 42, 62] encode multimodal data
+Matching and Graph-Aware Caching for Multimodal Retrieval-Augmented                           into a shared vector space using encoders such as CLIP [45] and
+Generation. PVLDB, 19(9): 2480 - 2493, 2026.                                                  retrieve the top-𝑘 most similar chunks. However, representing each
+doi:10.14778/3819518.3819565                                                                  chunk as a single vector obscures fine-grained entity-level infor-
+                                                                                              mation, leading to coarse-grained retrieval. To achieve entity-level
+PVLDB Artifact Availability:
+                                                                                              granularity, Graph-based RAG systems [9, 15, 23–26, 63] use LLMs to
+The source code, data, and/or other artifacts have been made available at
+                                                                                              extract entities and relations from multimodal documents, organize
+https://github.com/Wyb0627/MGRAG.
+                                                                                              them as nodes and edges in a knowledge graph (KG), and retrieve
+                                                                                              relevant graph components at query time. However, from a data-
+1    INTRODUCTION                                                                             management perspective, existing graph-based RAG approaches
+Answering complex queries over large, heterogeneous multimodal                                still face three fundamental challenges in their indexing, retrieval,
+document corpora is a central challenge in data management [46,                               and caching stages.
+47, 49, 53, 55]. Given a query and a corpus containing textual and
+                                                                                              Challenge 1: Query-agnostic KG construction. Existing graph-
+∗ Corresponding author                                                                        based approaches [15, 23, 25] construct a single, corpus-wide KG
+This work is licensed under the Creative Commons BY-NC-ND 4.0 International                   offline by extracting all entities and relations from every docu-
+License. Visit https://creativecommons.org/licenses/by-nc-nd/4.0/ to view a copy of
+this license. For any use beyond those covered by this license, obtain permission by
+                                                                                              ment, without considering the focus of any specific query. This is
+emailing info@vldb.org. Copyright is held by the owner/author(s). Publication rights          analogous to materializing a universal view without knowing the
+licensed to the VLDB Endowment.                                                               query workload: query-relevant entities, especially fine-grained
+Proceedings of the VLDB Endowment, Vol. 19, No. 9 ISSN 2150-8097.
+doi:10.14778/3819518.3819565                                                                  visual events extracted from images, are overwhelmed by irrelevant
+                                                                                              noise, and information critical for a specific query may never be
+
+
+
+
+                                                                                       2480
+               Node-level matching                                   Path-aware matching                              for the current query, with subgraph-matching-driven early termi-
+ Data
+ Graph     A
+                father_of
+                            B
+                                  father_of
+                                                  C     𝓓𝓖   A
+                                                                  father_of
+                                                                               B
+                                                                                       father_of
+                                                                                                       C
+                                                                                                                      nation. Second, to enable adaptive and semantically flexible graph
+                                                                                    Path Aggr.
+  𝓓𝓖                                                                                                                  retrieval, we formulate a Path-based Semantic Subgraph Matching
+   ✓               ✘                ✘             ✓     ✓                          ✓                       ✓          problem that generalizes classical subgraph isomorphism [13, 21]
+ Query                 grandfather_of                                    grandfather_of                               by relaxing topological constraints with path-level semantic aggre-
+ Graph         A                              C         𝓠𝓖       A                                 C
+  𝓠𝓖                                                                                                                  gation. We prove this problem is NP-hard and design an efficient
+                                                                 Correct alignment:
+          Cannot find a mapping, suffer from                 𝓓𝓖(A → B → C) ⇔ 𝓠𝓖(A → C)
+                                                                                                                      greedy algorithm based on semantic path growing and VF2-based
+         Semantic-structural Misalignment                        Find the correct mapping!                            isomorphism enumeration [13], whose practical cost is modest on
+                                ✓: Match      ✘: Mismatch    : Path Aggregation                                       the small, query-specific graphs constructed by MGRAG. Third,
+                                                                                                                      MGRAG introduces an event-aware KV caching mechanism that
+Figure 1: A motivating example of our path-based seman-                                                               incorporates four graph centrality measures: degree, betweenness,
+tic subgraph matching. The query’s grandfather_of edge                                                                eigenvector, and closeness. MGRAG utilizes these features to guide
+matches a two-hop father_of path in the data graph. Node-                                                             selective re-computation of cached states, bridging the gap between
+wise matching (left) misses this alignment, while our method                                                          token-level attention scores and event-level structural importance
+(right) aggregates paths to align them.                                                                               and preserving critical semantic relationships during inference.
+                                                                                                                         We summarize our contributions, which center on graph con-
+                                                                                                                      struction, query retrieval, and cache management:
+extracted at all. The challenge is to design an adaptive, query-driven                                                • We propose MGRAG, a multimodal graph-based RAG system that
+graph construction strategy that incrementally builds a compact,                                                        incrementally builds query-specific KGs on demand via a lazy,
+query-specific KG from the most relevant documents, balancing                                                           top-down construction strategy, avoiding the cost and quality
+construction cost against retrieval recall.                                                                             drawbacks of corpus-wide graph indexing.
+                                                                                                                      • We formulate graph retrieval as a new path-based semantic sub-
+Challenge 2: Inflexible graph matching. Once a KG is avail-
+                                                                                                                        graph matching problem, prove it NP-hard, and design an effi-
+able, the retrieval step should identify the subgraph that best an-
+                                                                                                                        cient greedy algorithm to solve it.
+swers the query. Current approaches either retrieve individual
+                                                                                                                      • We introduce a cache re-computation policy guided by graph
+nodes or triples by vector similarity with a fixed result size 𝑘 [23], or
+                                                                                                                        centrality, enabling the caching mechanism to preserve semantic
+apply rigid neighborhood expansion [25], both of which ignore path-
+                                                                                                                        coherence in multimodal contexts.
+level semantic equivalences. As shown in Figure 1, consider a data
+                                                                 father_of              father_of                     • Experiments on seven real-world multimodal QA datasets demon-
+graph DG containing the two-hop path 𝐴 −−−−−−−−→ 𝐵 −−−−−−−−→ 𝐶,                                                         strate that MGRAG achieves superior effectiveness and efficiency
+                                                                                   grandfather_of
+and a query graph QG containing the single edge 𝐴 −−−−−−−−−−−−→                                                         compared to state-of-the-art RAG, subgraph matching, and KV
+𝐶. Traditional node-level matching fails because no single edge                                                         caching baselines.
+in DG corresponds to grandfather_of, resulting in an inflexi-
+ble graph matching. This kind of mismatch arises frequently in                                                        2     PRELIMINARY AND RELATED WORKS
+multimodal KGs, where a single query edge about a visual event                                                        This section reviews related work on three core aspects of mul-
+may correspond to a multi-hop path through fine-grained entities                                                      timodal RAG data management: multimodal RAG pipelines (Sec-
+extracted from images.                                                                                                tion 2.1), subgraph matching (Section 2.2), and KV cache manage-
+Challenge 3: Event-agnostic KV cache management. In multi-                                                            ment (Section 2.3). Key notations are summarized in Table 1.
+user serving scenarios, current RAG serving systems [11, 33, 41, 59,
+68] cache the key-value (KV) states of retrieved contexts to acceler-                                                 2.1    Multimodal RAG
+ate inference for subsequent queries that reuse the same chunks.                                                      Although LLMs excel at multimodal tasks, they often lack up-to-
+Existing methods, such as CacheBlend [59], decide which tokens to                                                     date or domain-specific knowledge and struggle to recall long-tail
+selectively recompute based solely on token-level cross-attention                                                     facts, leading to hallucinated responses [36, 38, 65]. Multimodal
+scores. However, in multimodal contexts, particularly when pro-                                                       RAG systems [3, 5, 15, 20, 23–25, 42, 48, 54, 61, 64, 67] address these
+cessing images, each image is represented as a sequence of discrete                                                   gaps by retrieving up-to-date, relevant multimodal content, such
+tokens, fragmenting holistic visual events into isolated segments.                                                    as text and images, from large external sources. Formally, given a
+Token-level scoring fails to capture the event-level structural and                                                   user query 𝑞, a multimodal document corpus D = D𝑡𝑥𝑡 ∪ D𝑖𝑚𝑔
+semantic relationships among these tokens, which were naturally                                                       consisting of textual documents D𝑡𝑥𝑡 and image documents D𝑖𝑚𝑔 ,
+encoded in the KG topology.                                                                                           and an LLM with multimodal capabilities, a retrieval module Ω(·)
+Our approach. To address these three data-management chal-                                                            first retrieves a set of query-relevant information contexts C𝑞 from
+lenges, we propose MGRAG, a graph-based multimodal RAG frame-                                                         the multimodal chunk set C, which is generated from the original
+work with three core stages. First, MGRAG uses dense encoders                                                         corpus D by an indexing module Γ: C𝑞 = Ω(C, 𝑞), C = Γ(D). Next,
+to rank multimodal chunks by semantic relevance to the query,                                                         the LLM generates an answer 𝐴𝑞 conditioned on the query and the
+then incrementally constructs a query-specific multimodal KG by                                                       retrieved contexts C𝑞 : A𝑞 = LLM(𝑞, C𝑞 ).
+extracting entities and relations with an LLM in a query-aware,                                                           Depending on the technique, multimodal RAG approaches [5, 15,
+top-down manner. Following the database principle of lazy view                                                        20, 23–25, 42, 48, 54, 61, 64] fall into two categories: similarity-based
+materialization, MGRAG builds only the graph fragment needed                                                          and graph-based. In similarity-based systems [5, 20, 42, 48, 54, 64], Γ
+
+
+
+
+                                                                                                               2481
+encodes queries and documents into a shared embedding space, and                            Table 1: Summary of important notations.
+Ω returns the top-𝑘 most similar chunks or images. For example,
+VanillaRAG [20] encodes text chunks and images with pre-trained                    Notations      Meanings
+multimodal encoders (e.g., CLIP [45]) and retrieves by cosine similar-
+                                                                                  𝑞                 The input user query.
+ity. While straightforward, this coarse-grained retrieval cannot cap-             D                 The multimodal document corpus.
+ture fine-grained, entity-level semantics that span multiple chunks,              Ω                 The multimodal retrieval module.
+nor does it provide explicit relational reasoning to the LLM about                D𝑡𝑥𝑡 , D𝑖𝑚𝑔 The set of textual and image documents in D.
+why each chunk was retrieved. On the other hand, graph-based sys-                 Γ, Ω              The indexing and retrieval module.
+tems [15, 23–25, 61] address this by having Γ construct a knowledge               C                 The set of multimodal chunks generated from D.
+graph from multimodal documents and having Ω retrieve struc-                      T                 The set of text chunks split from D𝑡𝑥𝑡 .
+turally relevant subgraphs. GraphRAG [15] partitions the graph                    𝑐                 A multimodal chunk (text or image).
+into communities and generates community-level summaries, but                     →
+                                                                                  −
+                                                                                  h∗                The vector encoding of the respective component.
+incurs high costs for community detection and summarization. Hip-                 C𝑞𝑟𝑎𝑛𝑘            The coarse-grained ranked chunks regarding query 𝑞.
+poRAG [24] scores nodes via Personalized PageRank and retrieves                   KG𝑞 (V𝑞 , E𝑞 ) The query-specific multimodal KG.
+chunks associated with top-scoring nodes, reducing context length.                V𝑞 , E𝑞           The set of entities and relations in KG𝑞 .
+HippoRAG2 [25] further improves graph connectivity by indexing                    QG𝑞 ( V̂𝑞 , Ê𝑞 ) The query graph constructed from query 𝑞.
+entire passages as nodes.                                                         V̂𝑞               Entities (including placeholders) in the query graph.
+    Despite recent advances, existing graph-based systems have
+                                                                                  Ê𝑞               Relations in the query graph.
+three main limitations: (1) query-agnostic graph construction leads               R                 The candidate matched subgraph set
+to high indexing costs and noisy, less accurate retrieval; (2) retrieval          𝑟𝑒𝑠               The final matched subgraph.
+is limited to node or edge matching, missing multi-hop path seman-                𝑆𝑟                Matched subgraph 𝑟 ’s serialized string sequence.
+tics; (3) a fixed retrieval budget 𝑘 cannot flexibly support queries              ⊕(·)              The path aggregation function.
+needing variable evidence.                                                        𝜃                 Semantic similarity threshold for subgraph matching.
+                                                                                  𝜙 (𝑡)             The KV recompute score for token 𝑡.
+                                                                                      𝑞
+                                                                                  𝐺𝐹𝑡               The query specific graph topological score for token 𝑡.
+2.2    Subgraph Matching
+To adaptively retrieve query-relevant information from the exter-
+nal KG, subgraph matching methods can identify the most rele-                     2.3    KV Cache Management
+vant subgraphs that align with the query graph, directly affect-                  To mitigate the high computational cost of autoregressive decoding
+ing both the effectiveness and efficiency of query retrieval in the               in LLMs, key-value (KV) caching is widely adopted during infer-
+RAG data-management pipeline. Classical methods can be grouped                    ence. The core idea is to reuse previously computed key and value
+into three categories: exact solvers [13, 27], approximate graph-                 vectors in the attention mechanism, avoiding redundant recompu-
+matching algorithms [12, 17, 34, 35], and semantic graph-alignment                tation across decoding steps [37]. Formally, consider an LLM with
+methods [51, 52, 57].                                                             𝐿 transformer layers. At each layer ℓ, for an input token sequence
+   Exact solvers [13, 27] enumerate all subgraphs of KG isomor-                   x = [𝑥 1, . . . , 𝑥𝑛 ], the self-attention mechanism computes query Qℓ ,
+phic to QG. VF2 [13] uses depth-first backtracking with feasibility               key Kℓ , and value Vℓ matrices as: Qℓ = XW𝑄          ℓ , Kℓ = XWℓ , Vℓ =
+                                                                                                                                                     𝐾
+pruning on degrees, neighborhoods, and labels, while ISMAGS [27]
+                                                                                  XW𝑉 , where X is the token embedding matrix, and W𝑄
+                                                                                       ℓ                                                        ℓ , Wℓ , Wℓ
+                                                                                                                                                      𝐾    𝑉
+extends it with symmetry-aware search to avoid redundant em-
+                                                                                  are learnable projection matrices. The attention output is then:
+beddings. However, exact solvers require strict topological iso-                                                                   (︃ ℓ ℓ ⊤ )︃
+morphism, making them unable to address the inflexible graph                                                                         Q (K )
+                                                                                              Attention(Qℓ , Kℓ , Vℓ ) = softmax       √       Vℓ .       (1)
+matching issue in Figure 1. Also, approximate graph-matching al-                                                                         𝑑𝑘
+gorithms relax isomorphism constraints into optimization over
+                                                                                     During autoregressive generation, previously computed key/value
+soft correspondence matrices. SM [34] uses eigen-decomposition
+                                                                                  (KV) matrices for tokens 𝑥 1, . . . , 𝑥𝑛 can be cached and reused, since
+of an affinity matrix for soft scores, RRWM [12] interprets match-
+                                                                                  they depend only on past tokens. This caching speeds up inference.
+ing as a reweighted random walk with Sinkhorn normalization,
+                                                                                  However, in Retrieval-Augmented Generation (RAG), the retrieved
+VJ [17] expands seeded correspondences via bipartite matching,
+                                                                                  context C𝑞 and its integration (e.g., via positional encoding or cross-
+and IPFP [35] solves a quadratic assignment relaxation via integer-
+                                                                                  attention) can vary per query. Thus, blindly reusing cached KV
+projected fixed-point iteration. These methods tolerate structural
+                                                                                  for identical context chunks across queries may harm generation
+noise but still operate at individual node or edge level without ag-
+                                                                                  quality, as their representation can differ by query. Proper cache
+gregating path-level semantics. Lastly, semantic graph-alignment
+                                                                                  management is necessary.
+methods operate in embedding spaces derived from node/edge
+attributes. SLOTAlign [51] jointly refines graph structure and com-                  Definition 1 (KV Cache Management). Given a user query 𝑞,
+putes an optimal-transport alignment between attributed graphs,                   a set of multimodal contexts C𝑞 , and a transformer-based LLM, KV
+while FGWAlign [52] employs fused Gromov-Wasserstein distances                    cache management accelerates autoregressive decoding by reusing
+to jointly model attribute and topological similarity. Despite lever-             previously computed key-value (KV) states for tokens in C𝑞 ∪ {𝑞},
+aging semantic embeddings, these methods still match at the node                  while selectively recomputing KV states for a subset of tokens critical
+or edge level without modeling path-level, query-aware semantics.                 to generation quality. Formally, let T = Tokenize(𝑞 ∥ C𝑞 ) denote the
+
+
+
+
+                                                                           2482
+full input token sequence, with ∥ indicating concatenation. For each             Table 2: The scoring function of KV caching methods, where
+token 𝑡 ∈ T , the system computes a recompute score 𝜙 (𝑡) reflecting             Prefix denotes the tokens in the input prefix, 𝐾𝑉 𝑓 𝑢𝑙𝑙 [𝑡] and
+its importance. At each transformer layer, only the top-𝑏% tokens                𝐾𝑉 [𝑡] denotes the fully computed, and previously cached KV
+with highest 𝜙 (𝑡) values are recomputed, while the KV states of the             matrices of token 𝑡, respectively.
+remaining tokens are reused from cache:
+                     {︄                                                           Method             Feature                       Scoring Function 𝜙 (𝑡)
+                        Recompute(𝑡), if 𝜙 (𝑡) is in top 𝑏%
+            KV(𝑡) =                                               (2)             vLLM [33]          Position Dependent            1[𝑡 ∈ Prefix]
+                        Cache(𝑡),      otherwise                                  CacheBlend [59]    Position Independent          ||𝐾𝑉 [𝑡] − 𝐾𝑉 𝑓 𝑢𝑙𝑙 [𝑡] || 2
+                                                                                                                                   ∑︁ |𝑞 |      ∑︁ |𝑆𝑟 |        𝑞
+where Cache(𝑡) denotes the cached KV state from a previous inference,             MGRAG              Graph Structure Dependent        𝑗=1 𝑎𝑡 𝑗 + 𝑘=1 𝑎𝑡𝑘 + 𝐺𝐹𝑡
+and Recompute(𝑡) denotes freshly computed KV projections.
+   Current KV cache mechanisms are classified as Position Depen-                 of the triplet fact on graph that associated with token 𝑡: degree,
+dent Caching and Position Independent Caching. Position depen-                   betweenness, closeness, and eigenvector centrality. MGRAG will
+dent approaches, such as vLLM [33], reuse KV matrices for tokens at              recompute the KV matrix for 𝑏% of the tokens in each LLM layer.
+the same positions, which improves efficiency for repeated prompts                   At last, MGRAG would input the matched subgraph sequence
+but provides limited acceleration due to short shared subsequences.              𝑆𝑟 , the multimodal chunks C𝑞 used to construct the multimodal KG
+Position independent approaches [6, 59] reuse KV caches based                    KG𝑞 , and query 𝑞 together into the LLM for final query answering.
+on token importance, such as feature distances [6] or attention
+scores [59], allowing broader reuse and greater speedup. However,                3.2     Step 1: Coarse-grain Ranking
+these methods do not consider the structural relationships among
+tokens, like events in image data, which restricts their effectiveness.          We first encode the source multimodal document set D for retrieval,
+                                                                                 where D = D𝑡𝑥𝑡 ∪ D𝑖𝑚𝑔 , with text document set D𝑡𝑥𝑡 and image
+3     METHODOLOGY                                                                set D𝑖𝑚𝑔 . Specifically, for textual documents in D𝑡𝑥𝑡 , we will split
+                                                                                 them into overlapping text chunks T , with a fixed chunk token
+We introduce the overall MGRAG framework, detail its three core
+                                                                                 length 𝑙𝑐 , and an overlapping token length 𝑙𝑜 : T = Split(D𝑡𝑥𝑡 , 𝑙𝑐 , 𝑙𝑜 ),
+stages (Coarse-grain Ranking, Fine-grain Retrieval, Graph-Aware
+                                                                                 where we set 𝑙𝑐 and 𝑙𝑜 to 256 and 32, respectively, consistent with
+KV Cache), and deliver the complexity analysis.
+                                                                                 the best empirically findings in existing works [24, 25].
+                                                                                     We combine all text chunks T and image documents D𝑖𝑚𝑔 to
+3.1    Framework Overview
+                                                                                 form the multimodal chunk set C = T ∪ D𝑖𝑚𝑔 . Each chunk 𝑐 ∈ C
+To address query-agnostic KG construction, inflexible graph matching,            is encoded with a pretrained encoder M to obtain its embedding
+and event-agnostic KV re-computation issues of current multimodal                →
+                                                                                 −                                                  →
+                                                                                                                                    −
+                                                                                 h𝑐 ∈ R𝑑 for coarse-grained ranking: h𝑐 = M (𝑐), where 𝑑 is the
+RAG systems. We propose MGRAG, as shown in Figure 2, MGRAG
+                                                                                 embedding dimension. Following [22], we represent images using
+consists of 3 stages, i.e., Coarse-grain Ranking, Fine-grain Retrieval,
+                                                                                 their captions, enabling unified text-based encoding for both modal-
+and Graph-Aware KV Caching.
+                                                                                 ities. We use bge-base-en-v1.5 [57] as our encoder. If 𝑐 is an image
+Step 1: Coarse-grain Ranking. MGRAG first encodes source mul-
+                                                                                 (𝑐 ∈ D𝑖𝑚𝑔 ), we encode its caption, either provided by the dataset or
+timodal documents in D = {D𝑡𝑥𝑡 , D𝑖𝑚𝑔 } to prepare for retrieval.
+                                                                                 generated by an LLM, as its embedding.
+Text documents in D𝑡𝑥𝑡 are split into overlapping chunks and en-
+                                                                                     Given a query 𝑞 that may consist of both text 𝑞𝑡𝑥𝑡 and image 𝑞𝑖𝑚𝑔
+coded, while image captions C are used as vector representations
+                                                                                 modalities, our goal is to rank the most relevant multimodal chunks
+for images in D𝑖𝑚𝑔 , forming the multimodal chunks C. MGRAG
+                                                                                 in C = {𝑐 1, 𝑐 2, . . . , 𝑐 | C | }. Each chunk 𝑐 𝑗 is text or image chunk. For
+then ranks multimodal chunks C regarding their relevance to the
+                                                                                 a given query 𝑞, if it contains only a single modality (either text
+query 𝑞, obtaining ranked chunks C𝑞rank .
+                                                                                 or image), we use the corresponding encoder to obtain the query
+Step 2: Fine-grain Retrieval. In this step, MGRAG iterates the                                 →
+                                                                                               −
+ranked multimodal chunks C top-down to construct or enrich the                   embedding h𝑞 . If 𝑞 consists of both text and image modalities, we
+                                                                                                                         →
+                                                                                                                         −
+query 𝑞 specific multimodal KG KG𝑞 . The iteration terminates                    compute its representation h𝑞 by averaging the embeddings of its
+when a semantically matched subgraph is found between the query                  textual component and the caption 𝑞𝑐𝑎𝑝 of the querying image:
+graph QG𝑞 and the multimodal KG KG𝑞 , or when the iteration
+                                                                                                    → M (𝑞𝑡𝑥𝑡 ) + M (𝑞𝑐𝑎𝑝 )
+                                                                                                    −
+limit 𝜇 is reached. We formalize subgraph matching as a Path-                                       h𝑞 =                           .          (3)
+                                                                                                                      2
+based Semantic Subgraph Matching problem, which we prove to be
+NP-hard. In this formulation, a path 𝑃 in the query graph QG𝑞 is                 Next, we evaluate the distance between the query and each chunk
+mapped to a subgraph 𝑟 in the multimodal KG KG𝑞 . To solve this                  using the Euclidean distance in the embedding space:
+                                                                                                            →−
+                                                                                                            −    →      ∥︁→ −  →∥︁∥︁
+                                                                                                                        ∥︁−
+problem, we design a greedy algorithm.                                                            distance( h𝑞 , h𝑐 ) = ∥︁h𝑞 − h𝑐 ∥︁ ,        (4)
+Step 3: Graph-Aware KV Cache. Here, MGRAG selectively recom-                                                                            2
+putes the KV cache of each token 𝑡 based on a cache recompute score              where a smaller distance indicates a higher degree of semantic
+𝜙 (𝑡), which comprises three components: (1) the cross-attention                 similarity between the query and the chunk. This metric enables an
+score between token 𝑡 and the query 𝑞, (2) the cross-attention score             effective comparison across modalities by leveraging the strengths
+between token 𝑡 and the serialized graph sequence 𝑆𝑟 , and (3) the               of the multimodal encoder.
+                          𝑞
+graph feature score 𝐺𝐹𝑡 . To capture topological properties in small                With all distance scores computed, we rank the entire set of
+             𝑞
+graphs, 𝐺𝐹𝑡 incorporates four key graph topological measures                     candidate chunks for each query by sorting them in ascending
+
+
+
+
+                                                                          2483
+ Step 1: Coarse-grained Ranking               Step 2: Fine-grained Retrieval                                       Step 3: Graph-Aware KV Caching
+                                                                                                                                                     |&|           |*|
+                                                                                                                                        𝜙 𝑡 = ∑$'( 𝑎#$ + ∑)'( 𝑎#) + 𝐺𝐹#
+                                                                                                  c
+                                                                                      a                                                   KV Cache
+   Source                                                                                     b       h
+  MM Docs.     Image Captions
+                                                                                                      g                                                    𝜙 𝑡 not in top 𝑏%,
+                                                                                          f
+                                                          Iterative & Adaptive                                                  Serialization                  KV reuse
+                                                          Graph Construction                                           a
+                                                                                                                            b
+                        Rank                                                      Query Specific
+         Chunk                     Ranked MM Chunks                                                                     c   h
+                                                                                      KG                                                 Graph Seq. 𝑆+
+        Encoding                                                                                                      Matched
+                                                                                                                     Subgraph 𝑟                                           LLM
+                                                                         c
+                                                                     a
+                                                                     b   d Path-based Subgraph
+                                                                       ]
+                                                                    e           Matching
+                                                                              ⊕ 𝑃!" → {ℎ}                                          MM Chunks
+                                                                Query Graph
+
+
+                                                       Input Query 𝑞
+
+
+Figure 2: Our MGRAG consists of 3 steps. In Step 1, we rank the multimodal chunks regarding their relevance to the query. In
+Step 2, we iteratively construct a query-specific KG with the ranked multimodal chunks in a top-down manner. The iterations
+stop when the query’s semantically aligned subgraph is found in KG via a Path-based Subgraph Matching mechanism. In Step
+                                                                                                                𝑞
+3, We selectively reuse the LLM’s KV cache from Step 2, scoring each token 𝑡 by its topological importance 𝐺𝐹𝑡 in KG and
+cross-attention weights 𝑎, and only recompute tokens with recompute score 𝜙 (𝑡) in top 𝑏%.
+
+
+order of their Euclidean distance to the query representation, this                   where LLM(·) is the extraction model and 𝑝 extraction is the extraction
+rank results C𝑞rank of coarse-grained chunks C for the query 𝑞 is:                    prompt. In 𝑝 ext , we extract query-related entities and relations as
+                                                                                      key events from multimodal chunks, enabling query-aware KG
+              (︃      |︁
+                      |︁
+                                       (︃ [︂
+                                                 → −−→ ]︂ | C |
+                                                  −
+                                                                )︃)︃                  construction and addressing the query-agnostic issue. The original
+      C𝑞rank = 𝑐𝑖 ∈ C |︁|︁ 𝑖 ∈ argsort↑ distance( h𝑞 , h𝑐 𝑗 )        .   (5)          multimodal chunks 𝑐 are added to V𝑞𝑐 as passage nodes, yielding
+                                                               𝑗=1
+                                                                                      the final entity set V𝑞 . We then connect the passage node 𝑐 to
+                                                                                      entity 𝑣 extracted from it with pseudo relation 𝑒 (𝑐,𝑣) , with relation
+3.3    Step 2: Fine-grain Retrieval                                                   consists_in, obtaining the final relation set E𝑞 :
+Here, we iteratively select chunks 𝑐 from the query 𝑞’s ranked                                    ⋃︂                         ⋃︂          ⋃︂
+chunks C𝑞rank in descending order of similarity to the query. Each                       V𝑞 =            V𝑞𝑐 ∪ {𝑐}, E𝑞 =          (E𝑞𝑐 ∪       𝑓 (𝑐, 𝑣)), (7)
+selected chunk is used to extract entities and relations, thereby                                     𝑐 ∈ C𝑞rank                        𝑐 ∈ C𝑞rank            𝑣 ∈ V𝑞𝑐
+incrementally enriching the query-specific multimodal KG KG𝑞 .
+The iteration terminates when our Path-based Semantic Subgraph                        where 𝑓 (𝑐, 𝑣) = {𝑒 (𝑐, consists_in, 𝑣)} connects each passage node 𝑐
+Matching algorithm identifies a matched subgraph 𝑟 ⊆ KG𝑞 , or                         to entities 𝑣 extracted from it. With the entity set V𝑞 and relation
+reach the maximum iteration 𝜇.                                                        set E𝑞 , we are able to construct the multimodal KG KG𝑞 (V𝑞 , E𝑞 )
+   Firstly, we construct the query graph QG𝑞 ( V̂𝑞 , Eˆ𝑞 ) regarding                  specific to query 𝑞. Then, given an edge 𝑒 (𝑢, 𝑟, 𝑣) ∈ E𝑞 , where 𝑢 and
+                                                                                      𝑣 are entities and 𝑟 is the relation, we obtain their representations
+the query 𝑞. Here, we extract key entities V̂𝑞 and relations Eˆ𝑞
+                                                                                      using a text encoder M (e.g., BGE [57]) as follows:
+from the query similarly to Equation (6). When extracting entities
+and relations, as shown in Figure 3, to represent the key missing                                         →
+                                                                                                          −                  →
+                                                                                                                             −                       →
+                                                                                                                                                     −
+                                                                                                          h 𝑢 = M (𝑢),       h 𝑣 = M (𝑣),            h 𝑟 = M (𝑟 ).              (8)
+entities and relations in the query, which are usually highly related
+to the query answer, we ask the LLM to use placeholders that are                         Also, given two entities 𝑢 and 𝑣, there may exist multiple paths
+semantically close to those entities or relations, such as Person,                    from 𝑢 to 𝑣, denoted as P (𝑢, 𝑣). A single path 𝑃𝑖 (𝑢, 𝑣) ∈ P (𝑢, 𝑣)
+or Year, to represent them, and serve as entities or relations on                     consisting of 𝑘 consecutive triples is defined as:
+the query graph. These placeholders are later used for calculating                                    (︁                                                                  )︁
+semantic similarity with components on the multimodal KG, to                              𝑃𝑖 (𝑢, 𝑣) = 𝑒 1 (𝑢, 𝑟 1, 𝑧 1 ), 𝑒 2 (𝑧 1, 𝑟 2, 𝑧 2 ), . . . , 𝑒𝑘 (𝑧𝑘 −1, 𝑟𝑘 , 𝑣) ,
+retrieve the answer-related information.                                              where 𝑧 1, . . . , 𝑧𝑘 −1 are intermediate entities, 𝑟 1, . . . , 𝑟𝑘 are the corre-
+   Next, we construct or enrich the query-specific KG KG𝑞 . In                        sponding relations, and the path length is |𝑃 (𝑢, 𝑣)| = 𝑘. We define
+each iteration, we first apply LLM (e.g., Qwen-2.5-VL [8]) to extract                 the embedding of path 𝑃 (𝑢, 𝑣) as the aggregation over its relation
+entities V𝑞𝑐 and relations E𝑞𝑐 from each chunk 𝑐 ∈ C𝑞rank at the                      embeddings:
+current iteration regarding query 𝑞:
+                                                                                                                                   |𝑃𝑖⨁︂
+                                                                                                                                       (𝑢,𝑣) |
+                                                                                                                      →
+                                                                                                                      −                        →
+                                                                                                                                               −
+                                                                                                                      h 𝑃𝑖 (𝑢,𝑣) =             h 𝑟𝑗 ,                           (9)
+                   V𝑞𝑐 , E𝑞𝑐 = LLM(𝑐, 𝑞, 𝑝𝑒𝑥𝑡𝑟𝑎𝑐𝑡𝑖𝑜𝑛 ),                  (6)                                                             𝑗=1
+
+
+
+
+                                                                               2484
+ Query: The Irandhir Santos film whose poster has people doing martial arts was                           Algorithm 1: Path-based Semantic Subgraph Matching
+        released in what year?
+             : Pseudo Relation                       : Placeholder Entity                                   Input: Query graph QG𝑞 ( V̂𝑞 , Ê𝑞 ), anchor entity 𝛾 ∈ V̂𝑞 ,
+     Query Graph                                                                                                   multimodal KG KG𝑞 (V𝑞 , E𝑞 ), threshold 𝜃
+                          Has              Has                Has            Do                             Output: Highest-scoring matched subgraph 𝑟 ⊆ KG𝑞 or ∅
+     Irandhir Santos                Film            Poster          Person        Martial Arts
+                                      Release in                                                          1 R ← ∅;
+                                    Year                                                                                                   → −
+                                                                                                                                           −   →
+                                                                                                          2 for each 𝑣 ∈ V𝑞 with cos( h 𝑣 , h 𝛾 ) > 𝜃 do
+
+     Knowledge Graph                                                                                      3     I ← SubgraphIsomorphism(QG𝑞 , KG𝑞 , 𝑣);
+      Irandhir Santos acts in
+                                            On Top
+                                                                                                          4     for each mapping 𝐼 ∈ I do
+      The Assailant …                                                                  Martial
+                                                                                      Arts Kick           5         valid ← true, 𝑠 ← 0;
+                                                    Display
+                                                                                           Do
+      Irandhir Santos
+                           Act in
+                                      The Assailant
+                                                                                                          6         Vsub ← {𝐼 (𝑥) | 𝑥 ∈ V̂𝑞 };
+                                                                                       Mid Air
+       Act in                                    Release in                                 In
+                                                                                                          7         Esub ← ∅;
+                        Release in
+          Blue Eyes                        2009                                         Man               8         for each 𝑒ˆ (𝑢, ˆ𝑟, 𝑣) ∈ Ê𝑞 do
+                                                                                                          9             (found, 𝑃) ← GreedyPathSearch(𝐼 (𝑢), 𝐼 (𝑣),
+                                                                                                                         →−
+                                                                                                                          h 𝑒 (𝑢,𝑟,𝑣) , KG𝑞 , 𝜃 );
+Figure 3: An example of our path-based semantic subgraph
+matching. The blue edges denote pseudo relations that con-                                               10             if not found then
+nect multimodal chunks (passage nodes) to entities extracted                                             11                  valid ← false;
+from them. The blue boxes denote placeholder entities, rep-                                              12                  break;
+resenting unknown query knowledge.                                                                                                       → −
+                                                                                                                                         −   →
+                                                                                                         13             𝑠 ← 𝑠 + cos( h 𝑃 , h 𝑒 (𝑢,𝑟,𝑣) );
+                                                                                                         14             Esub ← Esub ∪ {𝑒 ∈ 𝑃 };
+        →
+        −                                                    ⨁︁                                          15             Vsub ← Vsub ∪ {nodes in 𝑃 };
+where h 𝑟 𝑗 is the semantic embedding of relation 𝑟 𝑗 , and      is a
+customized aggregation function, such as mean pooling.                                                   16          if valid then
+   After the graph construction or enrichment in each iteration, a                                       17              𝑠 ← 𝑠/| Ê𝑞 |;
+straightforward approach is to apply a graph matching algorithm                                          18              Λ ← (Vsub, Esub );
+based on each node/relation’s pairwise semantic similarity. Con-                                         19              R ← R ∪ {(Λ, 𝑠)};
+cretely, given the query graph QG𝑞 , if a matched subgraph can
+be identified in KG𝑞 , we consider the available knowledge to be                                         20   return top-scoring subgraph 𝑟 ∈ R, or ∅ if R = ∅;
+sufficient, terminate the iterative graph construction, and return
+the matched subgraph as the graph context to aid LLM query an-                                              Theorem 1. The Path-based Semantic Subgraph Matching Prob-
+swering. However, this matching process faces two main challenges.                                       lem is NP-hard.
+First, as shown in Figure 3, semantically equivalent subgraphs may
+differ in topology, resulting in a semantic-structural mismatch that
+                                                                                                            Proof Sketch. We establish NP-hardness through a polynomial-
+standard graph matching cannot resolve. Second, since MGRAG
+                                                                                                         time reduction from the Subgraph Isomorphism problem by con-
+constructs a query-specific KG for each query, it is impractical to
+                                                                                                         structing an instance with uniform embedding vectors and unit
+train a dedicated subgraph matching model for every KG. This
+                                                                                                         path lengths. Due to the space limitation, we put our proof in our
+limits the applicability of existing methods [30, 32, 66] in our set-
+                                                                                                         technical report [1].                                           □
+ting. To address both challenges, we formulate this problem as the
+Path-based Semantic Subgraph Matching Problem.
+                                                                                                            Since this problem is NP-hard, it is infeasible to obtain the op-
+   Definition 2 (Path-based Semantic Subgraph Matching                                                   timal result in polynomial time. Therefore, to solve this problem,
+Problem). Given a query graph QG𝑞 ( V̂𝑞 , Ê𝑞 ), a multimodal KG                                         we propose an efficient greedy algorithm based on semantic path
+KG𝑞 (V𝑞 , E𝑞 ), and a similarity threshold 𝜃 ∈ [0, 1], the Path-based                                    growing and subgraph isomorphism enumeration, as shown in
+Semantic Subgraph Matching Problem is to find an optimal matched                                         Algorithm 1, which can find a subgraph within the multimodal
+subgraph SG(V𝑞 , E𝑞 ) ⊆ KG𝑞 , induced by a mapping 𝐼 : V̂𝑞 → V𝑞 ,                                        KG that semantically matches the query graph, but not necessarily
+to maximize the overall similarity:                                                                      identical in graph topology. Given a query graph QG𝑞 , we first
+                                                   (︂−
+                                                    → −  → )︂
+                         ∑︂                                                                              select its anchor entity 𝛾 to the multimodal KG KG𝑞 , specifically,
+    max Sim(SG) =                     max      cos h 𝑟 , h 𝑃      (10)
+                                                    𝑃 ∈ P (𝐼 (𝑢 ),𝐼 (𝑣) )                                we compute the pairwise cosine similarities between the embed-
+                                𝑒 (𝑢, 𝑟, 𝑣) ∈ Ê𝑞
+                                                                                                         dings of all entities in QG𝑞 and KG𝑞 , and select the pair (𝛾, 𝑣) with
+           (︂−
+            → −    → )︂                   (︂−
+                                           → −     → )︂
+     ⎧
+       cos   h   , h           >  𝜃, cos    h   ,    h 𝐼 (𝑣) > 𝜃, ∀𝑢, 𝑣 ∈ V̂𝑞                            the highest similarity, where 𝛾 ∈ V̂𝑞 and 𝑣 ∈ V𝑞 . If the algorithm
+                        (𝑢 )
+     ⎪
+     ⎪         𝑢      𝐼                       𝑣
+     ⎨
+     ⎪                                                                                                   cannot find a valid match starting with 𝛾, it will try other anchor
+s.t.
+                                      → −
+                                     (︂ −   →     )︂
+                                                                                                         entities until a valid match is found. After that, we consider 𝛾 as
+     ⎪ max𝑃 ∈ P (𝐼 (𝑢 ),𝐼 (𝑣) ) cos h 𝑟 , h 𝑃 > 𝜃,                ∀ 𝑒 (𝑢, 𝑟, 𝑣) ∈ Ê𝑞
+     ⎪
+     ⎪
+     ⎩                                                                                                   the anchor entity in the query graph and 𝑣 as its candidate match
+        →
+        −                                                                                                entity in the multimodal KG, and calculate the Path-based Subgraph
+where h 𝑃 is the aggregated path embedding for 𝑃 ∈ P (𝐼 (𝑢), 𝐼 (𝑣))
+as defined in Equation (9). If no such subgraph exists, return ∅.                                        Isomorphism. In this paper, we substitute the VF2 [13] algorithm’s
+                                                                                                         exact matching mechanism with similarity-based matching. This
+
+
+
+
+                                                                                                  2485
+similarity-based matching uses a similarity threshold 𝜃 to calculate                          Algorithm 2: Greedy Path Search (GreedyPathSearch)
+the Path-based Subgraph Isomorphism in line 3 of Algorithm 1.                                  Input: Start node 𝑣 start , target node 𝑣 target , target joint
+    Then, for each subgraph isomorphism 𝐼 : V̂𝑞 → V𝑞 that satisfies                                                   →
+                                                                                                                      −
+                                                                                                      embedding h target , data graph KG𝑞 (V𝑞 , E𝑞 ),
+𝐼 (𝛾) = 𝑣, we try to find a matched subgraph edge by edge. To begin
+                                                                                                      similarity threshold 𝜃
+with, for every relation 𝑒ˆ (𝑢, ˆ𝑟, 𝑣) in the relation set Ê𝑞 of the query
+                                                                                               Output: Tuple (found, 𝑃) where found is Boolean and 𝑃 is
+graph QG𝑞 , we grow a path in the multimodal KG KG𝑞 starting
+                                                                                                         the matched path
+from entity 𝑢’s isomorphic node 𝐼 (𝑢) in the multimodal KG by
+                                                                                             1 𝑃 ← (𝑣 start ),   𝑥 ← 𝑣 start ;
+greedily selecting entities 𝑥 within the neighbor entity set N (𝑃) of
+                                                                                             2 while 𝑥 ≠ 𝑣 target do
+the currently generated path 𝑃 on the multimodal KG.
+    Then, we greedily expand the path 𝑃 by evaluating the neighbors                          3    Nvalid ← ∅;
+of the current end node 𝑥 of path 𝑃. We select the neighbor entity                           4    for each neighbor 𝑦 ∈ N (𝑥) and edge 𝑒 (𝑥, 𝑟, 𝑦) ∈ E𝑞 do
+                                                                                                      →
+                                                                                                      −           →−     →−              →
+                                                                                                                                         −
+𝑦 ∈ N (𝑥) and its connecting relation 𝑒 (𝑥, 𝑟, 𝑦) ∈ E𝑞 that maximize                         5         h tmp ← h 𝑃 ⊕ h 𝑒 (𝑥,𝑟,𝑦) ⊕ h 𝑦 ;
+the cosine similarity between the newly aggregated path embedding                                               →
+                                                                                                                −      →
+                                                                                                                       −
+                            →−                                                               6        if cos( h tmp, h target ) > 𝜃 then
+and the edge embedding h 𝑒ˆ (𝑢, ˆ𝑟,𝑣) of the query relation 𝑒ˆ (𝑢, ˆ𝑟, 𝑣):                   7               Nvalid ←
+                               (︂−
+                                 →       →
+                                         −           → −
+                                                      −   →            )︂                                                                     →
+                                                                                                                                              −      →−
+    arg       max         cos h 𝑃 ⊕ h 𝑒 (𝑥,𝑟,𝑦) ⊕ h 𝑦 , h 𝑒ˆ (𝑢, ˆ𝑟,𝑣)    (11)                                 Nvalid ∪ {(𝑦, 𝑒 (𝑥, 𝑟, 𝑦), cos( h tmp, h target ))};
+       𝑦 ∈ N (𝑥 ),𝑒 (𝑥,𝑟,𝑦) ∈ E𝑞
+       ⨁︁                                                                                     8     if Nvalid == ∅ then
+where      denotes the path aggregation function defined in Equa-                             9         return (false, ∅);
+tion (9). Once the optimal relation 𝑒 (𝑥, 𝑟, 𝑦) are identified, we ap-
+                                                                                             10     (𝑦 ∗, 𝑒 ∗, score) ← arg max (𝑦,𝑒,𝑠 ) ∈ Nvalid 𝑠;
+pend them to the current path 𝑃:
+                                                                                             11     𝑃 ← 𝑃 ◦ 𝑒∗;
+                                   𝑃 = 𝑃 ◦ 𝑒 (𝑥, 𝑟, 𝑦),                        (12)          12     𝑥 ← 𝑦∗;
+where ◦ denotes the path concatenation function, and update 𝑥 ← 𝑦                            13 if 𝑥 == 𝑣 target then
+to continue the path expansion from the new endpoint. The path                               14     return (true, 𝑃);
+expansion continues until the path reaches the target node 𝐼 (𝑣), or                         15 else
+terminates if no neighbor yields an aggregated cosine similarity                             16     return (false, ∅);
+above 𝜃 . In our experiments, for efficiency, we set a maximum path
+length 𝑙𝑝 to prevent excessively long paths.                                                    In Step 2, the entities and relations of graph 𝑟 are all extracted by
+   The path expansion terminates when no qualifying neighbor                                 the LLM to form the query-specific KG KG𝑞 , and will be input to
+remains. The aggregated path embedding is then validated against                             the LLM again in graph sequence 𝑆𝑟 for query answering. According
+the query edge embedding; the mapping is accepted only when all                              to Figure 4, the green token sequence was input to the LLM for
+query edges pass. Valid matches are added to R, and the highest-                             graph construction, and can be partially reused by tokens in the
+scoring subgraph 𝑟 ∈ R is returned. If R = ∅, the next chunk in                              blue graph sequence S𝑟 , as both of them are tokens of entities
+C𝑞rank is consumed to enrich KG𝑞 .                                                           and relations in the KG. Hence, we propose a Graph-Aware KV
+   Next, we prove our Path-based Semantic Subgraph Matching                                  Caching mechanism in Step 3, to better reflect the importance of
+algorithm has an approximation ratio bounded by the similarity                               these graph components’ respective tokens, regarding the KG’s
+threshold 𝜃 via ∞-Wasserstein Bottleneck [10].                                               topological structure.
+   Theorem 2. The Algorithms 1 achieve a 𝜃 -bounded quality guar-
+antee for the Path-based Semantic Subgraph Matching Problem: every
+edge in the matched subgraph has cosine similarity at least 𝜃 , if a                         3.4    Step 3: Graph-Aware KV Caching
+valid matched subgraph is found.                                                             Here, the LLM KV cache is stored in a fixed-size memory, and we
+                                                                                             evict them with the LRU (Least Recently Used) manner. Based on
+   Proof Sketch. By framing the graph matching process as a                                  the cache recompute score 𝜙 (·), we will only selectively recompute
+constrained optimal transport problem, we show that the local                                the 𝑏% most important tokens’ LLM KV matrices, and reuse other
+thresholding in our greedy algorithm bounds the ∞-Wasserstein                                tokens’ LLM KV matrices that were stored in Step 2. To be specific,
+(bottleneck) distance and achieves 𝜃 -approximation. Due to the                              we calculate the cache recompute score 𝜙 (𝑡) for each token 𝑡 re-
+space limitation, we put our proof in our technical report at [1]. □                                                                                     𝑞
+                                                                                             garding three components: (1). Its topological score 𝐺𝐹𝑡 regarding
+                                                                                             its respective entity or relation’s topological feature in the query 𝑞
+   After obtaining the matched subgraph 𝑟 , to convert the graph                                                                                              ∑︁ |𝑞 |
+into an LLM-compatible string format, we serialize it into a string                          specific multimodal KG KG𝑞 . (2). Its cross attention score 𝑗=1 𝑎𝑡 𝑗
+                                                                                                                                                     ∑︁ |𝑆𝑟 |
+sequence 𝑆𝑟 of triplet facts, with [SEP] as the split marker between                         with tokens of query 𝑞. (3). Its cross attention score 𝑘=1 𝑎𝑡𝑘 with
+different facts:                                                                             tokens of other entity and relation in KG𝑞 .
+                                                                                                 When processing images, the key events in LLM’s image inputs
+          𝑆𝑟 = 𝑒 (𝑢 1, 𝑟 1, 𝑣 1 ) || [SEP] · · · [SEP] || 𝑒 (𝑢𝑛 , 𝑟𝑛 , 𝑣𝑛 ),   (13)
+                                                                                             can be fragmented, making the cross-attention score applied by
+where 𝑢 1 · · · 𝑢𝑛 , 𝑣 1 · · · 𝑣𝑛 ∈ V𝑞 denote entity nodes in graph 𝑟 ,                      current KV caching mechanisms unable to reflect the importance of
+𝑒 (𝑢 1, 𝑟 1, 𝑣 1 ) · · · 𝑒 (𝑢𝑛 , 𝑟𝑛 , 𝑣𝑛 ) ∈ E𝑞 denotes relation edges in graph              image tokens. Hence, we construct a KG KG𝑞 to contain the query-
+𝑟 , || denotes the string concatenation operation.                                           related events. As a result, the topological information of KG𝑞 can
+
+
+
+
+                                                                                      2486
+be crucial for reflecting the importance of image tokens regarding                                                                                                                            User Query
+                                                                                                                  Event
+certain events. Hence, the first part of our cache recompute score                                                                                                      Token Sequence
+                                                  𝑞                                      Irandhir Santos acts in The Assailant ...                                  Cross Attention
+𝜙 (·) is the graph’s topological feature score 𝐺𝐹𝑡 of token 𝑡. As the
+                                                                                                                                       Irandhir Santos   acts
+KG𝑞 is constructed with the entities and relations that adaptively                                   In
+                                                                                             Man           Mid Air
+                                                                                                                                                                              𝜙 𝑡 not in top 𝑏%     Output
+extracted from multimodal chunks related to query 𝑞, they are                                                      Do
+                                                                                                                                                                                 KV Reuse
+usually small graphs with an average of fewer than 20 entities (see                                 Martial Arts Kick                LLM Graph Construction
+                                                                                                                                                                              |(! |
+                                                                                              Query-aware KG
+our technical report at [1]).                                                                                                                                                 ! 𝑎!'
+                                                                                                                                                                    X
+   As a result, random walk-based graph scoring algorithms such                                                                       Graph Sequence 𝑆!                       "%&
+
+                                                                                                                                                                               |$|
+as PageRank [58] are prone to overfitting and result in suboptimal
+                                                                                                                                                                    X         ! 𝑎!"
+performance. Consequently, we select the four most commonly                                                                               User Query                          "%&
+used graph statistical features to reflect the topological importance                                                                                                                 "
+                                                                                                                                                                               𝐺𝐹!        +       𝜙 𝑡
+of graph components. Here, we denote V𝑞 and E𝑞 as the entity and
+relation set of multimodal KG KG𝑞 , N (·) denotes the neighbor
+node set of a node or a subgraph on KG𝑞 :                                                Figure 4: An example of our event-agnostic KV re-
+                                                                                         computation, where we utilize the graph topological features
+• Degree Centrality (𝑑𝑐): For 𝑣 ∈ V𝑞 , degree centrality is 𝑑𝑐 (𝑣) =                     of the event KG as supplementary knowledge to help mitigate
+   deg(𝑣)
+  | V𝑞 | −1 where deg(𝑣) is the degree of 𝑣 in the multimodal KG                         the effects of attention calculation, making the KV Cache
+  KG𝑞 . Higher 𝑑𝑐 (𝑣) means greater topological importance.                              Score better reflect the original importance of image tokens.
+• Betweenness Centrality (𝑏𝑐): For any 𝑣 ∈ V𝑞 , we define its                            token 𝑡 in query 𝑞 as:
+  betweenness centrality 𝑏𝑐 (𝑣) as:
+                                                                                                                                            |𝑞 |            |𝑆𝑟 |
+                            2                ∑︂        |𝑃 (𝑥,𝑦)
+                                                          𝑣     |                                                                           ∑︂              ∑︂                        𝑞
+         𝑏𝑐 (𝑣) =                                                 ,                                                             𝜙 (𝑡) =            𝑎𝑡 𝑗 +           𝑎𝑡𝑘 + 𝐺𝐹𝑡 ,                         (14)
+                  (|V𝑞 | − 1)(|V𝑞 | − 2) 𝑥≠𝑦≠𝑣,𝑥,𝑦 ∈ V |𝑃 (𝑥,𝑦) |                                                                            𝑗=1            𝑘=1
+                                                         𝑞
+
+                                                                   𝑣
+  Here, 𝑃 (𝑥,𝑦) is the set of all paths from node 𝑥 to 𝑦, and 𝑃 (𝑥,𝑦)    ⊆               where |𝑞| and |𝑆𝑟 | denotes the number of tokens in query 𝑞 and
+  𝑃 (𝑥,𝑦) is the subset passing through node 𝑣. This metric measures                     graph sequence 𝑆𝑟 , respectively, and 𝑎𝑡 𝑗 denotes the cross attention
+  a node’s control over information flow and its role as a bridge                        score between token 𝑡 and token 𝑗.
+  in the network; higher values indicate greater importance for
+  graph connectivity.                                                                    3.5           Complexity Analysis
+• Eigenvector Centrality (𝑒𝑐): Let 𝜆 = (𝜆1, 𝜆2, . . . , 𝜆𝑛 ) ⊤ be the                    Denote the multimodal chunk set as |C|, the chunk length as 𝑙𝑐 ,
+  principal eigenvector of the adjacency matrix of KG𝑞 , and let                         the embedding dimension as 𝑑𝑒𝑚𝑏 , the node set of query graph
+  𝜆𝑣 denote its component for node 𝑣. The eigenvector centrality                         and multimodal KG as V̂ and V, the number of edges in query
+                  𝜆𝑣
+  is: 𝑒𝑐 (𝑣) = max(𝜆) . Unlike degree centrality, 𝑒𝑐 (𝑣) reflects both                   graph as Ê, the maximum path context length as 𝑙𝑝 , the query token
+  direct and indirect influence, recursively rewarding connections                       length as 𝑙𝑞 , the number of chunks used for graph construction as
+  to highly central neighbors.                                                           𝑘, the LLM’s hidden states as 𝑑𝐿𝐿𝑀 , the number of nodes and edges
+                                                           | V𝑞 | −1
+• Closeness Centrality (𝑐𝑐): For 𝑣 ∈ V𝑞 , 𝑐𝑐 (𝑣) = ∑︁                                    in multimodal KG as V and E, the token length of the matched
+                                                                  dist(𝑢,𝑣) ,
+                                                             𝑢 ∈V𝑞 , 𝑢≠𝑣
+                                                                                         subgraph sequence and query as |𝑆𝑟 | and |𝑞|. The total offline time
+   where dist(𝑢, 𝑣) is the shortest path length between 𝑢 and 𝑣.
+                                                                                         complexity of MGRAG is:
+   Higher 𝑐𝑐 (𝑣) means 𝑣 is more centrally located in the graph.
+With all these feature scores, we denote their average as the graph                                                                           𝑂 (|C|𝑑𝑒𝑚𝑏 𝑙𝑐2 ),
+topology 𝑓 (𝑢) score for node 𝑢: 𝑓 (𝑢) = 𝑑𝑐 (𝑢 )+𝑏𝑐 (𝑢 )+𝑒𝑐
+                                                          4
+                                                             (𝑢 )+𝑐𝑐 (𝑢 )
+                                                                          . Af-
+ter obtaining the graph topology score 𝑓 (·) for each graph node,                        and online time complexity is:
+we map each token 𝑡 to triplet facts. Here, we denote (𝑢, 𝑒 (𝑢,𝑣) , 𝑣)
+as the respective triplet fact that token 𝑡 involved in, and map 𝑡                              𝑂 (𝑑𝑒𝑚𝑏 𝑘𝑙𝑐2 + 𝑙𝑝 | Ê ||V | | V̂ |+1 + |V ||E | + 𝑑𝐿𝐿𝑀 (|𝑆𝑟 | 2 + |𝑞| 2 )).
+to the triplet fact as follow: 𝑡 ∈ 𝜓 (𝑢)||𝜓 (𝑒 (𝑢,𝑣) )||𝜓 (𝑣), where 𝜓 (·)
+denotes the mapping function from entity or relation to their respec-                       Although the time complexity is exponential in the worst case,
+tive tokens, || denotes the token concatenation operation, entity                        the average number of nodes and edges in the query graph and
+nodes 𝑢, 𝑣 ∈ V𝑞 , relation edges 𝑒 (𝑢,𝑣) ∈ E𝑞 . Then token 𝑡’s graph                     multimodal KG is less than 20, so MGRAG’s time cost remains com-
+                            𝑞                                                            parable to other baselines. Detailed complexity analysis is available
+topological feature 𝐺𝐹𝑡 is calculated as the average topological
+feature score of the two nodes involved in its respective triplet fact:                  in our technical report at [1].
+   𝑞    𝑓 (𝑢 )+𝑓 (𝑣)
+𝐺𝐹𝑡 =         2      . Similar to CacheBlend [59], we compute cross-
+attention scores for our KV cache: specifically, the cross-attention                     4        EXPERIMENTS
+between token 𝑡 and the KV cache of query 𝑞, as well as between 𝑡                        In this section, we outline our experimental setup in Section 4.1,
+and the KV cache of other tokens.                                                        including details on datasets, and evaluation metrics, and report our
+   After obtaining the matched subgraph 𝑟 ’s graph sequence 𝑆𝑟 ,                         experimental results in Section 4.2 and Section 4.3 for effectiveness
+we compute the cross attention score 𝑎 in a same manner with                             and efficiency, respectively. At last, we conduct the ablation study
+CacheBlend [59], and obtain the final KV recompute score 𝜙 (𝑡) of                        in Section 4.6 and parameter sensitivity study in Section 4.7.
+
+
+
+
+                                                                                  2487
+4.1    Experiment Settings                                                     Table 3: The statistic of MMQA [50], and 7 sub dataset of the
+                                                                               MRAMG [60] benchmark. T and I in Query Modality denotes
+4.1.1 Datasets. We select the Arxiv, Manual, Web, Wiki, Wit, and
+                                                                               the dataset contains textual and image queries, respectively.
+Recipe dataset from the MRAMG benchmark [60], as well as the
+MMQA dataset [50] to test MGRAG’s performance. The dataset
+statistics are shown in Table 3, where the MMQA dataset has a large            Statistic         MMQA Wiki Wit Recipe Arxiv Manual Web
+number of source documents, and its queries can consist of image               Query Modality   T/I    T   T             T       T       T       T
+and text pairs, making it a challenging dataset for evaluating RAG             Queries          951   500 600          2,360    200     390     750
+models. The MRAMG benchmark is the most up-to-date benchmark                   Texts          218,285 538 639          1,528    101      40    1,500
+of the multimodal QA task, and its six datasets are built upon source          Images          57,058 538 639          8,569    337    2,607   1,500
+data from various domains, compared to the MMQA dataset, it has                Corpus Size     22.5M 680k 478k         1.1M    136k    420k    215k
+a much smaller number of source documents, and only consists of                Query Hops       1-2   2-5 2-4           1-6     3-4     2-6     2-3
+textual queries.                                                               Avg Query Hops 1.5     3.0 2.8           3.3     3.1     3.7     2.4
+
+                                                                                 search to avoid redundant isomorphic embeddings. SM [34] re-
+4.1.2 Evaluation Metrics. We employ four metrics to evaluate                     laxes discrete matching to a spectral optimization over an affinity
+the performance of MGRAG and baselines via the RAGAS evalua-                     matrix, VJ [17] initializes from seeded correspondences and iter-
+tion framework [16], as follows:                                                 atively expands them, RRWM [12] performs reweighted random
+(1) Semantic Similarity (SIM.): Measures the vector’s cosine                     walks on the association graph to obtain robust soft correspon-
+    similarity between the generated answer and the gold answer,                 dences, and IPFP [35] solves a quadratic assignment relaxation
+    we apply the bge-base-en-v1.5 [57] for vector encoding.                      via an integer-projected fixed-point iteration. BGE [57] measures
+(2) Accuracy (ACC.): Measures the proportion of correct answers                  graph similarity in a learned embedding space by encoding en-
+    among all answers generated by a model.                                      tities and relations into dense vectors, SLOTAlign [51] jointly
+(3) ROUGE-L (ROG.) [39]: Evaluates the quality of generated text                 refines graph structure and computes an optimal-transport based
+    by comparing the longest common subsequence (LCS) between                    alignment between attributed graphs, and FGWAlign [52] uses
+    the generated answer 𝐺 and the ground-truth answer 𝑌 .                       a fused Gromov-Wasserstein distance to couple node attributes
+(4) BLEU-1 (BLU.) [44]: Measures the quality of the generated                    and topology for graph edit distance style alignment.
+    answer 𝐺 by computing the modified unigram precision with                  • KV Caching mechanisms: We compare MGRAG’s performance
+    respect to the ground-truth answer 𝑌 .                                       with 2 KV Cache mechanisms in Table 6. vLLM [33] provides
+                                                                                 prefix-based paged-attention KV caching to accelerate decoding,
+4.1.3 Baselines. As shown in Table 4 and Table 7, we compare                     while CacheBlend [59] is a position-independent method that
+MGRAG against a broad set of retrieval, subgraph matching, KG                    scores tokens by cross-attention importance and recomputes
+construction, and KV cache baselines.                                            only the most salient ones without exploiting graph structure.
+• RAG Systems: We compare MGRAG’s performance with 5 RAG                          For VanillaRAG, we implement it with the langchain framework
+  systems in Table 4. Among these systems, VanillaRAG [20] is                  and FAISS vector database [14]. For GraphRAG, we use the imple-
+  a similarity-based RAG system that retrieves top-𝑘 semantic-                 mentation from [2] which optimizes its original code and achieves
+  nearest chunks with a dense encoder and directly feeds them                  better time efficiency while not affect the performance; For all other
+  to the LLM. R1-Searcher [48] fine-tunes the retrieval and rea-               baselines, we use their official implementations. For all similarity-
+  soning pipeline of VanillaRAG with reinforcement learning to                 based retrieval scenarios, we encode all images’ captions to rep-
+  improve multi-step question answering. GraphRAG [15] con-                    resent them for similarity based retrieval as in [22], for achieving
+  structs a global knowledge graph from the corpus, performs                   better performance. We deploy the Qwen-2.5-VL-7B-Instruct back-
+  community detection, and generates community summaries as                    bone with vLLM [33], and use vLLM [33] to accelerate all tested
+  graph-level contexts for QA. LightRAG [23] simplifies GraphRAG               baselines other than MGRAG.
+  by skipping community construction and instead retrieving high-
+  scoring nodes and their neighborhoods to reduce retrieval cost.              4.1.4 Hyperparameter and Hardware Settings. We set the
+  HippoRAG2 [25] further improves graph-based retrieval by in-                 retrieval top-𝑘 value for all RAG models to 5, aligning with the
+  dexing full passages as nodes and using Personalized PageRank                settings of HippoRAG2 [25]. We apply the hybrid search and local
+  to select a fixed number of text or image chunks.                            model for LightRAG [23] and GraphRAG [15], respectively, as they
+• KG Construction methods: We compare MGRAG’s perfor-                          are the most complete search mode and achieve best performance.
+  mance with 2 KG construction methods in Table 7. Stanford                    We apply LightRAG’s local search mode for the text classification
+  OpenIE (O.IE) [7] extracts entities and relations using pattern-             task, as it achieves the best effectiveness on the two datasets tested.
+  based information extraction without LLMs, while STAT [56]                   For HippoRAG2 [25], we set its hyperparameters to default, aligning
+  builds KGs via term-frequency based statistical entity extraction.           with its original paper and code. For our MGRAG, the text chunks’
+• Subgraph Matching methods: We compare MGRAG’s perfor-                        length is set to 256, and token overlap between chunks to 32, to align
+  mance with 9 subgraph matching methods in Table 7. Among                     with the setting of HippoRAG2. All our experiments were carried
+  these systems, VF2 [13] is a classic exact subgraph-isomorphism              out and evaluated with Qwen2.5-7B-VL-Instruct [8] LLM backbone,
+  solver based on depth-first backtracking with strong feasibility             as Qwen is the best open-sourced multimodal LLM model according
+  pruning, and ISMAGS [27] extends VF2 with symmetry-aware                     to huggingface LLM-leaderboard [28] We apply the Contriever
+
+
+
+
+                                                                        2488
+Table 4: The experiment result on MMQA [50], and 7 sub                      Table 5: MGRAG’s breakdown efficiency for each module.
+dataset of the MRAMG [60] benchmark, all experiments were                   Where KGC denotes multimodal KG construction time (in
+carried out with Qwen2.5-VL-7B-Instruct backbone. "-" de-                   minutes) and token cost, Match denotes subgraph matching
+notes the experiment cost longer than 3 days.                               time cost, QA denotes LLM QA time and token cost, and E2E
+                                                                            denotes end-to-end time and token cost.
+                  Similarity-based         Graph-based
+ Dataset Metric                                                             Dataset # Query     KGC       Match     QA            E2E
+                  Vanilla.   R1.   Graph. Light. Hippo. MGRAG
+                                                                            MMQA       951  193.0 / 3,085 0.14  8.9 / 1,431 248.1 / 4,516
+           SIM.   0.8362   0.5478      -      -   0.8381   0.8533           Arxiv      200   61.9 / 3,946  0.23 16.2 / 2,944 83.9 / 6,890
+           ACC.   0.7053   0.3567      -      -   0.6335   0.7442           Manual     390   76.1 / 4,285  0.04 23.9 / 2,556 109.7 / 6,841
+ MMQA
+           ROG.   0.5942   0.1041      -      -   0.6659   0.6763           Web        750  143.8 / 4,623 0.27  42.9 / 3,101 196.5 / 7,723
+           BLEU   0.6645   0.0817      -      -   0.5917   0.7215           Wiki       500  164.2 / 6,629 0.30  52.1 / 6,267 241.5 / 12,896
+           SIM.   0.8664   0.7051   0.7943 0.7404 0.8293   0.8760           Wit        600  140.6 / 7,660 0.21  42.6 / 6,539 196.5 / 14,199
+           ACC.   0.6638   0.3775   0.2350 0.3813 0.4688   0.6800           Recipe    2,360 525.7 / 4,351 1.74 191.3 / 3,173 808.7 / 7,525
+ Arxiv
+           ROG.   0.2713   0.1189   0.1553 0.1580 0.2331   0.2726
+           BLEU   0.2452   0.1092   0.1690 0.1370 0.1281   0.2498
+           SIM.   0.8166   0.6046   0.5453 0.7255 0.6852   0.8221           Table 6: Efficiency and effectiveness comparison between
+           ACC.   0.5881   0.2071   0.1436 0.4096 0.2641   0.6173           MGRAG and other KV cache mechanisms on MMQA dataset.
+ Manual
+           ROG.   0.3509   0.1078   0.0974 0.1595 0.2047   0.3839           Where V. and H. denote these systems cope with similarity-
+           BLEU   0.2767   0.0740   0.0718 0.1385 0.1314   0.3093
+                                                                            based VanillaRAG and graph-based HippoRAG2 framework.
+           SIM.   0.6937   0.6620   0.5470 0.5513 0.5642   0.7009
+           ACC.   0.4703   0.4200   0.1053 0.2000 0.3607   0.5123           System             SIM.    ACC.    ROG. BLEU TTFT Time Cost
+ Web
+           ROG.   0.1508   0.1142   0.1133 0.0905 0.0616   0.1664
+           BLEU   0.0326   0.0785   0.1031 0.0206 0.0133   0.1456           vLLM (V.)       0.8315 0.6593 0.6277 0.5867 3.2 s             4.5 h
+           SIM.   0.8824   0.5478   0.6966 0.7517 0.8204   0.8838           CacheBlend (V.) 0.8315 0.6601 0.6417 0.5964 3.1 s             4.5 h
+           ACC.   0.7800   0.3567   0.2000 0.3660 0.6500   0.7845           vLLM (H.)       0.8381 0.6335 0.6659 0.5917 4.6 s             8.8 h
+ Wiki                                                                       CacheBlend (H.) 0.8415 0.6267 0.6636 0.5917 4.4 s             8.3 h
+           ROG.   0.3559   0.1418   0.1361 0.2008 0.3042   0.3579
+           BLEU   0.3053   0.1146   0.1007 0.1863 0.1851   0.3174           MGRAG           0.8533 0.7442 0.6763 0.7215 3.2 s             4.3 h
+           SIM.   0.7851   0.6110   0.6211 0.6973 0.7230   0.8033           Graph-based RAG baselines’ graph construction steps are query-
+           ACC.   0.6675   0.6017   0.1500 0.2483 0.5138   0.6967           agnostic, which limits their ability to utilize the fine-grained multi-
+ Wit
+           ROG.   0.3255   0.1307   0.1319 0.2416 0.2712   0.3589
+                                                                            modal source information, leading to high information loss. Conse-
+           BLEU   0.2095   0.0934   0.1142 0.1928 0.1200   0.2382
+                                                                            quently, as they lose the fine-grained multimodal information early
+           SIM.   0.8599   0.6155   0.8166 0.8118 0.7792   0.8673
+           ACC.   0.6525   0.2180   0.2771 0.3334 0.4917   0.6814           in the graph construction step, their later graph retrieval step is also
+ Recipe                                                                     affected, leading to suboptimal performance. For our MGRAG, the
+           ROG.   0.3714   0.1065   0.1745 0.2128 0.3303   0.4220
+           BLEU   0.2599   0.0773   0.1527 0.1648 0.1941   0.3102           graphs constructed are smaller but query-aware and more tailored
+                                                                            for the respective query, enabling the system to better utilize the
+[29] embedding model for HippoRAG2’s dense passage retrieval                fine-grained multimodal source information.
+procedure, and bge-base-en-v1.5 [57] embedding model for other                 Lastly, according to the experiment results on different hop
+baselines’ LLM embedding, align with HippoRAG2’s [25] setting.              queries of MRAMG benchmark in Table 8, MGRAG achieves better
+All experiments are conducted on an Intel(R) Xeon(R) Gold 5220R @           performance on long-hop queries. This demonstrates that MGRAG’s
+2.20GHz CPU and a single NVIDIA A100-SXM4-40GB GPU. Other                   subgraph matching mechanism can be redundant and costly when
+hyperparameters of models were set as default by their codes.               the query only requires simple retrieval, and crucial for handling
+                                                                            complex queries.
+
+                                                                            4.3    Efficiency Evaluation
+4.2      Effectiveness Evaluation                                           We evaluate the efficiency of MGRAG in comparison to both similarity-
+                                                                            based and graph-based RAG baselines, using the challenging MMQA
+As shown in Table 4 and Table 6, MGRAG achieves the overall best            dataset. Results are summarized in Table 6.
+performance over all 7 datasets, surpasses all tested baselines. Based         We add fine-grained breakdown time and token cost statistics
+on the experiment results, we can have the following observations:          of MGRAG’s each parts in Table 5. According to the results, the
+   Firstly, compared to the previous state-of-the-art systems, MGRAG        repeated LLM calls for entity and relation extraction is the key
+achieves a larger effectiveness improvement (5.5% on ACC.) on the           efficiency bottleneck of our MGRAG model. But in return, by adap-
+large MMQA dataset than on other datasets. This is because, large           tively building compact, relevant knowledge graphs using only
+external multimodal sources means a large amount of noise for each          the most pertinent multimodal chunks, MGRAG avoids the costly
+retrieval, and an accurate and query-aware graph construction is            and redundant graph expansion that plagues other graph-based
+crucially important in this scenario.                                       approaches and achieves better effectiveness.
+   Secondly, although lacking the ability of fine-grained retrieval,
+the Similarity-based RAG systems can still achieve comparable or
+better performance on certain tested datasets. This is because the
+                                                                            4.4    Subgraph Matching Experiments
+
+
+
+
+                                                                     2489
+Table 7: Experiments of MGRAG with 2 multimodal KG con-                                            Table 8: Performance comparison between VanillaRAG and
+struction and 5 subgraph matching baselines, all experiments                                       MGRAG on different hop queries from the MRAMG bench-
+were carried out with Qwen2.5-VL-7B-Instruct backbone.                                             mark. Times are in minutes.
+
+               MMKGC                 Subgraph Matching                                                                 VanillaRAG               MGRAG
+Dataset Metric Non LLM Exact Match Approximate Match Semantic Match Ours                            # Hop # Q
+                                                                                                                  Time ACC. ROG. BLEU Time ACC. ROG. BLEU
+               O.IE STAT VF2 ISMAGS SM VJ RRWM IPFP BGE SLOT FGW
+                                                                                                    1-hop    201 0.13 0.613 0.379 0.240 0.35 0.624 0.425 0.286
+       SIM.   0.642 0.655 0.851   0.833   0.832 0.812 0.838 0.773 0.832 0.838 0.837 0.853
+       ACC.   0.571 0.602 0.735   0.706   0.702 0.715 0.698 0.633 0.703 0.700 0.697 0.744
+                                                                                                    2-hop   1,237 0.10 0.588 0.304 0.193 0.37 0.601 0.335 0.230
+MMQA
+       ROG.   0.510 0.519 0.673   0.638   0.632 0.646 0.647 0.601 0.635 0.650 0.647 0.676           3-hop   2,357 0.16 0.633 0.329 0.238 0.41 0.659 0.355 0.260
+       BLEU   0.483 0.500 0.620   0.590   0.582 0.606 0.599 0.585 0.586 0.602 0.598 0.722           4-hop    499 0.19 0.697 0.338 0.259 0.44 0.712 0.373 0.293
+       SIM.   0.618 0.640 0.871   0.868   0.866 0.872 0.874 0.814 0.874 0.872 0.868 0.876
+                                                                                                    5-hop    286 0.18 0.678 0.319 0.205 0.45 0.733 0.392 0.282
+       ACC.   0.526 0.576 0.650   0.643   0.670 0.667 0.675 0.581 0.668 0.653 0.651 0.680
+Arxiv
+       ROG.   0.177 0.184 0.270   0.266   0.263 0.269 0.257 0.212 0.270 0.269 0.264 0.273           6-hop    220 0.18 0.661 0.305 0.176 0.43 0.738 0.377 0.249
+       BLEU   0.138 0.145 0.239   0.231   0.244 0.245 0.243 0.203 0.244 0.233 0.230 0.250
+                                          0.813 0.808 0.811 0.800 0.815 0.813 0.820 0.822
+       SIM.   0.520 0.509 0.817   0.817
+                                                                                                         Table 9: Ablation experiment of MGRAG on MMQA.
+       ACC.   0.459 0.443 0.612   0.612   0.614 0.608 0.614 0.594 0.615 0.611 0.600 0.617
+Manual
+       ROG.   0.245 0.234 0.377   0.382   0.378 0.372 0.377 0.369 0.375 0.375 0.374 0.384           Model                   SIM.    ACC.     ROG.     BLEU     Time Cost
+       BLEU   0.209 0.182 0.306   0.307   0.303 0.298 0.303 0.289 0.303 0.301 0.292 0.309
+       SIM.   0.466 0.485 0.677   0.675   0.676 0.679 0.675 0.666 0.687 0.676 0.676 0.701           MGRAG w.o. GM          0.8362   0.7260   0.6657   0.5774     4.4 h
+       ACC.   0.290 0.298 0.507   0.509   0.507 0.508 0.503 0.493 0.510 0.498 0.480 0.512           MGRAG w. MM Encoder    0.8513   0.7376   0.6744   0.7008     4.5 h
+Web
+       ROG.   0.052 0.101 0.156   0.155   0.156 0.160 0.157 0.149 0.156 0.154 0.147 0.166           Vanilla MGRAG w. k=5   0.8260   0.6887   0.6266   0.5773     4.7 h
+       BLEU   0.020 0.095 0.088   0.079   0.056 0.056 0.066 0.055 0.095 0.116 0.096 0.146           MGRAG                  0.8533   0.7442   0.6763   0.7215     4.3 h
+       SIM.   0.504 0.525 0.877   0.879   0.878 0.873 0.878 0.869 0.878 0.879 0.878 0.884
+       ACC.   0.498 0.510 0.752   0.754   0.750 0.751 0.743 0.735 0.746 0.749 0.747 0.785          (SIM.), accuracy (ACC.), ROUGE-L (ROG.), BLEU, the time-to-first-
+Wiki
+       ROG.   0.230 0.253 0.352   0.355   0.353 0.349 0.355 0.348 0.355 0.356 0.352 0.358
+       BLEU   0.200 0.218 0.300   0.303   0.298 0.297 0.301 0.296 0.301 0.301 0.300 0.317          token (TTFT), and total time cost.
+       SIM.   0.492 0.489 0.799   0.797   0.784 0.786 0.795 0.792 0.789 0.793 0.794 0.803             According to the results in Table 6, MGRAG consistently achieves
+       ACC.   0.465 0.453 0.693   0.694   0.686 0.691 0.679 0.678 0.689 0.693 0.691 0.697
+Wit
+       ROG.   0.233 0.205 0.354   0.355   0.353 0.356 0.347 0.346 0.356 0.351 0.349 0.359
+                                                                                                   superior efficiency and answer quality compared to all vLLM and
+       BLEU   0.210 0.198 0.234   0.231   0.229 0.227 0.230 0.231 0.230 0.227 0.223 0.238          CacheBlend variants. While vLLM and CacheBlend are fast when
+       SIM.   0.551 0.545 0.859   0.861   0.862 0.857 0.852 0.847 0.864 0.861 0.860 0.867          equipped with both similarity-based VanillaRAG, they incur sig-
+       ACC.   0.425 0.401 0.679   0.668   0.678 0.672 0.670 0.661 0.674 0.675 0.677 0.681
+Recipe                                                                                             nificant overhead and reduced answer quality when applied to
+       ROG.   0.211 0.198 0.413   0.407   0.411 0.413 0.406 0.395 0.415 0.412 0.409 0.422
+       BLEU   0.202 0.172 0.304   0.302   0.305 0.295 0.298 0.221 0.308 0.306 0.305 0.310          graph-based retrieval. In contrast, MGRAG’s event-aware, graph-
+To compare MGRAG’s path-based semantic subgraph matching                                           structure-guided KV caching enables both fast inference and high
+method with other applicable subgraph matching methods, we                                         answer quality across all metrics and retrieval paradigms.
+conduct extensive experiments on MMQA dataset in Table 7. As the                                      These results highlight the advantage of our approach: by lever-
+query graph and data graph are all query specific in our subgraph                                  aging the structural and semantic properties of the constructed
+matching scheme, training-based methods are not applicable, hence                                  knowledge graph, MGRAG’s KV cache mechanism delivers state-
+we only select exact matching algorithms VF2 [13], and ISMAGS                                      of-the-art performance.
+[27], the approximate matching algorithms SM [34], VJ [17], RRWM
+[12], and IPFP [35], and the semantic matching algorithms BGE                                      4.6      Ablation Study
+[57], SLOTAlign [51], FGWAlign [52] for comparison. Based on the                                   4.6.1 Model ablation. To analyze MGRAG’s performance, we con-
+results in Table 7, we can have the following observations:                                        duct an extensive ablation study on the MMQA dataset, the ablation
+   Firstly, exact matching methods achieve suboptimal performance,                                 models tested are listed as follows:
+demonstrating that they ignores the semantic correlation between                                   • MGRAG w.o. GM: We remove MGRAG’s semantic path-based
+the query and the KG, which leads to inaccurate graph matching.                                       subgraph matching algorithm, and construct query-specific graph
+Secondly, on most tested datasets, semantic matching methods                                          with a fixed number (the maximum number of coarse-grained
+achieve the second-best performance, which demonstrates the im-                                       retrieval) of multimodal chunks.
+portance of semantic correlation between the query and the KG.                                     • MGRAG w. MM Encoder: We directly use CLIP [45] to encode
+However, they also achieve worse effectiveness than MGRAG, as                                         multimodal contents, not using image captions as a proxy for
+they ignore the path-based feature during node matching, which is                                     multimodal input in coarse-grained ranking.
+crucial for accurate semantic subgraph matching in our scenario.                                   • Vanilla MGRAG: We directly use our path-based semantic sub-
+                                                                                                      graph matching method and the graph-based KV cache mecha-
+4.5    KV Cache Experiments                                                                           nism with the VanillaRAG pipeline, and set the retrieval amount
+To systematically assess the efficiency and effectiveness of the pro-                                 𝑘 = 5 (same as our MGRAG’s coarse-grained retrieval amount).
+posed graph-aware KV cache mechanism, we compare the mech-                                            Based on the results in Table 9, we can have the following ob-
+anism against two representative KV cache baselines, vLLM and                                      servations regarding MGRAG: Firstly, Vanilla MGRAG achieves
+CacheBlend, each equipped with both similarity-based (VanillaRAG)                                  the worst effectiveness, which demonstrates that our MGRAG’s
+and graph-based (HippoRAG2) retrieval modules. The results are                                     coarse-to-fine-grained adaptive retrieval pipeline can reduce the re-
+summarized in Table 6, where all experiments are conducted on                                      trieval noise by avoiding a large amount of noisy retrieval. Secondly,
+the MMQA dataset under the same hardware and model backbone                                        MGRAG w.o. GM achieves the second worst effectiveness, which
+(Qwen2.5-VL-7B-Instruct), ensuring fair and consistent evaluation.                                 demonstrates that using a fixed number of multimodal chunks to
+Table 6 summarizes the results across metrics of semantic similarity                               construct KG can introduce noise or insufficient knowledge. Lastly,
+
+
+
+
+                                                                                            2490
+Table 10: The inverse ablation of MGRAG’s path-based seman-
+tic subgraph matching (PSGM) and graph-based KV (GKV)
+cache mechanism, with two best-performing RAG system
+HippoRAG2 [25] and VanillaRAG [20] on MMQA.
+
+ Model                    SIM.     ACC.     ROG.     BLEU Time
+ Hippo.                  0.8381   0.6335   0.6659   0.5917    7.5 h
+ Hippo.+GKV              0.8392   0.6855   0.6651   0.7013    7.6 h
+ Hippo.+PSGM             0.8416   0.7372   0.6720   0.7128    4.1 h                (a) Similarity threshold 𝜃          (b) Max path length 𝑙𝑝
+ Hippo.+PSGM+GKV         0.8533   0.7442   0.6763   0.7215    4.3 h                       Figure 5: Parameter sensitivity of 𝜃 and 𝑙𝑝 .
+ Vanilla.                0.8362   0.7053   0.5942   0.6645    2.6 h
+ Vanilla.+PSGM           0.8460   0.7175   0.6466   0.6973    4.7 h
+                                                                               5    CONCLUSION
+ Vanilla.+PSGM+GKV       0.8485   0.7232   0.6563   0.7001    4.8 h            We present MGRAG, a graph-based multimodal RAG framework
+ MGRAG                   0.8533   0.7442   0.6763   0.7215    4.3 h            that tackles limitations in query awareness, flexible graph match-
+                                                                               ing, and KV cache management. By integrating query-driven KG
+aligned with the finding in [22], MGRAG w. MM Encoder achieves                 construction, path-based semantic subgraph matching, and graph-
+worse performance than MGRAG, which uses image caption as a                    aware KV caching, MGRAG achieves higher accuracy and com-
+proxy for multimodal input. This demonstrates the limited encod-               parable efficiency than existing baselines, especially on complex
+ing ability of current multimodal encoders, which causes more                  multi-hop queries. Our results demonstrate the value of principled
+information loss than converting the image to text and using text              graph methods for retrieval-augmented generation with large lan-
+encoders to generate representation vectors.                                   guage models. Specifically, MGRAG attains the largest gains on
+                                                                               large-scale and multi-hop queries while roughly halving the end-
+4.6.2 Inverse Ablations. We carry out inverse ablations of MGRAG’s             to-end latency of the strongest graph-based baseline, and inverse
+three stages on the MMQA (the easiest) dataset in Table 10, where              ablations confirm that the proposed path-based subgraph match-
+we integrate our path-based semantic subgraph matching (Namely                 ing and graph-aware KV caching can be plugged into other RAG
+PSGM) and graph-based KV cache (Namely GKV) mechanism with                     pipelines and consistently improve their effectiveness. In future
+the previously best-performed graph-based RAG model HippoRAG2                  work, we plan to explore cross-query KG reuse and lighter-weight
+[25], and non graph-based model VanillaRAG [20]. According to                  entity extraction to further enhance serving throughput.
+the results, each of our proposed path-based semantic subgraph
+matching (PSGM) and graph-based KV cache mechanism (GKV)                       6    ACKNOWLEDGEMENTS
+can further improve the performance of these two tested baselines,             Lei Chen’s work is partially supported by National Key Research
+and achieve the best performance when combined, demonstrating                  and Development Program of China Grant No. 2023YFF0725100,
+the effectiveness and generalizability of our proposed mechanisms.             National Science Foundation of China (NSFC) under Grant No.
+Moreover, it is also worth noting that the performance of Hip-                 U22B2060, Guangdong-Hong Kong Technology Innovation Joint
+poRAG2+PSGM+GKV is the same as our MGRAG, since while                          Funding Scheme Project No. 2024A0505040012, the Hong Kong
+sharing the same LLM-based entity extraction step, adding the                  RGC GRF Project 16213620, RIF Project R6020-19, AOE Project
+PSGM and GKV mechanisms to HippoRAG2 makes the retrieval                       AoE/E-603/18, Theme-based project TRS T41-603/20R, CRF Project
+and generation setting identical to our MGRAG.                                 C2004-21G, Key Areas Special Project of Guangdong Provincial
+                                                                               Universities 2024ZDZX1006, Guangdong Province Science and
+4.7    Parameter Sensitivity                                                   Technology Plan Project 2023A0505030011, Guangzhou munici-
+In this subsection, we analyze the parameter sensitivity of MGRAG’s            pality big data intelligence key lab, 2023A03J0012, Hong Kong
+unique hyperparameter, the graph matching similarity threshold                 ITC ITF grants MHX/078/21 and PRP/004/22FX, Hong Kong ITC
+0 < 𝜃 < 1, and the max semantic path length 𝑙𝑝 , for which we test             TC-SKLCRCC26EG01, Zhujiang scholar program 2021JC02X170,
+values from {1, 2, 3, ∞}. For MGRAG’s other parameters, we align               Microsoft Research Asia Collaborative Research Grant, HKUST-
+them with our tested baselines. According to Figure 5, we can have             Webank joint research lab, 2025 HKUST Shenzhen-Hong Kong Col-
+the following observations: Firstly, for the graph similarity thresh-          laborative Innovation Institute Green Sustainability Special Fund
+old 𝜃 , when the threshold is to 0.6, MGRAG tends to achieve better            from Shui On Xintiandi and the InnoSpace GBA, and HKUST(GZ) -
+performance. This demonstrates that a moderate similarity thresh-              CMCC(Guangzhou Branch) Metaverse Joint Innovation Lab under
+old can help MGRAG to better balance the precision and recall of the           Grant No. P00659. Haoyang Li’s work is partially supported by
+subgraph matching, which is crucial for accurate query-graph map-              grant Guangdong Basic and Applied Basic Research Foundation
+ping and consequently better retrieval performance. Secondly, for              (Project No. 2026A1515010227), No. PolyU P0052504, PolyU-Huawei
+the maximum path length 𝑙𝑝 , when 𝑙𝑝 is set to 3, MGRAG achieves               P0053707, PolyU-Minshang P0057770, PolyU TDG25-28/TBP/11-
+the best performance, which demonstrates that considering paths                IICA.
+with a maximum length of 3 can effectively capture the relevant
+semantic relationships in the knowledge graph without introducing
+excessive noise or computational overhead.
+
+
+
+
+                                                                        2491
+REFERENCES                                                                                            conference on empirical methods in natural language processing.
+ [1] [n.d.]. https://github.com/Wyb0627/MGRAG/blob/main/tech_report.pdf                          [24] Bernal Jiménez Gutiérrez, Yiheng Shu, Yu Gu, Michihiro Yasunaga, and Yu Su.
+ [2] [n.d.]. GitHub - gusye1234/nano-graphrag: A simple, easy-to-hack GraphRAG                        2024. HippoRAG: Neurobiologically Inspired Long-Term Memory for Large
+     implementation — github.com. https://github.com/gusye1234/nano-graphrag.                         Language Models. arXiv preprint arXiv:2405.14831 (2024).
+     [Accessed 17-10-2025].                                                                      [25] Bernal Jiménez Gutiérrez, Yiheng Shu, Weijian Qi, Sizhe Zhou, and Yu Su. 2025.
+ [3] Mohammad Mahdi Abootorabi, Amirhosein Zobeiri, Mahdi Dehghani, Moham-                            From RAG to Memory: Non-Parametric Continual Learning for Large Language
+     madali Mohammadkhani, Bardia Mohammadi, Omid Ghahroodi, Mahdieh Soley-                           Models. Forty-second International Conference on Machine Learning (2025).
+     mani Baghshah, and Ehsaneddin Asgari. 2025. Ask in any modality: A compre-                  [26] Haoyu Han, Yu Wang, Harry Shomer, Kai Guo, Jiayuan Ding, Yongjia Lei, Ma-
+     hensive survey on multimodal retrieval-augmented generation. arXiv preprint                      hantesh Halappanavar, Ryan A Rossi, Subhabrata Mukherjee, Xianfeng Tang,
+     arXiv:2502.08826 (2025).                                                                         et al. 2024. Retrieval-augmented generation with graphs (graphrag). arXiv
+ [4] Josh Achiam, Steven Adler, Sandhini Agarwal, Lama Ahmad, Ilge Akkaya, Floren-                    preprint arXiv:2501.00309 (2024).
+     cia Leoni Aleman, Diogo Almeida, Janko Altenschmidt, Sam Altman, Shyamal                    [27] Maarten Houbraken, Sofie Demeyer, Tom Michoel, Pieter Audenaert, Didier
+     Anadkat, et al. 2023. Gpt-4 technical report. arXiv preprint arXiv:2303.08774                    Colle, and Mario Pickavet. 2014. The Index-based Subgraph Matching Algorithm
+     (2023).                                                                                          with General Symmetries (ISMAGS): exploiting symmetry for faster subgraph
+ [5] Omar Adjali, Olivier Ferret, Sahar Ghannay, and Hervé Le Borgne. 2024. Multi-                    enumeration. PloS one 9, 5 (2014), e97896.
+     level information retrieval augmented generation for knowledge-based visual                 [28] huggingface. 2025. llm-leaderboard. https://huggingface.co/spaces/open-llm-
+     question answering. In Proceedings of the 2024 Conference on Empirical Methods in                leaderboard/open_llm_leaderboard#/
+     Natural Language Processing. Association for Computational Linguistics, 16499–              [29] Gautier Izacard, Mathilde Caron, Lucas Hosseini, Sebastian Riedel, Piotr Bo-
+     16513.                                                                                           janowski, Armand Joulin, and Edouard Grave. [n.d.]. Unsupervised Dense Infor-
+ [6] Shubham Agarwal, Sai Sundaresan, Subrata Mitra, Debabrata Mahapatra, Archit                      mation Retrieval with Contrastive Learning. Transactions on Machine Learning
+     Gupta, Rounak Sharma, Nirmal Joshua Kapu, Tong Yu, and Shiv Saini. 2025.                         Research ([n. d.]).
+     Cache-craft: Managing chunk-caches for efficient retrieval-augmented genera-                [30] Xun Jian, Zhiyuan Li, and Lei Chen. 2023. Suff: Accelerating subgraph matching
+     tion. Proceedings of the ACM on Management of Data 3, 3 (2025), 1–28.                            with historical data. Proceedings of the VLDB Endowment 16, 7 (2023), 1699–1711.
+ [7] Gabor Angeli, Melvin Jose Johnson Premkumar, and Christopher D Manning.                     [31] Huiqiang Jiang, Qianhui Wu, , Xufang Luo, Dongsheng Li, Chin-Yew Lin, Yuqing
+     2015. Leveraging linguistic structure for open domain information extraction. In                 Yang, and Lili Qiu. 2024. LongLLMLingua: Accelerating and Enhancing LLMs
+     Proceedings of the 53rd Annual Meeting of the Association for Computational Lin-                 in Long Context Scenarios via Prompt Compression. In Proceedings of the 62nd
+     guistics and the 7th International Joint Conference on Natural Language Processing               Annual Meeting of the Association for Computational Linguistics (Volume 1: Long
+     (Volume 1: Long Papers). 344–354.                                                                Papers), Lun-Wei Ku, Andre Martins, and Vivek Srikumar (Eds.). Association for
+ [8] Shuai Bai, Keqin Chen, Xuejing Liu, Jialin Wang, Wenbin Ge, Sibo Song, Kai                       Computational Linguistics, Bangkok, Thailand, 1658–1677. https://aclanthology.
+     Dang, Peng Wang, Shijie Wang, Jun Tang, et al. 2025. Qwen2. 5-vl technical                       org/2024.acl-long.91
+     report. arXiv preprint arXiv:2502.13923 (2025).                                             [32] Jinhao Jiang, Kun Zhou, Xin Zhao, and Ji-Rong Wen. 2023. UniKGQA: Unified
+ [9] Yukun Cao, Zengyi Gao, Zhiyang Li, Xike Xie, and S Kevin Zhou. 2025. LEGO-                       Retrieval and Reasoning for Solving Multi-hop Question Answering Over Knowl-
+     GraphRAG: Modularizing Graph-based Retrieval-Augmented Generation for                            edge Graph. In The Eleventh International Conference on Learning Representations.
+     Design Space Exploration. Proceedings of the VLDB Endowment 18 (2025).                      [33] Woosuk Kwon, Zhuohan Li, Siyuan Zhuang, Ying Sheng, Lianmin Zheng,
+[10] Thierry Champion, Luigi De Pascale, and Petri Juutinen. 2008. The inf-                           Cody Hao Yu, Joseph Gonzalez, Hao Zhang, and Ion Stoica. 2023. Efficient
+     Wasserstein Distance: Local Solutions and Existence of Optimal Transport Maps.                   memory management for large language model serving with pagedattention. In
+     SIAM Journal on Mathematical Analysis 40, 1 (2008), 1–20.                                        Proceedings of the 29th symposium on operating systems principles. 611–626.
+[11] Yihua Cheng, Yuhan Liu, Jiayi Yao, Yuwei An, Xiaokun Chen, Shaoting Feng,                   [34] Marius Leordeanu and Martial Hebert. 2005. A spectral technique for correspon-
+     Yuyang Huang, Samuel Shen, Kuntai Du, and Junchen Jiang. 2025. LMCache:                          dence problems using pairwise constraints. In Tenth IEEE International Conference
+     An Efficient KV Cache Layer for Enterprise-Scale LLM Inference. arXiv preprint                   on Computer Vision (ICCV’05) Volume 1, Vol. 2. IEEE, 1482–1489.
+     arXiv:2510.09665 (2025).                                                                    [35] Marius Leordeanu, Martial Hebert, and Rahul Sukthankar. 2009. An integer
+[12] Minsu Cho, Jungmin Lee, and Kyoung Mu Lee. 2010. Reweighted random walks                         projected fixed point method for graph matching and map inference. Advances
+     for graph matching. In European conference on Computer vision. Springer, 492–                    in neural information processing systems 22 (2009).
+     505.                                                                                        [36] Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir
+[13] Luigi P Cordella, Pasquale Foggia, Carlo Sansone, and Mario Vento. 2004. A (sub)                 Karpukhin, Naman Goyal, Heinrich Küttler, Mike Lewis, Wen-tau Yih, Tim Rock-
+     graph isomorphism algorithm for matching large graphs. IEEE transactions on                      täschel, et al. 2020. Retrieval-augmented generation for knowledge-intensive nlp
+     pattern analysis and machine intelligence 26, 10 (2004), 1367–1372.                              tasks. Advances in neural information processing systems 33 (2020), 9459–9474.
+[14] Matthijs Douze, Alexandr Guzhva, Chengqi Deng, Jeff Johnson, Gergely Szilvasy,              [37] Haoyang LI, Yiming Li, Anxin Tian, Tianhao Tang, Zhanchao Xu, Xuejia Chen,
+     Pierre-Emmanuel Mazaré, Maria Lomeli, Lucas Hosseini, and Hervé Jégou. 2024.                     Nicole HU, Wei Dong, Li Qing, and Lei Chen. 2025. A Survey on Large Language
+     The Faiss library. (2024). arXiv:2401.08281 [cs.LG]                                              Model Acceleration based on KV Cache Management. Transactions on Machine
+[15] Darren Edge, Ha Trinh, Newman Cheng, Joshua Bradley, Alex Chao, Apurva                           Learning Research (2025). https://openreview.net/forum?id=z3JZzu9EA3
+     Mody, Steven Truitt, and Jonathan Larson. 2024. From local to global: A graph               [38] Zihao Li. 2023. The dark side of chatgpt: Legal and ethical challenges from
+     rag approach to query-focused summarization. arXiv preprint arXiv:2404.16130                     stochastic parrots and hallucination. arXiv preprint arXiv:2304.14347 (2023).
+     (2024).                                                                                     [39] Chin-Yew Lin. 2004. ROUGE: A Package for Automatic Evaluation of Summaries.
+[16] Shahul Es, Jithin James, Luis Espinosa Anke, and Steven Schockaert. 2024. Ragas:                 In Text Summarization Branches Out. Association for Computational Linguistics,
+     Automated evaluation of retrieval augmented generation. In Proceedings of the                    Barcelona, Spain, 74–81. https://aclanthology.org/W04-1013/
+     18th Conference of the European Chapter of the Association for Computational                [40] Nelson F Liu, Kevin Lin, John Hewitt, Ashwin Paranjape, Michele Bevilacqua,
+     Linguistics: System Demonstrations. 150–158.                                                     Fabio Petroni, and Percy Liang. 2024. Lost in the Middle: How Language Models
+[17] Stefan Fankhauser, Kaspar Riesen, and Horst Bunke. 2011. Speeding up graph edit                  Use Long Contexts. Transactions of the Association for Computational Linguistics
+     distance computation through fast bipartite matching. In International Workshop                  11 (2024), 157–173.
+     on Graph-Based Representations in Pattern Recognition. Springer, 102–111.                   [41] Yuhan Liu, Hanchen Li, Yihua Cheng, Siddhant Ray, Yuyang Huang, Qizheng
+[18] Sebastian Farquhar, Jannik Kossen, Lorenz Kuhn, and Yarin Gal. 2024. Detecting                   Zhang, Kuntai Du, Jiayi Yao, Shan Lu, Ganesh Ananthanarayanan, et al. 2024.
+     hallucinations in large language models using semantic entropy. Nature 630,                      Cachegen: Kv cache compression and streaming for fast large language model
+     8017 (2024), 625–630.                                                                            serving. In Proceedings of the ACM SIGCOMM 2024 Conference. 38–56.
+[19] Sensen Gao, Shanshan Zhao, Xu Jiang, Lunhao Duan, Yong Xien Chng, Qing-                     [42] Pan Lu, Baolin Peng, Hao Cheng, Michel Galley, Kai-Wei Chang, Ying Nian Wu,
+     Guo Chen, Weihua Luo, Kaifu Zhang, Jia-Wang Bian, and Mingming Gong.                             Song-Chun Zhu, and Jianfeng Gao. 2023. Chameleon: Plug-and-play composi-
+     2025. Scaling Beyond Context: A Survey of Multimodal Retrieval-Augmented                         tional reasoning with large language models. Advances in Neural Information
+     Generation for Document Understanding. arXiv:2510.15253 [cs.CL] https:                           Processing Systems 36 (2023), 43447–43478.
+     //arxiv.org/abs/2510.15253                                                                  [43] Zhuoshi Pan, Qianhui Wu, Huiqiang Jiang, Menglin Xia, Xufang Luo, Jue Zhang,
+[20] Yunfan Gao, Yun Xiong, Xinyu Gao, Kangxiang Jia, Jinliu Pan, Yuxi Bi, Yi Dai, Ji-                Qingwei Lin, Victor Ruhle, Yuqing Yang, Chin-Yew Lin, H. Vicky Zhao, Lili
+     awei Sun, Meng Wang, and Haofen Wang. 2023. Retrieval-augmented generation                       Qiu, and Dongmei Zhang. 2024. LLMLingua-2: Data Distillation for Efficient
+     for large language models: A survey. arXiv preprint arXiv:2312.10997 (2023).                     and Faithful Task-Agnostic Prompt Compression. In Proceedings of the 62nd
+[21] M.R. Garey and D.S. Johnson. 1979. Computers and Intractability: A Guide to the                  Annual Meeting of the Association for Computational Linguistics (Volume 1: Long
+     Theory of NP-Completeness. W.H. Freeman.                                                         Papers), Lun-Wei Ku, Andre Martins, and Vivek Srikumar (Eds.). Association for
+[22] Ankush Gola. 2024. Multi-modal rag on Slide Decks. https://blog.langchain.                       Computational Linguistics, Bangkok, Thailand, 963–981. https://aclanthology.
+     com/multi-modal-rag-template/                                                                    org/2024.findings-acl.57
+[23] Zirui Guo, Lianghao Xia, Yanhua Yu, Tu Ao, and Chao Huang. 2025. LightRAG:                  [44] Kishore Papineni, Salim Roukos, Todd Ward, and Wei-Jing Zhu. 2002. Bleu: a
+     Simple and Fast Retrieval-Augmented Generation. In Proceedings of the 2025                       method for automatic evaluation of machine translation. In Proceedings of the
+
+
+
+
+                                                                                          2492
+     40th annual meeting of the Association for Computational Linguistics. 311–318.                  arXiv:2309.07597 [cs.CL]
+[45] Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sand-              [58] Mingji Yang, Hanzhi Wang, Zhewei Wei, Sibo Wang, and Ji-Rong Wen. 2024.
+     hini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, et al.                  Efficient algorithms for personalized pagerank computation: A survey. IEEE
+     2021. Learning transferable visual models from natural language supervision. In                 Transactions on Knowledge and Data Engineering 36, 9 (2024), 4582–4602.
+     International conference on machine learning. PmLR, 8748–8763.                             [59] Jiayi Yao, Hanchen Li, Yuhan Liu, Siddhant Ray, Yihua Cheng, Qizheng Zhang,
+[46] Ritesh Sarkhel and Arnab Nandi. 2019. Visual segmentation for information                       Kuntai Du, Shan Lu, and Junchen Jiang. 2025. CacheBlend: Fast large language
+     extraction from heterogeneous visually rich documents. In Proceedings of the                    model serving for RAG with cached knowledge fusion. In Proceedings of the
+     2019 international conference on management of data. 247–262.                                   Twentieth European Conference on Computer Systems. 94–109.
+[47] Ritesh Sarkhel and Arnab Nandi. 2021. Improving information extraction from                [60] Qinhan Yu, Zhiyou Xiao, Binghui Li, Zhengren Wang, Chong Chen, and Wentao
+     visually rich documents using visual span representations. Proceedings of the                   Zhang. 2025. MRAMG-Bench: A Comprehensive Benchmark for Advancing Mul-
+     VLDB Endowment 14, 5 (2021).                                                                    timodal Retrieval-Augmented Multimodal Generation. In Proceedings of the 48th
+[48] Huatong Song, Jinhao Jiang, Yingqian Min, Jie Chen, Zhipeng Chen, Wayne Xin                     International ACM SIGIR Conference on Research and Development in Information
+     Zhao, Lei Fang, and Ji-Rong Wen. 2025. R1-searcher: Incentivizing the search                    Retrieval. 3616–3626.
+     capability in llms via reinforcement learning. arXiv preprint arXiv:2503.05592             [61] Xu Yuan, Liangbo Ning, Wenqi Fan, and Qing Li. 2025. mKG-RAG: Multimodal
+     (2025).                                                                                         Knowledge Graph-Enhanced RAG for Visual Question Answering. arXiv preprint
+[49] Jun Song, Jingyi Ding, Irshad Kandy, Yanghao Lin, Zhongjia Wei, Zilong Zhou,                    arXiv:2508.05318 (2025).
+     Zhiwei Peng, Jixi Shan, Hongyue Mao, Xiuqi Huang, et al. 2025. Magnus: A Holis-            [62] Haoyu Zhang, Jun Liu, Zhenhua Zhu, Shulin Zeng, Maojia Sheng, Tao Yang,
+     tic Approach to Data Management for Large-Scale Machine Learning Workloads.                     Guohao Dai, and Yu Wang. 2024. Efficient and effective retrieval of dense-sparse
+     Proceedings of the VLDB Endowment 18, 12 (2025), 4964–4977.                                     hybrid vectors using graph-based approximate nearest neighbor search. arXiv
+[50] Alon Talmor, Ori Yoran, Amnon Catav, Dan Lahav, Yizhong Wang, Akari Asai,                       preprint arXiv:2410.20381 (2024).
+     Gabriel Ilharco, Hannaneh Hajishirzi, and Jonathan Berant. 2021. Multimodalqa:             [63] Qinggang Zhang, Shengyuan Chen, Yuanchen Bei, Zheng Yuan, Huachi Zhou,
+     Complex question answering over text, tables and images. International Confer-                  Zijin Hong, Junnan Dong, Hao Chen, Yi Chang, and Xiao Huang. 2025. A survey
+     ence on Learning Representations (2021).                                                        of graph retrieval-augmented generation for customized large language models.
+[51] Jianheng Tang, Weiqi Zhang, Jiajin Li, Kangfei Zhao, Fugee Tsung, and Jia Li.                   arXiv preprint arXiv:2501.13958 (2025).
+     2023. Robust attributed graph alignment via joint structure learning and optimal           [64] Tao Zhang, Ziqi Zhang, Zongyang Ma, Yuxin Chen, Zhongang Qi, Chunfeng
+     transport. In 2023 IEEE 39th International Conference on Data Engineering (ICDE).               Yuan, Bing Li, Junfu Pu, Yuxuan Zhao, Zehua Xie, et al. 2024. m𝑅 2 AG: Multimodal
+     IEEE, 1638–1651.                                                                                Retrieval-Reflection-Augmented Generation for Knowledge-Based VQA. arXiv
+[52] Jianheng Tang, Xi Zhao, Lemin Kong, Xiaofang Zhou, and Jia Li. 2025. Fused                      preprint arXiv:2411.15041 (2024).
+     Gromov-Wasserstein Alignment for Graph Edit Distance Computation and Be-                   [65] Yue Zhang, Yafu Li, Leyang Cui, Deng Cai, Lemao Liu, Tingchen Fu, Xinting
+     yond. Proceedings of the VLDB Endowment 18, 10 (2025), 3641–3654.                               Huang, Enbo Zhao, Yu Zhang, Yulong Chen, et al. 2023. Siren’s song in the
+[53] Matthias Urban and Carsten Binnig. 2024. Eleet: Efficient learned query execution               AI ocean: a survey on hallucination in large language models. arXiv preprint
+     over text and tables. Proceedings of the VLDB Endowment 17, 13 (2024), 4867–4880.               arXiv:2309.01219 (2023).
+[54] Mengzhao Wang, Xiangyu Ke, Xiaoliang Xu, Lu Chen, Yunjun Gao, Pinpin Huang,                [66] Zhijie Zhang, Yujie Lu, Weiguo Zheng, and Xuemin Lin. 2024. A comprehensive
+     and Runkai Zhu. 2024. Must: An effective and scalable framework for multimodal                  survey and experimental study of subgraph matching: trends, unbiasedness, and
+     search of target modality. In 2024 IEEE 40th International Conference on Data                   interaction. Proceedings of the ACM on Management of Data 2, 1 (2024), 1–29.
+     Engineering (ICDE). IEEE, 4747–4759.                                                       [67] Ruochen Zhao, Hailin Chen, Weishi Wang, Fangkai Jiao, Do Xuan Long, Cheng-
+[55] Mengzhao Wang, Haotian Wu, Xiangyu Ke, Yunjun Gao, Xiaoliang Xu, and Lu                         wei Qin, Bosheng Ding, Xiaobao Guo, Minzhi Li, Xingxuan Li, et al. [n.d.].
+     Chen. 2024. An Interactive Multi-Modal Query Answering System with Retrieval-                   Retrieving Multimodal Information for Augmented Generation: A Survey. In The
+     Augmented Large Language Models. Proceedings of the VLDB Endowment 17, 12                       2023 Conference on Empirical Methods in Natural Language Processing.
+     (2024), 4333–4336.                                                                         [68] Lianmin Zheng, Liangsheng Yin, Zhiqiang Xie, Chuyue Livia Sun, Jeff Huang,
+[56] Yubo Wang, Haoyang Li, Fei Teng, and Lei Chen. 2026. AGRAG: Advanced Graph-                     Cody Hao Yu, Shiyi Cao, Christos Kozyrakis, Ion Stoica, Joseph E Gonzalez,
+     based Retrieval-Augmented Generation for LLMs. 2026 IEEE 42nd International                     et al. 2024. Sglang: Efficient execution of structured language model programs.
+     Conference on Data Engineering (ICDE) (2026).                                                   Advances in neural information processing systems 37 (2024), 62557–62583.
+[57] Shitao Xiao, Zheng Liu, Peitian Zhang, and Niklas Muennighoff. 2023.
+     C-Pack: Packaged Resources To Advance General Chinese Embedding.
+
+
+
+
+                                                                                         2493
+

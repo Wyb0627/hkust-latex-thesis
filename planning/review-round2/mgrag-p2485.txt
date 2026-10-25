@@ -1,0 +1,107 @@
+ Query: The Irandhir Santos film whose poster has people doing martial arts was                           Algorithm 1: Path-based Semantic Subgraph Matching
+        released in what year?
+             : Pseudo Relation                       : Placeholder Entity                                   Input: Query graph QG𝑞 ( V̂𝑞 , Ê𝑞 ), anchor entity 𝛾 ∈ V̂𝑞 ,
+     Query Graph                                                                                                   multimodal KG KG𝑞 (V𝑞 , E𝑞 ), threshold 𝜃
+                          Has              Has                Has            Do                             Output: Highest-scoring matched subgraph 𝑟 ⊆ KG𝑞 or ∅
+     Irandhir Santos                Film            Poster          Person        Martial Arts
+                                      Release in                                                          1 R ← ∅;
+                                    Year                                                                                                   → −
+                                                                                                                                           −   →
+                                                                                                          2 for each 𝑣 ∈ V𝑞 with cos( h 𝑣 , h 𝛾 ) > 𝜃 do
+
+     Knowledge Graph                                                                                      3     I ← SubgraphIsomorphism(QG𝑞 , KG𝑞 , 𝑣);
+      Irandhir Santos acts in
+                                            On Top
+                                                                                                          4     for each mapping 𝐼 ∈ I do
+      The Assailant …                                                                  Martial
+                                                                                      Arts Kick           5         valid ← true, 𝑠 ← 0;
+                                                    Display
+                                                                                           Do
+      Irandhir Santos
+                           Act in
+                                      The Assailant
+                                                                                                          6         Vsub ← {𝐼 (𝑥) | 𝑥 ∈ V̂𝑞 };
+                                                                                       Mid Air
+       Act in                                    Release in                                 In
+                                                                                                          7         Esub ← ∅;
+                        Release in
+          Blue Eyes                        2009                                         Man               8         for each 𝑒ˆ (𝑢, ˆ𝑟, 𝑣) ∈ Ê𝑞 do
+                                                                                                          9             (found, 𝑃) ← GreedyPathSearch(𝐼 (𝑢), 𝐼 (𝑣),
+                                                                                                                         →−
+                                                                                                                          h 𝑒 (𝑢,𝑟,𝑣) , KG𝑞 , 𝜃 );
+Figure 3: An example of our path-based semantic subgraph
+matching. The blue edges denote pseudo relations that con-                                               10             if not found then
+nect multimodal chunks (passage nodes) to entities extracted                                             11                  valid ← false;
+from them. The blue boxes denote placeholder entities, rep-                                              12                  break;
+resenting unknown query knowledge.                                                                                                       → −
+                                                                                                                                         −   →
+                                                                                                         13             𝑠 ← 𝑠 + cos( h 𝑃 , h 𝑒 (𝑢,𝑟,𝑣) );
+                                                                                                         14             Esub ← Esub ∪ {𝑒 ∈ 𝑃 };
+        →
+        −                                                    ⨁︁                                          15             Vsub ← Vsub ∪ {nodes in 𝑃 };
+where h 𝑟 𝑗 is the semantic embedding of relation 𝑟 𝑗 , and      is a
+customized aggregation function, such as mean pooling.                                                   16          if valid then
+   After the graph construction or enrichment in each iteration, a                                       17              𝑠 ← 𝑠/| Ê𝑞 |;
+straightforward approach is to apply a graph matching algorithm                                          18              Λ ← (Vsub, Esub );
+based on each node/relation’s pairwise semantic similarity. Con-                                         19              R ← R ∪ {(Λ, 𝑠)};
+cretely, given the query graph QG𝑞 , if a matched subgraph can
+be identified in KG𝑞 , we consider the available knowledge to be                                         20   return top-scoring subgraph 𝑟 ∈ R, or ∅ if R = ∅;
+sufficient, terminate the iterative graph construction, and return
+the matched subgraph as the graph context to aid LLM query an-                                              Theorem 1. The Path-based Semantic Subgraph Matching Prob-
+swering. However, this matching process faces two main challenges.                                       lem is NP-hard.
+First, as shown in Figure 3, semantically equivalent subgraphs may
+differ in topology, resulting in a semantic-structural mismatch that
+                                                                                                            Proof Sketch. We establish NP-hardness through a polynomial-
+standard graph matching cannot resolve. Second, since MGRAG
+                                                                                                         time reduction from the Subgraph Isomorphism problem by con-
+constructs a query-specific KG for each query, it is impractical to
+                                                                                                         structing an instance with uniform embedding vectors and unit
+train a dedicated subgraph matching model for every KG. This
+                                                                                                         path lengths. Due to the space limitation, we put our proof in our
+limits the applicability of existing methods [30, 32, 66] in our set-
+                                                                                                         technical report [1].                                           □
+ting. To address both challenges, we formulate this problem as the
+Path-based Semantic Subgraph Matching Problem.
+                                                                                                            Since this problem is NP-hard, it is infeasible to obtain the op-
+   Definition 2 (Path-based Semantic Subgraph Matching                                                   timal result in polynomial time. Therefore, to solve this problem,
+Problem). Given a query graph QG𝑞 ( V̂𝑞 , Ê𝑞 ), a multimodal KG                                         we propose an efficient greedy algorithm based on semantic path
+KG𝑞 (V𝑞 , E𝑞 ), and a similarity threshold 𝜃 ∈ [0, 1], the Path-based                                    growing and subgraph isomorphism enumeration, as shown in
+Semantic Subgraph Matching Problem is to find an optimal matched                                         Algorithm 1, which can find a subgraph within the multimodal
+subgraph SG(V𝑞 , E𝑞 ) ⊆ KG𝑞 , induced by a mapping 𝐼 : V̂𝑞 → V𝑞 ,                                        KG that semantically matches the query graph, but not necessarily
+to maximize the overall similarity:                                                                      identical in graph topology. Given a query graph QG𝑞 , we first
+                                                   (︂−
+                                                    → −  → )︂
+                         ∑︂                                                                              select its anchor entity 𝛾 to the multimodal KG KG𝑞 , specifically,
+    max Sim(SG) =                     max      cos h 𝑟 , h 𝑃      (10)
+                                                    𝑃 ∈ P (𝐼 (𝑢 ),𝐼 (𝑣) )                                we compute the pairwise cosine similarities between the embed-
+                                𝑒 (𝑢, 𝑟, 𝑣) ∈ Ê𝑞
+                                                                                                         dings of all entities in QG𝑞 and KG𝑞 , and select the pair (𝛾, 𝑣) with
+           (︂−
+            → −    → )︂                   (︂−
+                                           → −     → )︂
+     ⎧
+       cos   h   , h           >  𝜃, cos    h   ,    h 𝐼 (𝑣) > 𝜃, ∀𝑢, 𝑣 ∈ V̂𝑞                            the highest similarity, where 𝛾 ∈ V̂𝑞 and 𝑣 ∈ V𝑞 . If the algorithm
+                        (𝑢 )
+     ⎪
+     ⎪         𝑢      𝐼                       𝑣
+     ⎨
+     ⎪                                                                                                   cannot find a valid match starting with 𝛾, it will try other anchor
+s.t.
+                                      → −
+                                     (︂ −   →     )︂
+                                                                                                         entities until a valid match is found. After that, we consider 𝛾 as
+     ⎪ max𝑃 ∈ P (𝐼 (𝑢 ),𝐼 (𝑣) ) cos h 𝑟 , h 𝑃 > 𝜃,                ∀ 𝑒 (𝑢, 𝑟, 𝑣) ∈ Ê𝑞
+     ⎪
+     ⎪
+     ⎩                                                                                                   the anchor entity in the query graph and 𝑣 as its candidate match
+        →
+        −                                                                                                entity in the multimodal KG, and calculate the Path-based Subgraph
+where h 𝑃 is the aggregated path embedding for 𝑃 ∈ P (𝐼 (𝑢), 𝐼 (𝑣))
+as defined in Equation (9). If no such subgraph exists, return ∅.                                        Isomorphism. In this paper, we substitute the VF2 [13] algorithm’s
+                                                                                                         exact matching mechanism with similarity-based matching. This
+
+
+
+
+                                                                                                  2485
+

@@ -1,0 +1,1121 @@
+{
+  "status": "SUPERSEDED",
+  "reason": "Preliminary row extraction; use agrag-cell-ledger.json and the independent local-complete PDF 652-cell check in verification-agrag.md.",
+  "original_records": [
+    {
+      "target": "main-creative",
+      "row": "NaiveRAG",
+      "numeric_cells": 6,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-creative",
+      "row": "L.LLMLingua",
+      "numeric_cells": 6,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-creative",
+      "row": "RAPTOR",
+      "numeric_cells": 6,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-creative",
+      "row": "SiReRAG",
+      "numeric_cells": 6,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-creative",
+      "row": "G-retriever",
+      "numeric_cells": 6,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-creative",
+      "row": "MIXRAG",
+      "numeric_cells": 6,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-creative",
+      "row": "GraphRAG",
+      "numeric_cells": 6,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-creative",
+      "row": "LightRAG",
+      "numeric_cells": 6,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-creative",
+      "row": "HippoRAG2",
+      "numeric_cells": 6,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-creative",
+      "row": "F.GraphRAG",
+      "numeric_cells": 6,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-creative",
+      "row": "AGRAG",
+      "numeric_cells": 6,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-summary",
+      "row": "NaiveRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-summary",
+      "row": "L.LLMLingua",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-summary",
+      "row": "RAPTOR",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-summary",
+      "row": "SiReRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-summary",
+      "row": "G-retriever",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-summary",
+      "row": "MIXRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-summary",
+      "row": "GraphRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-summary",
+      "row": "LightRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-summary",
+      "row": "HippoRAG2",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-summary",
+      "row": "F.GraphRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-summary",
+      "row": "AGRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-complex",
+      "row": "NaiveRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-complex",
+      "row": "L.LLMLingua",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-complex",
+      "row": "RAPTOR",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-complex",
+      "row": "SiReRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-complex",
+      "row": "G-retriever",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-complex",
+      "row": "MIXRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-complex",
+      "row": "GraphRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-complex",
+      "row": "LightRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-complex",
+      "row": "HippoRAG2",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-complex",
+      "row": "F.GraphRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-complex",
+      "row": "AGRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-fact",
+      "row": "NaiveRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-fact",
+      "row": "L.LLMLingua",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-fact",
+      "row": "RAPTOR",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-fact",
+      "row": "SiReRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-fact",
+      "row": "G-retriever",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-fact",
+      "row": "MIXRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-fact",
+      "row": "GraphRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-fact",
+      "row": "LightRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-fact",
+      "row": "HippoRAG2",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-fact",
+      "row": "F.GraphRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-fact",
+      "row": "AGRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-class",
+      "row": "NaiveRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-class",
+      "row": "L.LLMLingua",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-class",
+      "row": "RAPTOR",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-class",
+      "row": "SiReRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-class",
+      "row": "G-retriever",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-class",
+      "row": "MIXRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-class",
+      "row": "GraphRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-class",
+      "row": "LightRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-class",
+      "row": "HippoRAG2",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-class",
+      "row": "F.GraphRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "main-class",
+      "row": "AGRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "efficiency",
+      "row": "NaiveRAG",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "efficiency",
+      "row": "L.LLMLingua",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "efficiency",
+      "row": "RAPTOR",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "efficiency",
+      "row": "SiReRAG",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "efficiency",
+      "row": "G-Retriever",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "efficiency",
+      "row": "MIXRAG",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "efficiency",
+      "row": "GraphRAG",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "efficiency",
+      "row": "LightRAG",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "efficiency",
+      "row": "HippoRAG2",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "efficiency",
+      "row": "F.GraphRAG",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "efficiency",
+      "row": "AGRAG",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "efficiency-tokens",
+      "row": "NaiveRAG",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "efficiency-tokens",
+      "row": "L.LLMLingua",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "efficiency-tokens",
+      "row": "RAPTOR",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "efficiency-tokens",
+      "row": "SiReRAG",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "efficiency-tokens",
+      "row": "G-Retriever",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "efficiency-tokens",
+      "row": "MIXRAG",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "efficiency-tokens",
+      "row": "GraphRAG",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "efficiency-tokens",
+      "row": "LightRAG",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "efficiency-tokens",
+      "row": "HippoRAG2",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "efficiency-tokens",
+      "row": "F.GraphRAG",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "efficiency-tokens",
+      "row": "AGRAG",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "ablation",
+      "row": "AGRAG w. HR Only",
+      "numeric_cells": 6,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation",
+      "row": "AGRAG w. LLM ER",
+      "numeric_cells": 6,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation",
+      "row": "AGRAG w.o. HR",
+      "numeric_cells": 6,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation",
+      "row": "AGRAG w.o. MCMI",
+      "numeric_cells": 6,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation",
+      "row": "AGRAG w.o. Cle.",
+      "numeric_cells": 6,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation",
+      "row": "AGRAG",
+      "numeric_cells": 6,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation-summary",
+      "row": "AGRAG w. HR Only",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation-summary",
+      "row": "AGRAG w. LLM ER",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation-summary",
+      "row": "AGRAG w.o. HR",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation-summary",
+      "row": "AGRAG w.o. MCMI",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation-summary",
+      "row": "AGRAG w.o. Cle.",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation-summary",
+      "row": "AGRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation-complex",
+      "row": "AGRAG w. HR Only",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation-complex",
+      "row": "AGRAG w. LLM ER",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation-complex",
+      "row": "AGRAG w.o. HR",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation-complex",
+      "row": "AGRAG w.o. MCMI",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation-complex",
+      "row": "AGRAG w.o. Cle.",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation-complex",
+      "row": "AGRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation-fact",
+      "row": "AGRAG w. HR Only",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation-fact",
+      "row": "AGRAG w. LLM ER",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation-fact",
+      "row": "AGRAG w.o. HR",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation-fact",
+      "row": "AGRAG w.o. MCMI",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation-fact",
+      "row": "AGRAG w.o. Cle.",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation-fact",
+      "row": "AGRAG",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "ablation-cost",
+      "row": "AGRAG w. HR Only",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "ablation-cost",
+      "row": "AGRAG w. LLM ER",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "ablation-cost",
+      "row": "AGRAG w.o. HR",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "ablation-cost",
+      "row": "AGRAG w.o. MCMI",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "ablation-cost",
+      "row": "AGRAG w.o. Cle.",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "ablation-cost",
+      "row": "AGRAG",
+      "numeric_cells": 8,
+      "ordered_numeric_row_found_in": [],
+      "status": "NEEDS_MANUAL_ROW_CHECK"
+    },
+    {
+      "target": "low-resource",
+      "row": "SiReRAG-L",
+      "numeric_cells": 6,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "low-resource",
+      "row": "HippoRAG2-L",
+      "numeric_cells": 6,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "low-resource",
+      "row": "AGRAG-L",
+      "numeric_cells": 6,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "low-resource-summary",
+      "row": "SiReRAG-L",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "low-resource-summary",
+      "row": "HippoRAG2-L",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "low-resource-summary",
+      "row": "AGRAG-L",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "low-resource-complex",
+      "row": "SiReRAG-L",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "low-resource-complex",
+      "row": "HippoRAG2-L",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "low-resource-complex",
+      "row": "AGRAG-L",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "low-resource-fact",
+      "row": "SiReRAG-L",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "low-resource-fact",
+      "row": "HippoRAG2-L",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "low-resource-fact",
+      "row": "AGRAG-L",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "low-resource-efficiency",
+      "row": "SiReRAG-L",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "low-resource-efficiency",
+      "row": "HippoRAG2-L",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "low-resource-efficiency",
+      "row": "AGRAG-L",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "low-resource-efficiency-medical",
+      "row": "SiReRAG-L",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "low-resource-efficiency-medical",
+      "row": "HippoRAG2-L",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "target": "low-resource-efficiency-medical",
+      "row": "AGRAG-L",
+      "numeric_cells": 4,
+      "ordered_numeric_row_found_in": [
+        "local ICDE2026.pdf",
+        "author-confirmed arXiv"
+      ],
+      "status": "MATCH"
+    }
+  ]
+}

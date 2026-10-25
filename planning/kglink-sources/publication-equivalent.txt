@@ -1,0 +1,962 @@
+                                             KGLink: A column type annotation method that
+                                               combines knowledge graph and pre-trained
+                                                           language model
+                                                           1st Yubo Wang                            2nd Hao Xin                             3rd Lei Chen
+                                                             HKUST                                    HKUST                            HKUST(GZ) & HKUST
+                                                        Hong Kong, China                         Hong Kong, China                       Guangzhou, China
+                                                        ywangnx@cse.ust.hk                       hxinaa@cse.ust.hk                      leichen@cse.ust.hk
+
+
+
+
+arXiv:2406.00318v1 [cs.LG] 1 Jun 2024
+                                           Abstract—The semantic annotation of tabular data plays a             not all of those types are necessarily the ones we desire. As
+                                        crucial role in various downstream tasks. Previous research             illustrated in Figure 2(a), KG-based methods might generate
+                                        has proposed knowledge graph (KG)-based and deep learning-              candidate types such as Athlete or Basketball player, which
+                                        based methods, each with its inherent limitations. KG-based
+                                        methods encounter difficulties annotating columns when there            possess closely related and semantically correct meanings with
+                                        is no match for column cells in the KG. Moreover, KG-based              a finer granularity than the ground truth type Name. Despite
+                                        methods can provide multiple predictions for one column, making         their relevance, these candidate types do not directly contribute
+                                        it challenging to determine the semantic type with the most             to the prediction because they do not match the expected
+                                        suitable granularity for the dataset. This type granularity issue       Name, which does not even exist in the type hierarchy of types
+                                        limits their scalability.
+                                           On the other hand, deep learning-based methods face chal-            Athlete or Basketball player. We refer to this misalignment in
+                                        lenges related to the valuable context missing issue. This occurs       type granularity as the ‘type granularity gap’. This gap does
+                                        when the information within the table is insufficient for deter-        not only impacts model performance but also constrains the
+                                        mining the correct column type.                                         scalability of purely KG-based methods, necessitating a way
+                                           This paper presents KGLink, a method that combines Wiki-             to enhance the contribution of correct candidate types with
+                                        Data KG information with a pre-trained deep learning language
+                                        model for table column annotation, effectively addressing both          similar semantic meanings to the ground truth type. Secondly,
+                                        type granularity and valuable context missing issues. Through           KG-based methods face challenges in making predictions
+                                        comprehensive experiments on widely used tabular datasets               when they cannot find relevant information for columns in
+                                        encompassing numeric and string columns with varying type               the KG, particularly for numeric columns, since they are
+                                        granularity, we showcase the effectiveness and efficiency of            unsuitable to be linked to the KG.
+                                        KGLink. By leveraging the strengths of KGLink, we successfully
+                                        surmount challenges related to type granularity and valuable               To enhance scalability, various deep learning-based methods
+                                        context issues, establishing it as a robust solution for the semantic   have been proposed, including TaBERT [19] and Doduo [27].
+                                        annotation of tabular data.                                             These methods generate representation vectors for columns
+                                           Index Terms—knowledge graph, column type annotation, data            during training, showcasing improved scalability. Neverthe-
+                                        mining.                                                                 less, they grapple with valuable context missing issues. This
+                                                                                                                implies that the input table often lacks sufficient semantic
+                                                               I. I NTRODUCTION                                 information related to the predicted column type of the dataset.
+                                           Table column annotation is a crucial task, and many com-             In Figure 2(b), for example, the target column (predicted col-
+                                        panies develop commercial systems like Google Data Studio               umn) lacks essential context information, such as Sports Teams
+                                        [23], Microsoft Power BI [24], and Tableau [25], to understand          or Position in Team, which is crucial for accurately identifying
+                                        tables and perform downstream tasks such as data visualiza-             the column type as Cricketer. Notably, neither Birth Date nor
+                                        tion. Current column-type annotation methods can be catego-             Death Date is helpful for the deep learning model prediction.
+                                        rized into three main groups: knowledge graph (KG)-based                Conversely, although pre-trained language model (PLM)-based
+                                        methods, deep learning-based methods, and hybrid methods.               methods, such as Doduo [27], achieve decent performance in
+                                           The most recent KG-based method is MTab [1], which                   the column annotation task, the PLMs’ input sequence length
+                                        leverages information from KGs such as WikiData [37]                    limitations could impede their scalability, especially on tables
+                                        and DBpedia [38]. These methods typically rely on rules                 with numerous rows or columns.
+                                        or statistic-based techniques like TF-IDF (Term Frequency-                 Given the drawbacks of solely KG-based models and solely
+                                        Inverse Document Frequency) and heavily depend on the                   deep learning-based models, researchers have explored hybrid
+                                        relatedness between the table and the KG. Firstly, in real-             models. Some existing hybrids, like ColNet [20] and its more
+                                        world scenarios, there are usually numerous suitable types in           generalized version HNN [6], aim to integrate KG informa-
+                                        KG with different type granularity for a certain column, but            tion with deep learning models. However, as illustrated in
+  Label: Cricketer            Type                                               Firstly, the KGLink process involves searching for mentions
+                                                          Cricketer
+                                                                              of table cells in the external KG, then retrieving and filtering
+        ???                Occupation                                         entities based on the table structure to retain the best-matched
+   W. Blackburn               Sport                                           entities. Subsequently, to avoid a situation where the filter
+                                                             Human
+                                                                              excludes all information from KG, we generate a feature vector
+     W. Birkett               Type
+                                                                              for each column using KG information. These vectors serve
+     W. Birch                                             Cricket             as supplementary context information, addressing the valuable
+                           Occupation
+                                                                              context missing issue illustrated in 2(b).
+                             Type                    Knowledge graph
+                                                                                 Secondly, to identify the best type align with the entity,
+                             Sport                                            we propose a candidate type representation generation task. It
+                                                                              aims to leverage the generalization ability of PLM and thereby
+Fig. 1. An example from the SemTab dataset, if we only consider the type      resolving the type granularity issue depicted in 2(a).
+attribute, we would only obtain Human as the candidate type from the KG.
+This approach would overlook Cricketer and Cricket, which offer a finer
+                                                                                 Lastly, we introduce the row linking score for filtering rows
+granularity than Human and also provide valuable information for the column   based on their linkage quality. This measure aims to reduce
+type annotation task.                                                         the size of the tables fed to PLMs while preserving prediction
+                                                                              effectiveness.
+Figure 1, these models employ overly simplistic strategies in                    Furthermore, even for columns whose cells have no linkage
+selecting information from the KG and often fall short of fully               with KG, such as numeric columns, our model can still provide
+leveraging table structure and KG information. Firstly, HNN                   reasonable predictions due to the prior knowledge from the
+generates column embeddings solely based on the entity type                   PLM.
+from a single cell in that column, disregarding interactions                  Our contributions are summarized as follows:
+among columns and rows and neglecting crucial table structure
+                                                                                 • We proposed KGLink, a method for the column-type
+information. Secondly, when selecting types for entities, HNN
+                                                                                    prediction task that effectively combines KG information
+only considers types that belong to the KG-provided type
+                                                                                    with prior knowledge from a pre-trained language model
+attribute of entities. This approach would sometimes exclude
+                                                                                    (PLM). This approach addresses the type granularity issue
+the desired types, as those types may not appear in the type
+                                                                                    in KG-based methods and the valuable context missing
+attributes. The heavy reliance on the quality of a single cell’s
+                                                                                    issue in deep learning methods.
+linkage could easily introduce noise, and depending solely
+                                                                                 • We introduced an overlapping score to filter out KG-
+on KG-provided types could cause the model to overlook
+                                                                                    retrieved entities based on the table structure. Addition-
+many other valuable pieces of information in the KG. These
+                                                                                    ally, we utilized a feature vector generated from KG-
+factors could adversely impact the model’s performance and
+                                                                                    retrieved information to ensure that some information
+generalization abilities. (see subsection III-A).
+                                                                                    remains after the filtering process.
+   The examples provided above indicate that effectively in-
+                                                                                 • We introduced the candidate-type representation gener-
+tegrating complex KG information into deep learning-based
+                                                                                    ation task as a sub-task to further address the type
+models is a future research direction that still presents persis-
+                                                                                    granularity issue and improve model performance (Please
+tent challenges and is worth exploring.
+                                                                                    refer to subsection III-B for details).
+   Firstly, calling back numerous KG entities for one cell in                    • We have made the code of our model available on
+the table may not always be helpful, as some incorrect or                           GitHub1 , along with the modified VizNet [35] and
+missing entity linkages in the KG can negatively affect the                         SemTab [34] datasets, where entities have been linked
+model prediction.                                                                   to the WikiData [37] KG.
+   Secondly, even if the true entity of one cell is retrieved,
+identifying the type that best aligns with the semantic meaning                                      II. R ELATED W ORK
+of a dataset is challenging, as these types may not be readily                   As discussed in the previous section, column-type annota-
+associated with the type attribute of the retrieved entities.                 tion methods can be broadly categorized into two main types:
+   Lastly, the scalability of PLM-based models remains ques-                  Knowledge graph based methods: These methods, such as
+tionable on large tables due to input sequence length limits.                 MTab [1], ADOG [21], and JenTab [22], aim to establish
+The incorporation of additional KG information in the input                   connections between table cells and external knowledge graphs
+sequence of PLMs could exacerbate this problem, requiring                     (KGs). They utilize rule-based or statistic-based filters to en-
+an approach to reduce the size of the tables fed to PLMs.                     hance linking accuracy. While some methods perform well on
+   To overcome these challenges, we introduce KGLink, an                      KG-extracted datasets with exact entity matches, others use the
+approach that integrates KG information with deep learning                    KG as an external information source without requiring exact
+models for column type annotation. In the KGLink process,                     matches. For example, Khurana et al. proposed C 2 [36], which
+tables are serialized, and the PLM utilizes both KG infor-                    integrates multiple KGs such as Wikidata and DBpedia to
+mation and the serialized table to generate encodings for the                 form the data lake. It employs maximum likelihood estimation
+table and feature vectors. This enhances the overall prediction
+process.                                                                        1 https://github.com/Wyb0627/KBLink
+                                                                                       Label: Cricketer
+
+                           Label: Name
+                                                                                             ???          Birth Date     Death Date
+
+                                ???                      Basketball                     W. Blackburn      1888-11-24      1941/6/3
+                                                          player
+                                                                                          W. Birkett      1874-2-27       1934/5/2
+                             L. James
+                                                                                           W. Birch       1863-02-10     1940/12/11
+                           R. Westbrook                   Athlete
+
+                             A. Davis                Knowledge graph                        Col 1           Col 2          Col 3
+
+                            (a) Table with type granularity issue                   (b) Table with valuable context missing issue
+
+Fig. 2. Figure (a) and (b) present examples for the type granularity issue and valuable context missing issue, respectively. In Figure (a), for a column of
+basketball player names, the column type fetch from the KG could be Athlete, or Basketball player. These two types could all be correct types. However, in
+this dataset, the ground truth type (label) desired for this column could be Name since no finer granularity types such as Athlete exist in the dataset labels.
+A granularity gap exists between type Athlete or Basketball player and Name. Figure (b) highlights valuable context missing issues, posing challenges for
+deep learning-based models in performing column annotation tasks. The context information from columns two and three, which are irrelevant to the column
+type annotation task on column one, fails to provide any information close to the ground truth label: Cricketer. Consequently, it becomes arduous for deep
+learning-based models to accurately annotate the target column.
+
+
+to predict column types by leveraging information from the                       performance.
+external KG.
+                                                                                 Hybrid methods: Several earlier studies have integrated
+Deep learning-based methods: These methods approach                              knowledge graphs (KGs) with machine learning models. Chen
+column type annotation as multi-class classification task.                       et al. introduced ColNet [20], a CNN-based approach that uti-
+Hulsebos et al. [18] introduced Sherlock, a deep learning                        lizes the DBpedia KG to generate synthetic columns, thereby
+based model that utilized word embeddings and global                             augmenting training samples. The method leverages the KG to
+statistics features to predict column types. Building upon                       generate candidate types, aiding in CNN predictions. ColNet
+Sherlock, Zhang et al. proposed Sato [35], which incorporated                    employs a custom binary CNN classifier for each candidate
+the table context by integrating an LDA model to generate a                      class, predicting whether the cells in a column belong to
+global vector representing the table’s context and capturing                     a specific class. However, the approach of training separate
+the correlation between its columns and cells. Another                           classifiers for each type in ColNet is time-consuming and
+deep learning-based model is Tabbie [26], introduced by                          limits scalability.
+Iida et al., which is a PLM that takes the table structure                          Expanding on ColNet, Chen et al. introduced HNN [6],
+into consideration. It leverages stacked row and column                          an enhanced version that incorporates inter-column semantic
+transformers to generate table cell embeddings and perform                       information and utilizes the main cell entity’s property in the
+the column type annotation task. Wang et al. proposed                            KG for prediction assistance. However, HNN has limitations
+TCN [33], a convolutional network-based PLM that utilizes                        as it only considers linking the first cell of each target column
+information within the table and among similar domain tables                     to the KG and exclusively focuses on types within the KG-
+to predict column types and relations. Recently, various                         provided type attribute of entities. This simplistic approach
+PLMs such as BERT [29] and RoBERTa [13] have gained                              could introduce noise if the linkages of the sole cell are
+popularity in table understanding tasks as useful tools.                         incorrect. Additionally, retrieving only the type attribute of
+Yin et al. introduced TaBERT [19], which builds upon the                         entities overlooks many other valuable pieces of information
+BERT PLM and achieves promising performance in table                             present in the KG.
+understanding tasks. Doduo [27], proposed by Suhara et al.,                         In this paper, we empirically compare KGLink with five
+is another deep learning-based model that utilizes a stacked                     baseline methods including TaBERT [19], Doduo [27], HNN
+transformer structure and BERT. It integrates the column                         [6], Sudowoodo [3], and RECA [2]. Our experiments are based
+type annotation task with the column relation prediction                         on the modified VizNet2 [35] and SemTab3 [34] datasets.
+task, allowing them to benefit from each other. TURL [4],
+introduced by Deng et al., employs a visibility matrix to mask                                             III. M ETHDOLOGY
+out structurally irrelevant table components and enhance the                        The type granularity and valuable context missing issues
+BERT prediction. Sudowoodo [3], proposed by Wang et al.,                         can significantly affect the prediction accuracy of column
+applies k-means clustering and contrastive learning techniques                   type annotation models. In response to these challenges, we
+with the RoBERTa PLM for unsupervised or semi-supervised                         introduce a hybrid approach that melds KG information with
+column type annotation, greatly lower down the training data                     a pre-trained language model (PLM) based on deep learning.
+amount requirement. Sun et al. developed RECA [2], which
+leverages inter-table information within the training dataset                      2 https://github.com/megagonlabs/sato/tree/master/table data
+
+and BERT to achieve state-of-the-art column type annotation                        3 https://zenodo.org/record/3518531
+Fig. 3. Overview of KGLink’s model structure: KGLink integrates a knowledge graph (KG) component designed to filter out inappropriate numeric or date
+table cells. It proceeds with identifying j candidate types ct0 , . . . ctj for each column. Following this, the table rows undergo sorting based on their linkage
+quality. The processed table incorporates labels for candidate-type entities in each column. This table is then serialized by the deep learning component in part
+2, where feature vectors for each column are generated using information fetched from the KG in part 1. KGLink introduces the column type representation
+generation task as an subtask to further enhance prediction performance. This task generates a representation vector for each predicted column based on its
+cell and KG-extracted information. It then aims to optimize the gap between this vector and the representation vector of the column’s label in the dataset.
+To optimize accuracy, the model utilizes a combined adaptive loss with trainable weights σ0 and σ1 . Collectively, these elements contribute to the improved
+accuracy of column type predictions.
+
+   Our model, illustrated in Figure 3, is divided into two main                   (BM, denoting Best Matching) as the linking score for table
+parts: Part 1 is centered around extracting candidate types from                  cell mentions to their corresponding entities within the KG:
+KG, while Part 2 employs a deep learning model to perform                                 X n
+                                                                                                                     f (wl , E) · (k1 + 1)
+the tasks of column type annotation and column representation                       lse =      IDF (wl ) ·                                    ,
+                                                                                                                                           |e|
+generation. In Part 1, the initial table taken from the dataset,                           l=1             f (wl , e) + k1 · 1 − b + b · avgwl
+featuring the target column, is used as input, resulting in a                                                                                   (1)
+processed table with KG-derived candidate types. In Part 2,                       where e signifies the entities within the KG entity set E. Given
+this processed table serves as input for generating predictions                   that a table cell mention could encompass multiple words,
+for the column type annotation and column representation                          m = {w1 , w2 , ..., wl } refers to the search query containing
+generation tasks. Further detailed explanations of these com-                     the words extracted from the table cell’s mention. f (wl , E)
+ponents will be presented in the subsequent sections.                             indicates the count of occurrences of the word wl in the
+                                                                                  entity E, |E| denotes the length of the entity E in terms of
+A. Part 1: Knowledge graph for candidate type extraction                          words, and avgwl represents the average entity length in words
+   In this section, we delineate our approach to tackle the                       across the complete indexed KG. The parameters k1 and b are
+valuable context missing issue by leveraging KG information.                      adjustable parameters. The notation IDF (wl ) stands for the
+To address this challenge in a table T with n columns and l                       inverse document frequency weight associated with the word
+rows, we adopt a three-step process, as depicted in Figure 4.                     wl :
+   By adhering to this comprehensive approach, we effectively                                                  N − n(w ) + 0.5         
+                                                                                                                           l
+leverage KG information to mitigate valuable context missing,                                IDF (wl ) = ln                          +1 ,       (2)
+                                                                                                                   n(wl ) + 0.5
+thereby strengthening the predictive capabilities of the deep
+learning model.                                                                   where N represents the total number of documents in the
+Step 1: Table cell mention linking: In this step, our objective                   indexed KG, while n(wl ) signifies the count of documents
+is to obtain a KG entity set Emrc for each cell mention mrc .                     containing the word wl .
+To establish a connection between a cell mention m within                           For instances where the cell mention corresponds to a
+the table and the KG, we link m to the KG and retrieve its                        number or a date, it is inappropriate to link it to the KG.
+associated entity set Em . This connection is referred to as a                    In such situations, we assign a linking score of 0 to the cell.
+link, and the degree of correlation between the cell mention                      This strategy enables us to address this specific issue within the
+and the entity label is quantified as the linking score (ls) of                   context of the deep learning prediction model. Subsequently,
+this link. Within our approach, we employ the BM25 score [9]                      the deep learning model addresses this challenge by incorpo-
+                      Part 1: Knowledge graph for candidate-type extraction                    mention mrc in row c, we obtain its BM25 linking score lse .
+                                                                                               As presented in Equation 4, we determine the cell’s linking
+        Step 1:
+                                                                                               score lsmrc for the cell mention mrc by selecting the maximum
+                            𝒎𝟎𝟎   𝒎𝟎𝟏   𝒎𝟎𝟐
+              Input         …     …     …                         Entity sets 𝑬𝒎𝒄𝒓 with        BM25 linking score among its candidate entities.
+              Table
+                                                                   linking score 𝒍𝒔𝒆
+                            𝒎𝒓𝟎   𝒎𝒓𝟏   𝒎𝒓𝟐
+                                                                                                               lsmr = max(lse ), (e ∈ Eˆmr ).
+                                                                                                                  c                           c
+                                                                                                                                                          (4)
+                                                                                                 After obtaining the linking score for each cell in a row,
+        Step 2:
+                                                                                               the process of selecting the top-k rows for prediction involves
+   Row linking
+                      𝑙𝑠%   𝒎𝟎𝟎   𝒎𝟏𝟎   𝒎𝟐𝟎                                                    considering the linking score of a row r as the sum of all its
+                                                                Candidate entity sets $
+                                                                                      𝑬𝒎𝒓𝒄
+     scores           …     …     …     …
+                                                                with overlapping score 𝐨𝒔𝒆
+                                                                                               cells’ linking scores:
+                      𝑙𝑠&   𝒎𝒓𝟎   𝒎𝒓𝟏   𝒎𝒓𝟐                                                                                   C
+                                                                                                                              X
+                                                                                                                       lsr =     lsmrc .                   (5)
+                                                                                                                               c
+                                                            Extract one hop neighbor 𝓝(𝒆)
+        Step 3:                                              for entity 𝒆 and generate the
+                                                                 feature sequence 𝑺(𝒆)            A higher linking score for a row indicates greater reliability.
+                            𝒎𝟎𝟎   𝒎𝟏𝟎   𝒎𝟐𝟎
+     Filtered Table         …     …     …
+                                                           Candidate entity 𝑬$ 𝒎∗ for column
+                                                                                𝒄
+                                                                                               Rows with elevated scores are less likely to have incorrect or
+      with 𝒌 rows                                            𝒄, and candidate type score
+                            𝒎𝟎𝒌   𝒎𝟏𝒌   𝒎𝟐𝒌
+                                                                 𝒄𝒕𝒔𝒄𝒕𝒄 for 𝒄𝒕𝒄 ∈ $𝑬𝒎∗𝒄        missing links in the KG. This reliability is due to the typical
+                                                                                               pre-training of deep learning LMs with KG information.
+                                                                                               Consequently, the top-k rows chosen based on these high
+Fig. 4. Overview of the KG candidate type extraction process: We break
+down this procedure into three steps. This division is designed to minimize                    scores are considered more appropriate for predictions by deep
+noise from the KG, generate the feature sequence, and optimize the table for                   learning LMs. During each iteration of the loop, we insert rows
+enhanced predictions in the subsequent deep learning-based model.                              into an empty table. These rows are sorted in descending order
+                                                                                               based on the sum of the linking scores of their cell mentions.
+rating the column type representation generation task, which                                   Once all iterations are complete, we retain only the top-k rows
+will be further discussed in the subsequent subsection.                                        from this new table, effectively creating the filtered table.
+   Following the completion of the linking process, we                                            To evaluate the credibility of a candidate entity, we intro-
+acquire a KG entity set Emrc for each cell mention mrc .                                       duce the concept of an overlapping score ose for each entity e
+                                                                                               in the candidate entity set Eˆmrc associated with the cell mrc in
+Step 2: Filters on rows and entities: Upon completion of                                       row r. The overlapping score, defined by Equation 6, quantifies
+step 1, we proceed with filtering the extracted KG entities.                                   how frequently the candidate entity e appears in the one-
+The goal of this step is to create a pruned set Eˆmrc from                                     hop neighbor set of candidate entities from other columns. A
+the KG entity set Emrc for each cell mention mrc , and to                                      higher overlapping score signifies a greater level of reliability
+filter the table rows with the linking score. As illustrated in                                for the entity e.        C
+Figure 5, cell mentions originating from the same row but                                                              [
+                                                                                                       ose = e ▷◁          N (Emr ) , (e ∈ Em      ˆ r ).    (6)
+occupying different columns in a table can demonstrate close                                                                       c2                c1
+                                                                                                                      c1̸=c2
+relationships, suggesting a potential connection between their
+corresponding KG entities [1], [21], [22].
+                                                                                               Step 3: Candidate type generation: In this step, we de-
+    To capture this relationship, we define the overlapping entity
+                                                                                               termine potential types for the columns in the table and
+set Eˆmrc for a cell mention mrc in row r and column c.
+                                                                                               introduce a novel overlapping score to measure the intersection
+This is achieved by intersecting its entity set with the one-
+                                                                                               between entity nodes in the KG. Given a table T and a target
+hop neighbor entity set of all other columns. This intersecting
+                                                                                               column c in T ’s column set C, a set of candidate types
+approach also helps filter out noise introduced by the one-hop
+                                                                                               CT = {ct0 , ct1 , ..., ctj } are the label of type entities in the
+neighbor entity set. Mathematically, this can be expressed as
+                                                                                               KG, which could be the semantic type that describes column
+demonstrated in Equation 3:
+                                                                                               c. In this step, we aim to generate candidate types ct for every
+                          C 
+                ˆr =
+                          [                                                                   target column c in table T .
+              Em               Emrc1 ∩ N (Emrc2 ) ,            (3)
+                  c1                                                                              In KGLink, we consider the candidate types from the
+                                        c1̸=c2
+                                                                                               candidate type set CT for each column to assist with the
+where C represents the column set of table T and c1, c2                                        column annotation task. It’s worth noting that these candidate
+represent columns in set C of table T , N (Emrc2 ) represents                                  types may not always exist in the type hierarchy of the types
+the one hop neighbor set for N (Emrc2 ). Following Equation 3,                                 in set Dtype , as illustrated in Figure 2(a). For example, even
+we consider the set Em  ˆ r as the candidate entity set for the                                though Name is a type extracted from the KG, it does not exist
+                          c1
+       r
+cell mc1 . This approach incorporates inter column information,                                in the type hierarchy of Basketball player or Athlete.
+helping to prevent errors that may have occurred in step 1 from                                   While we can directly extract the semantic type of an entity
+propagating.                                                                                   from the KG, the default granularity of KG’s types often
+   In the process of filtering the table rows, we evaluate                                     falls short of our needs. For instance, consider mention Peter
+the linking score of each cell. After completing the linking                                   Steele in Figure 5, which ideally should be categorized as
+procedure, for every candidate entity e associated with the cell                               Musician. However, in the KG, Peter Steele is labeled as
+                                                                                    exclusion of entities classified under the named entity schema
+                                                                                    categories PERSON or DATE. The rationale behind this is
+                                                                                    that entities belonging to these types are not well-suited to
+                                                                                    represent column types within a table.
+                                                                                       As a result, the ultimate candidate type is more likely to
+                                                                                    be chosen from entities that are interconnected with higher-
+                                                                                    reliability entities within the same column. This selection
+                                                                                    criterion significantly increases the likelihood of identifying
+                                                                                    the most appropriate candidate type.
+                                                                                       After obtaining the candidate types, we concatenate them
+                                                                                    at the top of each column to form the processed table.
+                                                                                    Additionally, during the training preparation phase, the mask
+                                                                                    token or the ground truth label is also concatenated before
+                                                                                    the candidate types, creating the masked table and the ground
+                                                                                    truth table, respectively, in order to facilitate the column type
+                                                                                    representation generation task. It is crucial to note that if
+                                                                                    our algorithm returns no candidate types, the corresponding
+                                                                                    space for candidate types is replaced with padding tokens.
+                                                                                    For numeric columns, the candidate types are replaced with
+Fig. 5. An example from the SemTab [34] dataset, showcasing three KG                the column’s mean, variance, and average value.
+entity sets: Em0 , Em0 , and Em0 . The figure includes a red link representing
+                0      1           2
+a connection between entities in the one-hop neighbor. For instance, the entity
+                                                                                       Meanwhile, to set the stage for feature vector creation, we
+Rust, which corresponds to an album, has a one-hop neighbor entity: Peter           begin by constructing the feature sequence. Within the filtered
+Steele, representing a musician. This connection suggests a higher likelihood       table, we proceed to select the first cell from each predicted
+that these two entities are the correct representation for the cell mentions Rust
+and Peter Steele.
+                                                                                    column. This selection is based on the filter from the last
+                                                                                    step, specifically opting for the cell with the best total linking
+Human, even though Musician is present as an entity in the                          score. Subsequently, we identify the KG entity with the highest
+one-hop neighbor of Peter Steele within the KG. To overcome                         linking score for that cell. Next, we serialize entity e and all its
+this limitation, our objective is to generate more suitable                         one hop neighbor, to prepare the feature sequence S(e) to let
+candidate types that better align with our specific context and                     it ready for encoding in the deep learning part of our model:
+requirements, as depicted in Figure 5.                                                                                           
+                                                                                                        S(e) = s||           p||o ,                 (9)
+   In our methodology, we take advantage of the observation                                                           o∈N (e)
+that type entities frequently emerge within the one-hop neigh-
+                                                                                    where p represents the predicate connecting entity e with
+borhood of candidate entities. For every candidate entity e
+                                                                                    another entity in N (e), || signifies the concatenation operation.
+within column c from the pruned entity set Eˆm∗c , our process
+                                                                                    Note that when no entities are retrieved from the KG (e.g., in
+unfolds as follows:
+                            R
+                            [                                                       the case of a numeric column or when there are no matched
+                    Eˆm∗c =    Eˆmrc , (c ∈ C),              (7)                    entities for the cell mention in the KG), we set S(e) to a
+                                  r                                                 padding sequence, which only contains the padding token.
+where, Eˆm∗c symbolizes the union set of all pruned entity sets                     B. Part 2: Deep learning based model
+gathered from each row within column c, while R stands for
+the set of rows in table T . For each candidate entity e in Eˆm∗c ,                    In this section, we integrate table context with a deep
+we attribute its overlapping score ose to all entities within its                   learning-based pre-trained language model (PLM) using
+one-hop neighborhood. As a one-hop neighbor entity could                            multi-task learning. This integration serves to address the
+have multiple connections to entities in Eˆm∗c , we compute the                     type granularity issue and to enhance the overall model
+candidate type score cts by summing up all overlapping scores                       performance. The section is organized into three distinct
+of its neighbors:                                                                   steps, each designed with a specific objective. Through the
+                       X R                                                          integration of these steps, we harness the power of table
+             ctsctc =        |ctc ∩ N (er2 )| × oser2 ,                             context, bolster the model’s capabilities, and ultimately
+                      r2̸=r1                                  (8)                   achieve enhanced performance and effectiveness.
+                              ˆ r2 , ctc ∈ N (er1 )),
+                      (er2 ∈ Em c
+                                                                                    Step 1: Table serialization: In this section, we proceed with
+where R signifies the set of rows within table T , and r1, r2                       serializing the table into a sequence format to facilitate multi-
+represent specific rows within this set. Moreover, ctc denotes                      class classification. In KGLink, we adapted the multi-column
+the candidate type of column c.                                                     prediction serialization method from Doduo [27] to align
+   It’s noteworthy that during the selection of ctc from the set                    it with the requirements of the column type representation
+N (er1 ), we apply a label-based filter. This filter ensures the                    generation task.
+   Given that PLMs operate on tokenized sequences, it’s essen-
+tial to serialize tables into token sequences to fully leverage the
+structural advantages of PLMs. In certain prediction models
+that focus on single columns, such as Sherlock [18], table
+serialization occurred on a column basis. This implied concate-
+nating cells from the same column together. For instance, in
+the case of column ci , within single-column prediction models,
+the serialization would appear as follows:
+
+   S(ci )single ::= [CLS] tok 1i tok 2i ... tok m
+                                                i [SEP ].     (10)
+
+   In this context, it’s important to note that [CLS] and [SEP]
+tokens are special tokens within the BERT model, signifying
+the start and end of a sequence, respectively. The tok variable
+represents the tokens that result from the sequence’s word
+tokenization. These tokens become instrumental in generating
+representation vectors through PLMs.
+   However, single-column prediction models lack the advan-           Fig. 6. An example from the SemTab [34] dataset, the column data would be
+                                                                      tokenized and then encoded using pre-trained BERT, after that, the generated
+tage of contextual information from other columns within the          vmsk and vgt vector would be used in DMLM [32] loss to let the model
+same table. This shortcoming arises because these models              learn the column type representation.
+independently predict each table. Consequently, they overlook
+the inter-column relationships that hold significance for tasks          To implement this task within KGLink, we establish the
+like column annotation [6], [35], [36].                               column-type representation generation task as a sub-task.
+   To holistically embrace the contextual relationships among         Here, we leverage the BERT model’s [29] generation capa-
+columns within a table, we employ a serialization approach            bilities.
+introduced by Doduo [27], which is a multi-column prediction             To integrate contextual information, we generate both a
+model. This serialization method treats the entire table as a         ground truth table and a masked table during training. This
+sequence, focusing on serialization by column:                        allows the model to learn how to recover the masked token
+    S(T )multi ::=[CLS] tok 11 ... tok m           1
+                                       1 [CLS] tok 2 ...              with supervision from the ground truth table. It’s important to
+                                                              (11)
+                   ...[CLS] tok 1n ... tok m
+                                           n [SEP ].
+                                                                      note that during model evaluation, the ground truth table is
+                                                                      not created to prevent leakage.
+   In contrast to the serialization technique employed by                For a given table T , which contains target columns c in it’s
+single-column prediction models, this strategy involves in-           column set C, the column’s ground truth label l, the ground
+corporating the [CLS] token at the commencement of each               truth table Tgt is formed by concatenating each target column
+column. This step facilitates the serialization of the complete       c from T with its corresponding l at the top of the column.
+table into a single sequence. Consequently, the PLM can               Conversely, the masked table Tmsk is formed by concatenating
+effectively grasp the contextual details from the entire table.       each column c from T with the mask token provided by the
+During downstream tasks, the representation of the [CLS]              language model.
+token from each column can be passed to the output layer                 As depicted in Figure 6, we prefix the ground truth label of
+following the final PLM layer.                                        the column type, such as Musician, and the set of generated
+   blueAs for KGLink’s deep learning aspect, to align with            candidate types from the knowledge graph (KG), such as
+most of our baselines, we undertook the fine-tuning of the            Male, Musical group, and Composer, to the beginning of
+BERT [29] model:                                                      each serialized column in the table. This modified table is
+                        Y = BERT (S),                         (12)    referred to as the ground truth table. Furthermore, we utilize
+                                                                      the [MASK] token provided by the BERT model to replace the
+where S represents the input sequence, Y ∈ Rd represents              actual ground truth label in the ground truth table, resulting
+the encoding vector for the input sequence S. Note that               in the creation of the masked table.
+the BERT PLM can be substituted by other more powerful                   Throughout the training process, the goal is to reconstruct
+language models with encoder structure to further improve             the original ground truth label from the [MASK] token in
+the performance.                                                      the masked table, while accounting for the contextual details
+                                                                      from the table and the extracted candidate types. It’s important
+Step 2: Column-type representation generation: At this                to underscore that the ground truth label in the ground truth
+step, we introduce the column-type representation generation          table is also embedded with the table’s context. Consequently,
+task, which is centered around extracting the underlying se-          optimizing the retrieved representation of the [MASK] token
+mantic information of the column type by restoring the ground         from the masked table takes this contextual information into
+truth candidate type representation from masked tokens.               consideration.
+   To accomplish this, we employ the DMLM (Distilled                C. Complexity
+Masked Language Model) loss [32] in the process of recover-
+                                                                       In the KGLink, we first link cell mentions to the KG, then
+ing the [MASK] token. This loss function serves to enhance
+                                                                    calculate the overlapping score and perform entity filtering.
+the accuracy of predicting the original ground truth label.
+                                   XV                               After that, we calculate the candidate type score and filter the
+         LDM LM (Ymsk , Ygt ) = −        voc
+                                       ymsk       voc
+                                             log ygt  ,   (13)      candidate type. Next, we serialize the table and utilize the
+                                     voc                            PLM to encode tables and perform the classification task and
+                                        H
+                   Y = Sof tmax(Wo (       )),              (14)    the column type representation generation subtask.
+                                         T
+                                                                       For a dataset, considering the maximum number of columns
+where V is the vocabulary size, H is the generated vector
+                                                                    C, rows R, tables T , epochs P , the size of the label type set D,
+representation, Wo is a matrix that projects the output vector to
+                                                                    the vocabulary size V , the maximum input sequence B, and
+the vocabulary space, and voc is a variable iterate through the
+                                                                    the embedding dimension of the PLM d, and the maximum
+number of vocabulary words. The Ymsk is the representation
+                                                                    number of KG retrieved entities as E, and their maximum one
+in the vocabulary space generated from the [MASK] token,
+                                                                    hop neighbor number as N , we calculate the time and space
+and the Ygt is the ground truth label’s vector representation
+                                voc        voc                      complexity as follow:
+in the vocabulary space. The ymsk    and ygt   are the weight of
+the corresponding word in the vocabulary space. The T is a          Time Complexity: The KGLink traverses each column and
+scale factor on the output embedding vector.                        row to link cells to the KG, obtaining the linking score
+   By incorporating the DMLM loss, the model is trained to          and candidate entity set, which takes O(RC) time. The
+generate the column type representation from the [MASK]             candidate type score calculation and the candidate type fil-
+token, aiming to match the ground truth label vector as closely     tering take O(RC 2 E 2 T ) time. Calculating the candidate type
+as possible. This approach is beneficial even for annotating        score requires O(RCN E). Thus, the data pre-processing
+numeric columns, as it guides the model to generate accurate        time complexity of KGLink is O(RC) + O(RC 2 E 2 T ) +
+column type representations and aids in the column type             O(RCN E) = O(RCE(N + CET )). Since we serialize the
+annotation process.                                                 input table, encoding tables and feature vectors would take
+                                                                    O(BdP (T + T C)(B + d)) time [8], [29]. The classification
+Step 3: The adaptive combined loss: In this section, we com-        task would take O(d2 DCP ), and the column type represen-
+bine the column representation vector with the feature vector       tation generation subtask would take O(V DCP ). Hence the
+and apply the Uncertainty Weights (UW) method proposed by           overall time complexity of KGLink is: O(RCE(N +CET )+
+Kendall et al. [31] to optimize the column-type annotation and      BdP (T + T C)(B + d) + d2 DCP + V DCP ) = O(RCE(N +
+column-type representation generation tasks simultaneously.         CET )+BdP (T +T C)(B +d)+(d2 +V )DCP ) The KGLink
+  Denote the representation of the [CLS] token as the column        is linear in time complexity. Compared with the state-of-the-
+representation vector Ycls and the feature vector as Yf v . We      art method RECA, which has exponential complexity to tables.
+obtain the combined vector Ycol as follows:                         KGLink has better scalability for the growing size of datasets.
+                                                                    The runtime chart of KGLink and other baselines are provided
+                     Ycol = ϕ(Ycls , Yf v ),                (15)    in Figure 7; we only show the runtimes on the VizNet dataset
+               d     d      d                                       due to the space limitation.
+where ϕ(·) : R × R → R is a composition function.
+  Considering that the column type annotation task involves         Space Complexity: The KGLink requires O(RCE) space
+a multi-class classification problem, we utilize the Cross-         to store each table and their corresponding entities from the
+Entropy loss for this task:                   ′
+                                                                    KG. The linking score needs O(E) to store. Calculating
+                            ′              eygt                     the overlapping score requires O(RCE + E) to store the
+         LCrossEntropy (Ycol , L) = − log P|L| ′ ,     (16)
+                                                 yi                 overlapping score for all entities, and calculating the candidate
+                                           i=1 e
+          ′                                                         type score requires O(RCN E+E) to score the candidate type
+where Ycol   is the combined vector in the classification space
+                              ′                                     for all entities within one-hop neighbor of the KG-retrieved
+that has dimension |L|, ygt      is the weight that the model
+                                                                    entities. Preparing input and encoding columns requires O(T +
+predicts out the ground truth label as the true label, yi′ is the
+                                                                    d(B + d)) space since we serialize each table into one input
+weight that the model predicts out the i − th label as the true
+                                                                    sequence. It is O(Bd) space for the embeddings, O(d2 ) for
+label.
+                                                                    self-attention matrices, and O(d(V + D)) for the classifica-
+   To seamlessly merge this task with the column-type repre-
+                                                                    tion step and combined adaptive loss calculation. Hence, the
+sentation generation task, we must dynamically combine the
+                                                                    overall space complexity is: max(O(RCN E), O(T + d(B +
+DMLM loss and the Cross-Entropy loss to cater to different
+                                                                    d), O(Bd), O(d2 ), O(d(V + D)).
+datasets. Thus, we substitute the loss of tasks in [31] by
+DMLM and Cross Entropy loss:
+                         1               1                                           IV. E XPERIMENT R ESULTS
+  Ltotal (H, σ0 , σ1 ) = 2 LDM LM + 2 LCrossEntropy
+                        2σ0             2σ1                  (17)      We compared KGLink with six state-of-the-art models:
+                        + log σ0 σ1 ,                               MTab [1], TaBERT [19], Doduo [27], HNN [6], Sudowoodo
+where σ0 and σ1 are tunable variables.                              [3], and RECA [2].
+                                             80.00                                                              TABLE I
+        80                                                            Training time     KGL INK PERFORMANCE ON THE S EM TAB DATASET AND THE V IZ N ET
+                                                                      Inference time                                DATASET
+        70
+        60                                                                                   Model
+                                                                                                         Accuracy
+                                                                                                                 SemTab
+                                                                                                                    Weighted F1   Accuracy
+                                                                                                                                             VizNet
+                                                                                                                                                Weighted F1
+        50                                                                                  MTab [1]      89.10          -         38.21             -
+
+Hours
+                                                                                          TaBERT [19]     72.69        71.21       94.68           94.07
+        40                                                                                 Doduo [27]     84.06        82.43       95.40           95.06
+                                                                                            HNN [6]       66.54        65.12       66.89           68.82
+        30                                                                               Sudowoodo [3]    79.34        79.24       91.57           91.08
+                                                        23.45                              RECA [2]       86.12        84.91       93.25           93.18
+        20               16.45                                     16.50                    KGLink        87.12        85.78       96.28           96.07
+
+        10                                       9.00
+              1.090.13       1.13 1.960.07                  0.17       1.53 3.17 N/A   for 50 epochs on the SemTab dataset, and 20 epochs on
+        0
+             Sudowoodo HNN        Doduo RECA TaBERT KGLink MTab                        the VizNet dataset, we applied a 0.1 dropout rate on the
+        Fig. 7. The time chart of KGLink and other baselines on VizNet                 SemTab dataset, while 0.2 on the VizNet dataset since it
+                                                                                       contains more training tables, the batch size was set to 16
+   In our experiment, if we cannot find any linkages in the KG                         on both datasets, and early stopping was also applied. The
+for a specific mention, we assign a linking score of 0 to that                         experimental settings for TaBERT and Doduo were the same
+mention.                                                                               as KGLink. For HNN and RECA, we use the same experiment
+   For each cell mention, we determine whether it represents                           setting as their original paper [2], [6]. Despite Sudowoodo’s
+a number or a date with the named entity schema. If it does,                           semi-supervised and unsupervised ability, we utilize the same
+it is unsuitable for linking to the KG. In such cases, we set                          amount of training data with other baselines, making it a
+the linking score of that cell to 0, allowing the deep learning                        full-supervised model, which includes all labeled columns in
+prediction model to address this issue through the column-type                         the training set. For MTab, due to the difference in problem
+representation generation task.                                                        definition, we did not include the weighted F1 score. We
+A. Dataset                                                                             translate the label on VizNet dataset to WikiData KG entities to
+                                                                                       make MTab work on VizNet dataset. We run each experiment
+   We evaluated our approach using two benchmark datasets.
+                                                                                       3 times and calculate the average metric in Table I.
+The first dataset, SemTab [34], consists of 3,048 tables and
+                                                                                          The training, validation, and testing set proportions were set
+7,587 columns, with 69 rows and 4.5 columns per table on
+                                                                                       at 7:1:2 for all experiments, and we maintained the original
+average. It is derived from Wikipedia, DBpedia, and T2Dv2
+                                                                                       sample proportion of each class in all splits. The models
+Gold Standard data sources. We focused on rounds 1, 3, and
+                                                                                       were implemented using PyTorch and the Transformer library.
+4 from the 2019 version of SemTab, similar to the approach
+                                                                                       We utilized the open-source official implementations of the
+taken by RECA [2]. The SemTab dataset annotates 275 column
+                                                                                       baselines, and the experiments were conducted on an NVIDIA
+types corresponding to DBpedia KG entities. We excluded
+                                                                                       Tesla V100 GPU. Evaluation metrics included accuracy and
+round 2 from our evaluation due to columns with multiple
+                                                                                       weighted F1 scores for both datasets.
+ground truth labels, which was unsuitable for our comparison
+                                                                                          We used Elasticsearch, a distributed search and analytics
+with VizNet.
+                                                                                       engine, to index the WikiData KG and generate the BM25
+   The second dataset is a modified version of VizNet [16],
+                                                                                       entity linking scores for the KG entity callback. We retrieved
+introduced by Zhang et al. [35]. This version is a subset of
+                                                                                       up to 10 entities from the KG for each cell mention. From the
+the original VizNet corpus [16] specifically extracted for the
+                                                                                       KG entities in each column, we generated up to 3 candidate
+column type annotation task, consisting of 78,733 web tables
+                                                                                       types per row. The label-based filter used the spacy NLP tool
+with 119,360 columns annotated across 78 column types, with
+                                                                                       to detect the named entity schema and filter entities labeled
+20 rows and 2.3 columns per table on average. Following the
+                                                                                       as PERSON or DATE.
+methodology of RECA [2], we utilized the multi-column sub-
+                                                                                          Given that BERT has an input sequence length limit of
+dataset, which includes 32,265 web tables and 73,034 columns
+                                                                                       512, we restrict the token length per column in a table to
+annotated with 77 column types. It’s important to note that
+                                                                                       64. Additionally, we impose a maximum limit of 8 columns
+each web table in this dataset contains multiple columns.
+                                                                                       per table. If a table contains more than 8 columns, we divide
+Notably, the SemTab dataset offers more detailed column type
+                                                                                       it into multiple tables after the candidate type generation step
+annotations compared to the modified VizNet dataset, but it is
+                                                                                       and conduct the encoding and annotation process separately.
+smaller in size.
+B. Experimental Settings                                                               C. Main Results
+                                                                           −6
+   We used the AdamW optimizer with ϵ = 10               and an                          Table I presents accuracy and weighted F1 scores for the
+initial learning rate of 3×10−5 . The learning rate was linearly                       column-type annotation task on the SemTab and modified
+decayed without warm-up. The scale factor T > 1 is set to                              VizNet datasets, showcasing KGLink’s superior or comparable
+2, as suggested by Hinton et al. [30]. KGLink was trained                              performance to the baseline models.
+                                                              TABLE II
+                                               T HE ABLATION STUDY RESULT OF KGL INK
+
+                                                                                               SemTab                      VizNet
+           Model          PLM     Multi-task   KG candidate type   KG feature vector
+                                                                                       Accuracy   Weighted F1   Accuracy      Weighted F1
+      KGLink w/o msk     BERT                         ✓                   ✓             86.14        84.54       95.95           95.67
+       KGLink w/o ct     BERT         ✓                                                 86.27        84.56       95.83           95.48
+       KGLink w/o f v    BERT         ✓                                   ✓             87.02        85.68       95.98           95.70
+      KGLink DeBERTa    DeBERTa       ✓               ✓                   ✓             87.24        85.81       96.98           96.37
+         KGLink          BERT         ✓               ✓                   ✓             87.12        85.78       96.28           96.07
+
+   Across both datasets, KGLink consistently outperforms                                          V. A NALYSIS
+other baselines, enhancing accuracy and weighted F1 scores,           A. Ablation Study
+highlighting the effectiveness of incorporating KG information            To demonstrate the impact of our components, we con-
+and employing a multi-task learning approach.                         ducted tests on variations of the KGLink model. These variants
+   In the VizNet dataset, KGLink outperforms TaBERT, Do-              are referred to as KGLink w/o msk, KGLink w/o ct, KGLink
+duo, and Sudowoodo by leveraging KG information for im-               w/o f v, and KGLink DeBERTa. The results of these ablation
+proved predictions. Notably, despite being designed based on          studies are displayed in Table II.
+Doduo’s table serialization method and benefiting from KG-                The KGLink w/o msk model excludes the generation of
+extracted information, KGLink surpasses Doduo across all              representations from the [MASK] token. The KGLink w/o ct
+metrics.                                                              model excludes all KG information (the candidate types
+   On both datasets, KGLink outperforms HNN across all                and the feature vector). The KGLink w/o f v removes the
+evaluation metrics due to its proficient use of knowledge             feature vector generated from KG information. The KGLink
+within the BERT PLM and its refined integration with the KG.          DeBERTa substitutes the BERT PLM with a more advanced
+Although HNN also integrates KG information, it appears to            transformer based PLM DeBERTa [44]. Each variant allows
+be more vulnerable to noise from the entity linking process and       us to isolate and assess the individual contributions of the
+does not fully capitalize on the advantages of KG information.        corresponding components to the overall model performance.
+   Regarding RECA, its ability to capture inter-table infor-              KGLink outperforms the KGLink w/o msk model on the
+mation makes it less sensitive to training data distribution,         VizNet dataset. This could be attributed to the VizNet dataset’s
+achieving the current state-of-the-art performance. However,          coarser label granularity than the SemTab dataset, making the
+since RECA ignores intra-table information and does not               column type representation generation subtask less significant.
+integrate KG information, KGLink maintains a performance              Additionally, as shown in Table III, the VizNet dataset contains
+edge across these metrics on the VizNet dataset. On the               numeric columns that do not exist in the SemTab dataset.
+SemTab dataset, RECA achieves sub-optimal results because             These columns are not connected to KG and, therefore, cannot
+of the dataset’s nature. The SemTab only consists of 3048             benefit from KG information.
+tables but 275 column type classes. This also shows that                  KGLink outperforms the KGLink w/o ct model on both
+the approach introducing extra information (KGLink) or the            datasets, underscoring the significance of KG-extracted infor-
+approach better utilizing the existing information (RECA)             mation.
+would be less affected when the data amount is constrained.               KGLink also outperforms the KGLink w/o f v model on
+   Regarding Doduo, on the VizNet dataset, the accuracy of            both datasets. According to Table III, the feature vector could
+KGLink increased by 0.92%, and the weighted F1 increased              be considered a supplement when all KG information is
+by 1.06%. Since Doduo and KGLink apply the same table                 filtered out and generates no candidate types. This makes
+serialization method and the same PLM (BERT), both methods            the feature vector able to enhance the scalability of KGLink
+can benefit from capturing intra-table information and the            further.
+prior knowledge of the PLM, hence achieving competitive                   The KGLink DeBERTa model outperforms the KGLink
+performance on the VizNet dataset. According to Table IV,             model, this demonstrate that more powerful PLM encoder are
+KGLink still outperforms Doduo on columns with no linkages            likely to bring further improvements to KGLink.
+to KG because of the application of the multi-task learning               The differing increases in the two metrics from KGLinlk
+component, and the model’s better ability to process numeric          w/o ct to KGLink w/o f v and from KGLink w/o f v
+columns.                                                              to KGLink also illustrate that carefully selected candidate
+   Regarding MTab, since the labels of the SemTab dataset are         types are more important than KG information in a feature
+extracted from KG, MTab achieves the highest accuracy score           vector, despite the former having worse coverage across tables
+on the SemTab dataset. However, on the VizNet dataset, the            (Indicated in Table III).
+MTab achieves the worst accuracy, it is because the VizNet            B. Parameter sensitivity
+dataset consists of 12.8% numeric columns, which is hard for
+solely KG based method prediction. Furthermore, the label of            Table III illustrates the connection scenarios of KGLink on
+the VizNet dataset is not KG entities, although we translated         two datasets. We segregated this test into numeric columns and
+them to KG entities, this still limit the performance of MTab.        non-numeric columns. If all cells from a column are numeric,
+                           TABLE III
+  T HE LINK STATISTICS BETWEEN DATASETS AND THE W IKI DATA KG                87.0
+                                                                                                                                             1.0
+                                                                             86.5
+                                 SemTab         VizNet
+                                                                  Accuracy
+                                                                             86.0                                                            0.9
+   Numeric columns               0 (0%)         9489 (12.8%)
+                                                                             85.5                                                    log 2   0.8
+   Non-numeric columns w/o f v   0 (0%)         9278 (12.5%)                                                                                           0 VizNet
+                                                                             85.0
+                                                                                                                                             0.7       1 VizNet
+   Non-numeric columns w/o ct    1144 (15.1%)   55374 (74.7%)                             0 SemTab                                                     0 SemTab
+                                                                             84.5         1 SemTab                                                     1 SemTab
+   Total columns                 7587 (100%)    74141 (100%)                                                                                 0.6
+                                                                                    0.4     0.6      0.8           1.0   1.2   1.4                 0    5000      10000   15000   20000   25000
+                                                                                                           log 2                                                      Step
+we classify this column as numeric; otherwise, it is a non-              (a) Sensitivity of logσ02 , logσ12 .                        (b) Training curve of logσ02 , logσ12 .
+numeric column.                                                                                                      Fig. 8. Analysis on σ0 and σ1
+   Non-numeric columns w/o f v stands for non-numeric
+                                                                  dataset. For example, when p = 0.2, the total amount of
+columns with no KG-extracted information to generate feature
+                                                                  data would be 0.2 times the actual amount while the testing
+vectors, meaning it has zero linkage to the KG. Non-numeric
+                                                                  set remains unchanged. The experiment result is shown in
+columns w/o ct stands for non-numeric columns with no
+                                                                  Figure 9, we select p = 0.2, 0.4, 0.6, 0.8, 1.0. When p is small,
+candidate type extracted by our method from the KG. This
+                                                                  the training dataset is limited. Hence the model performance
+could be because there is no linkage for the column at
+                                                                  would benefit less from the candidate-type representation
+all, or all entities retrieved from the KG were filtered by
+                                                                  generation sub-task since the whole model would be more
+our method. These non-numeric columns are typically hard
+                                                                  complicated and hard to train. To illustrate the effectiveness of
+to annotate and involve cells with extended sentences, such
+                                                                  the row filter, we conducted tests on the KGLink model using
+as a lengthy address in a column labeled address, or short
+                                                                  filter sizes of k = 10, 25, 50, all. These values correspond to
+abbreviation codes (e.g., In a column with the type position,
+                                                                  using no more than the specified number of rows for each table
+the abbreviation code PF in the column cell might stand for
+                                                                  during annotation. In our experiments, the maximum column
+Power Forward, a specific position in a basketball game.).
+                                                                  encoding length was set to 64, and all indicates retaining at
+   Since the tables from SemTab were derived from the KG,
+                                                                  most 64 rows for the input table.
+only 15.1% of columns have no candidate type extracted
+                                                                      As depicted in Figure 10, optimal prediction performance is
+from the KG by our method. Moreover, no column lacks
+                                                                  observed when k is set to 25. This suggests that increasing the
+entities extracted from the KG to generate feature vectors.
+                                                                  number of table rows does not necessarily lead to better per-
+For the VizNet dataset, even though 74.7% of columns have
+                                                                  formance, as additional rows may introduce noise. Therefore,
+no candidate type extracted, after applying the feature vector,
+                                                                  selecting a smaller number of rows that are more suitable for
+only 12.5% of non-numeric columns lack KG information.
+                                                                  prediction becomes crucial. Additionally, as shown in Figure
+   In Table IV, we also compare the prediction performance
+                                                                  10(b), a smaller k maintains better time efficiency, especially
+of KGLink with other baselines when the columns cannot
+                                                                  on relatively small datasets like SemTab. To strike the right
+connect to KG. We select columns from the modified VizNet
+                                                                  balance between prediction performance and time cost, in our
+dataset whose entire table has no linkage to the KG from
+                                                                  experiments, unless otherwise specified, we set k = 25.
+the original test set. We adopt this strategy because if other
+                                                                      We present Figure 8(a) here to show the sensitivity of σ0
+columns from the same table have linkages, the column
+                                                                  and σ1 of the adaptive weighted loss on SemTab dataset,
+with no linkage would also partially benefit from the KG
+                                                                  we tested logσ02 and logσ12 within range 0.4 to 1.4 (When
+information of other columns. This subset comprises 315
+                                                                  testing logσ02 , the logσ12 is fixed to 1), where the accuracy
+tables and 612 columns in total, with 26 different labels. Of
+                                                                  tend to increase with logσ02 decrease, and logσ02 on the
+these columns, 556 are numeric, and 56 are non-numeric. We
+                                                                  contrary. The range of accuracy in Figure 8(a) demonstrate
+calculated their accuracy separately.
+                                                                  our model is more sensitive to σ0 compared with σ1 . This
+   The results demonstrate that KGLink can maintain competi-
+                                                                  shows the need to carefully determine the weight of the
+tive effectiveness even when it cannot find related KG informa-
+                                                                  column representation generation sub-task, since we do not
+tion for columns. Since all baselines other than HNN applied
+                                                                  directly take its result for use, an inappropriate weight may
+the PLM to encode the table, the results also underscore the
+                                                                  degrade KGLink’s performance. We also present Figure 8(b)
+crucial role of prior knowledge from the PLM in both numeric
+                                                                  here to show how logσ02 and logσ12 are optimized in the two
+and non-numeric column annotation. Notably, KGLink, Do-
+                                                                  datasets, demonstrating differences in uncertainties in different
+duo, and TaBERT outperform RECA and Sudowoodo, both of
+                                                                  datasets and tasks. Experiment on VizNet dataset converged to
+which are PLM-based baselines, particularly in non-numeric
+                                                                  a smaller σ0 , which shows that when the dataset contains more
+columns. This superior performance is attributed to KGLink,
+                                                                  tables and fewer column labels, the column representation
+Doduo, and TaBERT’s ability to capture intra-table informa-
+                                                                  generation task-related components would be better trained
+tion between columns. The observed phenomenon underscores
+                                                                  and contribute more to the model.
+the importance of intra-table information in the column type
+annotation task. We cut down the original training dataset into   C. Data Effciency
+a small one to find the suitable data amount to fully benefit        As shown in Table V, the original top-k rows mean that we
+from multi-task learning. We introduce p in this experiment,      do not apply our row filter and directly select the top-k rows
+which is the proportion of the training set to the original       from the table by it’s original order. This filter mechanism is
+                         TABLE IV
+   ACCURACY ON TEST SET WITH NO EXTRACTED KG INFORMATION
+                                                                                              KGLink                                     96.0           KGLink
+                                                                                   96         KGLink w/o msk                                            KGLink w/o msk
+                                                                                                                                         95.5
+          Model             Numeric Acc        Non-numeric Acc
+                                                                                   95                                                    95.0
+          KGLink            97.04              90.92
+                                                                                                                                         94.5
+          HNN [6]           44.05              18.37                          F1   94                                                 Acc94.0
+          TaBERT [19]       96.57              90.27
+                                                                                                                                         93.5
+          Doduo [27]        96.28              89.50                               93
+                                                                                                                                         93.0
+          RECA [2]          96.89              61.54                               92                                                    92.5
+          Sudowoodo [3]     96.21              67.72                                    0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0                     0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+                                                                                                               p                                                         p
+                                  TABLE V                                      (a) Weighted F1 with varying p                                 (b) Accuracy with varying p
+             P ERFORMANCE COMPARISON OF TABLE FILTERS
+                                                                             Fig. 9. The weighted F1 score and accuracy of KGLink and KGLink
+                                 SemTab                     VizNet           w/o msk with varying p
+   Filter mechanism
+                         Accuracy   Weighted F1    Accuracy    Weighted F1
+                                                                                                                                                         Semtab
+                                                                                95.0                                                        20.0         Viznet
+  Our top-k row filter    87.12        85.78         96.28       96.07
+  Original top-k rows     85.93        84.39         96.14       95.97          92.5                                                        17.5
+                                                                                90.0                                                        15.0
+                                                                                                                                            12.5
+                                                                              F187.5                                                  Hours 10.0
+deterministic in feature vector generation since it is generated                85.0
+                                                                                                                                             7.5
+from the cell whose row has the best row linking score, which                   82.5                                                         5.0
+                                                                                                                            Semtab
+is used in this filter mechanism.                                               80.0                                        Viznet           2.5
+   In the SemTab dataset, the performance improved more                                  10             25             50       all                10             25             50   all
+                                                                                                                   k                                                         k
+significantly compared to the VizNet dataset. This is because                  (a) Weighted F1 with varying k                                 (b) Time cost with varying k
+the SemTab dataset is more KG-related and has richer KG-
+extracted information compared to VizNet, as indicated in                    Fig. 10. The weighted F1 score and time cost of KGLink with varying k
+Table III. Therefore, it would benefit more from a better filter
+                                                                             representation generation task could also enhance performance
+mechanism.
+                                                                             on classes containing numeric columns, as we prepend the
+D. Qualitative Evaluation                                                    column’s mean, variance, and average value to the column,
+   For the SemTab dataset, the top three classes with increased              and these values have a certain range in reality.
+accuracy after adding the column representation generation                                                              VI. C ONCLUSION
+task are: Athlete, Protein, and Film, with an average increase
+                                                                               We introduced KGLink, which combines a deep learn-
+of accuracy of 9.70. It’s worth noting that we only consider
+                                                                             ing PLM with KG information for column-type annotation.
+classes with more than 10 samples in the test set to mitigate
+                                                                             Through experiments on benchmark datasets, we demonstrate
+randomness.
+                                                                             that KGLink achieves comparable or superior performance
+   As depicted in Figure 2(a), samples from the Athlete class
+                                                                             compared to state-of-the-art methods. Our analysis highlights
+often encounter the type granularity issue, indicating that the
+                                                                             the data efficiency of KGLink, achieving similar performance
+column representation generation task is beneficial in resolving
+                                                                             to most of the baseline methods using only approximately
+this problem. For the Protein class, we observed that the
+                                                                             60% of the training data. To support further research, we have
+candidate types extracted from the KG are sometimes not
+                                                                             made the KGLink model code and experimental data publicly
+Protein itself but could be Gene or Enzymes, closely related
+                                                                             available.
+in the semantic space to Protein. A similar situation is also
+observed in the Film class, where the candidate types generated                                                VII. ACKNOWLEDGEMENTS
+from the KG could be Television series, Scholarly article, or                  Lei Chen’s work is partially supported by National Key
+Book, instead of Film. In such cases, the column representation              Research and Development Program of China Grant No.
+generation task proves to be beneficial.                                     2023YFF0725100, National Science Foundation of China
+   For the VizNet dataset, the top three classes with increased              (NSFC) under Grant No. U22B2060, the Hong Kong RGC
+accuracy after adding the column representation generation                   GRF Project 16213620, RIF Project R6020-19, AOE Project
+task are: Artist, Year, and Rank, with an average increase of                AoE/E-603/18, Theme-based project TRS T41-603/20R, CRF
+accuracy of 3.18. Notably, since the test set of the VizNet                  Project C2004-21G, Guangdong Province Science and Tech-
+dataset is 10 times larger than that of SemTab, and its label                nology Plan Project 2023A0505030011, Hong Kong ITC ITF
+number is only 28% of SemTab, we only consider classes with                  grants MHX/078/21 and PRP/004/22FX, Zhujiang scholar pro-
+more than 100 samples in the test set.                                       gram 2021JC02X170, Microsoft Research Asia Collaborative
+   For the Artist class, the situation is similar to the Athlete             Research Grant and HKUST-Webank joint research lab grants.
+class in the SemTab dataset. The information extracted from
+the KG of this class contains information such as Human,
+Musical group, or Film, where the column representation
+generation task is needed to address the granularity issue. The
+accuracy increase on Year and Code illustrates that the column
+                               R EFERENCES                                         [26] H. Iida, D. Thai, V. Manjunatha, and M. Iyyer, “Tabbie: Pretrained
+                                                                                        representations of tabular data,” arXiv preprint arXiv:2105.02584, 2021.
+ [1] P. Nguyen, I. Yamada, N. Kertkeidkachorn, R. Ichise, and                      [27] Y. Suhara, J. Li, Y. Li, D. Zhang, Ç. Demiralp, C. Chen, and W.-C. Tan,
+     H. Takeda, “Semtab 2021: Tabular data annotation with mtab                         “Annotating columns with pre-trained language models,” in Proceedings
+     tool,” in SemTab@ISWC 2021, ser. CEUR Workshop Proceedings,                        of the 2022 International Conference on Management of Data, 2022, pp.
+     vol. 3103. CEUR-WS.org, 2021, pp. 92–101. [Online]. Available:                     1493–1503.
+     http://ceur-ws.org/Vol-3103/paper8.pdf                                        [28] Y. LeCun, Y. Bengio, and G. Hinton, “Deep learning,” nature, vol. 521,
+ [2] Y. Sun, H. Xin, and L. Chen, “Reca: Related tables enhanced column                 no. 7553, pp. 436–444, 2015.
+     semantic type annotation framework,” Proceedings of the VLDB Endow-           [29] J. Devlin, M.-W. Chang, K. Lee, and K. Toutanova, “Bert: Pre-training
+     ment, vol. 16, no. 6, pp. 1319–1331, 2023.                                         of deep bidirectional transformers for language understanding,” arXiv
+ [3] R. Wang, Y. Li, and J. Wang, “Sudowoodo: Contrastive self-supervised               preprint arXiv:1810.04805, 2018.
+     learning for multi-purpose data integration and preparation,” arXiv           [30] G. Hinton, O. Vinyals, J. Dean et al., “Distilling the knowledge in a
+     preprint arXiv:2207.04122, 2022.                                                   neural network,” arXiv preprint arXiv:1503.02531, vol. 2, no. 7, 2015.
+ [4] X. Deng, H. Sun, A. Lees, Y. Wu, and C. Yu, “Turl: Table understanding        [31] A. Kendall, Y. Gal, and R. Cipolla, “Multi-task learning using uncer-
+     through representation learning,” ACM SIGMOD Record, vol. 51, no. 1,               tainty to weigh losses for scene geometry and semantics,” in Proceedings
+     pp. 33–40, 2022.                                                                   of the IEEE conference on computer vision and pattern recognition,
+ [5] C. Gormley and Z. Tong, Elasticsearch: the definitive guide: a dis-                2018, pp. 7482–7491.
+     tributed real-time search and analytics engine. ” O’Reilly Media, Inc.”,      [32] Q. Wang, L. Yang, B. Kanagal, S. Sanghai, D. Sivakumar, B. Shu,
+     2015.                                                                              Z. Yu, and J. Elsas, “Learning to extract attribute value from product
+ [6] J. Chen, E. Jiménez-Ruiz, I. Horrocks, and C. Sutton, “Learning seman-            via question answering: A multi-task approach,” in Proceedings of the
+     tic annotations for tabular data,” in Proceedings of the 28th International        26th ACM SIGKDD International Conference on Knowledge Discovery
+     Joint Conference on Artificial Intelligence, 2019, pp. 2088–2094.                  & Data Mining, 2020, pp. 47–55.
+ [7] P. Nguyen, N. Kertkeidkachorn, R. Ichise, and H. Takeda,                      [33] D. Wang, P. Shiralkar, C. Lockard, B. Huang, X. L. Dong, and M. Jiang,
+     “Mtab4dbpedia: Semantic annotation for tabular data with dbpedia.”                 “Tcn: Table convolutional network for web table interpretation,” in
+ [8] A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez,            Proceedings of the Web Conference 2021, 2021, pp. 4020–4032.
+     Ł. Kaiser, and I. Polosukhin, “Attention is all you need,” Advances in        [34] O. Hassanzadeh, V. Efthymiou, J. Chen, E. Jiménez-Ruiz, and
+     neural information processing systems, vol. 30, 2017.                              K. Srinivas, “SemTab 2019: Semantic Web Challenge on Tabular
+ [9] S. Robertson, H. Zaragoza et al., “The probabilistic relevance frame-              Data to Knowledge Graph Matching Data Sets,” Oct. 2019. [Online].
+     work: Bm25 and beyond,” Foundations and Trends® in Information                     Available: https://doi.org/10.5281/zenodo.3518539
+     Retrieval, vol. 3, no. 4, pp. 333–389, 2009.                                  [35] D. Zhang, Y. Suhara, J. Li, M. Hulsebos, Ç. Demiralp, and W.-C.
+[10] I. Tenney, D. Das, and E. Pavlick, “Bert rediscovers the classical nlp             Tan, “Sato: Contextual semantic type detection in tables,” Proc. VLDB
+     pipeline,” arXiv preprint arXiv:1905.05950, 2019.                                  Endow., vol. 13, no. 12, p. 1835–1848, 2020. [Online]. Available:
+[11] T. Mikolov, K. Chen, G. Corrado, and J. Dean, “Efficient estimation of             https://doi.org/10.14778/3407790.3407793
+     word representations in vector space,” arXiv preprint arXiv:1301.3781,        [36] U. Khurana and S. Galhotra, “Semantic concept annotation for tabular
+     2013.                                                                              data,” in Proceedings of the 30th ACM International Conference on
+[12] J. Pennington, R. Socher, and C. D. Manning, “Glove: Global vectors                Information & Knowledge Management, 2021, pp. 844–853.
+     for word representation,” in Proceedings of the 2014 conference on            [37] D. Vrandečić and M. Krötzsch, “Wikidata: a free collaborative knowl-
+     empirical methods in natural language processing (EMNLP), 2014, pp.                edgebase,” Communications of the ACM, vol. 57, no. 10, pp. 78–85,
+     1532–1543.                                                                         2014.
+[13] Y. Liu, M. Ott, N. Goyal, J. Du, M. Joshi, D. Chen, O. Levy, M. Lewis,        [38] J. Lehmann, R. Isele, M. Jakob, A. Jentzsch, D. Kontokostas, P. N.
+     L. Zettlemoyer, and V. Stoyanov, “Roberta: A robustly optimized bert               Mendes, S. Hellmann, M. Morsey, P. Van Kleef, S. Auer et al.,
+     pretraining approach,” arXiv preprint arXiv:1907.11692, 2019.                      “Dbpedia–a large-scale, multilingual knowledge base extracted from
+[14] K. Clark, U. Khandelwal, O. Levy, and C. D. Manning, “What                         wikipedia,” Semantic web, vol. 6, no. 2, pp. 167–195, 2015.
+     does bert look at? an analysis of bert’s attention,” arXiv preprint           [39] A. Paszke, S. Gross, F. Massa, A. Lerer, J. Bradbury, G. Chanan,
+     arXiv:1906.04341, 2019.                                                            T. Killeen, Z. Lin, N. Gimelshein, L. Antiga et al., “Pytorch: An
+[15] A. Halevy, P. Norvig, and F. Pereira, “The unreasonable effectiveness              imperative style, high-performance deep learning library,” Advances in
+     of data,” IEEE intelligent systems, vol. 24, no. 2, pp. 8–12, 2009.                neural information processing systems, vol. 32, 2019.
+[16] K. Hu, S. Gaikwad, M. Hulsebos, M. A. Bakker, E. Zgraggen, C. Hi-             [40] T. Wolf, L. Debut, V. Sanh, J. Chaumond, C. Delangue, A. Moi,
+     dalgo, T. Kraska, G. Li, A. Satyanarayan, and Ç. Demiralp, “Viznet:               P. Cistac, T. Rault, R. Louf, M. Funtowicz et al., “Transformers: State-
+     Towards a large-scale visualization learning and benchmarking reposi-              of-the-art natural language processing,” in Proceedings of the 2020
+     tory,” in Proceedings of the 2019 CHI Conference on Human Factors                  conference on empirical methods in natural language processing: system
+     in Computing Systems, 2019, pp. 1–12.                                              demonstrations, 2020, pp. 38–45.
+[17] M. J. Cafarella, A. Halevy, D. Z. Wang, E. Wu, and Y. Zhang,                  [41] M. Honnibal and I. Montani, “spaCy 2: Natural language understanding
+     “Webtables: exploring the power of tables on the web,” Proceedings                 with Bloom embeddings, convolutional neural networks and incremental
+     of the VLDB Endowment, vol. 1, no. 1, pp. 538–549, 2008.                           parsing,” 2017, to appear.
+[18] M. Hulsebos, K. Hu, M. Bakker, E. Zgraggen, A. Satyanarayan,                  [42] T. Wang, A. Roberts, D. Hesslow, T. Le Scao, H. W. Chung, I. Belt-
+     T. Kraska, Ç. Demiralp, and C. Hidalgo, “Sherlock: A deep learning                agy, J. Launay, and C. Raffel, “What language model architecture
+     approach to semantic data type detection,” in Proceedings of the 25th              and pretraining objective works best for zero-shot generalization?” in
+     ACM SIGKDD International Conference on Knowledge Discovery &                       International Conference on Machine Learning. PMLR, 2022, pp.
+     Data Mining, 2019, pp. 1500–1508.                                                  22 964–22 984.
+[19] P. Yin, G. Neubig, W.-t. Yih, and S. Riedel, “Tabert: Pretraining             [43] C. Raffel, N. Shazeer, A. Roberts, K. Lee, S. Narang, M. Matena,
+     for joint understanding of textual and tabular data,” arXiv preprint               Y. Zhou, W. Li, and P. J. Liu, “Exploring the limits of transfer
+     arXiv:2005.08314, 2020.                                                            learning with a unified text-to-text transformer,” The Journal of Machine
+[20] J. Chen, E. Jiménez-Ruiz, I. Horrocks, and C. Sutton, “Colnet: Em-                Learning Research, vol. 21, no. 1, pp. 5485–5551, 2020.
+     bedding the semantics of web tables for column type prediction,” in           [44] P. He, X. Liu, J. Gao, and W. Chen, “Deberta: Decoding-enhanced bert
+     Proceedings of the AAAI Conference on Artificial Intelligence, vol. 33,            with disentangled attention,” arXiv preprint arXiv:2006.03654, 2020.
+     no. 01, 2019, pp. 29–36.
+[21] D. Oliveira and M. d’Aquin, “Adog-annotating data with ontologies and
+     graphs,” in SemTab@ ISWC, 2019.
+[22] N. Abdelmageed and S. Schindler, “Jentab: Matching tabular data to
+     knowledge graphs.” in SemTab@ ISWC, 2020, pp. 40–49.
+[23] “Google data studio,” 2020.
+[24] “Microsoft power bi,” 2020.
+[25] “Tableau software,” 2020.
+

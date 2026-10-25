@@ -1,0 +1,31 @@
+withinthecolumnincreasesthecandidate’sscore.
+Alabel-basedfilterexcludescandidatesassignedthenamed-entityschemacategoriesPER-
+SON or DATE. The reported implementation uses spaCy for this step. This filter distinguishes
+adescriptivecandidatetypefromaparticularperson’snameoradateencounteredintheneigh-
+borhood. KGLink retains the selected candidate-type labels as text and places them before the
+cell values in the processed column. The reported implementation generates up to three candi-
+date types per row from the KG entities in each column. Their later contribution depends on
+howtheencoderinterpretstheminthetablecontext.
+If no candidate type is returned, padding occupies the corresponding position. Numeric
+columns use numeric summary information in this part of the input, while their original values
+remainavailableinthetablesequence.
+The feature sequence provides a second representation of the retrieved knowledge. From
+the filtered and ranked table, KGLink selects a cell for each target column, chooses its highest-
+linking entity, and serializes that entity with its one-hop predicates and neighboring entities. If
+𝑒 is the selected entity, 𝑝 a predicate, and 𝑜 a neighboring object, the sequence consists of the
+entitylabelfollowedbypredicate–objectdescriptions. Encodingthistextyieldsafeaturevector
+forthecolumn. Apaddingsequenceisusedwhenthecolumnhasnoretrievedentity.
+Candidate types and feature sequences thus preserve different aspects of a neighborhood.
+Candidate selection emphasizes descriptions recurring across column values. The feature se-
+quence retains relational details surrounding a particular well-linked value. The experimental
+ablationsexaminethetwopathwaysthroughspecificmodelvariants.
+3.4 Language Model Integration
+3.4.1 Table Serialization and Column Representations
+KGLink adapts the multi-column serialization used by Doduo [11]. A special [CLS] token
+beginseachcolumn’ssegment. Thesegmentsareconcatenatedintooneinputsequence,followed
+by a [SEP] token. The contextual representation at each column’s [CLS] position provides
+that column’s vector. Because the sequence contains multiple columns, self-attention can use
+informationoutsidethepredictedcolumn.
+Writing the tokenized contents of column 𝑖 as tok1,…,tok𝑚, the original multi-column se-
+𝑖 𝑖
+28

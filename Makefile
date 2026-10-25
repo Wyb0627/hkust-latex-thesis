@@ -1,13 +1,18 @@
-thesis.pdf: main.tex \
-				chapter/*.tex \
+.PHONY: all clean counts
+all: thesis.pdf
 
-	latex main.tex
-	bibtex main
-	latex main.tex
-	latex main.tex
-	dvipdf main.dvi thesis.pdf
+BIB_FRAGMENTS := $(wildcard bibliography/*.bib)
+THESIS_INPUTS := $(wildcard chapter/*.tex chapter/tables/*.tex figures/*/*) template/hkust-thesis-v0.11.6/hkustthesis.cls
+
+thesis-references.bib: $(BIB_FRAGMENTS) scripts/merge_bibliography.py scripts/bib_utils.py
+	python3 scripts/merge_bibliography.py
+
+thesis.pdf: main.tex Makefile scripts/build_thesis.py $(THESIS_INPUTS) thesis-references.bib
+	python3 scripts/build_thesis.py
+
+counts:
+	mkdir -p planning/qa
+	texcount -inc -sub=chapter main.tex > planning/qa/texcount.txt
 
 clean:
-	rm *.aux *.bbl *.blg *.dvi *.pdf *.bak *.toc *.tol *.lof *.log *.lot
-read:
-	acroread thesis.pdf
+	latexmk -c main.tex

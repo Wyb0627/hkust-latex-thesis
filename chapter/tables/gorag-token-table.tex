@@ -1,0 +1,21 @@
+% Exact active-source transcription, numerical values retained.
+\begin{table}[t]
+	\centering
+	\caption{Token cost on IFS-Rel dataset with 1-shot setting.}
+	\label{tab:gorag:token}
+	
+	\small
+		\begin{tabular}{l|c|c} 
+			\hline\hline
+			\textbf{Model} & \textbf{AVG Token per Query} & \textbf{AVG Cost per Query (USD)}  \\ 
+			\hline
+			GPT-4o         & 634.6                        & \$0.005                               \\
+			LongLLMLingua  & 2771.3                       & \$0.021                               \\
+			NaiveRAG       & 4537.4                       & \$0.034                               \\
+			LightRAG       & 7866.3                       & \$0.059                               \\
+			GraphRAG       & 9296.3                       & \$0.070                               \\
+			\textbf{GORAG} & \textbf{557.5}               & \textbf{\$0.004}                      \\
+			\hline\hline
+		\end{tabular}
+	
+\end{table}

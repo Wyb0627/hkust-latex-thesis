@@ -1,0 +1,35 @@
+Round 1 Labels
+Round 2 Labels
+esaercnI
+dnuoR
+⚠
+⚠
+✅
+⚠
+⚠
+⚠
+Figure 4.1: Two rounds of the dynamic classification task. New abuse categories extend the
+availablelabels. ReproducedfromFigure1ofGORAG[2].
+The index used in this chapter is a weighted graph of keywords and labels. A keyword can
+occur in examples from several classes. Its incident edges record these associations, and their
+costs distinguish how the term is represented in the indexed corpus. The graph allows several
+query keywords to be considered jointly. A label can participate in the connection between
+querykeywordsevenwhenexaminingonekeywordinisolationwouldgiveanambiguoussetof
+alternatives. Theretrievedlabelsetdependsonthequeryterminalsandthecurrentgraph.
+GORAG also updates its index after classifying an unlabeled query. Keywords that were
+absentfromtheindexcanthenbecomeavailabletolaterqueries. Thepredictedlabelassociates
+the newly observed keywords with a class for subsequent retrieval. Support examples initialize
+thegraphusingtheirsuppliedlabels.
+The research question has three connected parts. First, how should a small support set be-
+come a graph whose edges distinguish keyword–label associations? Second, how should the
+graphselectadifferentcandidatesetforeachtextasthelabeluniverseexpands? Third,howcan
+observationsfrompreviouslyclassifiedtextsenlargetheindex? Thefollowingsectionsdevelop
+theseoperationsandthenexaminetheirreportedclassificationandresourceresults.
+4.1.1 Rounds and information availability
+Let𝒴𝑟 denotethelabelsintroducedatround𝑟. Thecurrentlabeluniverseis
+new
+𝑟
+𝒴𝑟 = 𝒴𝑖 . (4.1)
+⋃ new
+𝑖=1
+41

@@ -1,0 +1,36 @@
+Table6.3: Graph-constructionandgraph-matchingsubstitutions,transposedfrompublishedTa-
+ble7,p.2490[4]. Alltwelvemethodcolumnsandallfourmetricvaluesperdatasetareretained.
+O.IEandSTATreplacegraphconstruction;theotheralternativesreplacematching. Theshared
+backboneisQwen2.5-VL-7B-Instruct.
+Dataset Method SIM. ACC. ROG. BLEU
+MMQA O.IE 0.642 0.571 0.510 0.483
+MMQA STAT 0.655 0.602 0.519 0.500
+MMQA VF2 0.851 0.735 0.673 0.620
+MMQA ISMAGS 0.833 0.706 0.638 0.590
+MMQA SM 0.832 0.702 0.632 0.582
+MMQA VJ 0.812 0.715 0.646 0.606
+MMQA RRWM 0.838 0.698 0.647 0.599
+MMQA IPFP 0.773 0.633 0.601 0.585
+MMQA BGE 0.832 0.703 0.635 0.586
+MMQA SLOT 0.838 0.700 0.650 0.602
+MMQA FGW 0.837 0.697 0.647 0.598
+MMQA MGRAG 0.853 0.744 0.676 0.722
+Arxiv O.IE 0.618 0.526 0.177 0.138
+Arxiv STAT 0.640 0.576 0.184 0.145
+Arxiv VF2 0.871 0.650 0.270 0.239
+Arxiv ISMAGS 0.868 0.643 0.266 0.231
+Arxiv SM 0.866 0.670 0.263 0.244
+Arxiv VJ 0.872 0.667 0.269 0.245
+Arxiv RRWM 0.874 0.675 0.257 0.243
+Arxiv IPFP 0.814 0.581 0.212 0.203
+Arxiv BGE 0.874 0.668 0.270 0.244
+Arxiv SLOT 0.872 0.653 0.269 0.233
+Arxiv FGW 0.868 0.651 0.264 0.230
+Arxiv MGRAG 0.876 0.680 0.273 0.250
+Manual O.IE 0.520 0.459 0.245 0.209
+Manual STAT 0.509 0.443 0.234 0.182
+Manual VF2 0.817 0.612 0.377 0.306
+Manual ISMAGS 0.817 0.612 0.382 0.307
+Manual SM 0.813 0.614 0.378 0.303
+Manual VJ 0.808 0.608 0.372 0.298
+96

@@ -1,0 +1,30 @@
+CHAPTER 6
+SEMANTIC GRAPH MATCHING FOR MULTIMODAL
+REASONING WITH MGRAG
+ThischapterisbasedonMGRAG:SemanticSubgraphMatchingandGraph-AwareCaching
+for Multimodal Retrieval-Augmented Generation, published in the Proceedings of the VLDB
+Endowment, volume 19, number 9, pages 2480–2493, 2026 [4]. It studies how a query can
+determine the evidence graph to construct, how paths can express semantic correspondences
+acrossdifferentgraphtopologies,andhowtheresultingstructurecanguidecontextcomputation.
+6.1 Multimodal Evidence and Query Requirements
+An answer to a multimodal query may depend on a relation that is distributed across text and
+images. A document can name a person, an image can show an action, and another passage
+canconnectthatpersontoanevent. Retrievingeachitembyitssimilaritytothequerysupplies
+candidate evidence, but the relation needed for the answer can remain implicit. A graph makes
+theentitiesandtheirconnectionsavailableasaretrievalobject. Itsusefulnessdependsonwhich
+facts are extracted and on whether its representation can express the relation requested by the
+query.
+This chapter considers a corpus 𝒟 = 𝒟 ∪ 𝒟 and a query 𝑞 that can contain text, an
+txt img
+image,orboth. Aretrievalmoduleselectsevidencefromthecorpus,andamultimodallanguage
+model generates an answer using that evidence. The research question is how to construct and
+retrieve a query-relevant relational representation while controlling the cost of preparing and
+processingthecontext. Theanswer-generationtaskremainsgroundedintheoriginaldocuments
+andimages. Thegraphsuppliesanadditionalrepresentationoftheirquery-relatedcontent.
+Threedecisionsgovernthisprocess. Thefirstconcernswhentoconstructagraph. Acorpus-
+widegraphrequiresextractionbeforethequeryisknown. Itsentitiesandrelationsconsequently
+reflecttheextractionprompt’sgeneraldescriptionofthecorpus. Whenanimagecontainsseveral
+people, objects, and actions, the details relevant to one query can differ from those relevant
+to another. MGRAG places the query inside the extraction process and constructs the graph
+incrementallyfromrankedevidence. Thegraphisspecifictothecurrentquery.
+79

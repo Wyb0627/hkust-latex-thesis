@@ -1,0 +1,32 @@
+7.5 Error Propagation Across Structural Decisions
+The location of a structural decision affects how an error can propagate. An incorrect KGLink
+entity link changes the descriptions offered to the encoder for a table. In GORAG, an incorrect
+predicted label can become an association available to later queries. AGRAG reuses a corpus
+graph, so an extracted relation can influence several query-specific selections. MGRAG con-
+structs a new graph for each query, but a mistaken accepted match can end construction before
+later chunks are examined. These consequences follow from the lifecycles of the four evidence
+structures.
+They identify different targets for feedback. Entity disambiguation concerns the link from
+a cell to external knowledge. Online correction concerns an association already inserted into
+an index. Relation verification concerns the connection from graph content to source passages.
+Matching diagnosis concerns entity alignment, relation semantics, and the path search. Evalu-
+ating feedback at those stages would connect an observed answer or classification error to the
+structural decision that made the evidence available. Chapter 8 develops this direction while
+retainingthesequenceinwhichfeedbackbecomesavailable.
+7.6 Limitations and Open Questions
+Knowledge coverage affects the first study. A graph can supply missing context only where
+suitablelinkedinformationexists. KGLink’sno-linkageanalysesand itscombined encoder de-
+signdescribehowtheevaluatedmethodbehaveswhenthatevidencevaries. Broaderdeployment
+wouldalsorequireattentiontothecoverage,language,andupdatestateofthechosenknowledge
+graphandthetargetannotationvocabulary.
+Prediction-dependent evidence affects online indexing. GORAG’s later retrieval state de-
+pends on the information inserted earlier under its protocol. Incorrect predicted associations
+can therefore become available to later queries. The reported round-based experiments mea-
+sure performance with the prescribed update mechanism, while the behavior of longer-running
+streamsorsubstantiallydifferentlabelevolutionremainsafurtherquestion.
+Graph extraction and evaluation affect the generation studies. AGRAG still uses models
+forrelationsandtriplefiltering. MGRAGextractsquery-relatedfactsfrommultimodalchunks,
+withcaption-basedrankingprecedingthatextraction. Missingorinaccuraterepresentationscan
+affectwhichevidencereachesthematcherorgenerator. Model-assessedQAmetricsadditionally
+reflect the evaluation procedure. These conditions identify where evidence quality enters the
+110

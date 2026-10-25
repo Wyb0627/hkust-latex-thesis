@@ -1,0 +1,26 @@
+\begin{table}
+	\centering
+	\caption{The ablation experiment result on the two datasets and 4 tasks. All experiments were carried out with Qwen2.5-14B-Instruct LLM, where Time (I / Q) denotes the Index and Query time, Token (I / O) denotes the LLM Input and Output token count.}
+	\label{tab:agrag:ablation}
+	\setlength\tabcolsep{1.5pt}
+	\resizebox{\linewidth}{!}{
+		\begin{tabular}{l|ccc|ccc|cc|cc|cc|cc|cc|cc|cc|cc} 
+			\hline\hline
+			\multirow{3}{*}{\textbf{Model }} & \multicolumn{6}{c|}{\textbf{Creative Gen. }}                                                        & \multicolumn{4}{c|}{\textbf{Contextual Sum. }}                              & \multicolumn{4}{c|}{\textbf{Complex Rea. }}                                 & \multicolumn{4}{c|}{\textbf{Fact Retrieval }}                               & \multicolumn{4}{c}{\textbf{Model Efficiency }}                                                                             \\ 
+			\cline{2-23}
+			& \multicolumn{3}{c|}{\textbf{Novel }}             & \multicolumn{3}{c|}{\textbf{Medical }}           & \multicolumn{2}{c|}{\textbf{Novel}} & \multicolumn{2}{c|}{\textbf{Medical}} & \multicolumn{2}{c|}{\textbf{Novel}} & \multicolumn{2}{c|}{\textbf{Medical}} & \multicolumn{2}{c|}{\textbf{Novel}} & \multicolumn{2}{c|}{\textbf{Medical}} & \multicolumn{2}{c|}{\textbf{Novel }}                         & \multicolumn{2}{c}{\textbf{Medical }}                       \\ 
+			\cline{2-23}
+			& \textbf{FS.}   & \textbf{ACC.}  & \textbf{COV.}  & \textbf{FS.}   & \textbf{ACC.}  & \textbf{COV.}  & \textbf{COV. } & \textbf{ACC.}      & \textbf{COV.}  & \textbf{ACC.}        & \textbf{ROG.}  & \textbf{ACC.}      & \textbf{ROG.}  & \textbf{ACC.}        & \textbf{ROG.}  & \textbf{ACC.}      & \textbf{ROG.}  & \textbf{ACC.}        & \textbf{Time (I / Q)}         & \textbf{Token (I / G)}       & \textbf{Time (I / Q)}        & \textbf{Token (I / G)}       \\ 
+			\hline\hline
+			AGRAG w. HR Only                 & 0.491          & \underline{0.322}  & 0.378          & 0.303          & 0.526          & 0.549          & 0.739          & 0.522              & 0.535          & 0.583                & 0.303          & 0.453              & 0.334          & \underline{0.636}        & \underline{0.323}  & \underline{0.487}      & 0.355          & 0.619                & \textbf{11.7} / \underline{137.9} & \textbf{5,117} / \underline{193} & 11.4 / \underline{117.9}         & \underline{5,215} / \underline{199}  \\
+			AGRAG w. LLM ER                  & 0.428          & 0.302          & \underline{0.365}  & 0.352          & 0.526          & \underline{0.587}  & \underline{0.755}  & 0.552              & 0.600          & 0.566                & \underline{0.320}  & \underline{0.465}      & 0.333          & 0.624                & 0.322          & 0.480              & 0.353          & 0.613                & 83.3 /  161.2                 & 8,030 /   887                & 31.9 / 148.8                 & 5,457  / 414                 \\
+			AGRAG w.o. HR                    & \textbf{0.519} & 0.306          & 0.343          & 0.342          & 0.521          & 0.570          & 0.677          & 0.534              & 0.420          & 0.578                & 0.318          & 0.434              & 0.324          & 0.598                & 0.314          & \underline{0.487}      & 0.344          & 0.615                & \underline{61.7} / 138.9          & 6,986 / 741                  & \underline{9.4 }/ \textbf{114.4} & \textbf{4,820} / 315         \\
+			AGRAG w.o. MCMI                  & 0.488          & \underline{0.332}  & 0.358          & \underline{0.351}  & \underline{0.530}  & 0.575          & 0.748          & \underline{0.592}      & 0.600          & \underline{0.588}        & \textbf{0.324} & \underline{0.465}      & 0.329          & 0.633                & 0.322          & 0.470              & \textbf{0.359} & \underline{0.621}        & 63.9 / \textbf{130.4}         & \underline{6,710} / 757          & 9.5 /  125.0                 & 5,230 /    331               \\
+			AGRAG w.o. Cle.                  & 0.478          & 0.311          & 0.361          & 0.336          & 0.517          & 0.569          & 0.712          & 0.597              & \underline{0.616}  & 0.577                & 0.301          & 0.450              & \underline{0.334}  & 0.628                & 0.313          & 0.478              & 0.354          & 0.620                & 65.6 / 140.1                  & 6,988 / \textbf{154}         & 9.1 / 142.9                  & 5,252 / \textbf{158}         \\
+			
+			\textbf{AGRAG}                   & \underline{0.513}  & \textbf{0.339} & \textbf{0.386} & \textbf{0.356} & \textbf{0.598} & \textbf{0.589} & \textbf{0.778} & \textbf{0.643}     & \textbf{0.690} & \textbf{0.604}       & 0.319          & \textbf{0.467}     & \textbf{0.343} & \textbf{0.665}       & \textbf{0.324} & \textbf{0.490}     & \underline{0.357}  & \textbf{0.628}       & 65.6 / 142.0                  & 6,988 / 639                  & \textbf{9.1} / 145.3         & 5,252 / 306                  \\
+			\hline\hline
+		\end{tabular}
+	}
+	
+\end{table}

@@ -1,0 +1,38 @@
+[
+  [
+    "Caption embeddings used during ranking do not replace the images in this final multimodal context.",
+    "The final multimodal context retains the original images alongside their extracted relational representation."
+  ],
+  [
+    "These are the facts shown in the published illustration, which is used here to explain the representation rather than to introduce another evaluation case.",
+    "These facts are the content of the published illustrative example."
+  ],
+  [
+    "The published matcher returns an empty result when no valid correspondence exists in its current graph; the chapter's evaluation reports answer quality for the published pipeline without introducing an additional unreported recovery mechanism.",
+    "The matcher returns an empty result when no valid correspondence exists in its current graph."
+  ],
+  [
+    "These comparisons expose answer-quality and time changes under several compositions of retrieval and caching, which is more informative than measuring token reuse alone.",
+    "These comparisons expose answer-quality and time changes under several compositions of retrieval and caching."
+  ],
+  [
+    "The publication reports point values for these experiments; the reproduced tables retain those values and do not add confidence intervals or significance markers that were not reported.",
+    "The publication reports point estimates for these experiments."
+  ],
+  [
+    "These differences describe the evaluated datasets without treating their scales or question distributions as interchangeable.",
+    "The reported gains vary with the dataset and metric."
+  ],
+  [
+    "They do not determine a universal ranking of extraction methods across textual and multimodal tasks, whose evidence requirements differ.",
+    "The evaluated extraction setting uses multimodal evidence and query-specific graphs."
+  ],
+  [
+    "MGRAG consequently combines the highest answer-quality values with a total time of 4.3 hours, but it does not have the smallest TTFT entry.",
+    "MGRAG combines the highest answer-quality values with a total time of 4.3 hours; CacheBlend with VanillaRAG has the shortest TTFT."
+  ],
+  [
+    "No synthetic cross-dataset average is needed to express that result.",
+    "The hop-specific values retain the measured trade-off for each question group."
+  ]
+]

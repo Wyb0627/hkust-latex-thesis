@@ -1,0 +1,35 @@
+Table 3.1: Column-type annotation results reported for KGLink. Scores and missing entries
+reproducetheoriginalmain-resulttable.
+SemTab VizNet
+Model Accuracy WeightedF1 Accuracy WeightedF1
+MTab 89.10 - 38.21 -
+TaBERT 72.69 71.21 94.68 94.07
+Doduo 84.06 82.43 95.40 95.06
+HNN 66.54 65.12 66.89 68.82
+Sudowoodo 79.34 79.24 91.57 91.08
+RECA 86.12 84.91 93.25 93.18
+KGLink 87.12 85.78 96.28 96.07
+SemTab accuracy, 89.10. KGLink has the highest reported weighted F1 on SemTab and the
+highest values of both reported metrics on VizNet. These distinctions matter because the base-
+linecomparisoncontainsatask-definitiondifferenceforMTabanddoesnotincludeitsweighted
+F1.
+Doduo provides a useful comparison for the language-model pathway because KGLink
+adaptsitsserializationandusesBERTinthemainconfiguration. Doduoobtains84.06accuracy
+on SemTab and 95.40 on VizNet. KGLink’s higher scores under the reported experiment
+indicate that the full graph-augmented and jointly trained model improves on that baseline.
+The component experiments below examine which parts of KGLink contribute; the main table
+alonecomparescompletemethods.
+The dataset dependence is also visible in MTab’s results. Its accuracy is 89.10 on SemTab
+and 38.21 on VizNet under the label translation used in the experiment. These measurements
+motivate separating graph knowledge from the final annotation vocabulary. The source evalu-
+atessupervisedmethodsandaKG-basedmethodwhoselabelassumptionsdiffer. Theresulting
+scoresdescribeperformanceundereachdataset’slabelvocabularyandprotocol.
+3.6.3 Representation Learning and KG Evidence
+Table3.2separatesreportedvariantsfromtheprincipalbaselinecomparison. The𝑤/𝑜𝑚𝑠𝑘vari-
+antremovesthemaskedrepresentation-generationtask. ItsscoresarelowerthantheBERT-based
+fullmodelonbothdatasets. The𝑤/𝑜𝑐𝑡variantremovestheKG-derivedinformation,including
+candidatetypesandthefeaturevector,whilekeepingthemultitasklanguage-modelpathway. Its
+accuracy is 86.27 on SemTaband 95.83 on VizNet. The result supports the contribution of KG
+evidenceintheevaluatedjointarchitecture.
+The 𝑤/𝑜 𝑓𝑣 variant removes the KG-derived feature vector, following the original method
+34

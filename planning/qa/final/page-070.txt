@@ -1,0 +1,30 @@
+Text: Male feminists always Output:
+end up as sexual predators. Insulting Content
+I
+n
+p
+u
+t
+Steiner Tree
+Feminists
+Generated
+t
+u
+n p LLM
+sexual I
+Insult
+predators
+idiot
+Figure 4.5: A contextual-abuse example and its selected graph connections. Reproduced from
+Figure5ofGORAG[2].
+conditionidentifiesaconcretecomponentorevaluationchoicethataffectsthereportedclassifi-
+cationresult.
+Within these conditions, the study shows how a task graph can reduce the label-selection
+burden placed on a language model and maintain lexical evidence as the task evolves. The
+contribution differs from KGLink’s use of an existing knowledge graph to enrich table repre-
+sentations. Here the structure is built and updated from task data, and its immediate output
+is a query-specific label set. The next chapter turns from choosing among labels to selecting
+connected textual facts for an open-ended answer. That change requires a retrieval objective
+that accounts for the relevance and connection cost of evidence beyond a fixed classification
+vocabulary.
+56

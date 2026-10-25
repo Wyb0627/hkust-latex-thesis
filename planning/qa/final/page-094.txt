@@ -1,0 +1,35 @@
+Node-levelmatching Path-awarematching
+Data
+Graph A father_of B father_of C 𝓓𝓖 A father_of B father_of C
+𝓓𝓖 PathAggr.
+✓ ✘ ✘ ✓ ✓ ✓ ✓
+Query grandfather_of grandfather_of
+Graph A C 𝓠𝓖 A C
+𝓠𝓖
+Correct alignment:
+Cannotfindamapping,sufferfrom 𝓓𝓖(A → B → C) ⇔𝓠𝓖(A→ C)
+Semantic-structural Misalignment
+Findthe correctmapping!
+✓:Match ✘:Mismatch :PathAggregation
+Figure 6.1: Path-level correspondence in the MGRAG motivating example. A grandfa-
+ther_ofrelationcorrespondstotwofather_ofedges. OriginalFigure1,p.2481[4].
+The second decision concerns what constitutes a match. A query and its supporting docu-
+ments need not use the same decomposition of a fact. The published motivating example de-
+scribesadatagraphcontainingtwofather_ofedgesandaquerycontainingonegrand-
+father_of edge. The requested relation is represented by a two-hop path in the data. Re-
+quiring the same edge topology would exclude this correspondence. Figure 6.1 reproduces the
+example. MGRAG evaluates semantic representations of paths so that a query relation can be
+supportedbyasequenceofevidencerelations.
+The third decision concerns the cost of processing retrieved evidence. Graph construction
+alreadysendsevidencetoalanguagemodeltoextractentitiesandrelations. Someofthatcontent
+appearsagainwhenthematchedgraphanditssourcechunksareusedforanswering. Reusingthe
+earlierkey-value(KV)statescanreducerepeatedcomputation. Theirsuitabilitydependsonthe
+new query and context, so MGRAG selectively recomputes token states. It combines attention
+scores with topological features of the facts associated with those tokens. Structure thus enters
+bothevidenceselectionandthesubsequentuseoftheselectedcontext.
+These decisions extend the thesis from connected textual evidence to multimodal evidence
+whosesemanticdecompositionisquery-dependent. MGRAGdevelopsitsowngraphconstruc-
+tion, path-matching procedure, and cache score. The connection to the preceding studies lies
+in the role of explicit structure in organizing evidence. The evaluation in this chapter measures
+multimodalanswerqualityandcontext-servingcostsunderthepublishedMGRAGprotocol.
+80

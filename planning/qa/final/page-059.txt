@@ -1,0 +1,37 @@
+reports
+∑ 𝑤𝑟 ∑ 𝑤𝑟
+𝑤𝑟 = 1 𝑣∈ℳ 𝑦 𝑟 𝑛 𝑣,𝑦 𝑛 + 𝑣∈ℳ 𝑦 𝑟 𝑜 𝑣,𝑦 𝑜 . (4.4)
+𝑦 𝑛 ,𝑦 𝑜 2 ( 2|ℳ𝑟 | 2|ℳ𝑟 | )
+𝑦 𝑦
+𝑛 𝑜
+The formula uses costs incident to both labels. These factors determine the relative cost of
+traversingalabelbridgeratherthanakeywordassociation.
+Label bridges have a different evidential meaning from keyword–label edges. A keyword
+edgerecordsaterm’soccurrenceintextsassociatedwithaclass. Alabelbridgeisaddedbythe
+graph-merging procedure. It provides a connection through which retrieval can move between
+labelregions. Aretrievedpathcanthereforecombineobservedkeywordassociationswithlabel
+bridgesintroducedduringmerging.
+4.3 Adaptive Candidate Label Retrieval
+For a query 𝑡, GORAG extracts keywords using the indexing procedure and partitions them
+according to whether they already occur in 𝒱𝑟. Write these sets as 𝒱𝑡 and 𝒱𝑡 . The
+exist notexist
+existingkeywordsbecometheterminalsforcurrentretrieval. Theunseenkeywordsareheldfor
+online insertion after classification. The partition prevents the retrieval operation from treating
+anunindexedtermasifitalreadyhadaknownlabelneighborhood.
+Retrieval seeks a low-cost connected structure that contains the mapped terminals. Label
+nodes encountered in this structure form the candidate set 𝒴̂𝑟. Connecting several terminals
+𝑡
+can select intermediate labels and keywords. The graph therefore determines the number of
+candidatelabelsthroughthereturnedstructure,ratherthanrequiringthesamenumberoflabels
+forallqueries. Ashortqueryandaquerycontainingseveralmutuallydistantindexedtermscan
+producedifferentretrievalstructures.
+This terminal-connecting objective is related to the Steiner tree problem. In that problem,
+the required terminals are a subset of graph vertices, and the solution may use additional ver-
+ticestoconnectthem. Anordinaryminimumspanningtreeinsteadspansallverticesofitsinput
+graph. TheseobjectsplaydistinctrolesinGORAG’sprocedure. GORAGusestheseintermedi-
+atestructurestoconstructaheuristicconnectionamongthequeryterminals.
+4.3.1 Tree and auxiliary-graph operations
+GORAGusesagreedyterminal-connectingprocedurebasedonMehlhorn’salgorithm[38]. The
+mapped keywords serve as terminals. An auxiliary graph 𝐻 represents connections between
+terminals, with edge weights given by path costs. A minimum spanning tree of 𝐻 selects a
+45

@@ -1,0 +1,576 @@
+[
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "kind": "redundancy",
+    "before": "A language model often receives a question together with a collection of text, table cells, or images.",
+    "after": "Language-model pipelines use text, table cells, and images as evidence for prediction or generation.",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "kind": "shared-thread",
+    "before": "These problems connect through the interface between evidence and prediction. The structure may be externally supplied, maintained from task data, extracted from a corpus, or built for the current query. Its computational role may be to enrich a representation, identify candidate labels, connect facts, match query requirements, or guide context recomputation. The thesis examines these roles through four complete studies with their own tasks, algorithms, and published evaluations.",
+    "after": "The common question is how explicit relationships should constrain the evidence used for a task. KGLink selects descriptions for a supervised representation; GORAG selects labels from an evolving index; AGRAG selects connected facts and source context; and MGRAG matches query relations and allocates computation over the selected evidence. Across these studies, the thesis examines where structure is obtained, when it is adapted, and which downstream decision it controls.",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "kind": "redundancy",
+    "before": "This distinction is relevant to the title's use of \\emph{language models}. The thesis includes both a supervised encoder-based annotation method and retrieval-augmented generation systems.",
+    "after": "The thesis therefore includes supervised encoder-based annotation and retrieval-augmented generation.",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "kind": "redundancy",
+    "before": "An existing knowledge graph precedes online task indexing in the presentation; connected textual evidence precedes query-aware multimodal matching. ",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "kind": "redundancy",
+    "before": "They also determine the interpretation of an ablation. Removing a graph feature from an encoder changes its input evidence. Removing online indexing changes the information available to later predictions. Replacing an expanded subgraph with a tree changes the relations exposed in generation context. Changing a recomputation policy changes the model states refreshed while processing that context. The research chapters describe the altered component and its protocol before interpreting the corresponding result.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "kind": "redundancy",
+    "before": "This focus on interfaces separates several quantities that can otherwise be conflated. The number of retrieved passages is different from the number of facts represented in those passages. The size of a selected graph is different from the length of its token serialization. A candidate label's presence in context is different from the model selecting that label correctly. A semantic correspondence accepted by a matcher is different from a correct final answer. Each method connects these stages through a particular pipeline, and the experiments evaluate the resulting task outputs.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "kind": "redundancy",
+    "before": "The distinction is especially useful for comparing the studies. Their graphs are adapted to different evidence units and workloads, while their language models have different training and inference roles. The thesis evaluates the resulting structural operations in their original conditions and uses the comparison to identify design choices shared across the tasks.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "kind": "redundancy",
+    "before": "The contribution statements describe the technical changes; the research chapters retain their measured results and conditions.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "kind": "redundancy",
+    "before": " The contribution is evaluated through column annotation, component ablations, and cases with different graph coverage.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "kind": "redundancy",
+    "before": " The evaluation measures accuracy across rounds and shot conditions together with resource costs.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "kind": "redundancy",
+    "before": " Its evaluation separates tasks requiring isolated facts, multiple facts, summaries, flexible generation, and labels, and tests the effects of its component choices.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "kind": "redundancy",
+    "before": " The experiments examine multimodal answer quality, matching alternatives, construction and retrieval ablations, and serving costs.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "kind": "redundancy",
+    "before": "The term structural augmentation in this thesis covers these explicit uses of relationships. In KGLink, graph structure selects candidate knowledge for table representations. In GORAG, it connects query keywords with candidate labels. In AGRAG, it determines a connected evidence subgraph. In MGRAG, semantic paths guide evidence matching and graph information contributes to context recomputation~\\cite{bg-kglink,bg-gorag,bg-agrag,bg-mgrag}. The common object is an evidence pipeline whose behavior depends on relationships among indexed items. Each chapter evaluates that pipeline with the task and metrics of its corresponding study.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "kind": "precision",
+    "before": "and long tables are split by columns",
+    "after": "and wide tables are split by columns",
+    "evidence": "KGLink source implementation divides tables with more than eight columns"
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "kind": "method-condition",
+    "before": "The experimental implementation retrieves at most ten entities per cell mention.",
+    "after": "The experimental implementation retrieves at most ten entities per cell mention. From the KG entities in each column, it generates up to three candidate types per row, as specified in the original implementation.",
+    "evidence": "KGLink controlling PDF p.9 \u00a7IV.B; original KGLink.tex:663 (source says per row)"
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "kind": "redundancy",
+    "before": "Its effect is an empirical question because the score measures linkage rather than the semantic diversity of the selected values. ",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "kind": "redundancy",
+    "before": "The repeated classification positions retain the association between an output vector and its target column. Tokens from other columns remain present in the same encoder input, providing contextual information for these positions. This representation differs from independently encoding each column because the surrounding evidence is available while column vectors are computed. Candidate-type text is incorporated into the corresponding column segment before encoding, so its association with the target column is retained in the sequence layout. The feature vector is then combined with the column representation for the final decision. These two integration points allow KG descriptions to influence contextual encoding and provide a separate column-specific representation.",
+    "after": "Each column's \\texttt{[CLS]} position produces a contextual vector using the serialized columns. Candidate-type text precedes the corresponding cell values, allowing both to interact with neighboring columns through self-attention. KGLink separately encodes the feature sequence into a column-specific vector and combines it with the contextual column vector through the composition function $\\phi$. The resulting representation is mapped into the dataset's classification space.",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "kind": "redundancy",
+    "before": "The processed column includes candidate-type information as well as retained cell values. Consequently, an entity description can interact with the same cells that motivated its retrieval, and with neighboring columns that provide table context. The feature sequence is encoded separately into a column-specific vector. KGLink combines this feature vector with the contextual column representation through the composition function denoted $\\phi$ in the original method. The resulting vector is mapped into the dataset's classification space.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "kind": "redundancy",
+    "before": "The order of the two distributions follows the published expression. ",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "kind": "redundancy",
+    "before": " The experiment evaluates the trained models on the selected missing-linkage subset.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "kind": "redundancy",
+    "before": "KGLink's graph stage supplies additional evidence when retrieval succeeds, while the encoder continues to process values and inter-column context when it does not. The no-linkage experiment examines this second operating condition.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "kind": "ambiguous-source-quantity",
+    "before": "The qualitative analysis examines classes whose accuracy changes when the representation-generation task is added. On SemTab, the three classes with the largest reported increases are Athlete, Protein, and Film, using only classes with more than ten test samples. The source reports an average accuracy increase of 9.70 across those selected classes. This selection identifies examples of the auxiliary task's effect within the benchmark; the main table provides the aggregate dataset results.",
+    "after": "Among SemTab classes with more than ten test samples, Athlete, Protein, and Film have the three largest reported accuracy increases when the representation-generation task is added.",
+    "evidence": "Controlling PDF p.12 \u00a7V.D and KGLink.tex:874 both give 9.70 with no unit; omit that quantity rather than invent percent/percentage points"
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "kind": "redundancy",
+    "before": "The qualitative cases explain the kind of mismatch targeted by the method, while the task-removal ablation measures its aggregate effect under the reported protocol.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "kind": "redundancy",
+    "before": "The associated label is the model's prediction, which introduces an important distinction between supervised initialization and subsequent online expansion. The system receives true labels for the few-shot support examples; it does not receive the true label of a query before predicting that query. This information boundary defines the interpretation of the online evaluation.",
+    "after": "The predicted label associates the newly observed keywords with a class for subsequent retrieval. Support examples initialize the graph using their supplied labels.",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "kind": "redundancy",
+    "before": "Maintaining these statistics does not provide the query's correct class. ",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "kind": "redundancy",
+    "before": "Individual support documents are used to construct this representation; they are not defined as a third category of exemplar nodes in the graph.",
+    "after": "Support documents contribute keyword--label associations to this representation.",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "kind": "redundancy",
+    "before": "The graph does not encode a fixed rule that every occurrence of a keyword implies the same class.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "kind": "redundancy",
+    "before": "Consequently, a retrieved path should be interpreted as an operation on the constructed index, with these distinct edge semantics, rather than as a sequence of independently observed real-world relations.",
+    "after": "A retrieved path can therefore combine observed keyword associations with label bridges introduced during merging.",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "kind": "redundancy",
+    "before": "The distinction between terminals and intermediate nodes is central. Terminals must participate because they represent the query's mapped evidence. Intermediate nodes are included because the selected connections pass through them. The final candidate labels are the label nodes among these selected vertices. A label does not enter the candidate set merely because it is present somewhere in the full index. This selective use of graph topology is how the retrieved classification instruction can be smaller than the current task's complete label universe.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "kind": "redundancy",
+    "before": "The auxiliary tree and the returned structure have different vertex sets. The auxiliary tree expresses connections among the terminals. Their expanded paths can also contain keyword and label nodes that were not terminals. These intermediate nodes provide the connection between the query's lexical evidence and the candidate classes. The terminal set changes from query to query, while the costs reflect the graph accumulated at the current round.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "kind": "redundancy",
+    "before": "The retrieval procedure favors a connected explanation of the mapped keywords over independently selecting a fixed number of labels for each keyword. A label may be included because it connects several terms, and an additional keyword node may connect terms that have no direct edge. The returned structure can therefore express joint evidence that would be lost if each terminal were treated as an independent lookup. Its label intersection is the compact output used by classification.\n% G1: author directed main-text precedence over conflicting appendix pseudocode. This operational account follows main-text terminal/auxiliary-tree/path-expansion steps. No new ratio or corrected proof is asserted.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "kind": "redundancy",
+    "before": "This expression makes the retrieval output explicit. The selected structure is an intermediate object; the label intersection is the interface needed by the classifier. Supporting keywords and label descriptions then provide additional context for these alternatives.",
+    "after": "Representative keywords and label descriptions are added to the classification prompt for the labels selected by this intersection.",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "kind": "redundancy",
+    "before": "Adaptation concerns candidate selection after query mapping. Keyword extraction, the language model, and its prompts remain configured components. The useful distinction is between determining a candidate set from the query's connections and applying a fixed retrieval cutoff to all texts.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "kind": "redundancy",
+    "before": "The prediction precedes the update. A query therefore supplies its text to the current prediction, while its predicted class contributes to future index state. A mistaken prediction can attach a new keyword to an incorrect label. Edge weighting determines the cost of using that association, but it is not a mechanism for obtaining missing ground truth. The online ablation measures the overall contribution of using this expanding source under the reported protocol.",
+    "after": "The prediction precedes insertion, so a new keyword's association can affect later queries but not the prediction that created it. Incorrect predicted labels can propagate through those associations. The offline ablation suppresses online expansion, measuring its contribution relative to an index that receives no such query-dependent additions.",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "kind": "redundancy",
+    "before": "This distinction also determines what an evaluation result measures. Online accuracy includes decisions made with an index that has been affected by earlier predictions. It is a result for a stateful retrieval procedure. Evaluating queries independently against an unchanged support graph would answer a different question. The offline variant provides one such comparison by suppressing online expansion while retaining the rest of the method's components.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "kind": "redundancy",
+    "before": "Comparing the fourth-round ten-shot score to the first-round one-shot score would mix these conditions.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "kind": "redundancy",
+    "before": "Comparisons use methods evaluated under the same round and support conditions.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "kind": "redundancy",
+    "before": "The results establish different patterns on different datasets. WOS has many labels and longer academic texts. IFS-Rel uses a different backbone and balanced test allocation. CAD concerns contextual abuse categories. A single pooled improvement would combine these task and model differences. The chapter instead uses the per-condition scores to examine whether query-specific label selection and online evidence maintenance help the evaluated classifier.",
+    "after": "WOS improves with additional support in the displayed rounds, whereas IFS-Rel is non-monotonic across support sizes and CAD loses accuracy as labels accumulate.",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "kind": "source-boundary",
+    "before": "The full-method row of this ablation table differs from the full-method row of the main WOS table. They are retained as separate reported result series. Component comparisons above use only the ablation table's full-method row. Using a main-table value as the control for an ablation value would introduce an unexplained change of result series.\n% G4: run/seed/protocol provenance awaiting author/publication clarification.",
+    "after": "The publication gives different full-method values in the main and ablation WOS tables without explaining their provenance. Component comparisons here use the full-method row from the ablation table.",
+    "evidence": "GORAG controlling PDF main Table2 vs ablation Table3; no run/seed reconciliation established"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "kind": "redundancy",
+    "before": " It does not measure a classifier with no external label information.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "kind": "redundancy",
+    "before": "The zero-shot result also illustrates why support size is not the only determinant of graph content. A graph can be initialized from label descriptions, support texts, or a combination allowed by the protocol. The few-shot results and zero-shot results use different available information. The zero-shot and few-shot comparisons therefore evaluate different graph initialization sources.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "kind": "redundancy",
+    "before": "This construction lets the study display behavior at later rounds while retaining a sufficient test collection in each split. Its interpretation depends on the partitioning protocol. A later point can differ because it has a different current label universe and because its preceding rounds used another partition. The appropriate conclusion concerns the reported performance across these split settings, with the original curves providing the per-round evidence.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "kind": "redundancy",
+    "before": "This case illustrates the operation of retrieval for one text. The accuracy tables quantify the decisions over the test collections, and the ablation table measures the contribution of changing specific pipeline components. These evidence types answer different questions. The example explains how a candidate appears in the classifier's input, while the aggregate results measure whether the resulting predictions match the required classes across the evaluation data.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "kind": "redundancy",
+    "before": "The online component changes the source of that evidence. Support examples establish supervised keyword--label associations. Subsequent predictions provide labels for newly observed query keywords, allowing the index to cover terms absent from the support sample. The offline ablation measures the contribution of this expansion under the evaluated conditions. Its benefit is attached to a procedure whose state depends on earlier predictions, so the availability and ordering of query observations are part of the evaluation setting.",
+    "after": "The offline ablation shows the contribution of expanding the index beyond the support sample. Because these additions carry predicted labels, the method couples current classification with the evidence available to later queries.",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "kind": "redundancy",
+    "before": "It is a qualitative account of evidence selection; quantitative evaluation is provided separately in Section~\\ref{sec:agrag:experiments}.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "kind": "lifecycle-precision",
+    "before": "The pseudo connection is an indexing device",
+    "after": "The pseudo connection is a connectivity device",
+    "evidence": "AGRAG selected main method introduces pseudo node after query-dependent scoring; no fixed insertion order inferred"
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "kind": "lifecycle-precision",
+    "before": "a high-cost indexing connection",
+    "after": "a high-cost connectivity connection",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "kind": "redundancy",
+    "before": " Equations~\\ref{eq:agrag:extraction-score}--\\ref{eq:agrag:entities} preserve the source formulation.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "kind": "redundancy",
+    "before": "These expressions retain the distinct roles assigned to the candidate score and subgraph quantity in the method. This describes the paper's expansion rule separately from the initial tree construction.",
+    "after": "The candidate ratio therefore ranks possible additions using their assigned node scores, while the current subgraph is evaluated by Equation~\\ref{eq:agrag:mcmi-objective}.",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "kind": "redundancy",
+    "before": "This case also distinguishes structural inclusion from answer generation. Selecting a relation makes its content available in the prompt. The generator must still use the original question to determine which part of that content answers the request. The example is a published illustration of this interface, while the comparison between full AGRAG and the tree-only ablation measures the effect across evaluation queries. Their roles are complementary: the figure explains the evidence structure and the ablation supplies measured component evidence.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "kind": "redundancy",
+    "before": "The graph records relationships in the indexed evidence; the generated answer remains the language model's response conditioned on that evidence.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "kind": "redundancy",
+    "before": "These distinctions explain why multiple metrics are retained. A response can cover many reference items while adding unsupported claims, or remain grounded while omitting part of the required answer. A classification system can retrieve useful candidates but still select the wrong label. The evaluation therefore reports the actual task metrics instead of deriving a common aggregate score across QA and classification.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "kind": "redundancy",
+    "before": " The reported improvements concern this protocol and corpus.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "kind": "redundancy",
+    "before": " Each column retains the metric and query collection of its corresponding task.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "kind": "redundancy",
+    "before": " This is why the chapter retains both faithfulness and coverage rather than summarizing the ablation as uniform improvement.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "kind": "redundancy",
+    "before": " It measures the downstream consequence of that replacement; the aggregate scores alone do not identify every intermediate graph error.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "kind": "redundancy",
+    "before": "AGRAG's efficiency therefore needs to be read together with the task results and the individual cost components. AGRAG reduces indexing time in these comparisons while its query totals remain above HippoRAG2 on Novel and Medical.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "kind": "algorithm-precision",
+    "before": "The matcher returns an empty result when no valid correspondence exists in its current graph.",
+    "after": "The matcher returns an empty result when its search finds no valid correspondence in the current graph.",
+    "evidence": "Publisher Algorithm1 empty result set; greedy Algorithm2 may miss an otherwise feasible path"
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "kind": "redundancy",
+    "before": " These facts are the content of the published illustrative example.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "kind": "redundancy",
+    "before": "The objective and constraints follow the published formulation. ",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "kind": "redundancy",
+    "before": "It preserves the incremental operation described in the published construction procedure.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "kind": "algorithm-loop",
+    "before": "\\REQUIRE Query graph $\\mathcal{QG}_q$, evidence graph $\\mathcal{KG}_q$, threshold $\\theta$",
+    "after": "\\REQUIRE Query graph $\\mathcal{QG}_q$, query anchor $\\gamma$, evidence graph $\\mathcal{KG}_q$, threshold $\\theta$",
+    "evidence": "Publisher PDF p.2485 Algorithm1 inputs anchor and loops over threshold-qualified evidence counterparts"
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "kind": "algorithm-loop",
+    "before": "\\STATE Select an anchor correspondence and enumerate candidate mappings\n\\FOR{each candidate mapping $I$}",
+    "after": "\\FOR{each $v\\in\\mathcal V_q$ with $\\cos(\\mathbf h_v,\\mathbf h_\\gamma)>\\theta$}\n\\STATE Enumerate candidate mappings consistent with $I(\\gamma)=v$\n\\FOR{each candidate mapping $I$}",
+    "evidence": "Publisher PDF Algorithm1 lines2\u20134"
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "kind": "algorithm-loop",
+    "before": "\\ENDFOR\n\\STATE Return the highest-scoring result, or $\\varnothing$ if $\\mathcal R$ is empty",
+    "after": "\\ENDFOR\n\\ENDFOR\n\\STATE Return the highest-scoring result, or $\\varnothing$ if $\\mathcal R$ is empty",
+    "evidence": "Publisher PDF Algorithm1 collects all counterpart results before maximum selection"
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "kind": "algorithm-loop",
+    "before": "An anchor limits the subsequent search to mappings consistent with its correspondence.",
+    "after": "For the selected query anchor, Algorithm~\\ref{alg:mgrag:matching} considers each evidence counterpart exceeding the threshold and enumerates mappings consistent with that correspondence.",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "kind": "redundancy",
+    "before": "{\\clubpenalty=10000\nThe construction and matching substitutions supply a second level of comparison. Their role is to replace one part of MGRAG while retaining the surrounding question-answering task. For example, the graph-construction alternatives change which facts are available before matching. A matching alternative changes how the existing representation is aligned with the query. This separation is useful when an answer contains information from several source items: a missing fact and an unsuitable correspondence can both lower answer quality, but they concern different stages of the pipeline.\\par}",
+    "after": "Component substitutions evaluate graph construction, semantic matching, and cache policy within MGRAG. Inverse ablations add matching and recomputation to other retrieval systems.",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "kind": "redundancy",
+    "before": "The comparisons have four roles. Complete-system baselines measure the combined retrieval and generation pipeline. Graph-construction substitutions replace the evidence extraction component. Graph-matching substitutions replace the correspondence mechanism. Cache comparisons and inverse ablations vary context-serving components. Keeping these roles distinct makes it possible to relate each experiment to the particular decision it tests.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "kind": "redundancy",
+    "before": " The reported gains vary with the dataset and metric.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "kind": "redundancy",
+    "before": "The margins are therefore uneven. The table supports a consistent advantage for the full matching choice across the reported metric rows, with the magnitude determined by dataset and metric.",
+    "after": "MGRAG leads the displayed metric rows, with smaller MMQA and Web accuracy margins than the Wiki accuracy margin.",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "kind": "redundancy",
+    "before": "The matching experiment measures downstream answers after each substitution. Its metrics combine the selected graph with the generation model's use of the context. A higher answer score indicates a more effective retrieval-and-answering composition under this protocol. The semantic matching mechanism itself is described by its entity, path, and threshold conditions in Section~\\ref{sec:mgrag:matching}; the answer metrics provide empirical evidence for its use in MGRAG.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "kind": "redundancy",
+    "before": " The hop-specific values retain the measured trade-off for each question group.",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "kind": "redundancy",
+    "before": "Reporting both values preserves the contribution of the cache policy without assuming that every application of recomputation reduces total runtime. ",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "kind": "redundancy",
+    "before": "The result also depends on the retrieval pipeline paired with the cache. Adding a cache policy to an existing system leaves that system's evidence representation in place. MGRAG's full result includes query-aware construction and path-based matching as well as graph-aware recomputation. The inverse ablations in Section~\\ref{sec:mgrag:ablations} supply the closer comparison for the contribution of the graph feature after a retrieval choice has been fixed.",
+    "after": "Section~\\ref{sec:mgrag:ablations} compares these component additions within the HippoRAG2 and VanillaRAG pipelines.",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "kind": "cost-accounting",
+    "before": "The end-to-end measurement is retained separately from the listed module times. The original totals and their reported precision are preserved.",
+    "after": "The listed module times do not sum to the reported end-to-end total; the publication does not reconcile the difference in this breakdown.",
+    "evidence": "Publisher Table5 MMQA KGC193.0/Match0.14/QA8.9/E2E248.1; no explanation invented"
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "kind": "model-role",
+    "before": "Keyword extraction and classification",
+    "after": "Label-description generation and classification",
+    "evidence": "GORAG PDF Eq2 statistical TF-IDF; Eq11/12 model-generated label information/classification"
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "kind": "redundancy",
+    "before": "Table~\\ref{tab:discussion:roles} records these roles without requiring the studies to share an implementation. ",
+    "after": "",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "kind": "experimental-consistency",
+    "before": "This variation explains why the thesis retains task-specific metrics. Annotation F1, classification accuracy, model-assessed QA scores, lexical answer overlap, and serving latency measure different outcomes. Each supports a comparison within its stated protocol. The comparison relates each structural operation to its task metrics and component evidence.",
+    "after": "Table~\\ref{tab:discussion:controls} brings the main experimental conditions into the comparison. KGLink evaluates a trained encoder, whereas the other studies evaluate generative pipelines with different backbones. Even when a dataset name recurs, its supervision and update protocol can change: GORAG's WOS and IFS-Rel experiments accumulate labels and predicted-keyword associations over rounds, while AGRAG indexes one training passage per label for its classification setting. These experiments answer different questions about the use of structure.\n\n\\begin{table}[tbp]\n\\centering\\small\n\\caption{Main experimental conditions across the four studies. Hardware denotes the reported local setup; GORAG's IFS-Rel generation uses the GPT-4o service. Full task-specific controls appear in the corresponding research chapters.}\n\\label{tab:discussion:controls}\n\\begin{tabular}{>{\\raggedright\\arraybackslash}p{0.11\\textwidth}>{\\raggedright\\arraybackslash}p{0.26\\textwidth}>{\\raggedright\\arraybackslash}p{0.28\\textwidth}>{\\raggedright\\arraybackslash}p{0.23\\textwidth}}\n\\toprule\nStudy & Main model and hardware & Supervision and evidence state & Reported outcome\\\\\n\\midrule\nKGLink & BERT; Tesla V100 & 7:1:2 labeled-column split; external KG; three-run averages & Annotation accuracy and weighted F1 on a percentage scale\\\\\nGORAG & Qwen2.5-7B on CAD/WOS; GPT-4o on IFS-Rel; A100 40 GB & 1/5/10 support texts per label; cumulative labels; prediction-dependent index updates & Exact-label accuracy by round and support size\\\\\nAGRAG & Qwen2.5-14B-Instruct; A100 80 GB & Fixed corpus graph; query-conditioned scores and subgraph; one training passage per label for classification & Task-specific QA assessment/overlap, coverage, faithfulness, and classification metrics\\\\\nMGRAG & Qwen2.5-VL-7B-Instruct; A100 40 GB & Query-specific multimodal graph; semantic matching; selective KV recomputation & Answer quality, TTFT, and complete-system/module costs\\\\\n\\bottomrule\n\\end{tabular}\n\\end{table}\n\nA shared metric label can also conceal a different assessment rule. GORAG's accuracy requires the predicted class to match the gold label. AGRAG's QA accuracy uses model judgments scored 0, 0.5, or 1, while its classification accuracy uses label correctness. Its source-defined ROUGE-L quantity divides longest-common-subsequence length by generated-answer length. MGRAG reports answer accuracy alongside semantic similarity and lexical overlap. The synthesis therefore relates structural mechanisms to their corresponding measurements; it does not pool these scores into a single cross-task accuracy.",
+    "evidence": "Sources independently checked in round2 scientific reviews; no common model/protocol inferred"
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "kind": "shared-thread",
+    "before": "\\section{Choosing the Unit of Adaptation}\n\\label{sec:discussion:unit}\nThe studies suggest that adaptation should be defined at the unit the application can observe and evaluate. For a table encoder, the unit can be a column and its neighboring context. Its supervision identifies a type, so external graph information must enter a representation that supports that decision. For a dynamic classifier, the unit can be a label association in the current index. Its update affects future candidate retrieval as well as the current prediction sequence.\n\nFor textual generation, the unit of adaptation can be the selected evidence structure. A query changes which facts serve as anchors, which graph nodes receive influence, and which passages provide context. The corpus representation can remain reusable while retrieval changes. For multimodal QA, adaptation can include the representation itself: extraction uses the query, and matching determines whether construction should continue with another chunk. These are different interventions on the evidence pipeline.\n\nThe choice of unit also affects what an explanation of a result should contain. An annotation improvement should be related to the candidate evidence and representation task. A dynamic classification result should describe index updates and label availability. A generation result should identify the context supplied and the task's answer requirements. A serving result should specify which states were reused, which were recomputed, and the associated quality and cost measures. These details connect a structural method to an observable outcome.\n\nA further consequence is that errors can occur at several interfaces. A correct source fact can be linked to the wrong table entity. A useful keyword can be associated with an incorrect predicted label. An extracted relation can omit context needed by a summary. A semantically relevant path can be rejected by a local search decision. Treating these as separate interfaces provides a basis for diagnosis and for the feedback-oriented research directions in Chapter~\\ref{ch:conclusion}.\n\n",
+    "after": "\\section{Error Propagation Across Structural Decisions}\n\\label{sec:discussion:unit}\nThe location of a structural decision affects how an error can propagate. An incorrect KGLink entity link changes the descriptions offered to the encoder for a table. In GORAG, an incorrect predicted label can become an association available to later queries. AGRAG reuses a corpus graph, so an extracted relation can influence several query-specific selections. MGRAG constructs a new graph for each query, but a mistaken accepted match can end construction before later chunks are examined. These consequences follow from the lifecycles of the four evidence structures.\n\nThey identify different targets for feedback. Entity disambiguation concerns the link from a cell to external knowledge. Online correction concerns an association already inserted into an index. Relation verification concerns the connection from graph content to source passages. Matching diagnosis concerns entity alignment, relation semantics, and the path search. Evaluating feedback at those stages would connect an observed answer or classification error to the structural decision that made the evidence available. Chapter~\\ref{ch:conclusion} develops this direction while retaining the sequence in which feedback becomes available.\n\n",
+    "evidence": "Cross-chapter synthesis from operational evidence lifecycles; prospective feedback is not presented as an experiment"
+  },
+  {
+    "file": "chapter/ch08-conclusion.tex",
+    "kind": "conclusion-inference",
+    "before": "The first research question concerned the combination of external knowledge and table representations. KGLink links table cells to a knowledge graph, uses cross-column evidence to filter candidate entities, and constructs candidate types and feature sequences. A contextual representation task connects this evidence to the annotation vocabulary. Its SemTab and VizNet evaluation shows how graph information and supervised table encoding contribute under the reported task settings. The resulting insight is that knowledge enrichment must be coupled to the labels and context of the prediction task.",
+    "after": "KGLink's component comparisons show benefits from graph-derived evidence and contextual type-representation training. Its no-linkage subset also shows continued annotation through the table encoder when retrieved KG evidence is absent. External descriptions enter a supervised mapping to the annotation vocabulary, with cross-column filtering determining which descriptions are available.",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch08-conclusion.tex",
+    "kind": "conclusion-inference",
+    "before": "The second research question concerned retrieval under evolving few-shot supervision. GORAG maintains a weighted keyword--label graph and retrieves candidate labels through connections among query keywords. Its online indexing follows the sequence of information available during classification. The round-based experiments examine the resulting candidate retrieval and prediction process on CAD, WOS, and IFS-Rel. The study identifies task-specific graph maintenance and input-dependent candidate selection as parts of the classification pipeline.",
+    "after": "GORAG's offline ablation shows the contribution of expanding the keyword--label index with earlier predictions under its round protocol. Additional support and cumulative label growth have dataset-dependent effects, including non-monotonic results on IFS-Rel. The study makes evidence maintenance part of dynamic classification: current decisions shape associations available to later candidate retrieval.",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch08-conclusion.tex",
+    "kind": "conclusion-inference",
+    "before": "The third question concerned the organization of evidence for textual generation. AGRAG combines statistical entity extraction, model-extracted relations, query-conditioned influence, and semantic edge costs. Its subgraph selection exposes connections among facts, while a hybrid passage channel preserves contextual information. The evaluation distinguishes factual retrieval, complex reasoning, summarization, creative generation, and classification. The ablations show why the required answer coverage and the support for individual claims must be considered separately when selecting generation context.",
+    "after": "AGRAG's ablations distinguish answer coverage from support for the claims actually generated. Removing hybrid passages can retain a high faithfulness score while reducing coverage; replacing the expanded subgraph with its initial tree affects tasks differently. Connected graph facts and passage context therefore serve complementary evidence needs in the evaluated generation tasks.",
+    "evidence": "Independent full-manuscript review"
+  },
+  {
+    "file": "chapter/ch08-conclusion.tex",
+    "kind": "conclusion-inference",
+    "before": "The fourth question concerned semantic correspondence and computation over multimodal evidence. MGRAG ranks chunks, incrementally constructs a graph for the query, and matches query relations against semantic paths. Graph features then enter the selection of tokens for KV recomputation. Its MMQA and MRAMG experiments examine answer quality alongside graph construction, matching, and serving costs. The study extends structural evidence use from retrieving relevant content to deciding which parts of context processing to refresh.",
+    "after": "MGRAG's construction and matching comparisons support query-dependent extraction and semantic paths for the evaluated multimodal questions. Its cache comparisons show that the selected graph can also inform token-state recomputation. Component additions improve answer quality with runtime changes that depend on the host pipeline, extending structural evidence use into context processing.",
+    "evidence": "Independent full-manuscript review"
+  }
+]

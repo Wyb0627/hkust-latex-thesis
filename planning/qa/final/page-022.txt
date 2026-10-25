@@ -1,0 +1,32 @@
+Table 1.2: Publications incorporated into the thesis. The hyper-relational study provides a sep-
+aratebackgroundsection;thefourotherstudiesformthecoreresearchchapters.
+Publication Venue Thesislocation
+KGLink[1] ICDE2024 Chapter3
+Understanding the Embedding Models on CIKM2025 Chapter 2, structural infor-
+Hyper-relationalKnowledgeGraph[5] mationsection
+GORAG[2] WWW2026 Chapter4
+AGRAG[3] ICDE2026 Chapter5
+MGRAG[4] PVLDB2026 Chapter6
+research and distinguishes its link-prediction evidence from the downstream language-model
+evaluations.
+TheauthorledtheresearchpresentedinthisthesisunderthesupervisionofProf. LeiChen.
+TheworkbenefitedfromdiscussionsandcollaborationwithDr. HaoyangLi,Dr. HaoXin,and
+Dr. ShiminDi. Eachresearchchapteridentifiesitscoauthoredpublicationsource.
+1.5 Publications and Thesis Organization
+The thesis draws on five publications. KGLink was published at ICDE 2024. Understanding
+the Embedding Models on Hyper-relational Knowledge Graph was published at CIKM 2025.
+GORAG was published at WWW 2026, AGRAG at ICDE 2026, and MGRAG in Volume 19
+of the Proceedings of the VLDB Endowment. Table 1.2 records their roles in the thesis. Each
+researchchapterbeginswithitsownpublicationstatement.
+Chapter2establishesthesharedconceptsandcomparesrelatedworkaccordingtoevidence
+representation,retrieval,updates,matching,andcontextserving. Itincludesthehyper-relational
+study as an information-preservation perspective. Chapters 3–6 then develop the four research
+questions in sequence. Each chapter gives its problem, method, evaluation protocol, published
+evidence,anddiscussion.
+Chapter 7 compares the points at which structure enters these pipelines. It examines static
+andquery-dependentevidence,therelationshipbetweenqualityandcomputationalcost,andthe
+conditions affecting interpretation. Chapter 8 returns to the research questions and identifies
+directions for future work. The organization brings the studies together through their evidence
+interfaceswhilepreservingtheparticulartaskandprotocolthroughwhicheachcontributionwas
+evaluated.
+8

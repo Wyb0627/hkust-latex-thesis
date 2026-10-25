@@ -1,0 +1,30 @@
+% Exact active-source transcription, numerical values retained.
+\begin{table}[t]
+	\centering
+	\caption{Ablation experiments on WOS for GORAG's variants.}
+	
+	\label{tab:gorag:ablation}
+	\resizebox{\linewidth}{!}{
+		\begin{tabular}{l|l|c|c|c|c} 
+			\hline\hline
+			\multirow{2}{*}{\textbf{Dataset}} & \multirow{2}{*}{\textbf{Model}} & \multicolumn{4}{c}{\textbf{Round}}                                        \\ 
+			\cline{3-6}
+			& & R1              & R2         & R3           & R4  \\ 
+			\hline
+			\multirow{5}{*}{\textbf{WOS}} 
+			& GORAG \textit{offline\&unit}          &     0.2979            &     0.2287            &       0.2645          &      0.2249                        \\
+			& GORAG \textit{offline}          &     0.3063            &     0.2302            &       0.2455          &      0.2156                        \\
+			&  GORAG \textit{unit}             & 0.4706          & 0.4394          & 0.4407          & 0.3899                      \\
+			& GORAG \textit{keyword}         & \underline{0.4746}          & \underline{0.4606}          & \underline{0.4455}          & \underline{0.4030}             \\ 
+			& \textbf{GORAG}                           & \textbf{0.4862}          &  \textbf{0.4649}              &     \textbf{0.4814}            &       \textbf{0.4210}                    \\
+			\hline\hline
+			
+			
+			
+			
+			
+			
+		\end{tabular}
+	}
+	
+\end{table}

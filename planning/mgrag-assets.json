@@ -1,0 +1,56 @@
+[
+  {
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/VLDB_MGRAG/pvldbstyle-master/figures/motivation.pdf",
+    "published_figure_number": 1,
+    "published_page": 2481,
+    "target_chapter": 6,
+    "target_path": "figures/mgrag/motivation.pdf",
+    "sha256": "f8a3ff8c98c879a675535edd763f2543c221bfaad7bd44571268ae7d545edc28",
+    "verified_by": "MGRAG chapter agent: original-source PDF copied and byte/hash checked; visually compared with corresponding publisher PDF figure; reviewed in compiled chapter at full text width"
+  },
+  {
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/VLDB_MGRAG/pvldbstyle-master/figures/pipeline_new.pdf",
+    "published_figure_number": 2,
+    "published_page": 2484,
+    "target_chapter": 6,
+    "target_path": "figures/mgrag/pipeline_new.pdf",
+    "sha256": "71ecdb7b516429517ecfee00ca890072f03bc02a43c0b18bd32ae63866a3c54b",
+    "verified_by": "MGRAG chapter agent: original-source PDF copied and byte/hash checked; visually compared with corresponding publisher PDF figure; reviewed in compiled chapter at full text width"
+  },
+  {
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/VLDB_MGRAG/pvldbstyle-master/figures/query_graph.pdf",
+    "published_figure_number": 3,
+    "published_page": 2485,
+    "target_chapter": 6,
+    "target_path": "figures/mgrag/query_graph.pdf",
+    "sha256": "0f97a6724733ef2750a0362912c5c9dda6868206a97ef8b8a07b31dc746466c8",
+    "verified_by": "MGRAG chapter agent: original-source PDF copied and byte/hash checked; visually compared with corresponding publisher PDF figure; reviewed in compiled chapter at full text width"
+  },
+  {
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/VLDB_MGRAG/pvldbstyle-master/figures/graph_based_cache.pdf",
+    "published_figure_number": 4,
+    "published_page": 2487,
+    "target_chapter": 6,
+    "target_path": "figures/mgrag/graph_based_cache.pdf",
+    "sha256": "dc9b9478d8c1e3e85b6b09df00f6912b8772c481fc1d2d225fabbd559635fc21",
+    "verified_by": "MGRAG chapter agent: original-source PDF copied and byte/hash checked; visually compared with corresponding publisher PDF figure; reviewed in compiled chapter at full text width"
+  },
+  {
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/VLDB_MGRAG/pvldbstyle-master/figures/acc_vs_theta_fixed_lp.pdf",
+    "published_figure_number": "5a",
+    "published_page": 2491,
+    "target_chapter": 6,
+    "target_path": "figures/mgrag/acc_vs_theta_fixed_lp.pdf",
+    "sha256": "4175f44107be766e5c43ad64f85c3a0a737a340c738e8c244926e3cefee78bb7",
+    "verified_by": "MGRAG chapter agent: original-source PDF copied and byte/hash checked; visually compared with corresponding publisher PDF figure; reviewed in compiled chapter at full text width"
+  },
+  {
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/VLDB_MGRAG/pvldbstyle-master/figures/acc_vs_lp_fixed_theta.pdf",
+    "published_figure_number": "5b",
+    "published_page": 2491,
+    "target_chapter": 6,
+    "target_path": "figures/mgrag/acc_vs_lp_fixed_theta.pdf",
+    "sha256": "89944f51e523fadfc4f2a44e1736c531aca6f394a76f9aead62929dad6f1348e",
+    "verified_by": "MGRAG chapter agent: original-source PDF copied and byte/hash checked; visually compared with corresponding publisher PDF figure; reviewed in compiled chapter at full text width"
+  }
+]

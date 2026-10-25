@@ -1,0 +1,33 @@
+The input is a text corpus 𝒯 and a natural-language query 𝑞. The corpus is divided into
+chunks 𝒯 . The indexed graph 𝒢 = (𝒱,ℰ) contains entity nodes, passage nodes, and several
+𝑐
+kinds of edges. Query processing identifies an initial set of relevant triple facts, assigns node
+influence scores and edge costs, and produces a subgraph for generation. A hybrid retriever
+suppliesadditionalpassagesfromthesamecorpus. Theoutputisananswerconditionedonthe
+query,atextualserializationoftheretrievedgraph,andthehybridpassages.
+The evidence representation has two levels. Entity and relation information expresses spe-
+cific connections. Passage nodes preserve links to the text from which those connections were
+extracted. The graph serialization gives the generator a relational account of the retrieved ma-
+terial, while passages provide the language surrounding those facts. This division is central to
+AGRAG.Aretrievedgraphmayidentifytherelevantrelationshipwithoutpreservingeveryqual-
+ification or explanatory detail in a paragraph. The hybrid channel supplies contextual material
+alongsidethegraph.
+The chapter evaluates the resulting pipeline on tasks with different answer requirements.
+Factretrievalemphasizesindividualfacts. Complexreasoningcombinesfacts. Contextualsum-
+marizationrequirescoverageofseveralevidenceitems. Creativegenerationevaluatesresponses
+groundedinretrievedmaterialwhileallowingmoreflexibleoutput. Textclassification supplies
+a further setting in which graph retrieval identifies candidate labels. Each task retains its own
+evaluation protocol, so the results are interpreted by task rather than combined into a single
+measureofreasoning.
+5.2 Framework and Graph Construction
+5.2.1 The three-stage pipeline
+AGRAGseparatesdatapreparation,graphretrieval,andhybridretrieval. Datapreparationbuilds
+the graph and the passage indexes. Graph retrieval conditions the graph on a query through
+semantic mapping and influence scores, then selects a connected evidence subgraph. Hybrid
+retrieval combines dense passage similarity with BM25. Figure 5.1 reproduces the original
+architecture.
+The stages have different update requirements. Chunking, entity extraction, relation extrac-
+tion,andtheconstructionofpassagelinksbelongtocorpusindexing. Mappingaquerytograph
+facts, computing its influence scores, and expanding its evidence subgraph occur during query
+processing. Dense and sparse passage indexes support the hybrid channel. This organization
+58

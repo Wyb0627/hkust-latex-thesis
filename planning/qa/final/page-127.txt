@@ -1,0 +1,31 @@
+Theaccompanyinghyper-relationalknowledge-graph studyexaminedhowstructural repre-
+sentationspreservefactinformation. Itsqualifier-captureandgraph-receptionperspectiveshelp
+explainwhytheformofarepresentationmatters. Acrossthethesis,thecommondesignquestion
+iswhichrelationshipsmustremainexplicitforthedownstreamtask. Thepublishedevaluations
+answerthatquestionthroughparticularmethodsandprotocols,yieldingasetofevidenceinter-
+facesforlanguage-modelaugmentation.
+8.2 Future Directions
+8.2.1 Feedback for structure maintenance
+A first direction is to connect evidence maintenance with feedback about its use. The current
+studies select graph information from an external source, update keyword–label associations,
+prepare a corpus graph, or build a query-specific graph. Feedback could indicate whether a
+retrieved relationship was relevant, whether its supporting passage was suﬀicient, or whether a
+prediction inserted into an index was later corrected. Such feedback would give maintenance a
+moredirectconnectiontoevidencequality.
+The evaluation of this direction should preserve the sequence in which feedback becomes
+available. In an online classifier, a later correction differs from a gold label supplied before
+prediction. In a retrieval system, the quality of one answer can affect later evidence selection
+onlyafteritsassessmentisavailable. Explicitfeedbacktimingandprovenancewouldpermitthe
+studyofcorrectionandretentionpolicieswithoutconflatingthemwithadditionalsupervision.
+8.2.2 Multimodal structure and provenance
+A second direction concerns the quality of multimodal graph representations. Caption-based
+ranking provides an eﬀicient text interface for images, while query-aware extraction can tar-
+get details relevant to a question. Both operations influence which visual information becomes
+available to semantic matching. A useful extension would retain the link from a graph fact to
+thetextspanorimageregionsupportingit,togetherwiththeextractionconditions.
+This would support a more detailed analysis of retrieval errors. A failed match could result
+from missing visual evidence, an extraction error, an unsuitable relation representation, or a
+searchdecision. Distinguishingthesestageswouldhelpdeterminewhichcomponenttoimprove.
+It would also make it possible to assess whether a matched path is supported by the source
+evidenceatthegranularityusedintheanswer.
+113

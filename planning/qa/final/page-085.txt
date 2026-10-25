@@ -1,0 +1,34 @@
+Table 5.5: Text classification with Qwen2.5-14B-Instruct. Results from the AGRAG main ex-
+periment[3].
+Method WOS ACC WOS REC IFS-Rel ACC IFS-Rel REC
+NaiveRAG 0.237 0.257 0.351 0.197
+L.LLMLingua 0.274 0.231 0.378 0.220
+RAPTOR 0.409 0.290 0.293 0.212
+SiReRAG 0.430 0.294 0.325 0.220
+G-retriever 0.188 0.129 0.311 0.185
+MIXRAG 0.244 0.235 0.362 0.203
+GraphRAG 0.253 0.201 0.279 0.202
+LightRAG 0.273 0.224 0.265 0.220
+HippoRAG2 0.424 0.270 0.389 0.246
+F.GraphRAG 0.283 0.245 0.307 0.221
+AGRAG 0.438 0.307 0.403 0.251
+agevaluesandthedifferentbestcomparisonmethodsshowwhyonebaselinecannotsummarize
+everymetric.
+On Medical creative generation, AGRAG reports faithfulness 0.356, accuracy 0.598, and
+coverage 0.589. NaiveRAG has accuracy 0.577 and coverage 0.554. HippoRAG2 has faithful-
+ness 0.347. The task combines contextual grounding with a more flexible response format, and
+thethreemeasurescapturedifferentaspectsofthatresponse.
+For contextual summarization, AGRAG obtains coverage and accuracy of 0.778 and 0.643
+onNovel,and0.690and0.604onMedical. Thetaskrequirescollectinginformationdistributed
+acrosstheevidence. Theresultisconsistentwiththedesignofsupplyingconnectedgraphfacts
+togetherwithpassagecontext. Theablationsprovidethemoredirectcomponentcomparisonby
+removingeitherthegraphstructureorthehybridchannel.
+Forcomplexreasoning,thereportedROUGE-Landaccuracyvaluesare0.319and0.467on
+Noveland0.343and0.665onMedical. Forfactretrievaltheyare0.324and0.490onNoveland
+0.357and0.628onMedical. Thetasksusedifferentquerycollectionsandanswerformats.
+Classification accuracy and recall are 0.438 and 0.307 on WOS and 0.403 and 0.251 on
+IFS-Rel. SiReRAG reports WOS accuracy 0.430 and recall 0.294, while HippoRAG2 reports
+IFS-Relaccuracy0.389andrecall0.246. AGRAG’sclassifierreceivesgraph-derivedcandidate
+labelsunderthesourceprotocol. Theresultsevaluatethecombinedretrievalandlabel-selection
+pipeline,soimprovementscannotbeassignedsolelytothefinallanguage-modeldecision.
+71

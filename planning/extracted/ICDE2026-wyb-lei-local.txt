@@ -1,0 +1,1056 @@
+                  GERAG: Advanced Graph-Based
+             Retrieval-Augmented Generation for LLMs
+             Yubo Wang                                Haoyang Li                               Fei Teng                          Lei Chen
+            HKUST                                     PolyU                                  HKUST                       HKUST(GZ) & HKUST
+        Hong Kong SAR                            Hong Kong SAR                           Hong Kong SAR                    Guangzhou, China
+     ywangnx@connect.ust.hk                haoyang-comp.li@polyu.edu.hk                fteng@connect.ust.hk               leichen@cse.ust.hk
+
+
+
+   Abstract—Graph retrieval-augmented generation (graph-based
+RAG) has demonstrated significant potential in enhancing Large                         Text Corpus                                    Graph
+Language Models (LLMs) with structured knowledge. However,
+                                                                                   People with lighter-
+existing methods face three critical challenges: High Computa-                     colored skin are at a
+tional Cost, Poor Reasoning Ability, and Limited Generalizability,                 higher risk of developing
+with performance often lagging behind vanilla RAG on complex                       skin cancer because
+tasks. To address these issues, we propose GERAG, a graph-                         melanin filters out the
+based, efficient retrieval-augmented generation framework that                     sun’s harmful UV rays …
+decouples reasoning from LLM-driven text chunk analysis. At                                                                    Topic 1           Topic 2
+its core, GERAG formulates the graph retrieval as a Minimum                         Entity         Relation                  Community         Community
+Cost Maximum Influence (MCMI) subgraph generation problem,
+and we prove it to be NP-hard. This problem explicitly mod-
+els complex reasoning dependencies (e.g., cycles) beyond tree-                        Query Text          Community Summary
+                                                                                   Similar to Topic 1                                             Prediction
+structured paths. This subgraph, generated via a greedy algo-
+rithm, provides LLMs with structured reasoning paths alongside                                                                        LLM
+retrieved text chunks, reducing reliance on post-retrieval LLM
+reasoning. Additionally, GERAG introduces a statistics-based                    Fig. 1. An overview of the pioneering GraphRAG [1] model. It first extracts
+NER method to replace costly LLM-driven entity extraction,                      and indexes entities and relations as graph nodes and edges. Then it performs
+cutting token usage and inference time while preserving accuracy.               Top-k similarity-based retrieval for query-related graph communities. Finally,
+Evaluations on six real-world tasks, including fact retrieval,                  it input the LLM summary of retrieved communities and the query to the
+                                                                                LLM again for the final inference.
+contextual summarization, and text classification, demonstrate
+that GERAG achieves superior efficiency and effectiveness com-
+pared to existing graph-based RAG models, with up to 13.6%
+higher effectiveness, 1.66x faster inference, and 3.69x fewer                   semantic relationships [23]–[25]. 2 To overcome these limi-
+tokens consumed. By integrating structured graph reasoning and                  tations, researchers have proposed various Graph-based RAG
+lightweight preprocessing, GERAG advances the scalability and                   models [1], [26]–[31]. An example of the pioneering graph-
+adaptability of retrieval-augmented generation for knowledge-                   based RAG model, GraphRAG [1], is shown in Figure 1. 3
+intensive applications. The code of GERAG is released in:
+https://anonymous.4open.science/r/GERAG-4D30/ 1
+                                                                                These models leverage graph-structured knowledge to model
+   Index Terms—Large Language Models, Retrieval Augmented                       complex relationships between entities and contexts to enable
+Generation.                                                                     structured reasoning over inter-connected information, enhanc-
+                                                                                ing both the relevance and coherence of retrieved evidences
+                          I. I NTRODUCTION                                      [23], [25].
+                                                                                   Currently, the graph-based RAG models can be classified
+   Large Language Models (LLMs) [2]–[6] have demonstrated
+                                                                                into two categories, i.e., community-based models, and graph-
+remarkable capabilities in natural language understanding and
+                                                                                wandering models. Firstly, community-based models [1], [26],
+generation [7]–[15]. However, their reliance on static, in-
+                                                                                [28] retrieve graph communities/neighborhood information
+ternalized often leads to factual hallucinations and limited
+                                                                                based on the input query. For example, GraphRAG [1] creates
+adaptability to dynamic information [16]–[19], and retraining
+                                                                                graph communities, then maps the query to its corresponding
+or finetuning the LLM can lead to high computational costs
+                                                                                communities and applies LLM to generate the community
+[20], [21]. Retrieval-Augmented Generation (RAG) addresses
+                                                                                summary for retrieval. 4 On the other hand, graph-wandering
+this by integrating external factual knowledge during infer-
+                                                                                models [27], [29]–[32] apply graph algorithms, such as Per-
+ence, improving accuracy and enabling real-time updates. Yet,
+                                                                                sonalized PageRank (PPR) [33], to score the graph nodes
+traditional RAG methods’ retrieval [16], [22] is based on
+                                                                                based on the graph’s global topology and query information,
+simplistic mechanisms, such as keyword matching or dense
+vector similarity, make them struggle to capture fine-grained                     2 # haoyang: give what is the fine-grained, what is the meaning
+                                                                                  3 # haoyang: firstly construct and then leverage
+  1 # haoyang: you should explicitly state how your method addresses existing     4 # why only graphrag, could you write one general approach and cite more
+challenges. Also,limited generalization without any solutions                   ppaers
+capturing the graph’s long-range dependency, and then retrieve                 text corpus, and then indexes these triples, as well as
+Top-k text chunks based on high-scoring graph nodes. For                       the divided text chunks together as a Knowledge Graph
+example, when retrieval, HippoRAG2 [31] first maps query                       (KG). In this stage, we design a light-weighted, statistics-
+extracted triples to graph nodes and edges based on semantic                   based NER method to substitute other baselines’ LLM-
+similarity, then applies PPR based on these mapped graph                       based NER approach, achieving better efficiency while not
+components, and finally retrieves Top-k text chunks based on                   affecting the effectiveness. 7
+the PPR score of their linked nodes.                                        2) Stage 2-Graph Weighting: Secondly, GERAG anchors the
+   However, on complex QA tasks [34], which require knowl-                     input query to knowledge triples in KG, and calculates the
+edge summarization, or content generation, the existing Graph-                 node’s influence score based on the KG structure and the
+based RAG models still suffer from the following issues:                       anchored triples; in the meantime, GERAG also calculates
+1) High Computational Cost: Current graph-based RAG                            edge weights based on the semantic similarity between the
+    models simply depends on LLMs’ semantic ability for                        query and the edge’s corresponding triple. Hence, our graph
+    various procedure graph indexing, such as NER and xxx,                     weighting mechanism is query-aware and can benefit the
+    which can lead to frequent LLM calls and cause significant                 later retrieval and generation step to retrieve query-relevant
+    computational overhead as well as high token cost.                         information. 8
+2) Poor Reasoning Ability: 5 The community-based models’                    3) Stage 3-Retrieval & Generation: Lastly, based on the
+    retrieval only focuses on a narrow graph neighborhood                      weighted KG, the anchored triples, and the query, GERAG
+    and misses the graph’s long-range dependency, which is                     generates a Minimum Cost and Maximum Influence
+    crucial for complex tasks that require multi-hop reasoning.                (MCMI) reasoning subgraph, maximizing query-relevant
+    Furthermore, both categories of models solely retrieve text                information for any given task while minimizing noise
+    chunks, then apply LLM for reasoning and inference, make                   during the retrieval process without the need for any
+    the LLM fails to know how these chunks were selected.                      parameter finetuning. Compared to the simple steiner tree,
+3) Non-Generalizable: According to recent researches [34]–                     the MCMI subgraph can contain more complex reasoning
+    [36], the performance of these Graph-based RAG models                      structures, such as cycles between key nodes in graph,
+    is even sub-optimal than the simple VanillaRAG [16] on                     make it more generalizable to complex scenarios and tasks.
+    complex QA tasks that require summarization to current                     We formally prove the problem of generating an MCMI
+    knowledge, which implies their complex retrieval modules                   subgraph is NP-hard, and GERAG addresses it using a
+    are not precise and concrete enough, introducing noise and                 greedy algorithm. The resulting reasoning subgraph, along
+    affecting the performance.                                                 with the corresponding text chunks it references and the
+                                                                               text chunks most semantically similar to the query, are then
+   To address these issues, we propose a novel Graph-based
+                                                                               fed into the LLM for final inference. 9
+Efficient Retrieval Augmented Generation framework, called
+GERAG. Unlike current graph-based RAG models, which rely                    According to our experiments, GERAG achieves comparable
+on heavy LLM-based Named Entity Recognition (NER) for                       or better effectiveness than current state-of-the-art models
+graph indexing, GERAG employs a lightweight, statistics-                    on six real-world tasks with different complexity levels, and
+based NER method as a more efficient alternative. 6 This ap-                achieves the best time and token efficiency at the same time.
+proach significantly reduces token and time costs compared to                 We summarize our novel contributions as follows:
+the LLM-based NER commonly used in existing graph-based                     • We present the GERAG framework, which consists of three
+RAG models, without compromising model effectiveness. To                      stages: Graph Indexing, Graph Weighting, and Retrieval &
+enhance reasoning ability and generalizability, GERAG re-                     Generation, aiming at addressing the high computational
+trieves a Minimum Cost Maximum Influence (MCMI) rea-                          cost, poor reasoning ability, and non-generalizable issues
+soning subgraph based on the graph structure and the input                    of current Graph-based RAG models.
+query. This subgraph, along with its associated text chunks                 • We design a statistic-based NER method to substitute for
+and additional text chunks retrieved based on similarity, is then             the costly LLM NER procedure, and improve the model’s
+fed into the LLM for final inference. This process provides                   efficiency while not affecting its effectiveness.
+not only the relevant text chunks but also a clear reasoning                • We propose the Minimum Cost and Maximum Influence
+path connecting them. The MCMI subgraph captures more                         (MCMI) subgraph generation problem, prove it to be NP-
+complex reasoning patterns than a simple Steiner tree, enabling               hard, and design a greedy algorithm, ensuring GERAG’s
+better generalization on complex tasks. # haoyang: where is                   generalizablity to complex tasks.
+the support for your solution for generalization We divide the              • According to our experiments, GERAG can achieve at most
+GERAG framework into three stages:                                            13.6% effectiveness gain, 1.66x faster and 3.69x token
+1) Stage 1-Graph Indexing: Firstly, GERAG extracts knowl-                     7 # haoyang: again, you have repeated it in last paragraph. And what is the
+    edge triples consisting of entities and relations from the              method?
+                                                                              8 # very unclear, what is anchors the input query, could you directly state
+  5 #haoyang: how about wander-based?                                       your method
+  6 # what is the method for lightweight, what problem you solved? If you     9 # no any informative details for your method. It is too general, too
+only replace it by tf-idf, it is total engineer work                        redundant
+     saving than current graph-based RAG models.                                                TABLE I
+10                                                                                 S UMMARY OF IMPORTANT NOTATIONS .
+
+                                                                     Notations          Meanings
+                           II. R ELATED W ORKS                       t                  The text chunk.
+                                                                     q                  The input query.
+   In this section, we first introduce the traditional RAG mod-      T , Tc             Original texts and splited text chunks.
+els in Section II-A and then discuss the more advanced graph-        lt , lo            Text chunk and token overlap length.
+based RAG models in Section II-B. The important notations            s, c               The node influence score and edge cost.
+used in this paper are listed in Table I.                            SV , C E           Set of node influence score and edge cost.
+                                                                     τ, ϕ               NER threshold and synonym threshold.
+                                                                     ka , kr            Number of raw anchored triples, and hybrid
+A. Traditional RAG Models                                                               retrieved chunks.
+   Recently, Large Language Model (LLM)-based models have            f                  The anchored triplet fact in KG.
+                                                                     FKG                All triplet facts within the KG.
+undergone rapid development [37]–[45] and have been suc-
+                                                                     Fraw , F           Raw and anchored triplet facts after filter.
+cessfully adapted to various data base related tasks, including      v                  A node (entity) in KG.
+data discovery [46]–[48], entity or schema matching [49]–[52],       e(u,v)             An edge (relation) between node u and v.
+and natural language to SQL conversion [53]–[56].                    KG(V, E)           KG with entity set V and relation set E.
+   Although LLMs are inherently capable of inference without         d, p, P            The damping factor, personalization vector
+fine-tuning [2]–[6]. However, the lack of fine-tuning with up-                          and transition probablity matrix of PPR.
+to-dated and domain specific knowledge can lead LLMs to              N (·)              1-hop neighbor set of a node in KG.
+generate incorrect answers, as they lack task-specific knowl-        rM CM I            MCMI subgraph’s average score-cost ratio.
+edge, these incorrect answers are often referred to as hallu-        g                  MCMI subgraph’s text-formed graph string.
+cinations [57]. To mitigate hallucinations, researchers try to       pre , ptf , pgen   LLM prompt for relation extraction, triplet
+                                                                                        filtering, and answer generation.
+retrieve text documents outside of LLM as side information
+                                                                     AS(·), HS(·)       The anchor score and hybrid retrieval score.
+to help the LLM inference, have provided LLMs with text
+                                                                     EC(·)              The edge cost function.
+formed side information for classification [58]–[65], lead to
+the emergence of early RAG models. The earliest LLM-RAG
+                                                                      1) Community-based Models: Early graph-based RAG
+model is the simple VanillaRAG [16], when indexing, it split
+                                                                   models typically retrieve specific neighborhoods from the
+the texts into chunks, and encode them to semantic vector
+                                                                   graph based on the input query. The pioneering work in this
+representations. When retrieval, the model retrieve several text
+                                                                   category is GraphRAG [1], as illustrated in Figure 1, which
+chunks with top semantic similarity to the query.
+                                                                   constructs a graph and aggregates nodes into communities,
+   Based on VanillaRAG, researchers have developed various         followed by generating community summaries to assist the
+models to further tailor the text chunks and improve the           LLM in making predictions. However, GraphRAG requires
+retrieval quality. For example, Propositionizer [58] applies       re-computing the graph communities after each index update,
+a fine-tuned LLM to convert the text chunks into atomic            leading to significant computational overhead.
+expressions, namely propositions, to facilitate fine-grained in-
+                                                                      To address this limitation, LightRAG [26] eliminates the
+formation retrieval. Prompt compressor models [66], [67], such
+                                                                   explicit detection of graph communities, as well as the com-
+as LongLLMLingua [66] apply LLM’s generation perplexity
+                                                                   putation of community summaries. Instead, it retrieves the
+on to filter out un-important tokens in the text chunks, try
+                                                                   most semantically similar entities along with their 1-hop graph
+to maintain a more concise retrieval result for LLM input.
+                                                                   neighborhoods and the corresponding text passages containing
+However, the retrieval procedures of these models remain
+                                                                   these entities as external knowledge, which are then fed to the
+unstructured and struggle to capture the nuanced semantic and
+                                                                   LLM. Nevertheless, this approach can still incur computational
+structured relationship within the text chunks, which impedes
+                                                                   costs and may lead to hallucinations, as the 1-hop neighbor-
+the effectiveness of LLMs [16]–[19].
+                                                                   hoods can be large and often contain noisy information.
+                                                                      Moreover, all these community-based models are limited in
+B. Graph-based RAG Models                                          their ability to capture structural information beyond a small
+   To overcome the aforementioned limitations of traditional       local neighborhood, thereby restricting their ability for long-
+RAG models, researchers have begun to develop graph-based          range reasoning.
+RAG models [1], [26]–[31]. These models usually extract               2) Graph-wandering Models: To further enhance the long-
+graph components with LLMs from text corpis to index them          range graph reasoning capabilities of community-based mod-
+into graphs. When retrieval, these models will utilize the graph   els, researchers have proposed graph-wandering models [27],
+topology structure to capture complex relationships between        [29], [31], [32], which apply graph algorithms to detect and
+entities within and across text chunks.                            capture global topological information within the Knowledge
+                                                                   Graphs (KGs).
+     10 # the introduction is too vague                               Among these, HippoRAG [29] and Fast-GraphRAG [32]
+ Stage 1: Graph Indexing                                                                                                         Stage 3: Retrieval & Generation
+                                                                                Knowledge Graph (KG)                             HR Chunks
+           Corpus                              Triplet Facts                                                                                  LLM             Output
+                                                                                               fraud
+   Cryptocurrency Frauds    Efficient      (fraud, require, law)                                                                                             To prevent
+   require new laws to       NER           …
+                                                                     Index          require            target                                              cryptocurrency
+   …                                                                                                                                                     fraud, users can …
+                                                                                     law        cryptocurrency
+                                                                                                                                                  MCMI Subgraph
+ Stage 2: Graph Weighting                                                                                                                    cryptocurrency
+                                                                                                Weighted KG
+      User Query                             Anchored KG
+                                                                                                                                                 fraud        IP verification
+     How to prevent                                                                                fraud: s=0.7                  Generate
+                                                  fraud
+  cryptocurrency fraud?                                                 Weighting       require:                  target:         MCMI
+                           Anchor       require             target                                                                                                Law
+                                                                                         c=0.9                     c=0.3
+                                                                                                                                                              enforcement
+                                         law        cryptocurrency                  law: s=0.4           cryptocurrency: s=0.6                AI detection
+
+
+Fig. 2. An overview of GERAG. In Stage 1, GERAG constructs a KG with the light-weight statistics-based NER method based on the text corpus. In Stage
+2, the query is anchored to relevant triplet facts (marked in red) in KG, then node score and edge weights are assigned based on Personalized PageRank (PPR)
+and semantic similarity with each fact, respectively. In Stage 3, GERAG generates a Minimum-Cost and Maximum Influence (MCMI) reasoning subgraph,
+providing explicit reasoning chains in addition the most semantically similar text chunks by Hybrid Retrieval (HR) to support LLM inference.
+
+
+
+utilize the Personalized PageRank (PPR) algorithm to traverse                                 and generate query-aware reasoning subgraphs to aid LLM
+the constructed KG and assign relevance scores to graph nodes                                 inference without the need for any parameter finetuning. As
+with respect to the input query. During retrieval, these models                               shown in Figure 2, GERAG consists of three core stages, i.e.,
+select text chunks based on the aggregated PPR scores of                                      Indexing, Graph Weighting, and Retrieval & Generation.
+the graph nodes they contain. StructRAG [27] trains a router                                  Stage 1: Graph Indexing. In this stage, GERAG aims to
+module that learns to identify the optimal reasoning path over                                construct a Knowledge Graph (KG) KG(V, E) based on the
+the graph based on the input query. HippoRAG2 [31] further                                    given text corpus T . The process of this stage is similar to
+improves upon HippoRAG by incorporating text chunks as                                        other graph-based RAG baselines. Firstly, we chunk texts in
+passage nodes directly into the KG. It retrieves text chunks                                  corpus T into chunks Tc . 13 Next, we replace other baselines’
+based on the individual PPR scores of their corresponding                                     clumsy LLM NER procedure with a simple statistics-based
+passage nodes within the graph.                                                               NER approach based on TFIDF [68], and carry out NER
+   In this paper, we propose a novel graph-based and efficient                                based on Tc , the experiment result in section IV demonstrates
+Retrieval-Augmented Generation framework, termed GERAG.                                       our method resulting in better efficiency but not affecting the
+GERAG first constructs a KG using an efficient, statistics-                                   model effectiveness. After the NER procedure, we apply LLM
+based NER method. It then assigns graph weights based on                                      to detect relation edges between NER extracted entity nodes
+both the KG structure and the input query. Finally, it generates                              in each text chunk. At last, we also index the text chunks into
+a Minimum Cost and Maximum Influence (MCMI) reasoning                                         KG as passage nodes, and link all extracted entity nodes to
+subgraph to provide the LLM with clear reasoning chains that                                  text chunks that contain them with node-to-passage edges. The
+maximize query-relevant information while minimizing noise                                    detailed pseudo code of Stage 1 is shown in Algorithm 1, and
+during retrieval.                                                                             more details can be found in Section III-B.
+                                                                                              Stage 2: Graph Weighting. In this stage, we firstly anchor
+                           III. M ETHODOLOGY
+                                                                                              the query q to KG fact triples considering their semantic
+   In this section, we first introduce the overall GERAG frame-                               similarities, after that, we calculate the PPR score [33] based
+work. We then detail its three core stages: graph indexing,                                   on these anchored fact triples F as our node influence score
+graph weighting, and retrieval and generation. Finally, we                                    SV , as the PPR score already demonstrates remarkable effec-
+discuss the computational hardness and complexity analysis                                    tiveness and efficiency over many graph-based models [29],
+of our approach.                                                                              [31], [32]. On the other hand, we calculate the edge costs
+A. Framework Overview                                                                         CE considering the similarity score between the query and
+   11 12
+                                                                                              the facts’ vector representations; the higher their similarity
+         To address the aforementioned poor reasoning abil-                                   is, the lower the cost is. An example of the weighted graph
+ity, high computational cost, and non-generalizable issue of                                  created on the Medical dataset of GraphRAG-bench [34]
+current graph-based RAG models. We propose GERAG, an                                          is shown in Figure 3. The graph formed like this will be
+efficient and generalizable approach by applying a statistics-                                used for later Minimum Cost Maximum Influence (MCMI)
+based method to substitute the costy LLM NER approach,                                        subgraph generation. Compared with solely applying PPR as
+ 11 # too redundant overview. You only need to introduce the basic idea of                    the node scoring function, the edge cost further captures the
+method and corresponding advantage. No need to introduce the details
+ 12 # wrong information flows in Figure 2                                                       13 # haoyang: is it framework overview?
+semantic correspondence between the query and each fact.                       Algorithm 1 Indexing Algorithm of GERAG
+Consequently, our graph weighting mechanism can provide                        Require: T : The text corpus to be indexed.
+complex structured reasoning information, enabling LLMs to                     Ensure: KG(V, E): The Knowledge Graph (KG) constructed.
+better understand the correspondence between retrieved text
+chunks and the input query. The detailed pseudo code of Stage                   1: Let V = ∅, E = ∅
+2 is shown in Algorithm 2, and more details can be found in                     2: Get text chunk set Tc from T : Tc = Chunking(T );
+Section III-B.                                                                  3: for each text chunk t ∈ Tc do
+Stage 3: Retrieval & Generation. In this stage, we first                        4:   Carry out NER based on Equation 2: Vt = N ER(t);
+generate the Minimum Cost Maximum Influence (MCMI)                              5:   Carry out relation extraction with LLM: Et =
+reasoning subgraph GM CM I (VM CM I , EM CM I ), then feed it                        LLM (t, Vt );
+together with its involved text chunks and text chunks whose                    6:   V = V ∪ Vt , E = E ∪ Et ;
+semantic vector representations are most similar to that of the                 7: end for
+query. To generate the MCMI reasoning subgraph, we first                        8: Add Tc to V as passage node: V = V ∪ Tc ;
+generate a Minimum Cost Spanning Tree (MCST) through                            9: for each entity node v ∈ V do
+all anchored nodes obtained from Stage 2, considering the                      10:   for each text chunk in t ∈ Tc do
+assigned edge cost. Next, we initialize the MCMI subgraph                      11:      if v ∈ t then
+with the generated MCST, then we apply our greedy algorithm                    12:         Add passage edge between v and t: E = E ∪ e(v,t) ;
+by iteratively expanding the MCMI subgraph based on the                        13:      end if
+ratio of nodes’ influence score and the respective edge cost                   14:   end for
+(i.e., s/c). To be specific, for expanding, we select the node                 15: end for
+with the highest score-cost ratio within the 1-hop neighbor-                   16: return KG(V, E)
+hood of the current MCMI subgraph. If its score-cost ratio
+is greater than the current MCMI subgraph’s average score-
+cost ratio, we add this node entity and its corresponding edge                 as the NER score N ER(v, t) for text chunks’ each word and
+relation to the MCST and continue the next iteration. When                     phrase with no more than 3 words: 17
+the iteration stops, we return the subgraph generated as the
+                                                                                                   count(v, t)                  |Tc | + 1
+MCMI reasoning subgraph. In Section III-D, we demonstrate                      N ER(v, t) =                       ×log                              ,
+more details of the MCMI generation problem. We prove it                                        |t|log(|Tc | + 1)      |tj : v ∈ tj , tj ∈ Tc | + 1
+                                                                                                                                                 (2)
+to be NP-hard, and our greedy algorithm can achieve 2 2-
+                                                                               where Tc denotes all text chunks count(v, t) is the number
+approximate rate. The detailed pseudo code of our MCMI
+                                                                               of times that the term v appears in the text t, and |tj : v ∈
+subgraph generation algorithm is shown in Algorithm 3. 14
+                                                                               tj , tj ∈ Tc | denotes the number of texts in the corpus Tc that
+                                                                               contain the keyword v. Here, our NER procedure will extract
+                                                                               words or phrases with N ER(v, t) > τ as the entity nodes V
+B. Stage 1: Graph Indexing
+                                                                               of the KG. These entities are served as graph nodes, hence we
+   15 16
+         In this subsection, we introduce the graph indexing                   denote them as entity nodes.
+procedure of GERAG, where we apply a TFIDF [68] score
+based simple NER mechanism to substitute the costy LLM                                          V = {v | ∃t ∈ Tc , NER(v, t) > τ } .                       (3)
+NER approach of other graph-based RAG models, address                            After NER, we would extract relations from each text chunk
+the High Computational Cost issue of current graph-based                       t ∈ Tc based on the NER result. Similar from other graph-
+RAG models, resulting in better efficiency but not affect the                  based RAG models, we also apply LLM at this step:
+effectiveness. The pseudo code of graph construction is shown
+in Algorithm 1.
+                                                                                                       Et = LLM (Vt , t, pre ),                            (4)
+   To begin with, we split texts in T into fix lengthed chunks
+with a certain amount of token overlap between chunks:                         where Vt denotes the NER results (extracted entities) of text
+                                                                               chunk t, and in the relation extraction prompt pre , we ask the
+                          Tc = Split(T , lt , lo ),                     (1)    LLM to detect relations between entities in Vt w.r.t. text chunk
+                                                                               t.
+where lt and lo denotes the length of text chunks and token
+                                                                                  After relation extraction, we add text chunks in Tc to E as
+overlap between chunks. Next, we apply the simple statistics-
+                                                                               passage nodes, and add passage edges e(v,t) between entities
+based NER approach on the text chunks Tc . Specifically, this
+                                                                               the text chunks contain them, the respective relation of these
+simple approach calculates the normalized TFIDF score [68]
+                                                                               edges are namely Contains. By introducing passage nodes, we
+  14 # too redundant.                                                          integerate contextual information into the constructed KG, and
+  15 # the title has problems, it is not indexing                              the entity-passage edges can capture the inter-text correlations,
+   16 # the motivation lacks supports. In another words, whey reviewers need
+to believe such simple method can work, and why you use such ways. Any            17 so where is your contributions. The writing style directly told to review-
+clues to support your choice and method                                        ers: we just use tf-idf, and no contributions
+ Q: Which structures are at risk of and may contribute to the spread of kidney cancer?       Algorithm 2 Graph Weighting Algorithm
+                                                                                             Require: KG(V, E): The indexed KG;
+                                                               Connect 𝑐 = 0.31
+                                                                                                 F: A set of query anchored triplet fact in KG;
+                  𝑠 = 0.82                        𝑠 = 0.78     Affect
+                                   Can have                    𝑐 = 0.23      Blood               q: The vector representation of the query q.
+                       Kidney                     Tumors
+                                                                             vessels         Ensure: KG(V, E, SV , CE ): The weighted KG.
+                    Work             Spread                               Affect              1: Assign node weights SV with PPR score based on F:
+                                                    Occur in            𝑐 = 0.27
+                                                                                                 SV = P P R(KG, F);
+     Nearby    Invade Kidney                                                 Lymph
+                                                   RCC                                        2: for e(u,v) ∈ E do
+     tissues          cancer       Common                                    nodes
+                      𝑠 = 0.88       type                                                     3:   Assign edge costs ce(u,v) based on Equation 12:
+ A: Blood vessels are at risk of and may contribute to the local spread of kidney cancer.          ce(u,v) = EC(q, e(u,v) );
+                                                                                              4:   CE = CE ∪ ce(u,v) ;
+Fig. 3. An example of the constructed weighted KG, where red triples denote                   5: end for
+the anchored triples. The anchored triples as well as the relations and entities              6: return KG(V, E, SV , CE )
+in orange denotes the full generated MCMI subgraph for the given query, s
+and c denote the node influence score and edge cost, respectively.
+make our model able to generate reasoning pathes across
+different text chunks [31].
+   Furthermore, we add synonym edges Esyn between entity                                                P P Ri = (1 − d) × p + d × P · P P Ri−1 ,                  (10)
+nodes in V that have similarties larger than the synonym                                     where d denotes the damping factor, we set it to 0.5 to align
+threshold ϕ, the relation of these edges are namely synonym:                                 with the settings in [31], p ∈ R|V| denotes the personalization
+                                                                                            vector that depends on the anchored triples F, where the value
+           Esyn = e(u,v) cosine sim(u, v) > ϕ ,           (5)
+                                                                                             of corresponding elements of the anchor triples’ entities are
+   At last, we combine edge set Et for all text chunks t and                                 set to 1/|F|, and other elements are set to 0. The P ∈ R|V×V|
+passage edges together, as well as the synonym edges Esyn ,                                  in Equation 10 denotes the transition probability matrix, and
+to form the total edge (relation) set of the KG:                                             can be obtained by:
+                                                                                                                     (
+                                                                                                                           1
+                                                                                                                           (u)| , if e(u,v) ∈ E,
+                 [             [
+            E=       Et ∪             e(v,t) ∪ Esyn ,     (6)                                               Pu,v = |N                                   (11)
+                                                                                                                         1
+                      t∈Tc           v∈Vt , t∈Tc                                                                        |V| ,     otherwise,
+if the entity v not exist in text chunk t, e(v,t) = ∅.                                       where N (u) denotes the 1-hop neighbor set of node u in the
+                                                                                             KG. When the PPR score changes less than or equal to 10−7 ,
+C. Stage 2: Graph Weighting                                                                  the calculations are considered converged and terminated.
+   In this subsection, we introduce the graph weighting mech-                                Moreover, following [31], after calculate the PPR score, we
+anism of GERAG. Given the KG KG(V, E) constructed at the                                     multiply the PPR score of all passage nodes by a balance
+last stage, we first anchor the query q to KG and obtain raw                                 factor 0.05, to avoid over concentration on them. At last, we
+anchored triplet facts Fraw . Here encode each triplet fact in                               calculate the edge cost CE based on the similarity between
+KG f ∈ FKG and the query q into vector representations q                                     query representation q and edges’ respective triplet facts f:
+and f, and then select facts with top-k anchor score AS to                                                                  1 − AS(q, f)
+query q based on their cosine similarity:                                                                         EC(q, f) =             .            (12)
+                                                                                                                                  2
+                      AS(q, f) = cosine sim(q, f),                                     (7)   Moreover, to guarantee the KG’s connectivity, we connect all
+                                                                                             passage nodes to a pseudo node, with the pseudo edge (re-
+          Fraw = {f ∈ FKG | f ∈ arg ⊤ka (AS(q, f))} ,                                  (8)   lation) namely pseudo relation, and the cost of these pseudo
+                                                                                             edges is set to 10 to penalize paths through the pseudo node.
+where ka is a hyperparameter that controls the number of raw
+anchored triple generated, and f are obtained through encoding                               D. Stage 3: Retrieval & Generation
+the text concatenation of entities and relation of the triplet fact.                            In this subsection, we introduce the graph retrieval and
+   Further, we apply LLM based filter on raw anchored triplet                                answer generation procedure of GERAG. With the node and
+facts Fraw to generate the anchored triplet facts F, to reduce                               edge weighted KG constructed in Stage 2, we try to generate
+the noise in anchored triples:                                                               a Minimum Cost Maximum Influence (MCMI) subgraph to
+                                                                                             provide reasoning information for tasks with various difficul-
+                           F = LLM (Fraw , q, ptf ),                                   (9)   ties, achieving long-range graph reasoning ability as well as
+where ptf denotes the LLM prompt for triple filtering, in ptf ,                              enhancing the generalizability of GERAG to complex tasks
+we ask the LLM to filter out unrelated triplets w.r.t. the query                             without the need of parameter finetuning, address the Poor
+q.                                                                                           Reasoning Ability and Non-Generalizable issue of current
+   Next, based on the anchored triplet facts F and the KG                                    graph-based RAG models. 18
+structure, we calculate the Personalized PageRank (PPR) score                                   18 # the motitaion is very vague. You do not have any clues and evidences
+as our node influence score SV :                                                             to support why MCMI is good for retrieval,
+Algorithm 3 MCMI Subgraph Generation Algorithm                      Secondly, any Steiner Tree ST that contains ∀v ∈ F is also a
+Require: KG(V, E, SV , CE ): The weighted KG; F: A set of           solution of our problem. Thus, we prove that the Minimum
+    query anchored triplet fact in KG.                              Cost Maximum Influence Subgraph Generation problem is
+Ensure: GM CM I (VM CM I , EM CM I ): The MCMI subgraph.            NP-hard.
+ 1: Compute a minimum cost spanning tree M CST of KG;
+                                                                       Since the MCMI Subgraph Generation problem is the NP-
+ 2: Let Vterm = F ∩ V(M CST ) be the terminal nodes in
+                                                                    hard, it is infeasible to obtain the optimal result in polynomial
+    M CST ;
+                                                                    time. Therefore, to solve this problem, we propose a greedy
+ 3: Construct weighted auxiliary graph H: V(H) = Vterm ;
+                                                                    algorithm based on the Mehlhorn’s algorithm [70], as shown
+ 4: for each pair of terminal nodes (u, v) ∈ Vterm do
+                                                                    in Algorithm 3. Then, we apply our greedy algorithm by
+ 5:
+                    P path Puv in M CST from u to v;
+      Find the shortest
+                                                                    iteratively expanding the generated MCMI. Here, we first
+ 6:   Let cH(u,v) =   e∈P(u,v) ce , ce ∈ CE ;                       calculate the ratio of the nodes’ influence score and their
+ 7: end for
+                                                                    connected edges’ cost (i.e., s/c). Next, we check this ratio
+ 8: Compute minimum cost spanning tree M CST ′ of H;
+                                                                    of all nodes in the current MCMI’s 1-hop neighborhood
+ 9: Let VM CM I = ∅, EM CM I = ∅;
+                                                                    N (M CM I), if this ratio is greater than that the current MCMI
+10: for each edge e(u,v) ∈ M CST ′ do
+                                                                    subgraph’s average score-cost ratio, we add this node (entity)
+11:   Add nodes and edges from shortest path P(u,v) in
+                                                                    and the corresponding edge (relation) to the MCMI, recalculate
+      M CST to VM CM I and EM CM I ;
+                                                                    the MCMI’s score-cost ratio and continue the iteration, until
+12: end for
+                                                                    all neighbor node’s score-ratio is less or equal than the MCMI
+13: Calculate rM CM I with Equation 15;
+                                                                    subgraph’s average score-cost ratio. That is, for each edge
+14: while the node v in M CM I’s 1-hop neighborhood with
+                                                                    (relation) e(u,v) , we have (line 13 to line 19 of Algorithm
+    highest sv /ce(M CM I,v) satisfies sv /ce(M CM I,v) > rM CM I
+                                                                    3):
+    do                                                                            (
+15:   Recalculate rM CM I with Equation 15;                                         VM CM I ∪ v, if ce sv           > rM CM I ,
+16:   VM CM I = VM CM I ∪ v;                                        VM CM I =                            (M CM I,v)
+
+                                                                                    VM CM I ,       otherwise,
+17:   EM CM I = EM CM I ∪ e(M CM I,v) ;                                           (
+18: end while                                                                       EM CM I ∪ e(M CM I,v) , if ce sv           > rM CM I ,
+19: return GM CM I (VM CM I , EM CM I )
+                                                                    EM CM I =                                       (M CM I,v)
+
+                                                                                    EM CM I ,                 otherwise,
+                                                                                                                                   (14)
+                                                                    where rM CM I denotes the average score-cost ratio of the
+Definition 1 (Minimum Cost Maximum Influence Subgraph               current MCMI subgraph; VM CM I and EM CM I denotes the
+Generation Problem). Given an node and edge weighted                node and edge set of current MCMI subgraph; e(M CM I,v)
+connected graph KG(V, E, SV , CE ), a set of anchored triples       denotes the outgoing edges from the MCMI subgraph to its
+F. The aim is to generate a subgraph with the maximum node          1-hop neighborhood; And rM CM I is calculated as follow:
+score and minimum edge weight that contains all the anchored                               X                 su + sv
+triples.                                                                 rM CM I =                                             .   (15)
+                                                                                                    2 × ce(u,v) × |EM CM I |
+                                                                                       e(u,v) ∈EM CM I
+   To begin with, we initialize the MCMI as the Minimum Cost
+Spanning Tree (MCST) through all anchored facts F in the              After generate MCMI subgraph generation, we serialize the
+weighted KG KG(V, E, SV , CE ) (line 1 to line 12 of Algorithm      generated MCMI subgraph into a text graph string g:
+3):                                                                                 g = StrConcat(VM CM I , EM CM I ).             (16)
+                 M CM I = M CST (F, KG).                   (13)
+                                                                       Furthermore, we also apply Hybrid Retrieval (HR), which
+   Next, we prove our Minimum Cost Maximum Influence                retrieves the most similar text chunks THR from all text chunks
+(MCMI) Subgraph Generation problem can be reduced from              Tc to the query’s vector representation q:
+the Steiner Tree problem [69], which is NP-hard.
+                                                                               THR = {t ∈ Tc | f ∈ arg ⊤kr (HS(q, t))} ,       (17)
+Theorem 1. The Minimum Cost Maximum Influence Subgraph
+                                                                                           AS(q, t) + BM 25(q, t)
+Generation problem is NP-hard.                                                 HS(q, t) =                                      (18)
+                                                                                                      2
+Proof. To demonstrate that the Minimum Cost Maximum In-             19
+                                                                        where kr denotes the hyperparameter that controls the
+fluence Subgraph Generation problem is NP-hard, we provide          number of hybrid retrieved text chunks, t denotes the vector
+a simple reduction of our problem from the Minimum Cost             representation of text chunk t, HS(q, t) and BM 25(q, t)
+Steiner Tree problem [69]. Since the Steiner Tree problem           denotes the hybrid retrieval score and the BM25 [71] sparse
+is already proven to be NP-hard [69], we show that there is         retrieval score between query q and text t.
+a solution for the Steiner Tree problem if and only if there           At last, we input the query q, the text graph string g, text
+is a solution for our problem. Firstly, given a solution S for      chunks from hybrid retrieval (HR), and the response generation
+our problem, we can construct a Steiner Tree which connects
+all triples from F with minimum edge cost over graph G r .            19 check the notations
+LLM prompt, to ask the LLM to give an answer to query q                                        IV. E XPERIMENTS
+based on the provided contents.                                             In this section, we present the experimental evaluation
+                                                                         of our framework GERAG on the various of tasks. We
+               answer = LLM (q, g, THR , pgen ),                 (19)
+                                                                         compare the performance of GERAG against six effective
+                                                                         baselines spanning three technical categories. Specifically, we
+Running Examples: As shown in Figure 3, if we simply
+                                                                         first outline the experimental setup in Section IV-A, including
+calculate the minimum cost Steiner tree within the given
+                                                                         details on datasets, and evaluation metrics. Next, we report
+KG, the algorithm will simply return the two anchored fact
+                                                                         the experimental results, focusing on both effectiveness and
+(Kidney, Work, Kidney cancer), and (Kidney, Spread, Tumors)
+                                                                         efficiency evaluations, in Section IV-B and Section IV-C,
+as the reasoning path, and the LLM’s response answer would
+                                                                         respectively. Finally, we conduct an ablation study and a case
+likely to be Tumors. However, if we go one step further, then
+                                                                         study, presented in Section IV-D.
+within the generated cyclic graph, we can have more complete
+reasoning information regarding the query, and involve the               A. Experiment Settings
+correct answer Blood vessels.                                               1) Datasets & Tasks: We select the Novel and Medical
+Theorem 2. The approximation ratio of Algorithm 3 is 2.                  dataset from GraphRAG-bench benchmark [34] to evaluate
+                                                                         GERAG’s performance on 4 tasks that have different complex-
+Proof. In Algorithm 3, we firstly compute the minimum cost               ity levels, these tasks have the same input and output format
+spanning tree S = (VS , ES ) which connects all nodes in F.              with the classic QA task:
+Suppose the cost for S is WS , optimal minimum cost Steiner
+                                                                         • Fact Retrieval: The simplest (level 1) task of GraphRAG-
+tree with is S ∗ = (VS ∗ , ES ∗ ) with cost WS ∗ . S ∗ covers at least
+                                                                            bench, to solve this task, the model needs to retrieve isolated
+all edges from S. Following triangle inequality, for ∀e ∈ ES ∗ ,
+                                                                            facts in the graph with minimal reasoning needed. This task
+the sum of weight is less than 2 times of edge weights in ES ,
+                                                                            mainly tests the models’ precise keyword matching ability.
+which is WS ≤ 2WS ∗ . The process from line 14 to line 18
+                                                                         • Complex Reasoning (Complex Rea.): The level 2 task of
+will retrieve more edges. However, they will not change the
+                                                                            GraphRAG-bench, to solve this task, the model needs to
+weight in S. Therefore, the approximation ratio of Algorithm
+                                                                            connect multiple facts on the graph to form multi-hop, long-
+3 is 2.
+                                                                            ranged reasoning chains.
+                                                                         • Contextual Summarization (Contextual Sum.): The level
+E. Complexity Analysis                                                      3 task of GraphRAG-bench. Here, the model needs to
+   1) Time Complexity: For the NER procedure, the time                      synthesize fragmented information from the graph into
+complexity would be O(|V||Tc |); Adding passage nodes also                  comprehensive summaries. As the summary is not the longer
+requires O(|V||Tc |) time. For graph weighting, calculate the               the better, in our experiment, we ask the model to generate
+PPR score requires O(|Tc |(|V| + |E|)) time, and calculate the              the summary within 4096 tokens, and truncate the generated
+edge cost requires O(|E|) time. For GERAG’s Stage 3, the                    summary to 4096 tokens for evaluation.
+time complexity of GERAG’s MCST generation is O(|E| +                    • Creative Generation: The most complex (level 4) task of
+
+|V|log|V|) using the Mehlhorn algorithm [72]; The expansion                 GraphRAG-bench, to solve this task, the model needs to
+from MCST to MCMI would cost O(|VM CM I |·|N (VM CM I )|)                   generate hypothetical responses based on but beyond the
+Hence, the time complexity of GERAG’s MCMI generation                       retrieved knowledge. Similar to the setting of the Contextual
+at the worst case when VM CM I = V and the graph is fully                   Summarization task, we also ask the model to generate and
+connected would be: O(|V|2 + |E|).                                          evaluate with no more than 4096 tokens.
+   Hence, the total time complexity of GERAG is: O(|Tc |(|V|+            Furthermore, we also apply the text classification task, to
+|E|) + |V|2 ). Since the number of text chunk |Tc | is less or           test the RAG models’ ability to summarize the topic of text
+equal to the number of nodes |V| in graph, in the worst case,            passages, and classify them into the correct category within a
+the total time complexity of GERAG is:                                   given label sets. This task are also considered a complex task,
+                                                                         as it also require models’ summarization ability.
+                        O(|V| · |E| + |V|2 ).                            • Text Classification: Give a set of texts T and a set of label
+
+   2) Space Complexity: The graph of GERAG’s Stage 1 and                    L, the classification task aim to assign each text t ∈ T a
+Stage 2 is stored with the dense weighted adjency matrix,                   label l ∈ L that best suited to describe its semantic meaning.
+which needs O(|E|) space; Storing the text chunk would need                 For text classification task, we select the Web-Of-Science
+O(|Tc |) space; Storing the entity nodes require O(|V|) space.              (WOS) dataset [73], and the IFS-Rel dataset [74].
+Hence the total space complexity of GERAG’s Graph Indexing               We select one text passage per label from the training sets
+stage would be: O(|V| + |E| + |Tc |). In GERAG’s Stage 3, we             of the WOS and IFS-Rel datasets to construct the corpus for
+only need O(|E|) to store the graph.                                     RAG. During retrieval, instead of retrieving the full text chunk,
+   Hence, the total space complexity of GERAG is:                        we enable HippoRAG and GERAG to directly retrieve the
+                                                                         corresponding label of each text chunk. The retrieved labels
+                       O(|V| + |E| + |Tc |).                             are then used to form a candidate label set for the LLM’s text
+                                                              TABLE II
+   S TATISTICS OF THE N OVEL AND M EDICAL DATASET FROM G RAPH RAG- BENCH [34] ACROSS 4 TASKS , AND STATISTICS OF THE WOS [73] AND
+                                       IFS-REL [74] DATASET FOR THE TEXT CLASSIFICATION TASK .
+             Fact Retrieval Complex Reasoning Contextual Summarization Creative Generation                      Text Classification
+Dataset                                                                                        Dataset
+                                              # of Questions                                                 Testing Data # of Labels
+Novel [34]        971               610                    362                        67           WOS [73]            9,396   133
+Medical [34]     1,098              509                    289                       166           IFS-REL [74]        2,560   64
+
+
+
+prediction. The LLM is subsequently tasked with selecting the           3) Baselines: We compare GERAG’s performance with
+most appropriate label from this candidate set.                      6 baselines from 3 technical categories, they are traditional
+   The detailed dataset and task statistics are shown in Table II.   RAG model VanillaRAG [16] and LongLLMLingua [67];
+   2) Evaluation Metrics: In this paper, we apply 5 metrics          Community-based model GraphRAG [1], and LightRAG [26];
+to evaluate GERAG’s performance on 5 different tasks:                And graph-wandering model Fast-GraphRAG [32] and Hip-
+ a. Accuracy (ACC.): For text classification, the proportion         poRAG2 [31]. We use the xxx as LLM backbones.
+                                                                        20
+    of exact matches between LLM and gold labels. For other                We mainly test model performance with the Qwen-2.5-
+    tasks, sample is scored 0, 0.5, or 1 by the LLM for inac-        14B-Instruct backbone, but we also tested the performance
+    curate, partially accurate, or exactly accurate responses.       of GERAG with GPT-4o [76] backbone, as well as the
+ b. Recall (REC.): Quantifies the model’s ability to identify        reinforcement learning based RAG reasoning R1-Searcher-
+    all actual positive instances by calculating the ratio of true   Qwen-2.5-7B [77] LLM backbone in Table IV. Due to cost and
+    positives to the sum of true positives and false negatives,      space considerations, we only compare GERAG’s performance
+    we calculate the macro recall score and apply it to the text     with the previous state-of-the-art model HippoRAG2 [31]
+    classification task, where we have a fixed label set.            on GraphRAG-bench benchmark [34] for GPT-4o. For R1-
+ c. ROUGE-L [75]: evaluates the quality of generated text            Searcher-Qwen-2.5-7B, we further compare VanillaRAG [16],
+    by comparing the longest common subsequence (LCS)                as it is the RAG framework used in its original paper [77].
+    between the generated answer G and the ground-truth              Traditional RAG Models
+    answer Y .                                                       • VanillaRAG [16]: VanillaRAG acts as a foundational base-
+                                      LCS(G, Y )                        line of current RAG models. It encodes text chunks into a
+                   ROU GE − L =                    ,          (20)      vector database and retrieve the Top-k text chunks based on
+                                           |G|
+                                                                        the vector similarities between queries and text chunks.
+   we apply ROUGE-L to the fact retrieval and the complex            • L.LLMLingua [67]: LongLLMLingua utilizes LLM’s gen-
+   reasoning tasks, as the query answer of these two tasks are          eration perplexity to filter out unimportant LLM input to-
+   usually a fixed entity or relation.                                  kens. In this paper, we apply it to compress the retrieved text
+d. Coverage (COV.) [34]: evaluates answer completeness                  chunks of VanillaRAG w.r.t. the query and task instruction.
+   by assessing whether all necessary reference evidences E
+                                                                     Community-based Models
+   are included in the LLM response G, computed as the
+   proportion of covered evidences to the number of required         • GraphRAG [1]: It employs LLM for graph construction.
+
+   evidences |E|:                                                       When retrieval, it aggregates nodes into communities w.r.t.
+                                                                        the query, and generates community reports to encapsulate
+                           |{e ∈ E | M (e, G)}|                         global information from texts.
+                   Cov =                        ,            (21)
+                                   |E|                               • LightRAG [26]: It calculates the vector similarity between
+   where M (e, G) is a boolean function indicating whether              query extracted entities and graph nodes, achieving a one-
+   evidence e is covered by generated response G. We ap-                to-one mapping from entities to graph nodes, then retrieve
+   ply the coverage metric to contextual summarization and              these nodes’ graph neighborhood.
+   creative generation tasks, as the answers to these tasks are      Graph-wandering Models
+   usually passages that conclude multiple information points.       • F.GraphRAG [32]: Fast-Graphrag employs LLM for graph
+e. Faithfulness (FS.) [34]: measures the percentage of an-              construction. During retrieval, it applies PPR to assign node
+   swer claims A directly supported by retrieved context C,             scores based on the query, and retrieve the Top-k passages
+   calculated as the ratio of claims aligned with evidence to           based on the sum of their contained nodes’ scores.
+   the number of total claims A:                                     • HippoRAG2 [31]: It employs LLM for graph construction,
+                          |{a ∈ A | S(a, C)}|                           and also add the text chunks as nodes in the graph. As a
+                  FS =                         ,           (22)
+                                   |A|                                  result, it directly retrieves Top-k text chunks based on their
+                                                                        respective nodes’ PPR score.
+    where S(a, C) is a boolean function indicating whether a
+    claim is supported by contexts in C. We apply the faith-            4) Hyperparameter and Hardware Settings: We set the
+    fulness metric to the creative generation task to evaluate       retrieval top-k value for all RAG models to 5, aligning with the
+    the quality of the hypothesis in the LLM response.                 20 # put them into the corresponding experiment part
+                                                             TABLE III
+  M ODEL EFFECTIVENESS ON 4 DATASETS FOR 5 TASKS , ALL EXPERIMENTS WERE CARRIED OUT WITH Q WEN 2.5-14B-I NSTRUCT LLM BACKBONE .
+
+           Task               Creative Generation      Contextual Sum.       Complex Rea.       Fact Retrieval     Text Classification
+Category   Dataset           Novel          Medical    Novel     Medical   Novel     Medical   Novel     Medical   WOS        IFS-REL
+           Metric        FS. ACC. COV. FS. ACC. COV. COV. ACC. COV. ACC. ROG. ACC. ROG. ACC. ROG. ACC. ROG. ACC. ACC. REC. ACC. REC.
+Traditional VanillaRAG 0.205 0.307 0.384 0.176 0.577 0.554 0.745 0.621 0.677 0.576 0.120 0.447 0.117 0.635 0.117 0.431 0.182 0.604 0.237 0.257 0.351 0.197
+RAG         L.LLMLingua 0.213 0.316 0.377 0.225 0.575 0.496 0.687 0.627 0.657 0.583 0.092 0.434 0.080 0.633 0.115 0.420 0.105 0.591 0.274 0.231 0.378 0.220
+Community GraphRAG      0.427 0.310 0.339 0.345 0.475 0.325 0.758 0.620 0.625 0.506 0.246 0.449 0.250 0.606 0.240 0.445 0.217 0.521 0.253 0.201 0.279 0.202
+-based      LightRAG    0.201 0.314 0.329 0.189 0.567 0.549 0.753 0.628 0.625 0.585 0.223 0.448 0.255 0.637 0.253 0.460 0.283 0.607 0.273 0.224 0.265 0.220
+            HippoRAG2 0.496 0.295 0.325 0.347 0.563 0.451 0.735 0.586 0.496 0.560 0.314 0.453 0.332 0.622 0.310 0.470 0.343 0.598 0.424 0.270 0.389 0.246
+Graph-
+            F.GraphRAG 0.286 0.287 0.376 0.217 0.500 0.396 0.706 0.528 0.507 0.587 0.237 0.371 0.262 0.643 0.318 0.439 0.352 0.610 0.283 0.245 0.307 0.221
+wandering
+            GERAG       0.513 0.339 0.386 0.356 0.598 0.589 0.778 0.643 0.690 0.604 0.319 0.467 0.343 0.665 0.324 0.490 0.357 0.628 0.438 0.307 0.403 0.251
+
+
+                                                         TABLE IV
+       T HE PERFORMANCE COMPARASION OF GERAG AND BASELINES WITH GPT-4 O [76] AND R1-S EARCHER -Q WEN -2.5-7B [77] BACKBONE
+
+               Task                 Creative Generation      Contextual Sum.      Complex Rea.        Fact Retrieval
+  Backbone     Dataset            Novel           Medical   Novel      Medical  Novel     Medical   Novel      Medical
+               Metric         FS. ACC. COV. FS. ACC. COV. COV. ACC. COV. ACC. ROG. ACC. ROG. ACC. ROG. ACC. ROG. ACC.
+               HippoRAG2 0.519 0.429 0.355 0.322 0.571 0.545 0.752 0.612 0.671 0.597 0.340 0.477 0.391 0.667 0.340 0.490 0.400 0.631
+  GPT-4o
+               GERAG     0.536 0.478 0.414 0.374 0.632 0.609 0.794 0.667 0.703 0.634 0.351 0.515 0.397 0.673 0.343 0.503 0.402 0.649
+              VanillaRAG 0.211 0.203 0.255 0.210 0.036 0.124 0.604 0.444 0.181 0.254 0.069 0.285 0.050 0.200 0.086 0.306 0.063 0.208
+  R1-Searcher HippoRAG2 0.336 0.187 0.259 0.275 0.258 0.250 0.708 0.483 0.456 0.416 0.184 0.304 0.231 0.448 0.215 0.272 0.242 0.490
+              GERAG      0.400 0.255 0.263 0.308 0.270 0.261 0.715 0.495 0.480 0.429 0.208 0.326 0.245 0.464 0.313 0.303 0.253 0.511
+
+
+
+settings of Fast-GraphRAG and HippoRAG2. For LongLLM-                          B. Effectiveness Evaluation
+Lingua, we test the compression rate within 0.75, 0.8, 0.85 and                   As shown in Table III and Table IV, GERAG achieves the
+select 0.8, as it achieves the best overall classification accuracy.           overall best performance over all 5 tasks spanning through
+For GraphRAG, we apply its local search mode to all tasks,                     4 datasets surpasses all test baselines. Compared with the
+as it achieves the overall best effectiveness. For LightRAG,                   previous state-of-the art models, it achieves at most 13.6%
+we apply its hybrid search mode for all tasks except the text                  gain on text classification task, on other tasks, GERAG can
+classification task, as it is claimed as one of the contributions              still achieve at least 3% performance gain than the previous
+of LightRAG. We apply LightRAG’s local search mode for the                     state-of-the art models. Based on the experiment results, we
+text classification task, as it achieves the best effectiveness on             can have following observations:
+the two datasets tested. For Fast-GraphRAG and HippoRAG2,                         Firstly, on simple Fact Retrieval and Complex Reasoning
+we set their hyperparameters to default, to align with their                   tasks, the more recent Graph-wandering models achieve the
+original paper and code.                                                       best performance. This indicates that the phrase-level depen-
+   For our GERAG, the length of text chunks tl is set to 256,                  dencies, both long and short range, captured by these models’
+and token overlap between chunks to to 32, the number of raw                   graph scoring mechanisms, are beneficial for solving tasks
+anchored triples ka and the number of hybrid retrieved chunks                  that require forming a reasoning chain from one or multiple
+kr are both set to 5, to align with the setting of HippoRAG2                   facts to provide factual information. Our GERAG achieves the
+and GraphRAG-bench. GERAG’s unique hyperparameter, the                         best performance on Fact Retrieval and Complex Reasoning
+entity extraction threshold, and the maximum n-gram, were                      tasks. Unlike other Graph-wandering models that rely solely
+set to 0.5 and 3, respectively. Please refer to subsection IV-E                on inputting text chunks, GERAG benefits from phrase-level
+for further parameter sensitivity analysis. 21                                 dependencies by generating an explicit reasoning chain and
+   All our experiments were carried out and evaluated with                     directly feeding it to the LLM for guidance.
+Qwen2.5-14B-Instruct [79] LLM backbone. We apply the                              Secondly, in line with recent findings [34]–[36], Vanil-
+Contriever [80] embedding model for HippoRAG2 and                              laRAG [16] achieves better performance than all tested Graph-
+GERAG’s dense passage retrieval procedure, and bge-large-                      wandering baselines on Contextual Summarization and Cre-
+en-v1.5 [81] embedding model for other baselines’ LLM                          ative Generation tasks. This is because, Graph-wandering
+embedding. All experiments are conducted on an Intel(R)                        baselines overlook the global, and coarse-grained information
+Xeon(R) Gold 5220R @ 2.20GHz CPU and a single NVIDIA                           that is essential for effective summarization and creative gen-
+A100-SXM4-80GB GPU. Other hyperparameters of models                            eration. This result also suggests that the fine-grained, phrase-
+were set as default by their codes.                                            level information they capture is less beneficial for summariza-
+                                                                               tion compared to higher-level, coarse-grained insights, which
+  21 # notations are wrong                                                     help the LLM form a holistic understanding of the text chunks.
+                                                                            D. Ablation Study
+                                                                              To analyze GERAG’s performance, we conduct an extensive
+                                                                            ablation study on GraphRAG-bench tested across 2 datasets
+                                                                            and 4 tasks, the ablation models tested is listed as follow:
+ (a) Parameter sensitivity experiment on Novel dataset of GraphRAG-bench.   •   GERAG w. LLM NER: Here, we substitute GERAG’s
+                                                                                statistics-based NER method for HippoRAG2’s LLM NER
+                                                                                approach to test its effect on efficiency and effectiveness. 22
+
+                                                                            •GERAG w.o. HR: Here, we remove the hybrid retrieved
+                                                                             chunks in GERAG’s LLM input, and only input the reason-
+                                                                             ing subgraph and its involved text chunk to LLM.
+(b) Parameter sensitivity experiment on Medical dataset of GraphRAG-bench. • GERAG w.o. MCMI: Here, we simply generate a minimum
+
+Fig. 4. Parameter sensitivity experiment on GraphRAG-bench, where the x-     cost Steiner tree that contains all anchored fact triples as
+axis denotes the entity extraction threshold, and y-axis denotes the maximum reasoning path, ignoring more complex reasoning structures.
+n-gram, we select accuracy as the metric.
+                                                                               Based on the results in Table VI, we can have the following
+                                                                            observations regarding GERAG:
+Our GERAG achieves the best performance on Contextual                          Firstly, although GERAG w. LLM NER employs a more
+Summarization tasks by providing the hybrid retrieved text                  time and token-consuming LLM-based NER approach, it still
+chunks to the LLM for inference, in addition to the reasoning               achieves worse performance compared to GERAG. Based on
+subgrah, thereby offering coarse to fine-grained information                the case study in subsection IV-F. This is because the LLM
+for the final summarization generation.                                     NER approach can produce hallucinated outputs that fail to
+   Lastly, in the text classification task, HippoRAG2 [31]                  conform to the expected NER format, leading to decoding
+achieves the second-best performance across all metrics,                    errors. In this scenario, the model tend to skip the error
+slightly outperformed only by GERAG. This is because text                   text chunks, resulting in incomplete knowledge. As expected,
+classification requires capturing correlations between specific             GERAG w. LLM NER also exhibits the worst time and
+text entities and the text chunks to be classified, and both                token efficiency due to its cumbersome and resource-intensive
+HippoRAG2 and GERAG explicitly model entity-to-passage                      NER procedure. This highlights the importance of using a
+relationships in the Knowledge Graph (KG). GERAG achieves                   lightweight NER method for improving model efficiency.
+the best performance as its reasoning subgraph spans multiple                  Secondly, GERAG w.o. HR experiences a significant perfor-
+entity nodes in the KG and explicitly captures the relationships            mance drop on the Contextual Summarization task and in the
+between these entities and the text chunks associated with a                coverage score of the Creative Generation task. This is because
+given classification label, which can assist LLM classification.            it provides the LLM with only the reasoning path and its
+C. Efficiency Evaluation                                                    associated text chunks—while efficient, this limits the amount
+                                                                            of supportive content available and restricts the model’s ability
+   To evaluate the efficiency of GERAG, we compare                          to find sufficient grounded information.
+GERAG’s total time cost and total token cost with other
+                                                                               Last, GERAG w.o. MCMI performs similarly to GERAG
+baselines’ on all 4 dataset tested, the results is shown in
+                                                                            on the Fact Retrieval and Complex Reasoning tasks. This
+Table V. According to the result, GERAG is at most 1.66 times
+                                                                            is because its simple, tree-structured reasoning paths are
+faster compared with GraphRAG on Novel dataset, and at least
+                                                                            insufficient to support queries from harder tasks, which may
+10.5% accleration compared to HippoRAG2 on Novel dataset.
+                                                                            require the inclusion of cyclic structures or multiple answer
+As for token saving, GERAG achieves at most 3.69 times
+                                                                            nodes that are difficult to jointly capture within the Steiner
+token saving compared with GraphRAG on IFS-REL dataset,
+                                                                            tree framework.
+and save 9.3% tokens at least compared with HippoRAG2.
+   These results lead to two maior findings: Firstly, Hip-
+poRAG2 and GERAG achieve superior time efficiency than                      E. Parameter Sensitivity Analysis
+other baselines, this suggests that frequent LLM calls, partic-                Here, we test the max n-gram parameter from [1,3,5,7], as
+ularly those involving long input sequences, are the primary                entity distribution in English is, in general, less than 7 words
+efficiency bottleneck in most graph-based RAG models. By                    according to [82]. According to the experiment in Figure 4,
+avoiding the LLM-based graph summarization process, Hip-                    GERAG achieves the overall best performance when the entity
+poRAG2 and GERAG significantly alleviate this bottleneck,                   extraction threshold is set to 0.5. The maximum n-gram is set
+leading to improved performance.                                            to 3 for all tasks, as most of the entities usually consist of no
+   Secondly, although GERAG introduces an additional proce-
+dure generating the MCMI reasoning graph, as it replaces the                   22 you claim you are efficient on tf-idf, and llm NER is inefficient. But
+LLM-based NER procedure with a lightweight, statistics-based                results show that they do not have too much difference. Your motivation has
+NER method, it can still achieve the best time efficiency.                  big problems
+                                                              TABLE V
+ M ODEL EFFICIENCY ON 4 DATASETS FOR 5 TASKS , ALL EXPERIMENTS WERE CARRIED OUT WITH Q WEN 2.5-14B-I NSTRUCT LLM BACKBONE . W HERE
+             GERAG ACHIEVE AT MOST 166.3% ACCLERATION , AND 368.8% LESS TOKEN COST COMPARED WITH TESTED BASELINES .
+
+                                                        Time Cost (mins)                                                            Token Cost (# per query)
+ Category     Models
+                                     Novel            Medical        WOS                     IFS-REL              Novel             Medical         WOS                     IFS-REL
+ Traditional VanillaRAG  384.5 (+85%) 252.28 (+63%) 294.2 (+98%) 227.12 (+64%) 11,145 (+46%) 7,852 (+41%) 7,321 (+80%) 4,537 (+129%)
+ RAG         L.LLMLingua 410.46 (+98%) 342.83 (+122%) 362.17 (+144%) 318.66 (+13%) 10,216 (+34%) 6,575 (+18%) 5,892 (+45%) 2,771 (+40%)
+ Community GraphRAG      552.6 (+166%) 352.14 (+128%) 324.98 (+119%) 281.68 (+104%) 14,795 (+94%) 11,511 (+107%) 12,160 (+199%) 9,296 (+369%)
+ -based      LightRAG   386.47 (+86.3%) 279.51 (+81%) 252.66 (+70%) 229.39 (+66%) 14,377 (+89%) 9,961 (+79%) 11,737 (+188%) 7,866 (+297%)
+             HippoRAG2 229.17 (+11%) 176.13 (+14%) 190.42 (+28.3%) 154.7 (+12%) 8,978 (+18%) 6,859 (+23%) 5,159 (+27%) 2,542 (+28%)
+ Graph-
+             F.GraphRAG 319.84 (+54%) 221.44 (+43%) 215.42 (+45%) 191.14 (+38%) 8,742 (+15%) 6,076 (+9%) 4,992 (+23%) 2,237 (+13%)
+ wandering
+             GERAG           207.45         154.42        148.59         138.38         7,627          5,558          4,071         1,983
+
+
+                                                            TABLE VI
+  T HE ABLATION EXPERIMENT RESULT ON THE TWO DATASETS AND 4 TASKS FROM G RAPH RAG- BENCH [34] BENCHMARK . A LL EXPERIMENTS WERE
+                                     CARRIED OUT WITH Q WEN 2.5-14B-I NSTRUCT LLM BACKBONE .
+
+
+                                     Creative Generation                Contextual Sum. Complex Rea. Fact Retrieval                                    Total Efficiency
+ Model                             Novel          Medical               Novel Medical Novel Medical Novel Medical                                    Novel          Medical
+                                 FS.    COV.    FS.    COV.                          COV.             ROUGE-L                                     Time Token Time Token
+ GERAG w. LLM NER              0.4275    0.3650    0.3519     0.5873    0.7553      0.6000       0.3196       0.3330    0.3220       0.3525      244.50      8,917     180.71      5,971
+ GERAG w.o. HR                 0.5194    0.3433    0.3419     0.5701    0.6771      0.4199       0.3175       0.3240    0.3136       0.3435      200.64      5,615     120.79      5,135
+ GERAG w.o. MCMI               0.4882    0.3580    0.3506     0.5749    0.7479      0.6003       0.3242       0.3292    0.3221       0.3587      194.27      7,467     134.50      5,561
+ GERAG                         0.5134    0.3857    0.3560     0.5888    0.7779      0.6904       0.3186       0.3431    0.3241       0.3572      207.45      7,627     154.42      5,558
+
+
+                                                                         LLM NER:                                                    Extracted Triples of HippoRAG2:
+  Text Chunk: …when the book was about completed the                     minnesotian, district court, book                           (minnesotian, determined by, district court)
+  business manager of the minnesotian was informed that
+  an injunction had been issued prohibiting him from
+  drawing any money from the state until the question of
+  the right of the minnesotian to do any state printing had              Statistic-based NER:                                        Extracted Triples of GERAG:
+  been determined by the district court…                                 minnesotian, court, district court, business                (minnesotian, faced, injunction),
+                                                                         manager, state, district, injunction                        (injunction, prohibited, drawing money from state)
+
+(a) A comparasion between the heavy LLM NER of HippiRAG2 and GERAG’s statistic-based NER. Compared with LLM NER, the statistic-based NER extracts
+more candidate entities, lead to generating more natural and semantically complete triples.
+                                                                   used as
+                                                                                                                        Output with Steiner Tree:
+                                                    several secret symbol number
+  Q: In the context of Augustus Le                                                                                      The number seven was regarded as a mystic or significant number
+                                                      societies            seven
+  Plongeon‘s discussion of ancient                                                                aryans                among the Egyptians, Chaldeans, Hindoos, and Aryans. It was
+  civilizations in ’Vestiges of the Mayas,‘                                               used                          used in the septenary system of the grand gallery in the great
+                                                                      synonym                                           pyramid by Egyptians …
+  how was the number SEVEN regarded
+                                                         seven
+  as a mystic or significant number among                                    mystic
+  the Egyptians, Chaldeans, Hindoos, and                         is                               mayas                 Output with MCMI Subgraph:
+                                                                          number seven    used
+  Aryans, and what examples or symbolic                                                                                 The number seven was regarded as a mystic or significant number
+  uses of this number are described for               predilection           used                similar to             among the Egyptians, Chaldeans, Hindoos, and Aryans. Mayas use
+  these societies?                                    number for                                                        it as predilection number, several secret societies use it as symbol.
+                                                         mayas                      Egyptians                           For the Egyptians, it was used in the septenary system …
+
+(b) A comparison between generating the Steiner tree and the MCMI for reasoning, where the red edges denote those within both the Steiner tree and the
+MCMI, and the orange edges denote relations solely within the MCMI. In this case, the Steiner tree does not retrieve the usage example and fail to answer the
+second question.
+
+                 Fig. 5. Two cases of GERAG w.r.t. its light weight NER and MCMI generation step from GraphRAG-bench’s novel dataset.
+
+
+
+more than 3 words, aligning with the discovery of [82]–[84].                                 example cases related to GERAG’s statistics-based NER and
+23 24
+                                                                                             its Minimum Cost Maximum Influence (MCMI) reasoning
+                                                                                             subgraph generation approach.
+F. Case Study
+                                                                                                Firstly, we compare the NER and triple extraction results
+   In this subsection, we examine explicit case studies from
+                                                                                             of GERAG with those of HippoRAG2, which employs an
+our testing dataset. Due to space constraints, we focus on
+                                                                                             LLM-based NER method but shares the same triple extraction
+  23 #haoyang: write why you only have this param experiment                                 process as GERAG. As shown in Figure 5(a), the statistics-
+  24 #haoyang: write the reason behind the result                                            based NER approach extracts more candidate entities from the
+given text chunk, leading to the extraction of more natural and
+semantically complete triples.
+   Secondly, we compare GERAG’s MCMI subgraph with
+a simple Steiner tree. In Figure 5(b), the Steiner tree is
+represented by red edges, while the MCMI subgraph in-
+cludes both red and orange edges. Both reasoning structures
+successfully answer the first question marked in red in the
+query. However, the Steiner tree fails to address the second
+question marked in orange. In contrast, the MCMI subgraph
+incorporates examples of symbolic usage, such as predilection
+number for Mayas, enabling it to provide a more complete and
+nuanced answer.
+                      V. C ONCLUSION
+   This paper presents GERAG , a Graph-based Retrieval
+Augmented Generation framework addressing the high com-
+putational costs, limited reasoning capabilities, and poor gen-
+eralizability on complex QA tasks. GERAG introduces a
+lightweight, statistics-based NER method to replace costly
+LLM-driven entity extraction, improving efficiency without
+sacrificing effectiveness. By formulating retrieval as a Min-
+imum Cost Maximum Influence (MCMI) subgraph generation
+problem, GERAG captures query-relevant semantic dependen-
+cies by providing explicit reasoning subgraph to help LLM
+inference, make the framework able to generalize to complex
+QA tasks. Experiments on real-world datasets demonstrate the
+effectveness and efficiency of GERAG over state-of-the-art
+RAG models.
+                               R EFERENCES                                         [21] W. Fan, Y. Ding, L. Ning, S. Wang, H. Li, D. Yin, T.-S. Chua, and
+                                                                                        Q. Li, “A survey on rag meeting llms: Towards retrieval-augmented large
+ [1] D. Edge, H. Trinh, N. Cheng, J. Bradley, A. Chao, A. Mody, S. Truitt,              language models,” in Proceedings of the 30th ACM SIGKDD conference
+     and J. Larson, “From local to global: A graph rag approach to query-               on knowledge discovery and data mining, 2024, pp. 6491–6501.
+     focused summarization,” arXiv preprint arXiv:2404.16130, 2024.                [22] P. Lewis, E. Perez, A. Piktus, F. Petroni, V. Karpukhin, N. Goyal,
+ [2] Y. Sun, S. Wang, S. Feng, S. Ding, C. Pang, J. Shang, J. Liu, X. Chen,             H. Küttler, M. Lewis, W.-t. Yih, T. Rocktäschel et al., “Retrieval-
+     Y. Zhao, Y. Lu et al., “Ernie 3.0: Large-scale knowledge enhanced                  augmented generation for knowledge-intensive nlp tasks,” Advances in
+     pre-training for language understanding and generation,” arXiv preprint            neural information processing systems, vol. 33, pp. 9459–9474, 2020.
+     arXiv:2107.02137, 2021.                                                       [23] H. Han, Y. Wang, H. Shomer, K. Guo, J. Ding, Y. Lei, M. Halappanavar,
+ [3] A. Q. Jiang, A. Sablayrolles, A. Mensch, C. Bamford, D. S. Chaplot,                R. A. Rossi, S. Mukherjee, X. Tang et al., “Retrieval-augmented gener-
+     D. d. l. Casas, F. Bressand, G. Lengyel, G. Lample, L. Saulnier et al.,            ation with graphs (graphrag),” arXiv preprint arXiv:2501.00309, 2024.
+     “Mistral 7b,” arXiv preprint arXiv:2310.06825, 2023.                          [24] C. Shengyuan, Y. Cai, H. Fang, X. Huang, and M. Sun, “Differentiable
+ [4] H. Touvron, T. Lavril, G. Izacard, X. Martinet, M.-A. Lachaux,                     neuro-symbolic reasoning on large-scale knowledge graphs,” Advances
+     T. Lacroix, B. Rozière, N. Goyal, E. Hambro, F. Azhar et al.,                     in Neural Information Processing Systems, vol. 36, pp. 28 139–28 154,
+     “Llama: Open and efficient foundation language models,” arXiv preprint             2023.
+     arXiv:2302.13971, 2023.                                                       [25] Q. Zhang, S. Chen, Y. Bei, Z. Yuan, H. Zhou, Z. Hong, J. Dong,
+ [5] J. Achiam, S. Adler, S. Agarwal, L. Ahmad, I. Akkaya, F. L. Aleman,                H. Chen, Y. Chang, and X. Huang, “A survey of graph retrieval-
+     D. Almeida, J. Altenschmidt, S. Altman, S. Anadkat et al., “Gpt-4                  augmented generation for customized large language models,” 2025.
+     technical report,” arXiv preprint arXiv:2303.08774, 2023.                          [Online]. Available: https://arxiv.org/abs/2501.13958
+                                                                                   [26] Z. Guo, L. Xia, Y. Yu, T. Ao, and C. Huang, “Lightrag: Simple and fast
+ [6] A. Yang, B. Yang, B. Hui, B. Zheng, B. Yu, C. Zhou, C. Li, C. Li,
+                                                                                        retrieval-augmented generation,” 2024.
+     D. Liu, F. Huang et al., “Qwen2 technical report,” arXiv preprint
+     arXiv:2407.10671, 2024.                                                       [27] Z. Li, X. Chen, H. Yu, H. Lin, Y. Lu, Q. Tang, F. Huang, X. Han,
+                                                                                        L. Sun, and Y. Li, “Structrag: Boosting knowledge intensive reasoning
+ [7] C. Zhang, Y. Mao, Y. Fan, Y. Mi, Y. Gao, L. Chen, D. Lou, and
+                                                                                        of llms via inference-time hybrid information structurization,” in The
+     J. Lin, “Finsql: Model-agnostic llms-based text-to-sql framework for
+                                                                                        Thirteenth International Conference on Learning Representations.
+     financial analysis,” in Companion of the 2024 International Conference
+                                                                                   [28] Y. Hu, Z. Lei, Z. Zhang, B. Pan, C. Ling, and L. Zhao, “Grag:
+     on Management of Data, 2024, pp. 93–105.
+                                                                                        Graph retrieval-augmented generation,” 2024. [Online]. Available:
+ [8] D. Chen, Y. Huang, Z. Ma, H. Chen, X. Pan, C. Ge, D. Gao, Y. Xie,
+                                                                                        https://arxiv.org/abs/2405.16506
+     Z. Liu, J. Gao et al., “Data-juicer: A one-stop data processing system
+                                                                                   [29] B. Jimenez Gutierrez, Y. Shu, Y. Gu, M. Yasunaga, and Y. Su, “Hip-
+     for large language models,” in Companion of the 2024 International
+                                                                                        porag: Neurobiologically inspired long-term memory for large language
+     Conference on Management of Data, 2024, pp. 120–134.
+                                                                                        models,” Advances in Neural Information Processing Systems, vol. 37,
+ [9] K. Lu, Z. Yang, S. Wu, R. Xia, D. Zhang, and G. Chen, “Adda:                       pp. 59 532–59 569, 2024.
+     Towards efficient in-database feature generation via llm-based agents,”       [30] L. Liang, Z. Bo, Z. Gui, Z. Zhu, L. Zhong, P. Zhao, M. Sun, Z. Zhang,
+     Proceedings of the ACM on Management of Data, vol. 3, no. 3, pp.                   J. Zhou, W. Chen et al., “Kag: Boosting llms in professional domains
+     1–27, 2025.                                                                        via knowledge augmented generation,” in Companion Proceedings of
+[10] S. Jo and I. Trummer, “Sparellm: Automatically selecting task-specific             the ACM on Web Conference 2025, 2025, pp. 334–343.
+     minimum-cost large language models under equivalence constraint,”             [31] B. J. Gutiérrez, Y. Shu, W. Qi, S. Zhou, and Y. Su, “From rag to
+     Proceedings of the ACM on Management of Data, vol. 3, no. 3, pp.                   memory: Non-parametric continual learning for large language models,”
+     1–26, 2025.                                                                        Forty-second International Conference on Machine Learning, 2025.
+[11] M. I. L. Balaka, D. Alexander, Q. Wang, Y. Gong, A. Krisnadhi,                [32] circlemind ai. (2025) fast-graphrag. [Online]. Available: https://github.
+     and R. Castro Fernandez, “Pneuma: Leveraging llms for tabular data                 com/circlemind-ai/fast-graphrag
+     representation and retrieval in an end-to-end system,” Proceedings of         [33] T. H. Haveliwala, “Topic-sensitive pagerank,” in Proceedings of the 11th
+     the ACM on Management of Data, vol. 3, no. 3, pp. 1–28, 2025.                      international conference on World Wide Web, 2002, pp. 517–526.
+[12] W. Zhou, Y. Gao, X. Zhou, and G. Li, “Cracking sql barriers: An               [34] Z. Xiang, C. Wu, Q. Zhang, S. Chen, Z. Hong, X. Huang, and J. Su,
+     llm-based dialect translation system,” Proceedings of the ACM on                   “When to use graphs in rag: A comprehensive analysis for graph
+     Management of Data, vol. 3, no. 3, pp. 1–26, 2025.                                 retrieval-augmented generation,” arXiv preprint arXiv:2506.05690, 2025.
+[13] J. S. Barbosa, U. Gondhali, G. Petrossian, K. Sharma, S. Chakraborty,         [35] H. Han, H. Shomer, Y. Wang, Y. Lei, K. Guo, Z. Hua, B. Long,
+     J. Jacquet, and J. Freire, “A cost-effective llm-based approach to identify        H. Liu, and J. Tang, “Rag vs. graphrag: A systematic evaluation and
+     wildlife trafficking in online marketplaces,” Proceedings of the ACM on            key insights,” arXiv preprint arXiv:2502.11371, 2025.
+     Management of Data, vol. 3, no. 3, pp. 1–23, 2025.                            [36] Y. Zhou, Y. Su, Y. Sun, S. Wang, T. Wang, R. He, Y. Zhang, S. Liang,
+[14] K. Luoma and A. Kumar, “Snails: Schema naming assessments for                      X. Liu, Y. Ma et al., “In-depth analysis of graph-based rag in a unified
+     improved llm-based sql inference,” Proceedings of the ACM on                       framework,” arXiv preprint arXiv:2503.04338, 2025.
+     Management of Data, vol. 3, no. 1, pp. 1–26, 2025.                            [37] R. C. Fernandez, A. J. Elmore, M. J. Franklin, S. Krishnan,
+[15] R. Omar, O. Mangukiya, and E. Mansour, “Dialogue benchmark gen-                    and C. Tan, “How large language models will disrupt data
+     eration from knowledge graphs with cost-effective retrieval-augmented              management,” pp. 3302–3309, 2023. [Online]. Available: https:
+     llms,” Proceedings of the ACM on Management of Data, vol. 3, no. 1,                //www.vldb.org/pvldb/vol16/p3302-fernandez.pdf
+     pp. 1–26, 2025.                                                               [38] S. Amer-Yahia, A. Bonifati, L. Chen, G. Li, K. Shim, J. Xu, and X. Yang,
+[16] Y. Gao, Y. Xiong, X. Gao, K. Jia, J. Pan, Y. Bi, Y. Dai, J. Sun,                   “From large language models to databases and back: A discussion on
+     M. Wang, and H. Wang, “Retrieval-augmented generation for large                    research and education,” SIGMOD Rec., vol. 52, no. 3, pp. 49–56,
+     language models: A survey,” arXiv preprint arXiv:2312.10997, 2023.                 2023. [Online]. Available: https://doi.org/10.1145/3631504.3631518
+[17] B. Peng, Y. Zhu, Y. Liu, X. Bo, H. Shi, C. Hong, Y. Zhang, and                [39] M. Zhang, Z. Ji, Z. Luo, Y. Wu, and C. Chai, “Applications and
+     S. Tang, “Graph retrieval-augmented generation: A survey,” arXiv                   challenges for large language models: From data management
+     preprint arXiv:2408.08921, 2024.                                                   perspective,” in 40th IEEE International Conference on Data
+[18] S. Wu, Y. Xiong, Y. Cui, H. Wu, C. Chen, Y. Yuan, L. Huang, X. Liu,                Engineering, ICDE 2024, Utrecht, The Netherlands, May
+     T.-W. Kuo, N. Guan et al., “Retrieval-augmented generation for natural             13-16, 2024. IEEE, 2024, pp. 5530–5541. [Online]. Available:
+     language processing: A survey,” arXiv preprint arXiv:2407.13193, 2024.             https://doi.org/10.1109/ICDE60146.2024.00441
+[19] N. F. Liu, K. Lin, J. Hewitt, A. Paranjape, M. Bevilacqua, F. Petroni, and    [40] X. Miao, Z. Jia, and B. Cui, “Demystifying data management for
+     P. Liang, “Lost in the middle: How language models use long contexts,”             large language models,” in Companion of the 2024 International
+     Transactions of the Association for Computational Linguistics, vol. 12,            Conference on Management of Data, SIGMOD/PODS 2024, Santiago
+     pp. 157–173, 2024.                                                                 AA, Chile, June 9-15, 2024, P. Barceló, N. Sánchez-Pi, A. Meliou, and
+[20] T. Merth, Q. Fu, M. Rastegari, and M. Najibi, “Superposition prompt-               S. Sudarshan, Eds. ACM, 2024, pp. 547–555. [Online]. Available:
+     ing: improving and accelerating retrieval-augmented generation,” in                https://doi.org/10.1145/3626246.3654683
+     Proceedings of the 41st International Conference on Machine Learning,         [41] B. Snyder, M. Moisescu, and M. B. Zafar, “On early detection of
+     2024, pp. 35 507–35 527.                                                           hallucinations in factual question answering,” in Proceedings of the 30th
+     ACM SIGKDD Conference on Knowledge Discovery and Data Mining,                [60] Z. Hu, C. Wang, Y. Shu, H.-Y. Paik, and L. Zhu, “Prompt perturbation
+     2024, pp. 2721–2732.                                                              in retrieval-augmented generation based large language models,” in
+[42] A. Zhong, D. Mo, G. Liu, J. Liu, Q. Lu, Q. Zhou, J. Wu, Q. Li,                    Proceedings of the 30th ACM SIGKDD Conference on Knowledge
+     and Q. Wen, “Logparser-llm: Advancing efficient log parsing with                  Discovery and Data Mining, 2024, pp. 1119–1130.
+     large language models,” in Proceedings of the 30th ACM SIGKDD                [61] J. Wu, C.-C. Chang, T. Yu, Z. He, J. Wang, Y. Hou, and J. McAuley,
+     Conference on Knowledge Discovery and Data Mining, 2024, pp. 4559–                “Coral: Collaborative retrieval-augmented large language models im-
+     4570.                                                                             prove long-tail recommendation,” in Proceedings of the 30th ACM
+[43] M. Yan, Y. Wang, K. Pang, M. Xie, and J. Li, “Efficient mixture                   SIGKDD Conference on Knowledge Discovery and Data Mining, 2024,
+     of experts based on large language models for low-resource data                   pp. 3391–3401.
+     preprocessing,” in Proceedings of the 30th ACM SIGKDD Conference             [62] T. Cai, Z. Tan, X. Song, T. Sun, J. Jiang, Y. Xu, Y. Zhang, and J. Gu,
+     on Knowledge Discovery and Data Mining, 2024, pp. 3690–3701.                      “Forag: Factuality-optimized retrieval augmented generation for web-
+[44] L. Chen, F. Xu, N. Li, Z. Han, M. Wang, Y. Li, and P. Hui, “Large                 enhanced long-form question answering,” in Proceedings of the 30th
+     language model-driven meta-structure discovery in heterogeneous infor-            ACM SIGKDD Conference on Knowledge Discovery and Data Mining,
+     mation network,” in Proceedings of the 30th ACM SIGKDD Conference                 2024, pp. 199–210.
+     on Knowledge Discovery and Data Mining, 2024, pp. 307–318.                   [63] H. Oosterhuis, R. Jagerman, Z. Qin, X. Wang, and M. Bendersky,
+[45] Y. Ding, C. Niu, F. Wu, S. Tang, C. Lyu, and G. Chen, “Enhancing                  “Reliable confidence intervals for information retrieval evaluation using
+     on-device llm inference with historical cloud-based llm interactions,”            generative ai,” in Proceedings of the 30th ACM SIGKDD Conference
+     in Proceedings of the 30th ACM SIGKDD Conference on Knowledge                     on Knowledge Discovery and Data Mining, 2024, pp. 2307–2317.
+     Discovery and Data Mining, 2024, pp. 597–608.                                [64] S. Yadav, D. Saini, A. Buvanesh, B. Paliwal, K. Dahiya, S. Asokan,
+[46] S. Arora, B. Yang, S. Eyuboglu, A. Narayan, A. Hojel, I. Trummer,                 Y. Prabhu, J. Jiao, and M. Varma, “Extreme meta-classification for large-
+     and C. Ré, “Language models enable simple systems for generating                 scale zero-shot retrieval,” in Proceedings of the 30th ACM SIGKDD
+     structured views of heterogeneous data lakes,” Proceedings of the VLDB            Conference on Knowledge Discovery and Data Mining, 2024, pp. 3657–
+     Endowment, vol. 17, no. 2, pp. 92–105, 2023.                                      3666.
+[47] Y. Dong, C. Xiao, T. Nozawa, M. Enomoto, and M. Oyamada,                     [65] T.-Y. Che, X.-L. Mao, T. Lan, and H. Huang, “A hierarchical context
+     “Deepjoin: Joinable table discovery with pre-trained language models,”            augmentation method to improve retrieval-augmented llms on scientific
+     Proceedings of the VLDB Endowment, vol. 16, no. 10, pp. 2458–2470,                papers,” in Proceedings of the 30th ACM SIGKDD Conference on
+     2023.                                                                             Knowledge Discovery and Data Mining, 2024, pp. 243–254.
+[48] M. Kayali, A. Lykov, I. Fountalis, N. Vasiloglou, D. Olteanu, and            [66] Z. Pan, Q. Wu, H. Jiang, M. Xia, X. Luo, J. Zhang, Q. Lin,
+     D. Suciu, “Chorus: Foundation models for unified data discovery and               V. Ruhle, Y. Yang, C.-Y. Lin, H. V. Zhao, L. Qiu, and D. Zhang,
+     exploration,” Proceedings of the VLDB Endowment, vol. 17, no. 8, pp.              “Llmlingua-2: Data distillation for efficient and faithful task-agnostic
+     2104–2114, 2024.                                                                  prompt compression,” in Proceedings of the 62nd Annual Meeting of
+[49] Y. Zhang, A. Floratou, J. Cahoon, S. Krishnan, A. C. Müller, D. Banda,           the Association for Computational Linguistics (Volume 1: Long Papers),
+     F. Psallidas, and J. M. Patel, “Schema matching using pre-trained                 L.-W. Ku, A. Martins, and V. Srikumar, Eds. Bangkok, Thailand:
+     language models,” in 2023 IEEE 39th International Conference on Data              Association for Computational Linguistics, aug 2024, pp. 963–981.
+     Engineering (ICDE). IEEE, 2023, pp. 1558–1571.                                    [Online]. Available: https://aclanthology.org/2024.findings-acl.57
+[50] J. Tu, J. Fan, N. Tang, P. Wang, G. Li, X. Du, X. Jia, and S. Gao,           [67] H. Jiang, Q. Wu, , X. Luo, D. Li, C.-Y. Lin, Y. Yang, and
+     “Unicorn: A unified multi-tasking model for supporting matching tasks             L. Qiu, “Longllmlingua: Accelerating and enhancing LLMs in
+     in data integration,” Proceedings of the ACM on Management of Data,               long context scenarios via prompt compression,” in Proceedings of
+     vol. 1, no. 1, pp. 1–26, 2023.                                                    the 62nd Annual Meeting of the Association for Computational
+[51] M. Fan, X. Han, J. Fan, C. Chai, N. Tang, G. Li, and X. Du,                       Linguistics (Volume 1: Long Papers), L.-W. Ku, A. Martins, and
+     “Cost-effective in-context learning for entity resolution: A design space         V. Srikumar, Eds. Bangkok, Thailand: Association for Computational
+     exploration,” in 2024 IEEE 40th International Conference on Data                  Linguistics, aug 2024, pp. 1658–1677. [Online]. Available: https:
+     Engineering (ICDE). IEEE, 2024, pp. 3696–3709.                                    //aclanthology.org/2024.acl-long.91
+[52] X. Du, G. Yuan, S. Wu, G. Chen, and P. Lu, “In situ neural relational        [68] C. Sammut and G. I. Webb, Eds., TF–IDF. Boston, MA: Springer
+     schema matcher,” in 2024 IEEE 40th International Conference on Data               US, 2010, pp. 986–987. [Online]. Available: https://doi.org/10.1007/
+     Engineering (ICDE). IEEE, 2024, pp. 138–150.                                      978-0-387-30164-8 832
+[53] B. Li, Y. Luo, C. Chai, G. Li, and N. Tang, “The dawn of natural             [69] K. Su, B. Lu, H. Ngo, P. Pardalos, and D.-Z. Du, Steiner Tree
+     language to SQL: are we fully ready? [experiment, analysis \u0026                 Problems. Cham: Springer International Publishing, 2020, pp. 1–15.
+     benchmark ],” Proc. VLDB Endow., vol. 17, no. 11, pp. 3318–3331,                  [Online]. Available: https://doi.org/10.1007/978-3-030-54621-2 645-1
+     2024. [Online]. Available: https://www.vldb.org/pvldb/vol17/p3318-luo.       [70] K. Mehlhorn, “A faster approximation algorithm for the steiner problem
+     pdf                                                                               in graphs,” Information Processing Letters, vol. 27, no. 3, pp. 125–128,
+[54] T. Ren, Y. Fan, Z. He, R. Huang, J. Dai, C. Huang, Y. Jing,                       1988.
+     K. Zhang, Y. Yang, and X. S. Wang, “PURPLE: making a large                   [71] S. Robertson, H. Zaragoza et al., “The probabilistic relevance frame-
+     language model a better SQL writer,” in 40th IEEE International                   work: Bm25 and beyond,” Foundations and Trends® in Information
+     Conference on Data Engineering, ICDE 2024, Utrecht, The Netherlands,              Retrieval, vol. 3, no. 4, pp. 333–389, 2009.
+     May 13-16, 2024. IEEE, 2024, pp. 15–28. [Online]. Available:                 [72] K. Mehlhorn, “A faster approximation algorithm for the steiner
+     https://doi.org/10.1109/ICDE60146.2024.00009                                      problem in graphs,” Information Processing Letters, vol. 27, no. 3,
+[55] I. Trummer, “From bert to gpt-3 codex: harnessing the potential of very           pp. 125–128, 1988. [Online]. Available: https://www.sciencedirect.com/
+     large language models for data management,” Proceedings of the VLDB               science/article/pii/002001908890066X
+     Endowment, vol. 15, no. 12, pp. 3770–3773, 2022.                             [73] K. Kowsari, D. E. Brown, M. Heidarysafa, K. J. Meimandi, M. S.
+[56] Z. Gu, J. Fan, N. Tang, L. Cao, B. Jia, S. Madden, and X. Du, “Few-               Gerber, and L. E. Barnes, “Hdltex: Hierarchical deep learning for text
+     shot text-to-sql translation using structure and content prompt learning,”        classification,” in 2017 16th IEEE international conference on machine
+     Proceedings of the ACM on Management of Data, vol. 1, no. 2, pp.                  learning and applications (ICMLA). IEEE, 2017, pp. 364–371.
+     1–28, 2023.                                                                  [74] C. Xia, W. Yin, Y. Feng, and P. S. Yu, “Incremental few-shot
+[57] Y. Zhang, Y. Li, L. Cui, D. Cai, L. Liu, T. Fu, X. Huang, E. Zhao,                text classification with multi-round new classes: Formulation, dataset
+     Y. Zhang, Y. Chen et al., “Siren’s song in the ai ocean: a survey on hal-         and system,” in Proceedings of the 2021 Conference of the North
+     lucination in large language models,” arXiv preprint arXiv:2309.01219,            American Chapter of the Association for Computational Linguistics:
+     2023.                                                                             Human Language Technologies, NAACL-HLT 2021, Online, June 6-11,
+[58] T. Chen, H. Wang, S. Chen, W. Yu, K. Ma, X. Zhao, H. Zhang, and                   2021, K. Toutanova, A. Rumshisky, L. Zettlemoyer, D. Hakkani-Tür,
+     D. Yu, “Dense x retrieval: What retrieval granularity should we use?”             I. Beltagy, S. Bethard, R. Cotterell, T. Chakraborty, and Y. Zhou,
+     arXiv preprint arXiv:2312.06648, 2023.                                            Eds. Association for Computational Linguistics, 2021, pp. 1351–1360.
+[59] P. Sarthi, S. Abdullah, A. Tuli, S. Khanna, A. Goldie, and C. D.                  [Online]. Available: https://doi.org/10.18653/v1/2021.naacl-main.106
+     Manning, “Raptor: Recursive abstractive processing for tree-organized        [75] C.-Y. Lin, “Rouge: A package for automatic evaluation of summaries,”
+     retrieval,” arXiv preprint arXiv:2401.18059, 2024.                                in Text Summarization Branches Out. Barcelona, Spain: Association
+     for Computational Linguistics, jul 2004, pp. 74–81. [Online]. Available:
+     https://aclanthology.org/W04-1013/
+[76] A. Hurst, A. Lerer, A. P. Goucher, A. Perelman, A. Ramesh, A. Clark,
+     A. Ostrow, A. Welihinda, A. Hayes, A. Radford et al., “Gpt-4o system
+     card,” arXiv preprint arXiv:2410.21276, 2024.
+[77] H. Song, J. Jiang, Y. Min, J. Chen, Z. Chen, W. X. Zhao, L. Fang, and
+     J.-R. Wen, “R1-searcher: Incentivizing the search capability in llms via
+     reinforcement learning,” arXiv preprint arXiv:2503.05592, 2025.
+[78] “GitHub - gusye1234/nano-graphrag: A simple, easy-to-hack
+     GraphRAG implementation — github.com,” https://github.com/
+     gusye1234/nano-graphrag, [Accessed 23-11-2024].
+[79] Qwen, :, A. Yang, B. Yang, B. Zhang, B. Hui, B. Zheng, B. Yu,
+     C. Li, D. Liu, F. Huang, H. Wei, H. Lin, J. Yang, J. Tu, J. Zhang,
+     J. Yang, J. Yang, J. Zhou, J. Lin, K. Dang, K. Lu, K. Bao, K. Yang,
+     L. Yu, M. Li, M. Xue, P. Zhang, Q. Zhu, R. Men, R. Lin, T. Li,
+     T. Tang, T. Xia, X. Ren, X. Ren, Y. Fan, Y. Su, Y. Zhang, Y. Wan,
+     Y. Liu, Z. Cui, Z. Zhang, and Z. Qiu, “Qwen2.5 technical report,”
+     2025. [Online]. Available: https://arxiv.org/abs/2412.15115
+[80] G. Izacard, M. Caron, L. Hosseini, S. Riedel, P. Bojanowski, A. Joulin,
+     and E. Grave, “Unsupervised dense information retrieval with contrastive
+     learning,” Transactions on Machine Learning Research.
+[81] S. Xiao, Z. Liu, P. Zhang, and N. Muennighoff, “C-pack: Packaged
+     resources to advance general chinese embedding,” 2023.
+[82] J. F. Silva and J. C. Cunha, “An empirical model for n-gram frequency
+     distribution in large corpora,” in Pacific-Asia Conference on Knowledge
+     Discovery and Data Mining. Springer, 2020, pp. 840–851.
+[83] Q. Zhu, X. Li, A. Conesa, and C. Pereira, “Gram-cnn: a deep learning
+     approach with local context for named entity recognition in biomedical
+     text,” Bioinformatics, vol. 34, no. 9, pp. 1547–1554, 2018.
+[84] I. Fette, “Combining n-gram based statistics with traditional methods
+     for named entity recognition,” 2007.
+

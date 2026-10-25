@@ -1,0 +1,20 @@
+[
+  {
+    "path": "chapter/tables/agrag-efficiency.tex",
+    "numeric_tokens_unchanged": true,
+    "removed_numeric_emphasis": 35,
+    "reason": "Independent review found source-inherited bold/underline marks inconsistent with numeric ranks; keep method-name emphasis and literal measurements."
+  },
+  {
+    "path": "chapter/tables/agrag-ablation.tex",
+    "numeric_tokens_unchanged": true,
+    "removed_numeric_emphasis": 55,
+    "reason": "Independent review found source-inherited bold/underline marks inconsistent with numeric ranks; keep method-name emphasis and literal measurements."
+  },
+  {
+    "path": "chapter/tables/mgrag-matching.tex",
+    "numeric_tokens_unchanged": true,
+    "removed_numeric_emphasis": 59,
+    "reason": "Independent review found source-inherited bold/underline marks inconsistent with numeric ranks; keep method-name emphasis and literal measurements."
+  }
+]

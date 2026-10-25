@@ -1,0 +1,24 @@
+\begin{table}[tbp]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\caption{Complex reasoning with Qwen2.5-14B-Instruct. Results from the AGRAG main experiment~\cite{agrag-paper}.}
+\label{tab:agrag:main-complex}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+Method & Novel ROG & Novel ACC & Medical ROG & Medical ACC\\
+\midrule
+NaiveRAG & 0.120 & 0.447 & 0.117 & 0.635\\
+L.LLMLingua & 0.092 & 0.434 & 0.080 & 0.633\\
+RAPTOR & 0.290 & \underline{0.460} & 0.185 & \underline{0.649}\\
+SiReRAG & 0.307 & 0.459 & 0.269 & 0.646\\
+G-retriever & 0.146 & 0.441 & 0.102 & 0.396\\
+MIXRAG & 0.109 & 0.386 & 0.156 & 0.434\\
+GraphRAG & 0.246 & 0.449 & 0.250 & 0.606\\
+LightRAG & 0.223 & 0.448 & 0.255 & 0.637\\
+HippoRAG2 & \underline{0.314} & 0.453 & \underline{0.332} & 0.622\\
+F.GraphRAG & 0.237 & 0.371 & 0.262 & 0.643\\
+\textbf{AGRAG} & \textbf{0.319} & \textbf{0.467} & \textbf{0.343} & \textbf{0.665}\\
+\bottomrule
+\end{tabular}}
+\end{table}

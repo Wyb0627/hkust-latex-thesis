@@ -1,0 +1,245 @@
+[
+  {
+    "manifest": "kglink-assets.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/figures/tg_issue_small.pdf",
+    "target": "figures/kglink/tg_issue_small.pdf",
+    "recorded_sha256": "732464fa46a52bdb63090f1d737e730447c034dfc7334b9b746821e760806c24",
+    "source_sha256": "732464fa46a52bdb63090f1d737e730447c034dfc7334b9b746821e760806c24",
+    "target_sha256": "732464fa46a52bdb63090f1d737e730447c034dfc7334b9b746821e760806c24",
+    "status": "PASS"
+  },
+  {
+    "manifest": "kglink-assets.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/figures/DL_NotWell_small.pdf",
+    "target": "figures/kglink/DL_NotWell_small.pdf",
+    "recorded_sha256": "5461aad91a3ebcdd3b8f213664ec40dc585b49b7d443966650be8af510e6ede7",
+    "source_sha256": "5461aad91a3ebcdd3b8f213664ec40dc585b49b7d443966650be8af510e6ede7",
+    "target_sha256": "5461aad91a3ebcdd3b8f213664ec40dc585b49b7d443966650be8af510e6ede7",
+    "status": "PASS"
+  },
+  {
+    "manifest": "kglink-assets.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/figures/kglink_new_overview.png",
+    "target": "figures/kglink/kglink_new_overview.png",
+    "recorded_sha256": "cca22e629d750bc621dcf575c28fbe4c1c1ff8ab3d22117ced31b83f79f73ac7",
+    "source_sha256": "cca22e629d750bc621dcf575c28fbe4c1c1ff8ab3d22117ced31b83f79f73ac7",
+    "target_sha256": "cca22e629d750bc621dcf575c28fbe4c1c1ff8ab3d22117ced31b83f79f73ac7",
+    "status": "PASS"
+  },
+  {
+    "manifest": "kglink-assets.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/figures/KG_part.pdf",
+    "target": "figures/kglink/KG_part.pdf",
+    "recorded_sha256": "0ba3b254f1316a7f9bebdf36c06aaeb1388a241c17309e86098ba307f1379707",
+    "source_sha256": "0ba3b254f1316a7f9bebdf36c06aaeb1388a241c17309e86098ba307f1379707",
+    "target_sha256": "0ba3b254f1316a7f9bebdf36c06aaeb1388a241c17309e86098ba307f1379707",
+    "status": "PASS"
+  },
+  {
+    "manifest": "kglink-assets.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/figures/overlap.png",
+    "target": "figures/kglink/overlap.png",
+    "recorded_sha256": "e690fca34184c617d516cd5245ae0ff41ffb0697418ec3c6c472dc4e348df275",
+    "source_sha256": "e690fca34184c617d516cd5245ae0ff41ffb0697418ec3c6c472dc4e348df275",
+    "target_sha256": "e690fca34184c617d516cd5245ae0ff41ffb0697418ec3c6c472dc4e348df275",
+    "status": "PASS"
+  },
+  {
+    "manifest": "kglink-assets.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/figures/dmlm.png",
+    "target": "figures/kglink/dmlm.png",
+    "recorded_sha256": "b517e89e2207e53d094cf3366420d78f26420d3b001ec746e1ffb3b5bfab52c2",
+    "source_sha256": "b517e89e2207e53d094cf3366420d78f26420d3b001ec746e1ffb3b5bfab52c2",
+    "target_sha256": "b517e89e2207e53d094cf3366420d78f26420d3b001ec746e1ffb3b5bfab52c2",
+    "status": "PASS"
+  },
+  {
+    "manifest": "kglink-assets.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/figures/runtime.pdf",
+    "target": "figures/kglink/runtime.pdf",
+    "recorded_sha256": "557c5c321a4af3e19e91e2f225977550c633f822f3c374d15a21c9219d32b0e9",
+    "source_sha256": "557c5c321a4af3e19e91e2f225977550c633f822f3c374d15a21c9219d32b0e9",
+    "target_sha256": "557c5c321a4af3e19e91e2f225977550c633f822f3c374d15a21c9219d32b0e9",
+    "status": "PASS"
+  },
+  {
+    "manifest": "kglink-assets.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/figures/F1_k.pdf",
+    "target": "figures/kglink/F1_k.pdf",
+    "recorded_sha256": "a4b4c34c3f3bc990e9288e74bee283ffe5c22582493482f09ea76fa2f6691725",
+    "source_sha256": "a4b4c34c3f3bc990e9288e74bee283ffe5c22582493482f09ea76fa2f6691725",
+    "target_sha256": "a4b4c34c3f3bc990e9288e74bee283ffe5c22582493482f09ea76fa2f6691725",
+    "status": "PASS"
+  },
+  {
+    "manifest": "kglink-assets.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/figures/k_time.pdf",
+    "target": "figures/kglink/k_time.pdf",
+    "recorded_sha256": "9aad276fc818ee9ddc7f3a1c29860b4126583701129959de979995a0f95dd3a0",
+    "source_sha256": "9aad276fc818ee9ddc7f3a1c29860b4126583701129959de979995a0f95dd3a0",
+    "target_sha256": "9aad276fc818ee9ddc7f3a1c29860b4126583701129959de979995a0f95dd3a0",
+    "status": "PASS"
+  },
+  {
+    "manifest": "gorag-figure-manifest.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/WWW_CR/figures/DFSTC_task.pdf",
+    "target": "figures/gorag/DFSTC_task.pdf",
+    "recorded_sha256": "de51f123932dc9e8868670bb0e9d54730320942cffbd5ae5eafb5ccf4dad7d05",
+    "source_sha256": "de51f123932dc9e8868670bb0e9d54730320942cffbd5ae5eafb5ccf4dad7d05",
+    "target_sha256": "de51f123932dc9e8868670bb0e9d54730320942cffbd5ae5eafb5ccf4dad7d05",
+    "status": "PASS"
+  },
+  {
+    "manifest": "gorag-figure-manifest.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/WWW_CR/figures/GORAG_pipeline_example_new.pdf",
+    "target": "figures/gorag/GORAG_pipeline_example_new.pdf",
+    "recorded_sha256": "5c8bdcbe435f1390315934d108efba01da25dc4510c4df329b619f5a7a976643",
+    "source_sha256": "5c8bdcbe435f1390315934d108efba01da25dc4510c4df329b619f5a7a976643",
+    "target_sha256": "5c8bdcbe435f1390315934d108efba01da25dc4510c4df329b619f5a7a976643",
+    "status": "PASS"
+  },
+  {
+    "manifest": "gorag-figure-manifest.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/WWW_CR/figures/runtime_wos.pdf",
+    "target": "figures/gorag/runtime_wos.pdf",
+    "recorded_sha256": "d3785ab84db6f968b941bc0208cd5b1dd9c10c2cf172b291b2eec5bf949de9f1",
+    "source_sha256": "d3785ab84db6f968b941bc0208cd5b1dd9c10c2cf172b291b2eec5bf949de9f1",
+    "target_sha256": "d3785ab84db6f968b941bc0208cd5b1dd9c10c2cf172b291b2eec5bf949de9f1",
+    "status": "PASS"
+  },
+  {
+    "manifest": "gorag-figure-manifest.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/WWW_CR/figures/runtime_cad.pdf",
+    "target": "figures/gorag/runtime_cad.pdf",
+    "recorded_sha256": "428b95b762d42a80dff00236445dcfa6979ca2454fd90da4da9d3eae13c81452",
+    "source_sha256": "428b95b762d42a80dff00236445dcfa6979ca2454fd90da4da9d3eae13c81452",
+    "target_sha256": "428b95b762d42a80dff00236445dcfa6979ca2454fd90da4da9d3eae13c81452",
+    "status": "PASS"
+  },
+  {
+    "manifest": "gorag-figure-manifest.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/WWW_CR/figures/wos_4_round_1.pdf",
+    "target": "figures/gorag/wos_4_round_1.pdf",
+    "recorded_sha256": "617c6987ba51373e9b466b0b14cc3f2a9d0a56691f03a152543903d7620bc070",
+    "source_sha256": "617c6987ba51373e9b466b0b14cc3f2a9d0a56691f03a152543903d7620bc070",
+    "target_sha256": "617c6987ba51373e9b466b0b14cc3f2a9d0a56691f03a152543903d7620bc070",
+    "status": "PASS"
+  },
+  {
+    "manifest": "gorag-figure-manifest.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/WWW_CR/figures/wos_4_round_5.pdf",
+    "target": "figures/gorag/wos_4_round_5.pdf",
+    "recorded_sha256": "a51c0eaa96de3069488894498e69b4f8183620dc296dfba694550d302b214580",
+    "source_sha256": "a51c0eaa96de3069488894498e69b4f8183620dc296dfba694550d302b214580",
+    "target_sha256": "a51c0eaa96de3069488894498e69b4f8183620dc296dfba694550d302b214580",
+    "status": "PASS"
+  },
+  {
+    "manifest": "gorag-figure-manifest.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/WWW_CR/figures/new_case.pdf",
+    "target": "figures/gorag/new_case.pdf",
+    "recorded_sha256": "2ae2d9768c279ca37f819b59a4ce8ecb3617286ec1d7873c5cc6bfb16e3dc9c2",
+    "source_sha256": "2ae2d9768c279ca37f819b59a4ce8ecb3617286ec1d7873c5cc6bfb16e3dc9c2",
+    "target_sha256": "2ae2d9768c279ca37f819b59a4ce8ecb3617286ec1d7873c5cc6bfb16e3dc9c2",
+    "status": "PASS"
+  },
+  {
+    "manifest": "agrag-assets.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/figures/AGRAG_pipeline.pdf",
+    "target": "figures/agrag/AGRAG_pipeline.pdf",
+    "recorded_sha256": "84de949296d180d41981827640d998124070d804c7189ffc26daf77f7aa203ee",
+    "source_sha256": "84de949296d180d41981827640d998124070d804c7189ffc26daf77f7aa203ee",
+    "target_sha256": "84de949296d180d41981827640d998124070d804c7189ffc26daf77f7aa203ee",
+    "status": "PASS"
+  },
+  {
+    "manifest": "agrag-assets.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/figures/GERAG_example.pdf",
+    "target": "figures/agrag/GERAG_example.pdf",
+    "recorded_sha256": "05240a54e06bfb2de9c2ef2bb9baea2cd5ce52977bb740aa925adc71a32402f0",
+    "source_sha256": "05240a54e06bfb2de9c2ef2bb9baea2cd5ce52977bb740aa925adc71a32402f0",
+    "target_sha256": "05240a54e06bfb2de9c2ef2bb9baea2cd5ce52977bb740aa925adc71a32402f0",
+    "status": "PASS"
+  },
+  {
+    "manifest": "agrag-assets.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/figures/heatmap_novel.pdf",
+    "target": "figures/agrag/heatmap_novel.pdf",
+    "recorded_sha256": "b57050eba05cf56e7a49cca85ef6a95eb6221c13d339e744ef20492a2c455981",
+    "source_sha256": "b57050eba05cf56e7a49cca85ef6a95eb6221c13d339e744ef20492a2c455981",
+    "target_sha256": "b57050eba05cf56e7a49cca85ef6a95eb6221c13d339e744ef20492a2c455981",
+    "status": "PASS"
+  },
+  {
+    "manifest": "agrag-assets.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/figures/heatmap_medical.pdf",
+    "target": "figures/agrag/heatmap_medical.pdf",
+    "recorded_sha256": "3a473d3af15987a0cc70c3f55d072da3881c25dd6a4eb4f4a7060c38a9519634",
+    "source_sha256": "3a473d3af15987a0cc70c3f55d072da3881c25dd6a4eb4f4a7060c38a9519634",
+    "target_sha256": "3a473d3af15987a0cc70c3f55d072da3881c25dd6a4eb4f4a7060c38a9519634",
+    "status": "PASS"
+  },
+  {
+    "manifest": "mgrag-assets.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/VLDB_MGRAG/pvldbstyle-master/figures/motivation.pdf",
+    "target": "figures/mgrag/motivation.pdf",
+    "recorded_sha256": "f8a3ff8c98c879a675535edd763f2543c221bfaad7bd44571268ae7d545edc28",
+    "source_sha256": "f8a3ff8c98c879a675535edd763f2543c221bfaad7bd44571268ae7d545edc28",
+    "target_sha256": "f8a3ff8c98c879a675535edd763f2543c221bfaad7bd44571268ae7d545edc28",
+    "status": "PASS"
+  },
+  {
+    "manifest": "mgrag-assets.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/VLDB_MGRAG/pvldbstyle-master/figures/pipeline_new.pdf",
+    "target": "figures/mgrag/pipeline_new.pdf",
+    "recorded_sha256": "71ecdb7b516429517ecfee00ca890072f03bc02a43c0b18bd32ae63866a3c54b",
+    "source_sha256": "71ecdb7b516429517ecfee00ca890072f03bc02a43c0b18bd32ae63866a3c54b",
+    "target_sha256": "71ecdb7b516429517ecfee00ca890072f03bc02a43c0b18bd32ae63866a3c54b",
+    "status": "PASS"
+  },
+  {
+    "manifest": "mgrag-assets.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/VLDB_MGRAG/pvldbstyle-master/figures/query_graph.pdf",
+    "target": "figures/mgrag/query_graph.pdf",
+    "recorded_sha256": "0f97a6724733ef2750a0362912c5c9dda6868206a97ef8b8a07b31dc746466c8",
+    "source_sha256": "0f97a6724733ef2750a0362912c5c9dda6868206a97ef8b8a07b31dc746466c8",
+    "target_sha256": "0f97a6724733ef2750a0362912c5c9dda6868206a97ef8b8a07b31dc746466c8",
+    "status": "PASS"
+  },
+  {
+    "manifest": "mgrag-assets.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/VLDB_MGRAG/pvldbstyle-master/figures/graph_based_cache.pdf",
+    "target": "figures/mgrag/graph_based_cache.pdf",
+    "recorded_sha256": "dc9b9478d8c1e3e85b6b09df00f6912b8772c481fc1d2d225fabbd559635fc21",
+    "source_sha256": "dc9b9478d8c1e3e85b6b09df00f6912b8772c481fc1d2d225fabbd559635fc21",
+    "target_sha256": "dc9b9478d8c1e3e85b6b09df00f6912b8772c481fc1d2d225fabbd559635fc21",
+    "status": "PASS"
+  },
+  {
+    "manifest": "mgrag-assets.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/VLDB_MGRAG/pvldbstyle-master/figures/acc_vs_theta_fixed_lp.pdf",
+    "target": "figures/mgrag/acc_vs_theta_fixed_lp.pdf",
+    "recorded_sha256": "4175f44107be766e5c43ad64f85c3a0a737a340c738e8c244926e3cefee78bb7",
+    "source_sha256": "4175f44107be766e5c43ad64f85c3a0a737a340c738e8c244926e3cefee78bb7",
+    "target_sha256": "4175f44107be766e5c43ad64f85c3a0a737a340c738e8c244926e3cefee78bb7",
+    "status": "PASS"
+  },
+  {
+    "manifest": "mgrag-assets.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/VLDB_MGRAG/pvldbstyle-master/figures/acc_vs_lp_fixed_theta.pdf",
+    "target": "figures/mgrag/acc_vs_lp_fixed_theta.pdf",
+    "recorded_sha256": "89944f51e523fadfc4f2a44e1736c531aca6f394a76f9aead62929dad6f1348e",
+    "source_sha256": "89944f51e523fadfc4f2a44e1736c531aca6f394a76f9aead62929dad6f1348e",
+    "target_sha256": "89944f51e523fadfc4f2a44e1736c531aca6f394a76f9aead62929dad6f1348e",
+    "status": "PASS"
+  },
+  {
+    "manifest": "background-assets.json",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/figures/decomp_new.pdf",
+    "target": "figures/hyperkg/decomp_new.pdf",
+    "recorded_sha256": "5f80185a1a1659f6f50e314f8f1dafe6ff9b946e211b16f2cf2e054c3314f3a1",
+    "source_sha256": "5f80185a1a1659f6f50e314f8f1dafe6ff9b946e211b16f2cf2e054c3314f3a1",
+    "target_sha256": "5f80185a1a1659f6f50e314f8f1dafe6ff9b946e211b16f2cf2e054c3314f3a1",
+    "status": "PASS"
+  }
+]

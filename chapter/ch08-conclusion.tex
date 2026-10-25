@@ -1,0 +1,33 @@
+\chapter{Conclusion and Future Directions}
+\label{ch:conclusion}
+
+\section{Conclusion}
+\label{sec:conclusion:findings}
+This thesis investigated how explicit knowledge structures can organize and select evidence for language models. It developed four methods for table understanding, dynamic classification, connected textual evidence selection, and multimodal query answering. The studies examine structure at different interfaces: as information supplied to a learned representation, as an index for candidate retrieval, as a connected generation context, and as a signal for context computation.
+
+KGLink's component comparisons show benefits from graph-derived evidence and contextual type-representation training. Its no-linkage subset also shows continued annotation through the table encoder when retrieved KG evidence is absent. External descriptions enter a supervised mapping to the annotation vocabulary, with cross-column filtering determining which descriptions are available.
+
+GORAG's offline ablation shows the contribution of expanding the keyword--label index with earlier predictions under its round protocol. Additional support and cumulative label growth have dataset-dependent effects, including non-monotonic results on IFS-Rel. The study makes evidence maintenance part of dynamic classification: current decisions shape associations available to later candidate retrieval.
+
+AGRAG's ablations distinguish answer coverage from support for the claims actually generated. Removing hybrid passages can retain a high faithfulness score while reducing coverage; replacing the expanded subgraph with its initial tree affects tasks differently. Connected graph facts and passage context therefore serve complementary evidence needs in the evaluated generation tasks.
+
+MGRAG's construction and matching comparisons support query-dependent extraction and semantic paths for the evaluated multimodal questions. Its cache comparisons show that the selected graph can also inform token-state recomputation. Component additions improve answer quality with runtime changes that depend on the host pipeline, extending structural evidence use into context processing.
+
+The accompanying hyper-relational knowledge-graph study examined how structural representations preserve fact information. Its qualifier-capture and graph-reception perspectives help explain why the form of a representation matters. Across the thesis, the common design question is which relationships must remain explicit for the downstream task. The published evaluations answer that question through particular methods and protocols, yielding a set of evidence interfaces for language-model augmentation.
+
+\section{Future Directions}
+\label{sec:conclusion:future}
+\subsection{Feedback for structure maintenance}
+A first direction is to connect evidence maintenance with feedback about its use. The current studies select graph information from an external source, update keyword--label associations, prepare a corpus graph, or build a query-specific graph. Feedback could indicate whether a retrieved relationship was relevant, whether its supporting passage was sufficient, or whether a prediction inserted into an index was later corrected. Such feedback would give maintenance a more direct connection to evidence quality.
+
+The evaluation of this direction should preserve the sequence in which feedback becomes available. In an online classifier, a later correction differs from a gold label supplied before prediction. In a retrieval system, the quality of one answer can affect later evidence selection only after its assessment is available. Explicit feedback timing and provenance would permit the study of correction and retention policies without conflating them with additional supervision.
+
+\subsection{Multimodal structure and provenance}
+A second direction concerns the quality of multimodal graph representations. Caption-based ranking provides an efficient text interface for images, while query-aware extraction can target details relevant to a question. Both operations influence which visual information becomes available to semantic matching. A useful extension would retain the link from a graph fact to the text span or image region supporting it, together with the extraction conditions.
+
+This would support a more detailed analysis of retrieval errors. A failed match could result from missing visual evidence, an extraction error, an unsuitable relation representation, or a search decision. Distinguishing these stages would help determine which component to improve. It would also make it possible to assess whether a matched path is supported by the source evidence at the granularity used in the answer.
+
+\subsection{Joint retrieval and context computation}
+A third direction is to study retrieval and context serving as coupled decisions. Retrieved evidence determines the length, modality, and structural organization of the model's input. The available cached states and the recomputation policy then determine the cost of processing that input. MGRAG provides one point in this design space by using graph features in selective recomputation.
+
+Further work could evaluate how alternative evidence structures affect the quality--latency tradeoff under a fixed serving budget. The comparison would need to separate graph construction, matching, cache reuse, and answer generation, and retain the query workload and hardware conditions. This would connect the semantic value of retrieved evidence to the cost of using it, extending the thesis's focus on structure from context selection to the complete evidence-processing path.

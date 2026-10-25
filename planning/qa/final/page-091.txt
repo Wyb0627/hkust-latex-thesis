@@ -1,0 +1,27 @@
+Table5.18: Medicallow-resourceeﬀiciency. Qwen3-4B-Instruct-2507ontwo2080TiGPUs.
+Method Index min Query min Input tokens Output tokens
+SiReRAG-L 18.1 182.3 5,113 827
+HippoRAG2-L 21.8 162.4 5,577 584
+AGRAG-L 14.4 167.3 5,282 534
+5.7.6 Additional resource setting and parameter study
+The low-resource experiment uses Qwen3-4B-Instruct-2507 on two NVIDIA 2080 Ti GPUs.
+Thischangesbothmodelandhardwarerelativetothemainexperiment. Thecomparisonthere-
+foreconcernsthemethodswithinthatresourcesetting. Itsuppliesevidenceaboutoperatingwith
+a smaller backbone and different accelerators rather than a controlled estimate of the effect of
+modelsizealone.
+Inthatsetting,AGRAG-LreportsNovelcreative-generationaccuracy0.519andcontextual-
+summarizationaccuracy0.706. ItsNovelindex/querytotalsare44.7and132.1minutes. Medical
+totalsare14.4and167.3minutes. HippoRAG2-Lhasshorterquerytotalsinbothcorpora,while
+AGRAG-Lhas shorter indexing totals. The complete low-resource tables retain the quality and
+tokenmeasuresneededtoassessthosetradeoffs.
+The parameter study varies the maximum n-gram length over {1,3,5,7} and the extraction
+threshold over {0.1,0.3,0.5,0.7}. The original heatmaps are reproduced in Figure 5.3. They
+show accuracy across the tested combinations for Novel and Medical. The main experiment
+uses𝑏 = 3and𝜏 = 0.5.
+5.8 Discussion and Chapter Summary
+AGRAGplacesstructureattwopointsintheevidencepipeline. Graphconstructiondetermines
+which entities, relations, and passage links are available. Query-time selection determines how
+thoseitemsareconnectedinthecontextsuppliedtothegenerator. Thehybridretrieverpreserves
+aroutetopassageinformationoutsidetheselectedgraph. Themethodconsequentlytreatsgraph
+evidenceandtextualcontextascomplementaryrepresentationsoftheindexedcorpus.
+77

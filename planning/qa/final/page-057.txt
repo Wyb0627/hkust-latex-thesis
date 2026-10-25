@@ -1,0 +1,80 @@
+OfflineGraphIndexing&Retrieval
+Few-shotTrainingTexts Facts
+WeightedGraph MinSpanningTree
+𝑦 𝑡: : J F o r in a u o d ur new Cryptoand Extract 𝑦 𝑣: : C Fr r a y u p d to, Index
+become a billionairein no Billionaire,… Crypto 0.3 Fraud Fraud
+time!…
+UnlabeledQueryTexts Keywords 0.2 0.6 Retrieve 0.6 0.2
+Innotime Billionaire Innotime
+𝑡 fr : o I m ’m E a l i b te ill G io lo n b a a ir l e F i u n n v d e stor Extract 𝑣:E B l i i l t l e i , onaire Map Billionaire
+who’ll make you one in no Innotime,…
+time!…
+Classification&OnlineGraphIndexing Keywords
+WeightedGraph
+MinSpanningTree 𝑣:Elite,
+CandidateLabels LLM Billionaire Billionaire 0.6 Fraud
+0.6
+Fraud
+0.2
+Fr
+…
+aud Classify
+Res
+In
+u
+n
+l
+o
+ti
+t
+n
+im
+g
+e,
+L
+…
+a bel
+O
+In
+n
+d
+li
+e
+n
+x
+e
+0.2 0.3 E
+0
+l
+.4
+ite
+Billionaire Innotime Fraud Innotime Crypto
+Figure 4.2: GORAG’s offline indexing, query-dependent retrieval, classification, and online
+update. Newquerykeywordsareassociatedwiththepredictedclassafterclassification. Repro-
+ducedfromFigure2ofGORAG[2].
+4.2.1 Keyword extraction and correlation scores
+GORAGscorestermsusingnormalizedTF–IDF[37]. Itsextractionvocabularyincludeswords
+and phrases of fewer than three words. Let 𝒯 denote the corpus seen so far, and let df(𝑣) be
+≤𝑟
+thenumberofitstextscontainingterm𝑣. Thereportedcorrelationscoreis
+count(𝑣,𝑡) |𝒯 |+1
+≤𝑟
+𝐶𝑆(𝑣,𝑡) = log . (4.2)
+|𝑡|log(|𝒯
+≤𝑟
+|+1) df(𝑣)+1
+Herecount(𝑣,𝑡)istheoccurrencecountof𝑣in𝑡,and|𝑡|istextlength. Theexpressioncombines
+frequency within the text with frequency across the observed corpus. Its corpus term changes
+when additional texts are observed. Terms with 𝐶𝑆(𝑣,𝑡) > 𝜏 are retained, with 𝜏 = 0.5 in the
+original study. The method uses the score both to select keywords and to calculate association
+costs.
+Astatisticalextractionscoregiveseachretainedtermanumericalcontributionbeforegraph
+retrieval. This contribution has a different role from the final language model’s confidence in a
+label. Thescoredetermineswhichlexicalunitsareindexedandhowexpensivetheirassociations
+willbeinretrieval. Theevaluationofthefullpipelineisthereforeneededtoestablishtheeffect
+onclassification.
+Usingshortphrasescanpreservealexicalcombinationthatwouldbesplitbyunigramindex-
+ing. Atthesametime,theextractionrulerestrictswhatbecomesaterminallater. Contentabsent
+fromtheextractedkeywordsetcannotdirectlyactasaretrievalterminalforthatquery. Thefull
+query text remains available to the classifier, but its access to label evidence has already been
+43

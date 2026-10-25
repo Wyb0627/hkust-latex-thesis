@@ -1,0 +1,40 @@
+Table7.2: Mainexperimentalconditionsacrossthefourstudies. Hardwaredenotesthereported
+local setup; GORAG’s IFS-Rel generation uses the GPT-4o service. Full task-specific controls
+appearinthecorrespondingresearchchapters.
+Study Mainmodelandhardware Supervisionandevidence Reportedoutcome
+state
+KGLink BERT;TeslaV100 7:1:2train/validation/test; Annotationaccuracy
+externalKG;three-run andweightedF1ona
+averages percentagescale
+GORAG Qwen2.5-7Bon 1/5/10supporttextsper Exact-labelaccuracyby
+CAD/WOS;GPT-4oon label;cumulativelabels; roundandsupportsize
+IFS-Rel;A10040GB prediction-dependentindex
+updates
+AGRAG Qwen2.5-14B-Instruct; Fixedcorpusgraph; Task-specificQA
+A10080GB query-conditionedscores assessment/overlap,
+andsubgraph;onetraining coverage,faithfulness,
+passageperlabelfor andclassification
+classification metrics
+MGRAG Qwen2.5-VL-7B-Instruct; Query-specificmultimodal Answerquality,TTFT,
+A10040GB graph;semanticmatching; andcomplete-
+selectiveKVrecomputation system/modulecosts
+A shared metric label can also conceal a different assessment rule. GORAG’s accuracy re-
+quiresthepredictedclasstomatchthegoldlabel. AGRAG’sQAaccuracyusesmodeljudgments
+scored 0, 0.5, or 1, while its classification accuracy uses label correctness. Its source-defined
+ROUGE-L quantity divides longest-common-subsequence length by generated-answer length.
+MGRAG reports answer accuracy alongside semantic similarity and lexical overlap. The syn-
+thesisthereforerelatesstructuralmechanismstotheircorrespondingmeasurements;itdoesnot
+poolthesescoresintoasinglecross-taskaccuracy.
+The AGRAG ablations illustrate a distinction within one study. Removing hybrid retrieval
+canretainahighfaithfulnessscorewhileloweringcoverage. Thegraph-onlycontextcansupport
+its generated claims yet omit information required by the reference answer. Evidence selection
+thereforeneedstoconsiderbothwhichstatementsaresupportedandwhichrequiredstatements
+are represented. The combination of graph evidence and passage context addresses these two
+requirementsthroughdifferentchannels.
+MGRAGintroducesafurtherdistinctionbetweenselectingcontextandreusingitscomputa-
+tion. Thesystem-levelcachecomparisonchangesthesurroundingretrievalsystemaswellasthe
+servingmechanisminsomerows. Theinverseablationsprovideamorefocusedviewofadding
+matching and graph-aware recomputation to particular retrieval configurations. Their quality
+and time columns must be read together. A component that improves answer quality can also
+increaseruntime;thesystemcomparisonmeasurestheircombinedqualityandcost.
+108

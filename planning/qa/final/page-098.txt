@@ -1,0 +1,34 @@
+to a poster, and a person on the poster to an action. It also includes a release-year requirement.
+Theevidencegraphcontainsnamedfilmcandidatesandavisualdescriptionofamanperforming
+amartial-artskickinmidair. Thedepictedfilm,TheAssailant,isconnectedtotheyear2009.
+The example separates identifying the film from reading its release year. The actor’s name
+alonecanleadtoseveralfilmcandidates,includingtheotherfilmshowninthegraph. Thevisual
+relationsuppliestheconditionthatdistinguishestherequestedcandidate. Oncethecandidateis
+connected to the poster evidence, the release relation provides the requested value. The query
+therefore needs a connected account of the actor, film, depicted action, and year. A list con-
+taining a similar actor passage and an unrelated year passage would leave that correspondence
+unresolved.
+Theplaceholdersgivethematcherexplicitlocationsforthesemissingvalues. Thefilmplace-
+holdercanbecomparedwithnamedfilmentities,whiletheyearplaceholdermarkstherelation
+whoseendpointsuppliestherequestedanswer. Representingunknownvaluesbytheirsemantic
+rolesletsmatchingoperatebeforethosevaluesareknown. Thepathprocedurethentestswhether
+the selected evidence entities are connected through semantically suitable relations. This is the
+pointatwhichthequery’sinformationrequirementbecomesaconstraintontheretrievedgraph.
+Thequerygraphexpressesaretrievalrequirementatentityandrelationgranularity. Itscon-
+structionisamodel-mediatedinterpretationofthequestion. Thedownstreammatcheroperates
+on this interpretation, including the wording chosen for placeholders and relations. A semantic
+match therefore indicates agreement between the represented query and represented evidence.
+Answerqualityisevaluatedseparatelyusingtheoriginalquestionandreferenceanswer.
+6.4.2 Extracting facts from ranked chunks
+For a chunk 𝑐, the extraction model receives the chunk, query, and extraction prompt 𝑝 . Its
+ext
+outputcontainsquery-relatedentitiesandrelations,
+(𝒱𝑐,ℰ𝑐) = LLM(𝑐,𝑞,𝑝 ). (6.3)
+𝑞 𝑞 ext
+Including 𝑞 makes the extraction selective. The model is asked to identify events and relations
+relevant to the current question, rather than to enumerate every describable fact in the chunk.
+For an image, this permits attention to query-related visual events; for text, it permits selection
+oftheentitiesandrelationshipsneededtodescribetherequestedevidence.
+The chunk is also added as a passage node. MGRAG connects this node to the entities
+extracted from it using the pseudo-relation consists_in, retaining the published relation
+84

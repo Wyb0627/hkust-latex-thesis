@@ -1,0 +1,36 @@
+The mapped facts need not name every component required in the answer. An additional re-
+lation can identify a candidate answer and connect it to the query anchors. The edge-cost and
+influence quantities determine how this information is considered by the expansion procedure.
+The selected subgraph then exposes the retained relationships to the generator as named facts,
+alongsideitspassagecontext.
+The theoretical claims have distinct scopes. The main paper reports NP-hardness for the
+stated subgraph optimization problem and a 2-approximation result for the initial terminal-
+connecting stage. The expansion procedure adds further evidence after that stage. Its empir-
+ical contribution is evaluated by replacing the expanded subgraph with the initial Steiner-tree
+representation. The chapter uses this ablation to assess the role of expansion in the evaluated
+tasks.
+The graph returned by retrieval is serialized as 𝑔 = StrConcat(𝒱 ,ℰ ). This repre-
+MCMI MCMI
+sentationcontainstheselectedentitiesandrelations. Itmakestheselectedrelationshipsavailable
+withinthemodel’sinputsequence.
+5.5 Hybrid Retrieval and Generation
+Agraphindexcapturesextractedrelationships,whereasmanydetailsremainintheoriginaltext.
+AGRAGthereforealsoretrieveschunksthroughahybridscore,
+MS(𝐪,𝐭)+BM25(𝑞,𝑡)
+HS(𝑞,𝑡) = , (5.13)
+2
+where 𝐭 is the dense representation of chunk 𝑡. The top 𝑘 chunks according to this score form
+𝑟
+𝒯 . Thesourcereports𝑘 = 5inthemainsetting.
+HR 𝑟
+Thetwocomponentsofthescorerespondtodifferentkindsofcorrespondence. Densesim-
+ilarity compares distributed representations of a query and passage. BM25 responds to lexical
+overlapandtermweighting[15]. AGRAGaveragesthetwoscoresasspecifiedinthepaper,then
+combines the selected chunks with the graph serialization. The hybrid channel is therefore an
+additionalsourceofpassagecontextratherthanaseparategraphexpansionrule.
+Thefinalanswerisgeneratedthrough
+𝐴 = LLM(𝑞,𝑔,𝒯 ,𝑝 ). (5.14)
+𝑞 HR gen
+Thisinputhasaquery,anexplicitselectedrelationalstructure,andsupportingpassagecontent.
+The graph identifies connected facts. The passage channel supplies contextual language that
+65

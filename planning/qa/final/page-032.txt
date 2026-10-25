@@ -1,0 +1,33 @@
+The association of a qualifier with a statement is especially relevant when a subject partici-
+pates in several facts using the same relation. In the education example, a degree describes one
+university attendance statement. A collection of subject–degree and subject–university triples
+exposes the entities but changes the representation of which degree qualifies which attendance
+fact. A model following ordinary graph paths then receives the transformed connections. The
+Hyper method supplies additional connections intended to retain more of these associations,
+whereas a qualifier integrator receives the main fact and its qualifier pairs together. This com-
+parisonplacesinformationpreservationattheinterfacebetweenthedatarepresentationandthe
+computation that follows it. It concerns the semantic organization of the input as well as its
+vocabulary.
+The experiments compare conventional KGE models under these transformations with spe-
+cialized HKGE models. Some GNN-based KGE configurations obtain scores comparable to
+specializedmethodsonCleanedJF17kandWD50k. Theobservationmotivatesanexamination
+of the represented information and the architecture receiving it. In particular, adding qualifier-
+derived edges can change the paths followed by a graph encoder. Preserving more items in
+a converted graph therefore changes the model’s computational input as well as the nominal
+amountofstoredinformation.
+2.6.2 Qualifier Capture and Graph Reception
+The analysis separates qualifier capture from graph reception. Qualifier capture concerns how
+themodelrepresentsqualifierpairsandtheirassociationwiththemainstatement. Graphrecep-
+tionconcernshowitreceivesinformationfromthewidergraph,includingdependenciesbeyond
+one fact. Models operating on a fact in isolation have a different receptive field from graph
+encoders that propagate information across several hops. These properties are visible in the
+operationsusedtoconstructrepresentations.
+CompGCNjointlymodelsentityandrelationrepresentationsinamulti-relationalgraph[25].
+NBFNet aggregates path information for link prediction [26]. Their graph computations offer
+different ways to receive neighborhood and path information after decomposition. The CIKM
+analysis also identifies an information-compression issue when qualifier information is aggre-
+gatedintofixed-sizemain-triplerepresentations. Widergraphreceptionandqualifierintegration
+consequentlyconcerncomplementarypartsofthearchitecture. Thestudyevaluatesdesignsthat
+retainbothsourcesforprediction.
+FormerGNN combines a Transformer-based qualifier integrator operating on the original
+18

@@ -1,0 +1,236 @@
+{
+  "sha": "7fc670cd0ccd0d61f845bbfd8b062f7d0a31db70",
+  "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/trees/7fc670cd0ccd0d61f845bbfd8b062f7d0a31db70",
+  "tree": [
+    {
+      "path": "MMRAG.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2641fc5b51ed10c8fb24c330c50663761c36334a",
+      "size": 88778,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/2641fc5b51ed10c8fb24c330c50663761c36334a"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cb830b7ed409438b3147d39867a8f9f5a5352bc7",
+      "size": 1009,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/cb830b7ed409438b3147d39867a8f9f5a5352bc7"
+    },
+    {
+      "path": "cache",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "0ef23905bf0f88792e23782c1d14eab0d97b74bb",
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/trees/0ef23905bf0f88792e23782c1d14eab0d97b74bb"
+    },
+    {
+      "path": "cache/lmcache_config.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5b851ff187dae2a6bca7bb4516ac6503e71e7660",
+      "size": 5031,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/5b851ff187dae2a6bca7bb4516ac6503e71e7660"
+    },
+    {
+      "path": "cache/lmcache_model_config.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "588a634c3176ea78f7faa309bd728c0e04f89f66",
+      "size": 19037,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/588a634c3176ea78f7faa309bd728c0e04f89f66"
+    },
+    {
+      "path": "caption",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8f8c48976ae6ee90b1a3441e9c0b47989a10d54d",
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/trees/8f8c48976ae6ee90b1a3441e9c0b47989a10d54d"
+    },
+    {
+      "path": "caption/arxiv_caption.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3deb37551f649fae034006798a87071356fbce86",
+      "size": 100567,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/3deb37551f649fae034006798a87071356fbce86"
+    },
+    {
+      "path": "caption/manual_caption.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fcedaefaf665d07d4a7c81d71a2b242c92c02d2b",
+      "size": 618989,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/fcedaefaf665d07d4a7c81d71a2b242c92c02d2b"
+    },
+    {
+      "path": "caption/mmqa_caption.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6080d6ef787e44e631bec165a30a08e62b7f75d9",
+      "size": 12073955,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/6080d6ef787e44e631bec165a30a08e62b7f75d9"
+    },
+    {
+      "path": "caption/recipe_caption.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ed3bb3a86f226c327b952611b1dea6d441b7cc10",
+      "size": 1427841,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/ed3bb3a86f226c327b952611b1dea6d441b7cc10"
+    },
+    {
+      "path": "caption/web_caption.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "758f8ce9109e79a3d172d9e805fc4af31dafc4d4",
+      "size": 557008,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/758f8ce9109e79a3d172d9e805fc4af31dafc4d4"
+    },
+    {
+      "path": "caption/wiki_caption.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1fca7f216682651298f9c8f6d321c9f0ebd37faf",
+      "size": 206078,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/1fca7f216682651298f9c8f6d321c9f0ebd37faf"
+    },
+    {
+      "path": "caption/wit_caption.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "812425a2af1ba95bc9de8a4c5d6265dec3278920",
+      "size": 245550,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/812425a2af1ba95bc9de8a4c5d6265dec3278920"
+    },
+    {
+      "path": "dataset.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7457f9036c31551dec1c246708051e69cee83967",
+      "size": 11484,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/7457f9036c31551dec1c246708051e69cee83967"
+    },
+    {
+      "path": "metric.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9cb8b8e83cb734c0295159ef0702ac2435050d36",
+      "size": 9816,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/9cb8b8e83cb734c0295159ef0702ac2435050d36"
+    },
+    {
+      "path": "parallel.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5245de823a0b81c82377e92c1cc4dc86e43188f4",
+      "size": 7943,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/5245de823a0b81c82377e92c1cc4dc86e43188f4"
+    },
+    {
+      "path": "prompt.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5d179e5a48629b5637c072f7d6f1e473c63102ac",
+      "size": 13828,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/5d179e5a48629b5637c072f7d6f1e473c63102ac"
+    },
+    {
+      "path": "prompt",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "56f5ec9ad302d46d4d750bfe7c88043ab085effe",
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/trees/56f5ec9ad302d46d4d750bfe7c88043ab085effe"
+    },
+    {
+      "path": "prompt/sparql_query_prompt.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5f95abb03fed43dac5787c3ce28a084d5102dc92",
+      "size": 1363,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/5f95abb03fed43dac5787c3ce28a084d5102dc92"
+    },
+    {
+      "path": "prompt/system_prompt.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6502fc48e8e611aa42c360aea87b6f1a23125f5e",
+      "size": 557,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/6502fc48e8e611aa42c360aea87b6f1a23125f5e"
+    },
+    {
+      "path": "prompt/system_prompt_SPARQL.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "727690b9c291ed0f4bf9972773d32cc4d54d8df7",
+      "size": 1357,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/727690b9c291ed0f4bf9972773d32cc4d54d8df7"
+    },
+    {
+      "path": "prompt/system_prompt_cot.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "382ca48c8d791eac35b9162447af3f6ba2c78f70",
+      "size": 773,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/382ca48c8d791eac35b9162447af3f6ba2c78f70"
+    },
+    {
+      "path": "prompt/system_prompt_ent.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ae80c7747073791fc294e51486c0ed6819e177de",
+      "size": 852,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/ae80c7747073791fc294e51486c0ed6819e177de"
+    },
+    {
+      "path": "prompt/system_prompt_ner.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ef5d415e1a3814d8bc8dcabba5c5ed9bc339b689",
+      "size": 435,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/ef5d415e1a3814d8bc8dcabba5c5ed9bc339b689"
+    },
+    {
+      "path": "prompt/system_prompt_with_entity_ext.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8d4751ce05822b29e0da0f43bc07bb259936f39b",
+      "size": 852,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/8d4751ce05822b29e0da0f43bc07bb259936f39b"
+    },
+    {
+      "path": "run.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c2dcbe56c0c8d7f399520e013207cca8e3cc4e4d",
+      "size": 13564,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/c2dcbe56c0c8d7f399520e013207cca8e3cc4e4d"
+    },
+    {
+      "path": "tech_report.pdf",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bfefd4cfd9a1a0702d87b6bf355899339ef16d67",
+      "size": 1625348,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/bfefd4cfd9a1a0702d87b6bf355899339ef16d67"
+    },
+    {
+      "path": "utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d06273012093c5b934fd9e9f4e5d6201eceb657a",
+      "size": 14305,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/d06273012093c5b934fd9e9f4e5d6201eceb657a"
+    },
+    {
+      "path": "vanillarag_langchain.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1577181a7a3a3e84f0751c7fdb733777ce51ca3c",
+      "size": 6169,
+      "url": "https://api.github.com/repos/Wyb0627/MGRAG/git/blobs/1577181a7a3a3e84f0751c7fdb733777ce51ca3c"
+    }
+  ],
+  "truncated": false
+}

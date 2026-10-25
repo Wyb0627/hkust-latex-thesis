@@ -1,0 +1,14 @@
+INFO - This is Biber 2.19
+INFO - Logfile is 'planning/gorag-build/chapter-smoke.blg'
+INFO - Reading 'planning/gorag-build/chapter-smoke.bcf'
+INFO - Found 11 citekeys in bib section 0
+INFO - Processing section 0
+INFO - Looking for bibtex file 'bibliography/gorag.bib' for section 0
+INFO - LaTeX decoding ...
+INFO - Found BibTeX data source 'bibliography/gorag.bib'
+INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
+INFO - No sort tailoring available for locale 'en-US'
+INFO - Writing 'planning/gorag-build/chapter-smoke.bbl' with encoding 'UTF-8'
+INFO - Output to planning/gorag-build/chapter-smoke.bbl

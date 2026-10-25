@@ -1,0 +1,21 @@
+Figure3.2: KGLink’s graph-processing and language-model components. Candidate-type text,
+column feature vectors, and a contextual type-representation objective connect external knowl-
+edgetoannotation. OriginalimagereproducedfromKGLink[1],Fig.3.
+ing entities’ neighborhoods. It also constructs a feature sequence for each target column. The
+language-model stage serializes the processed table, encodes the table and feature sequences,
+combinestheresultingrepresentations,andpredictsthecolumnlabels. Asecondtraininginput
+contains the true type labels and provides contextual supervision for representations generated
+frommaskedtypepositions.
+Figure3.2showsthetwostagesandtheirtrainingobjectives.
+The two graph inputs have different selection rules. Candidate types aggregate evidence
+across linked cells and retain types supported by the column. A feature sequence describes a
+selected linked entity and its neighboring relations. The latter supplies another route for KG
+information when candidate-type selection produces little evidence. Neither input changes the
+classifier’soutputvocabulary. Forexample,acandidatetypedescribinganoccupationcansup-
+portabroaderannotationcategorythroughthelearnedmodelevenwhenthestringsdiffer.
+Theframeworkalsocontrolstheamountoftablecontentpassedtotheencoder. Entitylinking
+androwselectionprecedeserialization. Theretainedrowsprovideaboundedviewofthetable,
+and wide tables are split by columns under the reported input constraints. These operations
+matter because inserting external knowledge competes with cell content for the encoder’s finite
+inputlength. KGLinkselectsgraphevidenceandtablerowsbeforeencoding.
+23

@@ -1,0 +1,44 @@
+[
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before": " From the KG entities in each column, it generates up to three candidate types per row, as specified in the original implementation.",
+    "after": "",
+    "evidence": "Post-integration independent review, 2026-10-25"
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before": "KGLink retains the selected candidate-type labels as text and places them before the cell values in the processed column.",
+    "after": "KGLink retains the selected candidate-type labels as text and places them before the cell values in the processed column. The reported implementation generates up to three candidate types per row from the KG entities in each column.",
+    "evidence": "Post-integration independent review, 2026-10-25"
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before": "7:1:2 labeled-column split; external KG; three-run averages",
+    "after": "7:1:2 train/validation/test; external KG; three-run averages",
+    "evidence": "Post-integration independent review, 2026-10-25"
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before": "Their connection lies in making evidence relationships available to a particular task computation.",
+    "after": "The studies connect through the use of explicit relationships in task-specific computation.",
+    "evidence": "Post-integration independent review, 2026-10-25"
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before": "predicted-keyword associations",
+    "after": "keyword--label associations derived from predictions",
+    "evidence": "Post-integration independent review, 2026-10-25"
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before": "Their unit of semantic validation is a query edge and an associated evidence path.",
+    "after": "The constraints validate each query edge against an associated evidence path.",
+    "evidence": "Post-integration independent review, 2026-10-25"
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before": "Table~\\ref{tab:discussion:controls} brings the main experimental conditions into the comparison. KGLink evaluates a trained encoder, whereas the other studies evaluate generative pipelines with different backbones. Even when a dataset name recurs, its supervision and update protocol can change: GORAG's WOS and IFS-Rel experiments accumulate labels and keyword--label associations derived from predictions over rounds, while AGRAG indexes one training passage per label for its classification setting. These experiments answer different questions about the use of structure.",
+    "after": "Table~\\ref{tab:discussion:controls} compares the main experimental conditions. KGLink evaluates a trained encoder; the other studies evaluate generative pipelines with different backbones. Shared datasets also have different supervision and update protocols. GORAG's WOS and IFS-Rel experiments accumulate labels and prediction-derived keyword--label associations over rounds, whereas AGRAG indexes one training passage per label for classification.",
+    "evidence": "Final actual-PDF inspection: shorten redundant table transition to remove one-line continuation separated by Table7.2; all experiment conditions retained."
+  }
+]

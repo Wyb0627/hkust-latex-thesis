@@ -1,0 +1,31 @@
+graph extraction may omit. The ablations test both a graph-only condition and a hybrid-only
+condition,allowingtheevaluationtodistinguishtheircontributions.
+Forclassification,theretrievalinterfaceisadaptedtoreturncandidatelabelsassociatedwith
+passages. One training passage per label supplies the indexed corpus. The generator selects
+a label from the retrieved candidate set. This setting shares the evidence-selection principle
+with the QA tasks, but its output and accuracy calculation are different. It is also distinct from
+GORAG’sround-basedonlineindexingprotocol,whichisexaminedinChapter4.
+5.6 Computational Properties
+AGRAG’s work is distributed across corpus indexing and query processing. Statistical extrac-
+tion and passage-link construction operate over the corpus. Query processing includes triple
+mapping, filtering, graph propagation, subgraph selection, hybrid retrieval, and generation.
+Language-model calls contribute to relation extraction during indexing and to filtering and
+answergenerationonline.
+Thesource’sgraph-operationanalysisassigns𝑂(|𝒱||𝒯 |)timetoentityextractionandpas-
+𝑐
+sageassociation. Graphpropagationisexpressedintermsofnodeandedgecounts,andsemantic
+edge weighting visits the indexed edges. The Mehlhorn-based initial tree stage [38] is reported
+with 𝑂(|ℰ| + |𝒱|log|𝒱|) complexity. Expansion additionally depends on the selected sub-
+graph and its neighborhood. These expressions characterize graph operations; the measured
+end-to-endresultsincludemodelinferenceundertheexperimentalconfiguration.
+The distinction between indexing and querying is useful in deployment. An index is pre-
+pared once for a fixed corpus, while query filtering and generation recur for each query. An
+application with many queries can amortize index preparation, but its response latency still de-
+pends on online graph processing and the amount of generated text. Token counts and separate
+indexing/queryingtimesarethereforeretainedintheevaluation.
+The evidence graph also requires storage for entity strings, relations, and passage associa-
+tions. The source gives storage in terms of graph nodes, edges, and text chunks. These objects
+contribute to the index storage. Practical storage depends on how embeddings, text, and adja-
+cencystructuresarerepresented,whiletheexperimentaleﬀiciencytablereportstimeandtoken
+useratherthanameasuredmemorycomparison.
+66

@@ -1,0 +1,73 @@
+Step1:Coarse-grainedRanking Step2:Fine-grainedRetrieval Step3:Graph-Aware KV Caching
+c
+𝜙𝑡 =∑|
+$
+&
+'
+|
+(
+𝑎#$+∑|
+)
+*
+'
+|
+(
+𝑎#)+𝐺𝐹#
+a KVCache
+Source b h
+MMDocs. ImageCaptions g 𝜙𝑡 notintop𝑏%,
+f
+Iterative&Adaptive a Serialization KVreuse
+GraphConstruction b
+E
+C
+nc
+h
+o
+u
+d
+n
+i
+k
+ng
+Rank RankedMMChunks Query K S G pecific
+M
+c
+atched
+h GraphSeq.𝑆+
+Subgraph𝑟 LLM
+c
+a
+b d Path-basedSubgraph
+]
+e Matching
+MMChunks
+QueryGraph
+⊕ 𝑃!" →{ℎ}
+InputQuery𝑞
+Figure6.2: TheMGRAGpipeline. Rankedchunkssupportincrementalquery-awaregraphcon-
+struction and path-based matching. The matched graph also supplies features for selective KV
+recomputation. OriginalFigure2,p.2484[4].
+6.2 Framework and Evidence Representations
+Figure 6.2 shows three stages. Coarse-grained ranking orders text chunks and images accord-
+ing to their relevance to the query. Fine-grained retrieval consumes this ranked list, extracts
+query-relatedfacts,and searchesthe growing graph fora semantic match. Graph-awareKV re-
+computation then determines which cached token states to update for answer generation. The
+stoppingdecisioninthemiddlestageconnectsranking,graphconstruction,andmatching. Each
+additionalchunkcanchangewhetherthegraphcontainsasuitablecorrespondence.
+Two graphs serve different purposes. The query graph 𝒬𝒢 = (𝒱̂,ℰ̂) describes the enti-
+𝑞 𝑞 𝑞
+tiesandrelationsrequestedby𝑞,includingplaceholdersforunknowninformation. Theevidence
+graph 𝒦𝒢 = (𝒱 ,ℰ ) contains facts extracted from the chunks considered for that query. A
+𝑞 𝑞 𝑞
+mappingconnectsqueryentitiestoevidenceentities. Pathsbetweenthemappedendpointssup-
+plycandidateevidenceforthequeryrelations.
+For generation, MGRAG uses the graph sequence 𝑆 , the original chunks 𝒞 consumed
+𝑟 𝑞
+during construction, and the query 𝑞. Keeping the chunks preserves access to text and visual
+evidencebeyondtheextractedtriples. Theiridentityalsolinkstheselectedgraphtothematerial
+originally ranked and processed during construction. The graph gives the generator an explicit
+selection of relational content, while the source chunks provide the material from which the
+selection was made. The final multimodal context retains the original images alongside their
+extractedrelationalrepresentation.
+81

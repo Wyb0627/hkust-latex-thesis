@@ -1,0 +1,25 @@
+[
+  {
+    "path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/KGLink.tex",
+    "sha256": "b4a5779c054dc43fcce2d298e08c9075a6184e8c9eeb730f1a0f6f984bc2acc8",
+    "role": "LOCAL_RESEARCH_SOURCE_NOT_PUBLISHER_PDF"
+  },
+  {
+    "path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/KGLink.pdf",
+    "sha256": "a25e9cded7686ffc9a65a10cb0c8f00a410f0a1b318caa2b4245c3c669dc4763",
+    "role": "LOCAL_RESEARCH_SOURCE_NOT_PUBLISHER_PDF"
+  },
+  {
+    "path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/KGLink.bib",
+    "sha256": "db48277c8e19c5fd3cf8f3da2fff024306e83eb7b3065169e96a52d8a1158d35",
+    "role": "LOCAL_RESEARCH_SOURCE_NOT_PUBLISHER_PDF"
+  },
+  {
+    "path": "planning/kglink-sources/kglink-author-confirmed-publication.pdf",
+    "source_url": "https://arxiv.org/pdf/2406.00318",
+    "arxiv_version": "2406.00318v1",
+    "sha256": "08add6458cfc6e59629150396bf46c5bbedab52a04236137bcfbd2439229e894",
+    "role": "AUTHOR_CONFIRMED_PUBLICATION_EQUIVALENT",
+    "authority_note": "The author explicitly confirmed that the arXiv PDFs linked on their website are the formal published PDF versions. This is not a direct IEEE download."
+  }
+]

@@ -1,0 +1,37 @@
+underthesameACCheadinginthepaperbutevaluatedifferentoutputs.
+Complex reasoning and fact retrieval additionally report the source’s ROUGE-L mea-
+sure [54]. Contextual summarization and creative generation report coverage, the fraction
+of required reference evidence represented in the answer. Creative generation also reports
+faithfulness, the fraction of answer claims supported by retrieved context. The evaluation uses
+the RAGAS framework [55, 56] and the task-specific protocol. Coverage concerns inclusion of
+requiredinformation,whereasfaithfulnessconcernssupportforgeneratedclaims.
+Forgeneratedanswersequence𝐺 andreferencesequence𝑌,the source defines itsreported
+lexicalscoreas
+LCS(𝐺,𝑌)
+ROG(𝐺,𝑌) = . (5.15)
+|𝐺|
+Thedenominatoristhegeneratedanswerlength. Thisisthesource’sreportedROUGE-Lquan-
+tity, rather than an F1 combination of longest-common-subsequence precision and recall. Re-
+tainingthedenominatorisnecessarywheninterpretingashortfactualansweralongsidealonger
+response.
+Let 𝐸 denote the reference evidence items and let 𝑀(𝑒,𝑅) indicate whether response 𝑅
+coversitem𝑒. Coverageis
+|{𝑒 ∈ 𝐸 ∶ 𝑀(𝑒,𝑅)}|
+COV(𝑅,𝐸) = . (5.16)
+|𝐸|
+For the answer’s claim set 𝐴 and retrieved context 𝐶, let 𝑆(𝑎,𝐶) indicate that claim 𝑎 is sup-
+ported. Faithfulnessis
+|{𝑎 ∈ 𝐴 ∶ 𝑆(𝑎,𝐶)}|
+FS(𝐴,𝐶) = . (5.17)
+|𝐴|
+Thetwodenominatorsidentifydifferentevidencerequirements. Coverageusestherequiredref-
+erence information; faithfulness uses the claims actually made. A response omitting a required
+fact can lose coverage even when its remaining statements are supported. Conversely, adding
+unsupported claims affects faithfulness even if all reference evidence is mentioned. The source
+evaluatesthesejudgmentsthroughitsmodel-basedassessmentprocedure. Themeasuresthere-
+foreretaintheevaluatorandevidenceunitsofthatprotocol.
+5.7.3 Answer quality across tasks
+The main results are split by task in Tables 5.1–5.5. On Novel creative generation, AGRAG re-
+ports faithfulness 0.513, accuracy 0.339, and coverage 0.386. HippoRAG2 reports faithfulness
+0.496,whileRAPTORreportsaccuracy0.333andNaiveRAGcoverage0.384. Theclosecover-
+68

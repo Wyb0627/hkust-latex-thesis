@@ -1,0 +1,32 @@
+5.7 Experimental Evaluation
+5.7.1 Tasks, corpora, and model settings
+The main experiment uses Novel and Medical from GraphRAG-bench [45], together with
+WOS [40] and IFS-Rel [36] for classification. Novel contains 5,140 chunks, 63,887 graph
+entities, and 163,169 graph relations. Medical contains 1,030 chunks, 12,426 entities, and
+52,054 relations. The reported classification indexes contain 24 chunks for WOS and 11 for
+IFS-Rel, with 9,396 and 2,560 evaluated texts and 133 and 64 labels, respectively. These
+statisticsareretainedasreportedinthesourcedatasettable.
+The Novel evaluation contains 67 creative-generation queries, 362 contextual-
+summarization queries, 610 complex-reasoning queries, and 971 fact-retrieval queries.
+The corresponding Medical counts are 166, 289, 509, and 1,098. Their differing sizes and
+answer requirements are relevant to interpretation. The chapter compares methods within
+each reported task and corpus rather than treating these query collections as interchangeable
+observations.
+The main backbone is Qwen2.5-14B-Instruct [46], deployed through vLLM [47]. The ma-
+chine has an Intel Xeon Gold 5220R CPU and one NVIDIA A100 GPU with 80 GB memory.
+Contriever[48]suppliesdenserepresentationsforAGRAGandHippoRAG2;theotherbaselines
+usebge-large-en-v1.5accordingtothereportedconfiguration. Qwen3-Reranker-0.6Bperforms
+raw-triplet filtering. The retrieval top-𝑘 setting is 5; AGRAG’s raw mapped triple count and
+hybridchunkcountarealso5.
+GraphRAG uses local search. LightRAG uses hybrid search for the QA tasks, with its
+classification-specific configuration retained where applicable. The comparison includes
+NaiveRAG, LongLLMLingua [41], RAPTOR [49], SiReRAG [50], G-Retriever [51],
+MIXRAG [52], GraphRAG [17], LightRAG [19], HippoRAG2 [42], and Fast-GraphRAG [53].
+These methods represent passage retrieval, compression, hierarchical organization, connected
+subgraph selection, neighborhood retrieval, and graph propagation. The source experiments
+comparetheircompleteconfigurationsunderthestatedmodelsettings.
+5.7.2 Metric interpretation
+Classificationaccuracyistheproportionofpredictedlabelsmatchinggoldlabels. Classification
+recallismacrorecall. Fortheothertasks,thereportedaccuracyisamodel-assessedscorewith
+values0,0.5,or1forinaccurate,partiallyaccurate,oraccurateanswers. Thesequantitiesappear
+67

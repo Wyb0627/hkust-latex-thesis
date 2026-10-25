@@ -1,0 +1,29 @@
+CHAPTER 4
+ADAPTIVE GRAPH RETRIEVAL FOR DYNAMIC
+CLASSIFICATION WITH GORAG
+ThischapterisbasedonGORAG:Graph-basedOnlineRetrievalAugmentedGenerationfor
+Dynamic Few-shot Social Media Text Classification, published in the Proceedings of the ACM
+Web Conference 2026 [2]. It studies the selection and maintenance of label evidence when
+a classification task acquires new classes over several rounds. The central question is how a
+languagemodelcanreceiveaquery-specificcandidatesetwhiletheevidenceconnectingtextto
+labelschangesovertime.
+4.1 Dynamic Few-shot Classification
+A classification label defines a decision that an application asks a model to make. When the
+applicationaddsamorespecificcategory,thedecisionchangeseveniftheunderlyinglanguage
+modelstaysfixed. Forexample,asocialmediaclassificationtaskcaninitiallydistinguishthreat-
+eninglanguageandlaterintroduceidentityinsults. Amodelmustthendistinguishthenewlabel
+fromearlierlabelsusingtheavailableannotatedexamples. Thediﬀicultyconcernsbothlearning
+themeaningofanewcategoryandkeepingthecurrentalternativesvisibleduringprediction.
+Few-shotclassificationsuppliesasmallnumberoflabeledexamplesforeachclass. Dynamic
+few-shot classification adds classes in successive rounds [36]. The size of the label universe
+therefore grows independently of the number of examples available for each label. A retrieval
+system must update its evidence source as classes arrive, and each prediction must refer to the
+labelsetavailableatthatround. Thissettingdiffersfromrepeatedlyevaluatingafixedclassifier
+onanunchangedcollectionoflabels.
+The task also exposes a limitation of simply placing more material in a language model’s
+context. Additionalexamplesprovideinformationaboutlabels,butalargercontextcancontain
+many examples that have little bearing on the current text. The candidate list itself grows as
+classes accumulate. Selecting text passages without narrowing the associated label alternatives
+leavesthemodelwithalongclassificationinstruction. GORAGthereforetreatstheselectionof
+candidatelabelsasanexplicitretrievalproblem.
+40

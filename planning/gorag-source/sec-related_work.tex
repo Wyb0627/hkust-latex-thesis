@@ -1,0 +1,96 @@
+
+ \section{Preliminary and Related Works}\label{sec:pre_rel}
+
+	We first introduce the preliminaries of Dynamic Few-shot Social media Text Classification (DFSTC) in Section~\ref{sec:dfstc} and then discuss the
+		related works for DFSTC task
+ in Section~\ref{sec:related_work}. 
+	The important notations used in this paper are listed in \autoref{tab:notation} in \autoref{sec:notations}.
+	
+
+
+
+
+
+
+
+
+\subsection{DFSTC Task} \label{sec:dfstc}
+Text classification~\cite{kowsari2019text, minaee2021deep, li2022survey} is a key task in real-world web for good applications, including social media hate speech detection \cite{geissler2025analyzing,hee2024brinjal,chen2024hate,djuric2015hate,subramanyam2024triage,mandal2024contrastive,cao2024modularized,ji2024capalign,guo2024bayesian},
+misinformation/disinformation detection 
+\cite{luo2024message,nesterov2024contentious,liu2025modality,toughrai2025fake,cinus2025exposing,ashkinaze2024dynamics,chen2022cross,shang2024mmadapt,ye2024susceptibility}.
+It involves assigning predefined labels $y \in \mathcal{Y}$
+to text $t=(w_1,\cdots,w_{|t|})$ based on its words $w_i$. 
+
+
+Traditional approaches require fine-tuning with large labeled datasets~\cite{devlin2018bert,liu2019roberta}, which may not always be available.
+Recently, few-shot learning addresses this limitation by enabling models to classify social media texts into various classes with only a small number of labeled examples per class~\cite{meng2018weakly,meng2020text}.
+On the other hand, dynamic classification~\cite{parisi2019continual, hanmo2024effective, wang2024comprehensive} introduces an additional challenge where new classes are introduced over multiple rounds, requiring the model to adapt to new classes while retaining knowledge of previously seen ones, as frequently involve extensive human labeling for these new classes can be difficult. 
+	For example, in \autoref{fig:dfstc_task}, new and more fine-grained classes of hate speech, such as \textit{Identity Insults}, can serve as complements to categories that already exists. 
+
+Combining these aspects, Dynamic Few-Shot Social media Text Classification (DFSTC) task allows the model to handle evolving classification tasks with minimal labeled data, and is better suited for real world scenarios~\cite{xia-etal-2021-incremental}.
+In DFSTC task, the model is provided with multiple rounds of new class updates.
+Specifically, in each round $r$, a set of new labels $\mathcal{Y}^r_{new}$ is introduced. The complete candidate label set for round $r$, denoted as $\mathcal{Y}^r$, is the union of all new labels from rounds $i = 1$ to $r$: $\mathcal{Y}^r = \bigcup_{i=1}^r \mathcal{Y}^i_{new}$.
+ In round $r$, the labeled training set for class labels in $\mathcal{Y}^r$ 
+ is denoted as $\mathcal{D}^r=\cup_{y_i \in \mathcal{Y}^r}\{t_j,y_i\}_{j=1}^k$, 
+ where per class $y_i \in \mathcal{Y}^r$ only has $k$ labeled examples $\{t_j,y_i\}_{j=1}^k$.
+ 
+Formally, at the $r$-th round, given the labels in $\mathcal{Y}^r$ and all labeled data $\mathcal{D}^r=\cup_{i=1}^r\mathcal{D}^i$,
+the target of DFSTC task is to learn a function $f^r_\theta$, which can learn scores for all target labels $\mathbf{s}^r={f}^r_\theta(t_u,\mathcal{Y}^r)\in[0,1]^{|\mathcal{Y}^r|}$ for the unseen text $t_u$.
+Then, we can get the predicted label $y^{r*}\in \mathcal{Y}^r$ for the unseen text $t_u$ as follows.  
+
+
+
+\begin{equation}
+	y^{r*}=\arg\max_{y^r \in \cup_{i=1}^r \mathcal{Y}^i}({f}_\theta^r(t_u, \cup_{i=1}^r \mathcal{Y}^i)[y^r])
+\end{equation}
+
+DFSTC is valuable for its ability to learn from limited labeled data, adapt to evolving class distributions, 
+and address real-world scenarios where classes and data evolve over time.
+
+\subsection{DFSTC Models}\label{sec:related_work}
+Current Dynamic Few-Shot Social media Text Classification (DFSTC) models can be broadly categorized into 
+NN-based models and RAG-based models, RAG-based models can be further categorized into Long Context RAG, and Graph-based RAG models. 
+
+\subsubsection{\textbf{NN-based models}}
+NN-based models \cite{meng2018weakly,meng2020text,xia-etal-2021-incremental} generate additional data contrastively based on the few-shot labeled data and the text formed label names to train the NN-based classifier. 
+However, due to the limited labeled data, the generated text data of these models can have very limited patterns, which makes them prone to overfitting \cite{liu2023pre,liu2024liberating,lei2023tart}. 
+In web for good applications such as hate speech detection, different kinds of hate speech contents are usually a minority compared with neutral contents, this highly unbalanced data distribution can further overfit the NN-based models and affect their performance \cite{liu2023pre}.
+
+
+\begin{figure*}[ht]
+	\centering
+	
+	\includegraphics[width=1\linewidth]{figures/GORAG_pipeline_example_new}
+	\vspace{-20px}
+	\caption{An overview of GORAG in each round. 
+	In {\color{myblue}Part 1}, GORAG constructs a weighted graph based on keywords extracted from the few-shot training data.  
+	
+	In {\color{myorange}Part 2}, GORAG performs adaptive graph retrieval and outputs the candidate labels, which is a subset of the original target label set. 
+	In {\color{mygreen}Part 3}, GORAG first classifies texts into one of the candidate labels, 
+	
+	and then applies online graph indexing to update the graph with query text extracted entities that not yet existed in the graph.}
+	\label{fig:Gorag}
+		\vspace{-10px}
+\end{figure*}
+
+\subsubsection{\textbf{Long Context RAG models}}
+Recently, Large Language Model (LLM)-based models have undergone rapid development 
+\cite{zhangJLWC24,snyder2024early,zhong2024logparser,yan2024efficient,chen2024large,ding2024enhancing}.
+Notably, LLMs are inherently capable of inference without fine-tuning \cite{sun2021ernie, jiang2023mistral, touvron2023llama, achiam2023gpt, yang2024qwen2}, making them originally suitable for few-shot tasks. However, the lack of fine-tuning can lead LLMs to generate unfaithful responses, as they lack task-specific knowledge, these incorrect answers are often referred to as hallucinations \cite{zhang2023siren}. 
+In web for good applications such as hate speech detection, hallucinations can lead to failure to detect harmful responses, making these harmful contents being spread through internet. 
+To mitigate hallucinations, researchers 
+try to retrieve text documents outside of LLM as side information to help the LLM inference, namely Long Context RAG models
+
+ \cite{chen2023dense,sarthi2024raptor,hu2024prompt,wu2024coral,cai2024forag,oosterhuis2024reliable,yadav2024extreme,che2024hierarchical,pan-etal-2024-llmlingua,jiang-etal-2024-longllmlingua}. 
+Among them, prompt compressor models \cite{pan-etal-2024-llmlingua,jiang-etal-2024-longllmlingua}, 
+apply LLM's generation perplexity on to filter out un-important tokens in the model input. 
+
+\subsubsection{\textbf{Graph-based RAG models}}
+However, the retrieved contents of Long Context RAG models remain unstructured and lengthy, making the important fine-grained entity-level information be overwhelmed by noisy contexts \cite{edge2024local,guo2024lightrag}, which still impedes the effectiveness or efficiency of LLM classification, 
+
+leading to lost-in-the-middle issues \cite{liu2024lost} for cheaper open-sourced LLMs, or high token cost for proprietary LLMs \cite{hurst2024gpt}. 
+To address these issues, Graph-based RAG models were proposed
+\cite{peng2024graph,zhang2024graph,wu2024medical,zhang2024knowgpt,guo2024lightrag,gutierrez2024hipporag,gutiérrez2025ragmemory},
+ these models
+convert text chunks from the side information document as graph nodes, and the relation between these text chunks as graph edges. These models then retrieve graph nodes and edges as the LLM classification context, better preserving more fine-grained, entity-level information.
+However, current Graph-based RAG models usually consider each graph edge uniformly and ignore the varying confidence and importance of relations between text chunks. Also, as the optimal retrieval threshold can vary across different data samples, their globally fixed threshold selected by humans may be suboptimal for the entire dataset. 

@@ -1,0 +1,42 @@
+methodtofavorrelevantconnectedinformationwithoutchoosingnodessolelybytheirinfluence
+rank.
+The pseudo edges retain their explicitly assigned penalty. Their role is to provide connec-
+tivity when the semantic graph alone separates the anchors. A path using a pseudo edge can
+therefore be feasible but expensive. The distinction between a low-cost semantic connection
+and a high-cost connectivity connection helps explain how graph connectivity participates in
+evidenceselection.
+5.4 MCMI Formulation and Evidence Expansion
+Let𝒱 containthenodesparticipatinginthemappedfacts. Afeasiblesubgraphcontainsthese
+term
+terminalsandconnectseachterminaltoadesignatedrootterminal. Themainpaperdefinesthe
+MinimumCostMaximumInfluence(MCMI)objectiveas
+𝑐
+𝑟(𝒢′) = 𝑒 . (5.10)
+∑ 𝑠 +𝑠
+𝑒=(𝑢,𝑣)∈ℰ′ 𝑢 𝑣
+Thecostofanincludededgeisscaledbytheinfluenceofitsendpoints. Theexpressionspecifies
+the reported optimization formulation. The implementation procedure described in the paper
+starts from a terminal-connecting tree and then expands its neighborhood using marginal cost-
+to-scorecomparisons.
+Theinitialstructureconnectsthequery-mappedinformation. Thesourceconstructsanauxil-
+iarygraphontheterminals,usesshortest-pathcostsbetweenthem,selectsatreeonthatauxiliary
+structure,andexpandsitsedgesbacktopathsintheevidencegraph. Thisstagesuppliesconnec-
+tionsamonganchorsinsteadofreturningtheanchorsasanunorderedset. Thedetailedtheorem
+inthemainpaperassignsits2-approximationstatementtothisMCSTconstructionstage.
+Subsequent expansion examines neighboring candidates. A candidate node 𝑣 connected by
+anedgeofcost𝑐 isconsideredthroughtheratio
+(MCMI,𝑣)
+𝑐
+(MCMI,𝑣)
+. (5.11)
+𝑠
+𝑣
+Theprocedureselectsthelowestsuchratioandcomparesitwiththecurrentsubgraph’sreported
+cost-scorequantity. Theacceptanceconditionis
+𝑐
+(MCMI,𝑣)
+< 𝑟(𝒢 ). (5.12)
+MCMI
+𝑠
+𝑣
+63

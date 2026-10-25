@@ -1,0 +1,33 @@
+quentlyasubstantivepartofretrievaldesign. Thegraphrepresentation,theselectedobject,and
+itsserializationeachinfluencewhichevidencethemodelfinallyobserves.
+The thesis examines several structural retrieval questions within this landscape. GORAG
+retrieves labels by connecting keywords extracted from the query [2]. AGRAG selects a con-
+nected evidence subgraph while considering node influence and edge cost [3]. MGRAG tests
+semantic correspondence between query paths and evidence paths [4]. These operations have
+different output conditions. A set of highly ranked nodes need not contain paths that connect
+the query’s requested facts. Conversely, a connecting path can introduce intermediate evidence
+whosedirectquerysimilarityislower.
+The meaning of a path also depends on how the graph represents the source. Entity links
+extracted from a passage can provide a relational account of that passage, while passage nodes
+retainaroutetoitsoriginalwording. Combininggraphserializationwithsourcechunksletsthe
+generator receive both relational organization and textual context. AGRAG uses such a combi-
+nation in its hybrid retrieval pipeline. This connection between the selected structure and the
+originalmaterialisalsorelevanttomultimodalevidence,whereagraphdescriptioncanidentify
+relationshipswhiletheoriginalimagesuppliesvisualdetails.
+2.5 Multimodal Retrieval and Context Serving
+Multimodalquestionansweringrequiresevidencerepresentedinmorethanonemodality. Multi-
+ModalQAincludesquestionsovertext,tables,andimagesandstudiescombinationsofevidence
+across them [20]. The evidence needed for a question can occur in different source objects.
+A relationship stated in text may identify the image whose visual content contains the answer.
+Retrieval must therefore consider both the relevance of individual objects and the relationship
+connectingthemtothequestion.
+Multimodalindexingintroducesarepresentationdecisionbeforegraphretrieval. Imagescan
+bedescribedthroughcaptionsandindexedastext,orencodedwithamodelthatproducesvisual
+or shared representations. These choices expose different information to the retrieval score. A
+captionprovideslanguagedescribingselectedvisualcontent;theoriginalimagepreservesvisual
+details available to a multimodal generator. MGRAG uses caption-based representations in its
+coarse-rankingpathwayandlatersuppliesselectedoriginalchunkstogeneration[4]. Itsmethod
+chapterspecifiestheinterfaceateachstage.
+MRAMG-Benchstudiesretrieval-augmentedgenerationinwhichanswerscancombinetext
+and images [21]. Its multimodal output requirement adds another distinction between finding
+15

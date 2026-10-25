@@ -1,0 +1,346 @@
+{
+  "review_date": "2026-10-25",
+  "archive": "deliverables/thesis-project-2026-10-25.zip",
+  "build_exit_code": 0,
+  "page_count": 133,
+  "delivered_pdf_sha256": "f44abbdbc4bceb3ba9e73fe42b6b032f22d94aa9ceb40068d3e7280707b40905",
+  "pdf_text_matches_delivered": true,
+  "delivered_text_sha256": "950c9443db7fb1cb9b5a512acb93cd72a74aa3f8b08fe85de21759496b69616c",
+  "rebuilt_text_sha256": "950c9443db7fb1cb9b5a512acb93cd72a74aa3f8b08fe85de21759496b69616c",
+  "compiled_input_manifest_sha256": "5c5b3acf6dcfa870e83fe7edfc81c0ef446f97831812cc16de77f55b832f50a1",
+  "compiled_inputs": [
+    {
+      "path": "Makefile",
+      "sha256": "e8c645b59adb9b9baecc2b6a6a968767a24884e28bde0610503b669a4e5edd1a"
+    },
+    {
+      "path": "bibliography/agrag-related.bib",
+      "sha256": "c823b751f10208776bf1aa63e9501eac31722265e70fed86cbbd2524fec107dd"
+    },
+    {
+      "path": "bibliography/agrag.bib",
+      "sha256": "1e80b827144a23c9c116891fa970b30d179a9e8c15f21ab4a5f01e75bf3160d1"
+    },
+    {
+      "path": "bibliography/background.bib",
+      "sha256": "2b7e094bc1bda86660f36aa952577a9f5c49091c9de1c3c873b1211e1d771ffd"
+    },
+    {
+      "path": "bibliography/gorag.bib",
+      "sha256": "e085af430383988cf73135519e34431bfd426391c9f621cd6100d36f5ffa2ce0"
+    },
+    {
+      "path": "bibliography/kglink.bib",
+      "sha256": "b3598f8b6608bcabab1bb35ed40c80575aac1299c21c63944d40eb501e033214"
+    },
+    {
+      "path": "bibliography/mgrag.bib",
+      "sha256": "a19a1d4695059881c7d55cb49da37ce0188fb2610ec894806b714c5c237f7609"
+    },
+    {
+      "path": "chapter/ch01-introduction.tex",
+      "sha256": "021bf4b5fd725ad3f61efe2bd9179726a9d00b4980d9ba088a9d62edaee9c024"
+    },
+    {
+      "path": "chapter/ch02-background.tex",
+      "sha256": "66daffc35e67f14d677490f609c05431d7c9d79e4c9ce089ac7f74c99f63075f"
+    },
+    {
+      "path": "chapter/ch03-kglink.tex",
+      "sha256": "f5ec369c4c07178ec4a425bf2713ebcac7c96b15d4c17d5fb77221d4f788fcd3"
+    },
+    {
+      "path": "chapter/ch04-gorag.tex",
+      "sha256": "1ec6a9b6e795269d0c0c49c8c497d16b625c30b9ddd3f369527fc1398fd40b2b"
+    },
+    {
+      "path": "chapter/ch05-agrag.tex",
+      "sha256": "3ca20a5523a5e967d685bc7788dfd85bb89404968db6b3fe243f2ead0959bd8a"
+    },
+    {
+      "path": "chapter/ch06-mgrag.tex",
+      "sha256": "392c7fad68dad0a6e46aaad631b8e7abd1adfcec5bb9f935f708e2b93947b848"
+    },
+    {
+      "path": "chapter/ch07-discussion.tex",
+      "sha256": "0a43fa8a8975ee87a4f42995a0aeecac8fbfc6b17e9fea6f8c3f01a474d44c2e"
+    },
+    {
+      "path": "chapter/ch08-conclusion.tex",
+      "sha256": "6048c6c55b12bdbd973e3a634abb2a121ee864cf6021ae05ec4d83a788f2c215"
+    },
+    {
+      "path": "chapter/front-abstract.tex",
+      "sha256": "344d3ef6964ed7d4a4d69ba5a56cab81ad8fb8630ce216b4f7b5ca1149416530"
+    },
+    {
+      "path": "chapter/front-acknowledgements.tex",
+      "sha256": "6c035cdcea1b1991a453a2aaf739e1efba632d923281642439bf8c5c52225b52"
+    },
+    {
+      "path": "chapter/tables/agrag-ablation.tex",
+      "sha256": "fab58061a6704cd526eb0a97ca89c5a7d1113f41edc66fe91e04b7057abc8e85"
+    },
+    {
+      "path": "chapter/tables/agrag-efficiency.tex",
+      "sha256": "592c339162b89948f90d1d7ed14b3702f08b6689a0328799caed177e847215e0"
+    },
+    {
+      "path": "chapter/tables/agrag-low-resource-efficiency.tex",
+      "sha256": "276a0539cee9557828518a6fc1cb285bb82d45d0485dc1124f97c2bc54ed9636"
+    },
+    {
+      "path": "chapter/tables/agrag-low-resource.tex",
+      "sha256": "081722411632d83d0130db4220d7d1e2a46922c8fdff672b4da9460ccff8dc7b"
+    },
+    {
+      "path": "chapter/tables/agrag-main-class.tex",
+      "sha256": "3fb5c5dc01323d1a5258d02a9731326da9092456a69b9c108b7a9513bdb568a7"
+    },
+    {
+      "path": "chapter/tables/agrag-main-complex.tex",
+      "sha256": "24835b222449fe135ac0b427870594695a2ce111115937a719aa6b53ff9a3081"
+    },
+    {
+      "path": "chapter/tables/agrag-main-creative.tex",
+      "sha256": "5acfb61d0747738176aba6ea1d2d42d647f6b0c59055ffb99290a4b3efd93fba"
+    },
+    {
+      "path": "chapter/tables/agrag-main-fact.tex",
+      "sha256": "e0704b8b58dba01e05254aaf5698a8500cbdd570931c2f54ccb9084f000a06ee"
+    },
+    {
+      "path": "chapter/tables/agrag-main-summary.tex",
+      "sha256": "70aff8a58faee032d94eca3a1a07d54f24159fd88a97215743799e806f54c15d"
+    },
+    {
+      "path": "chapter/tables/gorag-ablation-table.tex",
+      "sha256": "4e7ad95ca8a991fc824f0b08804847c6b8e7eccba2d88c19b271afb4d4757196"
+    },
+    {
+      "path": "chapter/tables/gorag-dataset-table.tex",
+      "sha256": "8fa436207fc2b9cb0fa6a0d42307db4188956e23afc409646fce01fc3aadce80"
+    },
+    {
+      "path": "chapter/tables/gorag-main-tables.tex",
+      "sha256": "0374453343dfe4fe0bb00369f42641f647fc1786233a5cfa8eb58871d5b9b3b3"
+    },
+    {
+      "path": "chapter/tables/gorag-token-table.tex",
+      "sha256": "c3c6c7d863266c98f12ced7634a7fa506e96750f31dfbbfb5a43b48b6024881f"
+    },
+    {
+      "path": "chapter/tables/gorag-zero-table.tex",
+      "sha256": "548a6b310332aa65adfe94d78900d262da32daf9170c7c0c740bed50b7a07b79"
+    },
+    {
+      "path": "chapter/tables/mgrag-ablation.tex",
+      "sha256": "a8542c68ae5f529f8aa293db04c2c39b7b320f584e864bbf2666078bb84394db"
+    },
+    {
+      "path": "chapter/tables/mgrag-breakdown.tex",
+      "sha256": "63188c36c9bd69576bd57319f88ed8c6f9e1447c46553e39300c7d2528256524"
+    },
+    {
+      "path": "chapter/tables/mgrag-cache.tex",
+      "sha256": "943ecd11aa428ac9bdde5ee6111495ac5b79a0bb69c3316d93f7af95358bb926"
+    },
+    {
+      "path": "chapter/tables/mgrag-datasets.tex",
+      "sha256": "c0523c03b8e1bd3e4fd18eed4030e844ca6b1516b04b1662752ae779985e586d"
+    },
+    {
+      "path": "chapter/tables/mgrag-hops.tex",
+      "sha256": "69db138b227b2735288c136df879f31ecf1e649774b04774eb7777fbaaa8f5fa"
+    },
+    {
+      "path": "chapter/tables/mgrag-inverse.tex",
+      "sha256": "ae9ce04d9b835c02ff2ef9e39499d242de6a952921a44732cd8e22412796ea84"
+    },
+    {
+      "path": "chapter/tables/mgrag-main.tex",
+      "sha256": "1279e14ff5c6131d075a7ae39728f85f87082cacf11a003da2c2b89694638332"
+    },
+    {
+      "path": "chapter/tables/mgrag-matching.tex",
+      "sha256": "ee0c0ddff7fd347f601f0f6f0054ace827cc16ef27dbe02687305d7a44859b13"
+    },
+    {
+      "path": "figures/agrag/AGRAG_pipeline.pdf",
+      "sha256": "84de949296d180d41981827640d998124070d804c7189ffc26daf77f7aa203ee"
+    },
+    {
+      "path": "figures/agrag/GERAG_example.pdf",
+      "sha256": "05240a54e06bfb2de9c2ef2bb9baea2cd5ce52977bb740aa925adc71a32402f0"
+    },
+    {
+      "path": "figures/agrag/heatmap_medical.pdf",
+      "sha256": "3a473d3af15987a0cc70c3f55d072da3881c25dd6a4eb4f4a7060c38a9519634"
+    },
+    {
+      "path": "figures/agrag/heatmap_novel.pdf",
+      "sha256": "b57050eba05cf56e7a49cca85ef6a95eb6221c13d339e744ef20492a2c455981"
+    },
+    {
+      "path": "figures/gorag/DFSTC_task.pdf",
+      "sha256": "de51f123932dc9e8868670bb0e9d54730320942cffbd5ae5eafb5ccf4dad7d05"
+    },
+    {
+      "path": "figures/gorag/GORAG_pipeline_example_new.pdf",
+      "sha256": "5c8bdcbe435f1390315934d108efba01da25dc4510c4df329b619f5a7a976643"
+    },
+    {
+      "path": "figures/gorag/new_case.pdf",
+      "sha256": "2ae2d9768c279ca37f819b59a4ce8ecb3617286ec1d7873c5cc6bfb16e3dc9c2"
+    },
+    {
+      "path": "figures/gorag/runtime_cad.pdf",
+      "sha256": "428b95b762d42a80dff00236445dcfa6979ca2454fd90da4da9d3eae13c81452"
+    },
+    {
+      "path": "figures/gorag/runtime_wos.pdf",
+      "sha256": "d3785ab84db6f968b941bc0208cd5b1dd9c10c2cf172b291b2eec5bf949de9f1"
+    },
+    {
+      "path": "figures/gorag/wos_4_round_1.pdf",
+      "sha256": "617c6987ba51373e9b466b0b14cc3f2a9d0a56691f03a152543903d7620bc070"
+    },
+    {
+      "path": "figures/gorag/wos_4_round_5.pdf",
+      "sha256": "a51c0eaa96de3069488894498e69b4f8183620dc296dfba694550d302b214580"
+    },
+    {
+      "path": "figures/hyperkg/decomp_new.pdf",
+      "sha256": "5f80185a1a1659f6f50e314f8f1dafe6ff9b946e211b16f2cf2e054c3314f3a1"
+    },
+    {
+      "path": "figures/kglink/DL_NotWell_small.pdf",
+      "sha256": "5461aad91a3ebcdd3b8f213664ec40dc585b49b7d443966650be8af510e6ede7"
+    },
+    {
+      "path": "figures/kglink/F1_k.pdf",
+      "sha256": "a4b4c34c3f3bc990e9288e74bee283ffe5c22582493482f09ea76fa2f6691725"
+    },
+    {
+      "path": "figures/kglink/KG_part.pdf",
+      "sha256": "0ba3b254f1316a7f9bebdf36c06aaeb1388a241c17309e86098ba307f1379707"
+    },
+    {
+      "path": "figures/kglink/dmlm.png",
+      "sha256": "b517e89e2207e53d094cf3366420d78f26420d3b001ec746e1ffb3b5bfab52c2"
+    },
+    {
+      "path": "figures/kglink/k_time.pdf",
+      "sha256": "9aad276fc818ee9ddc7f3a1c29860b4126583701129959de979995a0f95dd3a0"
+    },
+    {
+      "path": "figures/kglink/kglink_new_overview.png",
+      "sha256": "cca22e629d750bc621dcf575c28fbe4c1c1ff8ab3d22117ced31b83f79f73ac7"
+    },
+    {
+      "path": "figures/kglink/overlap.png",
+      "sha256": "e690fca34184c617d516cd5245ae0ff41ffb0697418ec3c6c472dc4e348df275"
+    },
+    {
+      "path": "figures/kglink/runtime.pdf",
+      "sha256": "557c5c321a4af3e19e91e2f225977550c633f822f3c374d15a21c9219d32b0e9"
+    },
+    {
+      "path": "figures/kglink/tg_issue_small.pdf",
+      "sha256": "732464fa46a52bdb63090f1d737e730447c034dfc7334b9b746821e760806c24"
+    },
+    {
+      "path": "figures/mgrag/acc_vs_lp_fixed_theta.pdf",
+      "sha256": "89944f51e523fadfc4f2a44e1736c531aca6f394a76f9aead62929dad6f1348e"
+    },
+    {
+      "path": "figures/mgrag/acc_vs_theta_fixed_lp.pdf",
+      "sha256": "4175f44107be766e5c43ad64f85c3a0a737a340c738e8c244926e3cefee78bb7"
+    },
+    {
+      "path": "figures/mgrag/graph_based_cache.pdf",
+      "sha256": "dc9b9478d8c1e3e85b6b09df00f6912b8772c481fc1d2d225fabbd559635fc21"
+    },
+    {
+      "path": "figures/mgrag/motivation.pdf",
+      "sha256": "f8a3ff8c98c879a675535edd763f2543c221bfaad7bd44571268ae7d545edc28"
+    },
+    {
+      "path": "figures/mgrag/pipeline_new.pdf",
+      "sha256": "71ecdb7b516429517ecfee00ca890072f03bc02a43c0b18bd32ae63866a3c54b"
+    },
+    {
+      "path": "figures/mgrag/query_graph.pdf",
+      "sha256": "0f97a6724733ef2750a0362912c5c9dda6868206a97ef8b8a07b31dc746466c8"
+    },
+    {
+      "path": "main.tex",
+      "sha256": "b256e5ce9fcded9c1c2149766bdda3507af6d679d415d129ab58c807cd167279"
+    },
+    {
+      "path": "scripts/bib_utils.py",
+      "sha256": "39db4ff6c6030c35595fea4afeb1dc9f0562bb847097e01613179036f1d9de6e"
+    },
+    {
+      "path": "scripts/build_thesis.py",
+      "sha256": "4a1bd8a6a87c2a1492386de0e66247e6f3d27061245fb2598c7830e79d5e66a7"
+    },
+    {
+      "path": "scripts/check_thesis_assets.py",
+      "sha256": "606f2e549c61c6c41d6e89787d6e0f38f2418eb8587bb9cd9930e4c74869017f"
+    },
+    {
+      "path": "scripts/inspect_thesis_pdf.py",
+      "sha256": "a0cfc445d56313fb8fd658204b1fe30809534e9f72dc5ab48d14c70b8d68e6e3"
+    },
+    {
+      "path": "scripts/merge_bibliography.py",
+      "sha256": "5f96ae2dd7524bf3635a52a673fec2807eff1ee155ef64e8218a4d0e59f3fdb8"
+    },
+    {
+      "path": "scripts/package_thesis.py",
+      "sha256": "343a8946a0f0942e9ac8f6d83226fd7540ab15de4e0f36730821b152fb4e3799"
+    },
+    {
+      "path": "scripts/report_thesis_counts.py",
+      "sha256": "b42804b40b93e8fbf6cb95645207d1992bf2472b62277f03bbb37d854dbd63cc"
+    },
+    {
+      "path": "scripts/summarize_pdf_typography.py",
+      "sha256": "017b8d6f0363fce53f5f4f5a1eda6d2749f4619aad54d816a4debb453c21c646"
+    },
+    {
+      "path": "scripts/verify_thesis_package.py",
+      "sha256": "7b8a734879fae415a4e5a35b1c3836a69873cad5cb20751aabb3ddc98841256a"
+    },
+    {
+      "path": "template/hkust-thesis-v0.11.6/LICENSE",
+      "sha256": "5f05fcf6ef25a6c31bccd2df7c0c46b23107bbeb2ce5cdba74efb5cc357f4dbb"
+    },
+    {
+      "path": "template/hkust-thesis-v0.11.6/README.md",
+      "sha256": "42631b6d0fda9cdd9a1dfa5dcb7a2a9e2f43fc4b0abba43953e94b891340fb99"
+    },
+    {
+      "path": "template/hkust-thesis-v0.11.6/hkustthesis.cls",
+      "sha256": "09edd06793a3b1f2956e229042b34b834fde5b2f1a8abc2fd225daa9b63f9775"
+    },
+    {
+      "path": "template/hkust-thesis-v0.11.6/hkustthesis.dtx",
+      "sha256": "1ef3bd58acc47f003e787f220ed1bbe0f1a2f95880296b12f7ac6331012ad7ff"
+    },
+    {
+      "path": "template/hkust-thesis-v0.11.6/hkustthesis.ins",
+      "sha256": "b886e59d00cb7620810fc62ca5a433c8af78905447b9521b662751c08ebad072"
+    },
+    {
+      "path": "template/hkust-thesis-v0.11.6/release.json",
+      "sha256": "eb8c8e82d9a0a723943a79a2bb47461c3ef8842faca2f86e95bf50d229d37f92"
+    },
+    {
+      "path": "thesis-references.bib",
+      "sha256": "a92503588d3eb7ee58ee7c39eefb05f18bced7de730a441d06a37eb83b1fd2fe"
+    }
+  ],
+  "verification_scope": "Fresh temporary-directory extraction; all manifest hashes checked, reading PDF removed, make from no generated auxiliary files; identical extracted PDF text and page count. Later archive updates may add documentation only; compiled-input fingerprint must remain unchanged."
+}

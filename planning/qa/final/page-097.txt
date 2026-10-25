@@ -1,0 +1,40 @@
+Query: The Irandhir Santos film whose poster has people doing martial arts was
+released in what year?
+: Pseudo Relation : PlaceholderEntity
+Query Graph
+Has Has Has Do
+Irandhir Santos Film Poster Person MartialArts
+Releasein
+Year
+Knowledge Graph
+IrandhirSantosactsin
+OnTop Martial
+TheAssailant…
+ArtsKick
+Display
+Do
+Actin
+Irandhir Santos TheAssailant
+MidAir
+Actin Releasein In
+Releasein
+BlueEyes 2009 Man
+Figure 6.3: Query and evidence graphs in path-based semantic matching. Placeholder entities
+express unknown query information; pseudo-relations connect passage nodes to extracted enti-
+ties. OriginalFigure3,p.2485[4].
+6.4 Query-aware Graph Construction
+6.4.1 Representing the query
+MGRAG asks the language model to extract entities and relations from the query. Some query
+entitiesareknown,suchasthenameofapersonoranobjectappearinginthequestion. Othersare
+requested by the question. The extraction prompt represents those unknown components using
+semantically meaningful placeholders, including types such as Person or Year. A placeholder
+provides a textual representation that can be compared with evidence entities even though its
+valuehasnotyetbeensupplied.
+Figure 6.3 shows the query and evidence graph representations. The placeholder boxes de-
+scribe missing knowledge in the query. Passage nodes connect extracted entities back to their
+chunks. Theseconnectionsletthegraphcarrybothrelationalcontentanditsassociationwiththe
+original multimodal evidence. In a multimodal corpus, a passage node can represent an image
+aswellasatextchunk.
+The original example asks which year an Irandhir Santos film was released when its poster
+showspeopledoingmartialarts. Thequerygraphconnectstheactortoanunknownfilm,thefilm
+83

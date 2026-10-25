@@ -1,0 +1,20 @@
+graphinformationcanmatterbeyondretainingthesameentityandrelationvocabulary. Itscon-
+nection to this thesis is the design question of which relationships remain available to a model
+after evidence transformation. FormerGNN is a separate KG embedding framework; the four
+language-modelsystemsusethestructuresandinterfacesdefinedintheirownchapters.
+2.7 Research Questions Emerging from the Background
+The preceding work identifies several places where structure can influence model inputs. Ta-
+ble understanding needs evidence that matches both the values and the task’s type vocabulary.
+Dynamicclassificationneedsanindexthatincorporatesnewlyavailablelabelinformationandre-
+trievesappropriatealternativesforthecurrenttext. Open-endedtextgenerationneedsaselection
+rule that can organize connected facts and retain their source context. Multimodal generation
+addssemanticmatchingacrossheterogeneousevidenceandthecostofprocessingthatevidence
+asmodelcontext.
+Thefourresearchchaptersaddresstheseconditionsinsequence. Chapter3studiesexternal
+KG evidence and supervised type representations. Chapter 4 studies connected candidate-label
+retrieval and online index updates. Chapter 5 studies influence-aware connected evidence se-
+lection with hybrid passages. Chapter 6 studies query-aware multimodal graph construction,
+semantic path matching, and graph-aware KV recomputation. The hyper-relational study pro-
+videsarelatedanalysisofinformationpreservation. Thesharedconcernishowarepresentation
+exposestask-relevantevidencetothecomputationthatusesit.
+20

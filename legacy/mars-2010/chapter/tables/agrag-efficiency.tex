@@ -1,0 +1,37 @@
+\begin{table}[t]
+	\centering
+	\renewcommand{\arraystretch}{1.2}
+	\caption{Model efficiency on 4 datasets for 5 tasks, all experiments were carried out with Qwen2.5-14B-Instruct LLM backbone. 
+		
+	}
+	\label{tab:agrag:efficiency}
+	
+	\setlength\tabcolsep{1pt}
+ 
+		\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|l|cccc|cccc} 
+			\hline\hline
+			\multirow{2}{*}{\textbf{Category}}                                             & \multirow{2}{*}{\textbf{Models}} & \multicolumn{4}{c|}{\textbf{Time Cost (Indexing / Querying mins) }}           & \multicolumn{4}{c}{\textbf{Token Cost (Input / Output per query) }}                                             \\ 
+			\cline{3-10}
+			&                                  & \textbf{Novel}    & \textbf{Medical}  & \textbf{WOS}      & \textbf{IFS-REL}  & \textbf{Novel}               & \textbf{Medical}             & \textbf{WOS}               & \textbf{IFS-REL}     \\ 
+			\hline\hline
+			\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}Traditional\\RAG\end{tabular}}
+}      & NaiveRAG                         & \textbf{13} / 371 & \textbf{7} / 245  & \textbf{2} / 292  & \textbf{2} / 225  & 9,437 / 1,708                & 7,473 / 379                  & 7,292 / 29                  & 4,521 / \underline{16}   \\
+			& L.LLMLingua                      & 51 / 360          & 37 / 305          & \underline{4} / 358   & \underline{3} / 315   & 8,466 / 1,750                & 5,686 / 390                  & 5,861 / \underline{31}         & 2,757 / \textbf{14}  \\ 
+			\hline
+			\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}Tree\\-based RAG\end{tabular}}      & RAPTOR                           & 464 / 250         & 117 / 319         & 30 / 162          & 24 / \textbf{121} & 7,243 / 777                  & \underline{4,817} / 695          & 6,007 / 41                 & 3,807 / 33           \\
+			& SiReRAG                          & 85 / 233          & 40 / 207          & 26 / 139          & 18 / 117          & 7,759 / 800                  & 4,918 / 701                  & 6,012 / 47                 & 3,821 / 36           \\ 
+			\hline
+			\multirow{4}{*}{\begin{tabular}[c]{@{}l@{}}Community\\-based RAG\end{tabular}} & G-Retriever                      & 19 / \textbf{119} & 12 / 145          & 8 / \underline{158}   & \underline{3} / 164   & \underline{6,344} / \textbf{116} & 6,290 / \textbf{157}         & 6,762 / \textbf{12}        & 4,002 / 21           \\
+			& MIXRAG                           & \underline{17} / 388  & \underline{11} / 453  & 5 /  257          & \textbf{2} / 193  & \textbf{6,083} / \underline{237} & \textbf{4,238 }/ \underline{230} & \underline{4,193 }/ \underline{31} & 3,597 / 29           \\
+			& GraphRAG                         & 347 / 205         & 194 / 158         & 85 / 240          & 64 / 217          & 12,686 / 2,109               & 8,385 / 1,017                & 11,809 / 351               & 9,009 / 287          \\
+			& LightRAG                         & 166 / 221         & 116 / 164         & 42 / 211          & 31 / 197          & 13,145 / 1,233               & 9,535 / 426                  & 11,510 / 227               & 7,667 / 199          \\ 
+			\hline
+			\multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Walking\\-based RAG~\end{tabular}}  & HippoRAG2                        & 95 / \underline{134}  & 46 / \textbf{130} & 19 / 140          & 15 / 127          & 8,138 / 1,073                & 6,264 / 595                  & 5,066 / 93                 & 2,440 / 102          \\
+			& F.GraphRAG                       & 106 / 198         & 48 / 173          & 29 / 186          & 27 / 164          & 7,490 / 1,252                & 6,475 / 384                  & 4,957 / 35                 & \underline{2,217} / 20   \\
+			& \textbf{AGRAG}                   & 65 / 142          & 16 / \underline{138}  & 16 / \textbf{132} & 14 / \underline{124}  & 6,487 / 1,140                & 5,145 / 413                  & \textbf{3,970} / 101       & \textbf{1,890} / 93  \\
+			\hline\hline
+		\end{tabular}
+		
+	
+\end{table}

@@ -1,0 +1,33 @@
+nections. An embedding supplies a learned similarity or a contextual feature. The methods
+combine these representations in different ways. KGLink serializes graph-derived information
+fora table encoder. GORAGusesa weightedgraphforcandidate selection. AGRAGcombines
+nodescoresandedgecostsduringevidenceretrieval. MGRAGcomparesthesemanticsofpaths
+andusesgraphfeaturesincontextcomputation.
+Second, external evidence and supervision have different roles. The knowledge graph in
+KGLinksuppliesdescriptions thatneed notappear ina table. Columnlabels supervisethe pre-
+dictiontask. InGORAG,asmalllabeledtrainingsetsuppliesinitialkeyword–labelassociations,
+whilepredictionscancontributetoonlineindexingaccordingtotheroundprotocol. InAGRAG
+and MGRAG, source documents supply the evidence from which graphs are constructed. The
+experimentsspecifytheinformationavailabletoeachmethod.
+Third,thelanguagemodelsperformdifferentcomputations. KGLinkfine-tunesapre-trained
+encoderforcolumnannotation,withacontextualrepresentationobjective. Thelaterstudiesuse
+generativelanguagemodelsforselectedextraction,filtering,classification,oranswer-generation
+operations. The thesis therefore includes supervised encoder-based annotation and retrieval-
+augmentedgeneration.
+1.2.2 Reasoning through task-specific evidence
+The thesis uses reasoning in relation to the evaluated tasks. In annotation, the model uses table
+content and external type information to assign a semantic label. In dynamic classification,
+retrieval selects candidate labels appropriate to the current text and available index. In textual
+QA,themethodsuppliesconnectedfactsandpassagesforgeneratingananswer. Inmultimodal
+QA,semanticpathsrelatequeryrequirementstoevidenceexpressedacrossmodalities.
+The graph operations are observable components of these pipelines. They select, connect,
+andpresentevidence. Theresultingtaskmetricsevaluatepredictionsandgeneratedanswersun-
+derspecifiedconditions. Thismakestheinterfacebetweenstructuralcomputationandlanguage-
+model output the object of study. It also determines the appropriate evidence for each contri-
+bution: annotation accuracy and F1, classification results across rounds, task-specific QA mea-
+sures,andcontext-servingcosts.
+Thefourstudieshaveseparateimplementationsandevaluationsettings. Theircommonargu-
+ment concerns how explicit relationships can organize knowledge and guide evidence use. The
+chaptersprogressthroughexternalknowledge,onlineindexing,connectedtextualevidence,and
+query-awaremultimodalevidence. Eachchapterstatestheparticularmechanismitdevelops.
+3

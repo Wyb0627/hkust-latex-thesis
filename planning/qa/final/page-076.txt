@@ -1,0 +1,41 @@
+5.3.2 Node influence and edge costs
+AGRAG uses a personalized PageRank-style propagation [44] to assign query-dependent influ-
+encescores,
+𝐬 = lim 𝐬(𝑖), 𝐬(𝑖) = (1−𝑑)𝐩+𝑑𝐏𝐬(𝑖−1). (5.7)
+𝑖→∞
+Here 𝐩 is determined by nodes associated with the filtered mapped facts, and 𝐏 is the graph
+propagation matrix specified in the source. The reported setting uses 𝑑 = 0.5 and stops the
+iteration when the change is below 10−7. The score of a node 𝑣 is 𝑠 = 𝐬[𝑣]. Passage-node
+𝑣
+scoresaremultipliedby0.05tobalancetheircontributionrelativetoentitynodes.
+The personalization entries identify nodes participating in the mapped facts: an anchored
+nodereceivesentryoneandtheothernodesreceivezero. Thegraphoperatorisspecifiedby
+⎧1/|𝒩(𝑢)|, (𝑢,𝑣) ∈ ℰ,
+⎪
+𝐏[𝑢][𝑣] = (5.8)
+⎨
+⎪1/|𝒱|, otherwise.
+⎩
+Nonadjacent node pairs receive the constant term in this operator. The recurrence uses this
+matrixwiththedampingvalueinEquation5.7,followedbypassage-nodescaling.
+The node score is computed before neighborhood expansion. Consequently, a candidate’s
+influence refers to its position in the indexed graph under the query anchors. The subgraph
+selectionprocedureusestheseassignedscoresasitchangeswhichedgesandnodesareincluded.
+This distinction separates propagation over the evidence source from expansion of the context
+returned to the model. The former establishes a score landscape; the latter selects an evidence
+structureusingthatlandscapeandthesemanticedgecosts.
+Influence and direct similarity answer different retrieval questions. Similarity asks how
+closely a triple’s wording corresponds to the query. Influence additionally depends on graph
+connectivity to query anchors. A node can receive influence through connections to several
+mapped facts. The subgraph selection stage uses these scores alongside edge costs so that the
+retrievaldecisionreflectsbothkindsofinformation.
+Foranedge𝑒 = (𝑢,𝑣)associatedwithfact𝑓 ,AGRAGdefines
+𝑒
+1−MS(𝐪,𝐟 )
+𝑒
+𝑐 = . (5.9)
+𝑒
+2
+Higher semantic similarity gives a lower factual edge cost. The influence score is attached to
+nodes,whilethesimilaritycostisattachedtoedges. Keepingthesequantitiesseparateallowsthe
+62

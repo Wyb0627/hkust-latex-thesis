@@ -1,0 +1,184 @@
+{
+  "review_date": "2026-10-25",
+  "before_pdf_sha256": "95cac4f970108cfdd2d3c49ddfa71e9f5685042e1995cd789ce6835c9b509c7f",
+  "after_pdf_sha256": "f44abbdbc4bceb3ba9e73fe42b6b032f22d94aa9ceb40068d3e7280707b40905",
+  "formula_blocks": 47,
+  "formula_checks": [
+    {
+      "file": "chapter/ch01-introduction.tex",
+      "formula_blocks": 0,
+      "formula_blocks_byte_identical": true
+    },
+    {
+      "file": "chapter/ch02-background.tex",
+      "formula_blocks": 1,
+      "formula_blocks_byte_identical": true
+    },
+    {
+      "file": "chapter/ch03-kglink.tex",
+      "formula_blocks": 9,
+      "formula_blocks_byte_identical": true
+    },
+    {
+      "file": "chapter/ch04-gorag.tex",
+      "formula_blocks": 8,
+      "formula_blocks_byte_identical": true
+    },
+    {
+      "file": "chapter/ch05-agrag.tex",
+      "formula_blocks": 17,
+      "formula_blocks_byte_identical": true
+    },
+    {
+      "file": "chapter/ch06-mgrag.tex",
+      "formula_blocks": 12,
+      "formula_blocks_byte_identical": true
+    },
+    {
+      "file": "chapter/ch07-discussion.tex",
+      "formula_blocks": 0,
+      "formula_blocks_byte_identical": true
+    },
+    {
+      "file": "chapter/ch08-conclusion.tex",
+      "formula_blocks": 0,
+      "formula_blocks_byte_identical": true
+    }
+  ],
+  "table_file_count": 22,
+  "table_checks": [
+    {
+      "path": "chapter/tables/agrag-ablation.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 169,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    },
+    {
+      "path": "chapter/tables/agrag-efficiency.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 180,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    },
+    {
+      "path": "chapter/tables/agrag-low-resource-efficiency.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 32,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    },
+    {
+      "path": "chapter/tables/agrag-low-resource.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 70,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    },
+    {
+      "path": "chapter/tables/agrag-main-class.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 47,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    },
+    {
+      "path": "chapter/tables/agrag-main-complex.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 47,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    },
+    {
+      "path": "chapter/tables/agrag-main-creative.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 69,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    },
+    {
+      "path": "chapter/tables/agrag-main-fact.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 47,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    },
+    {
+      "path": "chapter/tables/agrag-main-summary.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 47,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    },
+    {
+      "path": "chapter/tables/gorag-ablation-table.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 26,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    },
+    {
+      "path": "chapter/tables/gorag-dataset-table.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 39,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    },
+    {
+      "path": "chapter/tables/gorag-main-tables.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 210,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    },
+    {
+      "path": "chapter/tables/gorag-token-table.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 14,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    },
+    {
+      "path": "chapter/tables/gorag-zero-table.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 24,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    },
+    {
+      "path": "chapter/tables/mgrag-ablation.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 25,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    },
+    {
+      "path": "chapter/tables/mgrag-breakdown.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 60,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    },
+    {
+      "path": "chapter/tables/mgrag-cache.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 34,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    },
+    {
+      "path": "chapter/tables/mgrag-datasets.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 52,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    },
+    {
+      "path": "chapter/tables/mgrag-hops.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 76,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    },
+    {
+      "path": "chapter/tables/mgrag-inverse.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 43,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    },
+    {
+      "path": "chapter/tables/mgrag-main.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 166,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    },
+    {
+      "path": "chapter/tables/mgrag-matching.tex",
+      "numeric_token_stream_identical": true,
+      "tokens": 342,
+      "literal_content_identical_except_logged_numeric_emphasis_and_caption_note": true
+    }
+  ],
+  "result": "PASS; all original formula blocks byte-identical; all table content identical except logged numeric emphasis and caption-note changes; restored anchor-loop exposition checked separately against publisher Algorithm1"
+}

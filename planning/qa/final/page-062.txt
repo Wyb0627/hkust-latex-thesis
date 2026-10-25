@@ -1,0 +1,34 @@
+Table 4.1: Dataset statistics for the four-round experiments, transposed from the original table.
+IFS-Relhas40testsamplesperlabel. Roundlabelcountsrefertonewlyintroducedlabels.
+Statistic CAD WOS IFS-Rel
+Averagetexttokens 154 200 105
+Round1testtexts 240 2,417 640
+Round1newlabels 4 32 16
+Round2testtexts 60 2,842 640
+Round2newlabels 3 53 16
+Round3testtexts 286 2,251 640
+Round3newlabels 3 30 16
+Round4testtexts 231 1,886 640
+Round4newlabels 3 18 16
+Totaltesttexts 817 9,396 2,560
+across IFS-Rel. The testcollections contain 817, 9,396, and 2,560 examples,respectively. IFS-
+Rel uses 40 test examples per label. Its balanced test allocation differs from the changing class
+frequenciesintheothercollections. Accuracyshouldthereforebeinterpretedwitheachdataset’s
+actualsplitanddistribution.
+ThelabelcountsinTable4.1describelabelsintroducedineachround. Theclassifieroperates
+overtheircumulativeunion. ThusthesecondWOSroundadds53labelstothe32labelsalready
+introduced, rather than replacing the earlier set by a new 53-label task. This distinction matters
+when relating the dataset statistics to the size of the classification instruction and to the graph
+stateretainedfromearlierrounds.
+Themainfew-shotstudyuses1,5,and10labeledexamplesperclass. CADandWOSRAG
+experiments use Qwen2.5-7B, while IFS-Rel uses GPT-4o. These are separate backbone con-
+ditions. The source reports an Intel Xeon Gold 5220R CPU at 2.20GHz and a single NVIDIA
+A100-SXM4-40GB GPU for the experiments. Runtime observations concern this implementa-
+tionandhardwaresetting;API-backedinferencealsoreflectstheserviceusedduringtheoriginal
+study.
+Classification accuracy requires an exact match between the model output and the ground-
+truthlabelnameornumber. Anoutputthatcannotbematchedtotherequiredclassisnotcounted
+ascorrect. Thisprotocolevaluatesthefinalclassificationdecisionratherthanagradedsemantic
+similarity between arbitrary generated answers. A fluent explanation alone does not satisfy the
+metric.
+48

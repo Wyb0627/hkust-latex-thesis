@@ -1,0 +1,42 @@
+{
+  "reported": {
+    "before": 84,
+    "after": 79
+  },
+  "published": {
+    "before": 50,
+    "after": 44
+  },
+  "rather than": {
+    "before": 32,
+    "after": 29
+  },
+  "should": {
+    "before": 25,
+    "after": 18
+  },
+  "protocol": {
+    "before": 39,
+    "after": 32
+  },
+  "does not": {
+    "before": 20,
+    "after": 16
+  },
+  "we do not claim": {
+    "before": 0,
+    "after": 0
+  },
+  "for a fair comparison": {
+    "before": 0,
+    "after": 0
+  },
+  "it should be noted": {
+    "before": 0,
+    "after": 0
+  },
+  "taken together": {
+    "before": 0,
+    "after": 0
+  }
+}

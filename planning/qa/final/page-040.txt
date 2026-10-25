@@ -1,0 +1,4 @@
+Figure 3.4: Cross-column evidence in the original album-and-musician example. Graph links
+connect candidate interpretations of cell mentions in the same row. Original image reproduced
+fromKGLink[1],Fig.5.
+26

@@ -1,0 +1,42 @@
+File: chapter/ch06-mgrag.tex
+Sum count: 6430
+Words in text: 6100
+Words in headers: 116
+Words outside text (captions, etc.): 116
+Number of headers: 30
+Number of floats/tables/figures: 5
+Number of math inlines: 86
+Number of math displayed: 12
+Subcounts:
+  text+headers+captions (#headers/#floats/#inlines/#displayed)
+  63+8+0 (1/0/0/0) Chapter: Semantic Graph Matching for Multimodal Reasoning with MGRAG
+  505+5+22 (1/1/2/0) Section: Multimodal Evidence and Query Requirements
+  211+4+28 (1/1/6/0) Section: Framework and Evidence Representations
+  346+2+0 (1/0/9/2) Section: Coarse-grained Ranking
+  0+3+0 (1/0/0/0) Section: Query-aware Graph Construction
+  460+3+26 (1/1/0/0) Subsection: Representing the query
+  211+5+0 (1/0/5/2) Subsection: Extracting facts from ranked chunks
+  206+5+0 (1/0/1/0) Subsection: Matching as a stopping decision
+  0+4+0 (1/0/0/0) Section: Path-based Semantic Subgraph Matching
+  432+4+0 (1/0/8/3) Subsection: From edges to paths
+  267+5+5 (1/0/17/0) Subsection: Anchor selection and candidate mappings
+  211+4+0 (1/0/6/1) Subsection: Greedy semantic path growth
+  190+3+0 (1/0/2/0) Subsection: Published algorithmic properties
+  125+3+0 (1/0/2/0) Subsection: Serializing selected evidence
+  0+3+0 (1/0/0/0) Section: Graph-aware KV Recomputation
+  185+4+20 (1/1/4/0) Subsection: Reuse and selective updates
+  207+4+0 (1/0/1/2) Subsection: Topological features of facts
+  108+3+0 (1/0/5/1) Subsection: Combined recomputation score
+  89+2+0 (1/0/9/1) Section: Computational Cost
+  520+2+0 (1/0/0/0) Section: Experimental Protocol
+  0+5+0 (1/0/0/0) Section: Answer Quality and Structural Retrieval
+  203+2+0 (1/0/0/0) Subsection: Complete-system comparisons
+  233+4+0 (1/0/0/0) Subsection: Construction and matching substitutions
+  133+4+0 (1/0/0/0) Subsection: Queries requiring multiple hops
+  495+5+0 (1/0/0/0) Section: Cache Quality and End-to-end Costs
+  0+4+0 (1/0/0/0) Section: Ablations and Parameter Sensitivity
+  139+2+0 (1/0/1/0) Subsection: Component ablations
+  140+5+0 (1/0/0/0) Subsection: Adding components to other pipelines
+  119+5+15 (1/1/7/0) Subsection: Matching threshold and path length
+  302+4+0 (1/0/1/0) Section: Discussion and Chapter Summary
+

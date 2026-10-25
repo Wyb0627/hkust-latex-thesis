@@ -1,0 +1,28 @@
+Table 5.9: Contextual summarization ablation with Qwen2.5-14B-Instruct. Values retain the
+originalsourceablationprecision.
+Method Novel COV Novel ACC Medical COV Medical ACC
+AGRAG w. HR Only 0.739 0.522 0.535 0.583
+AGRAG w. LLM ER 0.755 0.552 0.600 0.566
+AGRAG w.o. HR 0.677 0.534 0.420 0.578
+AGRAG w.o. MCMI 0.748 0.592 0.600 0.588
+AGRAG w.o. Cle. 0.712 0.597 0.616 0.577
+AGRAG 0.778 0.643 0.690 0.604
+Table5.10: ComplexreasoningablationwithQwen2.5-14B-Instruct. Valuesretaintheoriginal
+sourceablationprecision.
+Method Novel ROG Novel ACC Medical ROG Medical ACC
+AGRAG w. HR Only 0.303 0.453 0.334 0.636
+AGRAG w. LLM ER 0.320 0.465 0.333 0.624
+AGRAG w.o. HR 0.318 0.434 0.324 0.598
+AGRAG w.o. MCMI 0.324 0.465 0.329 0.633
+AGRAG w.o. Cle. 0.301 0.450 0.334 0.628
+AGRAG 0.319 0.467 0.343 0.665
+Table5.11: FactretrievalablationwithQwen2.5-14B-Instruct. Valuesretaintheoriginalsource
+ablationprecision.
+Method Novel ROG Novel ACC Medical ROG Medical ACC
+AGRAG w. HR Only 0.323 0.487 0.355 0.619
+AGRAG w. LLM ER 0.322 0.480 0.353 0.613
+AGRAG w.o. HR 0.314 0.487 0.344 0.615
+AGRAG w.o. MCMI 0.322 0.470 0.359 0.621
+AGRAG w.o. Cle. 0.313 0.478 0.354 0.620
+AGRAG 0.324 0.490 0.357 0.628
+74

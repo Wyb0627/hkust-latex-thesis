@@ -1,0 +1,34 @@
+with𝑘 = 5;itreportsaccuracy0.6887.
+Table6.7: MMQAcomponentablations,reproducedfrompublishedTable9,p.2490[4]. Time
+isinhours.
+Model SIM. ACC. ROG. BLEU Time
+Withoutgraphmatching 0.8362 0.7260 0.6657 0.5774 4.4h
+WithCLIPencoder 0.8513 0.7376 0.6744 0.7008 4.5h
+VanillaMGRAG,𝑘 = 5 0.8260 0.6887 0.6266 0.5773 4.7h
+MGRAG 0.8533 0.7442 0.6763 0.7215 4.3h
+The full system also has the largest SIM., ROUGE-L, and BLEU-1 entries in this table. Its
+reported time is 4.3 hours, compared with 4.4 hours without graph matching, 4.5 hours with
+CLIP,and4.7hoursforVanillaMGRAG.Thecomparisonsupportstheparticularcoarse-to-fine
+compositionusedinthepublishedsystem. Italsoidentifiesthescopeoftheencoderobservation:
+caption-based ranking performs better than the tested CLIP substitution on MMQA with this
+pipelineandbackbone.
+6.11.2 Adding components to other pipelines
+Table 6.8 retains the inverse ablations. Adding graph-aware KV recomputation to HippoRAG2
+changes accuracy from 0.6335 to 0.6855 and time from 7.5 to 7.6 hours. Adding path-based
+semantic matching gives accuracy 0.7372 and time 4.1 hours. Combining both gives accuracy
+0.7442 and time 4.3 hours. The latter configuration shares MGRAG’s reported values because
+thepublicationidentifiesitsretrievalandgenerationsettingwiththefullmethodoncebothcom-
+ponentsareincorporated.
+Table 6.8: MMQA inverse ablations, reproduced from published Table 10, p. 2491 [4]. PSGM
+and GKV denote path-based semantic graph matching and graph-aware KV recomputation.
+Timeisinhours.
+Model SIM. ACC. ROG. BLEU Time
+Hippo. 0.8381 0.6335 0.6659 0.5917 7.5h
+Hippo.+GKV 0.8392 0.6855 0.6651 0.7013 7.6h
+Hippo.+PSGM 0.8416 0.7372 0.6720 0.7128 4.1h
+Hippo.+PSGM+GKV 0.8533 0.7442 0.6763 0.7215 4.3h
+Vanilla. 0.8362 0.7053 0.5942 0.6645 2.6h
+Vanilla.+PSGM 0.8460 0.7175 0.6466 0.6973 4.7h
+Vanilla.+PSGM+GKV 0.8485 0.7232 0.6563 0.7001 4.8h
+MGRAG 0.8533 0.7442 0.6763 0.7215 4.3h
+102

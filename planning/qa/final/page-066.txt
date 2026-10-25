@@ -1,0 +1,36 @@
+Table4.8: AblationexperimentsonWOSforGORAG’svariants.
+Round
+Dataset Model
+R1 R2 R3 R4
+GORAGoffline&unit 0.2979 0.2287 0.2645 0.2249
+GORAGoffline 0.3063 0.2302 0.2455 0.2156
+WOS GORAGunit 0.4706 0.4394 0.4407 0.3899
+GORAGkeyword 0.4746 0.4606 0.4455 0.4030
+GORAG 0.4862 0.4649 0.4814 0.4210
+removesbothfeatures. Thekeywordvariantusestheextractedkeywordsinplaceofthecomplete
+query text for classification. These variants change specific inputs or index operations while
+retainingGORAG’soverallclassificationtask.
+In the ablation table, the full method reports 0.4862, 0.4649, 0.4814, and 0.4210 across
+rounds. Theofflinevariantreports0.3063,0.2302,0.2455,and0.2156. Theunitvariantreports
+0.4706, 0.4394, 0.4407, and 0.3899. Under this ablation protocol, removing online insertion
+hasalargerobservedeffectthanreplacingtheweightedgraphwithunitcosts. Thiscomparison
+concernsthevariantsreportedtogetherinthattable.
+Theoffline-and-unitvariantreports0.2979,0.2287,0.2645,and0.2249. Itsthird-andfourth-
+round values exceed those of the offline variant. The effects of removing these components
+are therefore not strictly additive across rounds. The keyword variant reports 0.4746, 0.4606,
+0.4455, and 0.4030, below the full method in each displayed column. The full query provides
+information useful to the classifier in these experiments even though keywords determine the
+retrievalterminals.
+Thepublicationgivesdifferentfull-methodvaluesinthemainandablationWOStableswith-
+outexplainingtheirprovenance. Componentcomparisonshereusethefull-methodrowfromthe
+ablationtable.
+4.7.1 Prompt tokens and graph growth
+The IFS-Rel one-shot token study reports average tokens per query and the corresponding US-
+dollarcostsundertheoriginalstudy’spricingconditions. GORAGuses557.5tokensperquery
+and reports a cost of $0.004. The direct GPT-4o comparison uses 634.6 tokens and reports
+$0.005. LongLLMLingua uses 2,771.3 tokens, NaiveRAG 4,537.4, LightRAG 7,866.3, and
+GraphRAG9,296.3. Theirreportedcostsare$0.021,$0.034,$0.059,and$0.070,respectively.
+Thetokencomparisonmeasureshowmuchcontextreachesthemodelintheevaluatedimple-
+mentation. GORAG’s candidate-label representation uses fewer tokens than the listed retrieval
+baselines in this experiment. The historic dollar values provide the cost calculation reported
+52

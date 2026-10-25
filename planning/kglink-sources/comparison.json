@@ -1,0 +1,7 @@
+{
+  "comparison": "Whitespace-tokenized pdftotext -layout output, arXiv side stamp removed by its exact text",
+  "equal": true,
+  "local_token_count": 11430,
+  "download_token_count": 11430,
+  "status": "AUTHOR_CONFIRMED_PUBLICATION_EQUIVALENT"
+}

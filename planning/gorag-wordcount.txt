@@ -1,0 +1,107 @@
+File: chapter/ch04-gorag.tex
+Encoding: ascii
+Sum count: 5293
+Words in text: 5042
+Words in headers: 73
+Words outside text (captions, etc.): 129
+Number of headers: 19
+Number of floats/tables/figures: 5
+Number of math inlines: 41
+Number of math displayed: 8
+Subcounts:
+  text+headers+captions (#headers/#floats/#inlines/#displayed)
+  71+8+0 (1/0/0/0) Chapter: Adaptive Graph Retrieval for Dynamic Classification with GORAG
+  471+3+20 (1/1/0/0) Section: Dynamic Few-shot Classification
+  214+4+0 (1/0/7/1) Subsection: Rounds and information availability
+  220+3+26 (1/1/1/0) Section: Weighted Graph Indexing
+  256+5+0 (1/0/9/1) Subsection: Keyword extraction and correlation scores
+  208+4+0 (1/0/5/1) Subsection: Keyword--label edge costs
+  204+3+0 (1/0/4/1) Subsection: Merging label rounds
+  298+4+0 (1/0/5/0) Section: Adaptive Candidate Label Retrieval
+  321+4+0 (1/0/3/1) Subsection: Tree and auxiliary-graph operations
+  325+4+0 (1/0/6/2) Section: Classification and Online Indexing
+  196+2+0 (1/0/0/1) Subsection: Computational organization
+  306+2+0 (1/0/0/0) Section: Experimental Design
+  177+4+0 (1/0/1/0) Subsection: Compared methods and controls
+  389+2+0 (1/0/0/0) Section: Classification Results
+  247+4+0 (1/0/0/0) Section: Ablations and Resource Use
+  283+5+29 (1/1/0/0) Subsection: Prompt tokens and graph growth
+  296+4+40 (1/1/0/0) Section: Zero-shot and Round Generalization
+  196+4+14 (1/1/0/0) Subsection: A retrieved classification case
+  364+4+0 (1/0/0/0) Section: Discussion and Chapter Summary
+
+Included file: ./planning/gorag-dataset-table.tex
+Encoding: ascii
+Sum count: 26
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 26
+Number of headers: 0
+Number of floats/tables/figures: 1
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./planning/gorag-main-tables.tex
+Encoding: ascii
+Sum count: 150
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 150
+Number of headers: 0
+Number of floats/tables/figures: 6
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./planning/gorag-ablation-table.tex
+Encoding: ascii
+Sum count: 7
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 7
+Number of headers: 0
+Number of floats/tables/figures: 1
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./planning/gorag-token-table.tex
+Encoding: ascii
+Sum count: 8
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 8
+Number of headers: 0
+Number of floats/tables/figures: 1
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./planning/gorag-zero-table.tex
+Encoding: ascii
+Sum count: 13
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 13
+Number of headers: 0
+Number of floats/tables/figures: 1
+Number of math inlines: 0
+Number of math displayed: 0
+
+Sum of files: chapter/ch04-gorag.tex
+File(s) total: chapter/ch04-gorag.tex
+Sum count: 5497
+Words in text: 5042
+Words in headers: 73
+Words outside text (captions, etc.): 333
+Number of headers: 19
+Number of floats/tables/figures: 15
+Number of math inlines: 41
+Number of math displayed: 8
+Files: 6
+Subcounts:
+  text+headers+captions (#headers/#floats/#inlines/#displayed)
+  5042+73+129 (19/5/41/8) File: chapter/ch04-gorag.tex
+  0+0+26 (0/1/0/0) Included file: ./planning/gorag-dataset-table.tex
+  0+0+150 (0/6/0/0) Included file: ./planning/gorag-main-tables.tex
+  0+0+7 (0/1/0/0) Included file: ./planning/gorag-ablation-table.tex
+  0+0+8 (0/1/0/0) Included file: ./planning/gorag-token-table.tex
+  0+0+13 (0/1/0/0) Included file: ./planning/gorag-zero-table.tex
+

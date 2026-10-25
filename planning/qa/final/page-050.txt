@@ -1,0 +1,31 @@
+Table3.4: Reportedcomparisonbetweenlinkage-rankedrowselectionandselectioninoriginal
+tableorder.
+SemTab VizNet
+Selection Accuracy WeightedF1 Accuracy WeightedF1
+Top-𝑘rowfilter 87.12 85.78 96.28 96.07
+Originaltop-𝑘rows 85.93 84.39 96.14 95.97
+Table 3.3 shows that KGLink still performs the annotation task in this condition. It obtains
+97.04 numeric accuracy and 90.92 non-numeric accuracy. TaBERT and Doduo also achieve
+highvaluesonthissubset. Theobservationisconsistentwiththearchitectureretaininga table-
+encodingpathwaywhenexternalevidenceisabsent.
+3.6.5 Type Granularity in the Reported Cases
+Among SemTab classes with more than ten test samples, Athlete, Protein, and Film have the
+threelargestreportedaccuracyincreaseswhentherepresentation-generationtaskisadded.
+The examples distinguish relevance from exact label identity. Protein columns can receive
+KGcandidatessuchasGeneorEnzymes. FilmcolumnscanreceiveTelevisionseries,Scholarly
+article,orBook. Thesedescriptionscontainrelatedsemanticinformationbutaredifferentfrom
+the desired annotation label. The contextual representation task uses the dataset label during
+training to learn how the retrieved descriptions and cell values jointly relate to that label. It
+thereforeaddressesacorrespondencebetweenevidenceandtaskvocabularythatcandidate-type
+retrievalaloneleavesunresolved.
+The Athlete example makes the same issue visible at a broader semantic level. Graph evi-
+dence can identify that the values denote athletes even when the dataset expects another level
+of description. KGLink preserves that evidence as language-model input and lets supervised
+annotationdeterminetheoutputcategory.
+3.6.6 Row Selection and Input Budgets
+Table3.4evaluatesrowordering. Thelinkage-rankedfiltergiveshigherreportedscoresthantak-
+ingtheoriginaltoprowsonbothdatasets. ThechangeislargeronSemTab. Sincethefilteralso
+determinesthecellusedforfeature-sequencegeneration,thiscomparisonconcernsthemethod’s
+complete linkage-based selection rule. It provides evidence that the ordering of available table
+evidencemattersunderthefixedinputconstraints.
+36

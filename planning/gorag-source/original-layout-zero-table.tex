@@ -1,0 +1,21 @@
+% Exact active-source transcription, numerical values retained.
+\begin{table}[t]
+	\centering
+	\caption{0-shot experiments for GORAG and RAG baselines on IFS-Rel dataset under 0-shot setting.}
+	\label{tab:gorag:zero}
+	
+	\resizebox{\linewidth}{!}{
+		\begin{tabular}{l|c|c|c|c} 
+			\hline\hline
+			\textbf{Model}          & \textbf{R1}              & \textbf{R2}              & \textbf{R3}              & \textbf{R4}               \\ 
+			\hline
+			GPT-4o \cite{gorag-hurst2024gpt}                  & 0.9219                   & 0.5109                   & 0.4063                   & \underline{0.5936}                    \\ 
+			LongLLMLingua \cite{gorag-jiang-etal-2024-longllmlingua}          & \underline{0.9281}                   & \underline{0.5297}                   & \underline{0.4234}                   & 0.5806                    \\
+			LightRAG \cite{gorag-guo2024lightrag}                & 0.6718                   & 0.3047                   & 0.2135                   & 0.0977                    \\ 
+			GraphRAG \cite{gorag-edge2024local}                & 0.5625                   & 0.1875                   & 0.1458                   & 0.0938                    \\
+			\textbf{\textbf{GORAG}} & \textbf{\textbf{0.9328}} & \textbf{\textbf{0.5406}} & \textbf{\textbf{0.4375}} & \textbf{\textbf{0.6063}}  \\
+			\hline\hline
+		\end{tabular}
+	}
+	
+\end{table}

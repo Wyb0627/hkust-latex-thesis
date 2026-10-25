@@ -1,0 +1,26 @@
+{\small
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{lrlrrrr}
+\caption{Results by query hop count, reorganized from published Table 8, p.~2490~\cite{mgrag-paper}. Time is in minutes, as reported. Each original row is shown as two method rows, with the query count repeated.}\label{tab:mgrag:hops}\\
+\toprule
+Hops & Queries & Method & Time & ACC. & ROG. & BLEU\\
+\midrule\endfirsthead
+\multicolumn{7}{c}{\tablename\ \thetable\ (continued)}\\
+\toprule
+Hops & Queries & Method & Time & ACC. & ROG. & BLEU\\
+\midrule\endhead
+\bottomrule\endfoot
+1-hop & 201 & VanillaRAG & \textbf{0.13} & 0.613 & 0.379 & 0.240 \\
+1-hop & 201 & MGRAG & 0.35 & \textbf{0.624} & \textbf{0.425} & \textbf{0.286} \\
+2-hop & 1,237 & VanillaRAG & \textbf{0.10} & 0.588 & 0.304 & 0.193 \\
+2-hop & 1,237 & MGRAG & 0.37 & \textbf{0.601} & \textbf{0.335} & \textbf{0.230} \\
+3-hop & 2,357 & VanillaRAG & \textbf{0.16} & 0.633 & 0.329 & 0.238 \\
+3-hop & 2,357 & MGRAG & 0.41 & \textbf{0.659} & \textbf{0.355} & \textbf{0.260} \\
+4-hop & 499 & VanillaRAG & \textbf{0.19} & 0.697 & 0.338 & 0.259 \\
+4-hop & 499 & MGRAG & 0.44 & \textbf{0.712} & \textbf{0.373} & \textbf{0.293} \\
+5-hop & 286 & VanillaRAG & \textbf{0.18} & 0.678 & 0.319 & 0.205 \\
+5-hop & 286 & MGRAG & 0.45 & \textbf{0.733} & \textbf{0.392} & \textbf{0.282} \\
+6-hop & 220 & VanillaRAG & \textbf{0.18} & 0.661 & 0.305 & 0.176 \\
+6-hop & 220 & MGRAG & 0.43 & \textbf{0.738} & \textbf{0.377} & \textbf{0.249} \\
+\end{longtable}
+}

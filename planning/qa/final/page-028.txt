@@ -1,0 +1,36 @@
+Table2.1: Representativeretrievalorganizationsandtheevidencestructurestheyexpose. Each
+rowreferstothecitedmethod’sdesign.
+Method Indexedrepresentation Query-relatedretrievaloperation
+DPR[16] Densepassagerepresentations Question–passagesimilarityscoring
+GraphRAG[17] Entity graph and community Use of graph-derived summaries for
+summaries query-focusedsummarization
+HippoRAG[18] Knowledge graph linked to pas- Personalized PageRank from query-
+sages relatedentities
+LightRAG[19] Graphandvectorrepresentations Dual-level retrieval of specific and
+broaderinformation
+HippoRAG combines language-model extraction, a knowledge graph, and personalized
+PageRank for retrieval [18]. Query-related entities seed a graph process whose scores depend
+on connectivity. A node can therefore receive retrieval influence through paths from the initial
+query representation. Personalized propagation introduces a query-dependent ranking over
+the index. It is distinct from a rule requiring every returned item to connect a specified set of
+terminalsinoneselectedsubgraph.
+LightRAG integrates graph structures with vector representations and uses retrieval at low
+and high levels [19]. Its design distinguishes more specific entity-oriented information from
+broader relational or conceptual information and includes incremental index updates. These
+mechanisms address the representation and maintenance of a graph retrieval source. The gran-
+ularity of the retrieval result remains a separate design choice from how the source graph was
+built.
+Table2.1comparestheevidenceorganizationoftheseapproacheswithpassageretrieval. It
+identifiestheevidenceobjectmadeavailabletoeachretrievalcomputation.
+Two graph operations help clarify these distinctions. A query anchor identifies an entity
+or fact that maps to the current question. Personalized propagation distributes influence from
+anchorsthroughthegraphandrankssurroundingevidenceaccordingtotheresultingscores. A
+terminal-connecting procedure instead takes a specified node set and selects connections that
+include those nodes. Intermediate nodes can enter a solution because they lie on the selected
+paths. The operations therefore ask different questions of the same indexed topology. One asks
+wherequeryinfluenceisconcentrated;theotheraskshowrequiredevidencecanbeconnected.
+The retrieval unit determines how these operations become context. Ranking an entity re-
+quiresaruleforfindingitssourcepassages. Selectingapathrequiresatextualrepresentationof
+its entities and relations. Selecting a community summary yields derived prose that can cover
+many underlying statements. The interface between a graph result and the generator is conse-
+14

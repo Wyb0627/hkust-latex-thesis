@@ -1,0 +1,31 @@
+3.3 KG-derived Candidate Types
+3.3.1 Cell Mention Linking
+The first step retrieves a candidate entity set 𝐸 𝑚𝑟 for each suitable cell mention. KGLink uses
+𝑐
+BM25 to score the relation between the mention’s words and indexed entity labels [15]. The
+implementation indexes Wikidata with Elasticsearch. The score incorporates query-term fre-
+quency, inverse document frequency, and label-length normalization. Multiple entities can
+match the same mention, so the retrieval output is a candidate set rather than a single disam-
+biguatedentity.
+Thisdistinctionisrelevantforshortstrings. Analbumtitleandanordinarywordmayshare
+thesamesurfaceform,whileaperson’snamecanrefertoseveralpeople. Lexicalmatchingcan
+identify plausible entries without determining which one belongs in the current table. KGLink
+uses the table’s row structure in the next step to provide this disambiguating context. A cell’s
+candidatesetisconsequentlyanintermediateobjectwhosememberscanberemovedwhentheir
+graphrelationsdisagreewithevidencefromothercolumns.
+Numeric and date mentions are handled separately. The reported procedure uses named-
+entity detection to identify these mentions and assigns them a linking score of zero. A failed
+entity lookup also receives a zero linking score. The subsequent model still receives the table
+values, so absence of a graph link does not remove a column from the annotation task. The
+language-model component provides the classification pathway for columns with missing KG
+evidence.
+The experimental implementation retrieves at most ten entities per cell mention. This limit
+bounds the candidate sets that enter the subsequent neighborhood operations. Graph-based fil-
+tering and row ranking select among the retrieved evidence before it reaches the annotation
+model.
+3.3.2 Cross-column Neighborhood Filtering
+Cellsinthesamerowdescriberelatedobjects. Analbumtitlebesideamusician’snamesupplies
+a useful relation that either mention lacks in isolation. KGLink uses this relation by checking
+whether a candidate entity for one cell occurs in the one-hop neighborhood of candidates for
+anothercell inthe samerow. Let𝒩(𝐸) denotethe one-hopneighbors ofa candidate entityset.
+24

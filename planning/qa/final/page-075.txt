@@ -1,0 +1,31 @@
+strings. It permits retrieval to connect different expressions that would otherwise form separate
+nodes. Itsrolediffersfromanextractedrelation: anextractedrelationcomesfromthelanguage
+model’s reading of a chunk, whereas a synonym edge comes from a similarity test. Both affect
+graphconnectivity,andbothremainpartoftheretrievalconditions.
+AGRAGadditionallyintroducesapseudonodelinkedtopassagenodes. Thereportedcostof
+eachpseudoedgeis10. Thisconnectiongivesthegrapharoutebetweenotherwisedisconnected
+portions while penalizing its use relative to semantically relevant factual edges. The pseudo
+connectionisaconnectivitydevice,soitshouldbedistinguishedfromafactualassertioninthe
+sourcecorpuswheninterpretingtheretrievedstructure.
+5.3 Query Mapping and Influence-aware Retrieval
+5.3.1 Mapping a query to triple facts
+At query time, AGRAG first identifies facts that are semantically close to the query. A text
+encoder ℳ maps the query and a textual rendering of each triple to vectors. With 𝐪 = ℳ(𝑞)
+and𝐟 = ℳ(𝑓),themappingscoreis
+MS(𝐪,𝐟) = cos(𝐪,𝐟). (5.5)
+Thehighest-scoring𝑘 factsformtherawmappedsetℱ . Themainsettinguses𝑘 = 5. This
+𝑎 raw 𝑎
+stagelocatescandidatefactsintheindexedgraphbeforegraphpropagationbegins.
+Amodel-basedfilteringstepthenevaluatestherawfactswithrespecttothequery,
+ℱ = LLM(ℱ ,𝑞,𝑝 ). (5.6)
+raw tf
+The filtered set ℱ defines the query anchors. Dense mapping and filtering play different roles.
+Dense mapping produces a short candidate list eﬀiciently. Filtering evaluates the candidates
+jointly with the actual query. The filtering ablation removes the second operation and tests its
+contributiontoanswerqualityandcost.
+The anchors determine where graph retrieval starts. They do not themselves specify the
+complete answer context. Facts connecting or surrounding the mapped set can be useful even
+whentheirdirectsimilaritytothequeryislower. Graphinfluenceprovidesawaytoscorethese
+surroundingitemsusingtheirconnectiontothemappedfacts. Edgecoststhenretainaseparate
+measureofsemanticrelevanceduringsubgraphconstruction.
+61
