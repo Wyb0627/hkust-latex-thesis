@@ -15,21 +15,21 @@ Chapter1 Introduction 1
 1.2.3 Theevidenceinterfaceasadesignchoice 4
 1.3 ResearchQuestions 4
 1.3.1 RQ1: Externalknowledgefortableunderstanding 4
-1.3.2 RQ2: Evidencemaintenanceunderevolvinglabels 5
+1.3.2 RQ2: Evidencemaintenanceunderevolvinglabels 4
 1.3.3 RQ3: Connectedevidencefortextualgeneration 5
 1.3.4 RQ4: Semantic matching and computation over multimodal
-evidence 6
+evidence 5
 1.4 ContributionsandEvidence 6
-1.5 PublicationsandThesisOrganization 8
+1.5 PublicationsandThesisOrganization 7
 Chapter2 BackgroundandRelatedWork 9
 2.1 KnowledgeGraphsandLanguageModels 9
 2.2 Knowledge-enhancedTableUnderstanding 10
-2.3 Retrieval-augmentedGeneration 12
+2.3 Retrieval-augmentedGeneration 11
 2.4 Graph-basedEvidenceRetrieval 13
 2.5 MultimodalRetrievalandContextServing 15
 2.6 StructuralInformationinHyper-relationalKnowledgeGraphs 16
-2.6.1 Facts,Qualifiers,andDecomposition 17
+2.6.1 Facts,Qualifiers,andDecomposition 16
 2.6.2 QualifierCaptureandGraphReception 18
-2.6.3 RepresentativePublishedEvidence 19
-2.7 ResearchQuestionsEmergingfromtheBackground 20
+2.6.3 RepresentativePublishedEvidence 18
+2.7 ResearchQuestionsEmergingfromtheBackground 19
 vi

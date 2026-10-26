@@ -1,0 +1,8 @@
+{
+  "no_numeric_metric_values": true,
+  "no_backbone_configuration": true,
+  "no_rhetorical_colons": true,
+  "no_em_dashes": true,
+  "paragraphs": 3,
+  "raw_word_tokens": 206
+}

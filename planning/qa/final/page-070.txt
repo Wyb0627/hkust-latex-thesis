@@ -1,30 +1,59 @@
-Text: Male feminists always Output:
-end up as sexual predators. Insulting Content
-I
-n
-p
-u
-t
-Steiner Tree
-Feminists
-Generated
-t
-u
-n p LLM
-sexual I
-Insult
-predators
-idiot
-Figure 4.5: A contextual-abuse example and its selected graph connections. Reproduced from
-Figure5ofGORAG[2].
-conditionidentifiesaconcretecomponentorevaluationchoicethataffectsthereportedclassifi-
-cationresult.
-Within these conditions, the study shows how a task graph can reduce the label-selection
-burden placed on a language model and maintain lexical evidence as the task evolves. The
-contribution differs from KGLink’s use of an existing knowledge graph to enrich table repre-
-sentations. Here the structure is built and updated from task data, and its immediate output
-is a query-specific label set. The next chapter turns from choosing among labels to selecting
-connected textual facts for an open-ended answer. That change requires a retrieval objective
-that accounts for the relevance and connection cost of evidence beyond a fixed classification
-vocabulary.
+Stage1:Data Stage3:HybridRetrieval
+Preparation TextChunks
+Corpus
+Cryptocurrency
+Fraudsrequirenew
+lawsto… LLM OutputAnswer
+User Query
+Toprevent Howtoprevent
+cryptocurrency
+cryptocurrencyfraud?
+fraud…
+Triplet Facts
+Stage2:GraphRetrieval MCMISubgraph
+( … fraud,require,law) KG cryptocurrency WeightedKG cryptocurrency cryptocurrency
+s=0.6
+law require target s l = a 0 w .4 re c q = u 0. i 9 re target fraud IPverification
+c=0.3 Law
+fraud fraud enforcement
+s=0.7
+AIdetection
+Extraction Ent./Rel.
+BM25Encoding HRChunks
+Chunking TextStore Hybrid
+Encode
+Retrieval
+VectorEncoding
+TextStore
+Generate Construct Weighting
+MCMI
+Figure 5.1: The AGRAG pipeline. The original figure separates corpus preparation, query-
+conditioned graph retrieval, and hybrid passage retrieval. Reproduced from Figure 1 of the
+sourcepaper[3].
+pipelines. Languagemodelsremaininvolvedinrelationextraction,filteringrawmappedtriples,
+andgeneratinganswers. Theentity-extractionablationchangesthenodessuppliedtosubsequent
+relationextractionandretrieval.
+5.2.2 Chunking and statistical entity extraction
+Thecorpusissplitintooverlappingtextchunks,
+𝒯 = Split(𝒯,𝑙 ,𝑙 ), (5.1)
+𝑐 𝑡 𝑜
+where 𝑙 is the chunk length and 𝑙 is the overlap. The reported main setting uses 256 tokens
+𝑡 𝑜
+per chunk and an overlap of 32 tokens. Overlap allows adjacent chunks to share text at their
+boundaries;thegraphsubsequentlyconnectschunksthroughtheentitiestheycontain.
+AGRAG considers words and phrases up to a maximum n-gram length 𝑏. For a candidate
+term𝑣inchunk𝑡,theextractionrulemodifiesTF–IDF[37]todefinethescore
+count(𝑣,𝑡) |𝒯 |+1
+𝑐
+ER(𝑣,𝑡) = log . (5.2)
+|𝑡|log(|𝒯
+𝑐
+|+1) |{𝑡
+𝑗
+∈ 𝒯
+𝑐
+∶ 𝑣 ∈ 𝑡
+𝑗
+}|+1
+Thefirstfactordependsonwithin-chunkfrequencyandlength. Theseconddistinguishesterms
 56

@@ -1,6 +1,6 @@
 # Structural Augmented Reasoning for Language Models
 
-English HKUST CSE PhD thesis by Yubo Wang. The complete manuscript contains Introduction, Background (including the separate CIKM hyper-relational study), KGLink, GORAG, AGRAG, MGRAG, Discussion, and Conclusion. Main entry: `main.tex`. Reading copy: `thesis.pdf`.
+English HKUST CSE PhD thesis by Yubo Wang. The complete manuscript contains Introduction, Background (including the separate CIKM hyper-relational study), KGLink, GORAG, AGRAG, MGRAG, Discussion, and Conclusion. Main entry: `main.tex`. The existing reading copy `thesis.pdf` predates the latest full-thesis prose revision; see the current compilation state below.
 
 ## Build
 
@@ -27,13 +27,16 @@ The adopted class is HKFoggyU v0.11.6, pinned to release commit `1a9230d`, under
 - `planning/CHAPTER_COUNTS.md`: narrative/caption/heading words and actual PDF page ranges.
 - `planning/EVIDENCE_SUMMARY.md`: version authority, source checks and known source discrepancies.
 - `planning/verification-{kglink,gorag,agrag,mgrag,background}.md`: detailed evidence records.
-- `planning/STYLE_AUDIT.md`: whole-manuscript defensive-writing audit.
+- `planning/STYLE_AUDIT.md`: current whole-manuscript writing audit.
+- `planning/review-sun-style-2026-10-27/REVIEW.md`: latest reference-led style revision, exact edits and compiler diagnostics.
 - `planning/FINAL_QA.md`: final compilation, typography and actual-PDF checks.
-- `planning/review-round2/REVIEW_SUMMARY.md`: independent full-manuscript review, source corrections, and before/after verification.
+- `planning/review-round2/REVIEW_SUMMARY.md`: earlier independent full-manuscript review and source corrections.
+- `planning/review-style-2026-10-27/REVIEW.md`: defensive-writing and punctuation review with exact edits.
+- `planning/review-style-2026-10-27/ABSTRACT_REVISION.md`: latest abstract revision and HKUST CSE abstract comparisons.
 - `planning/AUTHOR_ACTIONS.md`: the remaining author/institutional information.
 
 Twenty-seven research graphics are original source files with recorded hashes. Table values preserve the selected papers' precision, units, missing markers and experimental settings. No new experiment or replacement experimental graphic is included.
 
 The manuscript is complete for author and supervisor review. The unfilled signature date and department-head field must be completed from real information; signatures and institutional approval are outside the manuscript build. The title-page numeral follows the visible official sample pending departmental clarification. Source-internal theory discrepancies and an unreported MGRAG experimental recomputation budget are documented rather than silently repaired.
 
-The current portable bundle is `deliverables/thesis-project-2026-10-25.zip`. Round two removes repeated explanations; the accepted manuscript has 133 pages, 27,843 narrative words and 29,785 words including headings/captions. This is below the initial working word range; the plan permits a shorter complete manuscript without filler. Exact chapter counts and remaining author information are in the records above.
+The latest Sun-reference style pass applies 198 prose edits across all eight chapters. Current sources have 19,975 narrative words, 21,917 words including headings/captions, and a 206-word abstract. The built-in compiler fails when invoking Biber, so no updated PDF export or current pagination is certified. `thesis.pdf` remains the previous 128-page abstract-revision export. Exact changes and checks are in `planning/review-sun-style-2026-10-27/REVIEW.md`; the October 25 portable ZIP is an older snapshot.

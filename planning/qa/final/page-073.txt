@@ -1,61 +1,41 @@
-Stage1:Data Stage3:HybridRetrieval
-Preparation TextChunks
-Corpus
-Cryptocurrency
-Fraudsrequirenew
-lawsto… LLM OutputAnswer
-User Query
-Toprevent Howtoprevent
-cryptocurrency
-cryptocurrencyfraud?
-fraud…
-Triplet Facts
-Stage2:GraphRetrieval MCMISubgraph
-( … fraud,require,law) KG cryptocurrency WeightedKG cryptocurrency cryptocurrency
-s=0.6
-law require target s l = a 0 w .4 re c q = u 0. i 9 re target fraud IPverification
-c=0.3 Law
-fraud fraud enforcement
-s=0.7
-AIdetection
-Extraction Ent./Rel.
-BM25Encoding HRChunks
-Chunking TextStore Hybrid
-Encode
-Retrieval
-VectorEncoding
-TextStore
-Generate Construct Weighting
-MCMI
-Figure 5.1: The AGRAG pipeline. The original figure separates corpus preparation, query-
-conditioned graph retrieval, and hybrid passage retrieval. Reproduced from Figure 1 of the
-sourcepaper[3].
-identifieswhichcostsarisefrompreparingthecorpusandwhichrecurforeachquery.
-The statistical component replaces the entity extraction step used in the compared graph
-pipelines. Languagemodelsremaininvolvedinrelationextraction,filteringrawmappedtriples,
-andgeneratinganswers. Theentity-extractionablationchangesthenodessuppliedtosubsequent
-relationextractionandretrieval.
-5.2.2 Chunking and statistical entity extraction
-Thecorpusissplitintooverlappingtextchunks,
-𝒯 = Split(𝒯,𝑙 ,𝑙 ), (5.1)
-𝑐 𝑡 𝑜
-where 𝑙 is the chunk length and 𝑙 is the overlap. The reported main setting uses 256 tokens
-𝑡 𝑜
-per chunk and an overlap of 32 tokens. Overlap allows adjacent chunks to share text at their
-boundaries;thegraphsubsequentlyconnectschunksthroughtheentitiestheycontain.
-AGRAG considers words and phrases up to a maximum n-gram length 𝑏. For a candidate
-term𝑣inchunk𝑡,theextractionrulemodifiesTF–IDF[37]todefinethescore
-count(𝑣,𝑡) |𝒯 |+1
-𝑐
-ER(𝑣,𝑡) = log . (5.2)
-|𝑡|log(|𝒯
-𝑐
-|+1) |{𝑡
-𝑗
-∈ 𝒯
-𝑐
-∶ 𝑣 ∈ 𝑡
-𝑗
-}|+1
-Thefirstfactordependsonwithin-chunkfrequencyandlength. Theseconddistinguishesterms
+5.3.2 Node influence and edge costs
+AGRAG uses a personalized PageRank-style propagation [44] to assign query-dependent influ-
+encescores,
+𝐬 = lim 𝐬(𝑖), 𝐬(𝑖) = (1−𝑑)𝐩+𝑑𝐏𝐬(𝑖−1). (5.7)
+𝑖→∞
+Here 𝐩 is determined by nodes associated with the filtered mapped facts, and 𝐏 is the graph
+propagation matrix specified in the source. The reported setting uses 𝑑 = 0.5 and stops the
+iteration when the change is below 10−7. The score of a node 𝑣 is 𝑠 = 𝐬[𝑣]. Passage-node
+𝑣
+scoresaremultipliedby0.05tobalancetheircontributionrelativetoentitynodes.
+The personalization vector assigns one to nodes participating in the mapped facts and zero
+totheothernodes. Thegraphoperatorisspecifiedby
+⎧1/|𝒩(𝑢)|, (𝑢,𝑣) ∈ ℰ,
+⎪
+𝐏[𝑢][𝑣] = (5.8)
+⎨
+⎪1/|𝒱|, otherwise.
+⎩
+Nonadjacent node pairs receive the constant term in this operator. The recurrence uses this
+matrixwiththedampingvalueinEquation5.7,followedbypassage-nodescaling.
+The node score is computed before neighborhood expansion. Consequently, a candidate’s
+influence refers to its position in the indexed graph under the query anchors. The subgraph
+selectionprocedureusestheseassignedscoresasitchangeswhichedgesandnodesareincluded.
+This distinction separates propagation over the evidence source from expansion of the context
+returned to the model. The former establishes a score landscape; the latter selects an evidence
+structureusingthatlandscapeandthesemanticedgecosts.
+Influence and direct similarity answer different retrieval questions. Similarity asks how
+closely a triple’s wording corresponds to the query. Influence additionally depends on graph
+connectivity to query anchors. A node can receive influence through connections to several
+mapped facts. The subgraph selection stage uses these scores alongside edge costs so that the
+retrievaldecisionreflectsbothkindsofinformation.
+Foranedge𝑒 = (𝑢,𝑣)associatedwithfact𝑓 ,AGRAGdefines
+𝑒
+1−MS(𝐪,𝐟 )
+𝑒
+𝑐 = . (5.9)
+𝑒
+2
+Higher semantic similarity gives a lower factual edge cost. The influence score is attached to
+nodes,whilethesimilaritycostisattachedtoedges. Keepingthesequantitiesseparateallowsthe
 59

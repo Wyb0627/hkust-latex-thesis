@@ -1,70 +1,76 @@
-0.1 0.3 0.5 0.7
-Threshold
-b
-marg-N
-xaM
-7
-5
-3
-1
-Creative Gen. Contextual Sum. Complex Rea. Fact Retrieval
-0.42
-0.34
-0.1 0.3 0.5 0.7 0.1 0.3 0.5 0.7 0.1 0.3 0.5 0.7
-Threshold Threshold Threshold
-CCA
-0.68
-0.64
-CCA
-0.49
-0.47
-CCA
-0.51
-0.48
-CCA
-0.1 0.3 0.5 0.7
-Threshold
-b
-marg-N
-xaM
-7
-5
-3
-1
-Creative Gen. Contextual Sum. Complex Rea. Fact Retrieval
-0.63
-0.58
-0.1 0.3 0.5 0.7 0.1 0.3 0.5 0.7 0.1 0.3 0.5 0.7
-Threshold Threshold Threshold
-CCA
-0.61
-0.58
-CCA
-0.67
-0.64
-CCA
-0.63
-0.61
-CCA
-Figure 5.3: AGRAG parameter sensitivity on Novel (top) and Medical (bottom). The original
-panels vary the extraction threshold and maximum n-gram length and display task accuracy.
-ReproducedfromFigure3ofthesourcepaper[3].
-Theexperimentaldistinctionbetweenfaithfulnessandcoverageisespeciallyrelevantto the
-thesis. Removinghybridcontextcanretainorimproveonegroundingmeasurewhiledecreasing
-theamountofrequiredevidenceexpressedinananswer. Replacingtheexpandedsubgraphwith
-atreeaffectstheevaluatedtasksdifferently. Theseobservationsrelatetheretrievalrepresentation
-to specific answer requirements instead of treating a graph as a universal improvement over a
-passagelist.
-The remaining conditions concern the evidence source and the language-model interface.
-Relations are model-extracted, query anchors are model-filtered, and several QA metrics use
-modelassessment. Statisticalentityselectionconstrainsentitystringstothecorpus,butrelation
-qualityandevaluationremainimportanttotheinterpretationofthereportedscores. Acomplete
-application must also account for corpus preparation, online retrieval, and answer generation
-separately.
-Thechapteranswersthethirdresearchquestionbydevelopingapipelinethatcombinesnode
-influence, semantic edge costs, connected evidence selection, and hybrid passage context. The
-published experiments identify its effects across fact retrieval, complex reasoning, summariza-
-tion, creative generation, and classification. Chapter 6 adds multimodal evidence and asks how
-a query graph can match semantically corresponding paths even when the query and evidence
-graphshavedifferenttopologies.
+Step1:Coarse-grainedRanking Step2:Fine-grainedRetrieval Step3:Graph-Aware KV Caching
+c
+𝜙𝑡 =∑|
+$
+&
+'
+|
+(
+𝑎#$+∑|
+)
+*
+'
+|
+(
+𝑎#)+𝐺𝐹#
+a KVCache
+Source b h
+MMDocs. ImageCaptions g 𝜙𝑡 notintop𝑏%,
+f
+Iterative&Adaptive a Serialization KVreuse
+GraphConstruction b
+E
+C
+nc
+h
+o
+u
+d
+n
+i
+k
+ng
+Rank RankedMMChunks Query K S G pecific
+M
+c
+atched
+h GraphSeq.𝑆+
+Subgraph𝑟 LLM
+c
+a
+b d Path-basedSubgraph
+]
+e Matching
+MMChunks
+QueryGraph
+⊕ 𝑃!" →{ℎ}
+InputQuery𝑞
+Figure6.2: TheMGRAGpipeline. Rankedchunkssupportincrementalquery-awaregraphcon-
+struction and path-based matching. The matched graph also supplies features for selective KV
+recomputation. OriginalFigure2,p.2484[4].
+stoppingdecisioninthemiddlestageconnectsranking,graphconstruction,andmatching. Each
+additionalchunkcanchangewhetherthegraphcontainsasuitablecorrespondence.
+Two graphs serve different purposes. The query graph 𝒬𝒢 = (𝒱̂,ℰ̂) describes the enti-
+𝑞 𝑞 𝑞
+tiesandrelationsrequestedby𝑞,includingplaceholdersforunknowninformation. Theevidence
+graph 𝒦𝒢 = (𝒱 ,ℰ ) contains facts extracted from the chunks considered for that query. A
+𝑞 𝑞 𝑞
+mappingconnectsqueryentitiestoevidenceentities. Pathsbetweenthemappedendpointssup-
+plycandidateevidenceforthequeryrelations.
+For generation, MGRAG uses the graph sequence 𝑆 , the original chunks 𝒞 consumed
+𝑟 𝑞
+during construction, and the query 𝑞. Keeping the chunks preserves access to text and visual
+evidencebeyondtheextractedtriples. Theiridentityalsolinkstheselectedgraphtothematerial
+originally ranked and processed during construction. The graph gives the generator an explicit
+selection of relational content, while the source chunks provide the material from which the
+selection was made. The final multimodal context retains the original images alongside their
+extractedrelationalrepresentation.
+6.3 Coarse-grained Ranking
+MGRAG first divides textual documents into overlapping chunks. The published setting uses a
+chunk length 𝑙 = 256 tokens and overlap 𝑙 = 32 tokens. Images form the other members of
+𝑐 𝑜
+the chunk collection, giving 𝒞 = 𝒯 ∪𝒟 , where 𝒯 denotes the text chunks. This collection
+img
+is the input to the coarse retrieval stage. Ranking identifies the order in which content will be
+examined,ratherthandirectlydefiningthefinalgraphcontext.
 78

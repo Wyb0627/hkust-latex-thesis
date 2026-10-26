@@ -1,32 +1,33 @@
-Table6.2(continued)
-Dataset Metric Vanilla. R1. Graph. Light. Hippo. MGRAG
-Wiki SIM. 0.8824 0.5478 0.6966 0.7517 0.8204 0.8838
-Wiki ACC. 0.7800 0.3567 0.2000 0.3660 0.6500 0.7845
-Wiki ROG. 0.3559 0.1418 0.1361 0.2008 0.3042 0.3579
-Wiki BLEU 0.3053 0.1146 0.1007 0.1863 0.1851 0.3174
-Wit SIM. 0.7851 0.6110 0.6211 0.6973 0.7230 0.8033
-Wit ACC. 0.6675 0.6017 0.1500 0.2483 0.5138 0.6967
-Wit ROG. 0.3255 0.1307 0.1319 0.2416 0.2712 0.3589
-Wit BLEU 0.2095 0.0934 0.1142 0.1928 0.1200 0.2382
-Recipe SIM. 0.8599 0.6155 0.8166 0.8118 0.7792 0.8673
-Recipe ACC. 0.6525 0.2180 0.2771 0.3334 0.4917 0.6814
-Recipe ROG. 0.3714 0.1065 0.1745 0.2128 0.3303 0.4220
-Recipe BLEU 0.2599 0.0773 0.1527 0.1648 0.1941 0.3102
-The advantage over the strongest baseline varies by dataset and metric. On Wiki, accuracy
-is0.7845forMGRAGand0.7800forVanillaRAG,whiletheirsemanticsimilaritiesare0.8838
-and0.8824. OnWeb,thecorrespondingaccuraciesare0.5123and0.4703. OnRecipe,MGRAG
-reportsROUGE-Lof0.4220comparedwith0.3714forVanillaRAG.
-Several graph-based baselines score below VanillaRAG in this multimodal protocol. For
-example, on Manual, GraphRAG, LightRAG, and HippoRAG2 report accuracies of 0.1436,
-0.4096, and 0.2641, compared with VanillaRAG’s 0.5881. The presence of a graph by itself
-therefore does not predict the ranking in this table. MGRAG’s results concern its specific con-
-struction,matching,andcontext-processingdesign. Thesubstitutionsbelowhelpidentifywhich
-partscontributeunderthesameevaluationframework.
-6.9.2 Construction and matching substitutions
-Table 6.3 reorganizes every value from the published graph-construction and matching com-
-parison. Stanford OpenIE [64] and the statistical extraction alternative STAT replace the con-
-struction mechanism. VF2 and ISMAGS [58, 65] provide exact-matching alternatives. SM,
-VJ, RRWM, and IPFP represent approximate graph matching [66–69]. BGE, SLOTAlign, and
-FGWAlignsupplysemanticalternatives[57,70,71]. Thetablepreservesthepublication’sthree-
-decimalprecisionforthisexperiment.
+On MMQA, the full method reports accuracy 0.744, compared with 0.571 for OpenIE and
+0.602forSTAT.Thesesubstitutionschangetheavailableextractedevidence. Theirlowerscores
+establishtheimportanceoftheevaluatedconstructionchoiceforthissetting.
+AmongMMQAmatchingalternatives,VF2reachesaccuracy0.735,whileMGRAGreaches
+0.744. VF2alsohasROUGE-Lof0.673comparedwith0.676. OnWeb,BGEreachesaccuracy
+0.510 and MGRAG 0.512. On Wiki, ISMAGS reaches 0.754 and MGRAG 0.785. MGRAG
+leadsthedisplayedmetricrows,withsmallerMMQAandWebaccuracymarginsthantheWiki
+accuracymargin.
+6.9.3 Queries requiring multiple hops
+Table 6.4 reports results grouped by MRAMG query-hop count. For one-hop questions, Vanil-
+laRAG reports accuracy 0.613 and MGRAG 0.624. For six-hop questions, the reported values
+are 0.661 and 0.738. MGRAG also reports higher ROUGE-L and BLEU-1 for each hop group.
+VanillaRAGisfasterineveryhopgroup. Theone-hoptimesare0.13and0.35minutes,andthe
+six-hoptimesare0.18and0.43minutes.
+Table 6.4: Results by query hop count, reorganized from published Table 8, p. 2490 [4]. Time
+isinminutes,asreported. Eachoriginalrowisshownastwomethodrows,withthequerycount
+repeated.
+Hops Queries Method Time ACC. ROG. BLEU
+1-hop 201 VanillaRAG 0.13 0.613 0.379 0.240
+1-hop 201 MGRAG 0.35 0.624 0.425 0.286
+2-hop 1,237 VanillaRAG 0.10 0.588 0.304 0.193
+2-hop 1,237 MGRAG 0.37 0.601 0.335 0.230
+3-hop 2,357 VanillaRAG 0.16 0.633 0.329 0.238
+3-hop 2,357 MGRAG 0.41 0.659 0.355 0.260
+4-hop 499 VanillaRAG 0.19 0.697 0.338 0.259
+4-hop 499 MGRAG 0.44 0.712 0.373 0.293
+5-hop 286 VanillaRAG 0.18 0.678 0.319 0.205
+5-hop 286 MGRAG 0.45 0.733 0.392 0.282
+6-hop 220 VanillaRAG 0.18 0.661 0.305 0.176
+6-hop 220 MGRAG 0.43 0.738 0.377 0.249
+The six-hop group contains 220 queries, whereas the three-hop group contains 2,357. The
+comparisonshowsalargeraccuracygaponthelongest-hopgroupthanontheshortest-hopgroup,
 95

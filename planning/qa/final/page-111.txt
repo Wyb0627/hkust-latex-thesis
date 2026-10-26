@@ -1,35 +1,32 @@
-Table6.3(continued)
-Dataset Method SIM. ACC. ROG. BLEU
-Manual RRWM 0.811 0.614 0.377 0.303
-Manual IPFP 0.800 0.594 0.369 0.289
-Manual BGE 0.815 0.615 0.375 0.303
-Manual SLOT 0.813 0.611 0.375 0.301
-Manual FGW 0.820 0.600 0.374 0.292
-Manual MGRAG 0.822 0.617 0.384 0.309
-Web O.IE 0.466 0.290 0.052 0.020
-Web STAT 0.485 0.298 0.101 0.095
-Web VF2 0.677 0.507 0.156 0.088
-Web ISMAGS 0.675 0.509 0.155 0.079
-Web SM 0.676 0.507 0.156 0.056
-Web VJ 0.679 0.508 0.160 0.056
-Web RRWM 0.675 0.503 0.157 0.066
-Web IPFP 0.666 0.493 0.149 0.055
-Web BGE 0.687 0.510 0.156 0.095
-Web SLOT 0.676 0.498 0.154 0.116
-Web FGW 0.676 0.480 0.147 0.096
-Web MGRAG 0.701 0.512 0.166 0.146
-Wiki O.IE 0.504 0.498 0.230 0.200
-Wiki STAT 0.525 0.510 0.253 0.218
-Wiki VF2 0.877 0.752 0.352 0.300
-Wiki ISMAGS 0.879 0.754 0.355 0.303
-Wiki SM 0.878 0.750 0.353 0.298
-Wiki VJ 0.873 0.751 0.349 0.297
-Wiki RRWM 0.878 0.743 0.355 0.301
-Wiki IPFP 0.869 0.735 0.348 0.296
-Wiki BGE 0.878 0.746 0.355 0.301
-Wiki SLOT 0.879 0.749 0.356 0.301
-Wiki FGW 0.878 0.747 0.352 0.300
-Wiki MGRAG 0.884 0.785 0.358 0.317
-Wit O.IE 0.492 0.465 0.233 0.210
-Wit STAT 0.489 0.453 0.205 0.198
+3,085and1,431,withend-to-endtokenentry4,516. Thelistedmoduletimesdonotsumtothe
+reportedend-to-endtotal;thepublicationdoesnotreconcilethedifferenceinthisbreakdown.
+Table 6.6: Module costs reproduced from published Table 5, p. 2489 [4]. Time is in minutes.
+KGC,QA,andE2Ecellsretainthepublishedtime/tokenpairsforgraphconstruction,answering,
+and end-to-end processing. Match denotes matching time. Token counts and E2E totals are
+preservedasreported.
+Dataset Queries KGC Match QA E2E
+MMQA 951 193.0/3,085 0.14 8.9/1,431 248.1/4,516
+Arxiv 200 61.9/3,946 0.23 16.2/2,944 83.9/6,890
+Manual 390 76.1/4,285 0.04 23.9/2,556 109.7/6,841
+Web 750 143.8/4,623 0.27 42.9/3,101 196.5/7,723
+Wiki 500 164.2/6,629 0.30 52.1/6,267 241.5/12,896
+Wit 600 140.6/7,660 0.21 42.6/6,539 196.5/14,199
+Recipe 2,360 525.7/4,351 1.74 191.3/3,173 808.7/7,525
+Graphconstructionisthelargestlistedtimecomponentonallsevendatasets. Recipereports
+525.7 minutes for construction, 1.74 for matching, and 191.3 for answering, with end-to-end
+time 808.7 minutes. On the smaller Arxiv query set, the corresponding values are 61.9, 0.23,
+and 16.2 minutes, with end-to-end time 83.9. These measurements locate repeated extraction
+calls as a substantial cost within the evaluated pipeline, even though graph matching has an
+exponentialworst-casebound.
+The distinction between computational bounds and measured module costs is useful here.
+The graphs are built from query-selected evidence, so the matcher processes small instances in
+these experiments. Construction invokes the multimodal model on the selected chunks. Re-
+ducing the number of extracted chunks or the cost of each extraction could therefore affect the
+observedruntimesubstantially.
+6.11 Ablations and Parameter Sensitivity
+6.11.1 Component ablations
+The MMQA ablations in Table 6.7 change matching, coarse encoding, and pipeline composi-
+tion. Removing graph matching constructs the query-specific graph from a fixed number of
+chunks and reports accuracy 0.7260, compared with 0.7442 for MGRAG. Replacing caption-
+based coarse ranking with direct CLIP encoding [72] reports accuracy 0.7376. The Vanilla
 97

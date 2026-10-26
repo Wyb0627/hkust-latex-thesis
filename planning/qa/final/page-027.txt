@@ -1,17 +1,7 @@
-Anevolvingcollectionaddsamaintenanceproblem. Newlyavailabledocuments,examples,
-or labels must enter the index before retrieval can use them. Updating stored evidence can in-
-volve new embeddings, new graph nodes, changed edge weights, or derived summaries. The
-information supplied by an update also matters. A labeled support example carries a provided
-class, while a query processed online may carry only a model prediction. GORAG makes this
-distinction part of its dynamic classification protocol [2]. Its index expands as observations
-arrive,andretrievalusesthegraphstateavailableatthecurrentprediction.
-Context budgets also affect comparison between retrieval procedures. Returning more pas-
 sages can increase coverage and processing cost at the same time, while changing their orga-
 nization can alter repetition or access to supporting relationships. An experiment that fixes a
 generator and corpus can still change the information supplied to that generator through its re-
-trievalbudget. Thestudiesintheresearchchaptersreporttheiractualretrievallimitsandgener-
-ation inputs, alongside task-specific scores. These conditions specify the evidence available for
-apredictionandthecomputationalsettinginwhichitsqualitywasmeasured.
+trievalbudget.
 This view of RAG separates the update unit, the retrieval unit, and the context supplied to
 themodel. Theycanbedifferentobjects. Adocumentcancontributeseveralgraphfacts;graph
 traversal can return a label set; and the final prompt can include both selected structures and
@@ -30,4 +20,14 @@ ofacorpus’sthemesratherthanonelocalfact. Community-leveldescriptionsprovideare
 andsummarizationunitaboveindividualpassages. Thisdiffersfromreturningtheneighborsof
 asinglementionedentity. Thegraphalsosupportsthepreparationofderivedtextualsummaries
 thatcanlaterenterquestionanswering.
+HippoRAG combines language-model extraction, a knowledge graph, and personalized
+PageRank for retrieval [18]. Query-related entities seed a graph process whose scores depend
+on connectivity. A node can therefore receive retrieval influence through paths from the initial
+query representation. Personalized propagation introduces a query-dependent ranking over
+the index. It is distinct from a rule requiring every returned item to connect a specified set of
+terminalsinoneselectedsubgraph.
+LightRAG integrates graph structures with vector representations and uses retrieval at low
+and high levels [19]. Its design distinguishes more specific entity-oriented information from
+broader relational or conceptual information and includes incremental index updates. These
+mechanisms address the representation and maintenance of a graph retrieval source. The gran-
 13

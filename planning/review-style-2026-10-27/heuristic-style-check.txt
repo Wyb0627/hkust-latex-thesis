@@ -1,0 +1,191 @@
+======================================================================
+DE-AI WRITING TRACE ANALYSIS REPORT (Enhanced)
+======================================================================
+File: main.tex
+Total lines: 2744
+
+----------------------------------------------------------------------
+PRIORITY RANKING
+----------------------------------------------------------------------
+1. discussion_4: 18.2% (2 traces)
+2. discussion_3: 15.4% (2 traces)
+3. method_3: 6.2% (1 traces)
+4. result: 2.9% (4 traces)
+5. discussion_5: 1.9% (2 traces)
+6. experiment: 1.8% (3 traces)
+7. experiment_3: 1.5% (7 traces)
+8. introduction: 0.8% (1 traces)
+
+----------------------------------------------------------------------
+DETAILED TRACE LISTING
+----------------------------------------------------------------------
+
+INTRODUCTION:
+  chapter/ch01-introduction.tex:10 [overclaim]
+    The first setting is column type annotation. Consider a column of people accompa
+    -> Suggestion: Causal wording: use 'associated with / linked to' unless an intervention supports causation (see over-claim-guard).
+
+EXPERIMENT:
+  chapter/ch03-kglink.tex:362 [overclaim]
+    Table~  evaluates row ordering. The linkage-ranked filter gives higher reported 
+    -> Suggestion: Causal wording: use 'associated with / linked to' unless an intervention supports causation (see over-claim-guard).
+  chapter/ch03-kglink.tex:275 [tense]
+    Doduo provides a useful comparison for the language-model pathway because KGLink
+    -> Suggestion: Methods/Results narrate the study in past tense; change present-tense reporting verbs (e.g. 'shows' -> 'showed') unless the subject is a figure/table.
+  chapter/ch03-kglink.tex:332 [tense]
+    Table~  shows that KGLink still performs the annotation task in this condition. 
+    -> Suggestion: Methods/Results narrate the study in past tense; change present-tense reporting verbs (e.g. 'shows' -> 'showed') unless the subject is a figure/table.
+
+RESULT:
+  chapter/tables/gorag-main-tables.tex:2 [burstiness]
+    3 consecutive paragraphs open with 'begin table'
+    -> Suggestion: Vary the opening syntax across consecutive paragraphs.
+  chapter/tables/gorag-main-tables.tex:22 [burstiness]
+    3 consecutive paragraphs open with 'begin table'
+    -> Suggestion: Vary the opening syntax across consecutive paragraphs.
+  chapter/tables/gorag-main-tables.tex:42 [burstiness]
+    3 consecutive paragraphs open with 'begin table'
+    -> Suggestion: Vary the opening syntax across consecutive paragraphs.
+  chapter/tables/gorag-main-tables.tex:62 [burstiness]
+    3 consecutive paragraphs open with 'begin table'
+    -> Suggestion: Vary the opening syntax across consecutive paragraphs.
+
+EXPERIMENT_3:
+  chapter/ch05-agrag.tex:247 [vague_referent]
+    On Medical creative generation, AGRAG reports faithfulness 0.356, accuracy 0.598
+    -> Suggestion: Replace the vague referent with the exact research object, method, result, factor, or limitation.
+  chapter/tables/agrag-main-creative.tex:1 [burstiness]
+    3 consecutive paragraphs open with 'begin table'
+    -> Suggestion: Vary the opening syntax across consecutive paragraphs.
+  chapter/tables/agrag-main-summary.tex:1 [burstiness]
+    3 consecutive paragraphs open with 'begin table'
+    -> Suggestion: Vary the opening syntax across consecutive paragraphs.
+  chapter/tables/agrag-main-complex.tex:1 [burstiness]
+    3 consecutive paragraphs open with 'begin table'
+    -> Suggestion: Vary the opening syntax across consecutive paragraphs.
+  chapter/ch05-agrag.tex:226 [tense]
+    Let   denote the reference evidence items and let   indicate whether response   
+    -> Suggestion: Methods/Results narrate the study in past tense; change present-tense reporting verbs (e.g. 'shows' -> 'showed') unless the subject is a figure/table.
+  chapter/ch05-agrag.tex:231 [tense]
+    For the answer's claim set   and retrieved context  , let   indicate that claim 
+    -> Suggestion: Methods/Results narrate the study in past tense; change present-tense reporting verbs (e.g. 'shows' -> 'showed') unless the subject is a figure/table.
+  chapter/ch05-agrag.tex:257 [tense]
+    Table~  separates indexing time, querying time, input tokens, and output tokens.
+    -> Suggestion: Methods/Results narrate the study in past tense; change present-tense reporting verbs (e.g. 'shows' -> 'showed') unless the subject is a figure/table.
+
+DISCUSSION_3:
+  chapter/ch05-agrag.tex:298 [overclaim]
+    AGRAG places structure at two points in the evidence pipeline. Graph constructio
+    -> Suggestion: Causal wording: use 'associated with / linked to' unless an intervention supports causation (see over-claim-guard).
+  chapter/ch05-agrag.tex:298 [overclaim]
+    AGRAG places structure at two points in the evidence pipeline. Graph constructio
+    -> Suggestion: Causal wording: use 'associated with / linked to' unless an intervention supports causation (see over-claim-guard).
+
+METHOD_3:
+  chapter/ch06-mgrag.tex:31 [overclaim]
+    Figure~  shows three stages. Coarse-grained ranking orders text chunks and image
+    -> Suggestion: Causal wording: use 'associated with / linked to' unless an intervention supports causation (see over-claim-guard).
+
+DISCUSSION_4:
+  chapter/ch06-mgrag.tex:399 [overclaim]
+    MGRAG gives structure three connected responsibilities. Query-aware extraction d
+    -> Suggestion: Causal wording: use 'associated with / linked to' unless an intervention supports causation (see over-claim-guard).
+  chapter/ch06-mgrag.tex:399 [overclaim]
+    MGRAG gives structure three connected responsibilities. Query-aware extraction d
+    -> Suggestion: Causal wording: use 'associated with / linked to' unless an intervention supports causation (see over-claim-guard).
+
+DISCUSSION_5:
+  chapter/ch07-discussion.tex:82 [vague_referent]
+    The hyper-relational study in Chapter~  supplies another perspective on structur
+    -> Suggestion: Replace the vague referent with the exact research object, method, result, factor, or limitation.
+  chapter/ch07-discussion.tex:38 [overclaim]
+    The source of structure determines what can be adapted. KGLink begins with an ex
+    -> Suggestion: Causal wording: use 'associated with / linked to' unless an intervention supports causation (see over-claim-guard).
+
+----------------------------------------------------------------------
+DOCUMENT-LEVEL TRACES
+----------------------------------------------------------------------
+  chapter/ch05-agrag.tex:206 [term_threshold] (experiment_3)
+    'novel' used 49 times (cap 4)
+    -> Suggestion: Reduce repeated use of this word; vary vocabulary or quantify the claim.
+  chapter/ch01-introduction.tex:6 [term_threshold] (introduction)
+    'several' used 40 times (cap 5)
+    -> Suggestion: Reduce repeated use of this word; vary vocabulary or quantify the claim.
+  chapter/ch01-introduction.tex:84 [punctuation] (introduction)
+    \begin{table}[!htbp]
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/ch03-kglink.tex:178 [punctuation] (document)
+    Y=\operatorname{Softmax}\!\left(W_o\frac{H}{\mathcal{T}}\right),
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/ch03-kglink.tex:222 [punctuation] (document)
+    O\!\left(RCE(N+CET)\right).
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/ch04-gorag.tex:156 [punctuation] (document)
+    O\!\left(|\mathcal{Y}^r||\mathcal{Y}^{r-1}|+|\mathcal{V}_{\mathrm{new}}^r||\math
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/tables/agrag-main-creative.tex:6 [punctuation] (experiment_3)
+    \resizebox{\textwidth}{!}{%
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/tables/agrag-main-summary.tex:6 [punctuation] (experiment_3)
+    \resizebox{\textwidth}{!}{%
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/tables/agrag-main-complex.tex:6 [punctuation] (experiment_3)
+    \resizebox{\textwidth}{!}{%
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/tables/agrag-main-fact.tex:6 [punctuation] (experiment_3)
+    \resizebox{\textwidth}{!}{%
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/tables/agrag-main-class.tex:6 [punctuation] (experiment_3)
+    \resizebox{\textwidth}{!}{%
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/tables/agrag-efficiency.tex:6 [punctuation] (experiment_3)
+    \resizebox{\textwidth}{!}{%
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/tables/agrag-efficiency.tex:30 [punctuation] (experiment_3)
+    \resizebox{\textwidth}{!}{%
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/tables/agrag-ablation.tex:6 [punctuation] (experiment_3)
+    \resizebox{\textwidth}{!}{%
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/tables/agrag-ablation.tex:25 [punctuation] (experiment_3)
+    \resizebox{\textwidth}{!}{%
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/tables/agrag-ablation.tex:44 [punctuation] (experiment_3)
+    \resizebox{\textwidth}{!}{%
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/tables/agrag-ablation.tex:63 [punctuation] (experiment_3)
+    \resizebox{\textwidth}{!}{%
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/tables/agrag-ablation.tex:82 [punctuation] (experiment_3)
+    \resizebox{\textwidth}{!}{%
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/tables/agrag-low-resource.tex:6 [punctuation] (experiment_3)
+    \resizebox{\textwidth}{!}{%
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/tables/agrag-low-resource.tex:22 [punctuation] (experiment_3)
+    \resizebox{\textwidth}{!}{%
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/tables/agrag-low-resource.tex:38 [punctuation] (experiment_3)
+    \resizebox{\textwidth}{!}{%
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/tables/agrag-low-resource.tex:54 [punctuation] (experiment_3)
+    \resizebox{\textwidth}{!}{%
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/tables/agrag-low-resource-efficiency.tex:6 [punctuation] (experiment_3)
+    \resizebox{\textwidth}{!}{%
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/tables/agrag-low-resource-efficiency.tex:22 [punctuation] (experiment_3)
+    \resizebox{\textwidth}{!}{%
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/ch05-agrag.tex:288 [punctuation] (experiment_3)
+    \begin{figure}[!htbp]
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/ch06-mgrag.tex:197 [punctuation] (document)
+    \cos\!\left(\mathbf h_P\oplus\mathbf h_{e(x,r,y)}\oplus\mathbf h_y,
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/tables/mgrag-datasets.tex:1 [punctuation] (experiment_4)
+    \begin{table}[!htbp]
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.
+  chapter/tables/mgrag-inverse.tex:1 [punctuation] (document)
+    \begin{table}[!htbp]
+    -> Suggestion: Avoid em-dash overuse and exclamation marks in body sections.

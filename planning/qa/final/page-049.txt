@@ -1,35 +1,30 @@
-Table 3.2: Reported KGLink variant scores. The table reproduces the numeric columns and
-variantnamesoftheoriginalablationtable.
+Table3.4: Reportedcomparisonbetweenlinkage-rankedrowselectionandselectioninoriginal
+tableorder.
 SemTab VizNet
-Variant Accuracy WeightedF1 Accuracy WeightedF1
-KGLink𝑤/𝑜𝑚𝑠𝑘 86.14 84.54 95.95 95.67
-KGLink𝑤/𝑜𝑐𝑡 86.27 84.56 95.83 95.48
-KGLink𝑤/𝑜𝑓𝑣 87.02 85.68 95.98 95.70
-KGLinkDeBERTa 87.24 85.81 96.98 96.37
-KGLink 87.12 85.78 96.28 96.07
-Table 3.3: Reported accuracy on the VizNet test subset whose tables have no extracted KG
-information.
-Model Numericaccuracy Non-numericaccuracy
-KGLink 97.04 90.92
-HNN 44.05 18.37
-TaBERT 96.57 90.27
-Doduo 96.28 89.50
-RECA 96.89 61.54
-Sudowoodo 96.21 67.72
-description. It obtains 87.02 accuracy and 85.68 weighted F1 on SemTab, and 95.98 accuracy
-and 95.70 weighted F1 on VizNet. Candidate types provide the remaining KG input in this
-configuration. Thefullmodelreportshigherscoresonbothdatasets.
-ReplacingBERTwithDeBERTaproducesthefourthvariant[35]. Itobtains87.24/85.81on
-SemTab and 96.98/96.37 on VizNet. The architecture uses the same graph-processing design
-withadifferentencoderinthisexperiment.
-The representation and graph ablations answer related but separate questions. Removing
-the auxiliary task tests its training contribution while retaining graph inputs. Removing both
-KG pathways tests external information while preserving the representation task. The reported
-valuesareaveragesoverthreeruns.
-3.6.4 Annotation without Retrieved Knowledge
-The original study constructs a test subset from VizNet in which the entire table has no KG
-linkage. This condition is stricter than requiring only the target column to lack a link. With
-multi-columnencoding,atargetcolumncanotherwisebenefitfromgraphinformationretrieved
-foritsneighbors. Thesubsetcontains315tablesand612columnsacross26labels,comprising
-556numericcolumnsand56non-numericcolumns.
+Selection Accuracy WeightedF1 Accuracy WeightedF1
+Top-𝑘rowfilter 87.12 85.78 96.28 96.07
+Originaltop-𝑘rows 85.93 84.39 96.14 95.97
+the desired annotation label. The contextual representation task uses the dataset label during
+training to learn how the retrieved descriptions and cell values jointly relate to that label. It
+thereforeaddressesacorrespondencebetweenevidenceandtaskvocabularythatcandidate-type
+retrievalaloneleavesunresolved.
+The Athlete example makes the same issue visible at a broader semantic level. Graph evi-
+dence can identify that the values denote athletes even when the dataset expects another level
+of description. KGLink preserves that evidence as language-model input and lets supervised
+annotationdeterminetheoutputcategory.
+3.6.6 Row Selection and Input Budgets
+Table3.4evaluatesrowordering. Thelinkage-rankedfiltergiveshigherreportedscoresthantak-
+ingtheoriginaltoprowsonbothdatasets. ThechangeislargeronSemTab. Sincethefilteralso
+determinesthecellusedforfeature-sequencegeneration,thiscomparisonconcernsthemethod’s
+complete linkage-based selection rule. It provides evidence that the ordering of available table
+evidencemattersunderthefixedinputconstraints.
+The parameter study considers 𝑘 = 10,25,50, and a condition labeled all. The source de-
+scribesallasretainingatmost64rowsunderitsencodingconfiguration. Thereporteddefaultis
+𝑘 = 25,selectedfromthisstudy. TheoriginalcurvescompareweightedF1andtimecostasthe
+retained row budget changes. Figure 3.6 shows the measured relation between input selection,
+weightedF1,andtimecost.
+The training-data study uses proportions 𝑝 = 0.2,0.4,0.6,0.8,1.0 while keeping the test set
+unchanged. It compares KGLink with the version without the representation-generation task.
+The experiment measures data eﬀiciency by varying available supervision against a fixed eval-
+uationset.
 35

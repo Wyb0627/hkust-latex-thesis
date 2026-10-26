@@ -3,7 +3,7 @@ Subject:         HKFoggyU
 Author:          Yubo Wang
 Creator:         LaTeX with hkustthesis class
 Producer:        xdvipdfmx (20220710)
-CreationDate:    Sun Oct 25 03:27:29 2026 CST
+CreationDate:    Tue Oct 27 00:22:34 2026 CST
 Custom Metadata: no
 Metadata Stream: no
 Tagged:          no
@@ -11,10 +11,10 @@ UserProperties:  no
 Suspects:        no
 Form:            none
 JavaScript:      no
-Pages:           133
+Pages:           128
 Encrypted:       no
 Page size:       595.28 x 841.89 pts (A4)
 Page rot:        0
-File size:       3267587 bytes
+File size:       3248953 bytes
 Optimized:       no
 PDF version:     1.5

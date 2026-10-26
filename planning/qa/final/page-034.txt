@@ -1,20 +1,29 @@
-graphinformationcanmatterbeyondretainingthesameentityandrelationvocabulary. Itscon-
-nection to this thesis is the design question of which relationships remain available to a model
-after evidence transformation. FormerGNN is a separate KG embedding framework; the four
-language-modelsystemsusethestructuresandinterfacesdefinedintheirownchapters.
-2.7 Research Questions Emerging from the Background
-The preceding work identifies several places where structure can influence model inputs. Ta-
-ble understanding needs evidence that matches both the values and the task’s type vocabulary.
-Dynamicclassificationneedsanindexthatincorporatesnewlyavailablelabelinformationandre-
-trievesappropriatealternativesforthecurrenttext. Open-endedtextgenerationneedsaselection
-rule that can organize connected facts and retain their source context. Multimodal generation
-addssemanticmatchingacrossheterogeneousevidenceandthecostofprocessingthatevidence
-asmodelcontext.
-Thefourresearchchaptersaddresstheseconditionsinsequence. Chapter3studiesexternal
-KG evidence and supervised type representations. Chapter 4 studies connected candidate-label
-retrieval and online index updates. Chapter 5 studies influence-aware connected evidence se-
-lection with hybrid passages. Chapter 6 studies query-aware multimodal graph construction,
-semantic path matching, and graph-aware KV recomputation. The hyper-relational study pro-
-videsarelatedanalysisofinformationpreservation. Thesharedconcernishowarepresentation
-exposestask-relevantevidencetothecomputationthatusesit.
+CHAPTER 3
+KNOWLEDGE-ENRICHED TABLE UNDERSTANDING
+WITH KGLINK
+This chapter is based on the published paper KGLink: A Column Type Annotation Method
+thatCombinesKnowledgeGraphandPre-TrainedLanguageModel[1]. Itstudieshowaknowl-
+edge graph can supply information missing from a table and how a pre-trained language model
+can translate that information into the type vocabulary of a particular annotation task. The pre-
+diction target is a column label. Graph evidence enters the model through candidate types and
+aseparatefeaturesequence,whileasupervisedrepresentationtaskconnectstheevidencetothe
+dataset’sannotationscheme.
+3.1 Motivation and Task
+A table often presents entities through short names, abbreviated strings, or numbers. These
+values provide only part of the information needed to identify a column’s semantic type. A
+column containing names of cricket players may appear beside birth and death dates. Those
+dates describe the people but do not specify their occupation. A language model that encodes
+onlythetablereceivesadifferentevidentialbasisfromamodelthatalsohasaccesstorelations
+suchasoccupationandsportinaknowledgegraph. Theannotationproblemthereforeconcerns
+bothinterpretingtheavailabletextandselectingexternalinformationthatclarifiesit.
+External knowledge introduces a second diﬀiculty. The type expected by an annotation
+dataset need not coincide with a type attached to an entity in the graph. A column of bas-
+ketballplayerscanplausiblybedescribedasBasketballplayer,Athlete,orName. Anannotation
+benchmark may use only the last of these labels. Retrieving a factually relevant graph type is
+consequently insuﬀicient to determine the required output label. The model must learn which
+descriptionthetaskexpects. KGLinkreferstothismismatchasthetypegranularitygap. Thegap
+includescaseswherethedesireddatasetlabeldoesnotoccupyaconvenientancestorpositionin
+theretrievedgraph’stypehierarchy.
+These two diﬀiculties give structure distinct roles. Relations between linked entities can
+helpidentifyrelevantknowledge,whilesupervisedlearningcandeterminehowthatknowledge
 20

@@ -1,42 +1,28 @@
-methodtofavorrelevantconnectedinformationwithoutchoosingnodessolelybytheirinfluence
-rank.
-The pseudo edges retain their explicitly assigned penalty. Their role is to provide connec-
-tivity when the semantic graph alone separates the anchors. A path using a pseudo edge can
-therefore be feasible but expensive. The distinction between a low-cost semantic connection
-and a high-cost connectivity connection helps explain how graph connectivity participates in
-evidenceselection.
-5.4 MCMI Formulation and Evidence Expansion
-Let𝒱 containthenodesparticipatinginthemappedfacts. Afeasiblesubgraphcontainsthese
-term
-terminalsandconnectseachterminaltoadesignatedrootterminal. Themainpaperdefinesthe
-MinimumCostMaximumInfluence(MCMI)objectiveas
+Forclassification,theretrievalinterfaceisadaptedtoreturncandidatelabelsassociatedwith
+passages. One training passage per label supplies the indexed corpus. The generator selects
+a label from the retrieved candidate set. This classification index is fixed, whereas GORAG
+updatesitsindexonlineoverlabelroundsinChapter4.
+5.6 Computational Properties
+AGRAG’s work is distributed across corpus indexing and query processing. Statistical extrac-
+tion and passage-link construction operate over the corpus. Query processing includes triple
+mapping, filtering, graph propagation, subgraph selection, hybrid retrieval, and generation.
+Language-model calls contribute to relation extraction during indexing and to filtering and
+answergenerationonline.
+Thesource’sgraph-operationanalysisassigns𝑂(|𝒱||𝒯 |)timetoentityextractionandpas-
 𝑐
-𝑟(𝒢′) = 𝑒 . (5.10)
-∑ 𝑠 +𝑠
-𝑒=(𝑢,𝑣)∈ℰ′ 𝑢 𝑣
-Thecostofanincludededgeisscaledbytheinfluenceofitsendpoints. Theexpressionspecifies
-the reported optimization formulation. The implementation procedure described in the paper
-starts from a terminal-connecting tree and then expands its neighborhood using marginal cost-
-to-scorecomparisons.
-Theinitialstructureconnectsthequery-mappedinformation. Thesourceconstructsanauxil-
-iarygraphontheterminals,usesshortest-pathcostsbetweenthem,selectsatreeonthatauxiliary
-structure,andexpandsitsedgesbacktopathsintheevidencegraph. Thisstagesuppliesconnec-
-tionsamonganchorsinsteadofreturningtheanchorsasanunorderedset. Thedetailedtheorem
-inthemainpaperassignsits2-approximationstatementtothisMCSTconstructionstage.
-Subsequent expansion examines neighboring candidates. A candidate node 𝑣 connected by
-anedgeofcost𝑐 isconsideredthroughtheratio
-(MCMI,𝑣)
-𝑐
-(MCMI,𝑣)
-. (5.11)
-𝑠
-𝑣
-Theprocedureselectsthelowestsuchratioandcomparesitwiththecurrentsubgraph’sreported
-cost-scorequantity. Theacceptanceconditionis
-𝑐
-(MCMI,𝑣)
-< 𝑟(𝒢 ). (5.12)
-MCMI
-𝑠
-𝑣
+sageassociation. Graphpropagationisexpressedintermsofnodeandedgecounts,andsemantic
+edge weighting visits the indexed edges. The Mehlhorn-based initial tree stage [38] is reported
+with 𝑂(|ℰ| + |𝒱|log|𝒱|) complexity. Expansion additionally depends on the selected sub-
+graph and its neighborhood. These expressions characterize graph operations; the measured
+end-to-endresultsincludemodelinferenceundertheexperimentalconfiguration.
+The distinction between indexing and querying is useful in deployment. An index is pre-
+pared once for a fixed corpus, while query filtering and generation recur for each query. An
+application with many queries can amortize index preparation, but its response latency still de-
+pends on online graph processing and the amount of generated text. Token counts and separate
+indexing/queryingtimesarethereforeretainedintheevaluation.
+The evidence graph also requires storage for entity strings, relations, and passage associa-
+tions. The source gives storage in terms of graph nodes, edges, and text chunks. These objects
+contribute to the index storage. Practical storage depends on how embeddings, text, and adja-
+cencystructuresarerepresented,whiletheexperimentaleﬀiciencytablereportstimeandtoken
+useratherthanameasuredmemorycomparison.
 63

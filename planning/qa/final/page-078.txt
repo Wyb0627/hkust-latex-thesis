@@ -1,46 +1,32 @@
-Q: Which structuresareatriskofandmaycontributeto the spreadof kidney cancer?
-Mapto
-Connect 𝑐 = 0.31
-structures Tumors
-Can have Affect
-spread Spread Blood
-Kidney 𝑐 = 0.51 Tumors 𝑐 = 0.23
-kidney Kidney vessels
-𝑠 = 0.82 𝑠 = 0.78
-cancer cancer Spread 𝑠 = 0.69
-Kidney Work 𝑐 = 0.10 Affect
-Occur in
-𝑐 = 0.30 𝑐 = 0.27
-𝑐 = 0.34
-Invade
-Nearby Kidney Lymph
-𝑐 = 0.45 RCC
-tissues cancer nodes
-Commontype 𝑠 = 0.35
-𝑠 = 0.67 𝑠 = 0.88 𝑠 = 0.66
-𝑐 = 0.78
-A: Blood vessels areatriskofandmaycontributeto thelocal spreadof kidney cancer.
-Figure 5.2: The original AGRAG evidence-expansion example. Red triples are query-mapped
-facts; orange triples show additional neighboring evidence in the illustrated MCMI structure.
-ReproducedfromFigure2ofthesourcepaper[3].
-Thecandidateanditsconnectingedgeareaddedwhenthisconditionholds. Thesubgraphquan-
-tity is recalculated and the procedure considers the updated neighborhood. Expansion stops
-when the lowest candidate ratio is greater than or equal to the current subgraph quantity. The
-comparisonusesthenodescoreoftheprospectiveaddition,whereasEquation5.10usesthetwo
-endpoints of each included edge. The candidate ratio therefore ranks possible additions using
-theirassignednodescores,whilethecurrentsubgraphisevaluatedbyEquation5.10.
-Thepurposeofexpansionistoincludeadditionalgraphfactsaroundtheanchor-connecting
-structure. A tree represents one economical way to connect terminals. Additional relations can
-provideevidenceaboutanswercomponentsabsentfromthattree. TheoriginalMCMIexample
-depictsacyclicstructurecontainingsuchinformation. Theoutputissuppliedtothegeneratoras
-a graph, so its relation strings communicate more than the membership of individual retrieved
-passages.
-5.4.1 The original connected-evidence example
-TherunningexampleinFigure5.2makesthedifferencebetweenconnectinganchorsandcollect-
-ing an answer visible. Its mapped triples include (Kidney, Work, Kidney cancer) and (Kidney,
-Spread, Tumors), using the relation strings printed in the original illustration. Those triples lo-
-catethequery’ssubjectregion. Theexpandedstructureadditionallycontainsrelationsinvolving
-bloodvessels,neighboringtissues,andotherentitiesshowninthegraph. Theoriginalillustrated
-answeridentifiesbloodvesselsastherequestedcomponent.
-The example gives a concrete reason to inspect the neighborhood of an initial connection.
+5.7 Experimental Evaluation
+5.7.1 Tasks, corpora, and model settings
+The main experiment uses Novel and Medical from GraphRAG-bench [45], together with
+WOS [40] and IFS-Rel [36] for classification. Novel contains 5,140 chunks, 63,887 graph
+entities, and 163,169 graph relations. Medical contains 1,030 chunks, 12,426 entities, and
+52,054 relations. The reported classification indexes contain 24 chunks for WOS and 11 for
+IFS-Rel,with9,396and2,560evaluatedtextsand133and64labels,respectively.
+The Novel evaluation contains 67 creative-generation queries, 362 contextual-
+summarization queries, 610 complex-reasoning queries, and 971 fact-retrieval queries.
+ThecorrespondingMedicalcountsare166,289,509,and1,098.
+The main backbone is Qwen2.5-14B-Instruct [46], deployed through vLLM [47]. The ma-
+chine has an Intel Xeon Gold 5220R CPU and one NVIDIA A100 GPU with 80 GB memory.
+Contriever[48]suppliesdenserepresentationsforAGRAGandHippoRAG2;theotherbaselines
+usebge-large-en-v1.5accordingtothereportedconfiguration. Qwen3-Reranker-0.6Bperforms
+raw-triplet filtering. The retrieval top-𝑘 setting is 5; AGRAG’s raw mapped triple count and
+hybridchunkcountarealso5.
+GraphRAG uses local search. LightRAG uses hybrid search for the QA tasks, with its
+classification-specific configuration retained where applicable. The comparison includes
+NaiveRAG, LongLLMLingua [41], RAPTOR [49], SiReRAG [50], G-Retriever [51],
+MIXRAG [52], GraphRAG [17], LightRAG [19], HippoRAG2 [42], and Fast-GraphRAG [53].
+These methods represent passage retrieval, compression, hierarchical organization, connected
+subgraph selection, neighborhood retrieval, and graph propagation. The source experiments
+comparetheircompleteconfigurationsunderthestatedmodelsettings.
+5.7.2 Metric interpretation
+Classificationaccuracyistheproportionofpredictedlabelsmatchinggoldlabels. Classification
+recallismacrorecall. Fortheothertasks,thereportedaccuracyisamodel-assessedscorewith
+values0,0.5,or1forinaccurate,partiallyaccurate,oraccurateanswers. Thesequantitiesappear
+underthesameACCheadinginthepaperbutevaluatedifferentoutputs.
+Complex reasoning and fact retrieval additionally report the source’s ROUGE-L mea-
+sure [54]. Contextual summarization and creative generation report coverage, the fraction
+of required reference evidence represented in the answer. Creative generation also reports
 64

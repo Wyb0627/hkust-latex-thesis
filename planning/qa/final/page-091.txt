@@ -1,27 +1,37 @@
-Table5.18: Medicallow-resourceeﬀiciency. Qwen3-4B-Instruct-2507ontwo2080TiGPUs.
-Method Index min Query min Input tokens Output tokens
-SiReRAG-L 18.1 182.3 5,113 827
-HippoRAG2-L 21.8 162.4 5,577 584
-AGRAG-L 14.4 167.3 5,282 534
-5.7.6 Additional resource setting and parameter study
-The low-resource experiment uses Qwen3-4B-Instruct-2507 on two NVIDIA 2080 Ti GPUs.
-Thischangesbothmodelandhardwarerelativetothemainexperiment. Thecomparisonthere-
-foreconcernsthemethodswithinthatresourcesetting. Itsuppliesevidenceaboutoperatingwith
-a smaller backbone and different accelerators rather than a controlled estimate of the effect of
-modelsizealone.
-Inthatsetting,AGRAG-LreportsNovelcreative-generationaccuracy0.519andcontextual-
-summarizationaccuracy0.706. ItsNovelindex/querytotalsare44.7and132.1minutes. Medical
-totalsare14.4and167.3minutes. HippoRAG2-Lhasshorterquerytotalsinbothcorpora,while
-AGRAG-Lhas shorter indexing totals. The complete low-resource tables retain the quality and
-tokenmeasuresneededtoassessthosetradeoffs.
-The parameter study varies the maximum n-gram length over {1,3,5,7} and the extraction
-threshold over {0.1,0.3,0.5,0.7}. The original heatmaps are reproduced in Figure 5.3. They
-show accuracy across the tested combinations for Novel and Medical. The main experiment
-uses𝑏 = 3and𝜏 = 0.5.
-5.8 Discussion and Chapter Summary
-AGRAGplacesstructureattwopointsintheevidencepipeline. Graphconstructiondetermines
-which entities, relations, and passage links are available. Query-time selection determines how
-thoseitemsareconnectedinthecontextsuppliedtothegenerator. Thehybridretrieverpreserves
-aroutetopassageinformationoutsidetheselectedgraph. Themethodconsequentlytreatsgraph
-evidenceandtextualcontextascomplementaryrepresentationsoftheindexedcorpus.
+Node-levelmatching Path-awarematching
+Data
+Graph A father_of B father_of C 𝓓𝓖 A father_of B father_of C
+𝓓𝓖 PathAggr.
+✓ ✘ ✘ ✓ ✓ ✓ ✓
+Query grandfather_of grandfather_of
+Graph A C 𝓠𝓖 A C
+𝓠𝓖
+Correct alignment:
+Cannotfindamapping,sufferfrom 𝓓𝓖(A → B → C) ⇔𝓠𝓖(A→ C)
+Semantic-structural Misalignment
+Findthe correctmapping!
+✓:Match ✘:Mismatch :PathAggregation
+Figure 6.1: Path-level correspondence in the MGRAG motivating example. A grandfa-
+ther_ofrelationcorrespondstotwofather_ofedges. OriginalFigure1,p.2481[4].
+The second decision concerns what constitutes a match. A query and its supporting docu-
+ments need not use the same decomposition of a fact. The published motivating example de-
+scribesadatagraphcontainingtwofather_ofedgesandaquerycontainingonegrand-
+father_of edge. The requested relation is represented by a two-hop path in the data. Re-
+quiring the same edge topology would exclude this correspondence. Figure 6.1 reproduces the
+example. MGRAG evaluates semantic representations of paths so that a query relation can be
+supportedbyasequenceofevidencerelations.
+The third decision concerns the cost of processing retrieved evidence. Graph construction
+alreadysendsevidencetoalanguagemodeltoextractentitiesandrelations. Someofthatcontent
+appearsagainwhenthematchedgraphanditssourcechunksareusedforanswering. Reusingthe
+earlierkey-value(KV)statescanreducerepeatedcomputation. Theirsuitabilitydependsonthe
+new query and context, so MGRAG selectively recomputes token states. It combines attention
+scores with topological features of the facts associated with those tokens. Structure thus enters
+bothevidenceselectionandthesubsequentuseoftheselectedcontext.
+These decisions extend the thesis from connected textual evidence to multimodal evidence
+whosesemanticdecompositionisquery-dependent.
+6.2 Framework and Evidence Representations
+Figure 6.2 shows three stages. Coarse-grained ranking orders text chunks and images accord-
+ing to their relevance to the query. Fine-grained retrieval consumes this ranked list, extracts
+query-relatedfacts,and searchesthe growing graph fora semantic match. Graph-awareKV re-
+computation then determines which cached token states to update for answer generation. The
 77

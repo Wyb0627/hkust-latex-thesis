@@ -1,52 +1,38 @@
-Algorithm1Path-basedsemanticmatchinginMGRAG
-Require: Querygraph𝒬𝒢 ,queryanchor𝛾,evidencegraph𝒦𝒢 ,threshold 𝜃
-𝑞 𝑞
-1: Initializevalidresultsℛ ← ∅
-2: foreach𝑣 ∈ 𝒱 withcos 𝐡 ,𝐡 > 𝜃 do
-𝑎 𝑞 ( 𝑣 𝛾)
-𝑎
-3: Enumeratecandidatemappingsconsistentwith𝐼(𝛾) = 𝑣
-𝑎
-4: foreachcandidatemapping𝐼 do
-5: Initializethesubgraphwithmappedqueryentities;set𝑠 ← 0
-6: foreachqueryedge(𝑢,𝑟,̂ 𝑣)do
-7: Searchgreedilyforasemanticallyvalidpathfrom𝐼(𝑢)to𝐼(𝑣)
-8: if thepathsearchfailsthen
-9: Reject𝐼 andstopvalidatingthismapping
-10: else
-11: Addthepath’snodesandedgestothecandidatesubgraph
-12: Additscosinesimilarityto𝑠
-13: endif
-14: endfor
-15: if everyqueryedgehasavalidpaththen
-16:
-Addthesubgraphandscore𝑠/|ℰ̂|toℛ
+Foratokenassociatedwithatriple(𝑢,𝑟,𝑣),itsgraphfeatureisthemeanoftheendpointscores,
+𝑓(𝑢)+𝑓(𝑣)
 𝑞
-17: endif
-18: endfor
-19: endfor
-20: Returnthehighest-scoringresult,or∅ifℛ isempty
-6.5.3 Greedy semantic path growth
-Thepathsearchbeginsatthemappedsourceentityandmaintainsitscurrentendpoint𝑥. Foreach
-neighboring entity 𝑦 and connecting edge (𝑥,𝑟,𝑦), MGRAG evaluates the candidate extension
-using
-cos(𝐡
-𝑃
-⊕𝐡
-𝑒(𝑥,𝑟,𝑦)
-⊕𝐡
-𝑦
-,𝐡 𝑒(̂𝑢,𝑟,̂𝑣)). (6.10)
-Amongextensionsexceeding𝜃,itselectsthehighest-scoringone,appendsthatedgetothepath,
-andupdatestheendpointto𝑦. Thisrepeatsuntilthepathreachesthemappedtarget. Thesearch
-fails when no qualifying extension is available. The experiments also impose a maximum path
-length𝑙 toboundexpansion.
-𝑝
-The endpoint and threshold checks serve different roles. Reaching the target gives the ev-
-idence path the required relational endpoints. Passing the semantic checks gives it a represen-
-tation consistent with the requested relation. An attractive local extension can still prevent the
-greedy search from reaching the target, so a failed search does not establish that all possible
-pathsfail. Thealgorithmreturnsthebestresultamongthevalidcandidatesitfinds.
-All query edges must pass path validation before a mapping is accepted. This condition
-preventsasinglehigh-scoringrelationfromcompensatingforanunsupportedrequiredrelation.
+𝐺𝐹 = . (6.12)
+𝑡 2
+Thetoken-to-factassociation followsthe entityand relationtokenspansin theserialized repre-
+sentation. Tokensreferringtothesamefactthereforereceiveasharedstructuralcomponent.
+The graph feature concerns an entity’s position in the query-specific graph. A node that
+connects several extracted facts can carry a different score from an isolated endpoint. Because
+extraction is query-dependent, the feature is calculated from a representation already selected
+forthatquery. Itsmeaningisrelationalimportancewithinthatgraph,ratherthanacorpus-wide
+importancemeasure.
+Thepublishedgraphsaresmall,withfewerthantwentyentitiesonaverageaccordingtothe
+report. Averaging four graph statistics provides a direct structural feature for these graphs. The
+recomputationscoreusesgraphandattentioninformationavailableduringprocessing.
+6.6.3 Combined recomputation score
+Let 𝑎 denote attention between token 𝑡 and token 𝑗, and let |𝑞| and |𝑆 | denote the query and
+𝑡𝑗 𝑟
+serialized-graphlengths. Thescoreis
+|𝑞| |𝑆 |
+𝑟
+𝑞
+𝜙(𝑡) = 𝑎 + 𝑎 +𝐺𝐹 . (6.13)
+∑ 𝑡𝑗 ∑ 𝑡𝑘 𝑡
+𝑗=1 𝑘=1
+Thefirsttermexpressesinteractionwiththecurrentquestion. Thesecondexpressesinteraction
+with the selected relational context. The third assigns the structural feature of the associated
+graphfact. Theresultingsumdetermineswhichtokenstatesconsumetherecomputationbudget.
+The publication compares the policy with vLLM prefix caching [47] and CacheBlend [22].
+Their retrieval pipelines and cache variants are identified separately in the evaluation. The in-
+verse ablations also evaluate graph-aware recomputation within an existing retrieval pipeline.
+These comparisons expose answer-quality and time changes under several compositions of re-
+trievalandcaching.
+6.7 Computational Cost
+The published offline encoding cost is 𝑂(|𝒞|𝑑 𝑙2), with embedding dimension 𝑑 . Using
+emb 𝑐 emb
+𝑘 processed chunks, query-graph vertex and edge sets 𝒱̂and ℰ̂, evidence-graph sets 𝒱 and
 88

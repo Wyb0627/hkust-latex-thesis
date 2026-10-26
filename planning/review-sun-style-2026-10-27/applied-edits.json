@@ -1,0 +1,1770 @@
+[
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before_line": 6,
+    "before": "Language-model pipelines use text, table cells, and images as evidence for prediction or generation. The usefulness of that context depends on which evidence was selected and how its parts relate to one another. A table column may contain names while omitting the occupations needed to identify its semantic type. A classification query may refer to a label introduced after the initial index was constructed. An answer may depend on facts distributed across passages. A multimodal question may express a relationship that corresponds to several facts in the evidence. These settings require decisions about evidence before the model produces its prediction.",
+    "after": "Language models use tables, text, and images to make predictions and generate answers. The required information is often incomplete or distributed across sources. A table may list people without identifying their occupations. A classification task may introduce labels absent from its initial training examples. A question may require facts from several passages or a relationship expressed jointly by text and images. Selecting the relevant evidence and preserving its connections are therefore part of the prediction problem.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 6
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before_line": 8,
+    "before": "This thesis studies explicit structure as a means of making those decisions. A knowledge graph connects an entity to descriptions and relations beyond a table. A task graph connects keywords to labels and can be updated as classification proceeds. An evidence graph supports the selection of connected facts for text generation. A query graph specifies relationships to be matched against multimodal evidence. The central question is how these structures should participate in the computation that supplies context to a language model.",
+    "after": "We study how explicit knowledge structures can support evidence selection for language models. Knowledge graphs provide descriptions absent from a table. Task graphs maintain associations between keywords and classification labels. Evidence graphs connect facts across passages, while query graphs specify the relationships needed to answer a multimodal question. We develop methods that use these relationships to retrieve evidence and control how it is processed.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 8
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before_line": 10,
+    "before": "The first setting is column type annotation. Consider a column of people accompanied only by birth and death dates. A model that encodes the table can use the dates as context, but the table may not identify a common occupation. Linking the names to a knowledge graph can supply that information. Conversely, the knowledge graph may associate a person with several valid types, while a dataset expects a particular label vocabulary. KGLink combines external graph information with a pre-trained language model and supervision from the annotation task~\\cite{kglink-publication}. The structure supplies evidence; the task determines the label to predict.",
+    "after": "Our first problem is column type annotation. A column of people accompanied by birth and death dates may lack the information needed to identify their common occupation. Linking the names to a knowledge graph can supply that information, but the graph may assign several valid types to each person. These types may also differ from the annotation vocabulary. We propose KGLink to select relevant graph descriptions and learn their correspondence to the target labels~\\cite{kglink-publication}.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 10
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before_line": 12,
+    "before": "The second setting concerns dynamic few-shot text classification. A label set can grow over rounds, with only a few examples available for each label. The retrieval index must represent the available supervision and provide candidates for the current text. Adding every observed word uniformly does not distinguish useful associations from incidental ones. Returning a fixed number of semantically similar passages also leaves the candidate label decision implicit. GORAG constructs and updates weighted keyword--label relations and retrieves labels through connections among query keywords~\\cite{gorag-paper}.",
+    "after": "Our second problem is dynamic few-shot text classification. New labels arrive over successive rounds, with only a few examples for each class. A fixed retrieval budget does not determine which labels are relevant to the current text, and uniformly indexing observed words can retain incidental associations. We propose GORAG to maintain weighted keyword--label relations and retrieve candidate labels by connecting query keywords~\\cite{gorag-paper}.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 12
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before_line": 14,
+    "before": "The third setting concerns textual question answering and generation. A system can retrieve individually relevant chunks without telling the generator how their facts connect. An answer requiring a summary may also need more information than an economical path between query anchors contains. AGRAG constructs a text evidence graph, scores nodes by query-dependent influence, assigns semantic costs to edges, and selects a connected subgraph. Its hybrid passage retriever supplies additional contextual material~\\cite{agrag-paper}. The generator receives both the selected relational structure and text.",
+    "after": "Our third problem is evidence retrieval for textual question answering and generation. Individually relevant passages can repeat facts or leave their connections implicit. A short path between query anchors can also omit information needed for a summary. We propose AGRAG to select a connected subgraph using query-dependent node influence and semantic edge costs. Hybrid passage retrieval supplies context beyond the selected graph~\\cite{agrag-paper}.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 14
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before_line": 16,
+    "before": "The fourth setting introduces multimodal evidence. Images and text can describe the same event with different levels of detail. A direct relation in a question may correspond to a path through several entities in the evidence graph. A query-independent graph can also omit details relevant to a particular question. MGRAG builds an evidence graph incrementally for the query, uses path-based semantic matching to identify corresponding evidence, and incorporates graph features when selecting cached states for recomputation~\\cite{mgrag-paper}. Structure influences both retrieval and the processing of the retrieved context.",
+    "after": "Our fourth problem is multimodal question answering. A relation stated directly in a question may correspond to several relations in the evidence, and a graph constructed before seeing the query can omit relevant visual details. We propose MGRAG to build query-specific evidence graphs and match query relations to semantic paths. Graph features also guide the recomputation of cached model states when the retrieved content is used for answering~\\cite{mgrag-paper}.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 16
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before_line": 18,
+    "before": "The common question is how explicit relationships should constrain the evidence used for a task. KGLink selects descriptions for a supervised representation; GORAG selects labels from an evolving index; AGRAG selects connected facts and source context; and MGRAG matches query relations and allocates computation over the selected evidence. Across these studies, the thesis examines where structure is obtained, when it is adapted, and which downstream decision it controls.",
+    "after": "These problems lead to a common research question. How can explicit relationships improve the selection and processing of evidence for language models? We investigate external knowledge selection, online index maintenance, connected textual retrieval, and semantic matching over multimodal evidence.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 18
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before_line": 23,
+    "before": "In this thesis, structural augmentation means using explicit relationships among evidence items in a language-model pipeline. The items include entities, types, keywords, labels, passages, and query components. The relationships include knowledge-graph edges, keyword--label associations, passage-to-entity links, and paths that express a query requirement. The term describes where structure participates in the pipeline; the concrete representation is defined separately for each study.",
+    "after": "Structural augmentation uses explicit relationships among entities, types, keywords, labels, passages, or query components. We study knowledge-graph edges, keyword--label associations, passage links, and paths that express the relationships requested by a query.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 23
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before_line": 25,
+    "before": "There are three distinctions that organize the scope. First, a graph representation and a learned representation serve different purposes. A graph records named items and their connections. An embedding supplies a learned similarity or a contextual feature. The methods combine these representations in different ways. KGLink serializes graph-derived information for a table encoder. GORAG uses a weighted graph for candidate selection. AGRAG combines node scores and edge costs during evidence retrieval. MGRAG compares the semantics of paths and uses graph features in context computation.",
+    "after": "Graphs record entities and their connections, while embeddings provide similarity scores or contextual features. We combine them by serializing graph descriptions for a table encoder, weighting connections for label retrieval, scoring nodes and edges for subgraph selection, and comparing path semantics for multimodal matching.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 25
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before_line": 27,
+    "before": "Second, external evidence and supervision have different roles. The knowledge graph in KGLink supplies descriptions that need not appear in a table. Column labels supervise the prediction task. In GORAG, a small labeled training set supplies initial keyword--label associations, while predictions can contribute to online indexing according to the round protocol. In AGRAG and MGRAG, source documents supply the evidence from which graphs are constructed.",
+    "after": "External evidence supplies information, while supervision determines how that information is used for prediction. KGLink learns column labels from annotated tables and retrieves descriptions from an external graph. GORAG initializes its index from labeled examples and updates it using subsequent predictions. AGRAG and MGRAG construct their evidence graphs from source documents.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 27
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before_line": 29,
+    "before": "Third, the language models perform different computations. KGLink fine-tunes a pre-trained encoder for column annotation, with a contextual representation objective. The later studies use generative language models for selected extraction, filtering, classification, or answer-generation operations. The thesis therefore includes supervised encoder-based annotation and retrieval-augmented generation.",
+    "after": "KGLink fine-tunes a pre-trained encoder for column annotation. GORAG, AGRAG, and MGRAG use generative models for classification, extraction, filtering, or answer generation. The thesis thus covers both supervised representation learning and retrieval-augmented generation.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 29
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before_line": 32,
+    "before": "The thesis uses reasoning in relation to the evaluated tasks. In annotation, the model uses table content and external type information to assign a semantic label. In dynamic classification, retrieval selects candidate labels appropriate to the current text and available index. In textual QA, the method supplies connected facts and passages for generating an answer. In multimodal QA, semantic paths relate query requirements to evidence expressed across modalities.",
+    "after": "",
+    "type": "D12",
+    "reason": "The paragraph repeats the four task definitions rather than developing the meaning of a specific operation."
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before_line": 34,
+    "before": "Graph operations select, connect, and present evidence to the language model. The thesis evaluates these operations through annotation accuracy and F1, classification results across rounds, task-specific QA measures, and context-serving costs.",
+    "after": "We evaluate the structural operations through annotation accuracy and F1, classification accuracy across label rounds, task-specific answer measures, and context-processing costs.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 33
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before_line": 36,
+    "before": "The four studies have separate implementations and evaluation settings. Their common argument concerns how explicit relationships can organize knowledge and guide evidence use. The chapters progress through external knowledge, online indexing, connected textual evidence, and query-aware multimodal evidence. Each chapter states the particular mechanism it develops.",
+    "after": "The four studies have separate implementations and evaluations. They address successive problems in obtaining external knowledge, maintaining an index, selecting connected text, and matching multimodal evidence.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 35
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before_line": 38,
+    "before": "A related study on hyper-relational knowledge graphs examines information preservation during structural representation. It distinguishes qualifier information from graph reception and develops FormerGNN in response. This published work appears as a separate section in the background chapter. Its role is to inform the analysis of what a structural representation retains.",
+    "after": "We also examine information preservation in hyper-relational knowledge graphs. This study distinguishes qualifier capture from graph reception and develops FormerGNN to combine them. It appears in the background chapter and provides a basis for analyzing information lost during graph transformation.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 37
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before_line": 41,
+    "before": "The methods can also be understood by asking what information is available at each decision point. Before prediction, KGLink observes the table and linked knowledge but uses a masked type position in the inference sequence. GORAG observes the supervision available in a round and the graph state produced by earlier permitted updates. AGRAG observes the indexed corpus and the current query. MGRAG observes ranked multimodal chunks and progressively extracts facts relevant to its query graph. These information boundaries determine which structural operations are possible.",
+    "after": "The available information determines each retrieval decision. KGLink uses table content and linked descriptions, with a masked type position at inference. GORAG uses the support examples and index updates available before the current prediction. AGRAG selects from a fixed corpus graph for each query. MGRAG progressively extracts query-related facts from ranked multimodal chunks.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 40
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before_line": 55,
+    "before": "An evolving label set changes the meaning of evidence retrieval. A candidate must belong to the task's available labels, and the graph must incorporate new supervision without rebuilding its whole representation for every prediction. Within a round, predicted information can affect later queries if the method performs online indexing. Its timing and use of predicted labels therefore belong to the experimental protocol.",
+    "after": "As labels arrive, the index must retain earlier classes and incorporate new examples. Query predictions can also supply associations for later retrieval. The order of prediction and insertion determines which information is available to each query.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 54
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before_line": 75,
+    "before": "The thesis makes four core contributions corresponding to these questions. Each contribution combines a specific structural operation with a language-model task and a published evaluation. Table~\\ref{tab:introduction:questions} identifies where the method and evidence are developed.",
+    "after": "We make four contributions corresponding to the research questions. Table~\\ref{tab:introduction:questions} links each contribution to its method and evaluation.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 74
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before_line": 102,
+    "before": "The accompanying hyper-relational study contributes a separate analysis of structural information preservation and the FormerGNN design. It provides a representation-level perspective on the thesis theme.",
+    "after": "The accompanying hyper-relational study analyzes structural information preservation and introduces FormerGNN to combine qualifier information with graph reception.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 101
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 6,
+    "before": "The methods in this thesis use structure to determine which information a language model receives and how that information enters prediction. Their structures have different origins. A knowledge graph records external entities and relations; a classification index connects keywords with labels; an evidence graph links facts and passages; and a query graph expresses the relationships requested by a question. This chapter establishes the concepts needed to compare these representations and reviews work on table understanding, retrieval-augmented generation, graph retrieval, and multimodal context processing. Section~\\ref{sec:background:hyperkg} presents the author's published study of information preservation in hyper-relational knowledge graphs.",
+    "after": "This chapter reviews the foundations of knowledge graphs, language models, table annotation, graph retrieval, and multimodal context processing. We compare the information represented by each method and the operations used to retrieve it. Section~\\ref{sec:background:hyperkg} presents our study of information preservation in hyper-relational knowledge graphs.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 6
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 15,
+    "before": "Graph topology records the connections available to a computation. A neighborhood identifies adjacent entities and relations; a path composes a sequence of such connections; and a subgraph retains a selected set of nodes and edges. These objects support different operations. Neighborhood aggregation can enrich an entity representation, a path can provide evidence connecting two mentioned entities, and a subgraph can organize several facts relevant to a question. Their usefulness depends on the interpretation of the edges. A factual relation, a lexical-similarity edge, and a keyword--label association impose different meanings on a traversed connection.",
+    "after": "Graph neighborhoods, paths, and subgraphs support different retrieval operations. Neighborhood aggregation enriches entity representations. Paths connect entities mentioned in a question. Subgraphs collect several relevant facts and their relationships. The edge type determines how a connection should be interpreted, whether it represents a fact, lexical similarity, or a keyword--label association.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 15
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 19,
+    "before": "Knowledge stored in learned parameters and evidence supplied at prediction time enter these interfaces differently. Fine-tuning modifies model parameters using labeled examples. Retrieval selects material from an external index and places it in the model's input. A model can combine both, as in KGLink's learned annotation model with graph-derived features. The later RAG systems emphasize the selection of external evidence for a generator. Comparing these methods therefore requires identifying the source of evidence, the operation that selects it, and the model component that uses the selected representation.",
+    "after": "Fine-tuning modifies model parameters using labeled examples. Retrieval supplies evidence from an external index at prediction time. KGLink combines the two by fine-tuning an annotation model with graph-derived inputs. The later RAG systems retrieve evidence for a generator.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 19
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 24,
+    "before": "Column-type annotation assigns semantic labels to table columns. A column of names, numbers, or dates may support several plausible interpretations, and surrounding columns can disambiguate them. The target vocabulary is part of the task definition. Predicting a broad category such as Name and predicting a narrower occupation category require different decisions even when the underlying values are identical. This makes table annotation a useful setting for examining how external facts and learned representations interact.",
+    "after": "Column-type annotation assigns semantic labels to table columns. Similar values can require different labels under different annotation vocabularies. A column of people may be labeled Name or assigned an occupation category. Surrounding columns and external facts can help determine the intended type.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 24
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 26,
+    "before": "Sherlock represents column values using statistical properties, character distributions, word embeddings, and paragraph vectors, then trains a neural type detector~\\cite{bg-sherlock}. The approach makes distributional properties of a column available to the classifier. Its prediction unit is the column, so the available features differ from a representation that encodes the whole table jointly. Sato adds table context through topic modeling and structured prediction~\\cite{bg-sato}. It combines evidence about the values with contextual signals about which semantic types occur together. These methods establish that table context and column contents supply distinct information for type inference.",
+    "after": "Sherlock trains a neural type detector from statistical properties, character distributions, word embeddings, and paragraph vectors~\\cite{bg-sherlock}. Sato adds topic features and structured prediction to model which column types occur together~\\cite{bg-sato}. The two approaches differ in whether table context contributes to the prediction.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 26
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 28,
+    "before": "Pre-trained language models offer another way to compute contextual representations. Doduo serializes multiple columns for a language model and learns column annotations from the resulting representations~\\cite{bg-doduo}. Its column-type and column-property tasks relate individual categories to relationships between columns. The input organization determines which values can interact through the encoder. A multi-column sequence lets the representation of one column depend on another, subject to the model's sequence-length constraints. This differs from appending a table-level feature after independently encoding each column.",
+    "after": "Doduo serializes multiple columns for a pre-trained language model and learns column-type and column-property annotations from their contextual representations~\\cite{bg-doduo}. Self-attention lets a column representation depend on values in other columns, subject to the input-length limit.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 28
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 32,
+    "before": "KGLink examines the correspondence between KG-derived descriptions and a dataset's target labels~\\cite{bg-kglink}. It retrieves candidates for cell mentions, uses graph connections between columns to filter them, and learns from candidate-type text and a separate KG feature sequence. A contextual type-representation task helps the model use graph descriptions when their granularity differs from the dataset's labels. Chapter~\\ref{ch:kglink} develops this method and its evidence. The contribution is located at the interface between evidence selection and representation learning, where graph facts become inputs to a supervised annotation decision.",
+    "after": "KGLink retrieves candidate entities for cell mentions and filters them through connections between columns~\\cite{bg-kglink}. Candidate-type text and a separate KG feature sequence enrich the column representation. A contextual type-representation objective learns the correspondence between graph descriptions and annotation labels. Chapter~\\ref{ch:kglink} presents the method and experiments.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 32
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 34,
+    "before": "These lines of work differ in what makes two values mutually informative. Statistical features summarize a distribution, topic features describe a table, contextual encoding allows token interactions, related-table retrieval supplies other examples, and graph lookup exposes explicit relations. The differences are relevant even when all methods predict the same label set. They determine which information can resolve an ambiguous cell and what happens when one evidence source has little coverage.",
+    "after": "These methods obtain context from different sources. Statistical features summarize column contents, contextual encoders model values jointly, RECA retrieves related tables, and knowledge-based methods retrieve external facts. Their coverage determines which ambiguities they can resolve.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 34
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 41,
+    "before": "A basic passage pipeline divides a corpus into chunks, indexes them, scores the chunks for a query, and concatenates selected text with the query. The chunk boundary establishes the retrievable unit. Small chunks can isolate a relevant statement but split its explanation from necessary context. Large chunks can retain more context while using a larger part of the generation budget. Overlap changes how adjacent chunks share information. These choices affect both the material available to retrieval and the amount of repeated content passed to the model.",
+    "after": "A passage-based RAG pipeline divides a corpus into chunks, indexes them, and concatenates the retrieved chunks with the query. Small chunks can separate a fact from its explanation. Large chunks preserve more context but consume more input tokens. Overlap retains information across chunk boundaries at the cost of repeating some text.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 41
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 47,
+    "before": "Retrieval and generation also have different evaluation targets. Retrieval can be assessed by whether supporting evidence is included in the selected context. Generation is assessed through the answer, such as its exact correctness, overlap with a reference, or an evaluation protocol for open-ended content. A better answer score can reflect improvements in evidence selection, context organization, or the generator's use of that context.",
+    "after": "Retrieval evaluation measures whether the selected context contains supporting evidence. Generation evaluation measures the resulting answer through correctness, reference overlap, or model-based assessment. An answer improvement can arise from selecting better evidence, organizing the context, or using it more effectively.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 47
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 51,
+    "before": "Context budgets also affect comparison between retrieval procedures. Returning more passages can increase coverage and processing cost at the same time, while changing their organization can alter repetition or access to supporting relationships. An experiment that fixes a generator and corpus can still change the information supplied to that generator through its retrieval budget.",
+    "after": "Retrieving more passages can increase both answer coverage and model-processing cost. The retrieval budget therefore affects the information available to the generator even when the corpus and model remain fixed.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 51
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 53,
+    "before": "This view of RAG separates the update unit, the retrieval unit, and the context supplied to the model. They can be different objects. A document can contribute several graph facts; graph traversal can return a label set; and the final prompt can include both selected structures and source passages. The following section reviews methods that use these distinctions to retrieve evidence beyond independently ranked chunks.",
+    "after": "The indexed object can differ from the retrieved context. A document can contribute several graph facts, a traversal can return candidate labels, and a prompt can combine selected relationships with source passages. Graph retrieval makes these connections available during evidence selection.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 53
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 58,
+    "before": "A graph index makes relationships among evidence items available during retrieval. Its nodes can denote entities, passages, labels, or other task-specific objects. Its edges can represent extracted facts, shared mentions, semantic similarity, or an association observed in examples. The graph representation therefore includes a choice about what information should be connected. Query processing then makes another choice about which of those connections should influence the current context.",
+    "after": "Graph indexes connect entities, passages, labels, and other evidence items through extracted facts, shared mentions, or semantic similarity. Retrieval selects the nodes and connections relevant to the current query.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 58
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 60,
+    "before": "GraphRAG constructs an entity graph and community summaries to support query-focused summarization~\\cite{bg-graphrag}. Its organization is relevant to questions whose answer requires an account of a corpus's themes rather than one local fact. Community-level descriptions provide a retrieval and summarization unit above individual passages. This differs from returning the neighbors of a single mentioned entity. The graph also supports the preparation of derived textual summaries that can later enter question answering.",
+    "after": "GraphRAG builds an entity graph and community summaries for query-focused summarization~\\cite{bg-graphrag}. Community summaries provide a retrieval unit above individual passages and support questions about broader corpus themes.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 60
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 62,
+    "before": "HippoRAG combines language-model extraction, a knowledge graph, and personalized PageRank for retrieval~\\cite{bg-hipporag}. Query-related entities seed a graph process whose scores depend on connectivity. A node can therefore receive retrieval influence through paths from the initial query representation. Personalized propagation introduces a query-dependent ranking over the index. It is distinct from a rule requiring every returned item to connect a specified set of terminals in one selected subgraph.",
+    "after": "HippoRAG combines language-model extraction, a knowledge graph, and personalized PageRank~\\cite{bg-hipporag}. Query entities seed propagation through the graph, producing a ranking of related evidence. This ranking does not require all selected nodes to belong to one terminal-connecting structure.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 62
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 64,
+    "before": "LightRAG integrates graph structures with vector representations and uses retrieval at low and high levels~\\cite{bg-lightrag}. Its design distinguishes more specific entity-oriented information from broader relational or conceptual information and includes incremental index updates. These mechanisms address the representation and maintenance of a graph retrieval source. The granularity of the retrieval result remains a separate design choice from how the source graph was built.",
+    "after": "LightRAG combines graph and vector representations, low- and high-level retrieval, and incremental index updates~\\cite{bg-lightrag}. Its retrieval modes select specific entity information and broader relational or conceptual information.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 64
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 85,
+    "before": "Two graph operations help clarify these distinctions. A query anchor identifies an entity or fact that maps to the current question. Personalized propagation distributes influence from anchors through the graph and ranks surrounding evidence according to the resulting scores. A terminal-connecting procedure instead takes a specified node set and selects connections that include those nodes. Intermediate nodes can enter a solution because they lie on the selected paths. The operations therefore ask different questions of the same indexed topology. One asks where query influence is concentrated; the other asks how required evidence can be connected.",
+    "after": "Personalized propagation ranks evidence by influence from query anchors. Terminal-connecting retrieval instead selects paths that include a specified set of nodes, admitting intermediate nodes when needed. The former locates relevant graph regions; the latter constructs connections among required evidence items.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 85
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 87,
+    "before": "The retrieval unit determines how these operations become context. Ranking an entity requires a rule for finding its source passages. Selecting a path requires a textual representation of its entities and relations. Selecting a community summary yields derived prose that can cover many underlying statements. The interface between a graph result and the generator is consequently a substantive part of retrieval design. The graph representation, the selected object, and its serialization each influence which evidence the model finally observes.",
+    "after": "A graph result must be converted into model input. Entity retrieval requires finding associated source passages. Path retrieval requires serializing entities and relations. Community retrieval can return derived summaries. These choices determine which original details and relationships remain available to generation.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 87
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 91,
+    "before": "The meaning of a path also depends on how the graph represents the source. Entity links extracted from a passage can provide a relational account of that passage, while passage nodes retain a route to its original wording. Combining graph serialization with source chunks lets the generator receive both relational organization and textual context. AGRAG uses such a combination in its hybrid retrieval pipeline. This connection between the selected structure and the original material is also relevant to multimodal evidence, where a graph description can identify relationships while the original image supplies visual details.",
+    "after": "Passage nodes link extracted relations to their original wording. Combining graph serialization with source chunks gives the generator both connected facts and surrounding context. AGRAG uses this combination for text, and MGRAG retains source chunks containing the original images.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 91
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 98,
+    "before": "Multimodal indexing introduces a representation decision before graph retrieval. Images can be described through captions and indexed as text, or encoded with a model that produces visual or shared representations. These choices expose different information to the retrieval score. A caption provides language describing selected visual content; the original image preserves visual details available to a multimodal generator. MGRAG uses caption-based representations in its coarse-ranking pathway and later supplies selected original chunks to generation~\\cite{bg-mgrag}. Its method chapter specifies the interface at each stage.",
+    "after": "Images can be ranked through captions or visual embeddings. Captions expose selected visual content in a text embedding space, while the original images preserve details for multimodal generation. MGRAG ranks images through captions and supplies selected original chunks to the answering model~\\cite{bg-mgrag}.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 98
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 106,
+    "before": "MGRAG brings graph information into selective recomputation~\\cite{bg-mgrag}. Its retrieved structure contributes information about which evidence tokens participate in relevant relationships, together with attention-based signals. This extends structural augmentation from representing and selecting context to allocating computation within it. The cache contribution is consequently part of the chapter's main analysis.",
+    "after": "MGRAG supplements attention-based recomputation scores with features of the retrieved graph~\\cite{bg-mgrag}. The graph therefore guides both context selection and the computation reused when that context is processed.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 106
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 134,
+    "before": "The association of a qualifier with a statement is especially relevant when a subject participates in several facts using the same relation. In the education example, a degree describes one university attendance statement. A collection of subject--degree and subject--university triples exposes the entities but changes the representation of which degree qualifies which attendance fact. A model following ordinary graph paths then receives the transformed connections. The Hyper method supplies additional connections intended to retain more of these associations, whereas a qualifier integrator receives the main fact and its qualifier pairs together. This comparison places information preservation at the interface between the data representation and the computation that follows it. It concerns the semantic organization of the input as well as its vocabulary.",
+    "after": "Qualifier associations matter when a subject participates in several facts with the same relation. For example, a degree qualifies a particular university attendance statement. Separate subject--degree and subject--university triples retain the entities but change how that association is represented. Hyper adds connections intended to preserve these associations. A qualifier integrator instead receives the main fact and its qualifier pairs together.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 134
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 136,
+    "before": "The experiments compare conventional KGE models under these transformations with specialized HKGE models. Some GNN-based KGE configurations obtain scores comparable to specialized methods on Cleaned JF17k and WD50k. The observation motivates an examination of the represented information and the architecture receiving it. In particular, adding qualifier-derived edges can change the paths followed by a graph encoder. Preserving more items in a converted graph therefore changes the model's computational input as well as the nominal amount of stored information.",
+    "after": "We compare conventional KGE models under these transformations with specialized HKGE models. Some GNN-based configurations obtain comparable scores on Cleaned JF17k and WD50k. Adding qualifier-derived edges changes the graph paths available to an encoder, so information preservation depends on both the transformed data and the model that processes it.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 136
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before_line": 174,
+    "before": "The complete published comparison also includes Wikipeople and FBAUTO, with different dataset characteristics and metric rankings. The research establishes that the organization of graph information can matter beyond retaining the same entity and relation vocabulary. Its connection to this thesis is the design question of which relationships remain available to a model after evidence transformation.",
+    "after": "The complete comparison also includes Wikipeople and FBAUTO, with different dataset characteristics and metric rankings. The study shows how changing the organization of graph facts changes the information available to a prediction model.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 174
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 9,
+    "before": "This chapter is based on the published paper \\emph{KGLink: A Column Type Annotation Method that Combines Knowledge Graph and Pre-Trained Language Model}~\\cite{kglink-publication}. It studies how a knowledge graph can supply information missing from a table and how a pre-trained language model can translate that information into the type vocabulary of a particular annotation task. The prediction target is a column label. Graph evidence enters the model through candidate types and a separate feature sequence, while a supervised representation task connects the evidence to the dataset's annotation scheme.",
+    "after": "This chapter is based on the published paper \\emph{KGLink: A Column Type Annotation Method that Combines Knowledge Graph and Pre-Trained Language Model}~\\cite{kglink-publication}. We propose KGLink to annotate table columns using external graph knowledge. The method selects candidate types and graph-derived feature sequences, then learns their correspondence to the annotation labels through a contextual representation objective.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 9
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 14,
+    "before": "A table often presents entities through short names, abbreviated strings, or numbers. These values provide only part of the information needed to identify a column's semantic type. A column containing names of cricket players may appear beside birth and death dates. Those dates describe the people but do not specify their occupation. A language model that encodes only the table receives a different evidential basis from a model that also has access to relations such as occupation and sport in a knowledge graph. The annotation problem therefore concerns both interpreting the available text and selecting external information that clarifies it.",
+    "after": "A table may contain too little context to determine a column type. For example, names of cricket players accompanied by birth and death dates do not reveal their occupation. Linking those names to a knowledge graph can supply occupation and sport relations that are absent from the table.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 14
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 18,
+    "before": "These two difficulties give structure distinct roles. Relations between linked entities can help identify relevant knowledge, while supervised learning can determine how that knowledge should influence a dataset-specific prediction. Treating graph types as final labels combines those roles too early. Treating the table as an isolated sequence omits the external relations. KGLink keeps graph evidence available to a learned classifier and trains an auxiliary task that generates a contextual representation of the target type. The learned classifier maps graph-derived evidence into the task's output classes.",
+    "after": "We address missing context and type granularity through separate steps. Graph processing selects relevant external descriptions, while a supervised classifier learns the dataset labels. An auxiliary task trains a contextual representation of the target type so that the classifier can use graph descriptions even when their wording differs from the annotation vocabulary.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 18
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 20,
+    "before": "The scope of the chapter is column-type annotation on the evaluated SemTab and modified VizNet datasets. Reasoning takes the form of inferring a semantic category from cells, their table context, and graph-derived evidence. The language model is an encoder trained for classification. Its output is drawn from the dataset's label set. This task establishes the first setting examined in the thesis, where an existing graph augments a model's representation before prediction.",
+    "after": "We evaluate single-label column annotation on SemTab and modified VizNet. The encoder predicts a dataset label from the cells, table context, and selected graph descriptions.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 20
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 54,
+    "before": "The two graph inputs have different selection rules. Candidate types aggregate evidence across linked cells and retain types supported by the column. A feature sequence describes a selected linked entity and its neighboring relations. The latter supplies another route for KG information when candidate-type selection produces little evidence. Neither input changes the classifier's output vocabulary. For example, a candidate type describing an occupation can support a broader annotation category through the learned model even when the strings differ.",
+    "after": "Candidate types summarize descriptions supported by linked cells across a column. The feature sequence retains an entity and its neighboring relations from a selected cell. Both enter the learned classifier, which predicts a label from the dataset vocabulary.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 54
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 56,
+    "before": "The framework also controls the amount of table content passed to the encoder. Entity linking and row selection precede serialization. The retained rows provide a bounded view of the table, and wide tables are split by columns under the reported input constraints. These operations matter because inserting external knowledge competes with cell content for the encoder's finite input length. KGLink selects graph evidence and table rows before encoding.",
+    "after": "Graph descriptions and cell values share the encoder input budget. We therefore select rows before serialization and split wide tables by columns under the input limits.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 56
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 66,
+    "before": "This distinction is relevant for short strings. An album title and an ordinary word may share the same surface form, while a person's name can refer to several people. Lexical matching can identify plausible entries without determining which one belongs in the current table. KGLink uses the table's row structure in the next step to provide this disambiguating context. A cell's candidate set is consequently an intermediate object whose members can be removed when their graph relations disagree with evidence from other columns.",
+    "after": "Short strings are often ambiguous. An album title can match an ordinary word, and a name can refer to several people. We use relationships between cells in the same row to filter these lexical candidates.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 66
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 68,
+    "before": "Numeric and date mentions are handled separately. The reported procedure uses named-entity detection to identify these mentions and assigns them a linking score of zero. A failed entity lookup also receives a zero linking score. The subsequent model still receives the table values, so absence of a graph link does not remove a column from the annotation task. The language-model component provides the classification pathway for columns with missing KG evidence.",
+    "after": "Named-entity detection identifies numeric and date mentions, which receive a linking score of zero. Failed lookups also receive zero. The original cell values remain in the encoder input, allowing classification when KG evidence is missing.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 68
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 70,
+    "before": "The experimental implementation retrieves at most ten entities per cell mention. This limit bounds the candidate sets that enter the subsequent neighborhood operations. Graph-based filtering and row ranking select among the retrieved evidence before it reaches the annotation model.",
+    "after": "We retrieve at most ten entities per cell mention, then apply neighborhood filtering and row ranking before constructing the encoder inputs.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 70
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 93,
+    "before": "Neighborhood support is a structural selection signal. It depends on the relations recorded in the external graph and on the initial entity candidates. A missing graph relation can remove useful evidence, while an incorrect lexical candidate can survive if it has matching contextual links. The model therefore also uses the original table sequence and a separate feature representation.",
+    "after": "Filtering depends on both the initial entity candidates and the relations present in the knowledge graph. A missing relation can discard a useful candidate, while an incorrect candidate can survive through a matching contextual link. The encoder also receives the original table values and the separate feature sequence.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 93
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 102,
+    "before": "The filter uses inter-column information within a row, whereas candidate-type generation aggregates across rows within a column. These are different structural assumptions. The first exploits the relation between attributes of the same record. The second looks for recurring semantic descriptions of several values occupying the same column. Separating them clarifies why a relevant neighbor of one entity is insufficient on its own to determine a column's type.",
+    "after": "Filtering uses relationships between cells in the same row. Candidate-type generation then aggregates recurring descriptions across rows in a column.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 102
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 119,
+    "before": "This operation changes which examples of a column the language model observes. Selecting the first $k$ rows preserves the source table's order; ranking by linkage favors rows with more lexically supported graph evidence after filtering. The latter can make the external evidence more useful within the same row budget. The row-filter experiment compares the two selection rules while retaining the reported input limit.",
+    "after": "Linkage ranking favors rows with graph-supported candidates, while taking the first $k$ rows follows the source order. The row-filter experiment compares these rules under the same input budget.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 119
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 121,
+    "before": "Row selection also connects the graph and feature pathways. The feature sequence is generated from a selected cell associated with the highest-ranked row. Changing the row order can therefore affect the table content and the KG entity used to form that sequence. The row-selection experiment evaluates this coupled selection mechanism.",
+    "after": "The highest-ranked row also supplies the selected cell used for feature-sequence generation. Row ranking therefore changes both the table values and the KG entity passed to the encoder.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 121
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 136,
+    "before": "Candidate types and feature sequences thus preserve different aspects of a neighborhood. Candidate selection emphasizes descriptions recurring across column values. The feature sequence retains relational details surrounding a particular well-linked value.",
+    "after": "",
+    "type": "D11",
+    "reason": "The paragraph repeats the two input definitions immediately above."
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 189,
+    "before": "Training uses the true-type and masked inputs, while evaluation uses the masked input. The auxiliary objective therefore learns from labels available in training and generates a type representation from the ordinary table and retrieved evidence at prediction time. This pathway also serves numeric columns and columns without a retrieved KG candidate.",
+    "after": "Training uses both true-type and masked inputs; evaluation uses the masked input. The model thus learns from annotated types during training and predicts from table values and retrieved descriptions at inference, including for numeric columns and columns without KG candidates.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 187
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 191,
+    "before": "The classifier and the auxiliary task also use different output spaces. Classification predicts one of the dataset's column labels. The auxiliary representation is projected into the language model's vocabulary space. Their relationship is learned through the shared encoder and joint training. The final decision uses the dataset-specific classification head.",
+    "after": "The shared encoder is trained jointly for dataset-label classification and vocabulary-space type representation. The classification head produces the final column label.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 189
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 213,
+    "before": "The trainable weights allow the two objectives to contribute at different scales during optimization. They weight the training objectives, while row linking scores govern input selection. These mechanisms connect graph evidence to prediction at different stages of the pipeline.",
+    "after": "The trainable task weights balance the representation and classification losses during optimization.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 211
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 225,
+    "before": "The expression includes neighborhood aggregation and the cross-column candidate operations. It makes explicit that table dimensions and graph retrieval size affect preprocessing even when the later encoder length is capped. An increased candidate-set limit changes the graph-processing workload before any table tokens are encoded.",
+    "after": "Neighborhood aggregation and cross-column candidate filtering contribute to preprocessing. Increasing the candidate-set limit adds graph work even when the encoder input remains capped.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 223
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 229,
+    "before": "These costs describe different resources. Reducing the retained row count can shorten preprocessing or input preparation without proportionally changing a sequence already truncated to its token limit. Increasing candidate retrieval can add neighborhood work even when the encoder input remains fixed.",
+    "after": "Reducing the row count need not shorten a sequence already truncated to its token limit. Graph preprocessing and encoder computation can therefore respond differently to the same input-selection change.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 227
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 339,
+    "before": "The examples distinguish relevance from exact label identity. Protein columns can receive KG candidates such as Gene or Enzymes. Film columns can receive Television series, Scholarly article, or Book. These descriptions contain related semantic information but are different from the desired annotation label. The contextual representation task uses the dataset label during training to learn how the retrieved descriptions and cell values jointly relate to that label. It therefore addresses a correspondence between evidence and task vocabulary that candidate-type retrieval alone leaves unresolved.",
+    "after": "Protein columns can retrieve KG descriptions such as Gene or Enzymes, while Film columns can retrieve Television series, Scholarly article, or Book. These descriptions are related to the cell values but differ from the annotation labels. The contextual representation task learns how to use them jointly with the column contents.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 337
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 341,
+    "before": "The Athlete example makes the same issue visible at a broader semantic level. Graph evidence can identify that the values denote athletes even when the dataset expects another level of description. KGLink preserves that evidence as language-model input and lets supervised annotation determine the output category.",
+    "after": "The Athlete example shows the same granularity gap. KGLink retains the graph description as input and learns the annotation category from supervised examples.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 339
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 362,
+    "before": "Table~\\ref{tab:kglink:row-filter} evaluates row ordering. The linkage-ranked filter gives higher reported scores than taking the original top rows on both datasets. The change is larger on SemTab. Since the filter also determines the cell used for feature-sequence generation, this comparison concerns the method's complete linkage-based selection rule. It provides evidence that the ordering of available table evidence matters under the fixed input constraints.",
+    "after": "Table~\\ref{tab:kglink:row-filter} shows that linkage-ranked rows improve annotation over taking the first rows on both datasets, with a larger change on SemTab. The filter also selects the cell used for the feature sequence, so the comparison measures both effects of row ranking.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 360
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 399,
+    "before": "KGLink uses explicit structure at two levels. Within a table row, graph neighborhood connections filter ambiguous entity candidates. Across the rows of a column, recurring graph neighbors support candidate-type selection. These operations determine what external text the encoder receives. The classifier then learns the relation between that evidence and a dataset's label vocabulary. The auxiliary representation task supplies an additional supervised connection between contextual evidence and the intended type description.",
+    "after": "We proposed KGLink to supply missing table context and learn the correspondence between graph descriptions and annotation labels. Cross-column filtering selects entity candidates, recurring neighborhoods supply candidate types, and the contextual representation objective trains the encoder to use this information.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 397
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 401,
+    "before": "The empirical results support this division of responsibilities. The full BERT configuration improves on the version without the masked representation task and on the version without KG information. The row-selection comparison shows that choosing which table values enter the model changes the reported annotation scores. The no-linkage subset confirms that a trained model can continue to annotate tables when the graph stage supplies no retrieved evidence.",
+    "after": "Removing either the masked representation task or KG information lowers the full BERT configuration's annotation scores. Linkage-based row selection also improves the results. On tables without retrieved KG evidence, the trained encoder continues to annotate from the table values.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 399
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 405,
+    "before": "The chapter answers the thesis's first research question by showing how graph-derived knowledge can augment a column representation while a learned model handles the target label granularity. The next chapter changes the evidence-maintenance problem. It studies classification when labels and observed examples arrive over successive rounds, using a task-specific graph to retrieve candidate labels and update the available evidence online.",
+    "after": "The next chapter studies a different classification problem, in which labels and examples arrive over successive rounds. It develops a task-specific graph that retrieves candidate labels and updates the index after each prediction.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 403
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 11,
+    "before": "A classification label defines a decision that an application asks a model to make. When the application adds a more specific category, the decision changes even if the underlying language model stays fixed. For example, a social media classification task can initially distinguish threatening language and later introduce identity insults. A model must then distinguish the new label from earlier labels using the available annotated examples. The difficulty concerns both learning the meaning of a new category and keeping the current alternatives visible during prediction.",
+    "after": "Dynamic classification must distinguish new categories from those introduced earlier. For example, an abuse classifier may initially recognize threatening language and later add identity insults. With few examples per class, the model must learn the new category while retaining access to earlier labels.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 11
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 13,
+    "before": "Few-shot classification supplies a small number of labeled examples for each class. Dynamic few-shot classification adds classes in successive rounds~\\cite{gorag-xia-etal-2021-incremental}. The size of the label universe therefore grows independently of the number of examples available for each label. A retrieval system must update its evidence source as classes arrive, and each prediction must refer to the label set available at that round. This setting differs from repeatedly evaluating a fixed classifier on an unchanged collection of labels.",
+    "after": "Few-shot classification provides a small labeled support set for each class. In the dynamic setting, new classes arrive in successive rounds~\\cite{gorag-xia-etal-2021-incremental}. The index must incorporate their examples while preserving evidence for the cumulative label set.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 13
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 15,
+    "before": "The task also exposes a limitation of simply placing more material in a language model's context. Additional examples provide information about labels, but a larger context can contain many examples that have little bearing on the current text. The candidate list itself grows as classes accumulate. Selecting text passages without narrowing the associated label alternatives leaves the model with a long classification instruction. GORAG therefore treats the selection of candidate labels as an explicit retrieval problem.",
+    "after": "Adding more examples to the prompt can introduce irrelevant context as the label set grows. Passage retrieval alone also leaves the generator to choose among all labels. We instead retrieve a candidate label set for each query.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 15
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 17,
+    "before": "The index used in this chapter is a weighted graph of keywords and labels. A keyword can occur in examples from several classes. Its incident edges record these associations, and their costs distinguish how the term is represented in the indexed corpus. The graph allows several query keywords to be considered jointly. A label can participate in the connection between query keywords even when examining one keyword in isolation would give an ambiguous set of alternatives. The retrieved label set depends on the query terminals and the current graph.",
+    "after": "We represent keywords and labels in a weighted graph. A keyword can connect to several labels, with an edge cost for each association. Connecting several query keywords selects labels jointly from their neighborhoods.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 17
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 21,
+    "before": "The research question has three connected parts. First, how should a small support set become a graph whose edges distinguish keyword--label associations? Second, how should the graph select a different candidate set for each text as the label universe expands? Third, how can observations from previously classified texts enlarge the index? The following sections develop these operations and then examine their reported classification and resource results.",
+    "after": "GORAG combines weighted indexing, connected candidate-label retrieval, and online insertion. The following sections define these operations and evaluate their classification accuracy and resource costs.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 21
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 72,
+    "before": "A statistical extraction score gives each retained term a numerical contribution before graph retrieval. This contribution has a different role from the final language model's confidence in a label. The score determines which lexical units are indexed and how expensive their associations will be in retrieval.",
+    "after": "",
+    "type": "D12",
+    "reason": "The score has already been defined as term correlation and its two uses are stated beside the equation; distinguishing it from classifier confidence is an unsolicited non-claim."
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 74,
+    "before": "Using short phrases can preserve a lexical combination that would be split by unigram indexing. At the same time, the extraction rule restricts what becomes a terminal later. Content absent from the extracted keyword set cannot directly act as a retrieval terminal for that query. The full query text remains available to the classifier, but its access to label evidence has already been shaped by the index representation.",
+    "after": "Short phrases preserve lexical combinations that unigram extraction would split. Only extracted terms can become retrieval terminals, although the classifier still receives the full query text.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 72
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 86,
+    "before": "An edge weight thus belongs to a particular keyword--label pair. It is not a global importance weight assigned to the keyword irrespective of class. The same keyword may occur in several label contexts, and the corresponding averages can differ. Retrieval uses the resulting cost structure together with connectivity. Replacing every cost by one preserves the graph's adjacency while removing this distinction, which is the purpose of the unit-weight ablation.",
+    "after": "The same keyword can have different edge costs for different labels. The unit-weight ablation replaces all costs with one while preserving adjacency, testing whether these association-specific costs help retrieval.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 84
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 88,
+    "before": "The averaging rule also identifies the granularity at which evidence is combined. Texts are not concatenated into one label description before the edge is scored. Each contributing text supplies a correlation value and the edge records their mean complement. A later text can contribute another occurrence to the associated pair. This design lets the index summarize recurrent lexical associations without putting every support text into each classification prompt.",
+    "after": "Each observed text contributes a correlation value to its keyword--label pair. Averaging these values summarizes repeated associations without concatenating every support text into the classification prompt.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 86
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 93,
+    "before": "At each round, the graph created from newly supplied information is merged with the graph accumulated from earlier rounds. The node and edge sets are unions. This operation retains the label universe already introduced while adding nodes and associations for the new task state. It differs from rebuilding a fresh graph containing only the most recently introduced labels, which would remove access to earlier alternatives.",
+    "after": "At each round, we merge the new graph with the accumulated index by taking the unions of their node and edge sets. Earlier labels and their associations remain available for subsequent retrieval.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 91
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 106,
+    "before": "Label bridges have a different evidential meaning from keyword--label edges. A keyword edge records a term's occurrence in texts associated with a class. A label bridge is added by the graph-merging procedure. It provides a connection through which retrieval can move between label regions. A retrieved path can therefore combine observed keyword associations with label bridges introduced during merging.",
+    "after": "Label bridges connect graph regions introduced in different rounds. Unlike keyword edges, which record observed term--class associations, they are created during graph merging.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 104
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 139,
+    "before": "Keeping the original query in this interface matters because keyword extraction removes ordering, local syntax, and surrounding discourse from the retrieval representation. The selected candidate set does not by itself determine how these features should affect the decision. The classifier can inspect the complete query alongside the retrieved label information. GORAG's keyword variant removes the full query from this input to test the contribution of that context under the same overall framework.",
+    "after": "",
+    "type": "D11",
+    "reason": "The original-query input, lost syntax, and keyword-only ablation were already explained in the indexing section and are directly specified by the context equation."
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 159,
+    "before": "The two terms account for label merging and keyword--text processing. This count treats the associated text-processing and graph operations at the granularity used in that analysis. The number of tokens processed by a language-model call depends on the prompt and generated output, so the empirical token study supplies a separate measurement of model-facing work.",
+    "after": "The two terms count label merging and keyword--text processing. Language-model token costs additionally depend on prompt and output lengths and are measured in the token study.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 155
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 161,
+    "before": "Per-query processing maps the extracted terms to the existing graph, obtains a connecting structure, builds the classification prompt, and inserts new terms after prediction. The index state can therefore grow during one round as well as between label rounds. Graph memory and prompt length measure different consequences of that growth. A larger stored index can provide more candidate associations while a query still receives only the labels selected by its own retrieval structure. The resource experiments report these two quantities separately.",
+    "after": "Each query maps its keywords to the index, retrieves a connecting structure, and constructs a classification prompt. New terms are inserted after prediction, so the index can grow within a round. The prompt contains only the labels selected for the current query.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 157
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 185,
+    "before": "The baseline collection tests several ways of allocating external context. NaiveRAG selects passages. LongLLMLingua changes which tokens remain in that context. The graph baselines select graph-associated information. GORAG explicitly selects labels through a connection structure and expands its lexical index online. These differences motivate the comparison, while the ablations isolate changes within GORAG's own pipeline more directly.",
+    "after": "",
+    "type": "D11",
+    "reason": "Repeats the baseline descriptions without adding a comparison result or a new control."
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 272,
+    "before": "The useful property of the example is that candidate selection has a visible provenance. The label is connected to more than one term in the indexed representation. The displayed nonterminal neighbor also shows that a keyword neighborhood can contain more information than the connection chosen for the current text. Selecting a structure distinguishes the evidence used to connect the query terms from other associations present around the same label.",
+    "after": "The insult label connects more than one highlighted query term. Other keyword neighbors remain outside the selected structure, showing how connected retrieval narrows the available label evidence.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 266
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 284,
+    "before": "GORAG places structure between the observation of text and the construction of a language model's classification instruction. Keywords connect the current text to an accumulated graph. Edge costs and terminal connections select a subset of label alternatives. The model then classifies the original text with these alternatives and their representative information. Structure serves as a task-specific evidence-selection mechanism.",
+    "after": "We proposed GORAG for dynamic few-shot classification. Weighted keyword--label connections determine the candidate set for each query, and the language model classifies the original text using those labels and their descriptions.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 278
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 288,
+    "before": "Retrieved paths show which keywords and labels connected the query terms during candidate selection. The classifier then uses the original text and retrieved label information to make its prediction.",
+    "after": "",
+    "type": "D11",
+    "reason": "Repeats candidate-path provenance already explained by the concrete case and the retrieval algorithm."
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 292,
+    "before": "The study shows how a task graph can reduce the label-selection burden placed on a language model and maintain lexical evidence as the task evolves. The contribution differs from KGLink's use of an existing knowledge graph to enrich table representations. Here the structure is built and updated from task data, and its immediate output is a query-specific label set. The next chapter turns from choosing among labels to selecting connected textual facts for an open-ended answer. That change requires a retrieval objective that accounts for the relevance and connection cost of evidence beyond a fixed classification vocabulary.",
+    "after": "GORAG maintains classification evidence as labels and observed vocabulary evolve. Chapter~\\ref{ch:agrag} turns to open-ended answers, where retrieval must select connected facts and the passage context needed to explain them.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 284
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 8,
+    "before": "A retrieval system can locate passages relevant to a question while still leaving the generator with the task of discovering how those passages fit together. This distinction matters when a question asks for a summary, an explanation, or a response that combines information from different parts of a corpus. Similar passages may repeat one fact. Passages containing different parts of an answer may share few words. A graph provides an explicit representation of these connections, but the system must still decide which part of the graph to supply to the generator.",
+    "after": "A question can require facts from several parts of a corpus. Independently retrieved passages may repeat one fact or leave the relationships between different facts implicit. A graph records these relationships, but retrieval must still select a subgraph that contains enough information for the answer.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 8
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 10,
+    "before": "The research question in this chapter is how to select evidence that combines query relevance with connectivity. There are two related decisions. The first concerns the construction of the graph from text. Extracted entities establish the vocabulary over which subsequent retrieval operates. The second concerns the subgraph returned for a query. A ranking of individual nodes assigns relevance scores, whereas a connected subgraph also specifies relationships among the selected items. AGRAG addresses these decisions through statistical entity extraction, influence-aware graph retrieval, and a separate hybrid passage retrieval channel.",
+    "after": "We propose AGRAG to select connected evidence using query relevance and graph influence. Statistical extraction determines the entity vocabulary, semantic costs rank connections, and neighborhood expansion adds facts around the query anchors. A hybrid passage channel supplies context omitted by the graph representation.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 10
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 16,
+    "before": "The evidence representation has two levels. Entity and relation information expresses specific connections. Passage nodes preserve links to the text from which those connections were extracted. The graph serialization gives the generator a relational account of the retrieved material, while passages provide the language surrounding those facts. This division is central to AGRAG. A retrieved graph may identify the relevant relationship without preserving every qualification or explanatory detail in a paragraph. The hybrid channel supplies contextual material alongside the graph.",
+    "after": "Entity--relation edges represent facts, while passage nodes link those facts to source text. We supply both the selected graph and retrieved passages to the generator so that it can use relational connections alongside their surrounding explanations.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 16
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 32,
+    "before": "The stages have different update requirements. Chunking, entity extraction, relation extraction, and the construction of passage links belong to corpus indexing. Mapping a query to graph facts, computing its influence scores, and expanding its evidence subgraph occur during query processing. Dense and sparse passage indexes support the hybrid channel. This organization identifies which costs arise from preparing the corpus and which recur for each query.",
+    "after": "Corpus indexing performs chunking, entity and relation extraction, passage linking, and dense and sparse indexing. Query processing maps the question to facts, computes influence scores and edge costs, expands the evidence subgraph, and retrieves hybrid passages.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 32
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 58,
+    "before": "The extraction rule uses terms appearing in the corpus. This constrains the origin of entity strings and makes their relationship to the indexed text explicit. Its decisions are based on term statistics, so linguistic salience and factual importance need not coincide. A frequently mentioned generic term and a rare but relevant phrase have different statistical profiles. The sensitivity experiment therefore examines both the phrase boundary and the extraction threshold.",
+    "after": "Statistical extraction selects strings present in the corpus. Term frequency does not directly measure factual importance, so a generic expression can score differently from a rare but relevant phrase. We examine the n-gram boundary and threshold in the sensitivity study.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 58
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 60,
+    "before": "An entity string identifies a graph node, while its occurrences connect that node to passages. This provides a path from fine-grained graph retrieval back to textual evidence. A shared entity can also connect information across chunks. The utility of these connections depends on whether the extracted string captures the intended entity and whether occurrences have compatible meanings.",
+    "after": "Shared entities connect passages in the graph. These links are useful when the extracted strings identify compatible entities across their occurrences; ambiguous mentions can instead create misleading connections.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 60
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 92,
+    "before": "The filtered set $\\mathcal{F}$ defines the query anchors. Dense mapping and filtering play different roles. Dense mapping produces a short candidate list efficiently. Filtering evaluates the candidates jointly with the actual query. The filtering ablation removes the second operation and tests its contribution to answer quality and cost.",
+    "after": "The filtered set $\\mathcal{F}$ supplies query anchors. Dense mapping produces the candidate list, and the model checks its relevance to the question. The filtering ablation removes this second step.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 92
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 94,
+    "before": "The anchors determine where graph retrieval starts. They do not themselves specify the complete answer context. Facts connecting or surrounding the mapped set can be useful even when their direct similarity to the query is lower. Graph influence provides a way to score these surrounding items using their connection to the mapped facts. Edge costs then retain a separate measure of semantic relevance during subgraph construction.",
+    "after": "Facts around the anchors can contribute to an answer even when their direct query similarity is lower. We propagate influence from the mapped facts to score this surrounding evidence and use semantic edge costs when selecting its connections.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 94
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 116,
+    "before": "The node score is computed before neighborhood expansion. Consequently, a candidate's influence refers to its position in the indexed graph under the query anchors. The subgraph selection procedure uses these assigned scores as it changes which edges and nodes are included. This distinction separates propagation over the evidence source from expansion of the context returned to the model. The former establishes a score landscape; the latter selects an evidence structure using that landscape and the semantic edge costs.",
+    "after": "We compute node influence on the indexed graph before expansion. These scores remain assigned to the nodes while the retrieval procedure selects which nodes and edges to include.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 116
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 118,
+    "before": "Influence and direct similarity answer different retrieval questions. Similarity asks how closely a triple's wording corresponds to the query. Influence additionally depends on graph connectivity to query anchors. A node can receive influence through connections to several mapped facts. The subgraph selection stage uses these scores alongside edge costs so that the retrieval decision reflects both kinds of information.",
+    "after": "Direct similarity scores a triple against the question. Influence also reflects its connections to the query anchors, allowing evidence connected to several mapped facts to receive retrieval weight.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 118
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 125,
+    "before": "Higher semantic similarity gives a lower factual edge cost. The influence score is attached to nodes, while the similarity cost is attached to edges. Keeping these quantities separate allows the method to favor relevant connected information without choosing nodes solely by their influence rank.",
+    "after": "Higher similarity gives a lower factual edge cost. Subgraph selection combines these edge costs with node influence scores.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 125
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 127,
+    "before": "The pseudo edges retain their explicitly assigned penalty. Their role is to provide connectivity when the semantic graph alone separates the anchors. A path using a pseudo edge can therefore be feasible but expensive. The distinction between a low-cost semantic connection and a high-cost connectivity connection helps explain how graph connectivity participates in evidence selection.",
+    "after": "Pseudo edges retain their assigned penalty, providing an expensive route when factual connections alone cannot connect the anchors.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 127
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 137,
+    "before": "The cost of an included edge is scaled by the influence of its endpoints. The expression specifies the reported optimization formulation. The implementation procedure described in the paper starts from a terminal-connecting tree and then expands its neighborhood using marginal cost-to-score comparisons.",
+    "after": "The objective scales each included edge cost by the influence of its endpoints. We construct an initial terminal-connecting tree, then expand its neighborhood using marginal cost-to-score comparisons.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 137
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 153,
+    "before": "The purpose of expansion is to include additional graph facts around the anchor-connecting structure. A tree represents one economical way to connect terminals. Additional relations can provide evidence about answer components absent from that tree. The original MCMI example depicts a cyclic structure containing such information. The output is supplied to the generator as a graph, so its relation strings communicate more than the membership of individual retrieved passages.",
+    "after": "Expansion adds neighboring facts that can supply answer components absent from the initial tree. The resulting structure can contain cycles, as shown in the MCMI example, and its selected relations are serialized for generation.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 153
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 165,
+    "before": "The example gives a concrete reason to inspect the neighborhood of an initial connection. The mapped facts need not name every component required in the answer. An additional relation can identify a candidate answer and connect it to the query anchors. The edge-cost and influence quantities determine how this information is considered by the expansion procedure. The selected subgraph then exposes the retained relationships to the generator as named facts, alongside its passage context.",
+    "after": "In this example, the added relation supplies an answer component absent from the mapped facts. Influence scores and edge costs determine whether expansion includes that neighboring evidence.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 165
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 182,
+    "before": "The two components of the score respond to different kinds of correspondence. Dense similarity compares distributed representations of a query and passage. BM25 responds to lexical overlap and term weighting~\\cite{agrag-robertson2009probabilistic}. AGRAG averages the two scores as specified in the paper, then combines the selected chunks with the graph serialization. The hybrid channel is therefore an additional source of passage context rather than a separate graph expansion rule.",
+    "after": "Dense retrieval scores semantic similarity, while BM25 scores lexical overlap~\\cite{agrag-robertson2009probabilistic}. We average them and combine the selected passages with the graph serialization.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 182
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 189,
+    "before": "This input has a query, an explicit selected relational structure, and supporting passage content. The graph identifies connected facts. The passage channel supplies contextual language that graph extraction may omit. The ablations test both a graph-only condition and a hybrid-only condition, allowing the evaluation to distinguish their contributions.",
+    "after": "The generator receives the question, selected graph facts, and hybrid passages. Graph-only and hybrid-only ablations test the contributions of the two evidence channels.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 189
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 199,
+    "before": "The distinction between indexing and querying is useful in deployment. An index is prepared once for a fixed corpus, while query filtering and generation recur for each query. An application with many queries can amortize index preparation, but its response latency still depends on online graph processing and the amount of generated text. Token counts and separate indexing/querying times are therefore retained in the evaluation.",
+    "after": "A fixed corpus index can be reused across queries. Mapping, filtering, graph selection, and generation recur for each question, so index preparation can be amortized while query latency still depends on graph processing and generated output length.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 199
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 201,
+    "before": "The evidence graph also requires storage for entity strings, relations, and passage associations. The source gives storage in terms of graph nodes, edges, and text chunks. These objects contribute to the index storage. Practical storage depends on how embeddings, text, and adjacency structures are represented, while the experimental efficiency table reports time and token use rather than a measured memory comparison.",
+    "after": "The index stores entity strings, relations, embeddings, passage associations, and graph adjacency. Its memory use depends on their representations. The efficiency experiments measure time and tokens.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 201
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 236,
+    "before": "The two denominators identify different evidence requirements. Coverage uses the required reference information; faithfulness uses the claims actually made. A response omitting a required fact can lose coverage even when its remaining statements are supported. Conversely, adding unsupported claims affects faithfulness even if all reference evidence is mentioned. The source evaluates these judgments through its model-based assessment procedure.",
+    "after": "Coverage measures required reference information, while faithfulness measures support for the claims actually generated. Omitting a required fact lowers coverage; adding an unsupported claim lowers faithfulness. These judgments use the model-based assessment procedure.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 236
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 298,
+    "before": "AGRAG places structure at two points in the evidence pipeline. Graph construction determines which entities, relations, and passage links are available. Query-time selection determines how those items are connected in the context supplied to the generator. The hybrid retriever preserves a route to passage information outside the selected graph. The method consequently treats graph evidence and textual context as complementary representations of the indexed corpus.",
+    "after": "We proposed AGRAG to retrieve connected facts while retaining their source context. Query-conditioned influence and semantic edge costs guide subgraph expansion, and hybrid passage retrieval supplements the selected graph.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 298
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 302,
+    "before": "The experimental distinction between faithfulness and coverage is especially relevant to the thesis. Removing hybrid context can retain or improve one grounding measure while decreasing the amount of required evidence expressed in an answer. Replacing the expanded subgraph with a tree affects the evaluated tasks differently.\\par",
+    "after": "Removing hybrid context can retain high faithfulness while reducing coverage. Graph facts can support the claims that are generated yet omit information needed for the full answer. Expansion beyond the initial tree also helps summarization and creative generation, while its effect on fact retrieval is smaller.\\par",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 302
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 307,
+    "before": "The chapter answers the third research question by developing a pipeline that combines node influence, semantic edge costs, connected evidence selection, and hybrid passage context. The published experiments identify its effects across fact retrieval, complex reasoning, summarization, creative generation, and classification. Chapter~\\ref{ch:mgrag} adds multimodal evidence and asks how a query graph can match semantically corresponding paths even when the query and evidence graphs have different topologies.",
+    "after": "AGRAG addresses connected evidence selection for textual tasks. Chapter~\\ref{ch:mgrag} extends the problem to multimodal evidence, where a query relation may match a path with a different topology.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 307
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 9,
+    "before": "An answer to a multimodal query may depend on a relation that is distributed across text and images. A document can name a person, an image can show an action, and another passage can connect that person to an event. Retrieving each item by its similarity to the query supplies candidate evidence, but the relation needed for the answer can remain implicit. A graph makes the entities and their connections available as a retrieval object. Its usefulness depends on which facts are extracted and on whether its representation can express the relation requested by the query.",
+    "after": "Multimodal questions can require relationships distributed across text and images. A passage may name a person, an image may show an action, and another passage may link that person to an event. Retrieving the items independently can leave the required connection unresolved. We construct query-related graphs and match their paths to the relationships requested by the question.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 9
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 13,
+    "before": "Three decisions govern this process. The first concerns when to construct a graph. A corpus-wide graph requires extraction before the query is known. Its entities and relations consequently reflect the extraction prompt's general description of the corpus. When an image contains several people, objects, and actions, the details relevant to one query can differ from those relevant to another. MGRAG places the query inside the extraction process and constructs the graph incrementally from ranked evidence. The graph is specific to the current query.",
+    "after": "The first challenge is extracting the right facts. A corpus-wide graph is constructed before the question is known, and its extraction prompt may omit a visual detail needed later. We instead include the query in extraction and incrementally construct an evidence graph from ranked chunks.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 13
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 26,
+    "before": "These decisions extend the thesis from connected textual evidence to multimodal evidence whose semantic decomposition is query-dependent.",
+    "after": "",
+    "type": "D11",
+    "reason": "The transition restates the chapter topic without developing construction, matching or recomputation."
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 42,
+    "before": "For generation, MGRAG uses the graph sequence $S_r$, the original chunks $\\mathcal C_q$ consumed during construction, and the query $q$. Keeping the chunks preserves access to text and visual evidence beyond the extracted triples. Their identity also links the selected graph to the material originally ranked and processed during construction. The graph gives the generator an explicit selection of relational content, while the source chunks provide the material from which the selection was made. The final multimodal context retains the original images alongside their extracted relational representation.",
+    "after": "For generation, MGRAG combines the graph sequence $S_r$, the original chunks $\\mathcal C_q$ consumed during construction, and the query $q$. The chunks retain source text and original images, including details omitted from the extracted triples.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 40
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 63,
+    "before": "This stage gives a query-dependent priority to relatively inexpensive chunk representations. Fine-grained processing begins with the nearest chunk and can move down the list when its current graph is insufficient. A high-ranked chunk becomes a candidate for relational extraction and subsequent matching. Conversely, graph matching can stop construction before every candidate has been processed. The coarse-to-fine design separates the cost of ordering the corpus from the cost of extracting its query-related facts.",
+    "after": "Fine-grained retrieval processes chunks in coarse-ranking order. Each chunk can add facts needed for a match, and construction stops when matching succeeds or the iteration budget is exhausted.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 61
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 72,
+    "before": "MGRAG asks the language model to extract entities and relations from the query. Some query entities are known, such as the name of a person or an object appearing in the question. Others are requested by the question. The extraction prompt represents those unknown components using semantically meaningful placeholders, including types such as \\emph{Person} or \\emph{Year}. A placeholder provides a textual representation that can be compared with evidence entities even though its value has not yet been supplied.",
+    "after": "We extract entities and relations from the query. Known entities retain their descriptions, while requested values use semantic placeholders such as \\emph{Person} or \\emph{Year}. The matcher can compare these placeholders with evidence entities before the answer values are known.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 70
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 85,
+    "before": "The example separates identifying the film from reading its release year. The actor's name alone can lead to several film candidates, including the other film shown in the graph. The visual relation supplies the condition that distinguishes the requested candidate. Once the candidate is connected to the poster evidence, the release relation provides the requested value. The query therefore needs a connected account of the actor, film, depicted action, and year. A list containing a similar actor passage and an unrelated year passage would leave that correspondence unresolved.",
+    "after": "The actor name leads to several film candidates. The poster action distinguishes the requested film, whose release relation then supplies the year. Matching must therefore connect the actor, film, visual action, and release date.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 83
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 87,
+    "before": "The placeholders give the matcher explicit locations for these missing values. The film placeholder can be compared with named film entities, while the year placeholder marks the relation whose endpoint supplies the requested answer. Representing unknown values by their semantic roles lets matching operate before those values are known. The path procedure then tests whether the selected evidence entities are connected through semantically suitable relations. This is the point at which the query's information requirement becomes a constraint on the retrieved graph.",
+    "after": "The film placeholder aligns with a candidate film entity, and the year placeholder marks the requested release value. Path matching checks the relationships connecting those entities.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 85
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 89,
+    "before": "The query graph expresses a retrieval requirement at entity and relation granularity. Its construction is a model-mediated interpretation of the question. The downstream matcher operates on this interpretation, including the wording chosen for placeholders and relations. Errors in the extracted placeholders or relations can therefore change which evidence the matcher accepts.",
+    "after": "Extraction errors in query placeholders or relations can change the evidence accepted by the matcher.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 87
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 112,
+    "before": "Passage nodes give the matcher a route between a fact and its context. They can also connect facts associated with the same source item. The resulting graph combines extracted semantic relations with document-membership relations.",
+    "after": "Passage nodes connect extracted facts to their source chunks and can link facts from the same source item.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 110
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 118,
+    "before": "This design uses semantic coverage as an operational stopping test. Coverage is evaluated through the query graph's entities and relations, so a match requires more than one highly similar isolated entity. The procedure seeks a correspondence for the query's relational requirements. When the current graph lacks such a correspondence, additional evidence can introduce a missing endpoint, a relation, or a path between existing endpoints. The graph can therefore become matchable through information accumulated across chunks.",
+    "after": "If a required endpoint or path is missing, another chunk can supply it. Matching thus determines whether construction continues, using the relational requirements of the query graph.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 116
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 120,
+    "before": "The iteration cap controls the amount of evidence examined. It also bounds the opportunity to recover a fact that occurs late in the ranking. Reaching the cap and finding a valid match are distinct termination events. The matcher returns an empty result when its search finds no valid correspondence in the current graph. The cap, graph extraction, and matching threshold jointly determine which context reaches the answer generator.",
+    "after": "The iteration cap limits how far construction proceeds through the ranked list. A valid match can stop it earlier, while relevant evidence below the cap remains unexamined.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 118
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 132,
+    "before": "The aggregation operator can use mean pooling. This operation provides a representation of the composed evidence relation that can be compared with a query relation. The published greedy expansion further evaluates a joint representation containing the current path, candidate edge, and candidate endpoint. These are the path representation and extension test used at different steps of the procedure.",
+    "after": "The aggregation can use mean pooling to represent an evidence path. Greedy extension additionally compares the current path, candidate edge, and candidate endpoint with the query relation.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 130
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 151,
+    "before": "For a fixed candidate mapping, the inner maximization in Equation~\\ref{eq:mgrag:matching-objective} selects a supporting path for each query relation. The outer search compares entity mappings after those relation scores have been obtained. These levels distinguish the problem of locating the query's entities from the problem of explaining their relationships. Two mappings can have similar endpoint embeddings yet differ in whether their connecting paths satisfy the requested relation. Conversely, several paths between the same mapped endpoints can express different relations and receive different semantic scores.",
+    "after": "For a fixed entity mapping, the inner maximization in Equation~\\ref{eq:mgrag:matching-objective} selects a path for each query relation. The outer search compares mappings using these path scores. Similar endpoints can therefore produce different matching scores when their connecting paths express different relations.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 149
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 153,
+    "before": "The returned subgraph is assembled from the paths needed by the accepted query edges. Paths can share intermediate entities and edges. Their union exposes those shared facts in the evidence graph, while the query graph continues to specify which relational requirements were validated. A graph assembled in this way need not have the same number of entities as the query graph. Intermediate evidence nodes are precisely what permits a relation expressed compactly in the question to be supported by a more detailed description in the corpus.",
+    "after": "The returned subgraph is the union of the accepted paths, which can share nodes and edges. Intermediate entities allow a relation stated compactly in the question to match a longer description in the evidence.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 151
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 155,
+    "before": "This representation relaxes the requirement that the two graphs express a fact with the same number of edges. In the family-relation example, the evidence path has two steps and the query relation has one. Their correspondence is judged through semantic similarity. The procedure retains endpoint requirements, so the selected relation must connect entities that themselves correspond to the query. It combines entity-level alignment with path-level evidence instead of treating either component as sufficient on its own.",
+    "after": "In the family-relation example, two father relations support one grandfather relation. The path similarity must pass validation, and its endpoints must also align with the query entities.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 153
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 203,
+    "before": "The endpoint and threshold checks serve different roles. Reaching the target gives the evidence path the required relational endpoints. Passing the semantic checks gives it a representation consistent with the requested relation. An attractive local extension can still prevent the greedy search from reaching the target, so a failed search does not establish that all possible paths fail. The algorithm returns the best result among the valid candidates it finds.",
+    "after": "A path must reach the mapped target and pass the semantic checks. Greedy selection can follow a locally attractive extension that blocks a valid route, so search failure does not imply that no valid path exists. The algorithm returns the best accepted candidate it finds.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 201
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 205,
+    "before": "All query edges must pass path validation before a mapping is accepted. This condition prevents a single high-scoring relation from compensating for an unsupported required relation. The selected subgraph may contain paths of different lengths, because the evidence required by different query edges can have different decompositions. Construction then stops on that accepted match; otherwise, a further ranked chunk is incorporated and matching is attempted again.",
+    "after": "A mapping is accepted only when every query edge has a valid path. Accepted paths may have different lengths. The construction loop then stops; otherwise, it adds the next ranked chunk and repeats matching.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 203
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 219,
+    "before": "The same entities and relations were involved in the earlier graph-construction calls. Their tokens can therefore overlap with tokens in the answering context. MGRAG uses this relationship to reuse cached computation from construction while updating states important to the new answering context. The graph produced during retrieval thus becomes an input to the context-computation policy as well as to the language model's prompt.",
+    "after": "Construction and answering process overlapping content. We reuse cached states from construction and recompute selected tokens for the answering context.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 217
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 226,
+    "before": "A transformer caches key and value projections so that earlier token states can be reused. In MGRAG, content processed during graph construction appears again in the query-answering context. Recomputing every state repeats part of this work. Reusing every state can retain representations calculated under a different surrounding sequence. The cache policy chooses a subset for recomputation and reuses the others.",
+    "after": "MGRAG reuses key and value states from graph construction when their content appears in the answering context. Because the assembled context differs from the earlier extraction input, it recomputes selected token states and reuses the rest.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 224
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 253,
+    "before": "The graph feature concerns an entity's position in the query-specific graph. A node that connects several extracted facts can carry a different score from an isolated endpoint. Because extraction is query-dependent, the feature is calculated from a representation already selected for that query. Its meaning is relational importance within that graph, rather than a corpus-wide importance measure.",
+    "after": "The structural feature measures an entity's position in the query-specific graph. Nodes connecting several extracted facts can receive different scores from isolated endpoints.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 251
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 255,
+    "before": "The published graphs are small, with fewer than twenty entities on average according to the report. Averaging four graph statistics provides a direct structural feature for these graphs. The recomputation score uses graph and attention information available during processing.",
+    "after": "The graphs contain fewer than twenty entities on average in the published evaluation. We compute the four centrality measures on these query-specific graphs.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 253
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 265,
+    "before": "The first term expresses interaction with the current question. The second expresses interaction with the selected relational context. The third assigns the structural feature of the associated graph fact. The resulting sum determines which token states consume the recomputation budget.",
+    "after": "The score adds attention to the question, attention to the serialized graph, and the token's graph feature. Tokens with higher combined scores receive priority for recomputation.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 263
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 353,
+    "before": "The distinction between computational bounds and measured module costs is useful here. The graphs are built from query-selected evidence, so the matcher processes small instances in these experiments. Construction invokes the multimodal model on the selected chunks. Reducing the number of extracted chunks or the cost of each extraction could therefore affect the observed runtime substantially.",
+    "after": "Although mapping enumeration has an exponential bound, matching processes small query-specific graphs in these experiments. The measured bottleneck is repeated multimodal extraction. Reducing the number of processed chunks or the cost per extraction is therefore a target for runtime improvement.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 351
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 399,
+    "before": "MGRAG gives structure three connected responsibilities. Query-aware extraction determines which facts enter the graph. Path-based matching determines whether those facts express the relational requirements of the query. Graph features then influence the selection of token states for recomputation. The graph is consequently involved in constructing, selecting, and processing evidence, rather than serving only as a store from which a fixed number of items is retrieved.",
+    "after": "We proposed MGRAG to construct and match multimodal evidence for individual queries. Query-aware extraction selects relevant facts, semantic path matching connects them to the query, and graph-aware recomputation reuses processing from construction during answer generation.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 397
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 401,
+    "before": "The experiments support this design at several levels. Complete-system results report the highest values across the seven datasets' four answer metrics. Construction and matching substitutions evaluate the evidence representation and correspondence choices. The hop-group comparison shows additional quality gains for questions requiring more relational steps, together with added time. Cache comparisons and inverse ablations retain the context-serving contribution and expose its dependence on the surrounding retrieval pipeline.",
+    "after": "MGRAG obtains the highest values across the seven datasets' four answer metrics. Construction and matching substitutions show the benefits of query-dependent extraction and path semantics. The hop-group results show larger quality gains for questions requiring more relational steps, with added runtime. Cache and inverse-ablation results show how recomputation changes quality and cost within different retrieval pipelines.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 399
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 405,
+    "before": "For the thesis's central question, the chapter establishes a concrete extension from connected textual evidence to query-dependent multimodal evidence. Semantic paths allow relations to be represented at different granularities across the query and evidence graphs. Selective KV recomputation shows a further use of the retrieved structure in context processing. The following discussion compares these roles with the representations and retrieval objects studied in KGLink, GORAG, and AGRAG, using their respective tasks and published evidence.",
+    "after": "Semantic paths allow a query relation to match evidence expressed through several intermediate facts. The same graph can guide which cached token states are recomputed. The next chapter compares these uses of structure with external knowledge selection, online indexing, and connected textual retrieval.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 403
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before_line": 4,
+    "before": "The four studies place explicit structure at different points between an evidence source and a language-model output. KGLink enriches a column representation with knowledge outside the table. GORAG maintains associations that support candidate-label retrieval. AGRAG selects connected facts and passage context. MGRAG constructs and matches evidence for a query and uses graph features in context recomputation. This chapter compares those roles using the published evidence in the preceding chapters.",
+    "after": "The four methods use relationships to make different evidence decisions. KGLink selects external descriptions for table columns, GORAG retrieves labels from an evolving index, AGRAG collects connected facts and passages, and MGRAG matches multimodal evidence and guides its processing. We compare when these decisions occur, how their errors propagate, and what they imply for answer quality and computation.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 4
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before_line": 8,
+    "before": "The first research question concerns the representation received by a supervised encoder. KGLink's knowledge graph supplies candidate-type text and a feature sequence, while the task's labels supervise the final prediction. Its graph processing therefore precedes representation learning and inference. The important interface is the conversion from linked graph information to a sequence that the table encoder can use. Cross-column filtering makes the selected evidence depend on the table before the language model processes it.",
+    "after": "KGLink filters linked entities before the encoder reads the table. Its graph processing determines which candidate types and feature descriptions enter the model, while supervised training learns how those descriptions correspond to annotation labels.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 8
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before_line": 10,
+    "before": "The second question concerns selecting among task labels. GORAG uses graph connectivity to assemble a candidate set for the current text. The language model then performs label selection under this retrieved context. The graph changes as supervision and predictions become available under the round protocol. The index stores keyword--label associations, and retrieval uses them to determine which labels enter the classification decision.",
+    "after": "GORAG selects candidate labels before classification. Since predicted keyword--label associations are inserted into the index, one prediction can change the evidence retrieved for a later query.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 10
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before_line": 12,
+    "before": "The third question concerns connected evidence for generation. AGRAG adds an explicit graph serialization to the passage context. Query-conditioned influence and semantic edge costs guide selection of the subgraph. The hybrid channel retains access to text beyond the selected graph. This interface distinguishes the structural explanation of relationships among selected facts from the contextual wording of their source passages.",
+    "after": "AGRAG selects a connected subgraph for each query from a reusable corpus graph. Its hybrid retriever adds passages containing context absent from the selected relations.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 12
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before_line": 15,
+    "before": "The fourth question concerns both evidence selection and its processing cost. MGRAG uses a query graph to guide construction and semantic matching, then introduces graph information into token recomputation scores. The retrieval stage specifies which relationships support the query; the context stage uses associated structural features when choosing which cached computations to refresh. The same evidence representation thus participates in two computations with different objectives.\\par",
+    "after": "MGRAG makes query dependence part of graph construction. Matching controls whether another chunk is processed, and graph features determine which cached token states receive recomputation priority.\\par",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 15
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before_line": 34,
+    "before": "The comparison identifies an important design choice. A graph can supply more than additional facts. It can determine the unit that is selected, the relationships that remain visible in the model's input, and the computations performed on that input. The studies connect through the use of explicit relationships in task-specific computation.",
+    "after": "The selected structure controls both which facts reach the model and how their relationships remain visible. MGRAG further uses that structure to allocate context-processing computation.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 34
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before_line": 38,
+    "before": "The source of structure determines what can be adapted. KGLink begins with an existing knowledge graph. The graph contains information beyond the current table, but its coverage and vocabulary are external conditions. The method adapts the selection of linked evidence to the table and learns the target annotation scheme. Its supervision addresses how the evidence is used for prediction rather than reconstructing the external graph for each column.",
+    "after": "KGLink reuses an external knowledge graph and adapts evidence selection to each table. Learning changes how the model uses the selected descriptions; it does not rebuild the source graph.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 38
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before_line": 40,
+    "before": "GORAG constructs a task index from the limited data available to classification. Adaptation occurs through the addition and weighting of keyword--label relations. Its online protocol matters because an index enriched with earlier predictions differs from an index containing only the original labeled examples. A prediction used for indexing becomes part of the evidence available to later queries. The experiment consequently evaluates a sequence of index states as well as a classifier.",
+    "after": "GORAG updates a task index as labels and text arrive. Associations from earlier predictions become available to later queries, so classification performance depends on the sequence of index states.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 40
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before_line": 42,
+    "before": "AGRAG separates corpus preparation from query-dependent selection. The graph is built from the indexed text, and each query changes the mapped facts, node influence, edge costs, and selected evidence structure. This allows the same corpus graph to support different information needs. It also makes the relevance of a node depend on the query's anchors and its connections, rather than only on a fixed corpus-wide property.",
+    "after": "AGRAG prepares the corpus graph once, then changes query anchors, node influence, edge costs, and subgraph selection for each question. This amortizes graph preparation across repeated queries.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 42
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before_line": 44,
+    "before": "MGRAG moves query dependence into construction itself. Ranked chunks are consumed incrementally, and their extracted facts depend on the question. Matching provides a stopping condition for the growing graph. This choice can reduce the amount of graph material constructed for a query and focus extraction on its requirements. It also places construction work on the query path. The relevant cost comparison therefore includes query-aware extraction, matching, and generation.",
+    "after": "MGRAG extracts facts for each query as it consumes ranked chunks. Matching can stop construction before the full list is processed, but extraction and matching remain part of the query-time workload.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 44
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before_line": 50,
+    "before": "Evidence quality has several meanings across the studies. In KGLink, quality concerns the information supplied to a column representation and its relation to the target label vocabulary. In GORAG, it includes whether the retrieved candidates contain a useful label under the current index. In AGRAG, it concerns relevant connected facts and the coverage and grounding of generated content. In MGRAG, it includes semantic correspondence to the query and the quality preserved under selective recomputation.",
+    "after": "The relevant quality criterion follows the task. A column representation must support the expected type label. Classification retrieval must retain the correct candidate label. Generation requires both sufficient answer coverage and support for the claims produced. Cache reuse must preserve answer quality while reducing processing cost.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 50
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before_line": 74,
+    "before": "The AGRAG ablations illustrate a distinction within one study. Removing hybrid retrieval can retain a high faithfulness score while lowering coverage. The graph-only context can support its generated claims yet omit information required by the reference answer. Evidence selection therefore needs to consider both which statements are supported and which required statements are represented. The combination of graph evidence and passage context addresses these two requirements through different channels.",
+    "after": "The AGRAG ablations show why coverage and faithfulness must be considered together. Without hybrid passages, the generator can produce supported claims while omitting required information. Graph connectivity helps organize facts, while passages preserve context that extraction or subgraph selection can omit.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 74
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before_line": 76,
+    "before": "MGRAG introduces a further distinction between selecting context and reusing its computation. The system-level cache comparison changes the surrounding retrieval system as well as the serving mechanism in some rows. The inverse ablations provide a more focused view of adding matching and graph-aware recomputation to particular retrieval configurations. A component that improves answer quality can also increase runtime; the system comparison measures their combined quality and cost.",
+    "after": "MGRAG separates evidence retrieval from reuse of its computation. Cache comparisons measure combined retrieval and serving choices. Inverse ablations test additions within one retrieval pipeline, where improved answer quality can require extra runtime.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing. Shorten the paragraph to resolve the built-in compiler's 0.18-point line overflow.",
+    "after_line": 76
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before_line": 86,
+    "before": "The granularity of the evidence can affect both selection and interpretation. A column vector summarizes a sequence of cells. A candidate label summarizes a possible class assignment. A graph fact identifies an entity relation. A path combines several relations. A passage or image contains contextual details beyond its extracted graph representation. Moving between these units changes what information is explicit and which distinctions the next computation must recover.",
+    "after": "A column vector, candidate label, graph fact, path, and source passage preserve different information. Paths expose intermediate relations, while passages and images retain details that may disappear during extraction. Moving between these representations changes what the next stage must infer.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 86
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before_line": 88,
+    "before": "The contribution of structure therefore depends on the representation's fidelity to the required decision. Connectivity alone establishes that items are related within an index. Semantic matching evaluates whether the represented relationship corresponds to a query requirement. Task supervision identifies which labels are appropriate. The hyper-relational study motivates attention to preservation, while the core chapters test particular mechanisms at their own evidence interfaces.",
+    "after": "A useful structure must preserve the relationships needed for the task. Connectivity identifies available links, semantic matching checks their correspondence to a query, and supervision determines the required annotation category. The hyper-relational study examines how graph transformation can alter these relationships before prediction.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 88
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before_line": 94,
+    "before": "They identify different targets for feedback. Entity disambiguation concerns the link from a cell to external knowledge. Online correction concerns an association already inserted into an index. Relation verification concerns the connection from graph content to source passages. Matching diagnosis concerns entity alignment, relation semantics, and the path search. Evaluating feedback at those stages would connect an observed answer or classification error to the structural decision that made the evidence available. Chapter~\\ref{ch:conclusion} develops this direction.",
+    "after": "Feedback can target these error sources directly. Entity disambiguation can revise cell links, online correction can revise inserted associations, source verification can check extracted relations, and matching diagnosis can inspect entity alignment and path choices. Chapter~\\ref{ch:conclusion} develops these directions.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 94
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before_line": 98,
+    "before": "Knowledge coverage affects the first study. A graph can supply missing context only where suitable linked information exists. KGLink's no-linkage analyses and its combined encoder design describe how the evaluated method behaves when that evidence varies. Broader deployment would also require attention to the coverage, language, and update state of the chosen knowledge graph and the target annotation vocabulary.",
+    "after": "KGLink depends on the coverage and vocabulary of the external graph. Its no-linkage analysis tests tables without retrieved KG evidence, while broader use also depends on graph language, update state, and alignment with the target labels.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 98
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before_line": 100,
+    "before": "Prediction-dependent evidence affects online indexing. GORAG's later retrieval state depends on the information inserted earlier under its protocol. Incorrect predicted associations can therefore become available to later queries. The behavior of longer-running streams or different patterns of label evolution remains untested.",
+    "after": "GORAG can retain errors through prediction-derived index updates. Longer streams and different patterns of label evolution remain untested.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 100
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before_line": 102,
+    "before": "Graph extraction and evaluation affect the generation studies. AGRAG still uses models for relations and triple filtering. MGRAG extracts query-related facts from multimodal chunks, with caption-based ranking preceding that extraction. Missing or inaccurate representations can affect which evidence reaches the matcher or generator. Model-assessed QA metrics additionally reflect the evaluation procedure.",
+    "after": "AGRAG and MGRAG depend on extracted relations, and MGRAG additionally depends on caption-based image ranking. Missing or inaccurate facts can prevent the generator from receiving relevant evidence. Model-assessed QA metrics also depend on the evaluator and its assessment rules.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 102
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before_line": 104,
+    "before": "AGRAG's 2-approximation statement applies to its initial terminal-connecting tree. MGRAG's threshold condition applies to accepted path matches. The expanded AGRAG subgraph and MGRAG's greedy search have no corresponding global guarantee established in these studies.",
+    "after": "AGRAG's 2-approximation statement applies to its initial terminal-connecting tree. MGRAG's threshold condition describes accepted path similarities. Neither characterizes the answer quality of the full retrieval and generation pipeline.",
+    "type": "MIXED",
+    "reason": "Retain the exact local theoretical scope while replacing the generic global-guarantee disclaimer with its relevance to measured answers.",
+    "after_line": 104
+  },
+  {
+    "file": "chapter/ch08-conclusion.tex",
+    "before_line": 6,
+    "before": "This thesis investigated how explicit knowledge structures can organize and select evidence for language models. It developed four methods for table understanding, dynamic classification, connected textual evidence selection, and multimodal query answering. Structure supplies information to learned representations, indexes candidate labels, connects generation context, and guides context computation.",
+    "after": "In this thesis, we developed four methods that use explicit knowledge structures to select and process evidence for language models. The methods address missing table context, evolving classification labels, connected textual evidence, and semantic correspondence across multimodal sources.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 6
+  },
+  {
+    "file": "chapter/ch08-conclusion.tex",
+    "before_line": 8,
+    "before": "KGLink's component comparisons show benefits from graph-derived evidence and contextual type-representation training. Its no-linkage subset also shows continued annotation through the table encoder when retrieved KG evidence is absent. External descriptions enter a supervised mapping to the annotation vocabulary, with cross-column filtering determining which descriptions are available.",
+    "after": "We proposed KGLink to enrich column representations with graph descriptions and learn their correspondence to annotation labels. Cross-column filtering selects relevant descriptions, and contextual type-representation training helps the encoder use them. The model also retains a table-encoding pathway for columns without KG evidence.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 8
+  },
+  {
+    "file": "chapter/ch08-conclusion.tex",
+    "before_line": 10,
+    "before": "GORAG's offline ablation shows the contribution of expanding the keyword--label index with earlier predictions under its round protocol. Additional support and cumulative label growth have dataset-dependent effects, including non-monotonic results on IFS-Rel. Current classification decisions shape the associations available to later candidate retrieval.",
+    "after": "We proposed GORAG to maintain a keyword--label graph for dynamic few-shot classification. Connected retrieval produces a candidate set for each query, while online insertion expands the index after prediction. The ablations show the benefit of these updates, with dataset-dependent effects as support and label sets grow.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 10
+  },
+  {
+    "file": "chapter/ch08-conclusion.tex",
+    "before_line": 12,
+    "before": "AGRAG's ablations distinguish answer coverage from support for the claims actually generated. Removing hybrid passages can retain a high faithfulness score while reducing coverage; replacing the expanded subgraph with its initial tree affects tasks differently. Connected graph facts and passage context therefore serve complementary evidence needs in the evaluated generation tasks.",
+    "after": "We proposed AGRAG to select connected textual evidence using node influence and semantic edge costs. Expanding the initial tree supplies additional answer components, while hybrid passages retain context beyond the selected graph. The ablations show how these choices affect answer coverage and faithfulness.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 12
+  },
+  {
+    "file": "chapter/ch08-conclusion.tex",
+    "before_line": 14,
+    "before": "MGRAG's construction and matching comparisons support query-dependent extraction and semantic paths for the evaluated multimodal questions. Its cache comparisons show that the selected graph can also inform token-state recomputation. Component additions improve answer quality with runtime changes that depend on the host pipeline, extending structural evidence use into context processing.",
+    "after": "We proposed MGRAG to construct query-specific multimodal graphs and match query relations to semantic paths. Graph-aware recomputation extends the use of the retrieved structure to context processing. The experiments show improved answer quality, with runtime effects that depend on the retrieval pipeline.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 14
+  },
+  {
+    "file": "chapter/ch08-conclusion.tex",
+    "before_line": 21,
+    "before": "A first direction is to connect evidence maintenance with feedback about its use. The current studies select graph information from an external source, update keyword--label associations, prepare a corpus graph, or build a query-specific graph. Feedback could indicate whether a retrieved relationship was relevant, whether its supporting passage was sufficient, or whether a prediction inserted into an index was later corrected. Such feedback would give maintenance a more direct connection to evidence quality.",
+    "after": "Future work can use feedback to maintain evidence structures. A retrieved relation may prove irrelevant, its source passage may be insufficient, or a prediction inserted into an index may later be corrected. These observations could guide which associations are retained, revised, or removed.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 21
+  },
+  {
+    "file": "chapter/ch08-conclusion.tex",
+    "before_line": 23,
+    "before": "The evaluation of this direction should preserve the sequence in which feedback becomes available. In an online classifier, a later correction differs from a gold label supplied before prediction. In a retrieval system, the quality of one answer can affect later evidence selection only after its assessment is available. Explicit feedback timing and provenance would permit the study of correction and retention policies without conflating them with additional supervision.",
+    "after": "Feedback timing determines which updates are possible. An online correction becomes available after the original prediction, and an answer assessment can guide only subsequent retrieval. Recording this timing and the feedback source would allow correction and retention policies to be evaluated under explicit supervision conditions.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 23
+  },
+  {
+    "file": "chapter/ch08-conclusion.tex",
+    "before_line": 26,
+    "before": "A second direction concerns the quality of multimodal graph representations. Caption-based ranking provides an efficient text interface for images, while query-aware extraction can target details relevant to a question. Both operations influence which visual information becomes available to semantic matching. A useful extension would retain the link from a graph fact to the text span or image region supporting it, together with the extraction conditions.",
+    "after": "Multimodal graph construction could retain a link from each extracted fact to its supporting text span or image region. Caption-based ranking and query-aware extraction both select visual information, and source links would make their omissions easier to identify.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 26
+  },
+  {
+    "file": "chapter/ch08-conclusion.tex",
+    "before_line": 28,
+    "before": "This would support a more detailed analysis of retrieval errors. A failed match could result from missing visual evidence, an extraction error, an unsuitable relation representation, or a search decision. Distinguishing these stages would help determine which component to improve. It would also make it possible to assess whether a matched path is supported by the source evidence at the granularity used in the answer.",
+    "after": "Source links would help distinguish missing visual evidence from extraction, relation-representation, and path-search errors. They would also support checking whether an accepted path is grounded in the original source at the granularity required by the answer.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 28
+  },
+  {
+    "file": "chapter/ch08-conclusion.tex",
+    "before_line": 31,
+    "before": "A third direction is to study retrieval and context serving as coupled decisions. Retrieved evidence determines the length, modality, and structural organization of the model's input. The available cached states and the recomputation policy then determine the cost of processing that input. MGRAG provides one point in this design space by using graph features in selective recomputation.",
+    "after": "Retrieval and context computation can be optimized jointly. Retrieved evidence determines input length, modality, and relationships; cache availability and recomputation policy determine processing cost. MGRAG uses graph features for one such decision.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 31
+  },
+  {
+    "file": "chapter/ch08-conclusion.tex",
+    "before_line": 33,
+    "before": "Further work could evaluate how alternative evidence structures affect the quality--latency tradeoff under a fixed serving budget. The comparison would need to separate graph construction, matching, cache reuse, and answer generation, and retain the query workload and hardware conditions. This would connect the semantic value of retrieved evidence to the cost of using it, extending the thesis's focus on structure from context selection to the complete evidence-processing path.",
+    "after": "Further work could compare evidence structures under a fixed serving budget, measuring answer quality alongside construction, matching, cache reuse, and generation costs. Keeping the query workload and hardware fixed would show which structures provide useful information at an acceptable processing cost.",
+    "type": "STYLE",
+    "reason": "State the problem, operation or finding directly; remove repeated conceptual framing.",
+    "after_line": 33
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 6,
+    "before": "It studies the selection and maintenance of label evidence when a classification task acquires new classes over several rounds. The central question is how a language model can receive a query-specific candidate set while the evidence connecting text to labels changes over time.",
+    "after": "We propose GORAG to retrieve candidate labels for dynamic few-shot classification. It maintains a weighted graph of keyword--label associations, selects candidates by connecting query keywords, and inserts unseen terms after classification.",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 6
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 4,
+    "before": "It studies how a retrieval system can select connected evidence and communicate the relationships among retrieved facts to a language model. The task extends beyond retrieving a relevant label. An answer may require several facts, their connections, and the surrounding passages that explain them.",
+    "after": "We propose AGRAG to retrieve connected facts and supporting passages for language-model generation. It combines query-conditioned graph influence, semantic edge costs, and neighborhood expansion to collect evidence beyond the initially mapped facts.",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 4
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 4,
+    "before": "It studies how a query can determine the evidence graph to construct, how paths can express semantic correspondences across different graph topologies, and how the resulting structure can guide context computation.",
+    "after": "We propose MGRAG to construct query-specific multimodal graphs, match query relations to semantic paths, and guide selective recomputation of cached model states.",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 4
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 243,
+    "before": "The original study averages each experiment over three runs. It reports accuracy and weighted F1; these assess exact prediction of the target annotation label and class-frequency-weighted classification performance.",
+    "after": "Each experiment is averaged over three runs. Accuracy measures exact label prediction, and weighted F1 weights class-level performance by sample frequency.",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 241
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 275,
+    "before": "KGLink's higher scores under the reported experiment indicate that the full graph-augmented and jointly trained model improves on that baseline.",
+    "after": "KGLink improves on this baseline with graph-augmented inputs and joint training.",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 273
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 301,
+    "before": "The result supports the contribution of KG evidence in the evaluated joint architecture.",
+    "after": "Removing KG inputs reduces accuracy on both datasets.",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 299
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 303,
+    "before": "The full model reports higher scores on both datasets.",
+    "after": "The full model has higher scores on both datasets.",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 301
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 332,
+    "before": "Table~\\ref{tab:kglink:no-kg} shows that KGLink still performs the annotation task in this condition.",
+    "after": "Table~\\ref{tab:kglink:no-kg} compares annotation accuracy without retrieved KG evidence.",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 330
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before_line": 332,
+    "before": "The observation is consistent with the architecture retaining a table-encoding pathway when external evidence is absent.",
+    "after": "The table encoder supports annotation when external graph evidence is absent.",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 330
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 166,
+    "before": "The published study evaluates CAD, WOS, and IFS-Rel.",
+    "after": "We evaluate GORAG on CAD, WOS, and IFS-Rel.",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 162
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 181,
+    "before": "Their classification results are measurements of the adaptations used in this study.",
+    "after": "The graph retrieval systems are adapted to return classification evidence.",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 177
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 183,
+    "before": "These choices identify the systems that produced the reported results.",
+    "after": "",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters."
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 194,
+    "before": "These comparisons locate the result in a setting where the number of candidate labels increases substantially over the evaluation.",
+    "after": "GORAG maintains higher accuracy than these baselines as the label set grows.",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 188
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 208,
+    "before": "These variants change specific inputs or index operations while retaining GORAG's overall classification task.",
+    "after": "",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters."
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 212,
+    "before": "Under this ablation protocol, removing online insertion has a larger observed effect than replacing the weighted graph with unit costs.",
+    "after": "Disabling online insertion causes a larger accuracy drop than replacing weighted edges with unit costs.",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 206
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before_line": 225,
+    "before": "The token comparison measures how much context reaches the model in the evaluated implementation. GORAG's candidate-label representation uses fewer tokens than the listed retrieval baselines in this experiment.",
+    "after": "GORAG's candidate-label context uses fewer tokens than the retrieval baselines in this one-shot experiment.",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 219
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 206,
+    "before": "The main experiment uses Novel and Medical from GraphRAG-bench",
+    "after": "We evaluate AGRAG on Novel and Medical from GraphRAG-bench",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 206
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 212,
+    "before": "The source experiments compare their complete configurations under the stated model settings.",
+    "after": "",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters."
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 247,
+    "before": "The task combines contextual grounding with a more flexible response format, and the three measures capture different aspects of that response.",
+    "after": "",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters."
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 249,
+    "before": "The task requires collecting information distributed across the evidence. The result is consistent with the design of supplying connected graph facts together with passage context.",
+    "after": "Graph facts and passage context jointly supply information distributed across the corpus.",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 249
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 267,
+    "before": "The graph-containing configuration provides an observed benefit under these settings, particularly for the summarization accuracy score.",
+    "after": "Adding graph retrieval improves creative-generation scores and summarization accuracy.",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 267
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before_line": 275,
+    "before": "The ablation evaluates whether the initial semantic mapping alone supplies appropriate query anchors. Its results support retaining the filtering stage under the reported configuration.",
+    "after": "Filtering the mapped triples improves coverage and accuracy.",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 275
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 287,
+    "before": "The evaluation uses MMQA",
+    "after": "We evaluate MGRAG on MMQA",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 285
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 291,
+    "before": "These are the published controls for the comparisons in this chapter.",
+    "after": "",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters."
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 308,
+    "before": "MGRAG has the highest reported value in each of the four metric rows for each dataset.",
+    "after": "MGRAG has the highest value for all four metrics on each dataset.",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 306
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 322,
+    "before": "These substitutions change the available extracted evidence. Their lower scores establish the importance of the evaluated construction choice for this setting.",
+    "after": "Query-aware construction outperforms these extraction alternatives on MMQA.",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 320
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 332,
+    "before": "It supplies a direct account of the quality-cost trade-off for questions with different relational demands.",
+    "after": "",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters."
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 337,
+    "before": "These are distinct retrieval-and-cache compositions, each identified in the table.",
+    "after": "",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters."
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 343,
+    "before": "The additional computation is accompanied by changes in answer quality. Its purpose is to allocate repeated computation to token states selected by the combined score.",
+    "after": "Selective recomputation improves answer quality in this composition with an increase in total time.",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 341
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before_line": 351,
+    "before": "These measurements locate repeated extraction calls as a substantial cost within the evaluated pipeline, even though graph matching has an exponential worst-case bound.",
+    "after": "Repeated extraction accounts for most of the listed computation time despite the matcher's exponential worst-case bound.",
+    "type": "AUTHOR_VOICE",
+    "reason": "Present the method or observed comparison directly, following the problem--method--result progression in the reference research chapters.",
+    "after_line": 349
+  }
+]

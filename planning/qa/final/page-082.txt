@@ -1,37 +1,31 @@
-underthesameACCheadinginthepaperbutevaluatedifferentoutputs.
-Complex reasoning and fact retrieval additionally report the source’s ROUGE-L mea-
-sure [54]. Contextual summarization and creative generation report coverage, the fraction
-of required reference evidence represented in the answer. Creative generation also reports
-faithfulness, the fraction of answer claims supported by retrieved context. The evaluation uses
-the RAGAS framework [55, 56] and the task-specific protocol. Coverage concerns inclusion of
-requiredinformation,whereasfaithfulnessconcernssupportforgeneratedclaims.
-Forgeneratedanswersequence𝐺 andreferencesequence𝑌,the source defines itsreported
-lexicalscoreas
-LCS(𝐺,𝑌)
-ROG(𝐺,𝑌) = . (5.15)
-|𝐺|
-Thedenominatoristhegeneratedanswerlength. Thisisthesource’sreportedROUGE-Lquan-
-tity, rather than an F1 combination of longest-common-subsequence precision and recall. Re-
-tainingthedenominatorisnecessarywheninterpretingashortfactualansweralongsidealonger
-response.
-Let 𝐸 denote the reference evidence items and let 𝑀(𝑒,𝑅) indicate whether response 𝑅
-coversitem𝑒. Coverageis
-|{𝑒 ∈ 𝐸 ∶ 𝑀(𝑒,𝑅)}|
-COV(𝑅,𝐸) = . (5.16)
-|𝐸|
-For the answer’s claim set 𝐴 and retrieved context 𝐶, let 𝑆(𝑎,𝐶) indicate that claim 𝑎 is sup-
-ported. Faithfulnessis
-|{𝑎 ∈ 𝐴 ∶ 𝑆(𝑎,𝐶)}|
-FS(𝐴,𝐶) = . (5.17)
-|𝐴|
-Thetwodenominatorsidentifydifferentevidencerequirements. Coverageusestherequiredref-
-erence information; faithfulness uses the claims actually made. A response omitting a required
-fact can lose coverage even when its remaining statements are supported. Conversely, adding
-unsupported claims affects faithfulness even if all reference evidence is mentioned. The source
-evaluatesthesejudgmentsthroughitsmodel-basedassessmentprocedure. Themeasuresthere-
-foreretaintheevaluatorandevidenceunitsofthatprotocol.
 5.7.3 Answer quality across tasks
-The main results are split by task in Tables 5.1–5.5. On Novel creative generation, AGRAG re-
-ports faithfulness 0.513, accuracy 0.339, and coverage 0.386. HippoRAG2 reports faithfulness
-0.496,whileRAPTORreportsaccuracy0.333andNaiveRAGcoverage0.384. Theclosecover-
+The main results are split by task in Tables 5.1–5.5. On Novel creative generation, AGRAG
+reportsfaithfulness0.513,accuracy0.339,andcoverage0.386. HippoRAG2reportsfaithfulness
+0.496,whileRAPTORreportsaccuracy0.333andNaiveRAGcoverage0.384.
+On Medical creative generation, AGRAG reports faithfulness 0.356, accuracy 0.598, and
+coverage 0.589. NaiveRAG has accuracy 0.577 and coverage 0.554. HippoRAG2 has faithful-
+ness 0.347. The task combines contextual grounding with a more flexible response format, and
+thethreemeasurescapturedifferentaspectsofthatresponse.
+For contextual summarization, AGRAG obtains coverage and accuracy of 0.778 and 0.643
+onNovel,and0.690and0.604onMedical. Thetaskrequirescollectinginformationdistributed
+acrosstheevidence. Theresultisconsistentwiththedesignofsupplyingconnectedgraphfacts
+togetherwithpassagecontext.
+Forcomplexreasoning,thereportedROUGE-Landaccuracyvaluesare0.319and0.467on
+Noveland0.343and0.665onMedical. Forfactretrievaltheyare0.324and0.490onNoveland
+0.357and0.628onMedical. Thetasksusedifferentquerycollectionsandanswerformats.
+Classification accuracy and recall are 0.438 and 0.307 on WOS and 0.403 and 0.251 on
+IFS-Rel. SiReRAG reports WOS accuracy 0.430 and recall 0.294, while HippoRAG2 reports
+IFS-Relaccuracy0.389andrecall0.246. AGRAG’sclassifierreceivesgraph-derivedcandidate
+labelsunderthesourceprotocol.
+5.7.4 Indexing and querying costs
+Table 5.6 separates indexing time, querying time, input tokens, and output tokens. For Novel,
+AGRAG reports 65 minutes for indexing and 142 minutes for querying, compared with Hip-
+poRAG2’s 95 and 134 minutes. For Medical the corresponding values are 16 and 138 minutes
+for AGRAG and 46 and 130 minutes for HippoRAG2. This comparison shows lower index
+preparationtimealongsideahigherreportedquerytotalforAGRAG.
+Thetablealsocontainsmethodswithlowercostsinparticularcolumns. NaiveRAGhaslower
+indexingtimes,whileG-RetrieverhasashorterNovelqueryingtotal.
+On WOS and IFS-Rel, AGRAG reports querying times of 132 and 124 minutes and input
+tokencountsof3,970and1,890perquery. ThecorrespondingHippoRAG2valuesare140and
+127minutesand5,066and2,440tokens. Outputlengthsdifferbetweenmethods.
 68

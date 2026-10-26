@@ -1,38 +1,29 @@
-80
-70
-60
-50
-40
-30
-20
-10
-0
-Sudowoodo HNN Doduo RECA TaBERT KGLink MTab
-sruoH
-80.00
-Training time
-Inference time
-23.45
-16.45 16.50
-9.00
-3.17
-1.090.13 1.13 1.96 0.07 0.17 1.53 N/A
-Figure 3.7: Training and inference time reported on VizNet. Original image reproduced from
-KGLink[1],Fig.7.
-methods. Reading the two studies together identifies the operational choice examined by the
-chapter. Graphrelationsdeterminewhichevidenceenterstheencoder,andtheretainedevidence
-has a measurable processing cost. The accuracy comparison therefore depends on the selected
-inputandtrainingconfigurationaswellasontheavailabilityofaknowledgegraph.
-3.7 Discussion and Chapter Summary
-KGLink uses explicit structure at two levels. Within a table row, graph neighborhood connec-
-tionsfilterambiguousentitycandidates. Acrosstherowsofacolumn,recurringgraphneighbors
-supportcandidate-typeselection. Theseoperationsdeterminewhatexternaltexttheencoderre-
-ceives. Theclassifierthenlearnstherelationbetweenthatevidenceandadataset’slabelvocab-
-ulary. The auxiliary representation task supplies an additional supervised connection between
-contextualevidenceandtheintendedtypedescription.
-Theempirical results support this divisionof responsibilities. The full BERTconfiguration
-improves on the version without the masked representation task and on the version without KG
-information. The row-selection comparison shows that choosing which table values enter the
-model changes the reported annotation scores. The no-linkage subset confirms that a trained
-model can continue to annotate tables when the graph stage supplies no retrieved evidence.
+CHAPTER 4
+ADAPTIVE GRAPH RETRIEVAL FOR DYNAMIC
+CLASSIFICATION WITH GORAG
+ThischapterisbasedonGORAG:Graph-basedOnlineRetrievalAugmentedGenerationfor
+Dynamic Few-shot Social Media Text Classification, published in the Proceedings of the ACM
+Web Conference 2026 [2]. It studies the selection and maintenance of label evidence when
+a classification task acquires new classes over several rounds. The central question is how a
+languagemodelcanreceiveaquery-specificcandidatesetwhiletheevidenceconnectingtextto
+labelschangesovertime.
+4.1 Dynamic Few-shot Classification
+A classification label defines a decision that an application asks a model to make. When the
+applicationaddsamorespecificcategory,thedecisionchangeseveniftheunderlyinglanguage
+modelstaysfixed. Forexample,asocialmediaclassificationtaskcaninitiallydistinguishthreat-
+eninglanguageandlaterintroduceidentityinsults. Amodelmustthendistinguishthenewlabel
+fromearlierlabelsusingtheavailableannotatedexamples. Thediﬀicultyconcernsbothlearning
+themeaningofanewcategoryandkeepingthecurrentalternativesvisibleduringprediction.
+Few-shotclassificationsuppliesasmallnumberoflabeledexamplesforeachclass. Dynamic
+few-shot classification adds classes in successive rounds [36]. The size of the label universe
+therefore grows independently of the number of examples available for each label. A retrieval
+system must update its evidence source as classes arrive, and each prediction must refer to the
+labelsetavailableatthatround. Thissettingdiffersfromrepeatedlyevaluatingafixedclassifier
+onanunchangedcollectionoflabels.
+The task also exposes a limitation of simply placing more material in a language model’s
+context. Additionalexamplesprovideinformationaboutlabels,butalargercontextcancontain
+many examples that have little bearing on the current text. The candidate list itself grows as
+classes accumulate. Selecting text passages without narrowing the associated label alternatives
+leavesthemodelwithalongclassificationinstruction. GORAGthereforetreatstheselectionof
+candidatelabelsasanexplicitretrievalproblem.
 38

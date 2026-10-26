@@ -1,15 +1,3 @@
-supporting evidence and presenting the response. The MGRAG evaluation uses six MRAMG
-subsets together with MMQA. The source benchmark and the evaluated application should be
-distinguished because a system can use a benchmark’s evidence collection while applying its
-own retrieval and answer-assessment protocol. Chapter 6 gives the precise datasets, generator,
-andmetricsusedinthatstudy.
-Onceevidenceisretrieved,thesystemmustprocessitasmodelcontext. Inanautoregressive
-Transformer, the prefill stage computes representations for the supplied input, and decoding
-generatesanswertokens. Keyandvaluetensorsfromprocessedinputpositionscanbecachedfor
-later attention computation [7, 22]. Reusing these tensors concerns the computation associated
-with selected evidence. It is a separate decision from choosing which evidence belongs in the
-context.
-CacheGen addresses the storage and transfer of context caches through compression and
 streaming[23]. Therelevantresourceincludesthecostoffetchingcachedtensorsaswellascom-
 puting context representations. CacheBlend studies combining precomputed caches for several
 chunksbyselectivelyrecomputingpartoftheirkeyandvaluestates[22]. Itsmotivationincludes
@@ -19,14 +7,25 @@ andtheassembledinputcanaffectthecomputationrequiredforgeneration.
 MGRAG brings graph information into selective recomputation [4]. Its retrieved structure
 contributes information about which evidence tokens participate in relevant relationships, to-
 getherwithattention-basedsignals. Thisextendsstructuralaugmentationfromrepresentingand
-selecting context to allocating computation within it. The cache contribution is consequently
-partofthechapter’smainanalysis. Itsevaluationretainsanswerquality,token-relatedmeasure-
-ments, latency, and recomputation settings because those quantities describe the quality–cost
-relationshipbeingstudied.
+selectingcontexttoallocatingcomputationwithinit. Thecachecontributionisconsequentlypart
+ofthechapter’smainanalysis.
 2.6 Structural Information in Hyper-relational Knowledge
 Graphs
 This section presents the author’s published work Understanding the Embedding Models on
 Hyper-relationalKnowledgeGraph,publishedatCIKM2025[5]. Itexamineshowgraphrepre-
 sentationsandembeddingarchitecturespreserveinformationusedforlinkprediction. Thestudy
 providesaseparateperspectiveonstructuralinformationwithinthethesis. Itsexperimentscon-
+cernKGembeddingmodels,whilethefourresearchchaptersexaminelanguage-modelaugmen-
+tation.
+2.6.1 Facts, Qualifiers, and Decomposition
+Ahyper-relationalfactextendsamaintriplewithasetofqualifierpairs,
+𝐹 = (𝑠,𝑟,𝑜,𝒬), 𝒬 = {(𝑞𝑟 ,𝑞𝑒 )}𝑛 . (2.1)
+𝑖 𝑖 𝑖=1
+Here 𝑞𝑟 is a qualifier relation and 𝑞𝑒 its associated entity. Qualifiers attach information to a
+𝑖 𝑖
+particular statement. For example, degree and major can distinguish two education statements
+aboutthesameperson. Theirassociationwiththeintendedmaintripleispartoftheinformation
+represented by the fact. StarE retains the semantic roles of qualifiers and triples in message
+passingandintroducesWD50Kforhyper-relationallinkprediction[24].
+TheCIKMstudyaskshowmuchofanHKGEmodel’sperformancecomesfromitsbaseKGE
 16

@@ -1,13 +1,21 @@
-8.2.3 Joint retrieval and context computation
-A third direction is to study retrieval and context serving as coupled decisions. Retrieved ev-
-idence determines the length, modality, and structural organization of the model’s input. The
-available cached states and the recomputation policy then determine the cost of processing that
-input. MGRAG provides one point in this design space by using graph features in selective
-recomputation.
-Further work could evaluate how alternative evidence structures affect the quality–latency
-tradeoff under a fixed serving budget. The comparison would need to separate graph construc-
-tion,matching,cachereuse,andanswergeneration,andretainthequeryworkloadandhardware
-conditions. This would connect the semantic value of retrieved evidence to the cost of using
-it, extending the thesis’s focus on structure from context selection to the complete evidence-
-processingpath.
+[65] M. Houbraken et al., “The index-based subgraph matching algorithm with general symmetries
+(ismags):Exploitingsymmetryforfastersubgraphenumeration,”PloSone,vol.9,no.5,e97896,
+2014(cit.onp.92).
+[66] M. Leordeanu et al., “A spectral technique for correspondence problems using pairwise con-
+straints,”inTenthIEEEInternationalConferenceonComputerVision(ICCV’05)Volume1,IEEE,
+vol.2,2005,pp.1482–1489(cit.onp.92).
+[67] S. Fankhauser et al., “Speeding up graph edit distance computation through fast bipartite
+matching,” in International Workshop on Graph-Based Representations in Pattern Recognition,
+Springer,2011,pp.102–111(cit.onp.92).
+[68] M.Choetal.,“Reweightedrandomwalksforgraphmatching,”inEuropeanconferenceonCom-
+putervision,Springer,2010,pp.492–505(cit.onp.92).
+[69] M.Leordeanuetal.,“Anintegerprojectedfixedpointmethodforgraphmatchingandmapinfer-
+ence,”Advancesinneuralinformationprocessingsystems,vol.22,2009(cit.onp.92).
+[70] J. Tang et al., “Robust attributed graph alignment via joint structure learning and optimal trans-
+port,” in 2023 IEEE 39th International Conference on Data Engineering (ICDE), IEEE, 2023,
+pp.1638–1651(cit.onp.92).
+[71] J.Tangetal.,“Fusedgromov-wassersteinalignmentforgrapheditdistancecomputationandbe-
+yond,”ProceedingsoftheVLDBEndowment,vol.18,no.10,pp.3641–3654,2025(cit.onp.92).
+[72] A. Radford et al., “Learning transferable visual models from natural language supervision,” in
+Internationalconferenceonmachinelearning,PmLR,2021,pp.8748–8763(cit.onp.97).
 114

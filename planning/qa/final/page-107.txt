@@ -1,36 +1,35 @@
-Table 6.1: Evaluation datasets, reproduced from published Table 3, p. 2488 [4]. T and I denote
-textualandimagequerymodalities. ThecolumnscompriseMMQAandsixMRAMGsubsets.
-Statistic MMQA Wiki Wit Recipe Arxiv Manual Web
-QueryModality T/I T T T T T T
-Queries 951 500 600 2,360 200 390 750
-Texts 218,285 538 639 1,528 101 40 1,500
-Images 57,058 538 639 8,569 337 2,607 1,500
-CorpusSize 22.5M 680k 478k 1.1M 136k 420k 215k
-QueryHops 1–2 2–5 2–4 1–6 3–4 2–6 2–3
-AvgQueryHops 1.5 3.0 2.8 3.3 3.1 3.7 2.4
-configurationsusebge-base-en-v1.5. Similarity-basedretrievalrepresentsimagesthroughtheir
-captions. Thesearethepublishedcontrolsforthecomparisonsinthischapter.
-VanillaRAG is implemented with LangChain and FAISS [61]. The GraphRAG implemen-
-tationisnano-graphrag[62],andtheremainingbaselinesystemsusetheirreleasedimplementa-
-tions. TheprotocolselectshybridsearchforLightRAGandlocalsearchforGraphRAG.vLLM
-accelerates the tested baseline systems, while MGRAG uses its graph-aware cache procedure.
-Otherbaselinehyperparametersfollowtheimplementations’defaults.
-Four metrics characterize answers. Semantic similarity (SIM.) is the cosine similarity be-
-tween bge-base-en-v1.5 representations of generated and reference answers. Accuracy (ACC.)
-is the reported proportion of correct answers. ROUGE-L (ROG.) evaluates longest-common-
-subsequence overlap [54], and BLEU-1 evaluates modified unigram precision [63]. The paper
-usestheRAGASevaluationframework[56]. Thetablespreserveitsmetricnamesandprecision,
-includingthelabelBLEUusedforBLEU-1.
-Thefouranswermetricsreflectdifferentproperties. Embeddingsimilaritycomparesseman-
-ticproximityattheanswerlevel. ROUGE-LandBLEU-1retainsensitivitytothewordingshared
-with the reference. Accuracy provides the task’s correctness measurement. They are shown to-
-gether because agreement in one measure does not imply identical behavior in the others. The
-publicationreportspointestimatesfortheseexperiments.
-The complete-system baselines use different retrieval units. VanillaRAG returns dense-
-retrieved chunks, and R1-Searcher incorporates reinforcement learning into search and ques-
-tion answering. GraphRAG organizes its graph into communities and prepares summaries;
-LightRAG retrieves graph elements and neighborhoods through its selected search mode. Hip-
-poRAG2 adds passage nodes and uses Personalized PageRank for retrieval. In the published
-experiment, these systems are compared as implemented pipelines. Their results include their
-ownindexingandevidence-selectionchoices,whilethesharedbackboneandevaluationmetrics
+Table6.3(continued)
+Dataset Method SIM. ACC. ROG. BLEU
+Arxiv BGE 0.874 0.668 0.270 0.244
+Arxiv SLOT 0.872 0.653 0.269 0.233
+Arxiv FGW 0.868 0.651 0.264 0.230
+Arxiv MGRAG 0.876 0.680 0.273 0.250
+Manual O.IE 0.520 0.459 0.245 0.209
+Manual STAT 0.509 0.443 0.234 0.182
+Manual VF2 0.817 0.612 0.377 0.306
+Manual ISMAGS 0.817 0.612 0.382 0.307
+Manual SM 0.813 0.614 0.378 0.303
+Manual VJ 0.808 0.608 0.372 0.298
+Manual RRWM 0.811 0.614 0.377 0.303
+Manual IPFP 0.800 0.594 0.369 0.289
+Manual BGE 0.815 0.615 0.375 0.303
+Manual SLOT 0.813 0.611 0.375 0.301
+Manual FGW 0.820 0.600 0.374 0.292
+Manual MGRAG 0.822 0.617 0.384 0.309
+Web O.IE 0.466 0.290 0.052 0.020
+Web STAT 0.485 0.298 0.101 0.095
+Web VF2 0.677 0.507 0.156 0.088
+Web ISMAGS 0.675 0.509 0.155 0.079
+Web SM 0.676 0.507 0.156 0.056
+Web VJ 0.679 0.508 0.160 0.056
+Web RRWM 0.675 0.503 0.157 0.066
+Web IPFP 0.666 0.493 0.149 0.055
+Web BGE 0.687 0.510 0.156 0.095
+Web SLOT 0.676 0.498 0.154 0.116
+Web FGW 0.676 0.480 0.147 0.096
+Web MGRAG 0.701 0.512 0.166 0.146
+Wiki O.IE 0.504 0.498 0.230 0.200
+Wiki STAT 0.525 0.510 0.253 0.218
+Wiki VF2 0.877 0.752 0.352 0.300
+Wiki ISMAGS 0.879 0.754 0.355 0.303
 93

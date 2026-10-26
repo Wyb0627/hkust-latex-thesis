@@ -1,0 +1,10 @@
+{
+  "pdf_sha256": "08d701b5b070ec8ec9c226d632882a0e9f80c44edbc370618bc763244559e8fc",
+  "pages_with_changed_character_layout": [
+    2
+  ],
+  "unchanged_page_count": 127,
+  "font_comparison": "Compare actual font names after removing PDF-generated six-letter font subset tags; retain font size and every character bounding box.",
+  "strict_build_checks": "passed",
+  "abstract_source_sha256": "907babca8d91efcb35dd5d43a87987073020669bba788aff6b26cb20efdf6742"
+}

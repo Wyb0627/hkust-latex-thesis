@@ -1,23 +1,24 @@
-python3 scripts/build_thesis.py
 Rc files read:
   NONE
 Latexmk: This is Latexmk, John Collins, 7 Jan. 2023. Version 4.79.
 Latexmk: applying rule 'xelatex'...
 Rule 'xelatex':  Reasons for rerun
 Changed files or newly in use/created:
-  chapter/ch07-discussion.tex
+  chapter/front-abstract.tex
 Category 'changed_user':
-  chapter/ch07-discussion.tex
+  chapter/front-abstract.tex
 
 ------------
 Run number 1 of rule 'xelatex'
 ------------
 ------------
-Running 'xelatex -no-pdf -interaction=nonstopmode -halt-on-error -no-shell-escape -recorder  "main.tex"'
+Running 'xelatex -no-shell-escape -no-pdf -interaction=nonstopmode -file-line-error -synctex=1 -recorder  "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/main.tex"'
 ------------
 This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex)
 entering extended mode
-(./main.tex
+
+(/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-la
+tex-thesis/main.tex
 LaTeX2e <2022-11-01> patch level 1
 L3 programming layer <2023-02-22>
 (./template/hkust-thesis-v0.11.6/hkustthesis.cls
@@ -28,7 +29,7 @@ LaTeX Warning: You have requested document class `template/hkust-thesis-v0.11.6
 /hkustthesis',
                but the document class provides `hkustthesis'.
 
-Document Class: hkustthesis 2025/11/04 v0.11.5  Thesis template for HKUST 
+Document Class: hkustthesis 2025/11/04 v0.11.5  Thesis template for HKUST
 (/usr/local/texlive/2023/texmf-dist/tex/latex/l3packages/xparse/xparse.sty)
 (/usr/local/texlive/2023/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.st
 y)
@@ -46,7 +47,7 @@ Document Class: book 2022/07/02 v1.4n Standard LaTeX document class
 (/usr/local/texlive/2023/texmf-dist/tex/latex/setspace/setspace.sty)
 (/usr/local/texlive/2023/texmf-dist/tex/latex/lastpage/lastpage.sty
 (/usr/local/texlive/2023/texmf-dist/tex/latex/lastpage/lastpage2e.sty
-(/usr/local/texlive/2023/texmf-dist/tex/latex/lastpage/lastpagemodern.sty) 
+(/usr/local/texlive/2023/texmf-dist/tex/latex/lastpage/lastpagemodern.sty)
 )) (/usr/local/texlive/2023/texmf-dist/tex/latex/emptypage/emptypage.sty)
 (/usr/local/texlive/2023/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty)
 (/usr/local/texlive/2023/texmf-dist/tex/latex/makecell/makecell.sty
@@ -278,12 +279,12 @@ LaTeX Warning: Unused global option(s):
 
 Package siunitx Warning: Detected the "physics" package:
 (siunitx)                omitting definition of \qty.
-(siunitx)                
+(siunitx)
 (siunitx)                If you want to use \qty with the siunitx definition,
-(siunitx)                add 
-(siunitx)                
+(siunitx)                add
+(siunitx)
 (siunitx)                    \AtBeginDocument{\RenewCommandCopy\qty\SI}
-(siunitx)                
+(siunitx)
 (siunitx)                to your preamble.
 
 
@@ -303,69 +304,69 @@ Underfull \hbox (badness 10000) in paragraph at lines 18--18
 [9] (./main.lof
 Underfull \hbox (badness 10000) in paragraph at lines 6--6
  [][] [][]\TU/texgyretermes(0)/m/n/12 KGLink’s graph-processing and language-mo
-del components. 
+del components.
 
 Underfull \hbox (badness 1983) in paragraph at lines 6--6
  \TU/texgyretermes(0)/m/n/12 representation objective connect external knowledg
-e to annotation. 
+e to annotation.
 [10]
 Underfull \hbox (badness 5756) in paragraph at lines 20--20
  \TU/texgyretermes(0)/m/n/12 query-mapped facts; orange triples show additional
- neighboring 
+ neighboring
 
 Underfull \hbox (badness 5578) in paragraph at lines 23--23
  \TU/texgyrecursor(0)/m/n/12 grandfather_of \TU/texgyretermes(0)/m/n/12 relatio
-n corresponds to two \TU/texgyrecursor(0)/m/n/12 father_of 
+n corresponds to two \TU/texgyrecursor(0)/m/n/12 father_of
 ) [11] (./main.lot
 Underfull \hbox (badness 1931) in paragraph at lines 14--14
  [][] [][]\TU/texgyretermes(0)/m/n/12 WOS classification accuracy with one supp
-ort example per label. 
+ort example per label.
 
 Underfull \hbox (badness 3396) in paragraph at lines 15--15
  [][] [][]\TU/texgyretermes(0)/m/n/12 WOS classification accuracy with 5 suppor
-t examples per label. 
+t examples per label.
 
 Underfull \hbox (badness 2050) in paragraph at lines 16--16
  [][] [][]\TU/texgyretermes(0)/m/n/12 WOS classification accuracy with 10 suppo
-rt examples per label. 
+rt examples per label.
 [12]
 Underfull \hbox (badness 1448) in paragraph at lines 24--24
  [][] [][]\TU/texgyretermes(0)/m/n/12 Creative generation with Qwen2.5-14B-Inst
-ruct. Results from the 
+ruct. Results from the
 
 Underfull \hbox (badness 1502) in paragraph at lines 26--26
  [][] [][]\TU/texgyretermes(0)/m/n/12 Complex reasoning with Qwen2.5-14B-Instru
-ct. Results from the 
+ct. Results from the
 
 Underfull \hbox (badness 2837) in paragraph at lines 28--28
  [][] [][]\TU/texgyretermes(0)/m/n/12 Text classification with Qwen2.5-14B-Inst
-ruct. Results from the 
+ruct. Results from the
 
 Underfull \hbox (badness 10000) in paragraph at lines 44--44
  [][] [][]\TU/texgyretermes(0)/m/n/12 Answer quality with Qwen2.5-VL-7B-Instruc
-t, reproduced from 
+t, reproduced from
 [13]
 Underfull \hbox (badness 1442) in paragraph at lines 46--46
  [][] [][]\TU/texgyretermes(0)/m/n/12 Results by query hop count, reorganized f
-rom published Table 8, 
+rom published Table 8,
 
 Underfull \hbox (badness 1292) in paragraph at lines 49--49
  [][] [][]\TU/texgyretermes(0)/m/n/12 MMQA component ablations, reproduced from
- published Table 9, 
+ published Table 9,
 
 Underfull \hbox (badness 4595) in paragraph at lines 50--50
  [][] [][]\TU/texgyretermes(0)/m/n/12 MMQA inverse ablations, reproduced from p
-ublished Table 10, 
+ublished Table 10,
 
 Underfull \hbox (badness 1052) in paragraph at lines 50--50
  \TU/texgyretermes(0)/m/n/12 p. 2491 [4]. PSGM and GKV denote path-based semant
-ic graph 
+ic graph
 ) [14] (./chapter/ch01-introduction.tex
 Chapter 1.
-[1] [2] [3] [4] [5] [6] [7]
+[1] [2] [3] [4] [5] [6]
 Underfull \hbox (badness 6708) in paragraph at lines 119--119
 []|\TU/texgyretermes(0)/m/n/10.95 Understanding the Embedding Models on
-) (./chapter/ch02-background.tex [8]
+[7]) (./chapter/ch02-background.tex [8]
 Chapter 2.
 [9] [10] [11] [12] [13]
 Underfull \hbox (badness 10000) in paragraph at lines 78--78
@@ -373,20 +374,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 78--78
 
 Underfull \hbox (badness 1286) in paragraph at lines 80--81
 []|\TU/texgyretermes(0)/m/n/10.95 Dual-level retrieval of specific and
-[14] [15] [16] [17] [18] [19]) (./chapter/ch03-kglink.tex [20]
+[14] [15] [16] [17] [18]) (./chapter/ch03-kglink.tex [19]
 Chapter 3.
-[21] [22] [23] [24] [25] [26] [27] [28] [29] [30] [31] [32] [33] [34] [35]
-[36] [37] [38]) (./chapter/ch04-gorag.tex [39]
+[20] [21] [22] [23] [24] [25] [26] [27] [28] [29] [30] [31] [32] [33] [34]
+[35] [36]) (./chapter/ch04-gorag.tex [37]
 Chapter 4.
-[40] [41] [42] [43] [44] [45] [46] [47]
-(./chapter/tables/gorag-dataset-table.tex) [48]
-(./chapter/tables/gorag-main-tables.tex) [49] [50] [51]
-(./chapter/tables/gorag-ablation-table.tex)
-(./chapter/tables/gorag-token-table.tex) [52] [53]
-(./chapter/tables/gorag-zero-table.tex) [54] [55]) (./chapter/ch05-agrag.tex
-[56]
+[38] [39] [40] [41] [42] [43] [44] (./chapter/tables/gorag-dataset-table.tex)
+[45] [46] (./chapter/tables/gorag-main-tables.tex) [47] [48]
+(./chapter/tables/gorag-ablation-table.tex) [49]
+(./chapter/tables/gorag-token-table.tex) [50]
+(./chapter/tables/gorag-zero-table.tex) [51] [52]) (./chapter/ch05-agrag.tex
+[53]
 Chapter 5.
-[57] [58] [59] [60] [61] [62] [63] [64] [65] [66]
+[54] [55] [56] [57] [58] [59] [60] [61] [62] [63]
 Underfull \hbox (badness 10000) in paragraph at lines 208--209
 []\TU/texgyretermes(0)/m/n/12 The Novel evaluation contains 67 creative-generat
 ion queries, 362 contextual-
@@ -402,47 +402,51 @@ e applicable. The comparison includes
 Underfull \hbox (badness 4713) in paragraph at lines 212--213
 \TU/texgyretermes(0)/m/n/12 NaiveRAG, LongLLMLingua [[][][]41[]], RAPTOR [[][][
 ]49[]], SiReRAG [[][][]50[]], G-Retriever [[][][]51[]],
-[67] (./chapter/tables/agrag-main-creative.tex)
+[64] (./chapter/tables/agrag-main-creative.tex)
 (./chapter/tables/agrag-main-summary.tex)
 (./chapter/tables/agrag-main-complex.tex) (./chapter/tables/agrag-main-fact.tex
-) (./chapter/tables/agrag-main-class.tex) [68] [69] [70]
-(./chapter/tables/agrag-efficiency.tex [71])
-(./chapter/tables/agrag-ablation.tex [72]) [73] [74]
+) (./chapter/tables/agrag-main-class.tex) [65] [66] [67]
+(./chapter/tables/agrag-efficiency.tex) (./chapter/tables/agrag-ablation.tex
+[68] [69]) [70]
 Underfull \hbox (badness 1424) in paragraph at lines 273--274
 []\TU/texgyretermes(0)/m/n/12 The variant without MCMI expansion uses a Steiner
 -tree representation. Its Novel
-(./chapter/tables/agrag-low-resource.tex)
-(./chapter/tables/agrag-low-resource-efficiency.tex) [75] [76] [77])
-(./chapter/ch06-mgrag.tex [78]
+[71] (./chapter/tables/agrag-low-resource.tex)
+(./chapter/tables/agrag-low-resource-efficiency.tex) [72] [73] [74])
+(./chapter/ch06-mgrag.tex [75]
 Chapter 6.
-[79] [80] [81] [82] [83] [84] [85] [86] [87] [88] [89] [90] [91]
-(./chapter/tables/mgrag-datasets.tex) [92] [93]
-(./chapter/tables/mgrag-main.tex [94]) (./chapter/tables/mgrag-matching.tex
-[95] [96] [97]) [98] (./chapter/tables/mgrag-hops.tex) [99]
-(./chapter/tables/mgrag-cache.tex
+[76] [77] [78] [79] [80] [81] [82] [83] [84] [85] [86] [87] [88]
+(./chapter/tables/mgrag-datasets.tex) [89] (./chapter/tables/mgrag-main.tex
+[90]) [91] (./chapter/tables/mgrag-matching.tex [92] [93]) [94]
+(./chapter/tables/mgrag-hops.tex) [95] (./chapter/tables/mgrag-cache.tex
 Underfull \hbox (badness 1831) in paragraph at lines 4--4
  [][]\TU/texgyretermes(0)/m/n/12 Table 6.5: Cache-system comparison on MMQA, re
-produced from published Table 6, 
-) (./chapter/tables/mgrag-breakdown.tex [100])
-(./chapter/tables/mgrag-ablation.tex [101]) (./chapter/tables/mgrag-inverse.tex
-) [102]
+produced from published Table 6,
+) [96] (./chapter/tables/mgrag-breakdown.tex) [97]
+(./chapter/tables/mgrag-ablation.tex) (./chapter/tables/mgrag-inverse.tex)
+[98]
 Underfull \hbox (badness 1571) in paragraph at lines 390--390
  [][]\TU/texgyretermes(0)/m/n/12 Figure 6.5: MGRAG matching-parameter sensitivi
-ty. Original subfigures of Figure 5, 
-[103]) (./chapter/ch07-discussion.tex [104]
+ty. Original subfigures of Figure 5,
+[99]) (./chapter/ch07-discussion.tex [100]
 Chapter 7.
-[105] [106] [107] [108] [109] [110]) (./chapter/ch08-conclusion.tex [111]
+[101] [102] [103] [104] [105]) (./chapter/ch08-conclusion.tex
+Underfull \hbox (badness 3128) in paragraph at lines 104--1
+[]\TU/texgyretermes(0)/m/n/12 AGRAG’s 2-approximation statement applies to its
+initial terminal-connecting tree.
+[106]
 Chapter 8.
-[112] [113]) [114] [115] [116] [117] [118]
+[107] [108]) [109] [110] [111] [112] [113]
 Underfull \hbox (badness 1117) in paragraph at lines 36--36
 [][]\TU/texgyretermes(0)/m/n/10.95 S. Fankhauser \TU/texgyretermes(0)/m/it/10.9
 5 et al.\TU/texgyretermes(0)/m/n/10.95 , “Speeding up graph edit distance compu
 tation through fast bipartite
-[119] 
+[114]
 enddocument/afterlastpage: lastpage setting LastPage.
 (./main.aux) )
 (see the transcript file for additional information)
-Output written on main.xdv (133 pages, 2945604 bytes).
+Output written on main.xdv (128 pages, 2780216 bytes).
+SyncTeX written on main.synctex.gz.
 Transcript written on main.log.
 Latexmk: Getting log file 'main.log'
 Latexmk: Examining 'main.fls'
@@ -465,8 +469,11 @@ Run number 1 of rule 'xdvipdfmx'
 Running 'xdvipdfmx -E -o "main.pdf"  "main.xdv"'
 ------------
 main.xdv -> main.pdf
-[1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20][21][22][23][24][25][26][27][28][29][30][31][32][33][34][35][36][37][38][39][40][41][42][43][44][45][46][47][48][49][50][51][52][53][54][55][56][57][58][59][60][61][62][63][64][65][66][67][68][69][70][71][72][73][74][75][76][77][78][79][80][81][82][83][84][85][86][87][88][89][90][91][92][93][94][95][96][97][98][99][100][101][102][103][104][105][106][107][108][109][110][111][112][113][114][115][116][117][118][119][120][121][122][123][124][125][126][127][128][129][130][131][132][133]
-3267587 bytes written
+[1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20][21][22][23][24][25][26][27][28][29][30][31][32][33][34][35][36][37][38][39][40][41][42][43][44][45][46][47][48][49][50][51][52][53][54][55][56][57][58][59][60][61][62][63][64][65][66][67][68][69][70][71][72][73][74][75][76][77][78][79][80][81][82][83][84][85][86][87][88][89][90][91][92][93][94][95][96][97][98][99][100][101][102][103][104][105][106][107][108][109][110][111][112][113][114][115][116][117][118][119][120][121][122][123][124][125][126][127][128]
+3248953 bytes written
 Latexmk: All targets (main.pdf) are up-to-date
 
-Thesis PDF built; references, glyphs, labels and overflow checks passed.
+[INFO] Compiling main.tex with xelatex
+[INFO] Working directory: /Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis
+
+[SUCCESS] PDF generated: /Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/main.pdf

@@ -1,34 +1,42 @@
-accordingtotheirdistributionacrosschunks. Theextractedsetis
-𝒱 = {𝑣 ∶ ER(𝑣,𝑡) > 𝜏}, (5.3)
-𝑡
-withmaximumn-gramlength𝑏andthreshold𝜏 controllingcandidateboundariesandselection.
-Themainpaperreports𝑏 = 3and𝜏 = 0.5.
-The extraction rule uses terms appearing in the corpus. This constrains the origin of en-
-tity strings and makes their relationship to the indexed text explicit. Its decisions are based on
-term statistics, so linguistic salience and factual importance need not coincide. A frequently
-mentioned generic term and a rare but relevant phrase have different statistical profiles. The
-sensitivity experiment therefore examines both the phrase boundary and the extraction thresh-
-old.
-Anentitystringidentifiesagraphnode,whileitsoccurrencesconnectthatnodetopassages.
-This provides a path from fine-grained graph retrieval back to textual evidence. A shared en-
-tity can also connect information across chunks. The utility of these connections depends on
-whethertheextractedstringcapturestheintendedentityandwhetheroccurrenceshavecompat-
-ible meanings. The evaluation measures the complete retrieval and generation pipeline under
-thereportedextractionsettings.
-5.2.3 Relations, passage nodes, and synonyms
-For each chunk, the language model receives the selected entity set and the chunk text, and
-extractsrelations,
-ℰ = LLM(𝒱 ,𝑡,𝑝 ). (5.4)
-𝑡 𝑡 re
-The prompt 𝑝 asks for relations between the extracted entities in the chunk. The resulting
-re
-entity–relation–entity triples provide the graph’s factual edges. The statistical stage and the
-modelstagethereforeoperateconsecutively: oneselectsentitycandidatesfromobservedterms,
-andtheothersuppliesrelationsconditionedonthosecandidatesandtheircontext.
-Chunksarealsoinsertedaspassagenodes. AContainsedgeconnectsapassagetoanentity
-extractedfromit. Theselinkspreservetheassociationbetweenthesymbolicrepresentationand
-the source chunk. They also allow paths to cross passages through shared entities. A passage
-contributescontextualevidencetographretrievalwithoutbeingreducedtoasingleisolatedfact.
-The graph includes synonym edges between entity nodes whose embedding similarity ex-
-ceeds a threshold 𝜑. Such an edge expresses an embedding-based correspondence between
+methodtofavorrelevantconnectedinformationwithoutchoosingnodessolelybytheirinfluence
+rank.
+The pseudo edges retain their explicitly assigned penalty. Their role is to provide connec-
+tivity when the semantic graph alone separates the anchors. A path using a pseudo edge can
+therefore be feasible but expensive. The distinction between a low-cost semantic connection
+and a high-cost connectivity connection helps explain how graph connectivity participates in
+evidenceselection.
+5.4 MCMI Formulation and Evidence Expansion
+Let𝒱 containthenodesparticipatinginthemappedfacts. Afeasiblesubgraphcontainsthese
+term
+terminalsandconnectseachterminaltoadesignatedrootterminal. Themainpaperdefinesthe
+MinimumCostMaximumInfluence(MCMI)objectiveas
+𝑐
+𝑟(𝒢′) = 𝑒 . (5.10)
+∑ 𝑠 +𝑠
+𝑒=(𝑢,𝑣)∈ℰ′ 𝑢 𝑣
+Thecostofanincludededgeisscaledbytheinfluenceofitsendpoints. Theexpressionspecifies
+the reported optimization formulation. The implementation procedure described in the paper
+starts from a terminal-connecting tree and then expands its neighborhood using marginal cost-
+to-scorecomparisons.
+Theinitialstructureconnectsthequery-mappedinformation. Thesourceconstructsanauxil-
+iarygraphontheterminals,usesshortest-pathcostsbetweenthem,selectsatreeonthatauxiliary
+structure,andexpandsitsedgesbacktopathsintheevidencegraph. Thisstagesuppliesconnec-
+tionsamonganchorsinsteadofreturningtheanchorsasanunorderedset. Thedetailedtheorem
+inthemainpaperassignsits2-approximationstatementtothisMCSTconstructionstage.
+Subsequent expansion examines neighboring candidates. A candidate node 𝑣 connected by
+anedgeofcost𝑐 isconsideredthroughtheratio
+(MCMI,𝑣)
+𝑐
+(MCMI,𝑣)
+. (5.11)
+𝑠
+𝑣
+Theprocedureselectsthelowestsuchratioandcomparesitwiththecurrentsubgraph’sreported
+cost-scorequantity. Theacceptanceconditionis
+𝑐
+(MCMI,𝑣)
+< 𝑟(𝒢 ). (5.12)
+MCMI
+𝑠
+𝑣
 60

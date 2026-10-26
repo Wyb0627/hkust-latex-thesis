@@ -1,0 +1,111 @@
+{
+  "edits": 107,
+  "by_chapter": {
+    "chapter/ch01-introduction.tex": 7,
+    "chapter/ch02-background.tex": 13,
+    "chapter/ch03-kglink.tex": 12,
+    "chapter/ch04-gorag.tex": 19,
+    "chapter/ch05-agrag.tex": 23,
+    "chapter/ch06-mgrag.tex": 19,
+    "chapter/ch07-discussion.tex": 11,
+    "chapter/ch08-conclusion.tex": 3
+  },
+  "checks": {
+    "display_math": {
+      "identical": true,
+      "count": 47,
+      "differences": []
+    },
+    "algorithm": {
+      "identical": true,
+      "count": 1,
+      "differences": []
+    },
+    "inline_tables": {
+      "identical": true,
+      "count": 10,
+      "differences": []
+    },
+    "labels": {
+      "identical": true,
+      "count": 166,
+      "differences": []
+    },
+    "citations": {
+      "identical": true,
+      "count": 127,
+      "differences": []
+    },
+    "protected_inputs": {
+      "identical": true,
+      "count": 50
+    }
+  },
+  "phrase_counts": {
+    "reported": {
+      "before": 78,
+      "after": 62
+    },
+    "published": {
+      "before": 41,
+      "after": 33
+    },
+    "rather than": {
+      "before": 29,
+      "after": 18
+    },
+    "should": {
+      "before": 18,
+      "after": 9
+    },
+    "does not": {
+      "before": 16,
+      "after": 11
+    },
+    "within these conditions": {
+      "before": 1,
+      "after": 0
+    },
+    "should be read": {
+      "before": 2,
+      "after": 0
+    },
+    "should therefore": {
+      "before": 3,
+      "after": 0
+    },
+    "several conditions": {
+      "before": 2,
+      "after": 0
+    },
+    "we do not claim": {
+      "before": 0,
+      "after": 0
+    },
+    "for a fair comparison": {
+      "before": 0,
+      "after": 0
+    },
+    "it should be noted": {
+      "before": 0,
+      "after": 0
+    },
+    "taken together": {
+      "before": 0,
+      "after": 0
+    }
+  },
+  "rhetorical_colons": {
+    "before": 12,
+    "after": 0
+  },
+  "em_dashes": {
+    "before": 0,
+    "after": 0
+  },
+  "spaced_en_dashes": {
+    "before": 0,
+    "after": 0
+  },
+  "pdf_sha256": "ddcaf569a655c37b691c2d0a1e94ea435db4b3bd1d4f4fa1cc21ee71bbfe49db"
+}

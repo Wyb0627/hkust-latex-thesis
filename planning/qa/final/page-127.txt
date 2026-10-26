@@ -1,31 +1,45 @@
-Theaccompanyinghyper-relationalknowledge-graph studyexaminedhowstructural repre-
-sentationspreservefactinformation. Itsqualifier-captureandgraph-receptionperspectiveshelp
-explainwhytheformofarepresentationmatters. Acrossthethesis,thecommondesignquestion
-iswhichrelationshipsmustremainexplicitforthedownstreamtask. Thepublishedevaluations
-answerthatquestionthroughparticularmethodsandprotocols,yieldingasetofevidenceinter-
-facesforlanguage-modelaugmentation.
-8.2 Future Directions
-8.2.1 Feedback for structure maintenance
-A first direction is to connect evidence maintenance with feedback about its use. The current
-studies select graph information from an external source, update keyword–label associations,
-prepare a corpus graph, or build a query-specific graph. Feedback could indicate whether a
-retrieved relationship was relevant, whether its supporting passage was suﬀicient, or whether a
-prediction inserted into an index was later corrected. Such feedback would give maintenance a
-moredirectconnectiontoevidencequality.
-The evaluation of this direction should preserve the sequence in which feedback becomes
-available. In an online classifier, a later correction differs from a gold label supplied before
-prediction. In a retrieval system, the quality of one answer can affect later evidence selection
-onlyafteritsassessmentisavailable. Explicitfeedbacktimingandprovenancewouldpermitthe
-studyofcorrectionandretentionpolicieswithoutconflatingthemwithadditionalsupervision.
-8.2.2 Multimodal structure and provenance
-A second direction concerns the quality of multimodal graph representations. Caption-based
-ranking provides an eﬀicient text interface for images, while query-aware extraction can tar-
-get details relevant to a question. Both operations influence which visual information becomes
-available to semantic matching. A useful extension would retain the link from a graph fact to
-thetextspanorimageregionsupportingit,togetherwiththeextractionconditions.
-This would support a more detailed analysis of retrieval errors. A failed match could result
-from missing visual evidence, an extraction error, an unsuitable relation representation, or a
-searchdecision. Distinguishingthesestageswouldhelpdeterminewhichcomponenttoimprove.
-It would also make it possible to assess whether a matched path is supported by the source
-evidenceatthegranularityusedintheanswer.
+[47] W.Kwonetal.,“Eﬀicientmemorymanagementforlargelanguagemodelservingwithpagedatten-
+tion,”inProceedingsofthe29thsymposiumonoperatingsystemsprinciples,2023,pp.611–626
+(cit.onpp.64,88).
+[48] G. Izacard et al., “Unsupervised dense information retrieval with contrastive learning,” Transac-
+tionsonMachineLearningResearch,2022(cit.onpp.64,89).
+[49] P. Sarthi et al., “Raptor: Recursive abstractive processing for tree-organized retrieval,” arXiv
+preprintarXiv:2401.18059,2024(cit.onp.64).
+[50] N.Zhangetal.,“Sirerag:Indexingsimilarandrelatedinformationformultihopreasoning,”inThe
+ThirteenthInternationalConferenceonLearningRepresentations,2025(cit.onp.64).
+[51] X. He et al., “G-retriever: Retrieval-augmented generation for textual graph understanding and
+question answering,” Advances in Neural Information Processing Systems, vol. 37, pp. 132876–
+132907,2024(cit.onp.64).
+[52] L.Liuetal.,“Mixrag:Mixture-of-expertsretrieval-augmentedgenerationfortextualgraphunder-
+standingandquestionanswering,”arXivpreprintarXiv:2509.21391,2025(cit.onp.64).
+[53] circlemind-ai. “Fast-graphrag.” (2025), [Online]. Available: https://github.com/
+circlemind-ai/fast-graphrag(cit.onp.64).
+[54] C.-Y. Lin, “Rouge: A package for automatic evaluation of summaries,” in Text Summarization
+BranchesOut,Barcelona,Spain:AssociationforComputationalLinguistics,2004,pp.74–81(cit.
+onpp.64,90).
+[55] VibrantLabs, Ragas: Supercharge your llm application evaluations, https://github.
+com/vibrantlabsai/ragas,2024(cit.onp.65).
+[56] S. Es et al., “RAGAs: Automated evaluation of retrieval augmented generation,” in Proceedings
+ofthe18thConferenceoftheEuropeanChapteroftheAssociationforComputationalLinguistics:
+SystemDemonstrations,2024,pp.150–158.DOI:10.18653/v1/2024.eacl-demo.16
+(cit.onpp.65,90).
+[57] S. Xiao et al., C-pack: Packaged resources to advance general chinese embedding, 2023 (cit. on
+pp.79,92).
+[58] L. P. Cordella et al., “A (sub) graph isomorphism algorithm for matching large graphs,” IEEE
+transactions on pattern analysis and machine intelligence, vol. 26, no. 10, pp. 1367–1372, 2004
+(cit.onpp.84,92).
+[59] Y. Wang et al., MGRAG: Semantic subgraph matching and graph-aware caching for multimodal
+retrieval-augmented generation [technical report]. [Online]. Available: https://github.
+com/Wyb0627/MGRAG/blob/main/tech_report.pdf(cit.onp.86).
+[60] S.Baietal.,“Qwen2.5-VLtechnicalreport,”arXivpreprintarXiv:2502.13923,2025(cit.onp.89).
+[61] M.Douzeetal.,“Thefaisslibrary,”2024(cit.onp.89).
+[62] “nano-graphrag: A simple, easy-to-hack GraphRAG implementation.” (), [Online]. Available:
+https://github.com/gusye1234/nano-graphrag(cit.onp.89).
+[63] K.Papinenietal.,“Bleu:Amethodforautomaticevaluationofmachinetranslation,”inProceed-
+ingsofthe40thannualmeetingoftheAssociationforComputationalLinguistics,2002,pp.311–
+318(cit.onp.90).
+[64] G.Angelietal.,“Leveraginglinguisticstructureforopendomaininformationextraction,”inPro-
+ceedingsofthe53rdAnnualMeetingoftheAssociationforComputationalLinguisticsandthe7th
+InternationalJointConferenceonNaturalLanguageProcessing(Volume1:LongPapers),2015,
+pp.344–354(cit.onp.92).
 113

@@ -20,9 +20,9 @@ The graph representation separates an entity’s identity from the strings used 
 Atablecellorquerycontainsamention,whileanentitynodereferstoanindexedobject. Entity
 linking establishes a correspondence between the two. A short name may match several enti-
 ties,soaretrievalscoreandacontextualdisambiguationrulecaninfluencewhichfactsbecome
-available. Thedistinctionremainsrelevantwhenagraphisextractedfromtext: repeatedstrings,
-aliases, and synonyms affect whether different passages share a node. These indexing choices
-determinepossiblepathsbeforeaquery-specificselectionalgorithmbegins.
+available. When a graph is extracted from text, repeated strings, aliases, and synonyms affect
+whetherdifferentpassagesshareanode. Theseindexingchoicesdeterminepossiblepathsbefore
+aquery-specificselectionalgorithmbegins.
 Graph topology records the connections available to a computation. A neighborhood iden-
 tifies adjacent entities and relations; a path composes a sequence of such connections; and a
 subgraph retains a selected set of nodes and edges. These objects support different operations.

@@ -1,29 +1,28 @@
-Table 5.1: Creative generation with Qwen2.5-14B-Instruct. Results from the AGRAG main
-experiment[3].
-Method NovelFS NovelACC NovelCOV MedicalFS MedicalACC MedicalCOV
-NaiveRAG 0.205 0.307 0.384 0.176 0.577 0.554
-L.LLMLingua 0.213 0.316 0.377 0.225 0.575 0.496
-RAPTOR 0.365 0.333 0.373 0.314 0.526 0.553
-SiReRAG 0.324 0.328 0.365 0.295 0.544 0.456
-G-retriever 0.294 0.167 0.200 0.169 0.371 0.468
-MIXRAG 0.200 0.286 0.337 0.255 0.351 0.306
-GraphRAG 0.427 0.310 0.339 0.345 0.475 0.325
-LightRAG 0.201 0.314 0.329 0.189 0.567 0.549
-HippoRAG2 0.496 0.295 0.325 0.347 0.563 0.451
-F.GraphRAG 0.286 0.287 0.376 0.217 0.500 0.396
-AGRAG 0.513 0.339 0.386 0.356 0.598 0.589
-Table 5.2: Contextual summarization with Qwen2.5-14B-Instruct. Results from the AGRAG
-mainexperiment[3].
-Method Novel COV Novel ACC Medical COV Medical ACC
-NaiveRAG 0.745 0.621 0.677 0.576
-L.LLMLingua 0.687 0.627 0.657 0.583
-RAPTOR 0.760 0.626 0.633 0.583
-SiReRAG 0.754 0.617 0.592 0.560
-G-retriever 0.594 0.404 0.302 0.395
-MIXRAG 0.695 0.538 0.409 0.464
-GraphRAG 0.758 0.620 0.625 0.506
-LightRAG 0.753 0.628 0.625 0.585
-HippoRAG2 0.735 0.586 0.496 0.560
-F.GraphRAG 0.706 0.528 0.507 0.587
-AGRAG 0.778 0.643 0.690 0.604
+Table 5.6: Indexing / querying time in minutes. Qwen2.5-14B-Instruct; original paired mea-
+surementsarepreserved.
+Method Novel Medical WOS IFS-Rel
+NaiveRAG 13 / 371 7 / 245 2 / 292 2 / 225
+L.LLMLingua 51 / 360 37 / 305 4 / 358 3 / 315
+RAPTOR 464 / 250 117 / 319 30 / 162 24 / 121
+SiReRAG 85 / 233 40 / 207 26 / 139 18 / 117
+G-Retriever 19 / 119 12 / 145 8 / 158 3 / 164
+MIXRAG 17 / 388 11 / 453 5 / 257 2 / 193
+GraphRAG 347 / 205 194 / 158 85 / 240 64 / 217
+LightRAG 166 / 221 116 / 164 42 / 211 31 / 197
+HippoRAG2 95 / 134 46 / 130 19 / 140 15 / 127
+F.GraphRAG 106 / 198 48 / 173 29 / 186 27 / 164
+AGRAG 65 / 142 16 / 138 16 / 132 14 / 124
+Table5.7: Input/outputtokensperquery. Samesourceexperimentastheprecedingtimetable.
+Method Novel Medical WOS IFS-Rel
+NaiveRAG 9,437 / 1,708 7,473 / 379 7,292 / 29 4,521 / 16
+L.LLMLingua 8,466 / 1,750 5,686 / 390 5,861 / 31 2,757 / 14
+RAPTOR 7,243 / 777 4,817 / 695 6,007 / 41 3,807 / 33
+SiReRAG 7,759 / 800 4,918 / 701 6,012 / 47 3,821 / 36
+G-Retriever 6,344 / 116 6,290 / 157 6,762 / 12 4,002 / 21
+MIXRAG 6,083 / 237 4,238 / 230 4,193 / 31 3,597 / 29
+GraphRAG 12,686 / 2,109 8,385 / 1,017 11,809 / 351 9,009 / 287
+LightRAG 13,145 / 1,233 9,535 / 426 11,510 / 227 7,667 / 199
+HippoRAG2 8,138 / 1,073 6,264 / 595 5,066 / 93 2,440 / 102
+F.GraphRAG 7,490 / 1,252 6,475 / 384 4,957 / 35 2,217 / 20
+AGRAG 6,487 / 1,140 5,145 / 413 3,970 / 101 1,890 / 93
 69

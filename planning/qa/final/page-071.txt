@@ -1,29 +1,34 @@
-CHAPTER 5
-CONNECTED EVIDENCE SELECTION FOR LANGUAGE
-MODELS WITH AGRAG
-ThischapterisbasedonAGRAG:AdvancedGraph-basedRetrieval-AugmentedGeneration
-for LLMs, published at ICDE 2026 [3]. It studies how a retrieval system can select connected
-evidence and communicate the relationships among retrieved facts to a language model. The
-task extends beyond retrieving a relevant label. An answer may require several facts, their con-
-nections,andthesurroundingpassagesthatexplainthem.
-5.1 Research Problem and Evidence Requirements
-A retrieval system can locate passages relevant to a question while still leaving the generator
-with the task of discovering how those passages fit together. This distinction matters when a
-question asks for a summary, an explanation, or a response that combines information from
-different parts of a corpus. Similar passages may repeat one fact. Passages containing different
-parts of an answer may share few words. A graph provides an explicit representation of these
-connections,butthesystemmuststilldecidewhichpartofthegraphtosupplytothegenerator.
-Theresearchquestioninthischapterishowtoselectevidencethatcombinesqueryrelevance
-with connectivity. There are two related decisions. The first concerns the construction of the
-graph from text. Extracted entities establish the vocabulary over which subsequent retrieval
-operates. Thesecondconcernsthesubgraphreturnedforaquery. Arankingofindividualnodes
-assigns relevance scores, whereas a connected subgraph also specifies relationships among the
-selecteditems. AGRAGaddressesthesedecisionsthroughstatisticalentityextraction,influence-
-awaregraphretrieval,andaseparatehybridpassageretrievalchannel.
-Consider a corpus containing statements about an illness, the organ that it affects, and the
-routesthroughwhichitspreads. Aquerymaymatchfactsmentioningtheillnessandtheorgan.
-Connecting those facts can identify a small initial structure, but answering the question may
-require a neighboring fact that specifies another anatomical component. The original example
-in Figure 5.2 illustrates this distinction. The example motivates expansion beyond an initial
-terminal-connectingstructure.
+accordingtotheirdistributionacrosschunks. Theextractedsetis
+𝒱 = {𝑣 ∶ ER(𝑣,𝑡) > 𝜏}, (5.3)
+𝑡
+withmaximumn-gramlength𝑏andthreshold𝜏 controllingcandidateboundariesandselection.
+Themainpaperreports𝑏 = 3and𝜏 = 0.5.
+The extraction rule uses terms appearing in the corpus. This constrains the origin of en-
+tity strings and makes their relationship to the indexed text explicit. Its decisions are based on
+term statistics, so linguistic salience and factual importance need not coincide. A frequently
+mentioned generic term and a rare but relevant phrase have different statistical profiles. The
+sensitivity experiment therefore examines both the phrase boundary and the extraction thresh-
+old.
+Anentitystringidentifiesagraphnode,whileitsoccurrencesconnectthatnodetopassages.
+This provides a path from fine-grained graph retrieval back to textual evidence. A shared en-
+tity can also connect information across chunks. The utility of these connections depends on
+whethertheextractedstringcapturestheintendedentityandwhetheroccurrenceshavecompat-
+iblemeanings.
+5.2.3 Relations, passage nodes, and synonyms
+For each chunk, the language model receives the selected entity set and the chunk text, and
+extractsrelations,
+ℰ = LLM(𝒱 ,𝑡,𝑝 ). (5.4)
+𝑡 𝑡 re
+The prompt 𝑝 asks for relations between the extracted entities in the chunk. The resulting
+re
+entity–relation–entity triples provide the graph’s factual edges. Statistical extraction selects en-
+tity candidates from observed terms. The model then extracts relations conditioned on those
+candidatesandtheircontext.
+Chunksarealsoinsertedaspassagenodes. AContainsedgeconnectsapassagetoanentity
+extractedfromit. Theselinkspreservetheassociationbetweenthesymbolicrepresentationand
+the source chunk. They also allow paths to cross passages through shared entities. A passage
+contributescontextualevidencetographretrievalwithoutbeingreducedtoasingleisolatedfact.
+The graph includes synonym edges between entity nodes whose embedding similarity ex-
+ceeds a threshold 𝜑. Such an edge expresses an embedding-based correspondence between
+strings. It permits retrieval to connect different expressions that would otherwise form sepa-
 57

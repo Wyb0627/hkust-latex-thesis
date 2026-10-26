@@ -17,19 +17,6 @@ Relation Entity Newlycreatedrelation Newlycreatedentity
 Figure 2.1: Original comparison of hyper-relational decomposition methods. Prune retains the
 main triple; Direct adds subject–qualifier links; Hyper adds combined relations; database reifi-
 cationintroducesauxiliaryobjects. ReproducedfromFig.1oftheCIKMstudy[5].
-cernKGembeddingmodels,whilethefourresearchchaptersexaminelanguage-modelaugmen-
-tation.
-2.6.1 Facts, Qualifiers, and Decomposition
-Ahyper-relationalfactextendsamaintriplewithasetofqualifierpairs,
-𝐹 = (𝑠,𝑟,𝑜,𝒬), 𝒬 = {(𝑞𝑟 ,𝑞𝑒 )}𝑛 . (2.1)
-𝑖 𝑖 𝑖=1
-Here 𝑞𝑟 is a qualifier relation and 𝑞𝑒 its associated entity. Qualifiers attach information to a
-𝑖 𝑖
-particular statement. For example, degree and major can distinguish two education statements
-aboutthesameperson. Theirassociationwiththeintendedmaintripleispartoftheinformation
-represented by the fact. StarE retains the semantic roles of qualifiers and triples in message
-passingandintroducesWD50Kforhyper-relationallinkprediction[24].
-TheCIKMstudyaskshowmuchofanHKGEmodel’sperformancecomesfromitsbaseKGE
 architectureandhowmuchcomesfromspecializedqualifierprocessing. Itevaluatesadata-level
 alternative to modifying the model. Three decomposition methods convert a hyper-relational
 factintoordinarytripleswhileretainingdifferentinformation. Prunekeepsonlythemaintriple.
@@ -42,4 +29,18 @@ tion. A decomposition can retain qualifier entities and relation labels while ch
 associationwiththemainfactisexpressed. Databasereificationintroducesauxiliaryentitiesand
 relations, also changing the original main-triple topology. These differences determine which
 neighborhoodsandpathsanordinaryKGEmodelreceivesafterconversion.
+The association of a qualifier with a statement is especially relevant when a subject partici-
+pates in several facts using the same relation. In the education example, a degree describes one
+university attendance statement. A collection of subject–degree and subject–university triples
+exposes the entities but changes the representation of which degree qualifies which attendance
+fact. A model following ordinary graph paths then receives the transformed connections. The
+Hyper method supplies additional connections intended to retain more of these associations,
+whereas a qualifier integrator receives the main fact and its qualifier pairs together. This com-
+parisonplacesinformationpreservationattheinterfacebetweenthedatarepresentationandthe
+computation that follows it. It concerns the semantic organization of the input as well as its
+vocabulary.
+The experiments compare conventional KGE models under these transformations with spe-
+cialized HKGE models. Some GNN-based KGE configurations obtain scores comparable to
+specializedmethodsonCleanedJF17kandWD50k. Theobservationmotivatesanexamination
+of the represented information and the architecture receiving it. In particular, adding qualifier-
 17

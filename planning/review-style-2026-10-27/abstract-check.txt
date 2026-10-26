@@ -1,0 +1,31 @@
+============================================================
+Abstract Structure Diagnosis
+============================================================
+File: /Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/main.tex
+Language: en
+Status: FAIL
+
+------------------------------------------------------------
+Element Diagnosis
+------------------------------------------------------------
+
+  Background  : [MISSING ]
+    Suggestion: Add 1-2 sentences establishing the research context and knowledge gap.
+
+  Objective   : [MISSING ]
+    Suggestion: Add a sentence starting with 'This study aims to...' or 'We investigate...'
+
+  Methods     : [PRESENT ]
+    Evidence: "KGLink integrates knowledge graphs with a pre-trained language model to enrich column representations and bridge diff..."
+
+  Results     : [VAGUE   ]
+    Evidence: "Experiments across table annotation, dynamic classification, textual generation, and multimodal question answering sh..."
+    Suggestion: Add quantitative evidence: accuracy, improvement percentage, or effect size.
+
+  Conclusion  : [PRESENT ]
+    Evidence: "Ablation studies verify the contributions of the structural components."
+
+------------------------------------------------------------
+  Words: 206 (limit: 150–300) [PASS]
+
+============================================================

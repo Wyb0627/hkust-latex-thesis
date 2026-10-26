@@ -1,13 +1,3 @@
-quentlyasubstantivepartofretrievaldesign. Thegraphrepresentation,theselectedobject,and
-itsserializationeachinfluencewhichevidencethemodelfinallyobserves.
-The thesis examines several structural retrieval questions within this landscape. GORAG
-retrieves labels by connecting keywords extracted from the query [2]. AGRAG selects a con-
-nected evidence subgraph while considering node influence and edge cost [3]. MGRAG tests
-semantic correspondence between query paths and evidence paths [4]. These operations have
-different output conditions. A set of highly ranked nodes need not contain paths that connect
-the query’s requested facts. Conversely, a connecting path can introduce intermediate evidence
-whosedirectquerysimilarityislower.
-The meaning of a path also depends on how the graph represents the source. Entity links
 extracted from a passage can provide a relational account of that passage, while passage nodes
 retainaroutetoitsoriginalwording. Combininggraphserializationwithsourcechunksletsthe
 generator receive both relational organization and textual context. AGRAG uses such a combi-
@@ -30,4 +20,14 @@ coarse-rankingpathwayandlatersuppliesselectedoriginalchunkstogeneration[4]. Itsm
 chapterspecifiestheinterfaceateachstage.
 MRAMG-Benchstudiesretrieval-augmentedgenerationinwhichanswerscancombinetext
 and images [21]. Its multimodal output requirement adds another distinction between finding
+supporting evidence and presenting the response. The MGRAG evaluation uses six MRAMG
+subsetstogetherwithMMQA.Chapter6specifiestheretrievalandanswer-assessmentprotocol
+usedforthesedatasets.
+Onceevidenceisretrieved,thesystemmustprocessitasmodelcontext. Inanautoregressive
+Transformer, the prefill stage computes representations for the supplied input, and decoding
+generatesanswertokens. Keyandvaluetensorsfromprocessedinputpositionscanbecachedfor
+later attention computation [7, 22]. Reusing these tensors concerns the computation associated
+with selected evidence. It is a separate decision from choosing which evidence belongs in the
+context.
+CacheGen addresses the storage and transfer of context caches through compression and
 15

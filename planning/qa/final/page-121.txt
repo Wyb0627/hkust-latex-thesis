@@ -1,33 +1,30 @@
-originallabeledexamples. Apredictionusedforindexingbecomespartoftheevidenceavailable
-to later queries. The experiment consequently evaluates a sequence of index states as well as a
-classifier.
-AGRAG separates corpus preparation from query-dependent selection. The graph is built
-fromtheindexedtext,andeachquerychangesthemappedfacts,nodeinfluence,edgecosts,and
-selectedevidencestructure. Thisallowsthesamecorpusgraphtosupportdifferentinformation
-needs. Italsomakestherelevanceofanodedependonthequery’sanchorsanditsconnections,
-ratherthanonlyonafixedcorpus-wideproperty.
-MGRAG moves query dependence into construction itself. Ranked chunks are consumed
-incrementally, and their extracted facts depend on the question. Matching provides a stopping
-condition for the growing graph. This choice can reduce the amount of graph material con-
-structedforaqueryandfocusextractiononitsrequirements. Italsoplacesconstructionworkon
-thequerypath. Therelevantcostcomparisonthereforeincludesquery-awareextraction,match-
-ing,andgeneration.
-These alternatives correspond to different workloads. An existing knowledge graph is use-
-ful when entities and their external descriptions are available. Online indexing fits tasks whose
-labelevidenceevolvesoverasequence. Areusablecorpusgraphsupportsrepeatedqueriesover
-sharedtext. Query-specificconstructiontargetstheevidencerequirementsofanindividualmul-
-timodal question. The thesis’s progression reveals these choices through concrete tasks rather
-thanselectingonegraphlifecycleforeveryapplication.
-7.3 Evidence Quality and Computational Cost
-Evidence quality has several meanings across the studies. In KGLink, quality concerns the
-information supplied to a column representation and its relation to the target label vocabulary.
-InGORAG,itincludeswhethertheretrievedcandidatescontainausefullabelunderthecurrent
-index. In AGRAG, it concerns relevant connected facts and the coverage and grounding of
-generatedcontent. InMGRAG,itincludessemanticcorrespondencetothequeryandthequality
-preservedunderselectiverecomputation.
-Table7.2comparesthemainexperimentalconditions. KGLinkevaluatesatrainedencoder;
-the other studies evaluate generative pipelines with different backbones. Shared datasets also
-havedifferentsupervisionandupdateprotocols. GORAG’sWOSandIFS-Relexperimentsaccu-
-mulatelabelsandprediction-derivedkeyword–labelassociationsoverrounds,whereasAGRAG
-indexesonetrainingpassageperlabelforclassification.
+CHAPTER 8
+CONCLUSION AND FUTURE DIRECTIONS
+8.1 Conclusion
+This thesis investigated how explicit knowledge structures can organize and select evidence for
+language models. It developed four methods for table understanding, dynamic classification,
+connected textual evidence selection, and multimodal query answering. Structure supplies in-
+formationtolearnedrepresentations,indexescandidatelabels,connectsgenerationcontext,and
+guidescontextcomputation.
+KGLink’s component comparisons show benefits from graph-derived evidence and contex-
+tualtype-representationtraining. Itsno-linkagesubsetalsoshowscontinuedannotationthrough
+thetableencoderwhenretrievedKGevidenceisabsent. Externaldescriptionsenterasupervised
+mapping to the annotation vocabulary, with cross-column filtering determining which descrip-
+tionsareavailable.
+GORAG’sofflineablationshowsthecontributionofexpandingthekeyword–labelindexwith
+earlier predictions under its round protocol. Additional support and cumulative label growth
+havedataset-dependenteffects,includingnon-monotonicresultsonIFS-Rel. Currentclassifica-
+tiondecisionsshapetheassociationsavailabletolatercandidateretrieval.
+AGRAG’s ablations distinguish answer coverage from support for the claims actually gen-
+erated. Removinghybridpassagescanretainahighfaithfulnessscorewhilereducingcoverage;
+replacing the expanded subgraph with its initial tree affects tasks differently. Connected graph
+facts and passage context therefore serve complementary evidence needs in the evaluated gen-
+erationtasks.
+MGRAG’sconstructionandmatchingcomparisonssupportquery-dependentextractionand
+semantic paths for the evaluated multimodal questions. Its cache comparisons show that the
+selectedgraphcanalsoinformtoken-staterecomputation. Componentadditionsimproveanswer
+qualitywithruntimechangesthatdependonthehostpipeline,extendingstructuralevidenceuse
+intocontextprocessing.
+Theaccompanyinghyper-relationalknowledge-graph studyexaminedhowstructural repre-
+sentationspreservefactinformation. Itsqualifier-captureandgraph-receptionperspectiveshelp
 107

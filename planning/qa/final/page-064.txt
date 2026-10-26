@@ -1,45 +1,35 @@
-Table 4.3: WOS classification accuracy with 5 support examples per label. Qwen2.5-7B is the
-RAGbackbone. ValuesandemphasisreproducethecorrespondingcolumnsofGORAG’smain
-table.
-Method Round1 Round2 Round3 Round4
-Entailment 0.3823 0.4471 0.4857 0.4387
-NaiveRAG 0.3904 0.2154 0.1475 0.1556
-LongLLMLingua 0.3823 0.2202 0.1567 0.1382
-GraphRAG 0.3897 0.2197 0.1770 0.1634
-LightRAG 0.3806 0.2216 0.1767 0.1626
-HippoRAG2 0.4245 0.2656 0.2210 0.1860
-GORAG 0.4990 0.5109 0.4996 0.4717
-Table4.4: WOSclassificationaccuracywith10supportexamplesperlabel. Qwen2.5-7Bisthe
-RAGbackbone. ValuesandemphasisreproducethecorrespondingcolumnsofGORAG’smain
-table.
-Method Round1 Round2 Round3 Round4
-Entailment 0.4187 0.4222 0.4787 0.4442
-NaiveRAG 0.3897 0.2187 0.1799 0.1649
-LongLLMLingua 0.3901 0.2198 0.1608 0.1493
-GraphRAG 0.3906 0.2219 0.1786 0.1625
-LightRAG 0.3815 0.2145 0.1799 0.1632
-HippoRAG2 0.4208 0.2666 0.2242 0.1915
-GORAG 0.5134 0.5284 0.5234 0.4929
-Table 4.5: IFS-Rel classification accuracy with one support example per label. GPT-4o is the
-RAGbackbone. ValuesandemphasisreproducethecorrespondingcolumnsofGORAG’smain
-table.
-Method Round1 Round2 Round3 Round4
-Entailment 0.3391 0.4008 0.3061 0.2971
-NaiveRAG 0.7343 0.5394 0.4719 0.5233
-LongLLMLingua 0.8750 0.5734 0.4703 0.5819
-GraphRAG 0.6406 0.4406 0.3828 0.4297
-LightRAG 0.7578 0.4906 0.3802 0.4531
-HippoRAG2 0.7313 0.4875 0.4297 0.4984
-GORAG 0.9688 0.5938 0.4844 0.6165
-Table 4.6: IFS-Rel classification accuracy with 5 support examples per label. GPT-4o is the
-RAGbackbone. ValuesandemphasisreproducethecorrespondingcolumnsofGORAG’smain
-table.
-Method Round1 Round2 Round3 Round4
-Entailment 0.6046 0.5516 0.4703 0.4395
-NaiveRAG 0.7344 0.5406 0.4719 0.4938
-LongLLMLingua 0.8906 0.5922 0.4741 0.4903
-GraphRAG 0.7813 0.4688 0.3734 0.4422
-LightRAG 0.8281 0.5155 0.4010 0.4804
-HippoRAG2 0.7375 0.5016 0.4328 0.5008
-GORAG 0.9688 0.6172 0.4948 0.4988
+Table4.9: TokencostonIFS-Reldatasetwith1-shotsetting.
+Model AVGTokenperQuery AVGCostperQuery(USD)
+GPT-4o 634.6 $0.005
+LongLLMLingua 2771.3 $0.021
+NaiveRAG 4537.4 $0.034
+LightRAG 7866.3 $0.059
+GraphRAG 9296.3 $0.070
+GORAG 557.5 $0.004
+alargerobservedeffectthanreplacingtheweightedgraphwithunitcosts.
+Theoffline-and-unitvariantreports0.2979,0.2287,0.2645,and0.2249. Itsthird-andfourth-
+round values exceed those of the offline variant. The effects of removing these components
+are therefore not strictly additive across rounds. The keyword variant reports 0.4746, 0.4606,
+0.4455, and 0.4030, below the full method in each displayed column. The full query provides
+information useful to the classifier in these experiments even though keywords determine the
+retrievalterminals.
+Thepublicationgivesdifferentfull-methodvaluesinthemainandablationWOStableswith-
+outexplainingtheirprovenance. Componentcomparisonshereusethefull-methodrowfromthe
+ablationtable.
+4.7.1 Prompt tokens and graph growth
+The IFS-Rel one-shot token study reports average tokens per query and the corresponding US-
+dollarcostsundertheoriginalstudy’spricingconditions. GORAGuses557.5tokensperquery
+and reports a cost of $0.004. The direct GPT-4o comparison uses 634.6 tokens and reports
+$0.005. LongLLMLingua uses 2,771.3 tokens, NaiveRAG 4,537.4, LightRAG 7,866.3, and
+GraphRAG9,296.3. Theirreportedcostsare$0.021,$0.034,$0.059,and$0.070,respectively.
+Thetokencomparisonmeasureshowmuchcontextreachesthemodelintheevaluatedimple-
+mentation. GORAG’s candidate-label representation uses fewer tokens than the listed retrieval
+baselinesinthisexperiment.
+Graph growth is measured separately during the first IFS-Rel round with GPT-4o. The re-
+portedindexcontains1,644nodesand1,771edgesatthe25-percentcheckpoint,and5,299nodes
+and 5,503 edges at the final checkpoint. The corresponding reported memory values are 13.3
+KBand46.4KB.Thesememoryvaluescoverthegraphindexalone.
+TheoriginalruntimestudycomparestotaltimeonWOSandCADundertheone-shotsetting,
+using Qwen2.5-7B. Online insertion adds work after each prediction, while statistical keyword
+indexingandsmallermodelinputscanchangeotherpartsofthepipeline.
 50

@@ -1,33 +1,45 @@
-The selected subgraph may contain paths of different lengths, because the evidence required
-by different query edges can have different decompositions. Construction then stops on that
-accepted match; otherwise, a further ranked chunk is incorporated and matching is attempted
-again.
-6.5.4 Published algorithmic properties
-Thepublicationstatesthatpath-basedsemanticsubgraphmatchingisNP-hard. Itsproofsketch
-reduces subgraph isomorphism to a restricted instance with uniform embeddings and unit path
-lengths. Theresultmotivatestheuseofsemanticpathgrowthandconstrainedmappingenumer-
-ation. The complexity of enumerating mappings remains relevant even when each individual
-extensionisselectedgreedily.
-The published Theorem 2 gives a threshold-based quality condition for a valid returned
-match. Every matched query relation has a supporting path with cosine similarity at least 𝜃.
-Under the strict acceptance test in Equation 6.9, the average score of an accepted mapping ex-
-ceeds 𝜃 as well. This condition describes the semantic validation of returned evidence. It is
-conditionalonfindingavalidmatchanddoesnotrequirethealgorithmtorecoveronewhenever
-suchasubgraphexists.
-Thetechnicalreportdiscussesthethresholdintermsofabottlenecktransportcost[59]. With
-a per-edge cost of one minus cosine similarity, the threshold limits the largest accepted local
-cost. TheexplicittheoremstatementinthepublisherPDFisusedheretospecifytheresult. The
-method’s empirical quality is assessed by the graph-matching substitutions and answer-quality
-measurementsinSection6.9.
-6.5.5 Serializing selected evidence
-After matching, MGRAG serializes the selected triples into 𝑆 , separating facts with [SEP].
+ℰ, maximum path length 𝑙 , and language-model hidden dimension 𝑑 , its reported online
+𝑝 LLM
+boundis
+𝑂(𝑑
+emb
+𝑘𝑙
+𝑐
+2 +𝑙
+𝑝
+|ℰ̂||𝒱||𝒱̂|+1 +|𝒱||ℰ|
+(6.14)
++𝑑
+LLM
+(|𝑆
 𝑟
-This sequence is combined with 𝑞 and the original chunks consumed during construction. The
-serializationsuppliesanexplicitlistofentitiesandrelationshipstotheansweringmodel. Orig-
-inal chunks remain available because extraction is a selective description of the evidence, and
-somelinguisticorvisualdetailsmaylieoutsidethetriples.
-The same entities and relations were involved in the earlier graph-construction calls. Their
-tokens can therefore overlap with tokens in the answering context. MGRAG uses this relation-
-shiptoreusecachedcomputationfromconstructionwhileupdatingstatesimportanttothenew
-answering context. The graph produced during retrieval thus becomes an input to the context-
+|2 +|𝑞|2)).
+Themapping-enumerationtermisexponentialinquery-graphsize. Query-specificconstruction
+andaboundedpathlengthrestrictthegraphsprocessedintheevaluatedsetting. Actualmodule
+costs provide the complementary evidence about where runtime is spent. In particular, graph
+construction calls the language model repeatedly, whereas matching operates on the extracted
+graph. Section6.10reportsthesecostsindividually.
+6.8 Experimental Protocol
+The evaluation uses MMQA [20] and the Arxiv, Manual, Web, Wiki, Wit, and Recipe subsets
+of MRAMG-Bench [21]. Table 6.1 preserves the published dataset statistics. MMQA includes
+textual and image queries. The six MRAMG subsets contain textual queries over multimodal
+corpora. Theirquery-hoprangesandcorpussizesdiffer,soresultsarereportedbydataset.
+Table 6.1: Evaluation datasets, reproduced from published Table 3, p. 2488 [4]. T and I denote
+textualandimagequerymodalities. ThecolumnscompriseMMQAandsixMRAMGsubsets.
+Statistic MMQA Wiki Wit Recipe Arxiv Manual Web
+QueryModality T/I T T T T T T
+Queries 951 500 600 2,360 200 390 750
+Texts 218,285 538 639 1,528 101 40 1,500
+Images 57,058 538 639 8,569 337 2,607 1,500
+CorpusSize 22.5M 680k 478k 1.1M 136k 420k 215k
+QueryHops 1–2 2–5 2–4 1–6 3–4 2–6 2–3
+AvgQueryHops 1.5 3.0 2.8 3.3 3.1 3.7 2.4
+The shared generation backbone is Qwen2.5-VL-7B-Instruct [60]. The experiments run on
+an Intel Xeon Gold 5220R CPU at 2.20 GHz and one NVIDIA A100-SXM4 GPU with 40 GB
+memory. Theretrievalamountissettofive,textchunksuse256tokens,andoverlapis32tokens.
+HippoRAG2 uses Contriever for dense passage retrieval [48]; the other reported embedding
+configurationsusebge-base-en-v1.5. Similarity-basedretrievalrepresentsimagesthroughtheir
+captions. Thesearethepublishedcontrolsforthecomparisonsinthischapter.
+VanillaRAG is implemented with LangChain and FAISS [61]. The GraphRAG implemen-
+tationisnano-graphrag[62],andtheremainingbaselinesystemsusetheirreleasedimplementa-
 89

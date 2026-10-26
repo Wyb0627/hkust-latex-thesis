@@ -1,35 +1,61 @@
-Table 4.7: IFS-Rel classification accuracy with 10 support examples per label. GPT-4o is the
-RAGbackbone. ValuesandemphasisreproducethecorrespondingcolumnsofGORAG’smain
-table.
-Method Round1 Round2 Round3 Round4
-Entailment 0.5859 0.5828 0.5193 0.4895
-NaiveRAG 0.7406 0.5469 0.4688 0.5000
-LongLLMLingua 0.9219 0.5806 0.5225 0.5038
-GraphRAG 0.8125 0.4719 0.3141 0.3922
-LightRAG 0.8594 0.5156 0.4427 0.4610
-HippoRAG2 0.7406 0.4938 0.4438 0.4953
-GORAG 0.9688 0.6250 0.5344 0.5469
-OnWOSwithonesupportexampleperlabel,GORAGreportsaccuraciesof0.4866,0.4790,
-0.4736, and 0.4420 across the four rounds. Entailment reports 0.3695, 0.3994, 0.4510, and
-0.4030inthesamecolumns. ThecorrespondingGraphRAGvaluesare0.3852,0.2213,0.1816,
-and 0.1641. These comparisons locate the result in a setting where the number of candidate
-labelsincreasessubstantiallyovertheevaluation.
-Additional support examples improve GORAG’s WOS accuracy in the main table. At the
-fourth round, its one-, five-, and ten-shot values are 0.4420, 0.4717, and 0.4929. At the first
-round they are 0.4866, 0.4990, and 0.5134. The changing label universe and changing support
-sizeareseparateexperimentalaxes.
-IFS-Rel uses GPT-4o. In its first round, GORAG reports 0.9688 for all three support sizes,
-whilethefourth-roundscoresare0.6165,0.4988,and0.5469. Thefive-shotfourth-roundvalue
-is below the one-shot value, so increasing support size does not produce a monotonic improve-
-ment in every setting. LongLLMLingua reports 0.5819, 0.4903, and 0.5038 in these fourth-
-round columns. HippoRAG2 reports 0.4984, 0.5008, and 0.4953; its five-shot result exceeds
-GORAG’sfive-shotresultinthatcolumn.
-CAD uses Qwen2.5-7B. Its GORAG first-round accuracy is 0.6125 in all three support set-
-tings. The fourth-round one- and five-shot accuracies are 0.3133 and 0.3146. Accuracy de-
-creasesinlaterroundsasthecumulativelabelsetgrows.
-WOS improves with additional support in the displayed rounds, whereas IFS-Rel is non-
-monotonicacrosssupportsizesandCADlosesaccuracyaslabelsaccumulate.
-4.7 Ablations and Resource Use
-TheWOSablationstudyusesaone-shotQwen2.5-7Bsetting. Theofflinevariantdisablesonline
-indexing. The unit variant assigns cost one to every graph edge. The offline-and-unit variant
+80.0
+70.0
+60.0
+50.0
+40.0
+30.0
+20.0
+10.0
+0.0
+Entail. Naïve Long. Graph. Light. Hippo.
+G
+O
+R
+A
+G
+sniM
+10.0
+8.0
+6.0
+4.0
+2.0
+0.0
+Entail. Naïve Long. Graph. Light. Hippo.
+G
+O
+R
+A
+G
+(a)WOS.
+sniM
+R1
+R2
+R3
+R4
+(b)CAD.
+Figure 4.3: Total time in minutes for the one-shot four-round experiments with Qwen2.5-7B.
+The original R1–R4 legend in panel (b) applies to both panels. Reproduced from Figure 3 of
+GORAG[2].
+Table4.10: 0-shotexperimentsforGORAGandRAGbaselinesonIFS-Reldatasetunder0-shot
+setting.
+Model R1 R2 R3 R4
+GPT-4o[43] 0.9219 0.5109 0.4063 0.5936
+LongLLMLingua[41] 0.9281 0.5297 0.4234 0.5806
+LightRAG[19] 0.6718 0.3047 0.2135 0.0977
+GraphRAG[17] 0.5625 0.1875 0.1458 0.0938
+GORAG 0.9328 0.5406 0.4375 0.6063
+4.8 Zero-shot and Round Generalization
+Thezero-shotIFS-Relexperimentsupplieslabelnamesandlanguage-model-generateddescrip-
+tions without annotated support texts. GORAG extracts keywords from these descriptions to
+initializeitsgraph. Theexperimentconsequentlytestswhetherdescription-derivedassociations
+cansupportcandidateselectionandsubsequentclassification.
+GORAG reports zero-shot accuracies of 0.9328, 0.5406, 0.4375, and 0.6063. The direct
+GPT-4o comparison reports 0.9219, 0.5109, 0.4063, and 0.5936. LongLLMLingua reports
+0.9281, 0.5297, 0.4234, and 0.5806. The graph-based comparisons in the same table are lower
+underthisinitializationprotocol. Thesevaluessupporttheuseoflabeldescriptionsasaninitial
+retrievalsourceforthisexperiment.
+The round-generalization study uses WOS split into four, six, and eight rounds under one-
+and five-shot settings. The displayed curve combines rounds one to four from the four-round
+split, rounds five and six from the six-round split, and rounds seven and eight from the eight-
+roundsplit. Thesepointsrepresentresultsfromdifferentpartitionsofthelabelset. Theydonot
 51

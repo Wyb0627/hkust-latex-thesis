@@ -9,23 +9,18 @@ cesses. Tables can omit information needed for semantic annotation, classificati
 evolve under limited supervision, and answers can require relationships distributed across tex-
 tualandvisualsources. Thisthesisinvestigateshowexplicitknowledgestructurescanorganize
 andselectevidenceforthesesettings.
-The thesis develops four methods. KGLink combines knowledge-graph information with a
-pre-trainedlanguagemodelforcolumntypeannotation. Cross-columngraphfiltering,candidate
-types, and a contextual representation objective relate external knowledge to the target annota-
-tion vocabulary. GORAG maintains weighted keyword–label relations for dynamic few-shot
-classification. Its connected retrieval and online indexing adapt candidate evidence to the input
-and the information available across rounds. AGRAG selects connected textual evidence using
-query-conditioned node influence and semantic edge costs, then combines the selected graph
-with hybrid passage retrieval. MGRAG incrementally constructs query-specific multimodal
-graphs, matches query relations to semantic paths, and uses graph features to guide selective
-recomputationofcachedmodelstates.
-EvaluationscoverannotationonSemTabandVizNet,dynamicclassificationonCAD,WOS
-and IFS-Rel, textual retrieval and generation, and multimodal question answering. KGLink
-obtains weighted F1 of 96.07% on VizNet. GORAG reaches fourth-round WOS accuracy of
-0.4929 with ten examples per label and Qwen2.5-7B. AGRAG obtains Medical summarization
-coverage of 0.690 with Qwen2.5-14B-Instruct. MGRAG reaches MMQA accuracy of 0.7442
-with Qwen2.5-VL-7B-Instruct. Ablations examine knowledge enrichment, index maintenance,
-connected context, semantic matching, and context recomputation. A separate hyper-relational
-knowledge-graph study analyzes information preservation. The studies identify how explicit
-relationshipsguideevidencerepresentation,retrieval,andcomputationforlanguagemodels.
+Thethesisdevelopsfourmethodsforstructuralaugmentation. KGLinkintegratesknowledge
+graphs with a pre-trained language model to enrich column representations and bridge differ-
+ences between graph types and annotation labels. GORAG supports dynamic few-shot classi-
+fication through connected label retrieval and an online graph index that evolves with the task.
+AGRAG selects connected textual evidence by combining query-dependent node influence, se-
+manticedgecosts,andhybridpassageretrieval. MGRAGconstructsquery-specificmultimodal
+graphs, matches query relations to semantic paths, and uses graph structure to guide the reuse
+andrecomputationofcachedmodelstates.
+Experiments across table annotation, dynamic classification, textual generation, and multi-
+modalquestionansweringshowimprovedeffectivenessoverestablishedbaselinesandeﬀiciency
+gainsingraphindexingandcontextprocessing. Ablationstudiesverifythecontributionsofthe
+structural components. A related study of hyper-relational knowledge graphs examines infor-
+mation preservation. These studies demonstrate how explicit relationships improve evidence
+representation,retrieval,andcomputationforlanguagemodels.
 ii

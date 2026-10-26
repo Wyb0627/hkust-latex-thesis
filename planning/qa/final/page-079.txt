@@ -1,36 +1,40 @@
-The mapped facts need not name every component required in the answer. An additional re-
-lation can identify a candidate answer and connect it to the query anchors. The edge-cost and
-influence quantities determine how this information is considered by the expansion procedure.
-The selected subgraph then exposes the retained relationships to the generator as named facts,
-alongsideitspassagecontext.
-The theoretical claims have distinct scopes. The main paper reports NP-hardness for the
-stated subgraph optimization problem and a 2-approximation result for the initial terminal-
-connecting stage. The expansion procedure adds further evidence after that stage. Its empir-
-ical contribution is evaluated by replacing the expanded subgraph with the initial Steiner-tree
-representation. The chapter uses this ablation to assess the role of expansion in the evaluated
-tasks.
-The graph returned by retrieval is serialized as 𝑔 = StrConcat(𝒱 ,ℰ ). This repre-
-MCMI MCMI
-sentationcontainstheselectedentitiesandrelations. Itmakestheselectedrelationshipsavailable
-withinthemodel’sinputsequence.
-5.5 Hybrid Retrieval and Generation
-Agraphindexcapturesextractedrelationships,whereasmanydetailsremainintheoriginaltext.
-AGRAGthereforealsoretrieveschunksthroughahybridscore,
-MS(𝐪,𝐭)+BM25(𝑞,𝑡)
-HS(𝑞,𝑡) = , (5.13)
-2
-where 𝐭 is the dense representation of chunk 𝑡. The top 𝑘 chunks according to this score form
-𝑟
-𝒯 . Thesourcereports𝑘 = 5inthemainsetting.
-HR 𝑟
-Thetwocomponentsofthescorerespondtodifferentkindsofcorrespondence. Densesim-
-ilarity compares distributed representations of a query and passage. BM25 responds to lexical
-overlapandtermweighting[15]. AGRAGaveragesthetwoscoresasspecifiedinthepaper,then
-combines the selected chunks with the graph serialization. The hybrid channel is therefore an
-additionalsourceofpassagecontextratherthanaseparategraphexpansionrule.
-Thefinalanswerisgeneratedthrough
-𝐴 = LLM(𝑞,𝑔,𝒯 ,𝑝 ). (5.14)
-𝑞 HR gen
-Thisinputhasaquery,anexplicitselectedrelationalstructure,andsupportingpassagecontent.
-The graph identifies connected facts. The passage channel supplies contextual language that
+Table 5.1: Creative generation with Qwen2.5-14B-Instruct. Results from the AGRAG main
+experiment[3].
+Method NovelFS NovelACC NovelCOV MedicalFS MedicalACC MedicalCOV
+NaiveRAG 0.205 0.307 0.384 0.176 0.577 0.554
+L.LLMLingua 0.213 0.316 0.377 0.225 0.575 0.496
+RAPTOR 0.365 0.333 0.373 0.314 0.526 0.553
+SiReRAG 0.324 0.328 0.365 0.295 0.544 0.456
+G-retriever 0.294 0.167 0.200 0.169 0.371 0.468
+MIXRAG 0.200 0.286 0.337 0.255 0.351 0.306
+GraphRAG 0.427 0.310 0.339 0.345 0.475 0.325
+LightRAG 0.201 0.314 0.329 0.189 0.567 0.549
+HippoRAG2 0.496 0.295 0.325 0.347 0.563 0.451
+F.GraphRAG 0.286 0.287 0.376 0.217 0.500 0.396
+AGRAG 0.513 0.339 0.386 0.356 0.598 0.589
+faithfulness, the fraction of answer claims supported by retrieved context. The evaluation uses
+the RAGAS framework [55, 56] and the task-specific protocol. Coverage concerns inclusion of
+requiredinformation,whereasfaithfulnessconcernssupportforgeneratedclaims.
+Forgeneratedanswersequence𝐺 andreferencesequence𝑌,the source defines itsreported
+lexicalscoreas
+LCS(𝐺,𝑌)
+ROG(𝐺,𝑌) = . (5.15)
+|𝐺|
+Thedenominatoristhegeneratedanswerlength. Thisisthesource’sreportedROUGE-Lquan-
+tity,ratherthananF1combinationoflongest-common-subsequenceprecisionandrecall.
+Let 𝐸 denote the reference evidence items and let 𝑀(𝑒,𝑅) indicate whether response 𝑅
+coversitem𝑒. Coverageis
+|{𝑒 ∈ 𝐸 ∶ 𝑀(𝑒,𝑅)}|
+COV(𝑅,𝐸) = . (5.16)
+|𝐸|
+For the answer’s claim set 𝐴 and retrieved context 𝐶, let 𝑆(𝑎,𝐶) indicate that claim 𝑎 is sup-
+ported. Faithfulnessis
+|{𝑎 ∈ 𝐴 ∶ 𝑆(𝑎,𝐶)}|
+FS(𝐴,𝐶) = . (5.17)
+|𝐴|
+Thetwodenominatorsidentifydifferentevidencerequirements. Coverageusestherequiredref-
+erence information; faithfulness uses the claims actually made. A response omitting a required
+fact can lose coverage even when its remaining statements are supported. Conversely, adding
+unsupported claims affects faithfulness even if all reference evidence is mentioned. The source
+evaluatesthesejudgmentsthroughitsmodel-basedassessmentprocedure.
 65

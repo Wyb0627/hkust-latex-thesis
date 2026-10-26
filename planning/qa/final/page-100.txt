@@ -1,44 +1,32 @@
-6.5 Path-based Semantic Subgraph Matching
-6.5.1 From edges to paths
-A relation in the query graph can be expressed by several relations in the evidence graph.
-MGRAG assigns text embeddings to entity and relation descriptions. For a path 𝑃(𝑢,𝑣) con-
-taining relations 𝑟 ,…,𝑟 , it defines a semantic representation by aggregating the relation em-
-1 𝑘
-beddings,
-𝑘
-𝐡 = 𝐡 . (6.6)
-𝑃(𝑢,𝑣) ⨁ 𝑟 𝑗
-𝑗=1
-Theaggregationoperatorcanusemeanpooling. Thisoperationprovidesarepresentationofthe
-composed evidence relation that can be compared with a query relation. The published greedy
-expansion further evaluates a joint representation containing the current path, candidate edge,
-and candidate endpoint. These are the path representation and extension test used at different
-stepsoftheprocedure.
-Let 𝐼 ∶ 𝒱̂ → 𝒱 be a candidate entity mapping. For a query edge (𝑢,𝑟,̂ 𝑣), the candidate
-𝑞 𝑞
-evidence paths run from 𝐼(𝑢) to 𝐼(𝑣). Denote this collection by 𝒫(𝐼(𝑢),𝐼(𝑣)). The matching
-objectiveis
-max
-∑
-max cos(𝐡
+The published Theorem 2 gives a threshold-based quality condition for a valid returned
+match. Every matched query relation has a supporting path with cosine similarity at least 𝜃.
+Under the strict acceptance test in Equation 6.9, the average score of an accepted mapping ex-
+ceeds 𝜃 as well. This condition describes the semantic validation of returned evidence. It is
+conditionalonfindingavalidmatchanddoesnotrequirethealgorithmtorecoveronewhenever
+suchasubgraphexists.
+Thetechnicalreportdiscussesthethresholdintermsofabottlenecktransportcost[59]. With
+aper-edgecostofoneminuscosinesimilarity,thethresholdlimitsthelargestacceptedlocalcost.
+Section6.9evaluatesgraph-matchingsubstitutionsandanswerquality.
+6.5.5 Serializing selected evidence
+After matching, MGRAG serializes the selected triples into 𝑆 , separating facts with [SEP].
 𝑟
-,
-̂
-𝐡 𝑃). (6.7)
-𝐼 𝑃∈𝒫(𝐼(𝑢),𝐼(𝑣))
-(𝑢,𝑟,̂𝑣)∈ℰ̂
-𝑞
-Candidatemappingsmustsatisfythesemanticthreshold𝜃 forthemappedentitiesandforevery
-queryrelation’ssupportingpath,
-cos(𝐡 𝑢 ,𝐡 𝐼(𝑢)) > 𝜃 forall𝑢 ∈ 𝒱̂ 𝑞 , (6.8)
-max cos(𝐡 𝑟 , ̂ 𝐡 𝑃) > 𝜃 forall(𝑢,𝑟,̂ 𝑣) ∈ ℰ̂ 𝑞 . (6.9)
-𝑃∈𝒫(𝐼(𝑢),𝐼(𝑣))
-The constraints validate each query edge against an associated evidence path. The selected
-evidenceisthesubgraphformedfromthemappedentitiesandacceptedpaths,whichcaninclude
-intermediateentitiesabsentfromthequerygraph.
-Forafixedcandidatemapping, theinnermaximizationin Equation6.7selectsasupporting
-path for each query relation. The outer search compares entity mappings after those relation
-scoreshavebeenobtained. Theselevelsdistinguishtheproblemoflocatingthequery’sentities
-fromtheproblemofexplainingtheirrelationships. Twomappingscanhavesimilarendpointem-
-beddingsyetdifferinwhethertheirconnectingpathssatisfytherequestedrelation. Conversely,
+This sequence is combined with 𝑞 and the original chunks consumed during construction. The
+serializationsuppliesanexplicitlistofentitiesandrelationshipstotheansweringmodel. Orig-
+inal chunks remain available because extraction is a selective description of the evidence, and
+somelinguisticorvisualdetailsmaylieoutsidethetriples.
+The same entities and relations were involved in the earlier graph-construction calls. Their
+tokens can therefore overlap with tokens in the answering context. MGRAG uses this relation-
+shiptoreusecachedcomputationfromconstructionwhileupdatingstatesimportanttothenew
+answering context. The graph produced during retrieval thus becomes an input to the context-
+computationpolicyaswellastothelanguagemodel’sprompt.
+6.6 Graph-aware KV Recomputation
+6.6.1 Reuse and selective updates
+A transformer caches key and value projections so that earlier token states can be reused. In
+MGRAG, content processed during graph construction appears again in the query-answering
+context. Recomputing every state repeats part of this work. Reusing every state can retain
+representations calculated under a different surrounding sequence. The cache policy chooses a
+subsetforrecomputationandreusestheothers.
+Let 𝜙(𝑡) be the recomputation score of token 𝑡. At each transformer layer, MGRAG re-
+computes the tokens in the highest 𝑏% of scores and reuses the cached states for the remaining
+tokens. The published description uses a fixed-size cache with least-recently-used eviction. Its
 86

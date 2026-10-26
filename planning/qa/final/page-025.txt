@@ -9,11 +9,10 @@ depend on another, subject to the model’s sequence-length constraints. This di
 pendingatable-levelfeatureafterindependentlyencodingeachcolumn.
 Knowledge-based methods obtain evidence through a different route. HNN combines
 learned table features with knowledge-base lookup and inter-column semantics [12]. A
-knowledge resource can identify a relation between mentioned objects that the table’s strings
-do not explain. RECA uses related tables as an additional contextual source [13]. These
-approaches show two choices for extending the information available within the target table:
-retrieving external semantic facts and identifying evidence from other tables. Their retrieval
-unitsandpreparationcostsdifferaccordingly.
+knowledgeresourcecanidentifyarelationbetweenmentionedobjectsthatthetable’sstringsdo
+notexplain. RECAusesrelatedtablesasanadditionalcontextualsource[13]. Theseapproaches
+extend the information available within the target table through external semantic facts or
+evidencefromothertables. Theirretrievalunitsandpreparationcostsdifferaccordingly.
 KGLinkexaminesthecorrespondencebetweenKG-deriveddescriptionsandadataset’star-
 getlabels[1]. Itretrievescandidatesforcellmentions,usesgraphconnectionsbetweencolumns
 to filter them, and learns from candidate-type text and a separate KG feature sequence. A con-
@@ -26,6 +25,9 @@ turessummarizeadistribution,topicfeaturesdescribeatable,contextualencodingallows
 interactions, related-table retrieval supplies other examples, and graph lookup exposes explicit
 relations. The differences are relevant even when all methods predict the same label set. They
 determine which information can resolve an ambiguous cell and what happens when one evi-
-dence source has little coverage. The experimental discussion in Chapter 3 retains the selected
-datasets,labelschemes,andbaselinesettingswhencomparingtheiroutcomes.
+dencesourcehaslittlecoverage.
+2.3 Retrieval-augmented Generation
+Retrieval-augmentedgenerationconditionsagenerativemodeloninformationselectedfroman
+externalcollection[14]. Aretrievalstagemapsthequerytoindexedevidence,andageneration
+stage uses the evidence to produce an answer. The distinction makes the external collection an
 11

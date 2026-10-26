@@ -1,27 +1,27 @@
 Figure5.1 TheAGRAGpipeline. Theoriginalfigureseparatescorpuspreparation,
 query-conditioned graph retrieval, and hybrid passage retrieval. Repro-
-ducedfromFigure1ofthesourcepaper[3]. 59
+ducedfromFigure1ofthesourcepaper[3]. 56
 Figure5.2 The original AGRAG evidence-expansion example. Red triples are
 query-mapped facts; orange triples show additional neighboring
 evidence in the illustrated MCMI structure. Reproduced from Figure 2
-ofthesourcepaper[3]. 64
+ofthesourcepaper[3]. 61
 Figure5.3 AGRAG parameter sensitivity on Novel (top) and Medical (bottom).
 The original panels vary the extraction threshold and maximum n-gram
 length and display task accuracy. Reproduced from Figure 3 of the
-sourcepaper[3]. 78
+sourcepaper[3]. 74
 Figure6.1 Path-level correspondence in the MGRAG motivating example. A
 grandfather_of relation corresponds to two father_of
-edges. OriginalFigure1,p.2481[4]. 80
+edges. OriginalFigure1,p.2481[4]. 77
 Figure6.2 TheMGRAGpipeline. Rankedchunkssupportincrementalquery-aware
 graph construction and path-based matching. The matched graph also
 supplies features for selective KV recomputation. Original Figure 2,
-p.2484[4]. 81
+p.2484[4]. 78
 Figure6.3 Query and evidence graphs in path-based semantic matching. Place-
 holder entities express unknown query information; pseudo-relations
-connectpassagenodestoextractedentities. OriginalFigure3,p.2485[4]. 83
+connectpassagenodestoextractedentities. OriginalFigure3,p.2485[4]. 80
 Figure6.4 Graph features supplement attention in token recomputation scoring.
 The diagram retains the original graphical content. Original Figure 4,
-p.2487[4]. 91
+p.2487[4]. 87
 Figure6.5 MGRAG matching-parameter sensitivity. Original subfigures of Figure
-5,p.2491[4]. 103
+5,p.2491[4]. 99
 xi

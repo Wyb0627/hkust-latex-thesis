@@ -1,31 +1,40 @@
-several paths between the same mapped endpoints can express different relations and receive
-differentsemanticscores.
-The returned subgraph is assembled from the paths needed by the accepted query edges.
-Paths can share intermediate entities and edges. Their union exposes those shared facts in the
-evidencegraph, while the query graph continues to specify which relational requirements were
-validated. Agraphassembledinthiswayneednothavethesamenumberofentitiesasthequery
-graph. Intermediate evidence nodes are precisely what permits a relation expressed compactly
-inthequestiontobesupportedbyamoredetaileddescriptioninthecorpus.
-Thisrepresentationrelaxestherequirementthatthetwographsexpressafactwiththesame
-numberofedges. Inthefamily-relationexample,theevidencepathhastwostepsandthequery
-relation has one. Their correspondence is judged through semantic similarity. The procedure
-retains endpoint requirements, so the selected relation must connect entities that themselves
-correspond to the query. It combines entity-level alignment with path-level evidence instead of
-treatingeithercomponentassuﬀicientonitsown.
-6.5.2 Anchor selection and candidate mappings
-MGRAGfirstcomputespairwisecosinesimilaritiesbetweenqueryentitiesandevidenceentities.
-Thehighest-similaritypairsuppliesananchorentityinthequerygraphanditscandidatecoun-
-terpart in the evidence graph. If no valid match is obtained from that anchor, the method tries
-other anchors. For the selected query anchor, Algorithm 1 considers each evidence counterpart
-exceedingthethresholdandenumeratesmappingsconsistentwiththatcorrespondence.
-Candidatemappingsareenumeratedusingasimilarity-basedmodificationofVF2[58]. VF2
-supplies a graph-matching search procedure; the MGRAG adaptation uses the threshold 𝜃 in
-semanticfeasibilitychecks. Eachcandidateisthenvalidatedrelationbyrelationthroughgreedy
-pathsearch. Acandidateentitycorrespondencecanconsequentlyberejectedbecauseoneofits
-requiredrelationslacksanacceptableevidencepath.
-Foreachacceptedmapping,thealgorithmtakestheunionofthepathsthatsupportitsquery
-edges. It averages the edge-wise semantic similarities to obtain a score 𝑠. The highest-scoring
-accepted subgraph is returned. Dividing by the number of query edges does not change the
-rankingofcandidatemappingsforthesamequery. Itprovidesanaveragesemanticscorewitha
-commonrangeacrossquerieswhosegraphsizesdiffer.
+Event User Query
+TokenSequence
+IrandhirSantos acts inThe Assailant ... Cross Attention
+IrandhirSantos acts
+In
+Man MidAir
+𝜙 𝑡 not in top 𝑏% Output
+Do
+KV Reuse
+MartialArtsKick LLMGraph Construction
+Query-awareKG |(!|
+!𝑎
+X !'
+Graph Sequence 𝑆 ! "%&
+|$|
+!𝑎
+X !"
+User Query
+"%&
+"
+𝐺𝐹 + 𝜙 𝑡
+!
+Figure 6.4: Graph features supplement attention in token recomputation scoring. The diagram
+retainstheoriginalgraphicalcontent. OriginalFigure4,p.2487[4].
+proposedpolicyconcernstherankingoftokenstatesforselectiverecomputation. Thebudgetis
+representedby𝑏;thenumericalexperimenttablesdonotspecifyafixedvalueforthatbudget.
+Figure6.4showshowthegraphcontributes. Query-relatedeventsarerepresentedbyentities
+andrelations. Thescorecombinesattentiontothequery,attentiontothegraphsequence,anda
+feature derived from the topology of the associated fact. The goal of the added term is to give
+tokensaccesstoanevent-levelstructuralsignalalongsidetoken-levelattention.
+6.6.2 Topological features of facts
+MGRAGusesdegree,betweenness,eigenvector,andclosenesscentralitytocharacterizeanode.
+Degree centrality measures its normalized number of adjacent connections. Betweenness char-
+acterizes its participation in paths connecting other nodes. Eigenvector centrality weights con-
+nectionsbythecentralityoftheirneighbors. Closenessusesdistancestoothergraphnodes. The
+publishedmethodaveragesthesefourquantities,
+𝑑𝑐(𝑢)+𝑏𝑐(𝑢)+𝑒𝑐(𝑢)+𝑐𝑐(𝑢)
+𝑓(𝑢) = . (6.11)
+4
 87

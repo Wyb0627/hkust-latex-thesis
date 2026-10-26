@@ -1,31 +1,29 @@
-graph extraction may omit. The ablations test both a graph-only condition and a hybrid-only
-condition,allowingtheevaluationtodistinguishtheircontributions.
-Forclassification,theretrievalinterfaceisadaptedtoreturncandidatelabelsassociatedwith
-passages. One training passage per label supplies the indexed corpus. The generator selects
-a label from the retrieved candidate set. This setting shares the evidence-selection principle
-with the QA tasks, but its output and accuracy calculation are different. It is also distinct from
-GORAG’sround-basedonlineindexingprotocol,whichisexaminedinChapter4.
-5.6 Computational Properties
-AGRAG’s work is distributed across corpus indexing and query processing. Statistical extrac-
-tion and passage-link construction operate over the corpus. Query processing includes triple
-mapping, filtering, graph propagation, subgraph selection, hybrid retrieval, and generation.
-Language-model calls contribute to relation extraction during indexing and to filtering and
-answergenerationonline.
-Thesource’sgraph-operationanalysisassigns𝑂(|𝒱||𝒯 |)timetoentityextractionandpas-
-𝑐
-sageassociation. Graphpropagationisexpressedintermsofnodeandedgecounts,andsemantic
-edge weighting visits the indexed edges. The Mehlhorn-based initial tree stage [38] is reported
-with 𝑂(|ℰ| + |𝒱|log|𝒱|) complexity. Expansion additionally depends on the selected sub-
-graph and its neighborhood. These expressions characterize graph operations; the measured
-end-to-endresultsincludemodelinferenceundertheexperimentalconfiguration.
-The distinction between indexing and querying is useful in deployment. An index is pre-
-pared once for a fixed corpus, while query filtering and generation recur for each query. An
-application with many queries can amortize index preparation, but its response latency still de-
-pends on online graph processing and the amount of generated text. Token counts and separate
-indexing/queryingtimesarethereforeretainedintheevaluation.
-The evidence graph also requires storage for entity strings, relations, and passage associa-
-tions. The source gives storage in terms of graph nodes, edges, and text chunks. These objects
-contribute to the index storage. Practical storage depends on how embeddings, text, and adja-
-cencystructuresarerepresented,whiletheexperimentaleﬀiciencytablereportstimeandtoken
-useratherthanameasuredmemorycomparison.
+Table 5.2: Contextual summarization with Qwen2.5-14B-Instruct. Results from the AGRAG
+mainexperiment[3].
+Method Novel COV Novel ACC Medical COV Medical ACC
+NaiveRAG 0.745 0.621 0.677 0.576
+L.LLMLingua 0.687 0.627 0.657 0.583
+RAPTOR 0.760 0.626 0.633 0.583
+SiReRAG 0.754 0.617 0.592 0.560
+G-retriever 0.594 0.404 0.302 0.395
+MIXRAG 0.695 0.538 0.409 0.464
+GraphRAG 0.758 0.620 0.625 0.506
+LightRAG 0.753 0.628 0.625 0.585
+HippoRAG2 0.735 0.586 0.496 0.560
+F.GraphRAG 0.706 0.528 0.507 0.587
+AGRAG 0.778 0.643 0.690 0.604
+Table 5.3: Complex reasoning with Qwen2.5-14B-Instruct. Results from the AGRAG main
+experiment[3].
+Method Novel ROG Novel ACC Medical ROG Medical ACC
+NaiveRAG 0.120 0.447 0.117 0.635
+L.LLMLingua 0.092 0.434 0.080 0.633
+RAPTOR 0.290 0.460 0.185 0.649
+SiReRAG 0.307 0.459 0.269 0.646
+G-retriever 0.146 0.441 0.102 0.396
+MIXRAG 0.109 0.386 0.156 0.434
+GraphRAG 0.246 0.449 0.250 0.606
+LightRAG 0.223 0.448 0.255 0.637
+HippoRAG2 0.314 0.453 0.332 0.622
+F.GraphRAG 0.237 0.371 0.262 0.643
+AGRAG 0.319 0.467 0.343 0.665
 66

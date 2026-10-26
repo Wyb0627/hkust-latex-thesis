@@ -1,30 +1,30 @@
-Table 5.13: Creative generation in the low-resource setting. Qwen3-4B-Instruct-2507 on two
-2080TiGPUs;valuesandemphasispreserved.
-Method NovelFS NovelACC NovelCOV MedicalFS MedicalACC MedicalCOV
-SiReRAG-L 0.324 0.412 0.299 0.421 0.758 0.475
-HippoRAG2-L 0.433 0.481 0.335 0.425 0.755 0.433
-AGRAG-L 0.441 0.519 0.354 0.436 0.777 0.490
-Table5.14: Contextualsummarizationinthelow-resourcesetting. Qwen3-4B-Instruct-2507on
-two2080TiGPUs;valuesandemphasispreserved.
-Method Novel COV Novel ACC Medical COV Medical ACC
-SiReRAG-L 0.647 0.673 0.536 0.738
-HippoRAG2-L 0.696 0.657 0.522 0.731
-AGRAG-L 0.745 0.706 0.545 0.751
-Table 5.15: Complex reasoning in the low-resource setting. Qwen3-4B-Instruct-2507 on two
-2080TiGPUs;valuesandemphasispreserved.
-Method Novel ROG Novel ACC Medical ROG Medical ACC
-SiReRAG-L 0.260 0.426 0.308 0.698
-HippoRAG2-L 0.280 0.507 0.298 0.681
-AGRAG-L 0.293 0.552 0.312 0.739
-Table 5.16: Fact retrieval in the low-resource setting. Qwen3-4B-Instruct-2507 on two 2080 Ti
-GPUs;valuesandemphasispreserved.
-Method Novel ROG Novel ACC Medical ROG Medical ACC
-SiReRAG-L 0.271 0.416 0.343 0.661
-HippoRAG2-L 0.288 0.513 0.338 0.654
-AGRAG-L 0.297 0.560 0.351 0.701
-Table5.17: Novellow-resourceeﬀiciency. Qwen3-4B-Instruct-2507ontwo2080TiGPUs.
-Method Index min Query min Input tokens Output tokens
-SiReRAG-L 52.0 183.5 7,898 1,003
-HippoRAG2-L 55.7 131.2 7,964 1,354
-AGRAG-L 44.7 132.1 6,625 1,172
+CHAPTER 6
+SEMANTIC GRAPH MATCHING FOR MULTIMODAL
+REASONING WITH MGRAG
+ThischapterisbasedonMGRAG:SemanticSubgraphMatchingandGraph-AwareCaching
+for Multimodal Retrieval-Augmented Generation, published in the Proceedings of the VLDB
+Endowment, volume 19, number 9, pages 2480–2493, 2026 [4]. It studies how a query can
+determine the evidence graph to construct, how paths can express semantic correspondences
+acrossdifferentgraphtopologies,andhowtheresultingstructurecanguidecontextcomputation.
+6.1 Multimodal Evidence and Query Requirements
+An answer to a multimodal query may depend on a relation that is distributed across text and
+images. A document can name a person, an image can show an action, and another passage
+canconnectthatpersontoanevent. Retrievingeachitembyitssimilaritytothequerysupplies
+candidate evidence, but the relation needed for the answer can remain implicit. A graph makes
+theentitiesandtheirconnectionsavailableasaretrievalobject. Itsusefulnessdependsonwhich
+facts are extracted and on whether its representation can express the relation requested by the
+query.
+This chapter considers a corpus 𝒟 = 𝒟 ∪ 𝒟 and a query 𝑞 that can contain text, an
+txt img
+image,orboth. Aretrievalmoduleselectsevidencefromthecorpus,andamultimodallanguage
+model generates an answer using that evidence. The research question is how to construct and
+retrieve a query-relevant relational representation while controlling the cost of preparing and
+processingthecontext. Theanswer-generationtaskremainsgroundedintheoriginaldocuments
+andimages. Thegraphsuppliesanadditionalrepresentationoftheirquery-relatedcontent.
+Threedecisionsgovernthisprocess. Thefirstconcernswhentoconstructagraph. Acorpus-
+widegraphrequiresextractionbeforethequeryisknown. Itsentitiesandrelationsconsequently
+reflecttheextractionprompt’sgeneraldescriptionofthecorpus. Whenanimagecontainsseveral
+people, objects, and actions, the details relevant to one query can differ from those relevant
+to another. MGRAG places the query inside the extraction process and constructs the graph
+incrementallyfromrankedevidence. Thegraphisspecifictothecurrentquery.
 76

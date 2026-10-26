@@ -1,38 +1,36 @@
-collection of terminal connections. Expanding these connections into their underlying paths
-producesthegraphstructureusedforcandidateselection. Thelanguagemodelthenreceivesthe
-labelsencounteredinthisstructure.
-Oncetheexpandedstructure𝑆𝑟 isobtained,thecandidatesetis
-𝑡
-𝒴̂𝑟 = 𝒱(𝑆𝑟)∩𝒴𝑟. (4.5)
-𝑡 𝑡
-Representative keywords and label descriptions are added to the classification prompt for the
-labelsselectedbythisintersection.
-4.4 Classification and Online Indexing
-GORAG constructs a classification input by concatenating the query text, extracted query key-
-words, retrieved candidate labels, and representative keywords associated with those labels.
-With𝒦𝑡 denotingquerykeywordsand𝒦 therepresentativelabelinformation,theinputis
-𝒴̂𝑟
-𝑡
-𝑐 = Concat 𝑡,𝒦𝑡,𝒴̂𝑟,𝒦 . (4.6)
-𝑡 ( 𝑡 𝒴̂𝑟)
-𝑡
-A language model applies the classification instruction 𝑝 to this input and produces 𝑦∗.
-classify 𝑡
-The graph narrows and describes the alternatives; the language model performs the final text
-classification.
-Keeping the original query in this interface matters because keyword extraction removes
-ordering,localsyntax,andsurroundingdiscoursefromtheretrievalrepresentation. Theselected
-candidate set does not by itself determine how these features should affect the decision. The
-classifier can inspect the complete query alongside the retrieved label information. GORAG’s
-keyword variant removes the full query from this input to test the contribution of that context
-underthesameoverallframework.
-Aftertheprediction,eachkeywordin𝒱𝑡 isinsertedintothegraphandconnectedto𝑦∗.
-notexist 𝑡
-Theupdatecanbewrittenas
-𝒱𝑟 ← 𝒱𝑟 ∪𝒱𝑡 , (4.7)
-notexist
-ℰ𝑟 ← ℰ𝑟 ∪{(𝑣,𝑦∗) ∶ 𝑣 ∈ 𝒱𝑡 }. (4.8)
-𝑡 notexist
-Newassociationsreceiveweightsthroughthereportedweightingmechanism. Laterqueriescan
-then map terms that were previously absent from the index. The update changes the retrieval
+Table 4.1: Dataset statistics for the four-round experiments, transposed from the original table.
+IFS-Relhas40testsamplesperlabel. Roundlabelcountsrefertonewlyintroducedlabels.
+Statistic CAD WOS IFS-Rel
+Averagetexttokens 154 200 105
+Round1testtexts 240 2,417 640
+Round1newlabels 4 32 16
+Round2testtexts 60 2,842 640
+Round2newlabels 3 53 16
+Round3testtexts 286 2,251 640
+Round3newlabels 3 30 16
+Round4testtexts 231 1,886 640
+Round4newlabels 3 18 16
+Totaltesttexts 817 9,396 2,560
+ThelabelcountsinTable4.1describelabelsintroducedineachround. Theclassifieroperates
+overtheircumulativeunion. ThusthesecondWOSroundadds53labelstothe32labelsalready
+introduced, rather than replacing the earlier set by a new 53-label task. This distinction matters
+when relating the dataset statistics to the size of the classification instruction and to the graph
+stateretainedfromearlierrounds.
+The main few-shot study uses 1, 5, and 10 labeled examples per class. CAD and WOS
+RAG experiments use Qwen2.5-7B, while IFS-Rel uses GPT-4o. The source reports an Intel
+Xeon Gold 5220R CPU at 2.20GHz and a single NVIDIA A100-SXM4-40GB GPU for the
+experiments. IFS-RelinferenceusestheGPT-4oservice.
+Classification accuracy requires an exact match between the model output and the ground-
+truthlabelnameornumber. Anoutputthatcannotbematchedtotherequiredclassisnotcounted
+ascorrect.
+4.5.1 Compared methods and controls
+The study compares six baselines. Entailment constructs text–label entailment pairs and fine-
+tunes a classifier [36]. NaiveRAG retrieves text chunks from the indexed support information.
+Retrieved context is compressed by LongLLMLingua before classification [41]. GraphRAG,
+LightRAG, and HippoRAG2 supply graph-based retrieval alternatives [17, 19, 42]. Their clas-
+sificationresultsaremeasurementsoftheadaptationsusedinthisstudy.
+EntailmentusesRoBERTa-largeforfivetrainingepochs,abatchsizeof16,alearningrateof
+10−6, and Adam. LongLLMLingua is evaluated with compression rates of 0.75, 0.8, and 0.85,
+with 0.8 selected in the reported comparison. GraphRAG and LightRAG use local search. The
+source uses the nano-graphrag implementation for GraphRAG and NaiveRAG and the other
 46

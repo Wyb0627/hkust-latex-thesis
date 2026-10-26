@@ -1,4 +1,33 @@
-Figure 3.4: Cross-column evidence in the original album-and-musician example. Graph links
-connect candidate interpretations of cell mentions in the same row. Original image reproduced
-fromKGLink[1],Fig.5.
+exploits the relation between attributes of the same record. The second looks for recurring se-
+manticdescriptionsofseveralvaluesoccupyingthesamecolumn. Separatingthemclarifieswhy
+arelevantneighborofoneentityisinsuﬀicientonitsowntodetermineacolumn’stype.
+3.3.3 Row Linking Quality and Input Selection
+KGLink derives a cell score from the best-scoring retained entity. For a nonempty filtered can-
+didateset,thescoreis
+𝑙𝑠 𝑚𝑟 = max 𝑙𝑠 𝑒 , (3.2)
+𝑐 𝑒∈𝐸̂ 𝑚𝑟
+𝑐
+where𝑙𝑠 istheentity’sBM25linkingscore. Unlinkedcellsusezeroasdescribedintheevalu-
+𝑒
+ationprotocol. Arow’sscoresumsthescoresofitscells,
+𝑙𝑠 𝑟 = ∑ 𝑙𝑠 𝑚𝑟 𝑐 . (3.3)
+𝑐∈𝐶
+Rowsaresortedbythisquantity,andonlythetop𝑘rowsareretainedforprediction.
+Thisoperationchangeswhichexamplesofacolumnthelanguagemodelobserves. Selecting
+the first 𝑘 rows preserves the source table’s order; ranking by linkage favors rows with more
+lexically supported graph evidence after filtering. The latter can make the external evidence
+moreusefulwithinthesamerowbudget. Therow-filterexperimentcomparesthetwoselection
+ruleswhileretainingthereportedinputlimit.
+Row selection also connects the graph and feature pathways. The feature sequence is gen-
+eratedfrom a selectedcell associated withthe highest-rankedrow. Changing theroworder can
+thereforeaffectthetablecontentandtheKGentityusedtoformthatsequence. Therow-selection
+experimentevaluatesthiscoupledselectionmechanism.
+3.3.4 Candidate Types and Feature Sequences
+Candidate-type generation searches beyond an entity’s explicit type attribute. A person’s graph
+entry may be typed as Human, while Musician appears as an occupation neighbor. The latter
+can be more informative for a table column. KGLink collects filtered entities across the target
+column and examines their one-hop neighborhoods. It scores a potential type by aggregating
+the overlapping scores of entities from other rows that connect to that type. Repeated support
+withinthecolumnincreasesthecandidate’sscore.
+Alabel-basedfilterexcludescandidatesassignedthenamed-entityschemacategoriesPER-
 26

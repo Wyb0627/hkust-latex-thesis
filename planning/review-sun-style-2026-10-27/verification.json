@@ -1,0 +1,200 @@
+{
+  "edits": 198,
+  "by_chapter": {
+    "chapter/ch01-introduction.tex": 19,
+    "chapter/ch02-background.tex": 24,
+    "chapter/ch03-kglink.tex": 31,
+    "chapter/ch04-gorag.tex": 27,
+    "chapter/ch05-agrag.tex": 30,
+    "chapter/ch06-mgrag.tex": 36,
+    "chapter/ch07-discussion.tex": 20,
+    "chapter/ch08-conclusion.tex": 11
+  },
+  "checks": {
+    "display_math": {
+      "identical": true,
+      "count": 47,
+      "changed": []
+    },
+    "algorithm": {
+      "identical": true,
+      "count": 1,
+      "changed": []
+    },
+    "inline_tables": {
+      "identical": true,
+      "count": 10,
+      "changed": []
+    },
+    "figures": {
+      "identical": true,
+      "count": 21,
+      "changed": []
+    },
+    "labels": {
+      "identical": true,
+      "count": 166,
+      "changed": []
+    },
+    "citations": {
+      "identical": true,
+      "count": 127,
+      "changed": []
+    },
+    "ordered_numeric_tokens": {
+      "identical": true,
+      "count": 935,
+      "changed": []
+    },
+    "protected_files": {
+      "identical": true,
+      "count": 52
+    },
+    "abstract_unchanged": {
+      "identical": true
+    }
+  },
+  "phrase_counts": {
+    "interface": {
+      "before": 12,
+      "after": 2
+    },
+    "the reported": {
+      "before": 36,
+      "after": 28
+    },
+    "the source": {
+      "before": 26,
+      "after": 18
+    },
+    "different roles": {
+      "before": 3,
+      "after": 0
+    },
+    "different questions": {
+      "before": 1,
+      "after": 0
+    },
+    "this distinction": {
+      "before": 7,
+      "after": 3
+    },
+    "these conditions": {
+      "before": 1,
+      "after": 1
+    },
+    "rather than": {
+      "before": 18,
+      "after": 11
+    },
+    "should": {
+      "before": 9,
+      "after": 1
+    },
+    "reported": {
+      "before": 62,
+      "after": 51
+    },
+    "we propose": {
+      "before": 0,
+      "after": 17
+    },
+    "we proposed": {
+      "before": 0,
+      "after": 8
+    },
+    "we evaluate": {
+      "before": 0,
+      "after": 5
+    }
+  },
+  "punctuation": {
+    "rhetorical_colons": {
+      "before": 0,
+      "after": 0
+    },
+    "em_dashes": {
+      "before": 0,
+      "after": 0
+    },
+    "spaced_en_dashes": {
+      "before": 0,
+      "after": 0
+    }
+  },
+  "chapter_counts": [
+    {
+      "chapter": 1,
+      "file": "chapter/ch01-introduction.tex",
+      "narrative": 1909,
+      "headings": 58,
+      "captions": 36
+    },
+    {
+      "chapter": 2,
+      "file": "chapter/ch02-background.tex",
+      "narrative": 2698,
+      "headings": 46,
+      "captions": 83
+    },
+    {
+      "chapter": 3,
+      "file": "chapter/ch03-kglink.tex",
+      "narrative": 3252,
+      "headings": 88,
+      "captions": 234
+    },
+    {
+      "chapter": 4,
+      "file": "chapter/ch04-gorag.tex",
+      "narrative": 2905,
+      "headings": 73,
+      "captions": 333
+    },
+    {
+      "chapter": 5,
+      "file": "chapter/ch05-agrag.tex",
+      "narrative": 3324,
+      "headings": 90,
+      "captions": 314
+    },
+    {
+      "chapter": 6,
+      "file": "chapter/ch06-mgrag.tex",
+      "narrative": 4306,
+      "headings": 116,
+      "captions": 374
+    },
+    {
+      "chapter": 7,
+      "file": "chapter/ch07-discussion.tex",
+      "narrative": 1090,
+      "headings": 30,
+      "captions": 47
+    },
+    {
+      "chapter": 8,
+      "file": "chapter/ch08-conclusion.tex",
+      "narrative": 491,
+      "headings": 20,
+      "captions": 0
+    }
+  ],
+  "narrative_words": 19975,
+  "previous_narrative_words": 25604,
+  "abstract_words": 206,
+  "source_sha256": {
+    "chapter/front-abstract.tex": "907babca8d91efcb35dd5d43a87987073020669bba788aff6b26cb20efdf6742",
+    "chapter/front-acknowledgements.tex": "6c035cdcea1b1991a453a2aaf739e1efba632d923281642439bf8c5c52225b52",
+    "chapter/ch01-introduction.tex": "64da4b40cb3edc2731274bedf731325ffcc3380559d757e1bf64d59bd23355f3",
+    "chapter/ch02-background.tex": "83c2916a26fa8e393204f533b0ffd524fb1f2b9fa75b8046d98ca6a31df84ac2",
+    "chapter/ch03-kglink.tex": "584b31b5c72215d179a5cc7cfd5519ecee969bbcfda0ebb8ea74b88ce654524f",
+    "chapter/ch04-gorag.tex": "042644ab0fcf7316a360a3a5950e7cb01c729013caefa1cc08d450427dfd71ed",
+    "chapter/ch05-agrag.tex": "0c84b49911cef65c02686f91033f07e89ac34d0159ab6bfac627de69e0c6d725",
+    "chapter/ch06-mgrag.tex": "d86737db396d012222d36114a6714f1ece33058b1830264cb6b8a23177955134",
+    "chapter/ch07-discussion.tex": "e329621f02b8e3925a1a8e1f8bb45ae067c1efee5990cb385838531e86819a7b",
+    "chapter/ch08-conclusion.tex": "2ed5edcaf53e37afdec8ead2443388ce419d3e142512772cd91f190dde3bcfd2"
+  },
+  "reading_pdf_sha256": "08d701b5b070ec8ec9c226d632882a0e9f80c44edbc370618bc763244559e8fc",
+  "compilation": "Built-in compiler failed to locate Biber. Source parsing completed with no remaining overfull box in the latest diagnostics. No separate PDF was compiled or exported."
+}

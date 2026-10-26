@@ -1,35 +1,76 @@
-Round 1 Labels
-Round 2 Labels
-esaercnI
-dnuoR
-⚠
-⚠
-✅
-⚠
-⚠
-⚠
-Figure 4.1: Two rounds of the dynamic classification task. New abuse categories extend the
-availablelabels. ReproducedfromFigure1ofGORAG[2].
-The index used in this chapter is a weighted graph of keywords and labels. A keyword can
-occur in examples from several classes. Its incident edges record these associations, and their
-costs distinguish how the term is represented in the indexed corpus. The graph allows several
-query keywords to be considered jointly. A label can participate in the connection between
-querykeywordsevenwhenexaminingonekeywordinisolationwouldgiveanambiguoussetof
-alternatives. Theretrievedlabelsetdependsonthequeryterminalsandthecurrentgraph.
-GORAG also updates its index after classifying an unlabeled query. Keywords that were
-absentfromtheindexcanthenbecomeavailabletolaterqueries. Thepredictedlabelassociates
-the newly observed keywords with a class for subsequent retrieval. Support examples initialize
-thegraphusingtheirsuppliedlabels.
-The research question has three connected parts. First, how should a small support set be-
-come a graph whose edges distinguish keyword–label associations? Second, how should the
-graphselectadifferentcandidatesetforeachtextasthelabeluniverseexpands? Third,howcan
-observationsfrompreviouslyclassifiedtextsenlargetheindex? Thefollowingsectionsdevelop
-theseoperationsandthenexaminetheirreportedclassificationandresourceresults.
-4.1.1 Rounds and information availability
-Let𝒴𝑟 denotethelabelsintroducedatround𝑟. Thecurrentlabeluniverseis
-new
-𝑟
-𝒴𝑟 = 𝒴𝑖 . (4.1)
-⋃ new
-𝑖=1
+OfflineGraphIndexing&Retrieval
+Few-shotTrainingTexts Facts
+WeightedGraph MinSpanningTree
+𝑦 𝑡: : J F o r in a u o d ur new Cryptoand Extract 𝑦 𝑣: : C Fr r a y u p d to, Index
+become a billionairein no Billionaire,… Crypto 0.3 Fraud Fraud
+time!…
+UnlabeledQueryTexts Keywords 0.2 0.6 Retrieve 0.6 0.2
+Innotime Billionaire Innotime
+𝑡 fr : o I m ’m E a l i b te ill G io lo n b a a ir l e F i u n n v d e stor Extract 𝑣:E B l i i l t l e i , onaire Map Billionaire
+who’ll make you one in no Innotime,…
+time!…
+Classification&OnlineGraphIndexing Keywords
+WeightedGraph
+MinSpanningTree 𝑣:Elite,
+CandidateLabels LLM Billionaire Billionaire 0.6 Fraud
+0.6
+Fraud
+0.2
+Fr
+…
+aud Classify
+Res
+In
+u
+n
+l
+o
+ti
+t
+n
+im
+g
+e,
+L
+…
+a bel
+O
+In
+n
+d
+li
+e
+n
+x
+e
+0.2 0.3 E
+0
+l
+.4
+ite
+Billionaire Innotime Fraud Innotime Crypto
+Figure 4.2: GORAG’s offline indexing, query-dependent retrieval, classification, and online
+update. Newquerykeywordsareassociatedwiththepredictedclassafterclassification. Repro-
+ducedfromFigure2ofGORAG[2].
+thenumberofitstextscontainingterm𝑣. Thereportedcorrelationscoreis
+count(𝑣,𝑡) |𝒯 |+1
+≤𝑟
+𝐶𝑆(𝑣,𝑡) = log . (4.2)
+|𝑡|log(|𝒯
+≤𝑟
+|+1) df(𝑣)+1
+Herecount(𝑣,𝑡)istheoccurrencecountof𝑣in𝑡,and|𝑡|istextlength. Theexpressioncombines
+frequency within the text with frequency across the observed corpus. Its corpus term changes
+when additional texts are observed. Terms with 𝐶𝑆(𝑣,𝑡) > 𝜏 are retained, with 𝜏 = 0.5 in the
+original study. The method uses the score both to select keywords and to calculate association
+costs.
+Astatisticalextractionscoregiveseachretainedtermanumericalcontributionbeforegraph
+retrieval. This contribution has a different role from the final language model’s confidence in a
+label. Thescoredetermineswhichlexicalunitsareindexedandhowexpensivetheirassociations
+willbeinretrieval.
+Using short phrases can preserve a lexical combination that would be split by unigram in-
+dexing. At the same time, the extraction rule restricts what becomes a terminal later. Content
+absent from the extracted keyword set cannot directly act as a retrieval terminal for that query.
+Thefullquerytextremainsavailabletotheclassifier,butitsaccesstolabelevidencehasalready
+beenshapedbytheindexrepresentation.
 41

@@ -92,3 +92,19 @@ Raymond Wong 页面给出的博士 presentation 时长建议属于其指导语�
 本轮没有编译外部模板，也没有做五篇作者论文出版 PDF 的逐格数据比对。下载失败或不完整的其他 thesis 文件未进入本地参考集合，也不计入样本统计。
 
 保存的三份 PDF 合计约 3.5 MB，文件来源、字节数和 SHA-256 见 [references/manifest.json](references/manifest.json)。社区模板保留在线入口和选用建议，尚未复制为项目依赖。后续 agent 应先阅读主计划，再使用本文件选取适合的参考，不按资源数量增加 thesis 的背景篇幅。
+
+
+## 7. 摘要写作补充
+
+2026-10-27 重新阅读了 Yu Peng 论文印刷页 xii–xiii、Tianqing Fang 论文印刷页 xv–xvi 的摘要，并在线核查 Yushi Sun 和 Zihao Wang 的 CSE 博士论文摘要。
+
+- [Yushi Sun, 2025](https://researchportal.hkust.edu.hk/en/studentTheses/innovative-approaches-to-data-curation-and-retrieval-augmented-ge/) 的摘要以研究问题和三项贡献组织，实验只作总体描述，没有逐项列出分数和 backbone 规模。
+- [Zihao Wang, 2025](https://researchportal.hkust.edu.hk/en/studentTheses/querying-neural-graph-databases/) 的摘要重点交代理论问题与技术结论，也未列举 benchmark 分数或 backbone 配置。
+- Fang 的摘要出现人工标注数据规模，Peng 的摘要出现理论近似因子；这些与逐项列举实验 metric 数值不同。因此这里借鉴的是信息组织层次，不推断全系摘要一律不写数字。
+
+依据作者本轮明确偏好，当前摘要保留研究动机与方法贡献，删除数据集清单、具体分数及 backbone 名称/规模，用定性结论概述 effectiveness 和 efficiency。具体对照与完整改写见 `review-style-2026-10-27/ABSTRACT_REVISION.md`。
+
+
+## 8. 孙宇石全文行文参考
+
+2026-10-27 按作者指定读取本地 `sample_thesis/yushi_sun.pdf`，查阅摘要、引言、各研究章的动机/方法/结果/总结，以及全文结论。参考重点从先前的摘要扩展到全文研究叙述。采用问题、例子、设计和结果的直接推进方式，压缩当前稿中的接口式抽象说明、重复组件解释和防御性尾句。没有复制其段落或迁入其研究结论，也没有跟随通用背景中的宣传性词汇。参考章节和实际修改对照见 `review-sun-style-2026-10-27/REVIEW.md`。

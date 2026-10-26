@@ -1,73 +1,48 @@
-Step1:Coarse-grainedRanking Step2:Fine-grainedRetrieval Step3:Graph-Aware KV Caching
-c
-𝜙𝑡 =∑|
-$
-&
-'
-|
-(
-𝑎#$+∑|
-)
-*
-'
-|
-(
-𝑎#)+𝐺𝐹#
-a KVCache
-Source b h
-MMDocs. ImageCaptions g 𝜙𝑡 notintop𝑏%,
-f
-Iterative&Adaptive a Serialization KVreuse
-GraphConstruction b
-E
-C
-nc
-h
-o
-u
-d
-n
-i
-k
-ng
-Rank RankedMMChunks Query K S G pecific
-M
-c
-atched
-h GraphSeq.𝑆+
-Subgraph𝑟 LLM
-c
-a
-b d Path-basedSubgraph
-]
-e Matching
-MMChunks
-QueryGraph
-⊕ 𝑃!" →{ℎ}
-InputQuery𝑞
-Figure6.2: TheMGRAGpipeline. Rankedchunkssupportincrementalquery-awaregraphcon-
-struction and path-based matching. The matched graph also supplies features for selective KV
-recomputation. OriginalFigure2,p.2484[4].
-6.2 Framework and Evidence Representations
-Figure 6.2 shows three stages. Coarse-grained ranking orders text chunks and images accord-
-ing to their relevance to the query. Fine-grained retrieval consumes this ranked list, extracts
-query-relatedfacts,and searchesthe growing graph fora semantic match. Graph-awareKV re-
-computation then determines which cached token states to update for answer generation. The
-stoppingdecisioninthemiddlestageconnectsranking,graphconstruction,andmatching. Each
-additionalchunkcanchangewhetherthegraphcontainsasuitablecorrespondence.
-Two graphs serve different purposes. The query graph 𝒬𝒢 = (𝒱̂,ℰ̂) describes the enti-
-𝑞 𝑞 𝑞
-tiesandrelationsrequestedby𝑞,includingplaceholdersforunknowninformation. Theevidence
-graph 𝒦𝒢 = (𝒱 ,ℰ ) contains facts extracted from the chunks considered for that query. A
-𝑞 𝑞 𝑞
-mappingconnectsqueryentitiestoevidenceentities. Pathsbetweenthemappedendpointssup-
-plycandidateevidenceforthequeryrelations.
-For generation, MGRAG uses the graph sequence 𝑆 , the original chunks 𝒞 consumed
-𝑟 𝑞
-during construction, and the query 𝑞. Keeping the chunks preserves access to text and visual
-evidencebeyondtheextractedtriples. Theiridentityalsolinkstheselectedgraphtothematerial
-originally ranked and processed during construction. The graph gives the generator an explicit
-selection of relational content, while the source chunks provide the material from which the
-selection was made. The final multimodal context retains the original images alongside their
-extractedrelationalrepresentation.
+therefore needs a connected account of the actor, film, depicted action, and year. A list con-
+taining a similar actor passage and an unrelated year passage would leave that correspondence
+unresolved.
+Theplaceholdersgivethematcherexplicitlocationsforthesemissingvalues. Thefilmplace-
+holdercanbecomparedwithnamedfilmentities,whiletheyearplaceholdermarkstherelation
+whoseendpointsuppliestherequestedanswer. Representingunknownvaluesbytheirsemantic
+rolesletsmatchingoperatebeforethosevaluesareknown. Thepathprocedurethentestswhether
+the selected evidence entities are connected through semantically suitable relations. This is the
+pointatwhichthequery’sinformationrequirementbecomesaconstraintontheretrievedgraph.
+Thequerygraphexpressesaretrievalrequirementatentityandrelationgranularity. Itscon-
+structionisamodel-mediatedinterpretationofthequestion. Thedownstreammatcheroperates
+onthisinterpretation,includingthewordingchosenforplaceholdersandrelations. Errorsinthe
+extractedplaceholdersorrelationscanthereforechangewhichevidencethematcheraccepts.
+6.4.2 Extracting facts from ranked chunks
+For a chunk 𝑐, the extraction model receives the chunk, query, and extraction prompt 𝑝 . Its
+ext
+outputcontainsquery-relatedentitiesandrelations,
+(𝒱𝑐,ℰ𝑐) = LLM(𝑐,𝑞,𝑝 ). (6.3)
+𝑞 𝑞 ext
+Including 𝑞 makes the extraction selective. The model is asked to identify events and relations
+relevant to the current question, rather than to enumerate every describable fact in the chunk.
+For an image, this permits attention to query-related visual events; for text, it permits selection
+oftheentitiesandrelationshipsneededtodescribetherequestedevidence.
+The chunk is also added as a passage node. MGRAG connects this node to the entities
+extracted from it using the pseudo-relation consists_in, retaining the published relation
+(𝑖)
+nameandorientationfromchunktoentity. If𝒞 istheprefixofrankedchunksconsumedafter
+𝑞
+iteration𝑖,thecumulativegraphcontains
+𝒱 (𝑖) = (𝒱𝑐 ∪{𝑐}), (6.4)
+𝑞 ⋃ 𝑞
+(𝑖)
+𝑐∈𝒞
+𝑞
+ℰ
+𝑞
+(𝑖) =
+⋃
+(ℰ
+𝑞
+𝑐 ∪{(𝑐,consists_in,𝑣) ∶ 𝑣 ∈ 𝒱
+𝑞
+𝑐}). (6.5)
+(𝑖)
+𝑐∈𝒞
+𝑞
+Theiteration-indexednotationmakesexplicitthattheunionsrangeoverthechunksalreadypro-
 81

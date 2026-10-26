@@ -1,37 +1,34 @@
-reports
-∑ 𝑤𝑟 ∑ 𝑤𝑟
-𝑤𝑟 = 1 𝑣∈ℳ 𝑦 𝑟 𝑛 𝑣,𝑦 𝑛 + 𝑣∈ℳ 𝑦 𝑟 𝑜 𝑣,𝑦 𝑜 . (4.4)
-𝑦 𝑛 ,𝑦 𝑜 2 ( 2|ℳ𝑟 | 2|ℳ𝑟 | )
-𝑦 𝑦
-𝑛 𝑜
-The formula uses costs incident to both labels. These factors determine the relative cost of
-traversingalabelbridgeratherthanakeywordassociation.
-Label bridges have a different evidential meaning from keyword–label edges. A keyword
-edgerecordsaterm’soccurrenceintextsassociatedwithaclass. Alabelbridgeisaddedbythe
-graph-merging procedure. It provides a connection through which retrieval can move between
-labelregions. Aretrievedpathcanthereforecombineobservedkeywordassociationswithlabel
-bridgesintroducedduringmerging.
-4.3 Adaptive Candidate Label Retrieval
-For a query 𝑡, GORAG extracts keywords using the indexing procedure and partitions them
-according to whether they already occur in 𝒱𝑟. Write these sets as 𝒱𝑡 and 𝒱𝑡 . The
-exist notexist
-existingkeywordsbecometheterminalsforcurrentretrieval. Theunseenkeywordsareheldfor
-online insertion after classification. The partition prevents the retrieval operation from treating
-anunindexedtermasifitalreadyhadaknownlabelneighborhood.
-Retrieval seeks a low-cost connected structure that contains the mapped terminals. Label
-nodes encountered in this structure form the candidate set 𝒴̂𝑟. Connecting several terminals
-𝑡
-can select intermediate labels and keywords. The graph therefore determines the number of
-candidatelabelsthroughthereturnedstructure,ratherthanrequiringthesamenumberoflabels
-forallqueries. Ashortqueryandaquerycontainingseveralmutuallydistantindexedtermscan
-producedifferentretrievalstructures.
-This terminal-connecting objective is related to the Steiner tree problem. In that problem,
-the required terminals are a subset of graph vertices, and the solution may use additional ver-
-ticestoconnectthem. Anordinaryminimumspanningtreeinsteadspansallverticesofitsinput
-graph. TheseobjectsplaydistinctrolesinGORAG’sprocedure. GORAGusestheseintermedi-
-atestructurestoconstructaheuristicconnectionamongthequeryterminals.
-4.3.1 Tree and auxiliary-graph operations
-GORAGusesagreedyterminal-connectingprocedurebasedonMehlhorn’salgorithm[38]. The
-mapped keywords serve as terminals. An auxiliary graph 𝐻 represents connections between
-terminals, with edge weights given by path costs. A minimum spanning tree of 𝐻 selects a
+sociations. Theofflineablationsuppressesonlineexpansion,measuringitscontributionrelative
+toanindexthatreceivesnosuchquery-dependentadditions.
+4.4.1 Computational organization
+Thegraphseparatesworkperformedatalabelupdatefromworkperformedforeachquery. Of-
+fline indexing processes the supplied texts, creates or updates keyword associations, generates
+label information when available,and mergesthe round’sgraph. The cross-round label bridges
+introduce interactions between the newly indexed and earlier label regions. In the source’s ab-
+stractoperationcount,constructionisexpressedas
+𝑂(|𝒴𝑟||𝒴𝑟−1|+|𝒱
+n
+𝑟
+ew
+||𝒟𝑟|). (4.9)
+The two terms account for label merging and keyword–text processing. This count treats the
+associated text-processing and graph operations at the granularity used in that analysis. The
+number of tokens processed by a language-model call depends on the prompt and generated
+output,sotheempiricaltokenstudysuppliesaseparatemeasurementofmodel-facingwork.
+Per-query processing maps the extracted terms to the existing graph, obtains a connecting
+structure, builds the classification prompt, and inserts new terms after prediction. The index
+state can therefore grow during one round as well as between label rounds. Graph memory
+and prompt length measure different consequences of that growth. A larger stored index can
+provide more candidate associations while a query still receives only the labels selected by its
+ownretrievalstructure. Theresourceexperimentsreportthesetwoquantitiesseparately.
+4.5 Experimental Design
+The published study evaluates CAD, WOS, and IFS-Rel. CAD contains social media posts an-
+notated for contextual abuse [39]. WOS contains academic texts associated with research-area
+labels[40]. IFS-Relsuppliesrelation-classificationexamplesderivedfromnewstextinanincre-
+mental few-shot benchmark [36]. These datasets exercise different label vocabularies and text
+lengthswithinthedynamicclassificationsetting.
+The four-round split introduces 13 labels across CAD’s rounds, 133 across WOS, and 64
+across IFS-Rel. The testcollections contain 817, 9,396, and 2,560 examples,respectively. IFS-
+Rel uses 40 test examples per label. Its balanced test allocation differs from the changing class
+frequenciesintheothercollections.
 45

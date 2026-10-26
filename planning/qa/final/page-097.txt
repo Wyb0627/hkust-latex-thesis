@@ -1,40 +1,43 @@
-Query: The Irandhir Santos film whose poster has people doing martial arts was
-released in what year?
-: Pseudo Relation : PlaceholderEntity
-Query Graph
-Has Has Has Do
-Irandhir Santos Film Poster Person MartialArts
-Releasein
-Year
-Knowledge Graph
-IrandhirSantosactsin
-OnTop Martial
-TheAssailant…
-ArtsKick
-Display
-Do
-Actin
-Irandhir Santos TheAssailant
-MidAir
-Actin Releasein In
-Releasein
-BlueEyes 2009 Man
-Figure 6.3: Query and evidence graphs in path-based semantic matching. Placeholder entities
-express unknown query information; pseudo-relations connect passage nodes to extracted enti-
-ties. OriginalFigure3,p.2485[4].
-6.4 Query-aware Graph Construction
-6.4.1 Representing the query
-MGRAG asks the language model to extract entities and relations from the query. Some query
-entitiesareknown,suchasthenameofapersonoranobjectappearinginthequestion. Othersare
-requested by the question. The extraction prompt represents those unknown components using
-semantically meaningful placeholders, including types such as Person or Year. A placeholder
-provides a textual representation that can be compared with evidence entities even though its
-valuehasnotyetbeensupplied.
-Figure 6.3 shows the query and evidence graph representations. The placeholder boxes de-
-scribe missing knowledge in the query. Passage nodes connect extracted entities back to their
-chunks. Theseconnectionsletthegraphcarrybothrelationalcontentanditsassociationwiththe
-original multimodal evidence. In a multimodal corpus, a passage node can represent an image
-aswellasatextchunk.
-The original example asks which year an Irandhir Santos film was released when its poster
-showspeopledoingmartialarts. Thequerygraphconnectstheactortoanunknownfilm,thefilm
+Theaggregationoperatorcanusemeanpooling. Thisoperationprovidesarepresentationofthe
+composed evidence relation that can be compared with a query relation. The published greedy
+expansion further evaluates a joint representation containing the current path, candidate edge,
+and candidate endpoint. These are the path representation and extension test used at different
+stepsoftheprocedure.
+Let 𝐼 ∶ 𝒱̂ → 𝒱 be a candidate entity mapping. For a query edge (𝑢,𝑟,̂ 𝑣), the candidate
+𝑞 𝑞
+evidence paths run from 𝐼(𝑢) to 𝐼(𝑣). Denote this collection by 𝒫(𝐼(𝑢),𝐼(𝑣)). The matching
+objectiveis
+max
+∑
+max cos(𝐡
+𝑟
+,
+̂
+𝐡 𝑃). (6.7)
+𝐼 𝑃∈𝒫(𝐼(𝑢),𝐼(𝑣))
+(𝑢,𝑟,̂𝑣)∈ℰ̂
+𝑞
+Candidatemappingsmustsatisfythesemanticthreshold𝜃 forthemappedentitiesandforevery
+queryrelation’ssupportingpath,
+cos(𝐡 𝑢 ,𝐡 𝐼(𝑢)) > 𝜃 forall𝑢 ∈ 𝒱̂ 𝑞 , (6.8)
+max cos(𝐡 𝑟 , ̂ 𝐡 𝑃) > 𝜃 forall(𝑢,𝑟,̂ 𝑣) ∈ ℰ̂ 𝑞 . (6.9)
+𝑃∈𝒫(𝐼(𝑢),𝐼(𝑣))
+The constraints validate each query edge against an associated evidence path. The selected
+evidenceisthesubgraphformedfromthemappedentitiesandacceptedpaths,whichcaninclude
+intermediateentitiesabsentfromthequerygraph.
+Forafixedcandidatemapping, theinnermaximizationin Equation6.7selectsasupporting
+path for each query relation. The outer search compares entity mappings after those relation
+scoreshavebeenobtained. Theselevelsdistinguishtheproblemoflocatingthequery’sentities
+fromtheproblemofexplainingtheirrelationships. Twomappingscanhavesimilarendpointem-
+beddingsyetdifferinwhethertheirconnectingpathssatisfytherequestedrelation. Conversely,
+several paths between the same mapped endpoints can express different relations and receive
+differentsemanticscores.
+The returned subgraph is assembled from the paths needed by the accepted query edges.
+Paths can share intermediate entities and edges. Their union exposes those shared facts in the
+evidencegraph, while the query graph continues to specify which relational requirements were
+validated. Agraphassembledinthiswayneednothavethesamenumberofentitiesasthequery
+graph. Intermediate evidence nodes are precisely what permits a relation expressed compactly
+inthequestiontobesupportedbyamoredetaileddescriptioninthecorpus.
+Thisrepresentationrelaxestherequirementthatthetwographsexpressafactwiththesame
+numberofedges. Inthefamily-relationexample,theevidencepathhastwostepsandthequery
 83

@@ -1,43 +1,34 @@
-Thefirsttermexpressesinteractionwiththecurrentquestion. Thesecondexpressesinteraction
-with the selected relational context. The third assigns the structural feature of the associated
-graphfact. Theresultingsumdetermineswhichtokenstatesconsumetherecomputationbudget.
-The publication compares the policy with vLLM prefix caching [47] and CacheBlend [22].
-Their retrieval pipelines and cache variants are identified separately in the evaluation. The in-
-verse ablations also evaluate graph-aware recomputation within an existing retrieval pipeline.
-These comparisons expose answer-quality and time changes under several compositions of re-
-trievalandcaching.
-6.7 Computational Cost
-The published offline encoding cost is 𝑂(|𝒞|𝑑 𝑙2), with embedding dimension 𝑑 . Using
-emb 𝑐 emb
-𝑘 processed chunks, query-graph vertex and edge sets 𝒱̂and ℰ̂, evidence-graph sets 𝒱 and
-ℰ, maximum path length 𝑙 , and language-model hidden dimension 𝑑 , its reported online
-𝑝 LLM
-boundis
-𝑂(𝑑
-emb
-𝑘𝑙
-𝑐
-2 +𝑙
-𝑝
-|ℰ̂||𝒱||𝒱̂|+1 +|𝒱||ℰ|
-(6.14)
-+𝑑
-LLM
-(|𝑆
-𝑟
-|2 +|𝑞|2)).
-Themapping-enumerationtermisexponentialinquery-graphsize. Query-specificconstruction
-andaboundedpathlengthrestrictthegraphsprocessedintheevaluatedsetting. Actualmodule
-costs provide the complementary evidence about where runtime is spent. In particular, graph
-construction calls the language model repeatedly, whereas matching operates on the extracted
-graph. Section6.10reportsthesecostsindividually.
-6.8 Experimental Protocol
-The evaluation uses MMQA [20] and the Arxiv, Manual, Web, Wiki, Wit, and Recipe subsets
-of MRAMG-Bench [21]. Table 6.1 preserves the published dataset statistics. MMQA includes
-textual and image queries. The six MRAMG subsets contain textual queries over multimodal
-corpora. Theirquery-hoprangesandcorpussizesdiffer,soresultsarereportedbydataset.
-The shared generation backbone is Qwen2.5-VL-7B-Instruct [60]. The experiments run on
-an Intel Xeon Gold 5220R CPU at 2.20 GHz and one NVIDIA A100-SXM4 GPU with 40 GB
-memory. Theretrievalamountissettofive,textchunksuse256tokens,andoverlapis32tokens.
-HippoRAG2 uses Contriever for dense passage retrieval [48]; the other reported embedding
+0.4096,and0.2641,comparedwithVanillaRAG’s0.5881.
+6.9.2 Construction and matching substitutions
+Table 6.3 reorganizes every value from the published graph-construction and matching com-
+parison. Stanford OpenIE [64] and the statistical extraction alternative STAT replace the con-
+struction mechanism. VF2 and ISMAGS [58, 65] provide exact-matching alternatives. SM,
+VJ, RRWM, and IPFP represent approximate graph matching [66–69]. BGE, SLOTAlign, and
+FGWAlignsupplysemanticalternatives[57,70,71]. Thetablepreservesthepublication’sthree-
+decimalprecisionforthisexperiment.
+Table6.3: Graph-constructionandgraph-matchingsubstitutions,transposedfrompublishedTa-
+ble7,p.2490[4]. Alltwelvemethodcolumnsandallfourmetricvaluesperdatasetareretained.
+O.IEandSTATreplacegraphconstruction;theotheralternativesreplacematching. Theshared
+backboneisQwen2.5-VL-7B-Instruct.
+Dataset Method SIM. ACC. ROG. BLEU
+MMQA O.IE 0.642 0.571 0.510 0.483
+MMQA STAT 0.655 0.602 0.519 0.500
+MMQA VF2 0.851 0.735 0.673 0.620
+MMQA ISMAGS 0.833 0.706 0.638 0.590
+MMQA SM 0.832 0.702 0.632 0.582
+MMQA VJ 0.812 0.715 0.646 0.606
+MMQA RRWM 0.838 0.698 0.647 0.599
+MMQA IPFP 0.773 0.633 0.601 0.585
+MMQA BGE 0.832 0.703 0.635 0.586
+MMQA SLOT 0.838 0.700 0.650 0.602
+MMQA FGW 0.837 0.697 0.647 0.598
+MMQA MGRAG 0.853 0.744 0.676 0.722
+Arxiv O.IE 0.618 0.526 0.177 0.138
+Arxiv STAT 0.640 0.576 0.184 0.145
+Arxiv VF2 0.871 0.650 0.270 0.239
+Arxiv ISMAGS 0.868 0.643 0.266 0.231
+Arxiv SM 0.866 0.670 0.263 0.244
+Arxiv VJ 0.872 0.667 0.269 0.245
+Arxiv RRWM 0.874 0.675 0.257 0.243
+Arxiv IPFP 0.814 0.581 0.212 0.203
 92

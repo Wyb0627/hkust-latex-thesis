@@ -7,8 +7,7 @@ Second, external evidence and supervision have different roles. The knowledge gr
 KGLinksuppliesdescriptions thatneed notappear ina table. Columnlabels supervisethe pre-
 dictiontask. InGORAG,asmalllabeledtrainingsetsuppliesinitialkeyword–labelassociations,
 whilepredictionscancontributetoonlineindexingaccordingtotheroundprotocol. InAGRAG
-and MGRAG, source documents supply the evidence from which graphs are constructed. The
-experimentsspecifytheinformationavailabletoeachmethod.
+andMGRAG,sourcedocumentssupplytheevidencefromwhichgraphsareconstructed.
 Third,thelanguagemodelsperformdifferentcomputations. KGLinkfine-tunesapre-trained
 encoderforcolumnannotation,withacontextualrepresentationobjective. Thelaterstudiesuse
 generativelanguagemodelsforselectedextraction,filtering,classification,oranswer-generation
@@ -20,14 +19,15 @@ content and external type information to assign a semantic label. In dynamic cla
 retrieval selects candidate labels appropriate to the current text and available index. In textual
 QA,themethodsuppliesconnectedfactsandpassagesforgeneratingananswer. Inmultimodal
 QA,semanticpathsrelatequeryrequirementstoevidenceexpressedacrossmodalities.
-The graph operations are observable components of these pipelines. They select, connect,
-andpresentevidence. Theresultingtaskmetricsevaluatepredictionsandgeneratedanswersun-
-derspecifiedconditions. Thismakestheinterfacebetweenstructuralcomputationandlanguage-
-model output the object of study. It also determines the appropriate evidence for each contri-
-bution: annotation accuracy and F1, classification results across rounds, task-specific QA mea-
-sures,andcontext-servingcosts.
+Graph operations select, connect, and present evidence to the language model. The the-
+sis evaluates these operations through annotation accuracy and F1, classification results across
+rounds,task-specificQAmeasures,andcontext-servingcosts.
 Thefourstudieshaveseparateimplementationsandevaluationsettings. Theircommonargu-
 ment concerns how explicit relationships can organize knowledge and guide evidence use. The
 chaptersprogressthroughexternalknowledge,onlineindexing,connectedtextualevidence,and
 query-awaremultimodalevidence. Eachchapterstatestheparticularmechanismitdevelops.
+A related study on hyper-relational knowledge graphs examines information preservation
+duringstructuralrepresentation. Itdistinguishesqualifierinformationfromgraphreceptionand
+develops FormerGNN in response. This published work appears as a separate section in the
+backgroundchapter. Itsroleistoinformtheanalysisofwhatastructuralrepresentationretains.
 3

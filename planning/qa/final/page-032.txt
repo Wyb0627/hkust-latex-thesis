@@ -1,17 +1,3 @@
-The association of a qualifier with a statement is especially relevant when a subject partici-
-pates in several facts using the same relation. In the education example, a degree describes one
-university attendance statement. A collection of subject–degree and subject–university triples
-exposes the entities but changes the representation of which degree qualifies which attendance
-fact. A model following ordinary graph paths then receives the transformed connections. The
-Hyper method supplies additional connections intended to retain more of these associations,
-whereas a qualifier integrator receives the main fact and its qualifier pairs together. This com-
-parisonplacesinformationpreservationattheinterfacebetweenthedatarepresentationandthe
-computation that follows it. It concerns the semantic organization of the input as well as its
-vocabulary.
-The experiments compare conventional KGE models under these transformations with spe-
-cialized HKGE models. Some GNN-based KGE configurations obtain scores comparable to
-specializedmethodsonCleanedJF17kandWD50k. Theobservationmotivatesanexamination
-of the represented information and the architecture receiving it. In particular, adding qualifier-
 derived edges can change the paths followed by a graph encoder. Preserving more items in
 a converted graph therefore changes the model’s computational input as well as the nominal
 amountofstoredinformation.
@@ -30,4 +16,17 @@ gatedintofixed-sizemain-triplerepresentations. Widergraphreceptionandqualifierin
 consequentlyconcerncomplementarypartsofthearchitecture. Thestudyevaluatesdesignsthat
 retainbothsourcesforprediction.
 FormerGNN combines a Transformer-based qualifier integrator operating on the original
+hyper-relational facts with a graph encoder operating on the pruned main-triple graph. The
+graphencodergeneratesatopologyrepresentationforthesubject. Themodelconcatenatesthis
+representation with representations of the main triple and qualifier pairs and passes them to a
+Transformer decoder. This organization supplies qualifier and graph information jointly to the
+prediction stage. In the reported configuration, HyperFormer provides the qualifier integrator
+andNBFNetprovidesthegraphencoder[26,27].
+2.6.3 Representative Published Evidence
+Table 2.2 reproduces the Cleaned JF17k and WD50k columns of the study’s Table 6. MRR
+measuresmeanreciprocalrank,andH@1andH@10measurewhetherthetargetentityappears
+within the corresponding rank cutoff. These are link-prediction measures, distinct from the an-
+notationandanswermetricsofthelaterchapters.
+FormerGNN obtains MRR 0.432 on Cleaned JF17k and 0.377 on WD50k, compared with
+HyperFormer’s 0.425 and 0.372. NBFNet + Prune has the highest H@10 in both selected
 18

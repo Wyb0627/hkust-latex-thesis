@@ -1,8 +1,3 @@
-QAtasksandclassification,retainingthedistinctmeaningsoftheirmetrics.
-1.3.4 RQ4: Semantic matching and computation over multimodal evi-
-dence
-The fourth question asks how to construct and match evidence for a multimodal query when
-the query and evidence graphs express related information through different topologies, and
 howthatstructurecanguidecontextrecomputation. Theinputincludesamultimodalcorpus,a
 query,andthemodelstatesavailableforreuse. Theoutputisamatchedevidencesubgraphand
 ananswergeneratedundertheselectedrecomputationpolicy.
@@ -28,4 +23,10 @@ contextualrepresentationtaskconnectsthegraphinformationtotheannotationlabels.
 keywords and labels and uses a connected retrieval procedure to generate input-specific
 candidate labels. Its online indexing incorporates information according to the dynamic
 classificationprotocol.
+3. Influence-aware connected evidence selection. AGRAG combines statistical entity se-
+lection, query-conditioned influence, semantic edge costs, an expanded evidence sub-
+graph,andhybridpassageretrieval.
+4. Query-aware multimodal matching and recomputation. MGRAG incrementally con-
+structsevidencegraphsforindividualqueries,matchesqueryrelationstosemanticpaths,
+andusesgraphinformationinselectiveKVrecomputation.
 6

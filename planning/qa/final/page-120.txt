@@ -1,36 +1,29 @@
-Table 7.1: The roles of structure across the four studies. The entries summarize the methods in
-theirrespectiveresearchchapters.
-Study Structuresource Selectedorrepresented Modelrole
-evidence
-KGLink Existingknowledge Candidatetypesand Fine-tunedtableencoding
-graphandtablelinks graph-derivedcolumn andtypeprediction
-features
-GORAG Labeledexamplesand Connectedkeyword–label Label-description
-prescribedonline evidenceandcandidate generationand
-updates labels classification
-AGRAG Corpusterms,extracted Query-conditioned Relationextraction,
-relations,andpassage connectedsubgraphand filtering,andgeneration
-links hybridpassages
-MGRAG Queryandranked Semanticpathmatches, Query-awareextraction,
-multimodalchunks originalchunks,andgraph QA,andselectiveKV
-features recomputation
-Thefourthquestionconcernsbothevidenceselectionanditsprocessingcost. MGRAGusesa
-querygraphtoguideconstructionandsemanticmatching,thenintroducesgraphinformationinto
-tokenrecomputationscores. Theretrievalstagespecifieswhichrelationshipssupportthequery;
-thecontextstageusesassociatedstructuralfeatureswhenchoosingwhichcachedcomputations
-torefresh. Thesameevidencerepresentationthusparticipatesintwocomputationswithdifferent
-objectives.
-Thecomparison identifies animportant design choice. A graph cansupplymore than addi-
-tionalfacts. Itcandeterminetheunitthatisselected,therelationshipsthatremainvisibleinthe
-model’s input, and the computations performed on that input. The studies connect through the
-useofexplicitrelationshipsintask-specificcomputation.
-7.2 Static, Online, and Query-dependent Structures
-Thesourceofstructuredetermineswhatcanbeadapted. KGLinkbeginswithanexistingknowl-
-edge graph. The graph contains information beyond the current table, but its coverage and vo-
-cabularyareexternalconditions. Themethodadaptstheselectionoflinkedevidencetothetable
-and learns the target annotation scheme. Its supervision addresses how the evidence is used for
-predictionratherthanreconstructingtheexternalgraphforeachcolumn.
-GORAGconstructsataskindexfromthelimiteddataavailabletoclassification. Adaptation
-occursthroughtheadditionandweightingofkeyword–labelrelations. Itsonlineprotocolmatters
-because an index enriched with earlier predictions differs from an index containing only the
+graph, so an extracted relation can influence several query-specific selections. MGRAG con-
+structs a new graph for each query, but a mistaken accepted match can end construction before
+laterchunksareexamined.
+They identify different targets for feedback. Entity disambiguation concerns the link from
+a cell to external knowledge. Online correction concerns an association already inserted into
+an index. Relation verification concerns the connection from graph content to source passages.
+Matching diagnosis concerns entity alignment, relation semantics, and the path search. Evalu-
+ating feedback at those stages would connect an observed answer or classification error to the
+structuraldecisionthatmadetheevidenceavailable. Chapter8developsthisdirection.
+7.6 Limitations and Open Questions
+Knowledge coverage affects the first study. A graph can supply missing context only where
+suitablelinkedinformationexists. KGLink’sno-linkageanalysesand itscombined encoder de-
+signdescribehowtheevaluatedmethodbehaveswhenthatevidencevaries. Broaderdeployment
+wouldalsorequireattentiontothecoverage,language,andupdatestateofthechosenknowledge
+graphandthetargetannotationvocabulary.
+Prediction-dependent evidence affects online indexing. GORAG’s later retrieval state de-
+pends on the information inserted earlier under its protocol. Incorrect predicted associations
+can therefore become available to later queries. The behavior of longer-running streams or dif-
+ferentpatternsoflabelevolutionremainsuntested.
+Graph extraction and evaluation affect the generation studies. AGRAG still uses models
+forrelationsandtriplefiltering. MGRAGextractsquery-relatedfactsfrommultimodalchunks,
+withcaption-basedrankingprecedingthatextraction. Missingorinaccuraterepresentationscan
+affectwhichevidencereachesthematcherorgenerator. Model-assessedQAmetricsadditionally
+reflecttheevaluationprocedure.
+AGRAG’s 2-approximation statement applies to its initial terminal-connecting tree.
+MGRAG’s threshold condition applies to accepted path matches. The expanded AGRAG
+subgraph and MGRAG’s greedy search have no corresponding global guarantee established in
+thesestudies.
 106

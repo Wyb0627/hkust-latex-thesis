@@ -1,38 +1,21 @@
-Label: Cricketer
-Label: Name
-??? Birth Date Death Date
-??? Basketball W. Blackburn 1888-11-24 1941/6/3
-player
-W. Birkett 1874-2-27 1934/5/2
-L.James
-W. Birch 1863-02-10 1940/12/11
-Athlete
-R.Westbrook
-A.Davis Knowledgegraph Col1 Col2 Col3
-(a)Typegranularity (b)Missingcontext
-Figure 3.1: Two annotation diﬀiculties in the original KGLink examples. A graph description
-suchasAthletecandifferfromthetargetlabelName,whiledatesbesideaperson’snameprovide
-littleoccupationinformation. OriginalsubfiguresreproducedfromKGLink[1],Fig.2.
-should influence a dataset-specific prediction. Treating graph types as final labels combines
-those roles too early. Treating the table as an isolated sequence omits the external relations.
-KGLink keeps graph evidence available to a learned classifier and trains an auxiliary task that
-generates a contextual representation of the target type. The learned classifier maps graph-
-derivedevidenceintothetask’soutputclasses.
-The scope of the chapter is column-type annotation on the evaluated SemTab and modified
-VizNetdatasets. Reasoningtakestheformofinferringasemanticcategoryfromcells,theirtable
-context,andgraph-derivedevidence. Thelanguagemodelisanencodertrainedforclassification.
-Its output is drawn from the dataset’s label set. This task establishes the first setting examined
-inthethesis,whereanexistinggraphaugmentsamodel’srepresentationbeforeprediction.
-3.2 Problem Formulation and Framework
-Let𝑇 beatablewithrowset𝑅andcolumnset𝐶. Acellmention𝑚𝑟 isthecontentofrow𝑟and
-𝑐
-column 𝑐. The task assigns a label 𝑙 from the dataset’s type set 𝐷 to each target column. All
-𝑐
-columnsinthesametablecancontributecontexttothatdecision. Theexternalknowledgegraph
-suppliesentitylabelsandtheirone-hoprelations. Duringtraining,columnlabelssuperviseboth
-classification and the auxiliary representation task. During evaluation, those labels are absent
-fromthemodelinput.
-KGLinkhasagraph-processingstagefollowedbyalanguage-modelstage. Thegraphstage
-retrieves candidate entities for cell mentions, filters these entities using connections between
-columns, ranks rows by their linkage quality, and derives candidate types from the remain-
+Figure3.2: KGLink’s graph-processing and language-model components. Candidate-type text,
+column feature vectors, and a contextual type-representation objective connect external knowl-
+edgetoannotation. OriginalimagereproducedfromKGLink[1],Fig.3.
+ing entities’ neighborhoods. It also constructs a feature sequence for each target column. The
+language-model stage serializes the processed table, encodes the table and feature sequences,
+combinestheresultingrepresentations,andpredictsthecolumnlabels. Asecondtraininginput
+contains the true type labels and provides contextual supervision for representations generated
+frommaskedtypepositions.
+Figure3.2showsthetwostagesandtheirtrainingobjectives.
+The two graph inputs have different selection rules. Candidate types aggregate evidence
+across linked cells and retain types supported by the column. A feature sequence describes a
+selected linked entity and its neighboring relations. The latter supplies another route for KG
+information when candidate-type selection produces little evidence. Neither input changes the
+classifier’soutputvocabulary. Forexample,acandidatetypedescribinganoccupationcansup-
+portabroaderannotationcategorythroughthelearnedmodelevenwhenthestringsdiffer.
+Theframeworkalsocontrolstheamountoftablecontentpassedtotheencoder. Entitylinking
+androwselectionprecedeserialization. Theretainedrowsprovideaboundedviewofthetable,
+and wide tables are split by columns under the reported input constraints. These operations
+matter because inserting external knowledge competes with cell content for the encoder’s finite
+inputlength. KGLinkselectsgraphevidenceandtablerowsbeforeencoding.
 22

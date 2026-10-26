@@ -1,34 +1,39 @@
-to a poster, and a person on the poster to an action. It also includes a release-year requirement.
-Theevidencegraphcontainsnamedfilmcandidatesandavisualdescriptionofamanperforming
-amartial-artskickinmidair. Thedepictedfilm,TheAssailant,isconnectedtotheyear2009.
-The example separates identifying the film from reading its release year. The actor’s name
-alonecanleadtoseveralfilmcandidates,includingtheotherfilmshowninthegraph. Thevisual
-relationsuppliestheconditionthatdistinguishestherequestedcandidate. Oncethecandidateis
-connected to the poster evidence, the release relation provides the requested value. The query
-therefore needs a connected account of the actor, film, depicted action, and year. A list con-
-taining a similar actor passage and an unrelated year passage would leave that correspondence
-unresolved.
-Theplaceholdersgivethematcherexplicitlocationsforthesemissingvalues. Thefilmplace-
-holdercanbecomparedwithnamedfilmentities,whiletheyearplaceholdermarkstherelation
-whoseendpointsuppliestherequestedanswer. Representingunknownvaluesbytheirsemantic
-rolesletsmatchingoperatebeforethosevaluesareknown. Thepathprocedurethentestswhether
-the selected evidence entities are connected through semantically suitable relations. This is the
-pointatwhichthequery’sinformationrequirementbecomesaconstraintontheretrievedgraph.
-Thequerygraphexpressesaretrievalrequirementatentityandrelationgranularity. Itscon-
-structionisamodel-mediatedinterpretationofthequestion. Thedownstreammatcheroperates
-on this interpretation, including the wording chosen for placeholders and relations. A semantic
-match therefore indicates agreement between the represented query and represented evidence.
-Answerqualityisevaluatedseparatelyusingtheoriginalquestionandreferenceanswer.
-6.4.2 Extracting facts from ranked chunks
-For a chunk 𝑐, the extraction model receives the chunk, query, and extraction prompt 𝑝 . Its
-ext
-outputcontainsquery-relatedentitiesandrelations,
-(𝒱𝑐,ℰ𝑐) = LLM(𝑐,𝑞,𝑝 ). (6.3)
-𝑞 𝑞 ext
-Including 𝑞 makes the extraction selective. The model is asked to identify events and relations
-relevant to the current question, rather than to enumerate every describable fact in the chunk.
-For an image, this permits attention to query-related visual events; for text, it permits selection
-oftheentitiesandrelationshipsneededtodescribetherequestedevidence.
-The chunk is also added as a passage node. MGRAG connects this node to the entities
-extracted from it using the pseudo-relation consists_in, retaining the published relation
+relation has one. Their correspondence is judged through semantic similarity. The procedure
+retains endpoint requirements, so the selected relation must connect entities that themselves
+correspond to the query. It combines entity-level alignment with path-level evidence instead of
+treatingeithercomponentassuﬀicientonitsown.
+6.5.2 Anchor selection and candidate mappings
+MGRAGfirstcomputespairwisecosinesimilaritiesbetweenqueryentitiesandevidenceentities.
+Thehighest-similaritypairsuppliesananchorentityinthequerygraphanditscandidatecoun-
+terpart in the evidence graph. If no valid match is obtained from that anchor, the method tries
+other anchors. For the selected query anchor, Algorithm 1 considers each evidence counterpart
+exceedingthethresholdandenumeratesmappingsconsistentwiththatcorrespondence.
+Candidatemappingsareenumeratedusingasimilarity-basedmodificationofVF2[58]. VF2
+supplies a graph-matching search procedure; the MGRAG adaptation uses the threshold 𝜃 in
+semanticfeasibilitychecks. Eachcandidateisthenvalidatedrelationbyrelationthroughgreedy
+pathsearch. Acandidateentitycorrespondencecanconsequentlyberejectedbecauseoneofits
+requiredrelationslacksanacceptableevidencepath.
+Foreachacceptedmapping,thealgorithmtakestheunionofthepathsthatsupportitsquery
+edges. It averages the edge-wise semantic similarities to obtain a score 𝑠. The highest-scoring
+accepted subgraph is returned. Dividing by the number of query edges does not change the
+rankingofcandidatemappingsforthesamequery. Itprovidesanaveragesemanticscorewitha
+commonrangeacrossquerieswhosegraphsizesdiffer.
+6.5.3 Greedy semantic path growth
+Thepathsearchbeginsatthemappedsourceentityandmaintainsitscurrentendpoint𝑥. Foreach
+neighboring entity 𝑦 and connecting edge (𝑥,𝑟,𝑦), MGRAG evaluates the candidate extension
+using
+cos(𝐡
+𝑃
+⊕𝐡
+𝑒(𝑥,𝑟,𝑦)
+⊕𝐡
+𝑦
+,𝐡 𝑒(̂𝑢,𝑟,̂𝑣)). (6.10)
+Amongextensionsexceeding𝜃,itselectsthehighest-scoringone,appendsthatedgetothepath,
+andupdatestheendpointto𝑦. Thisrepeatsuntilthepathreachesthemappedtarget. Thesearch
+fails when no qualifying extension is available. The experiments also impose a maximum path
+length𝑙 toboundexpansion.
+𝑝
+The endpoint and threshold checks serve different roles. Reaching the target gives the ev-
+idence path the required relational endpoints. Passing the semantic checks gives it a represen-
 84

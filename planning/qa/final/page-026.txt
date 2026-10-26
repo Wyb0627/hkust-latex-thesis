@@ -1,7 +1,3 @@
-2.3 Retrieval-augmented Generation
-Retrieval-augmentedgenerationconditionsagenerativemodeloninformationselectedfroman
-externalcollection[14]. Aretrievalstagemapsthequerytoindexedevidence,andageneration
-stage uses the evidence to produce an answer. The distinction makes the external collection an
 explicit part of the prediction system. Changing its contents or its selection rule changes the
 contextreceivedbythegeneratorevenwhenthegenerator’sparametersstayfixed.
 A basic passage pipeline divides a corpus into chunks, indexes them, scores the chunks for
@@ -17,18 +13,23 @@ represents queries and passages as vectors and scores their correspondence in a 
 Dense Passage Retrieval uses a dual-encoder framework with separate question and passage
 encoders [16]. The two representations provide different signals, so hybrid retrieval can select
 contextusingbothlexicaloverlapandembeddingsimilarity.
-For a query 𝑞 and indexed evidence item 𝑒, write the retrieval score abstractly as 𝑠(𝑞,𝑒). A
-conventional fixed-budget result contains the highest-scoring 𝑘 items. This formulation makes
-two assumptions explicit: evidence is scored at the chosen item granularity, and the retrieval
-cutoff controls how many such items are returned. A graph-based system can alter either as-
-sumption. It can score relationships as well as items, or determine the context by a structural
-condition such as connecting query anchors. The resulting context is then a selected relational
-objectwithaserializationforthelanguagemodel.
+For a query 𝑞 and indexed evidence item 𝑒, write the retrieval score abstractly as 𝑠(𝑞,𝑒).
+A conventional fixed-budget result contains the highest-scoring 𝑘 items. Evidence is scored at
+the chosen item granularity, and the retrieval cutoff controls how many items are returned. A
+graph-based system can alter either assumption. It can score relationships as well as items, or
+determinethecontextbyastructuralconditionsuchasconnectingqueryanchors. Theresulting
+contextisthenaselectedrelationalobjectwithaserializationforthelanguagemodel.
 Retrievalandgenerationalsohavedifferentevaluationtargets. Retrievalcanbeassessedby
 whethersupportingevidenceisincludedintheselectedcontext. Generationisassessedthrough
 the answer, such as its exact correctness, overlap with a reference, or an evaluation protocol
 for open-ended content. A better answer score can reflect improvements in evidence selection,
-contextorganization,orthegenerator’suseofthatcontext. Theresearchchapterspreserveeach
-study’s ablations and assessment procedure so that a change to one stage can be interpreted in
-itsexperimentalsetting.
+contextorganization,orthegenerator’suseofthatcontext.
+Anevolvingcollectionaddsamaintenanceproblem. Newlyavailabledocuments,examples,
+or labels must enter the index before retrieval can use them. Updating stored evidence can in-
+volve new embeddings, new graph nodes, changed edge weights, or derived summaries. The
+information supplied by an update also matters. A labeled support example carries a provided
+class, while a query processed online may carry only a model prediction. GORAG makes this
+distinction part of its dynamic classification protocol [2]. Its index expands as observations
+arrive,andretrievalusesthegraphstateavailableatthecurrentprediction.
+Context budgets also affect comparison between retrieval procedures. Returning more pas-
 12

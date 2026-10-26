@@ -1,50 +1,33 @@
-95.0
-92.5
-90.0
-87.5
-85.0
-82.5
-80.0
-10 25 50 all
-k
-1F
-20.0
-17.5
-15.0
-12.5
-10.0
-7.5
-5.0
-Semtab
-Viznet 2.5
-10 25 50 all
-k
-(a)WeightedF1
+80
+70
+60
+50
+40
+30
+20
+10
+0
+Sudowoodo HNN Doduo RECA TaBERT KGLink MTab
 sruoH
-Semtab
-Viznet
-(b)Timecost
-Figure 3.6: Reported effect of the retained row budget 𝑘. The original two subfigures compare
-annotationqualityandtimecostonSemTabandVizNet. ReproducedfromKGLink[1],Fig.10.
-The parameter study considers 𝑘 = 10,25,50, and a condition labeled all. The source de-
-scribesallasretainingatmost64rowsunderitsencodingconfiguration. Thereporteddefaultis
-𝑘 = 25,selectedfromthisstudy. TheoriginalcurvescompareweightedF1andtimecostasthe
-retained row budget changes. Figure 3.6 shows the measured relation between input selection,
-weightedF1,andtimecost.
-The training-data study uses proportions 𝑝 = 0.2,0.4,0.6,0.8,1.0 while keeping the test set
-unchanged. It compares KGLink with the version without the representation-generation task.
-The experiment measures data eﬀiciency by varying available supervision against a fixed eval-
-uationset.
-3.6.7 Runtime in the Evaluated Configuration
-Figure3.7reproducesthe original VizNetruntime chart. KGLink’sreported training and infer-
-encetimesare16.50and1.53hours. ThecorrespondingRECAvaluesare80.00and9.00hours.
-Thefigurealsoshowsmethodswithshortermeasuredtimes,includingDoduoat1.96hoursfor
-training and 0.07 hours for inference. These measurements locate KGLink’s annotation results
-within the costs of the evaluated implementations. Its use of external retrieval and a second
-trainingobjectivecarriescomputationbeyondthetableencoderalone.
-The chart labels MTab’s inference entry as N/A. Training and inference times describe dif-
-ferent preparation and prediction procedures. The comparison uses VizNet and the original
-experimentalhardware.
-The row-budget results address a separate resource decision. They vary how much table
-contentisretainedbeforeencodingwithinKGLink,whiletheruntimechartcomparescomplete
+80.00
+Training time
+Inference time
+23.45
+16.45 16.50
+9.00
+3.17
+1.090.13 1.13 1.96 0.07 0.17 1.53 N/A
+Figure 3.7: Training and inference time reported on VizNet. Original image reproduced from
+KGLink[1],Fig.7.
+model changes the reported annotation scores. The no-linkage subset confirms that a trained
+modelcancontinuetoannotatetableswhenthegraphstagesuppliesnoretrievedevidence.
+Knowledge coverage and annotation vocabulary remain material conditions. The graph-
+processing stage can use only entities and relations available to its linker and neighborhood
+retrieval. The supervised predictor learns the type set represented in training. The evaluated
+datasetsusesingle-labelcolumnannotationandboundedtableinputs.
+The chapter answers the thesis’s first research question by showing how graph-derived
+knowledge can augment a column representation while a learned model handles the target
+label granularity. The next chapter changes the evidence-maintenance problem. It studies
+classification when labels and observed examples arrive over successive rounds, using a
+task-specificgraphtoretrievecandidatelabelsandupdatetheavailableevidenceonline.
 37

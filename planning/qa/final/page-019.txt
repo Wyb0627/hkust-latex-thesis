@@ -1,8 +1,3 @@
-SemTabandVizNetexperiments,ablations,no-linkagecases,andeﬀiciencyevidence.
-1.3.2 RQ2: Evidence maintenance under evolving labels
-Thesecondquestionaskshowaretrievalindexcanmaintaintask-specificrelationshipsandselect
-relevantlabelsasafew-shotclassificationproblemevolves. Theinputincludestheexamplesand
-labels available at the current round, an existing graph index, and an unseen text. The output is
 alabelpredictionandtheprescribedindexupdateforsubsequentprocessing.
 Anevolvinglabelsetchangesthemeaningofevidenceretrieval. Acandidatemustbelongto
 thetask’savailablelabels,andthegraphmustincorporatenewsupervisionwithoutrebuildingits
@@ -29,4 +24,9 @@ extractedrelations,passagenodes,andsynonymlinks. Query-mappedfactsconditionthein
 encescores;semanticsimilaritysuppliesedgecosts. Themethodconstructsaninitialterminal-
 connecting structure and expands it according to the reported cost-score rule. A hybrid dense
 andBM25channelsuppliesadditionalpassages. Chapter5evaluatesthesechoicesacrosstextual
+QAtasksandclassification.
+1.3.4 RQ4: Semantic matching and computation over multimodal evi-
+dence
+The fourth question asks how to construct and match evidence for a multimodal query when
+the query and evidence graphs express related information through different topologies, and
 5

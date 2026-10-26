@@ -1,27 +1,31 @@
-CHAPTER 7
-DISCUSSION
-Thefourstudiesplaceexplicitstructureatdifferentpointsbetweenanevidencesourceanda
-language-model output. KGLink enriches a column representation with knowledge outside the
-table. GORAG maintains associations that support candidate-label retrieval. AGRAG selects
-connected facts and passage context. MGRAG constructs and matches evidence for a query
-and uses graph features in context recomputation. This chapter compares those roles using the
-publishedevidenceintheprecedingchapters.
-7.1 Where Structure Enters the Pipeline
-The first research question concerns the representation received by a supervised encoder.
-KGLink’sknowledgegraphsuppliescandidate-typetextandafeaturesequence,whilethetask’s
-labels supervise the final prediction. Its graph processing therefore precedes representation
-learningandinference. Theimportantinterfaceistheconversionfromlinkedgraphinformation
-to a sequence that the table encoder can use. Cross-column filtering makes the selected
-evidencedependonthetablebeforethelanguagemodelprocessesit.
-The second question concerns selecting among task labels. GORAG uses graph connec-
-tivity to assemble a candidate set for the current text. The language model then performs label
-selectionunderthisretrievedcontext. Thegraphchangesassupervisionandpredictionsbecome
-available under the round protocol. Its role is therefore both representational and operational:
-the index stores keyword–label associations, and retrieval uses those associations to determine
-whichlabelsentertheclassificationdecision.
-The third question concerns connected evidence for generation. AGRAG adds an explicit
-graphserializationtothepassagecontext. Query-conditionedinfluenceandsemanticedgecosts
-guide selection of the subgraph. The hybrid channel retains access to text beyond the selected
-graph. This interface distinguishes the structural explanation of relationships among selected
-factsfromthecontextualwordingoftheirsourcepassages.
+index and retrieval. AGRAG separates corpus indexing from querying. MGRAG reports con-
+struction,matching,answer-generation,andend-to-endcosts.
+7.4 Information Preservation and Semantic Granularity
+The hyper-relational study in Chapter 2 supplies another perspective on structural representa-
+tions. Amaintripleanditsqualifiersexpressdifferentaspectsofafact. Decomposingthatrepre-
+sentationcanretainsomerelationshipswhilelosingtheassociationthatgivesthemtheirmean-
+ing. The study examines this issue through decomposition methods, qualifier capture, graph
+reception,andlink-predictionresults.
+Arelateddesignquestionappearsineachcorechapter. KGLinkmusttranslategraph-derived
+type descriptions into the annotation task’s vocabulary. GORAG associates words with labels
+whoserelevancedependsontheclassificationtask. AGRAGselectsagraphserializationwhile
+retaining a passage channel for information absent from that serialization. MGRAG matches
+relations to paths that can express a corresponding meaning through a different topology. Each
+methodspecifiesanevidenceunitandawaytorelatethatunittothetask.
+Thegranularityoftheevidencecanaffectbothselectionandinterpretation. Acolumnvector
+summarizes a sequence of cells. A candidate label summarizes a possible class assignment. A
+graph fact identifies an entity relation. A path combines several relations. A passage or image
+contains contextual details beyond its extracted graph representation. Moving between these
+units changes what information is explicit and which distinctions the next computation must
+recover.
+The contribution of structure therefore depends on the representation’s fidelity to the re-
+quireddecision. Connectivityaloneestablishesthatitemsarerelatedwithinanindex. Semantic
+matching evaluates whether the represented relationship corresponds to a query requirement.
+Task supervision identifies which labels are appropriate. The hyper-relational study motivates
+attention to preservation, while the core chapters test particular mechanisms at their own evi-
+denceinterfaces.
+7.5 Error Propagation Across Structural Decisions
+The location of a structural decision affects how an error can propagate. An incorrect KGLink
+entity link changes the descriptions offered to the encoder for a table. In GORAG, an incorrect
+predicted label can become an association available to later queries. AGRAG reuses a corpus
 105

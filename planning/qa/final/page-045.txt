@@ -1,55 +1,26 @@
-Withcontextualvector𝐻 andtemperature𝒯,vocabularyprojectiongives
-𝐻
-𝑌 = Softmax 𝑊 , (3.5)
-( 𝑜 )
-𝒯
-where 𝑊 projects into the vocabulary space. Denote the masked and ground-truth outputs by
-𝑜
-𝑌 and𝑌 . Themainpaperwritestheauxiliaryobjectiveas
-msk gt
-𝑉
-𝑗 𝑗
-ℒ (𝑌 ,𝑌 ) = − 𝑦 log𝑦 , (3.6)
-DMLM msk gt ∑ msk gt
-𝑗=1
-with vocabulary size 𝑉. The objective uses the contextualized representations produced from
-thetwotableinputs.
-Trainingusesthetrue-typeandmaskedinputs,whileevaluationusesthemaskedinput. The
-auxiliary objective therefore learns from labels available in training and generates a type repre-
-sentation from the ordinary table and retrieved evidence at prediction time. This pathway also
-servesnumericcolumnsandcolumnswithoutaretrievedKGcandidate.
-The classifier and the auxiliary task also use different output spaces. Classification predicts
-one of the dataset’s column labels. The auxiliary representation is projected into the language
-model’s vocabulary space. Their relationship is learned through the shared encoder and joint
-training. Thefinaldecisionusesthedataset-specificclassificationhead.
-3.4.3 Classification and Adaptive Task Weighting
-Let 𝑧 be the classification logits obtained from the combined column and feature representa-
-𝑐
-tions. Foratargetlabel𝑙 ,theclassificationlossiscross-entropy,
-𝑐
-exp 𝑧
-( 𝑐,𝑙 )
-𝑐
-ℒ (𝑧 ,𝑙 ) = −log . (3.7)
-CE 𝑐 𝑐
-∑
-𝑗∈𝐷
-exp(𝑧 𝑐,𝑗)
-KGLink jointly optimizes this loss and the auxiliary representation objective using uncertainty
-weighting[29]. Withtrainabletaskparameters𝜎 and𝜎 ,thecombinedobjectiveis
-0 1
-ℒ ℒ
-DMLM CE
-ℒ
-total
-=
-2𝜎2
-+
-2𝜎2
-+log(𝜎
-0
-𝜎 1). (3.8)
-0 1
-Thetemperatureusedintherepresentationobjectiveissettotwointhereportedexperiments.
-The trainable weights allow the two objectives to contribute at different scales during opti-
+3.5 Computational Structure
+Thegraph-processingcostdependsontabledimensions,candidate-setsizes,andneighborhood
+sizes. Linking traverses table cells. Cross-column filtering compares candidate information
+between columns within a row. Candidate-type scoring visits neighborhoods and aggregates
+support across rows. The implementation’s limits on retrieved entities and serialized columns
+constraintheseoperationsintheevaluatedsetting. TheexternalWikidataindexispreparedwith
+Elasticsearchandsupplieslexicalretrievalscores.
+Theoriginalanalysisdenotesmaximumtablerowsandcolumnsby𝑅and𝐶,thenumberof
+tables by 𝑇, the maximum retrieved entities by 𝐸, and their maximum one-hop neighborhood
+sizeby𝑁. Itreportsthepreprocessingexpression
+𝑂(𝑅𝐶𝐸(𝑁 +𝐶𝐸𝑇)). (3.9)
+Theexpressionincludesneighborhoodaggregationandthecross-columncandidateoperations.
+It makes explicit that table dimensions and graph retrieval size affect preprocessing even
+when the later encoder length is capped. An increased candidate-set limit changes the
+graph-processingworkloadbeforeanytabletokensareencoded.
+Encoding cost depends on the serialized input length and the encoder’s hidden dimension.
+KGLink encodes table inputs and column feature sequences; training also includes the ground-
+truth and masked constructions used by the representation task. The classification head maps
+column vectors into the label space, while the auxiliary projection operates over the language
+model’svocabulary. Thus, increasingthe label setaffects classification,whereas increasing the
+vocabulary-spaceprojectionconcernstherepresentationobjective.
+These costs describe different resources. Reducing the retained row count can shorten pre-
+processingorinputpreparationwithoutproportionallychangingasequencealreadytruncatedto
+itstokenlimit. Increasingcandidateretrievalcanaddneighborhoodworkevenwhentheencoder
+inputremainsfixed.
 31

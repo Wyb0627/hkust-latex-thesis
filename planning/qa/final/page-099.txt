@@ -1,46 +1,44 @@
-(𝑖)
-nameandorientationfromchunktoentity. If𝒞 istheprefixofrankedchunksconsumedafter
+Algorithm1Path-basedsemanticmatchinginMGRAG
+Require: Querygraph𝒬𝒢 ,queryanchor𝛾,evidencegraph𝒦𝒢 ,threshold 𝜃
+𝑞 𝑞
+1: Initializevalidresultsℛ ← ∅
+2: foreach𝑣 ∈ 𝒱 withcos 𝐡 ,𝐡 > 𝜃 do
+𝑎 𝑞 ( 𝑣 𝛾)
+𝑎
+3: Enumeratecandidatemappingsconsistentwith𝐼(𝛾) = 𝑣
+𝑎
+4: foreachcandidatemapping𝐼 do
+5: Initializethesubgraphwithmappedqueryentities;set𝑠 ← 0
+6: foreachqueryedge(𝑢,𝑟,̂ 𝑣)do
+7: Searchgreedilyforasemanticallyvalidpathfrom𝐼(𝑢)to𝐼(𝑣)
+8: if thepathsearchfailsthen
+9: Reject𝐼 andstopvalidatingthismapping
+10: else
+11: Addthepath’snodesandedgestothecandidatesubgraph
+12: Additscosinesimilarityto𝑠
+13: endif
+14: endfor
+15: if everyqueryedgehasavalidpaththen
+16:
+Addthesubgraphandscore𝑠/|ℰ̂|toℛ
 𝑞
-iteration𝑖,thecumulativegraphcontains
-𝒱 (𝑖) = (𝒱𝑐 ∪{𝑐}), (6.4)
-𝑞 ⋃ 𝑞
-(𝑖)
-𝑐∈𝒞
-𝑞
-ℰ
-𝑞
-(𝑖) =
-⋃
-(ℰ
-𝑞
-𝑐 ∪{(𝑐,consists_in,𝑣) ∶ 𝑣 ∈ 𝒱
-𝑞
-𝑐}). (6.5)
-(𝑖)
-𝑐∈𝒞
-𝑞
-Theiteration-indexednotationmakesexplicitthattheunionsrangeoverthechunksalreadypro-
-cessed.
-Passagenodesgivethematcheraroutebetweenafactanditscontext. Theycanalsoconnect
-facts associated with the same source item. The resulting graph combines extracted semantic
-relationswithdocument-membershiprelations. Thesetwoedgetypeshavedifferentinterpreta-
-tions, even though both participate in the evidence representation. The distinction is visible in
-theoriginalexample’suseofseparateedgecolors.
-6.4.3 Matching as a stopping decision
-Aftereachgraphupdate,MGRAGattemptspath-basedsemanticsubgraphmatchingagainstthe
-query graph. A valid match ends the construction loop. If the matcher returns an empty result,
-thenextrankedchunkisusedtoenrichthegraph. Theloopisboundedbythemaximumnumber
-ofconstructioniterations𝜇. Thus,theamountofgraphconstructiondependsonboththeranking
-orderandthematchingoutcome.
-This design uses semantic coverage as an operational stopping test. Coverage is evaluated
-throughthequerygraph’sentitiesandrelations,soamatchrequiresmorethanonehighlysimilar
-isolated entity. The procedure seeks a correspondence for the query’s relational requirements.
-Whenthecurrentgraphlackssuchacorrespondence,additionalevidencecanintroduceamiss-
-ing endpoint, a relation, or a path between existing endpoints. The graph can therefore become
-matchablethroughinformationaccumulatedacrosschunks.
-Theiterationcapcontrolstheamountofevidenceexamined. Italsoboundstheopportunity
-to recover a fact that occurs late in the ranking. Reaching the cap and finding a valid match are
-distinct termination events. The matcher returns an empty result when its search finds no valid
-correspondenceinthe currentgraph. Thecap,graph extraction,and matchingthreshold jointly
-determinewhichcontextreachestheanswergenerator.
+17: endif
+18: endfor
+19: endfor
+20: Returnthehighest-scoringresult,or∅ifℛ isempty
+tation consistent with the requested relation. An attractive local extension can still prevent the
+greedy search from reaching the target, so a failed search does not establish that all possible
+pathsfail. Thealgorithmreturnsthebestresultamongthevalidcandidatesitfinds.
+All query edges must pass path validation before a mapping is accepted. This condition
+preventsasinglehigh-scoringrelationfromcompensatingforanunsupportedrequiredrelation.
+The selected subgraph may contain paths of different lengths, because the evidence required
+by different query edges can have different decompositions. Construction then stops on that
+accepted match; otherwise, a further ranked chunk is incorporated and matching is attempted
+again.
+6.5.4 Published algorithmic properties
+Thepublicationstatesthatpath-basedsemanticsubgraphmatchingisNP-hard. Itsproofsketch
+reduces subgraph isomorphism to a restricted instance with uniform embeddings and unit path
+lengths. Theresultmotivatestheuseofsemanticpathgrowthandconstrainedmappingenumer-
+ation. The complexity of enumerating mappings remains relevant even when each individual
+extensionisselectedgreedily.
 85

@@ -1,31 +1,46 @@
-strings. It permits retrieval to connect different expressions that would otherwise form separate
-nodes. Itsrolediffersfromanextractedrelation: anextractedrelationcomesfromthelanguage
-model’s reading of a chunk, whereas a synonym edge comes from a similarity test. Both affect
-graphconnectivity,andbothremainpartoftheretrievalconditions.
-AGRAGadditionallyintroducesapseudonodelinkedtopassagenodes. Thereportedcostof
-eachpseudoedgeis10. Thisconnectiongivesthegrapharoutebetweenotherwisedisconnected
-portions while penalizing its use relative to semantically relevant factual edges. The pseudo
-connectionisaconnectivitydevice,soitshouldbedistinguishedfromafactualassertioninthe
-sourcecorpuswheninterpretingtheretrievedstructure.
-5.3 Query Mapping and Influence-aware Retrieval
-5.3.1 Mapping a query to triple facts
-At query time, AGRAG first identifies facts that are semantically close to the query. A text
-encoder ℳ maps the query and a textual rendering of each triple to vectors. With 𝐪 = ℳ(𝑞)
-and𝐟 = ℳ(𝑓),themappingscoreis
-MS(𝐪,𝐟) = cos(𝐪,𝐟). (5.5)
-Thehighest-scoring𝑘 factsformtherawmappedsetℱ . Themainsettinguses𝑘 = 5. This
-𝑎 raw 𝑎
-stagelocatescandidatefactsintheindexedgraphbeforegraphpropagationbegins.
-Amodel-basedfilteringstepthenevaluatestherawfactswithrespecttothequery,
-ℱ = LLM(ℱ ,𝑞,𝑝 ). (5.6)
-raw tf
-The filtered set ℱ defines the query anchors. Dense mapping and filtering play different roles.
-Dense mapping produces a short candidate list eﬀiciently. Filtering evaluates the candidates
-jointly with the actual query. The filtering ablation removes the second operation and tests its
-contributiontoanswerqualityandcost.
-The anchors determine where graph retrieval starts. They do not themselves specify the
-complete answer context. Facts connecting or surrounding the mapped set can be useful even
-whentheirdirectsimilaritytothequeryislower. Graphinfluenceprovidesawaytoscorethese
-surroundingitemsusingtheirconnectiontothemappedfacts. Edgecoststhenretainaseparate
-measureofsemanticrelevanceduringsubgraphconstruction.
+Q: Which structuresareatriskofandmaycontributeto the spreadof kidney cancer?
+Mapto
+Connect 𝑐 = 0.31
+structures Tumors
+Can have Affect
+spread Spread Blood
+Kidney 𝑐 = 0.51 Tumors 𝑐 = 0.23
+kidney Kidney vessels
+𝑠 = 0.82 𝑠 = 0.78
+cancer cancer Spread 𝑠 = 0.69
+Kidney Work 𝑐 = 0.10 Affect
+Occur in
+𝑐 = 0.30 𝑐 = 0.27
+𝑐 = 0.34
+Invade
+Nearby Kidney Lymph
+𝑐 = 0.45 RCC
+tissues cancer nodes
+Commontype 𝑠 = 0.35
+𝑠 = 0.67 𝑠 = 0.88 𝑠 = 0.66
+𝑐 = 0.78
+A: Blood vessels areatriskofandmaycontributeto thelocal spreadof kidney cancer.
+Figure 5.2: The original AGRAG evidence-expansion example. Red triples are query-mapped
+facts; orange triples show additional neighboring evidence in the illustrated MCMI structure.
+ReproducedfromFigure2ofthesourcepaper[3].
+Thecandidateanditsconnectingedgeareaddedwhenthisconditionholds. Thesubgraphquan-
+tity is recalculated and the procedure considers the updated neighborhood. Expansion stops
+when the lowest candidate ratio is greater than or equal to the current subgraph quantity. The
+comparisonusesthenodescoreoftheprospectiveaddition,whereasEquation5.10usesthetwo
+endpoints of each included edge. The candidate ratio therefore ranks possible additions using
+theirassignednodescores,whilethecurrentsubgraphisevaluatedbyEquation5.10.
+Thepurposeofexpansionistoincludeadditionalgraphfactsaroundtheanchor-connecting
+structure. A tree represents one economical way to connect terminals. Additional relations can
+provideevidenceaboutanswercomponentsabsentfromthattree. TheoriginalMCMIexample
+depictsacyclicstructurecontainingsuchinformation. Theoutputissuppliedtothegeneratoras
+a graph, so its relation strings communicate more than the membership of individual retrieved
+passages.
+5.4.1 The original connected-evidence example
+TherunningexampleinFigure5.2makesthedifferencebetweenconnectinganchorsandcollect-
+ing an answer visible. Its mapped triples include (Kidney, Work, Kidney cancer) and (Kidney,
+Spread, Tumors), using the relation strings printed in the original illustration. Those triples lo-
+catethequery’ssubjectregion. Theexpandedstructureadditionallycontainsrelationsinvolving
+bloodvessels,neighboringtissues,andotherentitiesshowninthegraph. Theoriginalillustrated
+answeridentifiesbloodvesselsastherequestedcomponent.
+The example gives a concrete reason to inspect the neighborhood of an initial connection.
 61

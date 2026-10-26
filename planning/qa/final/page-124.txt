@@ -1,32 +1,42 @@
-7.5 Error Propagation Across Structural Decisions
-The location of a structural decision affects how an error can propagate. An incorrect KGLink
-entity link changes the descriptions offered to the encoder for a table. In GORAG, an incorrect
-predicted label can become an association available to later queries. AGRAG reuses a corpus
-graph, so an extracted relation can influence several query-specific selections. MGRAG con-
-structs a new graph for each query, but a mistaken accepted match can end construction before
-later chunks are examined. These consequences follow from the lifecycles of the four evidence
-structures.
-They identify different targets for feedback. Entity disambiguation concerns the link from
-a cell to external knowledge. Online correction concerns an association already inserted into
-an index. Relation verification concerns the connection from graph content to source passages.
-Matching diagnosis concerns entity alignment, relation semantics, and the path search. Evalu-
-ating feedback at those stages would connect an observed answer or classification error to the
-structural decision that made the evidence available. Chapter 8 develops this direction while
-retainingthesequenceinwhichfeedbackbecomesavailable.
-7.6 Limitations and Open Questions
-Knowledge coverage affects the first study. A graph can supply missing context only where
-suitablelinkedinformationexists. KGLink’sno-linkageanalysesand itscombined encoder de-
-signdescribehowtheevaluatedmethodbehaveswhenthatevidencevaries. Broaderdeployment
-wouldalsorequireattentiontothecoverage,language,andupdatestateofthechosenknowledge
-graphandthetargetannotationvocabulary.
-Prediction-dependent evidence affects online indexing. GORAG’s later retrieval state de-
-pends on the information inserted earlier under its protocol. Incorrect predicted associations
-can therefore become available to later queries. The reported round-based experiments mea-
-sure performance with the prescribed update mechanism, while the behavior of longer-running
-streamsorsubstantiallydifferentlabelevolutionremainsafurtherquestion.
-Graph extraction and evaluation affect the generation studies. AGRAG still uses models
-forrelationsandtriplefiltering. MGRAGextractsquery-relatedfactsfrommultimodalchunks,
-withcaption-basedrankingprecedingthatextraction. Missingorinaccuraterepresentationscan
-affectwhichevidencereachesthematcherorgenerator. Model-assessedQAmetricsadditionally
-reflect the evaluation procedure. These conditions identify where evidence quality enters the
+REFERENCES
+[1] Y.Wangetal.,“KGLink:Acolumntypeannotationmethodthatcombinesknowledgegraphand
+pre-trained language model,” in 2024 IEEE 40th International Conference on Data Engineering
+(ICDE), IEEE, 2024, pp. 1023–1035. DOI: 10.1109/ICDE60146.2024.00083 (cit. on
+pp.1,8,11,20–22,24,25,29,36,37).
+[2] Y. Wang et al., “GORAG: Graph-based online retrieval augmented generation for dynamic few-
+shotsocialmediatextclassification,”inProceedingsoftheACMWebConference2026,Associa-
+tionforComputingMachinery,2026,pp.9148–9159.DOI:10.1145/3774904.3793011
+(cit.onpp.2,8,12,14,38,39,41,51–53).
+[3] Y. Wang et al., “AGRAG: Advanced graph-based retrieval-augmented generation for LLMs,” in
+2026 IEEE 42nd International Conference on Data Engineering (ICDE), IEEE, 2026. DOI: 10.
+1109/ICDE65706.2026.00110(cit.onpp.2,8,14,54,56,61,65–67,74).
+[4] Y.Wangetal.,“MGRAG:Semanticsubgraphmatchingandgraph-awarecachingformultimodal
+retrieval-augmentedgeneration,”ProceedingsoftheVLDBEndowment,vol.19,no.9,pp.2480–
+2493, 2026. DOI: 10.14778/3819518.3819565 (cit. on pp. 2, 8, 14–16, 76–78, 80, 87,
+89,90,92,95–99).
+[5] Y. Wang et al., “Understanding the embedding models on hyper-relational knowledge graph,” in
+Proceedingsofthe34thACMInternationalConferenceonInformationandKnowledgeManage-
+ment,2025,pp.3177–3187.DOI:10.1145/3746252.3761370(cit.onpp.8,16,17).
+[6] D. Vrandečić et al., “Wikidata,” Communications of the ACM, vol. 57, no. 10, pp. 78–85, 2014.
+DOI:10.1145/2629489(cit.onp.9).
+[7] A.Vaswanietal.,“Attentionisallyouneed,”inAdvancesinNeuralInformationProcessingSys-
+tems,vol.30,2017(cit.onpp.10,15).
+[8] J. Devlin et al., “BERT: Pre-training of deep bidirectional transformers for language understand-
+ing,”inProceedingsofNAACL-HLT2019,2019,pp.4171–4186.DOI:10.18653/v1/N19-
+1423(cit.onpp.10,28).
+[9] M.Hulsebosetal.,“Sherlock:Adeeplearningapproachtosemanticdatatypedetection,”inPro-
+ceedings of the 25th ACM SIGKDD International Conference on Knowledge Discovery & Data
+Mining,2019,pp.1500–1508(cit.onp.10).
+[10] D.Zhangetal.,“Sato:Contextualsemantictypedetectionintables,”Proc.VLDBEndow.,vol.13,
+no.12,pp.1835–1848,2020(cit.onpp.10,32).
+[11] Y. Suhara et al., “Annotating columns with pre-trained language models,” in Proceedings of the
+2022InternationalConferenceonManagementofData,2022,pp.1493–1503(cit.onpp.11,27,
+32).
+[12] J.Chenetal.,“Learningsemanticannotationsfortabulardata,”inProceedingsofthe28thInter-
+nationalJointConferenceonArtificialIntelligence,2019,pp.2088–2094(cit.onpp.11,32).
+[13] Y.Sunetal.,“Reca:Relatedtablesenhancedcolumnsemantictypeannotationframework,”Pro-
+ceedings of the VLDB Endowment, vol. 16, no. 6, pp. 1319–1331, 2023. DOI: 10.14778/
+3583140.3583149(cit.onpp.11,32).
+[14] P.Lewisetal.,“Retrieval-augmentedgenerationforknowledge-intensivenlptasks,”Advancesin
+neuralinformationprocessingsystems,vol.33,pp.9459–9474,2020(cit.onp.11).
 110

@@ -1,35 +1,33 @@
-Table 3.1: Column-type annotation results reported for KGLink. Scores and missing entries
-reproducetheoriginalmain-resulttable.
-SemTab VizNet
-Model Accuracy WeightedF1 Accuracy WeightedF1
-MTab 89.10 - 38.21 -
-TaBERT 72.69 71.21 94.68 94.07
-Doduo 84.06 82.43 95.40 95.06
-HNN 66.54 65.12 66.89 68.82
-Sudowoodo 79.34 79.24 91.57 91.08
-RECA 86.12 84.91 93.25 93.18
-KGLink 87.12 85.78 96.28 96.07
-SemTab accuracy, 89.10. KGLink has the highest reported weighted F1 on SemTab and the
-highest values of both reported metrics on VizNet. These distinctions matter because the base-
-linecomparisoncontainsatask-definitiondifferenceforMTabanddoesnotincludeitsweighted
-F1.
-Doduo provides a useful comparison for the language-model pathway because KGLink
-adaptsitsserializationandusesBERTinthemainconfiguration. Doduoobtains84.06accuracy
-on SemTab and 95.40 on VizNet. KGLink’s higher scores under the reported experiment
-indicate that the full graph-augmented and jointly trained model improves on that baseline.
-The component experiments below examine which parts of KGLink contribute; the main table
-alonecomparescompletemethods.
-The dataset dependence is also visible in MTab’s results. Its accuracy is 89.10 on SemTab
-and 38.21 on VizNet under the label translation used in the experiment. These measurements
-motivate separating graph knowledge from the final annotation vocabulary. The source evalu-
-atessupervisedmethodsandaKG-basedmethodwhoselabelassumptionsdiffer. Theresulting
-scoresdescribeperformanceundereachdataset’slabelvocabularyandprotocol.
-3.6.3 Representation Learning and KG Evidence
-Table3.2separatesreportedvariantsfromtheprincipalbaselinecomparison. The𝑤/𝑜𝑚𝑠𝑘vari-
-antremovesthemaskedrepresentation-generationtask. ItsscoresarelowerthantheBERT-based
-fullmodelonbothdatasets. The𝑤/𝑜𝑐𝑡variantremovestheKG-derivedinformation,including
-candidatetypesandthefeaturevector,whilekeepingthemultitasklanguage-modelpathway. Its
-accuracy is 86.27 on SemTaband 95.83 on VizNet. The result supports the contribution of KG
-evidenceintheevaluatedjointarchitecture.
+Table 3.3: Reported accuracy on the VizNet test subset whose tables have no extracted KG
+information.
+Model Numericaccuracy Non-numericaccuracy
+KGLink 97.04 90.92
+HNN 44.05 18.37
+TaBERT 96.57 90.27
+Doduo 96.28 89.50
+RECA 96.89 61.54
+Sudowoodo 96.21 67.72
 The 𝑤/𝑜 𝑓𝑣 variant removes the KG-derived feature vector, following the original method
+description. It obtains 87.02 accuracy and 85.68 weighted F1 on SemTab, and 95.98 accuracy
+and 95.70 weighted F1 on VizNet. Candidate types provide the remaining KG input in this
+configuration. Thefullmodelreportshigherscoresonbothdatasets.
+ReplacingBERTwithDeBERTaproducesthefourthvariant[35]. Itobtains87.24/85.81on
+SemTab and 96.98/96.37 on VizNet. The architecture uses the same graph-processing design
+withadifferentencoderinthisexperiment.
+3.6.4 Annotation without Retrieved Knowledge
+The original study constructs a test subset from VizNet in which the entire table has no KG
+linkage. This condition is stricter than requiring only the target column to lack a link. With
+multi-columnencoding,atargetcolumncanotherwisebenefitfromgraphinformationretrieved
+foritsneighbors. Thesubsetcontains315tablesand612columnsacross26labels,comprising
+556numericcolumnsand56non-numericcolumns.
+Table 3.3 shows that KGLink still performs the annotation task in this condition. It obtains
+97.04 numeric accuracy and 90.92 non-numeric accuracy. TaBERT and Doduo also achieve
+highvaluesonthissubset. Theobservationisconsistentwiththearchitectureretaininga table-
+encodingpathwaywhenexternalevidenceisabsent.
+3.6.5 Type Granularity in the Reported Cases
+Among SemTab classes with more than ten test samples, Athlete, Protein, and Film have the
+threelargestreportedaccuracyincreaseswhentherepresentation-generationtaskisadded.
+The examples distinguish relevance from exact label identity. Protein columns can receive
+KGcandidatessuchasGeneorEnzymes. FilmcolumnscanreceiveTelevisionseries,Scholarly
+article,orBook. Thesedescriptionscontainrelatedsemanticinformationbutaredifferentfrom
 34

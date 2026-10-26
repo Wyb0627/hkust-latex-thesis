@@ -1,42 +1,33 @@
-6.3 Coarse-grained Ranking
-MGRAG first divides textual documents into overlapping chunks. The published setting uses a
-chunk length 𝑙 = 256 tokens and overlap 𝑙 = 32 tokens. Images form the other members of
-𝑐 𝑜
-the chunk collection, giving 𝒞 = 𝒯 ∪𝒟 , where 𝒯 denotes the text chunks. This collection
-img
-is the input to the coarse retrieval stage. Ranking identifies the order in which content will be
-examined,ratherthandirectlydefiningthefinalgraphcontext.
-The implementation uses the text encoder bge-base-en-v1.5 [57]. Text chunks are encoded
-directly. Animageisrepresentedforrankingbyitscaption,whichcanbesuppliedbythedataset
-orgeneratedbyalanguagemodel. Bothtypesofevidencecanthereforebecomparedinthetext
-embedding space. Let ℳ denote that encoder and 𝐡 the representation of a candidate chunk.
-𝑐
-For an image chunk, the input to ℳ is its caption. This detail matters because the ranking
-representationexpressestheimagethroughlanguage,whereasthelaterextractionandanswering
-stagescanuseitsvisualcontent.
-Foraquerycontainingtext𝑞 andanimagecaption𝑞 ,MGRAGaveragesthetworepre-
-txt cap
-sentations,
-ℳ(𝑞 )+ℳ(𝑞 )
-txt cap
-𝐡 = . (6.1)
-𝑞
-2
-A query with one modality uses its corresponding textual representation. The distance to a
-candidateis
-𝑑(𝑞,𝑐) = ‖𝐡 −𝐡 ‖ , (6.2)
-𝑞 𝑐 2
-and the chunks are ordered by increasing distance. Equations 6.1 and 6.2 retain the averaging
-andEuclidean-rankingoperationsofthepublishedmethod.
-Thisstagegivesaquery-dependentprioritytorelativelyinexpensivechunkrepresentations.
-Fine-grainedprocessingbeginswiththenearestchunkandcanmovedownthelistwhenitscur-
-rentgraphisinsuﬀicient. Ahigh-rankedchunkbecomesacandidateforrelationalextractionand
-subsequentmatching. Conversely,graphmatchingcanstopconstructionbeforeeverycandidate
-hasbeenprocessed. Thecoarse-to-finedesignseparatesthecostoforderingthecorpusfromthe
-costofextractingitsquery-relatedfacts.
-Caption quality affects which images receive an early position. A caption can omit a visual
-detail that becomes relevant during graph construction, or foreground content unrelated to the
-query. The published CLIP substitution experiment tests an alternative coarse representation
-withinthispipeline. ItsresultsarediscussedalongsidethecomponentablationsinSection6.11,
-wheretheencoderchoicecanbeassessedunderthesameansweringtask.
+cessed.
+Passagenodesgivethematcheraroutebetweenafactanditscontext. Theycanalsoconnect
+facts associated with the same source item. The resulting graph combines extracted semantic
+relationswithdocument-membershiprelations.
+6.4.3 Matching as a stopping decision
+Aftereachgraphupdate,MGRAGattemptspath-basedsemanticsubgraphmatchingagainstthe
+query graph. A valid match ends the construction loop. If the matcher returns an empty result,
+thenextrankedchunkisusedtoenrichthegraph. Theloopisboundedbythemaximumnumber
+ofconstructioniterations𝜇. Thus,theamountofgraphconstructiondependsonboththeranking
+orderandthematchingoutcome.
+This design uses semantic coverage as an operational stopping test. Coverage is evaluated
+throughthequerygraph’sentitiesandrelations,soamatchrequiresmorethanonehighlysimilar
+isolated entity. The procedure seeks a correspondence for the query’s relational requirements.
+Whenthecurrentgraphlackssuchacorrespondence,additionalevidencecanintroduceamiss-
+ing endpoint, a relation, or a path between existing endpoints. The graph can therefore become
+matchablethroughinformationaccumulatedacrosschunks.
+Theiterationcapcontrolstheamountofevidenceexamined. Italsoboundstheopportunity
+to recover a fact that occurs late in the ranking. Reaching the cap and finding a valid match are
+distinct termination events. The matcher returns an empty result when its search finds no valid
+correspondenceinthe currentgraph. Thecap,graph extraction,and matchingthreshold jointly
+determinewhichcontextreachestheanswergenerator.
+6.5 Path-based Semantic Subgraph Matching
+6.5.1 From edges to paths
+A relation in the query graph can be expressed by several relations in the evidence graph.
+MGRAG assigns text embeddings to entity and relation descriptions. For a path 𝑃(𝑢,𝑣) con-
+taining relations 𝑟 ,…,𝑟 , it defines a semantic representation by aggregating the relation em-
+1 𝑘
+beddings,
+𝑘
+𝐡 = 𝐡 . (6.6)
+𝑃(𝑢,𝑣) ⨁ 𝑟 𝑗
+𝑗=1
 82
