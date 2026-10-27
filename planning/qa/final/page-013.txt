@@ -1,45 +1,45 @@
-Table4.8 AblationexperimentsonWOSforGORAG’svariants. 49
-Table4.9 TokencostonIFS-Reldatasetwith1-shotsetting. 50
+Table4.8 AblationexperimentsonWOSforGORAG’svariants. 42
+Table4.9 TokencostonIFS-Reldatasetwith1-shotsetting. 43
 Table4.10 0-shot experiments for GORAG and RAG baselines on IFS-Rel dataset
-under0-shotsetting. 51
+under0-shotsetting. 44
 Table5.1 Creative generation with Qwen2.5-14B-Instruct. Results from the
-AGRAGmainexperiment[3]. 65
+AGRAGmainexperiment[3]. 57
 Table5.2 ContextualsummarizationwithQwen2.5-14B-Instruct. Resultsfromthe
-AGRAGmainexperiment[3]. 66
+AGRAGmainexperiment[3]. 57
 Table5.3 Complex reasoning with Qwen2.5-14B-Instruct. Results from the
-AGRAGmainexperiment[3]. 66
+AGRAGmainexperiment[3]. 58
 Table5.4 Fact retrieval with Qwen2.5-14B-Instruct. Results from the AGRAG
-mainexperiment[3]. 67
+mainexperiment[3]. 58
 Table5.5 Text classification with Qwen2.5-14B-Instruct. Results from the
-AGRAGmainexperiment[3]. 67
+AGRAGmainexperiment[3]. 59
 Table5.6 Indexing / querying time in minutes. Qwen2.5-14B-Instruct; original
-pairedmeasurementsarepreserved. 69
+pairedmeasurementsarepreserved. 60
 Table5.7 Input/outputtokensperquery. Samesourceexperimentasthepreceding
-timetable. 69
+timetable. 61
 Table5.8 Creative generation ablation with Qwen2.5-14B-Instruct. Values retain
-theoriginalsourceablationprecision. 70
+theoriginalsourceablationprecision. 61
 Table5.9 Contextual summarization ablation with Qwen2.5-14B-Instruct. Values
-retaintheoriginalsourceablationprecision. 70
+retaintheoriginalsourceablationprecision. 61
 Table5.10 Complex reasoning ablation with Qwen2.5-14B-Instruct. Values retain
-theoriginalsourceablationprecision. 70
+theoriginalsourceablationprecision. 62
 Table5.11 Fact retrieval ablation with Qwen2.5-14B-Instruct. Values retain the
-originalsourceablationprecision. 71
+originalsourceablationprecision. 62
 Table5.12 Ablationtimeandtokencosts. Timeisinminutes. Pairedtokencolumns
 retain the source I/G headings; its caption describes input/output token
-counts. 71
+counts. 62
 Table5.13 Creative generation in the low-resource setting. Qwen3-4B-Instruct-
-2507ontwo2080TiGPUs;valuesandemphasispreserved. 72
+2507ontwo2080TiGPUs;valuesandemphasispreserved. 64
 Table5.14 Contextual summarization in the low-resource setting. Qwen3-4B-
-Instruct-2507ontwo2080TiGPUs;valuesandemphasispreserved. 72
+Instruct-2507ontwo2080TiGPUs;valuesandemphasispreserved. 64
 Table5.15 Complex reasoning in the low-resource setting. Qwen3-4B-Instruct-
-2507ontwo2080TiGPUs;valuesandemphasispreserved. 72
+2507ontwo2080TiGPUs;valuesandemphasispreserved. 64
 Table5.16 Fact retrieval in the low-resource setting. Qwen3-4B-Instruct-2507 on
-two2080TiGPUs;valuesandemphasispreserved. 73
+two2080TiGPUs;valuesandemphasispreserved. 64
 Table5.17 Novellow-resourceeﬀiciency. Qwen3-4B-Instruct-2507ontwo2080Ti
-GPUs. 73
+GPUs. 64
 Table5.18 Medical low-resource eﬀiciency. Qwen3-4B-Instruct-2507 on two 2080
-TiGPUs. 73
+TiGPUs. 65
 Table6.1 Evaluation datasets, reproduced from published Table 3, p. 2488 [4]. T
 andIdenotetextualandimagequerymodalities. Thecolumnscomprise
-MMQAandsixMRAMGsubsets. 89
+MMQAandsixMRAMGsubsets. 78
 xiii

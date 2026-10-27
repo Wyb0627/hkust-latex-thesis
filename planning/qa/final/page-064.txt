@@ -1,35 +1,30 @@
-Table4.9: TokencostonIFS-Reldatasetwith1-shotsetting.
-Model AVGTokenperQuery AVGCostperQuery(USD)
-GPT-4o 634.6 $0.005
-LongLLMLingua 2771.3 $0.021
-NaiveRAG 4537.4 $0.034
-LightRAG 7866.3 $0.059
-GraphRAG 9296.3 $0.070
-GORAG 557.5 $0.004
-alargerobservedeffectthanreplacingtheweightedgraphwithunitcosts.
-Theoffline-and-unitvariantreports0.2979,0.2287,0.2645,and0.2249. Itsthird-andfourth-
-round values exceed those of the offline variant. The effects of removing these components
-are therefore not strictly additive across rounds. The keyword variant reports 0.4746, 0.4606,
-0.4455, and 0.4030, below the full method in each displayed column. The full query provides
-information useful to the classifier in these experiments even though keywords determine the
-retrievalterminals.
-Thepublicationgivesdifferentfull-methodvaluesinthemainandablationWOStableswith-
-outexplainingtheirprovenance. Componentcomparisonshereusethefull-methodrowfromthe
-ablationtable.
-4.7.1 Prompt tokens and graph growth
-The IFS-Rel one-shot token study reports average tokens per query and the corresponding US-
-dollarcostsundertheoriginalstudy’spricingconditions. GORAGuses557.5tokensperquery
-and reports a cost of $0.004. The direct GPT-4o comparison uses 634.6 tokens and reports
-$0.005. LongLLMLingua uses 2,771.3 tokens, NaiveRAG 4,537.4, LightRAG 7,866.3, and
-GraphRAG9,296.3. Theirreportedcostsare$0.021,$0.034,$0.059,and$0.070,respectively.
-Thetokencomparisonmeasureshowmuchcontextreachesthemodelintheevaluatedimple-
-mentation. GORAG’s candidate-label representation uses fewer tokens than the listed retrieval
-baselinesinthisexperiment.
-Graph growth is measured separately during the first IFS-Rel round with GPT-4o. The re-
-portedindexcontains1,644nodesand1,771edgesatthe25-percentcheckpoint,and5,299nodes
-and 5,503 edges at the final checkpoint. The corresponding reported memory values are 13.3
-KBand46.4KB.Thesememoryvaluescoverthegraphindexalone.
-TheoriginalruntimestudycomparestotaltimeonWOSandCADundertheone-shotsetting,
-using Qwen2.5-7B. Online insertion adds work after each prediction, while statistical keyword
-indexingandsmallermodelinputscanchangeotherpartsofthepipeline.
+5.2.3 Relations, passage nodes, and synonyms
+For each chunk, the language model receives the selected entity set and the chunk text, and
+extractsrelations,
+ℰ = LLM(𝒱 ,𝑡,𝑝 ). (5.4)
+𝑡 𝑡 re
+The prompt 𝑝 asks for relations between the extracted entities in the chunk. The resulting
+re
+entity–relation–entity triples provide the graph’s factual edges. Statistical extraction selects en-
+tity candidates from observed terms. The model then extracts relations conditioned on those
+candidatesandtheircontext.
+Chunksarealsoinsertedaspassagenodes. AContainsedgeconnectsapassagetoanentity
+extractedfromit. Theselinkspreservetheassociationbetweenthesymbolicrepresentationand
+the source chunk. They also allow paths to cross passages through shared entities. A passage
+contributescontextualevidencetographretrievalwithoutbeingreducedtoasingleisolatedfact.
+The graph includes synonym edges between entity nodes whose embedding similarity ex-
+ceeds a threshold 𝜑. Such an edge expresses an embedding-based correspondence between
+strings. It permits retrieval to connect different expressions that would otherwise form sepa-
+rate nodes. Extracted relations come from the language model’s reading of a chunk, whereas
+synonymedgescomefromasimilaritytest.
+AGRAGadditionallyintroducesapseudonodelinkedtopassagenodes. Thereportedcostof
+eachpseudoedgeis10. Thisconnectiongivesthegrapharoutebetweenotherwisedisconnected
+portions while penalizing its use relative to semantically relevant factual edges. Pseudo edges
+provideconnectivitybetweenpassageswithoutassertingafactualrelation.
+5.3 Query Mapping and Influence-aware Retrieval
+5.3.1 Mapping a query to triple facts
+At query time, AGRAG first identifies facts that are semantically close to the query. A text
+encoder ℳ maps the query and a textual rendering of each triple to vectors. With 𝐪 = ℳ(𝑞)
+and𝐟 = ℳ(𝑓),themappingscoreis
+MS(𝐪,𝐟) = cos(𝐪,𝐟). (5.5)
 50

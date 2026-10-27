@@ -3,7 +3,9 @@
 
 \section{Motivation}
 \label{sec:introduction:motivation}
-Language models use tables, text, and images to make predictions and generate answers. The required information is often incomplete or distributed across sources. A table may list people without identifying their occupations. A classification task may introduce labels absent from its initial training examples. A question may require facts from several passages or a relationship expressed jointly by text and images. Selecting the relevant evidence and preserving its connections are therefore part of the prediction problem.
+Language models utilize information in tables, text, and images to make predictions and respond to queries. 
+However, the required information is often incomplete or distributed across sources. A table may list people without identifying their occupations. A classification task may introduce labels absent from its initial training examples. A question may require facts from several passages or a relationship expressed jointly by text and images. 
+Hence, selecting relevant evidences and preserving their connections are therefore crucial real-world problems.
 
 We study how explicit knowledge structures can support evidence selection for language models. Knowledge graphs provide descriptions absent from a table. Task graphs maintain associations between keywords and classification labels. Evidence graphs connect facts across passages, while query graphs specify the relationships needed to answer a multimodal question. We develop methods that use these relationships to retrieve evidence and control how it is processed.
 

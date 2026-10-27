@@ -1,38 +1,29 @@
-The implementation uses the text encoder bge-base-en-v1.5 [57]. Text chunks are encoded
-directly. Animageisrepresentedforrankingbyitscaption,whichcanbesuppliedbythedataset
-orgeneratedbyalanguagemodel. Bothtypesofevidencecanthereforebecomparedinthetext
-embedding space. Let ℳ denote that encoder and 𝐡 the representation of a candidate chunk.
-𝑐
-For an image chunk, the input to ℳ is its caption. This detail matters because the ranking
-representationexpressestheimagethroughlanguage,whereasthelaterextractionandanswering
-stagescanuseitsvisualcontent.
-Foraquerycontainingtext𝑞 andanimagecaption𝑞 ,MGRAGaveragesthetworepre-
-txt cap
-sentations,
-ℳ(𝑞 )+ℳ(𝑞 )
-txt cap
-𝐡 = . (6.1)
-𝑞
-2
-A query with one modality uses its corresponding textual representation. The distance to a
-candidateis
-𝑑(𝑞,𝑐) = ‖𝐡 −𝐡 ‖ , (6.2)
-𝑞 𝑐 2
-and the chunks are ordered by increasing distance. Equations 6.1 and 6.2 define the query rep-
-resentationandrankingdistance.
-Thisstagegivesaquery-dependentprioritytorelativelyinexpensivechunkrepresentations.
-Fine-grainedprocessingbeginswiththenearestchunkandcanmovedownthelistwhenitscur-
-rentgraphisinsuﬀicient. Ahigh-rankedchunkbecomesacandidateforrelationalextractionand
-subsequentmatching. Conversely,graphmatchingcanstopconstructionbeforeeverycandidate
-hasbeenprocessed. Thecoarse-to-finedesignseparatesthecostoforderingthecorpusfromthe
-costofextractingitsquery-relatedfacts.
-Caption quality affects which images receive an early position. A caption can omit a visual
-detail that becomes relevant during graph construction, or foreground content unrelated to the
-query. The published CLIP substitution experiment tests an alternative coarse representation
-withinthispipeline. Section6.11reportstheencodercomparison.
-6.4 Query-aware Graph Construction
-6.4.1 Representing the query
-MGRAG asks the language model to extract entities and relations from the query. Some query
-entitiesareknown,suchasthenameofapersonoranobjectappearinginthequestion. Othersare
-requested by the question. The extraction prompt represents those unknown components using
+configurationsusebge-base-en-v1.5. Similarity-basedretrievalrepresentsimagesthroughtheir
+captions.
+VanillaRAG is implemented with LangChain and FAISS [61]. The GraphRAG implemen-
+tationisnano-graphrag[62],andtheremainingbaselinesystemsusetheirreleasedimplementa-
+tions. TheprotocolselectshybridsearchforLightRAGandlocalsearchforGraphRAG.vLLM
+accelerates the tested baseline systems, while MGRAG uses its graph-aware cache procedure.
+Otherbaselinehyperparametersfollowtheimplementations’defaults.
+Four metrics characterize answers. Semantic similarity (SIM.) is the cosine similarity be-
+tween bge-base-en-v1.5 representations of generated and reference answers. Accuracy (ACC.)
+is the reported proportion of correct answers. ROUGE-L (ROG.) evaluates longest-common-
+subsequence overlap [54], and BLEU-1 evaluates modified unigram precision [63]. The paper
+usestheRAGASevaluationframework[56]. Thetablespreserveitsmetricnamesandprecision,
+includingthelabelBLEUusedforBLEU-1.
+Thepublicationreportspointestimatesfortheseexperiments.
+The complete-system baselines use different retrieval units. VanillaRAG returns dense-
+retrieved chunks, and R1-Searcher incorporates reinforcement learning into search and ques-
+tion answering. GraphRAG organizes its graph into communities and prepares summaries;
+LightRAG retrieves graph elements and neighborhoods through its selected search mode. Hip-
+poRAG2addspassagenodesandusesPersonalizedPageRankforretrieval.
+Componentsubstitutionsevaluategraphconstruction,semanticmatching,andcachepolicy
+withinMGRAG.Inverseablationsaddmatchingandrecomputationtootherretrievalsystems.
+6.9 Answer Quality and Structural Retrieval
+6.9.1 Complete-system comparisons
+Table 6.2 reproduces the complete-system results. MGRAG has the highest value for all four
+metrics on each dataset. On MMQA, its accuracy is 0.7442, compared with 0.7053 for Vanil-
+laRAG and 0.6335 for HippoRAG2. Its semantic similarity is 0.8533, ROUGE-L is 0.6763,
+andBLEU-1is0.7215. GraphRAGandLightRAGhavemissingMMQAentriesbecausethose
+experimentsexceededthreedays.
 79

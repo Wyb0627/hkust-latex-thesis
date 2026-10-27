@@ -1,0 +1,2 @@
+mkdir -p planning/qa
+texcount -inc -sub=chapter main.tex > planning/qa/texcount.txt

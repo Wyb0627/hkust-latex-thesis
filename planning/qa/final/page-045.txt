@@ -1,26 +1,38 @@
-3.5 Computational Structure
-Thegraph-processingcostdependsontabledimensions,candidate-setsizes,andneighborhood
-sizes. Linking traverses table cells. Cross-column filtering compares candidate information
-between columns within a row. Candidate-type scoring visits neighborhoods and aggregates
-support across rows. The implementation’s limits on retrieved entities and serialized columns
-constraintheseoperationsintheevaluatedsetting. TheexternalWikidataindexispreparedwith
-Elasticsearchandsupplieslexicalretrievalscores.
-Theoriginalanalysisdenotesmaximumtablerowsandcolumnsby𝑅and𝐶,thenumberof
-tables by 𝑇, the maximum retrieved entities by 𝐸, and their maximum one-hop neighborhood
-sizeby𝑁. Itreportsthepreprocessingexpression
-𝑂(𝑅𝐶𝐸(𝑁 +𝐶𝐸𝑇)). (3.9)
-Theexpressionincludesneighborhoodaggregationandthecross-columncandidateoperations.
-It makes explicit that table dimensions and graph retrieval size affect preprocessing even
-when the later encoder length is capped. An increased candidate-set limit changes the
-graph-processingworkloadbeforeanytabletokensareencoded.
-Encoding cost depends on the serialized input length and the encoder’s hidden dimension.
-KGLink encodes table inputs and column feature sequences; training also includes the ground-
-truth and masked constructions used by the representation task. The classification head maps
-column vectors into the label space, while the auxiliary projection operates over the language
-model’svocabulary. Thus, increasingthe label setaffects classification,whereas increasing the
-vocabulary-spaceprojectionconcernstherepresentationobjective.
-These costs describe different resources. Reducing the retained row count can shorten pre-
-processingorinputpreparationwithoutproportionallychangingasequencealreadytruncatedto
-itstokenlimit. Increasingcandidateretrievalcanaddneighborhoodworkevenwhentheencoder
-inputremainsfixed.
+80
+70
+60
+50
+40
+30
+20
+10
+0
+Sudowoodo HNN Doduo RECA TaBERT KGLink MTab
+sruoH
+80.00
+Training time
+Inference time
+23.45
+16.45 16.50
+9.00
+3.17
+1.090.13 1.13 1.96 0.07 0.17 1.53 N/A
+Figure 3.7: Training and inference time reported on VizNet. Original image reproduced from
+KGLink[1],Fig.7.
+3.7 Discussion and Chapter Summary
+We proposed KGLink to supply missing table context and learn the correspondence between
+graph descriptions and annotation labels. Cross-column filtering selects entity candidates, re-
+curringneighborhoodssupplycandidatetypes,andthecontextualrepresentationobjectivetrains
+theencodertousethisinformation.
+Removing either the masked representation task or KG information lowers the full BERT
+configuration’s annotation scores. Linkage-based row selection also improves the results. On
+tables without retrieved KG evidence, the trained encoder continues to annotate from the table
+values.
+Knowledge coverage and annotation vocabulary remain material conditions. The graph-
+processing stage can use only entities and relations available to its linker and neighborhood
+retrieval. The supervised predictor learns the type set represented in training. The evaluated
+datasetsusesingle-labelcolumnannotationandboundedtableinputs.
+The next chapter studies a different classification problem, in which labels and examples
+arrive over successive rounds. It develops a task-specific graph that retrieves candidate labels
+andupdatestheindexaftereachprediction.
 31

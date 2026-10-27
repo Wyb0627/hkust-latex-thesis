@@ -1,38 +1,16 @@
-Label: Cricketer
-Label: Name
-??? Birth Date Death Date
-??? Basketball W. Blackburn 1888-11-24 1941/6/3
-player
-W. Birkett 1874-2-27 1934/5/2
-L.James
-W. Birch 1863-02-10 1940/12/11
-Athlete
-R.Westbrook
-A.Davis Knowledgegraph Col1 Col2 Col3
-(a)Typegranularity (b)Missingcontext
-Figure 3.1: Two annotation diﬀiculties in the original KGLink examples. A graph description
-suchasAthletecandifferfromthetargetlabelName,whiledatesbesideaperson’snameprovide
-littleoccupationinformation. OriginalsubfiguresreproducedfromKGLink[1],Fig.2.
-should influence a dataset-specific prediction. Treating graph types as final labels combines
-those roles too early. Treating the table as an isolated sequence omits the external relations.
-KGLink keeps graph evidence available to a learned classifier and trains an auxiliary task that
-generates a contextual representation of the target type. The learned classifier maps graph-
-derivedevidenceintothetask’soutputclasses.
-The scope of the chapter is column-type annotation on the evaluated SemTab and modified
-VizNetdatasets. Reasoningtakestheformofinferringasemanticcategoryfromcells,theirtable
-context,andgraph-derivedevidence. Thelanguagemodelisanencodertrainedforclassification.
-Its output is drawn from the dataset’s label set. This task establishes the first setting examined
-inthethesis,whereanexistinggraphaugmentsamodel’srepresentationbeforeprediction.
-3.2 Problem Formulation and Framework
-Let𝑇 beatablewithrowset𝑅andcolumnset𝐶. Acellmention𝑚𝑟 isthecontentofrow𝑟and
+Figure 3.4: Cross-column evidence in the original album-and-musician example. Graph links
+connect candidate interpretations of cell mentions in the same row. Original image reproduced
+fromKGLink[1],Fig.5.
+Filteringdependsonboththeinitialentitycandidatesandtherelationspresentintheknowl-
+edgegraph. Amissingrelationcandiscardausefulcandidate,whileanincorrectcandidatecan
+survive through a matching contextual link. The encoder also receives the original table values
+andtheseparatefeaturesequence.
+Filtering uses relationships between cells in the same row. Candidate-type generation then
+aggregatesrecurringdescriptionsacrossrowsinacolumn.
+3.3.3 Row Linking Quality and Input Selection
+KGLink derives a cell score from the best-scoring retained entity. For a nonempty filtered can-
+didateset,thescoreis
+𝑙𝑠 𝑚𝑟 = max 𝑙𝑠 𝑒 , (3.2)
+𝑐 𝑒∈𝐸̂ 𝑚𝑟
 𝑐
-column 𝑐. The task assigns a label 𝑙 from the dataset’s type set 𝐷 to each target column. All
-𝑐
-columnsinthesametablecancontributecontexttothatdecision. Theexternalknowledgegraph
-suppliesentitylabelsandtheirone-hoprelations. Duringtraining,columnlabelssuperviseboth
-classification and the auxiliary representation task. During evaluation, those labels are absent
-fromthemodelinput.
-KGLinkhasagraph-processingstagefollowedbyalanguage-modelstage. Thegraphstage
-retrieves candidate entities for cell mentions, filters these entities using connections between
-columns, ranks rows by their linkage quality, and derives candidate types from the remain-
 21

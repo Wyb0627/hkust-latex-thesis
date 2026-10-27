@@ -1,48 +1,34 @@
-therefore needs a connected account of the actor, film, depicted action, and year. A list con-
-taining a similar actor passage and an unrelated year passage would leave that correspondence
-unresolved.
-Theplaceholdersgivethematcherexplicitlocationsforthesemissingvalues. Thefilmplace-
-holdercanbecomparedwithnamedfilmentities,whiletheyearplaceholdermarkstherelation
-whoseendpointsuppliestherequestedanswer. Representingunknownvaluesbytheirsemantic
-rolesletsmatchingoperatebeforethosevaluesareknown. Thepathprocedurethentestswhether
-the selected evidence entities are connected through semantically suitable relations. This is the
-pointatwhichthequery’sinformationrequirementbecomesaconstraintontheretrievedgraph.
-Thequerygraphexpressesaretrievalrequirementatentityandrelationgranularity. Itscon-
-structionisamodel-mediatedinterpretationofthequestion. Thedownstreammatcheroperates
-onthisinterpretation,includingthewordingchosenforplaceholdersandrelations. Errorsinthe
-extractedplaceholdersorrelationscanthereforechangewhichevidencethematcheraccepts.
-6.4.2 Extracting facts from ranked chunks
-For a chunk 𝑐, the extraction model receives the chunk, query, and extraction prompt 𝑝 . Its
-ext
-outputcontainsquery-relatedentitiesandrelations,
-(𝒱𝑐,ℰ𝑐) = LLM(𝑐,𝑞,𝑝 ). (6.3)
-𝑞 𝑞 ext
-Including 𝑞 makes the extraction selective. The model is asked to identify events and relations
-relevant to the current question, rather than to enumerate every describable fact in the chunk.
-For an image, this permits attention to query-related visual events; for text, it permits selection
-oftheentitiesandrelationshipsneededtodescribetherequestedevidence.
-The chunk is also added as a passage node. MGRAG connects this node to the entities
-extracted from it using the pseudo-relation consists_in, retaining the published relation
-(𝑖)
-nameandorientationfromchunktoentity. If𝒞 istheprefixofrankedchunksconsumedafter
-𝑞
-iteration𝑖,thecumulativegraphcontains
-𝒱 (𝑖) = (𝒱𝑐 ∪{𝑐}), (6.4)
-𝑞 ⋃ 𝑞
-(𝑖)
-𝑐∈𝒞
-𝑞
-ℰ
-𝑞
-(𝑖) =
-⋃
-(ℰ
-𝑞
-𝑐 ∪{(𝑐,consists_in,𝑣) ∶ 𝑣 ∈ 𝒱
-𝑞
-𝑐}). (6.5)
-(𝑖)
-𝑐∈𝒞
-𝑞
-Theiteration-indexednotationmakesexplicitthattheunionsrangeoverthechunksalreadypro-
+and0.8824. OnWeb,thecorrespondingaccuraciesare0.5123and0.4703. OnRecipe,MGRAG
+reportsROUGE-Lof0.4220comparedwith0.3714forVanillaRAG.
+Several graph-based baselines score below VanillaRAG in this multimodal protocol. For
+example, on Manual, GraphRAG, LightRAG, and HippoRAG2 report accuracies of 0.1436,
+0.4096,and0.2641,comparedwithVanillaRAG’s0.5881.
+6.9.2 Construction and matching substitutions
+Table 6.3 reorganizes every value from the published graph-construction and matching com-
+parison. Stanford OpenIE [64] and the statistical extraction alternative STAT replace the con-
+struction mechanism. VF2 and ISMAGS [58, 65] provide exact-matching alternatives. SM,
+VJ, RRWM, and IPFP represent approximate graph matching [66–69]. BGE, SLOTAlign, and
+FGWAlignsupplysemanticalternatives[57,70,71]. Thetablepreservesthepublication’sthree-
+decimalprecisionforthisexperiment.
+Table6.3: Graph-constructionandgraph-matchingsubstitutions,transposedfrompublishedTa-
+ble7,p.2490[4]. Alltwelvemethodcolumnsandallfourmetricvaluesperdatasetareretained.
+O.IEandSTATreplacegraphconstruction;theotheralternativesreplacematching. Theshared
+backboneisQwen2.5-VL-7B-Instruct.
+Dataset Method SIM. ACC. ROG. BLEU
+MMQA O.IE 0.642 0.571 0.510 0.483
+MMQA STAT 0.655 0.602 0.519 0.500
+MMQA VF2 0.851 0.735 0.673 0.620
+MMQA ISMAGS 0.833 0.706 0.638 0.590
+MMQA SM 0.832 0.702 0.632 0.582
+MMQA VJ 0.812 0.715 0.646 0.606
+MMQA RRWM 0.838 0.698 0.647 0.599
+MMQA IPFP 0.773 0.633 0.601 0.585
+MMQA BGE 0.832 0.703 0.635 0.586
+MMQA SLOT 0.838 0.700 0.650 0.602
+MMQA FGW 0.837 0.697 0.647 0.598
+MMQA MGRAG 0.853 0.744 0.676 0.722
+Arxiv O.IE 0.618 0.526 0.177 0.138
+Arxiv STAT 0.640 0.576 0.184 0.145
+Arxiv VF2 0.871 0.650 0.270 0.239
+Arxiv ISMAGS 0.868 0.643 0.266 0.231
 81

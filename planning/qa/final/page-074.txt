@@ -1,42 +1,26 @@
-methodtofavorrelevantconnectedinformationwithoutchoosingnodessolelybytheirinfluence
-rank.
-The pseudo edges retain their explicitly assigned penalty. Their role is to provide connec-
-tivity when the semantic graph alone separates the anchors. A path using a pseudo edge can
-therefore be feasible but expensive. The distinction between a low-cost semantic connection
-and a high-cost connectivity connection helps explain how graph connectivity participates in
-evidenceselection.
-5.4 MCMI Formulation and Evidence Expansion
-Let𝒱 containthenodesparticipatinginthemappedfacts. Afeasiblesubgraphcontainsthese
-term
-terminalsandconnectseachterminaltoadesignatedrootterminal. Themainpaperdefinesthe
-MinimumCostMaximumInfluence(MCMI)objectiveas
-𝑐
-𝑟(𝒢′) = 𝑒 . (5.10)
-∑ 𝑠 +𝑠
-𝑒=(𝑢,𝑣)∈ℰ′ 𝑢 𝑣
-Thecostofanincludededgeisscaledbytheinfluenceofitsendpoints. Theexpressionspecifies
-the reported optimization formulation. The implementation procedure described in the paper
-starts from a terminal-connecting tree and then expands its neighborhood using marginal cost-
-to-scorecomparisons.
-Theinitialstructureconnectsthequery-mappedinformation. Thesourceconstructsanauxil-
-iarygraphontheterminals,usesshortest-pathcostsbetweenthem,selectsatreeonthatauxiliary
-structure,andexpandsitsedgesbacktopathsintheevidencegraph. Thisstagesuppliesconnec-
-tionsamonganchorsinsteadofreturningtheanchorsasanunorderedset. Thedetailedtheorem
-inthemainpaperassignsits2-approximationstatementtothisMCSTconstructionstage.
-Subsequent expansion examines neighboring candidates. A candidate node 𝑣 connected by
-anedgeofcost𝑐 isconsideredthroughtheratio
-(MCMI,𝑣)
-𝑐
-(MCMI,𝑣)
-. (5.11)
-𝑠
-𝑣
-Theprocedureselectsthelowestsuchratioandcomparesitwiththecurrentsubgraph’sreported
-cost-scorequantity. Theacceptanceconditionis
-𝑐
-(MCMI,𝑣)
-< 𝑟(𝒢 ). (5.12)
-MCMI
-𝑠
-𝑣
+Table 5.6: Indexing / querying time in minutes. Qwen2.5-14B-Instruct; original paired mea-
+surementsarepreserved.
+Method Novel Medical WOS IFS-Rel
+NaiveRAG 13 / 371 7 / 245 2 / 292 2 / 225
+L.LLMLingua 51 / 360 37 / 305 4 / 358 3 / 315
+RAPTOR 464 / 250 117 / 319 30 / 162 24 / 121
+SiReRAG 85 / 233 40 / 207 26 / 139 18 / 117
+G-Retriever 19 / 119 12 / 145 8 / 158 3 / 164
+MIXRAG 17 / 388 11 / 453 5 / 257 2 / 193
+GraphRAG 347 / 205 194 / 158 85 / 240 64 / 217
+LightRAG 166 / 221 116 / 164 42 / 211 31 / 197
+HippoRAG2 95 / 134 46 / 130 19 / 140 15 / 127
+F.GraphRAG 106 / 198 48 / 173 29 / 186 27 / 164
+AGRAG 65 / 142 16 / 138 16 / 132 14 / 124
+5.7.4 Indexing and querying costs
+Table 5.6 separates indexing time, querying time, input tokens, and output tokens. For Novel,
+AGRAG reports 65 minutes for indexing and 142 minutes for querying, compared with Hip-
+poRAG2’s 95 and 134 minutes. For Medical the corresponding values are 16 and 138 minutes
+for AGRAG and 46 and 130 minutes for HippoRAG2. This comparison shows lower index
+preparationtimealongsideahigherreportedquerytotalforAGRAG.
+Thetablealsocontainsmethodswithlowercostsinparticularcolumns. NaiveRAGhaslower
+indexingtimes,whileG-RetrieverhasashorterNovelqueryingtotal.
+On WOS and IFS-Rel, AGRAG reports querying times of 132 and 124 minutes and input
+tokencountsof3,970and1,890perquery. ThecorrespondingHippoRAG2valuesare140and
+127minutesand5,066and2,440tokens. Outputlengthsdifferbetweenmethods.
 60

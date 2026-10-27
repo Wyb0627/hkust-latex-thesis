@@ -1,45 +1,18 @@
-ℰ, maximum path length 𝑙 , and language-model hidden dimension 𝑑 , its reported online
-𝑝 LLM
-boundis
-𝑂(𝑑
-emb
-𝑘𝑙
-𝑐
-2 +𝑙
-𝑝
-|ℰ̂||𝒱||𝒱̂|+1 +|𝒱||ℰ|
-(6.14)
-+𝑑
-LLM
-(|𝑆
-𝑟
-|2 +|𝑞|2)).
-Themapping-enumerationtermisexponentialinquery-graphsize. Query-specificconstruction
-andaboundedpathlengthrestrictthegraphsprocessedintheevaluatedsetting. Actualmodule
-costs provide the complementary evidence about where runtime is spent. In particular, graph
-construction calls the language model repeatedly, whereas matching operates on the extracted
-graph. Section6.10reportsthesecostsindividually.
-6.8 Experimental Protocol
-The evaluation uses MMQA [20] and the Arxiv, Manual, Web, Wiki, Wit, and Recipe subsets
-of MRAMG-Bench [21]. Table 6.1 preserves the published dataset statistics. MMQA includes
-textual and image queries. The six MRAMG subsets contain textual queries over multimodal
-corpora. Theirquery-hoprangesandcorpussizesdiffer,soresultsarereportedbydataset.
-Table 6.1: Evaluation datasets, reproduced from published Table 3, p. 2488 [4]. T and I denote
-textualandimagequerymodalities. ThecolumnscompriseMMQAandsixMRAMGsubsets.
-Statistic MMQA Wiki Wit Recipe Arxiv Manual Web
-QueryModality T/I T T T T T T
-Queries 951 500 600 2,360 200 390 750
-Texts 218,285 538 639 1,528 101 40 1,500
-Images 57,058 538 639 8,569 337 2,607 1,500
-CorpusSize 22.5M 680k 478k 1.1M 136k 420k 215k
-QueryHops 1–2 2–5 2–4 1–6 3–4 2–6 2–3
-AvgQueryHops 1.5 3.0 2.8 3.3 3.1 3.7 2.4
-The shared generation backbone is Qwen2.5-VL-7B-Instruct [60]. The experiments run on
-an Intel Xeon Gold 5220R CPU at 2.20 GHz and one NVIDIA A100-SXM4 GPU with 40 GB
-memory. Theretrievalamountissettofive,textchunksuse256tokens,andoverlapis32tokens.
-HippoRAG2 uses Contriever for dense passage retrieval [48]; the other reported embedding
-configurationsusebge-base-en-v1.5. Similarity-basedretrievalrepresentsimagesthroughtheir
-captions. Thesearethepublishedcontrolsforthecomparisonsinthischapter.
-VanillaRAG is implemented with LangChain and FAISS [61]. The GraphRAG implemen-
-tationisnano-graphrag[62],andtheremainingbaselinesystemsusetheirreleasedimplementa-
+6.12 Discussion and Chapter Summary
+We proposed MGRAG to construct and match multimodal evidence for individual queries.
+Query-aware extraction selects relevant facts, semantic path matching connects them to the
+query, and graph-aware recomputation reuses processing from construction during answer
+generation.
+MGRAG obtains the highest values across the seven datasets’ four answer metrics. Con-
+struction and matching substitutions show the benefits of query-dependent extraction and path
+semantics. The hop-group results show larger quality gains for questions requiring more rela-
+tional steps, with added runtime. Cache and inverse-ablation results show how recomputation
+changesqualityandcostwithindifferentretrievalpipelines.
+Caption omissions and extraction errors can exclude relevant facts before matching. An
+accepted match ends construction, so an incorrect correspondence can prevent examination of
+laterchunks. Theconstructionandpath-lengthcapsfurtherrestrictthesearch.
+Semantic paths allow a query relation to match evidence expressed through several inter-
+mediate facts. The same graph can guide which cached token states are recomputed. The next
+chaptercomparestheseusesofstructurewithexternalknowledgeselection,onlineindexing,and
+connectedtextualretrieval.
 89

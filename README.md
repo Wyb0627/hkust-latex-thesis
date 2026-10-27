@@ -1,6 +1,6 @@
 # Structural Augmented Reasoning for Language Models
 
-English HKUST CSE PhD thesis by Yubo Wang. The complete manuscript contains Introduction, Background (including the separate CIKM hyper-relational study), KGLink, GORAG, AGRAG, MGRAG, Discussion, and Conclusion. Main entry: `main.tex`. The existing reading copy `thesis.pdf` predates the latest full-thesis prose revision; see the current compilation state below.
+English HKUST CSE PhD thesis by Yubo Wang. The complete manuscript contains Introduction, Background (including the separate CIKM hyper-relational study), KGLink, GORAG, AGRAG, MGRAG, Discussion, and Conclusion. Main entry: `main.tex`. The reading copy `thesis.pdf` includes the latest full-thesis prose revision and has 115 pages.
 
 ## Build
 
@@ -10,7 +10,7 @@ Install a TeX distribution providing XeLaTeX, Biber, latexmk and the packages us
 make
 ```
 
-The build merges `bibliography/*.bib` into `thesis-references.bib`, compiles with shell escape disabled, checks unresolved references, missing characters, duplicate labels and overfull boxes, and copies `main.pdf` to `thesis.pdf`. If BibLaTeX retains a stale auxiliary rerun flag, the build explicitly logs an auxiliary cleanup and repeats the build once. Bibliographic metadata are deduplicated by DOI or normalized title; original citation keys survive as BibLaTeX aliases. Edit the bibliography fragments, not the generated merged file.
+The build checks the paths of latexmk, XeLaTeX and Biber, adding the active `/Library/TeX/texbin` directory to the build process PATH when needed. It prints the resolved paths and stops if a required program is missing. The build merges `bibliography/*.bib` into `thesis-references.bib`, compiles with shell escape disabled, checks unresolved references, missing characters, duplicate labels and overfull boxes, and copies `main.pdf` to `thesis.pdf`. If BibLaTeX retains a stale auxiliary rerun flag, the build explicitly logs an auxiliary cleanup and repeats the build once. Bibliographic metadata are deduplicated by DOI or normalized title; original citation keys survive as BibLaTeX aliases. Edit the bibliography fragments, not the generated merged file.
 
 ```sh
 make counts    # TeXcount output under planning/qa/
@@ -39,4 +39,4 @@ Twenty-seven research graphics are original source files with recorded hashes. T
 
 The manuscript is complete for author and supervisor review. The unfilled signature date and department-head field must be completed from real information; signatures and institutional approval are outside the manuscript build. The title-page numeral follows the visible official sample pending departmental clarification. Source-internal theory discrepancies and an unreported MGRAG experimental recomputation budget are documented rather than silently repaired.
 
-The latest Sun-reference style pass applies 198 prose edits across all eight chapters. Current sources have 19,975 narrative words, 21,917 words including headings/captions, and a 206-word abstract. The built-in compiler fails when invoking Biber, so no updated PDF export or current pagination is certified. `thesis.pdf` remains the previous 128-page abstract-revision export. Exact changes and checks are in `planning/review-sun-style-2026-10-27/REVIEW.md`; the October 25 portable ZIP is an older snapshot.
+The latest Sun-reference style pass applies 198 prose edits across all eight chapters. Current sources have 19,975 narrative words, 21,917 words including headings/captions, and a 206-word abstract. The XeLaTeX/Biber build completed and `thesis.pdf` is updated to 115 pages. Reference, glyph, overflow, font embedding and page geometry checks passed. The app’s independent built-in preview still fails; diagnosis and build repair are recorded in `planning/compile-repair-2026-10-27/REPORT.md`. Exact changes and checks are in `planning/review-sun-style-2026-10-27/REVIEW.md`; the October 25 portable ZIP is an older snapshot.

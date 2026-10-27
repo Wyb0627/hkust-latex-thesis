@@ -1,38 +1,30 @@
-Table4.2: WOSclassificationaccuracywithonesupportexampleperlabel. Qwen2.5-7Bisthe
-RAGbackbone. ValuesandemphasisreproducethecorrespondingcolumnsofGORAG’smain
-table.
-Method Round1 Round2 Round3 Round4
-Entailment 0.3695 0.3994 0.4510 0.4030
-NaiveRAG 0.3885 0.2267 0.1821 0.1653
-LongLLMLingua 0.3806 0.2155 0.1770 0.1468
-GraphRAG 0.3852 0.2213 0.1816 0.1641
-LightRAG 0.3930 0.2202 0.1743 0.1625
-HippoRAG2 0.4133 0.2552 0.2205 0.1906
-GORAG 0.4866 0.4790 0.4736 0.4420
-Table 4.3: WOS classification accuracy with 5 support examples per label. Qwen2.5-7B is the
-RAGbackbone. ValuesandemphasisreproducethecorrespondingcolumnsofGORAG’smain
-table.
-Method Round1 Round2 Round3 Round4
-Entailment 0.3823 0.4471 0.4857 0.4387
-NaiveRAG 0.3904 0.2154 0.1475 0.1556
-LongLLMLingua 0.3823 0.2202 0.1567 0.1382
-GraphRAG 0.3897 0.2197 0.1770 0.1634
-LightRAG 0.3806 0.2216 0.1767 0.1626
-HippoRAG2 0.4245 0.2656 0.2210 0.1860
-GORAG 0.4990 0.5109 0.4996 0.4717
-baselines’ oﬀicial implementations. These choices identify the systems that produced the re-
-portedresults.
-The baseline collection tests several ways of allocating external context. NaiveRAG selects
-passages. LongLLMLingua changes which tokens remain in that context. The graph base-
-lines select graph-associated information. GORAG explicitly selects labels through a connec-
-tion structure and expands its lexical index online. These differences motivate the comparison,
-whiletheablationsisolatechangeswithinGORAG’sownpipelinemoredirectly.
-4.6 Classification Results
-The tables beginning with Tables 4.2 and 4.5 preserve the WOS and IFS-Rel portions of the
-main accuracy table. Each dataset is split into one-, five-, and ten-shot tables, with rounds as
-columns. Eachvalueisafractionalaccuracy,andthelabelsavailabletothemodelexpandwith
-theround.
-OnWOSwithonesupportexampleperlabel,GORAGreportsaccuraciesof0.4866,0.4790,
-0.4736, and 0.4420 across the four rounds. Entailment reports 0.3695, 0.3994, 0.4510, and
-0.4030inthesamecolumns. ThecorrespondingGraphRAGvaluesare0.3852,0.2213,0.1816,
+CHAPTER 5
+CONNECTED EVIDENCE SELECTION FOR LANGUAGE
+MODELS WITH AGRAG
+ThischapterisbasedonAGRAG:AdvancedGraph-basedRetrieval-AugmentedGeneration
+for LLMs, published at ICDE 2026 [3]. We propose AGRAG to retrieve connected facts and
+supportingpassagesforlanguage-modelgeneration. Itcombinesquery-conditionedgraphinflu-
+ence, semantic edge costs, and neighborhood expansion to collect evidence beyond the initially
+mappedfacts.
+5.1 Research Problem and Evidence Requirements
+A question can require facts from several parts of a corpus. Independently retrieved passages
+may repeat one fact or leave the relationships between different facts implicit. A graph records
+these relationships, but retrieval must still select a subgraph that contains enough information
+fortheanswer.
+We propose AGRAG to select connected evidence using query relevance and graph influ-
+ence. Statistical extraction determines the entity vocabulary, semantic costs rank connections,
+and neighborhood expansion adds facts around the query anchors. A hybrid passage channel
+suppliescontextomittedbythegraphrepresentation.
+Consider a corpus containing statements about an illness, the organ that it affects, and the
+routesthroughwhichitspreads. Aquerymaymatchfactsmentioningtheillnessandtheorgan.
+Connecting those facts can identify a small initial structure, but answering the question may
+require a neighboring fact that specifies another anatomical component. The original example
+in Figure 5.2 illustrates this distinction. The example motivates expansion beyond an initial
+terminal-connectingstructure.
+The input is a text corpus 𝒯 and a natural-language query 𝑞. The corpus is divided into
+chunks 𝒯 . The indexed graph 𝒢 = (𝒱,ℰ) contains entity nodes, passage nodes, and several
+𝑐
+kinds of edges. Query processing identifies an initial set of relevant triple facts, assigns node
+influence scores and edge costs, and produces a subgraph for generation. A hybrid retriever
+suppliesadditionalpassagesfromthesamecorpus. Theoutputisananswerconditionedonthe
 47

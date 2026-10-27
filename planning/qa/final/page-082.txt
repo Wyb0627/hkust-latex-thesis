@@ -1,31 +1,39 @@
-5.7.3 Answer quality across tasks
-The main results are split by task in Tables 5.1–5.5. On Novel creative generation, AGRAG
-reportsfaithfulness0.513,accuracy0.339,andcoverage0.386. HippoRAG2reportsfaithfulness
-0.496,whileRAPTORreportsaccuracy0.333andNaiveRAGcoverage0.384.
-On Medical creative generation, AGRAG reports faithfulness 0.356, accuracy 0.598, and
-coverage 0.589. NaiveRAG has accuracy 0.577 and coverage 0.554. HippoRAG2 has faithful-
-ness 0.347. The task combines contextual grounding with a more flexible response format, and
-thethreemeasurescapturedifferentaspectsofthatresponse.
-For contextual summarization, AGRAG obtains coverage and accuracy of 0.778 and 0.643
-onNovel,and0.690and0.604onMedical. Thetaskrequirescollectinginformationdistributed
-acrosstheevidence. Theresultisconsistentwiththedesignofsupplyingconnectedgraphfacts
-togetherwithpassagecontext.
-Forcomplexreasoning,thereportedROUGE-Landaccuracyvaluesare0.319and0.467on
-Noveland0.343and0.665onMedical. Forfactretrievaltheyare0.324and0.490onNoveland
-0.357and0.628onMedical. Thetasksusedifferentquerycollectionsandanswerformats.
-Classification accuracy and recall are 0.438 and 0.307 on WOS and 0.403 and 0.251 on
-IFS-Rel. SiReRAG reports WOS accuracy 0.430 and recall 0.294, while HippoRAG2 reports
-IFS-Relaccuracy0.389andrecall0.246. AGRAG’sclassifierreceivesgraph-derivedcandidate
-labelsunderthesourceprotocol.
-5.7.4 Indexing and querying costs
-Table 5.6 separates indexing time, querying time, input tokens, and output tokens. For Novel,
-AGRAG reports 65 minutes for indexing and 142 minutes for querying, compared with Hip-
-poRAG2’s 95 and 134 minutes. For Medical the corresponding values are 16 and 138 minutes
-for AGRAG and 46 and 130 minutes for HippoRAG2. This comparison shows lower index
-preparationtimealongsideahigherreportedquerytotalforAGRAG.
-Thetablealsocontainsmethodswithlowercostsinparticularcolumns. NaiveRAGhaslower
-indexingtimes,whileG-RetrieverhasashorterNovelqueryingtotal.
-On WOS and IFS-Rel, AGRAG reports querying times of 132 and 124 minutes and input
-tokencountsof3,970and1,890perquery. ThecorrespondingHippoRAG2valuesare140and
-127minutesand5,066and2,440tokens. Outputlengthsdifferbetweenmethods.
+Node-levelmatching Path-awarematching
+Data
+Graph A father_of B father_of C 𝓓𝓖 A father_of B father_of C
+𝓓𝓖 PathAggr.
+✓ ✘ ✘ ✓ ✓ ✓ ✓
+Query grandfather_of grandfather_of
+Graph A C 𝓠𝓖 A C
+𝓠𝓖
+Correct alignment:
+Cannotfindamapping,sufferfrom 𝓓𝓖(A → B → C) ⇔𝓠𝓖(A→ C)
+Semantic-structural Misalignment
+Findthe correctmapping!
+✓:Match ✘:Mismatch :PathAggregation
+Figure 6.1: Path-level correspondence in the MGRAG motivating example. A grandfa-
+ther_ofrelationcorrespondstotwofather_ofedges. OriginalFigure1,p.2481[4].
+quiring the same edge topology would exclude this correspondence. Figure 6.1 reproduces the
+example. MGRAG evaluates semantic representations of paths so that a query relation can be
+supportedbyasequenceofevidencerelations.
+The third decision concerns the cost of processing retrieved evidence. Graph construction
+alreadysendsevidencetoalanguagemodeltoextractentitiesandrelations. Someofthatcontent
+appearsagainwhenthematchedgraphanditssourcechunksareusedforanswering. Reusingthe
+earlierkey-value(KV)statescanreducerepeatedcomputation. Theirsuitabilitydependsonthe
+new query and context, so MGRAG selectively recomputes token states. It combines attention
+scores with topological features of the facts associated with those tokens. Structure thus enters
+bothevidenceselectionandthesubsequentuseoftheselectedcontext.
+6.2 Framework and Evidence Representations
+Figure 6.2 shows three stages. Coarse-grained ranking orders text chunks and images accord-
+ing to their relevance to the query. Fine-grained retrieval consumes this ranked list, extracts
+query-relatedfacts,and searchesthe growing graph fora semantic match. Graph-awareKV re-
+computation then determines which cached token states to update for answer generation. The
+stoppingdecisioninthemiddlestageconnectsranking,graphconstruction,andmatching. Each
+additionalchunkcanchangewhetherthegraphcontainsasuitablecorrespondence.
+Two graphs serve different purposes. The query graph 𝒬𝒢 = (𝒱̂,ℰ̂) describes the enti-
+𝑞 𝑞 𝑞
+tiesandrelationsrequestedby𝑞,includingplaceholdersforunknowninformation. Theevidence
+graph 𝒦𝒢 = (𝒱 ,ℰ ) contains facts extracted from the chunks considered for that query. A
+𝑞 𝑞 𝑞
+mappingconnectsqueryentitiestoevidenceentities. Pathsbetweenthemappedendpointssup-
 68

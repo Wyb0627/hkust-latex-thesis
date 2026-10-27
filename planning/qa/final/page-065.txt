@@ -1,61 +1,37 @@
-80.0
-70.0
-60.0
-50.0
-40.0
-30.0
-20.0
-10.0
-0.0
-Entail. Naïve Long. Graph. Light. Hippo.
-G
-O
-R
-A
-G
-sniM
-10.0
-8.0
-6.0
-4.0
-2.0
-0.0
-Entail. Naïve Long. Graph. Light. Hippo.
-G
-O
-R
-A
-G
-(a)WOS.
-sniM
-R1
-R2
-R3
-R4
-(b)CAD.
-Figure 4.3: Total time in minutes for the one-shot four-round experiments with Qwen2.5-7B.
-The original R1–R4 legend in panel (b) applies to both panels. Reproduced from Figure 3 of
-GORAG[2].
-Table4.10: 0-shotexperimentsforGORAGandRAGbaselinesonIFS-Reldatasetunder0-shot
-setting.
-Model R1 R2 R3 R4
-GPT-4o[43] 0.9219 0.5109 0.4063 0.5936
-LongLLMLingua[41] 0.9281 0.5297 0.4234 0.5806
-LightRAG[19] 0.6718 0.3047 0.2135 0.0977
-GraphRAG[17] 0.5625 0.1875 0.1458 0.0938
-GORAG 0.9328 0.5406 0.4375 0.6063
-4.8 Zero-shot and Round Generalization
-Thezero-shotIFS-Relexperimentsupplieslabelnamesandlanguage-model-generateddescrip-
-tions without annotated support texts. GORAG extracts keywords from these descriptions to
-initializeitsgraph. Theexperimentconsequentlytestswhetherdescription-derivedassociations
-cansupportcandidateselectionandsubsequentclassification.
-GORAG reports zero-shot accuracies of 0.9328, 0.5406, 0.4375, and 0.6063. The direct
-GPT-4o comparison reports 0.9219, 0.5109, 0.4063, and 0.5936. LongLLMLingua reports
-0.9281, 0.5297, 0.4234, and 0.5806. The graph-based comparisons in the same table are lower
-underthisinitializationprotocol. Thesevaluessupporttheuseoflabeldescriptionsasaninitial
-retrievalsourceforthisexperiment.
-The round-generalization study uses WOS split into four, six, and eight rounds under one-
-and five-shot settings. The displayed curve combines rounds one to four from the four-round
-split, rounds five and six from the six-round split, and rounds seven and eight from the eight-
-roundsplit. Thesepointsrepresentresultsfromdifferentpartitionsofthelabelset. Theydonot
+Thehighest-scoring𝑘 factsformtherawmappedsetℱ . Themainsettinguses𝑘 = 5. This
+𝑎 raw 𝑎
+stagelocatescandidatefactsintheindexedgraphbeforegraphpropagationbegins.
+Amodel-basedfilteringstepthenevaluatestherawfactswithrespecttothequery,
+ℱ = LLM(ℱ ,𝑞,𝑝 ). (5.6)
+raw tf
+The filtered set ℱ supplies query anchors. Dense mapping produces the candidate list, and the
+modelchecksitsrelevancetothequestion. Thefilteringablationremovesthissecondstep.
+Factsaroundtheanchorscancontributetoananswerevenwhentheirdirectquerysimilarity
+islower. Wepropagateinfluence fromthe mappedfactstoscore thissurrounding evidenceand
+usesemanticedgecostswhenselectingitsconnections.
+5.3.2 Node influence and edge costs
+AGRAG uses a personalized PageRank-style propagation [44] to assign query-dependent influ-
+encescores,
+𝐬 = lim 𝐬(𝑖), 𝐬(𝑖) = (1−𝑑)𝐩+𝑑𝐏𝐬(𝑖−1). (5.7)
+𝑖→∞
+Here 𝐩 is determined by nodes associated with the filtered mapped facts, and 𝐏 is the graph
+propagation matrix specified in the source. The reported setting uses 𝑑 = 0.5 and stops the
+iteration when the change is below 10−7. The score of a node 𝑣 is 𝑠 = 𝐬[𝑣]. Passage-node
+𝑣
+scoresaremultipliedby0.05tobalancetheircontributionrelativetoentitynodes.
+The personalization vector assigns one to nodes participating in the mapped facts and zero
+totheothernodes. Thegraphoperatorisspecifiedby
+⎧1/|𝒩(𝑢)|, (𝑢,𝑣) ∈ ℰ,
+⎪
+𝐏[𝑢][𝑣] = (5.8)
+⎨
+⎪1/|𝒱|, otherwise.
+⎩
+Nonadjacent node pairs receive the constant term in this operator. The recurrence uses this
+matrixwiththedampingvalueinEquation5.7,followedbypassage-nodescaling.
+We compute node influence on the indexed graph before expansion. These scores remain
+assignedtothenodeswhiletheretrievalprocedureselectswhichnodesandedgestoinclude.
+Direct similarity scores a triple against the question. Influence also reflects its connections
+to the query anchors, allowing evidence connected to several mapped facts to receive retrieval
+weight.
 51

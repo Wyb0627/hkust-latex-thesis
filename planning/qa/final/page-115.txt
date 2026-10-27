@@ -1,26 +1,21 @@
-CHAPTER 7
-DISCUSSION
-Thefourstudiesplaceexplicitstructureatdifferentpointsbetweenanevidencesourceanda
-language-model output. KGLink enriches a column representation with knowledge outside the
-table. GORAG maintains associations that support candidate-label retrieval. AGRAG selects
-connected facts and passage context. MGRAG constructs and matches evidence for a query
-and uses graph features in context recomputation. This chapter compares those roles using the
-publishedevidenceintheprecedingchapters.
-7.1 Where Structure Enters the Pipeline
-The first research question concerns the representation received by a supervised encoder.
-KGLink’sknowledgegraphsuppliescandidate-typetextandafeaturesequence,whilethetask’s
-labels supervise the final prediction. Its graph processing therefore precedes representation
-learningandinference. Theimportantinterfaceistheconversionfromlinkedgraphinformation
-to a sequence that the table encoder can use. Cross-column filtering makes the selected
-evidencedependonthetablebeforethelanguagemodelprocessesit.
-Thesecondquestionconcernsselectingamongtasklabels. GORAGusesgraphconnectivity
-toassembleacandidatesetforthecurrenttext. Thelanguagemodelthenperformslabelselection
-underthisretrievedcontext. Thegraphchangesassupervisionandpredictionsbecomeavailable
-undertheroundprotocol. Theindexstoreskeyword–labelassociations,andretrievalusesthem
-todeterminewhichlabelsentertheclassificationdecision.
-The third question concerns connected evidence for generation. AGRAG adds an explicit
-graphserializationtothepassagecontext. Query-conditionedinfluenceandsemanticedgecosts
-guide selection of the subgraph. The hybrid channel retains access to text beyond the selected
-graph. This interface distinguishes the structural explanation of relationships among selected
-factsfromthecontextualwordingoftheirsourcepassages.
+[65] M. Houbraken et al., “The index-based subgraph matching algorithm with general symmetries
+(ismags):Exploitingsymmetryforfastersubgraphenumeration,”PloSone,vol.9,no.5,e97896,
+2014(cit.onp.81).
+[66] M. Leordeanu et al., “A spectral technique for correspondence problems using pairwise con-
+straints,”inTenthIEEEInternationalConferenceonComputerVision(ICCV’05)Volume1,IEEE,
+vol.2,2005,pp.1482–1489(cit.onp.81).
+[67] S. Fankhauser et al., “Speeding up graph edit distance computation through fast bipartite
+matching,” in International Workshop on Graph-Based Representations in Pattern Recognition,
+Springer,2011,pp.102–111(cit.onp.81).
+[68] M.Choetal.,“Reweightedrandomwalksforgraphmatching,”inEuropeanconferenceonCom-
+putervision,Springer,2010,pp.492–505(cit.onp.81).
+[69] M.Leordeanuetal.,“Anintegerprojectedfixedpointmethodforgraphmatchingandmapinfer-
+ence,”Advancesinneuralinformationprocessingsystems,vol.22,2009(cit.onp.81).
+[70] J. Tang et al., “Robust attributed graph alignment via joint structure learning and optimal trans-
+port,” in 2023 IEEE 39th International Conference on Data Engineering (ICDE), IEEE, 2023,
+pp.1638–1651(cit.onp.81).
+[71] J.Tangetal.,“Fusedgromov-wassersteinalignmentforgrapheditdistancecomputationandbe-
+yond,”ProceedingsoftheVLDBEndowment,vol.18,no.10,pp.3641–3654,2025(cit.onp.81).
+[72] A. Radford et al., “Learning transferable visual models from natural language supervision,” in
+Internationalconferenceonmachinelearning,PmLR,2021,pp.8748–8763(cit.onp.87).
 101

@@ -1,31 +1,46 @@
-Table 5.13: Creative generation in the low-resource setting. Qwen3-4B-Instruct-2507 on two
-2080TiGPUs;valuesandemphasispreserved.
-Method NovelFS NovelACC NovelCOV MedicalFS MedicalACC MedicalCOV
-SiReRAG-L 0.324 0.412 0.299 0.421 0.758 0.475
-HippoRAG2-L 0.433 0.481 0.335 0.425 0.755 0.433
-AGRAG-L 0.441 0.519 0.354 0.436 0.777 0.490
-Table5.14: Contextualsummarizationinthelow-resourcesetting. Qwen3-4B-Instruct-2507on
-two2080TiGPUs;valuesandemphasispreserved.
-Method Novel COV Novel ACC Medical COV Medical ACC
-SiReRAG-L 0.647 0.673 0.536 0.738
-HippoRAG2-L 0.696 0.657 0.522 0.731
-AGRAG-L 0.745 0.706 0.545 0.751
-creative-generationscores,whiletheinitialtreeremainscompetitiveonfactretrieval.
-Removingraw-tripletfilteringgivesNovelcontextual-summarizationcoverage0.712andac-
-curacy0.597. Thesearebelow0.778and0.643forfullAGRAG.Theablationevaluateswhether
-the initial semantic mapping alone supplies appropriate query anchors. Its results support re-
-tainingthefilteringstageunderthereportedconfiguration.
-ThemaineﬀiciencyandablationtablesreportdifferentMedicalindexingandqueryingtotals.
-Componentcomparisonsusethemeasurementsintheablationtable.
-5.7.6 Additional resource setting and parameter study
-The low-resource experiment uses Qwen3-4B-Instruct-2507 on two NVIDIA 2080 Ti GPUs.
-Both the backbone and accelerators differ from the main experiment, so their individual effects
-arenotisolated.
-Inthatsetting,AGRAG-LreportsNovelcreative-generationaccuracy0.519andcontextual-
-Table 5.15: Complex reasoning in the low-resource setting. Qwen3-4B-Instruct-2507 on two
-2080TiGPUs;valuesandemphasispreserved.
-Method Novel ROG Novel ACC Medical ROG Medical ACC
-SiReRAG-L 0.260 0.426 0.308 0.698
-HippoRAG2-L 0.280 0.507 0.298 0.681
-AGRAG-L 0.293 0.552 0.312 0.739
+iteration𝑖,thecumulativegraphcontains
+𝒱 (𝑖) = (𝒱𝑐 ∪{𝑐}), (6.4)
+𝑞 ⋃ 𝑞
+(𝑖)
+𝑐∈𝒞
+𝑞
+ℰ
+𝑞
+(𝑖) =
+⋃
+(ℰ
+𝑞
+𝑐 ∪{(𝑐,consists_in,𝑣) ∶ 𝑣 ∈ 𝒱
+𝑞
+𝑐}). (6.5)
+(𝑖)
+𝑐∈𝒞
+𝑞
+Theiteration-indexednotationmakesexplicitthattheunionsrangeoverthechunksalreadypro-
+cessed.
+Passagenodesconnectextractedfactstotheirsourcechunksandcanlinkfactsfromthesame
+sourceitem.
+6.4.3 Matching as a stopping decision
+Aftereachgraphupdate,MGRAGattemptspath-basedsemanticsubgraphmatchingagainstthe
+query graph. A valid match ends the construction loop. If the matcher returns an empty result,
+thenextrankedchunkisusedtoenrichthegraph. Theloopisboundedbythemaximumnumber
+ofconstructioniterations𝜇. Thus,theamountofgraphconstructiondependsonboththeranking
+orderandthematchingoutcome.
+If a required endpoint or path is missing, another chunk can supply it. Matching thus deter-
+mineswhetherconstructioncontinues,usingtherelationalrequirementsofthequerygraph.
+Theiterationcaplimitshowfarconstructionproceedsthroughtherankedlist. Avalidmatch
+canstopitearlier,whilerelevantevidencebelowthecapremainsunexamined.
+6.5 Path-based Semantic Subgraph Matching
+6.5.1 From edges to paths
+A relation in the query graph can be expressed by several relations in the evidence graph.
+MGRAG assigns text embeddings to entity and relation descriptions. For a path 𝑃(𝑢,𝑣) con-
+taining relations 𝑟 ,…,𝑟 , it defines a semantic representation by aggregating the relation em-
+1 𝑘
+beddings,
+𝑘
+𝐡 = 𝐡 . (6.6)
+𝑃(𝑢,𝑣) ⨁ 𝑟 𝑗
+𝑗=1
+The aggregation can use mean pooling to represent an evidence path. Greedy extension ad-
+ditionally compares the current path, candidate edge, and candidate endpoint with the query
 72

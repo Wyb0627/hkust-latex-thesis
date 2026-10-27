@@ -1,0 +1,89 @@
+{
+  "detection": {
+    "activeBinDir": "/Library/TeX/texbin",
+    "commands": {
+      "biber": {
+        "path": "/Library/TeX/texbin/biber",
+        "version": "present"
+      },
+      "kpsewhich": {
+        "path": "/Library/TeX/texbin/kpsewhich",
+        "version": "kpathsea version 6.3.5"
+      },
+      "latexmk": {
+        "path": "/Library/TeX/texbin/latexmk",
+        "version": "Latexmk, John Collins, 7 Jan. 2023. Version 4.79"
+      },
+      "lualatex": {
+        "path": "/Library/TeX/texbin/lualatex",
+        "version": "This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)"
+      },
+      "pdflatex": {
+        "path": "/Library/TeX/texbin/pdflatex",
+        "version": "pdfTeX 3.141592653-2.6-1.40.25 (TeX Live 2023)"
+      },
+      "xelatex": {
+        "path": "/Library/TeX/texbin/xelatex",
+        "version": "XeTeX 3.141592653-2.6-0.999995 (TeX Live 2023)"
+      }
+    },
+    "knownTexBinDirs": [
+      "/Library/TeX/texbin",
+      "/usr/local/texlive/2025/bin/universal-darwin",
+      "/usr/local/texlive/2023/bin/universal-darwin"
+    ],
+    "missingRecommended": [],
+    "missingRequired": [],
+    "reason": "Required TeX tools are available.",
+    "searchPath": "/Library/TeX/texbin:/usr/local/texlive/2025/bin/universal-darwin:/usr/local/texlive/2023/bin/universal-darwin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Library/Frameworks/Python.framework/Versions/3.14/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.9/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/usr/local/share/dotnet:/Users/ybwang/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/ybwang/.codex/tmp/arg0-macos/codex-arg0t2VtmK:/Users/ybwang/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/ybwang/anaconda3/bin:/Users/ybwang/anaconda3/condabin:/Users/ybwang/.local/bin:/Users/ybwang/.docker/bin:/Users/ybwang/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS",
+    "status": "existing-usable",
+    "texmfroot": "/usr/local/texlive/2023"
+  },
+  "ready": true,
+  "smokeTest": {
+    "attempted": true,
+    "command": [
+      "/Library/TeX/texbin/latexmk",
+      "-norc",
+      "-pdf",
+      "-interaction=nonstopmode",
+      "-halt-on-error",
+      "-synctex=1",
+      "/var/folders/1s/k64td8hn10n4xz0s4t76hf_00000gn/T/codex-latex-doctor-wyvv6ubv/smoke.tex"
+    ],
+    "exitCode": 0,
+    "log": "Rc files read:\n  NONE\nLatexmk: This is Latexmk, John Collins, 7 Jan. 2023. Version 4.79.\nNo existing .aux file, so I'll make a simple one, and require run of *latex.\nLatexmk: applying rule 'pdflatex'...\nRule 'pdflatex':  Reasons for rerun\nCategory 'other':\n  Rerun of 'pdflatex' forced or previously required\n\n------------\nRun number 1 of rule 'pdflatex'\n------------\n------------\nRunning 'pdflatex  -interaction=nonstopmode -halt-on-error -synctex=1 -recorder  \"/var/folders/1s/k64td8hn10n4xz0s4t76hf_00000gn/T/codex-latex-doctor-wyvv6ubv/smoke.tex\"'\n------------\nThis is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex)\n restricted \\write18 enabled.\nentering extended mode\n\n(/var/folders/1s/k64td8hn10n4xz0s4t76hf_00000gn/T/codex-latex-doctor-wyvv6ubv/s\nmoke.tex\nLaTeX2e <2022-11-01> patch level 1\nL3 programming layer <2023-02-22>\n(/usr/local/texlive/2023/texmf-dist/tex/latex/base/article.cls\nDocument Class: article 2022/07/02 v1.4n Standard LaTeX document class\n(/usr/local/texlive/2023/texmf-dist/tex/latex/base/size10.clo))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amsmath.sty\nFor additional information on amsmath, use the `?' option.\n(/usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amstext.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amsgen.sty))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amsbsy.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amsopn.sty))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)\n(./smoke.aux) [1{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdft\nex.map}] (./smoke.aux) )</usr/local/texlive/2023/texmf-dist/fonts/type1/public/\namsfonts/cm/cmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/a\nmsfonts/cm/cmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/ams\nfonts/cm/cmr7.pfb>\nOutput written on smoke.pdf (1 page, 31005 bytes).\nSyncTeX written on smoke.synctex.gz.\nTranscript written on smoke.log.\nLatexmk: Getting log file 'smoke.log'\nLatexmk: Examining 'smoke.fls'\nLatexmk: Examining 'smoke.log'\nLatexmk: Log file says output to 'smoke.pdf'\nLatexmk: All targets () are up-to-date\n\n",
+    "passed": true
+  },
+  "tectonic": {
+    "checked": [
+      {
+        "path": "/Users/ybwang/.codex/plugins/cache/openai-bundled/latex/0.2.4/bin/tectonic",
+        "source": "bundled"
+      }
+    ],
+    "path": "/Users/ybwang/.codex/plugins/cache/openai-bundled/latex/0.2.4/bin/tectonic",
+    "reason": "Tectonic executable is available.",
+    "source": "bundled",
+    "status": "available",
+    "version": "Tectonic 0.16.9"
+  },
+  "tectonicSmokeTest": {
+    "attempted": true,
+    "command": [
+      "/Users/ybwang/.codex/plugins/cache/openai-bundled/latex/0.2.4/bin/tectonic",
+      "-X",
+      "compile",
+      "--outdir",
+      "/var/folders/1s/k64td8hn10n4xz0s4t76hf_00000gn/T/codex-tectonic-doctor-bes1fgf2",
+      "--outfmt",
+      "pdf",
+      "--print",
+      "--untrusted",
+      "smoke.tex"
+    ],
+    "exitCode": 1,
+    "log": "note: \"version 2\" Tectonic command-line interface activated\nerror: Operation not permitted (os error 1)\ncaused by: Operation not permitted (os error 1)\n",
+    "passed": false
+  }
+}

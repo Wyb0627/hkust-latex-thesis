@@ -1,33 +1,32 @@
-sages can increase coverage and processing cost at the same time, while changing their orga-
-nization can alter repetition or access to supporting relationships. An experiment that fixes a
-generator and corpus can still change the information supplied to that generator through its re-
-trievalbudget.
-This view of RAG separates the update unit, the retrieval unit, and the context supplied to
-themodel. Theycanbedifferentobjects. Adocumentcancontributeseveralgraphfacts;graph
-traversal can return a label set; and the final prompt can include both selected structures and
-source passages. The following section reviews methods that use these distinctions to retrieve
-evidencebeyondindependentlyrankedchunks.
-2.4 Graph-based Evidence Retrieval
-A graph index makes relationships among evidence items available during retrieval. Its nodes
-can denote entities, passages, labels, or other task-specific objects. Its edges can represent ex-
-tractedfacts,sharedmentions,semanticsimilarity,oranassociationobservedinexamples. The
-graph representation therefore includes a choice about what information should be connected.
-Queryprocessingthenmakesanotherchoiceaboutwhichofthoseconnectionsshouldinfluence
-thecurrentcontext.
-GraphRAGconstructsanentitygraphandcommunitysummariestosupportquery-focused
-summarization [17]. Its organizationis relevantto questions whose answer requiresan account
-ofacorpus’sthemesratherthanonelocalfact. Community-leveldescriptionsprovidearetrieval
-andsummarizationunitaboveindividualpassages. Thisdiffersfromreturningtheneighborsof
-asinglementionedentity. Thegraphalsosupportsthepreparationofderivedtextualsummaries
-thatcanlaterenterquestionanswering.
-HippoRAG combines language-model extraction, a knowledge graph, and personalized
-PageRank for retrieval [18]. Query-related entities seed a graph process whose scores depend
-on connectivity. A node can therefore receive retrieval influence through paths from the initial
-query representation. Personalized propagation introduces a query-dependent ranking over
-the index. It is distinct from a rule requiring every returned item to connect a specified set of
-terminalsinoneselectedsubgraph.
-LightRAG integrates graph structures with vector representations and uses retrieval at low
-and high levels [19]. Its design distinguishes more specific entity-oriented information from
-broader relational or conceptual information and includes incremental index updates. These
-mechanisms address the representation and maintenance of a graph retrieval source. The gran-
+generation. MGRAGranksimagesthroughcaptionsandsuppliesselectedoriginalchunkstothe
+answeringmodel[4].
+MRAMG-Benchstudiesretrieval-augmentedgenerationinwhichanswerscancombinetext
+and images [21]. Its multimodal output requirement adds another distinction between finding
+supporting evidence and presenting the response. The MGRAG evaluation uses six MRAMG
+subsetstogetherwithMMQA.Chapter6specifiestheretrievalandanswer-assessmentprotocol
+usedforthesedatasets.
+Onceevidenceisretrieved,thesystemmustprocessitasmodelcontext. Inanautoregressive
+Transformer, the prefill stage computes representations for the supplied input, and decoding
+generatesanswertokens. Keyandvaluetensorsfromprocessedinputpositionscanbecachedfor
+later attention computation [7, 22]. Reusing these tensors concerns the computation associated
+with selected evidence. It is a separate decision from choosing which evidence belongs in the
+context.
+CacheGen addresses the storage and transfer of context caches through compression and
+streaming[23]. Therelevantresourceincludesthecostoffetchingcachedtensorsaswellascom-
+puting context representations. CacheBlend studies combining precomputed caches for several
+chunksbyselectivelyrecomputingpartoftheirkeyandvaluestates[22]. Itsmotivationincludes
+interactions between chunks that were not present when their caches were independently com-
+puted. Thesemethodsplacecontextservingwithintheevidencepipeline,whereretrievalorder
+andtheassembledinputcanaffectthecomputationrequiredforgeneration.
+MGRAG supplements attention-based recomputation scores with features of the retrieved
+graph [4]. The graph therefore guides both context selection and the computation reused when
+thatcontextisprocessed.
+2.6 Structural Information in Hyper-relational Knowledge
+Graphs
+This section presents the author’s published work Understanding the Embedding Models on
+Hyper-relationalKnowledgeGraph,publishedatCIKM2025[5]. Itexamineshowgraphrepre-
+sentationsandembeddingarchitecturespreserveinformationusedforlinkprediction. Thestudy
+providesaseparateperspectiveonstructuralinformationwithinthethesis. Itsexperimentscon-
+cernKGembeddingmodels,whilethefourresearchchaptersexaminelanguage-modelaugmen-
+tation.
 13

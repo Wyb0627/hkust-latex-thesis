@@ -1,30 +1,21 @@
-Table2.2: ProjectionoftheCIKMstudy’sTable6ontoCleanedJF17kandWD50k. Allmodel
-rows and the original metric precision are retained; the original bold and underline markings
-indicatebestandsecond-bestvalues.
-CleanedJF17k WD50k
-Model MRR H@1 H@10 MRR H@1 H@10
-StarE 0.381 0.284 0.577 0.346 0.268 0.494
-QUAD 0.402 0.305 0.602 0.349 0.275 0.487
-HAHE 0.405 0.310 0.585 0.360 0.288 0.496
-HyperFormer 0.425 0.328 0.613 0.372 0.293 0.522
-NBFNet+Prune 0.415 0.313 0.630 0.360 0.271 0.530
-CompGCN+Hyper 0.389 0.294 0.590 0.350 0.277 0.488
-FormerGNN 0.432 0.335 0.624 0.377 0.299 0.527
-datasets, at 0.630 and 0.530. The experiment uses a single NVIDIA A100-40GB GPU. Pa-
-rameters follow the original repositories or are selected by grid search when dataset-specific
-settings are unavailable. For comparisons involving CompGCN, the study replaces its decoder
-withaTransformertoalignitwiththecorrespondingHKGEconfigurations.
-ThecompletepublishedcomparisonalsoincludesWikipeopleandFBAUTO,withdifferent
-dataset characteristics and metric rankings. The research establishes that the organization of
-graphinformationcanmatterbeyondretainingthesameentityandrelationvocabulary. Itscon-
-nection to this thesis is the design question of which relationships remain available to a model
-afterevidencetransformation.
-2.7 Research Questions Emerging from the Background
-The preceding work identifies several places where structure can influence model inputs. Ta-
-ble understanding needs evidence that matches both the values and the task’s type vocabulary.
-Dynamicclassificationneedsanindexthatincorporatesnewlyavailablelabelinformationandre-
-trievesappropriatealternativesforthecurrenttext. Open-endedtextgenerationneedsaselection
-rule that can organize connected facts and retain their source context. Multimodal generation
-addssemanticmatchingacrossheterogeneousevidenceandthecostofprocessingthatevidence
-asmodelcontext.
+Figure3.2: KGLink’s graph-processing and language-model components. Candidate-type text,
+column feature vectors, and a contextual type-representation objective connect external knowl-
+edgetoannotation. OriginalimagereproducedfromKGLink[1],Fig.3.
+3.3 KG-derived Candidate Types
+3.3.1 Cell Mention Linking
+The first step retrieves a candidate entity set 𝐸 𝑚𝑟 for each suitable cell mention. KGLink uses
+𝑐
+BM25 to score the relation between the mention’s words and indexed entity labels [15]. The
+implementation indexes Wikidata with Elasticsearch. The score incorporates query-term fre-
+quency, inverse document frequency, and label-length normalization. Multiple entities can
+match the same mention, so the retrieval output is a candidate set rather than a single disam-
+biguatedentity.
+Short strings are often ambiguous. An album title can match an ordinary word, and a name
+can refer to several people. We use relationships between cells in the same row to filter these
+lexicalcandidates.
+Named-entitydetectionidentifiesnumericanddatementions,whichreceivealinkingscore
+of zero. Failed lookups also receive zero. The original cell values remain in the encoder input,
+allowingclassificationwhenKGevidenceismissing.
+Weretrieveatmosttenentitiespercellmention,thenapplyneighborhoodfilteringandrow
+rankingbeforeconstructingtheencoderinputs.
 19

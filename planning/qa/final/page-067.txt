@@ -1,35 +1,46 @@
-Text: Male feminists always Output:
-end up as sexual predators. Insulting Content
-I
-n
-p
-u
-t
-Steiner Tree
-Feminists
-Generated
-t
-u
-n p LLM
-sexual I
-Insult
-predators
-idiot
-Figure 4.5: A contextual-abuse example and its selected graph connections. Reproduced from
-Figure5ofGORAG[2].
-Theofflineablationshowsthecontributionofexpandingtheindexbeyondthesupportsam-
-ple. Because these additions carry predicted labels, the method couples current classification
-withtheevidenceavailabletolaterqueries.
-Retrievedpathsshowwhichkeywordsandlabelsconnectedthequerytermsduringcandidate
-selection. The classifier then uses the original text and retrieved label information to make its
-prediction.
-Keywordextractionrestrictsthequerytermsavailableasretrievalterminals. Sparsesupport
-dataandlimitedlabeldescriptionsconstraininitialgraphcoverage.
-Thestudyshowshowataskgraphcanreducethelabel-selectionburdenplacedonalanguage
-modelandmaintainlexicalevidenceasthetaskevolves. ThecontributiondiffersfromKGLink’s
-useofanexistingknowledgegraphtoenrichtablerepresentations. Herethestructureisbuiltand
-updated from task data, and its immediate output is a query-specific label set. The next chapter
-turnsfromchoosingamonglabelstoselectingconnectedtextualfactsforanopen-endedanswer.
-Thatchangerequiresaretrievalobjectivethataccountsfortherelevanceandconnectioncostof
-evidencebeyondafixedclassificationvocabulary.
+Q: Which structuresareatriskofandmaycontributeto the spreadof kidney cancer?
+Mapto
+Connect 𝑐 = 0.31
+structures Tumors
+Can have Affect
+spread Spread Blood
+Kidney 𝑐 = 0.51 Tumors 𝑐 = 0.23
+kidney Kidney vessels
+𝑠 = 0.82 𝑠 = 0.78
+cancer cancer Spread 𝑠 = 0.69
+Kidney Work 𝑐 = 0.10 Affect
+Occur in
+𝑐 = 0.30 𝑐 = 0.27
+𝑐 = 0.34
+Invade
+Nearby Kidney Lymph
+𝑐 = 0.45 RCC
+tissues cancer nodes
+Commontype 𝑠 = 0.35
+𝑠 = 0.67 𝑠 = 0.88 𝑠 = 0.66
+𝑐 = 0.78
+A: Blood vessels areatriskofandmaycontributeto thelocal spreadof kidney cancer.
+Figure 5.2: The original AGRAG evidence-expansion example. Red triples are query-mapped
+facts; orange triples show additional neighboring evidence in the illustrated MCMI structure.
+ReproducedfromFigure2ofthesourcepaper[3].
+Thecandidateanditsconnectingedgeareaddedwhenthisconditionholds. Thesubgraphquan-
+tity is recalculated and the procedure considers the updated neighborhood. Expansion stops
+when the lowest candidate ratio is greater than or equal to the current subgraph quantity. The
+comparisonusesthenodescoreoftheprospectiveaddition,whereasEquation5.10usesthetwo
+endpoints of each included edge. The candidate ratio therefore ranks possible additions using
+theirassignednodescores,whilethecurrentsubgraphisevaluatedbyEquation5.10.
+Expansionaddsneighboringfactsthatcansupplyanswercomponentsabsentfromtheinitial
+tree. Theresultingstructurecancontaincycles,asshownintheMCMIexample,anditsselected
+relationsareserializedforgeneration.
+5.4.1 The original connected-evidence example
+TherunningexampleinFigure5.2makesthedifferencebetweenconnectinganchorsandcollect-
+ing an answer visible. Its mapped triples include (Kidney, Work, Kidney cancer) and (Kidney,
+Spread, Tumors), using the relation strings printed in the original illustration. Those triples lo-
+catethequery’ssubjectregion. Theexpandedstructureadditionallycontainsrelationsinvolving
+bloodvessels,neighboringtissues,andotherentitiesshowninthegraph. Theoriginalillustrated
+answeridentifiesbloodvesselsastherequestedcomponent.
+In this example, the added relation supplies an answer component absent from the mapped
+facts. Influence scores and edge costs determine whether expansion includes that neighboring
+evidence.
+The theoretical claims have distinct scopes. The main paper reports NP-hardness for the
 53

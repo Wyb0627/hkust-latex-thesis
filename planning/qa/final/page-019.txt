@@ -1,32 +1,31 @@
-alabelpredictionandtheprescribedindexupdateforsubsequentprocessing.
-Anevolvinglabelsetchangesthemeaningofevidenceretrieval. Acandidatemustbelongto
-thetask’savailablelabels,andthegraphmustincorporatenewsupervisionwithoutrebuildingits
-wholerepresentationforeveryprediction. Withinaround,predictedinformationcanaffectlater
-queriesifthemethodperformsonlineindexing. Itstiminganduseofpredictedlabelstherefore
-belongtotheexperimentalprotocol.
-GORAG answers this question through weighted keyword–label indexing, terminal-based
-connected retrieval, and online updates after classification. Its candidate set is selected for the
-currentinputratherthanspecifiedonlybyafixedretrievalcount. Chapter4describestheround
-andshotsettings,theretrievalconstruction,andtheCAD,WOS,andIFS-Relresults. Thechap-
-teralsoexaminesthecostofindexingandretrievalandtheeffectoftheproposedcomponents.
-1.3.3 RQ3: Connected evidence for textual generation
-Thethirdquestionaskshowtoselectevidencethatreflectsbothitsrelevancetoaqueryandthe
-connections among its facts. The input is a text corpus and a query whose answer can involve
-several information items. The output includes an evidence subgraph, passage context, and the
-generatedanswer.
-A graph-ranking score identifies relevant nodes but does not by itself specify an evidence
-structure. Conversely, a small structure connecting query anchors may omit additional facts
-neededforasummary. Thesystemmustalsoaccountforinformationthatremainsintheoriginal
-text after graph extraction. These requirements motivate a combination of graph selection and
-passageretrieval.
-AGRAG answers the question by constructing a graph with statistically selected entities,
-extractedrelations,passagenodes,andsynonymlinks. Query-mappedfactsconditiontheinflu-
-encescores;semanticsimilaritysuppliesedgecosts. Themethodconstructsaninitialterminal-
-connecting structure and expands it according to the reported cost-score rule. A hybrid dense
 andBM25channelsuppliesadditionalpassages. Chapter5evaluatesthesechoicesacrosstextual
 QAtasksandclassification.
 1.3.4 RQ4: Semantic matching and computation over multimodal evi-
 dence
 The fourth question asks how to construct and match evidence for a multimodal query when
 the query and evidence graphs express related information through different topologies, and
+howthatstructurecanguidecontextrecomputation. Theinputincludesamultimodalcorpus,a
+query,andthemodelstatesavailableforreuse. Theoutputisamatchedevidencesubgraphand
+ananswergeneratedundertheselectedrecomputationpolicy.
+A query can contain unknown entities, represented by semantically meaningful placehold-
+ers. Evidence may express the requested relation through intermediate entities. The relevant
+details can also depend on the question posed about an image. These conditions make both the
+constructionofthegraphandthematchingoperationquery-dependent. Onceselectedevidence
+enters the generator, tokens associated with connected events supply information about which
+computationstorefresh.
+MGRAG answers the question through caption-based coarse ranking, incremental query-
+awaregraphconstruction,andpath-basedsemanticsubgraphmatching. Itthencombinesquery
+attention,graph-sequenceattention,andgraphtopologicalfeaturestoscoretokensforselective
+KV recomputation. Chapter 6 reports QA results on MMQA and six MRAMG subsets, com-
+parisonsofmatchingmethods,componentablations,andcachequality–costmeasurements.
+1.4 Contributions and Evidence
+We make four contributions corresponding to the research questions. Table 1.1 links each con-
+tributiontoitsmethodandevaluation.
+1. Knowledge-enrichedcolumn representations. KGLink selects graph-derived evidence
+usingtablerelationshipsandintegratesthatevidencewithapre-trainedtableencoder. Its
+contextualrepresentationtaskconnectsthegraphinformationtotheannotationlabels.
+2. Online structured label retrieval. GORAG maintains weighted associations between
+keywords and labels and uses a connected retrieval procedure to generate input-specific
+candidate labels. Its online indexing incorporates information according to the dynamic
+classificationprotocol.
 5

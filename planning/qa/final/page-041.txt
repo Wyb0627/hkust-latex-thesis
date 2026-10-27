@@ -1,35 +1,35 @@
-SON or DATE. The reported implementation uses spaCy for this step. This filter distinguishes
-adescriptivecandidatetypefromaparticularperson’snameoradateencounteredintheneigh-
-borhood. KGLink retains the selected candidate-type labels as text and places them before the
-cell values in the processed column. The reported implementation generates up to three candi-
-date types per row from the KG entities in each column. Their later contribution depends on
-howtheencoderinterpretstheminthetablecontext.
-If no candidate type is returned, padding occupies the corresponding position. Numeric
-columns use numeric summary information in this part of the input, while their original values
-remainavailableinthetablesequence.
-The feature sequence provides a second representation of the retrieved knowledge. From
-the filtered and ranked table, KGLink selects a cell for each target column, chooses its highest-
-linking entity, and serializes that entity with its one-hop predicates and neighboring entities. If
-𝑒 is the selected entity, 𝑝 a predicate, and 𝑜 a neighboring object, the sequence consists of the
-entitylabelfollowedbypredicate–objectdescriptions. Encodingthistextyieldsafeaturevector
-forthecolumn. Apaddingsequenceisusedwhenthecolumnhasnoretrievedentity.
-Candidate types and feature sequences thus preserve different aspects of a neighborhood.
-Candidate selection emphasizes descriptions recurring across column values. The feature se-
-quenceretainsrelationaldetailssurroundingaparticularwell-linkedvalue.
-3.4 Language Model Integration
-3.4.1 Table Serialization and Column Representations
-KGLink adapts the multi-column serialization used by Doduo [11]. A special [CLS] token
-beginseachcolumn’ssegment. Thesegmentsareconcatenatedintooneinputsequence,followed
-by a [SEP] token. The contextual representation at each column’s [CLS] position provides
-that column’s vector. Because the sequence contains multiple columns, self-attention can use
-informationoutsidethepredictedcolumn.
-Writing the tokenized contents of column 𝑖 as tok1,…,tok𝑚, the original multi-column se-
-𝑖 𝑖
-rializationhastheform
-𝑆(𝑇) = [CLS]tok1⋯tok𝑚 [CLS]tok1⋯
-1 1 2
-(3.4)
-[CLS]tok1 ⋯tok𝑚 [SEP].
-|𝐶| |𝐶|
-Each column’s [CLS] position produces a contextual vector using the serialized columns.
+Table 3.1: Column-type annotation results reported for KGLink. Scores and missing entries
+reproducetheoriginalmain-resulttable.
+SemTab VizNet
+Model Accuracy WeightedF1 Accuracy WeightedF1
+MTab 89.10 - 38.21 -
+TaBERT 72.69 71.21 94.68 94.07
+Doduo 84.06 82.43 95.40 95.06
+HNN 66.54 65.12 66.89 68.82
+Sudowoodo 79.34 79.24 91.57 91.08
+RECA 86.12 84.91 93.25 93.18
+KGLink 87.12 85.78 96.28 96.07
+annotatedcolumns,and77types.
+Thedataaresplitintotraining,validation,andtestingportionsintheratio7:1:2whilemain-
+taining each class’s original sample proportion. Each experiment is averaged over three runs.
+Accuracymeasuresexactlabelprediction,andweightedF1weightsclass-levelperformanceby
+samplefrequency.
+Training uses AdamW, an initial learning rate of 3 × 10−5, and 𝜖 = 10−6. The learning
+rate decays linearly without warm-up. The reported maximum training lengths are 50 epochs
+on SemTab and 20 on VizNet, with early stopping. Batch size is 16 for both datasets; dropout
+is 0.1 for SemTab and 0.2 for VizNet. The implementation uses PyTorch and the Transformers
+libraryonanNVIDIATeslaV100GPU.
+The baseline set includes MTab, TaBERT, Doduo, HNN, Sudowoodo, and RECA [11–13,
+32–34]. TaBERT and Doduo use KGLink’s experimental settings. HNN and RECA follow
+their original settings. Sudowoodo receives the full labeled training set in this comparison.
+VizNetlabelsaretranslatedtoWikidataentitiesforMTab,andMTab’sweightedF1isunreported
+becauseofthedifferenceinproblemdefinition.
+3.6.2 Main Annotation Results
+Table3.1reportsthemaincomparison. KGLinkobtainsaccuracy87.12andweightedF185.78
+on SemTab, and accuracy 96.28 and weighted F1 96.07 on VizNet. MTab has the highest
+SemTab accuracy, 89.10. KGLink has the highest reported weighted F1 on SemTab and the
+highestvaluesofbothreportedmetricsonVizNet.
+Doduo provides a useful comparison for the language-model pathway because KGLink
+adaptsitsserializationandusesBERTinthemainconfiguration. Doduoobtains84.06accuracy
+on SemTab and 95.40 on VizNet. KGLink improves on this baseline with graph-augmented
 27

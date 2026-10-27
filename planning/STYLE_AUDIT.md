@@ -6,6 +6,6 @@ The [complete review](review-sun-style-2026-10-27/REVIEW.md) records reference s
 
 Narrative words changed from 25,604 to 19,975. Sentence-level dashes and rhetorical colons remain absent. All formulas, algorithms, tables, figures, numeric tokens, labels and citations passed source-invariance checks. Qualitative defensive-writing judgment: 2/10 before, 1/10 after.
 
-The built-in compiler did not complete because its Biber invocation returned program-not-found. The discovered line overflow was corrected; final diagnostics show no remaining overfull box or LaTeX source error. No replacement document or separate PDF was generated. `thesis.pdf` remains the previous 128-page export and predates this pass.
+The latest sources have now been compiled with the existing XeLaTeX/Biber toolchain. `thesis.pdf` contains this pass and has 115 pages. Compilation and visual QA are recorded in `FINAL_QA.md`. The independent app preview still fails; see `compile-repair-2026-10-27/REPORT.md`.
 
 Earlier body/abstract reviews remain at `review-style-2026-10-27/REVIEW.md` and `ABSTRACT_REVISION.md`. The preceding audit index is archived as `review-sun-style-2026-10-27/previous-style_audit.md`.

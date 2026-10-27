@@ -1,46 +1,28 @@
-Hyper-relational facts (a). Prune (b). Direct (c). Hyper (d). DBReification
-𝒒𝒆𝟐 𝒒𝒆𝟐 𝒒𝒆𝟐
-𝒓|𝒒𝒓𝟐
-𝒓
-𝒔 𝒒𝒓𝟐 𝒐 𝒔 𝒓 𝒐 𝒒𝒓𝟐 𝒐 𝒒𝒓𝟐 𝒐 𝒔 𝒓𝒔𝒖𝒃
-𝒓𝒑𝒓𝒆
-𝒓𝒐𝒃𝒋 𝒐
-𝒔 𝒔
-𝒓
-𝒓 𝒒𝒓𝟏 𝒒𝒓𝟏 𝒓 𝒒𝒓𝟏 𝒑𝒆
-𝒒𝒆𝟏 𝒒𝒆𝟏 𝒒𝒆𝟏
-𝒓|𝒒𝒓𝟏
-𝒒𝒆𝟏
-𝒒𝒓𝟏 𝒒𝒓𝟐
-𝒒𝒆𝟐
-Relation Entity Newlycreatedrelation Newlycreatedentity
-Figure 2.1: Original comparison of hyper-relational decomposition methods. Prune retains the
-main triple; Direct adds subject–qualifier links; Hyper adds combined relations; database reifi-
-cationintroducesauxiliaryobjects. ReproducedfromFig.1oftheCIKMstudy[5].
-architectureandhowmuchcomesfromspecializedqualifierprocessing. Itevaluatesadata-level
-alternative to modifying the model. Three decomposition methods convert a hyper-relational
-factintoordinarytripleswhileretainingdifferentinformation. Prunekeepsonlythemaintriple.
-Direct adds triples connecting the subject to qualifier entities through their qualifier relations.
-Hyperaddsfurtherrelationswhosenamescombinethemainrelationwitheachqualifierrelation
-andconnectthequalifierentitytothemainobject.
-Figure 2.1 reproduces the original comparison, including database reification. The study
-distinguishes main-triple information, intra-qualifier information, and inter-qualifier informa-
-tion. A decomposition can retain qualifier entities and relation labels while changing how their
-associationwiththemainfactisexpressed. Databasereificationintroducesauxiliaryentitiesand
-relations, also changing the original main-triple topology. These differences determine which
-neighborhoodsandpathsanordinaryKGEmodelreceivesafterconversion.
-The association of a qualifier with a statement is especially relevant when a subject partici-
-pates in several facts using the same relation. In the education example, a degree describes one
-university attendance statement. A collection of subject–degree and subject–university triples
-exposes the entities but changes the representation of which degree qualifies which attendance
-fact. A model following ordinary graph paths then receives the transformed connections. The
-Hyper method supplies additional connections intended to retain more of these associations,
-whereas a qualifier integrator receives the main fact and its qualifier pairs together. This com-
-parisonplacesinformationpreservationattheinterfacebetweenthedatarepresentationandthe
-computation that follows it. It concerns the semantic organization of the input as well as its
-vocabulary.
-The experiments compare conventional KGE models under these transformations with spe-
-cialized HKGE models. Some GNN-based KGE configurations obtain scores comparable to
-specializedmethodsonCleanedJF17kandWD50k. Theobservationmotivatesanexamination
-of the represented information and the architecture receiving it. In particular, adding qualifier-
+CHAPTER 3
+KNOWLEDGE-ENRICHED TABLE UNDERSTANDING
+WITH KGLINK
+This chapter is based on the published paper KGLink: A Column Type Annotation Method
+that Combines Knowledge Graph and Pre-Trained Language Model [1]. We propose KGLink
+toannotatetablecolumnsusingexternalgraphknowledge. Themethodselectscandidatetypes
+and graph-derived feature sequences, then learns their correspondence to the annotation labels
+throughacontextualrepresentationobjective.
+3.1 Motivation and Task
+Atablemaycontaintoolittlecontexttodetermineacolumntype. Forexample,namesofcricket
+players accompanied by birth and death dates do not reveal their occupation. Linking those
+names to a knowledge graph can supply occupation and sport relations that are absent from the
+table.
+External knowledge introduces a second diﬀiculty. The type expected by an annotation
+dataset need not coincide with a type attached to an entity in the graph. A column of bas-
+ketballplayerscanplausiblybedescribedasBasketballplayer,Athlete,orName. Anannotation
+benchmark may use only the last of these labels. Retrieving a factually relevant graph type is
+consequently insuﬀicient to determine the required output label. The model must learn which
+descriptionthetaskexpects. KGLinkreferstothismismatchasthetypegranularitygap. Thegap
+includescaseswherethedesireddatasetlabeldoesnotoccupyaconvenientancestorpositionin
+theretrievedgraph’stypehierarchy.
+We address missing context and type granularity through separate steps. Graph processing
+selectsrelevantexternaldescriptions,whileasupervisedclassifierlearnsthedatasetlabels. An
+auxiliary task trains a contextual representation of the target type so that the classifier can use
+graphdescriptionsevenwhentheirwordingdiffersfromtheannotationvocabulary.
+We evaluate single-label column annotation on SemTab and modified VizNet. The encoder
+predictsadatasetlabelfromthecells,tablecontext,andselectedgraphdescriptions.
 17

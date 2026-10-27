@@ -1,37 +1,38 @@
-Node-levelmatching Path-awarematching
-Data
-Graph A father_of B father_of C 𝓓𝓖 A father_of B father_of C
-𝓓𝓖 PathAggr.
-✓ ✘ ✘ ✓ ✓ ✓ ✓
-Query grandfather_of grandfather_of
-Graph A C 𝓠𝓖 A C
-𝓠𝓖
-Correct alignment:
-Cannotfindamapping,sufferfrom 𝓓𝓖(A → B → C) ⇔𝓠𝓖(A→ C)
-Semantic-structural Misalignment
-Findthe correctmapping!
-✓:Match ✘:Mismatch :PathAggregation
-Figure 6.1: Path-level correspondence in the MGRAG motivating example. A grandfa-
-ther_ofrelationcorrespondstotwofather_ofedges. OriginalFigure1,p.2481[4].
-The second decision concerns what constitutes a match. A query and its supporting docu-
-ments need not use the same decomposition of a fact. The published motivating example de-
-scribesadatagraphcontainingtwofather_ofedgesandaquerycontainingonegrand-
-father_of edge. The requested relation is represented by a two-hop path in the data. Re-
-quiring the same edge topology would exclude this correspondence. Figure 6.1 reproduces the
-example. MGRAG evaluates semantic representations of paths so that a query relation can be
-supportedbyasequenceofevidencerelations.
-The third decision concerns the cost of processing retrieved evidence. Graph construction
-alreadysendsevidencetoalanguagemodeltoextractentitiesandrelations. Someofthatcontent
-appearsagainwhenthematchedgraphanditssourcechunksareusedforanswering. Reusingthe
-earlierkey-value(KV)statescanreducerepeatedcomputation. Theirsuitabilitydependsonthe
-new query and context, so MGRAG selectively recomputes token states. It combines attention
-scores with topological features of the facts associated with those tokens. Structure thus enters
-bothevidenceselectionandthesubsequentuseoftheselectedcontext.
-These decisions extend the thesis from connected textual evidence to multimodal evidence
-whosesemanticdecompositionisquery-dependent.
-6.2 Framework and Evidence Representations
-Figure 6.2 shows three stages. Coarse-grained ranking orders text chunks and images accord-
-ing to their relevance to the query. Fine-grained retrieval consumes this ranked list, extracts
-query-relatedfacts,and searchesthe growing graph fora semantic match. Graph-awareKV re-
-computation then determines which cached token states to update for answer generation. The
+6.6.2 Topological features of facts
+MGRAGusesdegree,betweenness,eigenvector,andclosenesscentralitytocharacterizeanode.
+Degree centrality measures its normalized number of adjacent connections. Betweenness char-
+acterizes its participation in paths connecting other nodes. Eigenvector centrality weights con-
+nectionsbythecentralityoftheirneighbors. Closenessusesdistancestoothergraphnodes. The
+publishedmethodaveragesthesefourquantities,
+𝑑𝑐(𝑢)+𝑏𝑐(𝑢)+𝑒𝑐(𝑢)+𝑐𝑐(𝑢)
+𝑓(𝑢) = . (6.11)
+4
+Foratokenassociatedwithatriple(𝑢,𝑟,𝑣),itsgraphfeatureisthemeanoftheendpointscores,
+𝑓(𝑢)+𝑓(𝑣)
+𝑞
+𝐺𝐹 = . (6.12)
+𝑡 2
+Thetoken-to-factassociation followsthe entityand relationtokenspansin theserialized repre-
+sentation. Tokensreferringtothesamefactthereforereceiveasharedstructuralcomponent.
+Thestructuralfeaturemeasuresanentity’spositioninthequery-specificgraph. Nodescon-
+nectingseveralextractedfactscanreceivedifferentscoresfromisolatedendpoints.
+The graphs contain fewer than twenty entities on average in the published evaluation. We
+computethefourcentralitymeasuresonthesequery-specificgraphs.
+6.6.3 Combined recomputation score
+Let 𝑎 denote attention between token 𝑡 and token 𝑗, and let |𝑞| and |𝑆 | denote the query and
+𝑡𝑗 𝑟
+serialized-graphlengths. Thescoreis
+|𝑞| |𝑆 |
+𝑟
+𝑞
+𝜙(𝑡) = 𝑎 + 𝑎 +𝐺𝐹 . (6.13)
+∑ 𝑡𝑗 ∑ 𝑡𝑘 𝑡
+𝑗=1 𝑘=1
+Thescoreaddsattentiontothequestion,attentiontotheserializedgraph,andthetoken’sgraph
+feature. Tokenswithhighercombinedscoresreceivepriorityforrecomputation.
+The publication compares the policy with vLLM prefix caching [47] and CacheBlend [22].
+Their retrieval pipelines and cache variants are identified separately in the evaluation. The in-
+verse ablations also evaluate graph-aware recomputation within an existing retrieval pipeline.
+These comparisons expose answer-quality and time changes under several compositions of re-
+trievalandcaching.
 77

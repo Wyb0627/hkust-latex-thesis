@@ -1,32 +1,29 @@
-tionsamongquerykeywords[2].
-Thethirdsettingconcernstextualquestionansweringandgeneration. Asystemcanretrieve
-individually relevant chunks without telling the generator how their facts connect. An answer
-requiring a summary may also need more information than an economical path between query
-anchors contains. AGRAG constructs a text evidence graph, scores nodes by query-dependent
-influence,assignssemanticcoststoedges,andselectsaconnectedsubgraph. Itshybridpassage
-retriever supplies additional contextual material [3]. The generator receives both the selected
-relationalstructureandtext.
-The fourth setting introduces multimodal evidence. Images and text can describe the same
-event with different levels of detail. A direct relation in a question may correspond to a path
-throughseveralentitiesintheevidencegraph. Aquery-independentgraphcanalsoomitdetails
-relevanttoaparticularquestion. MGRAGbuildsanevidencegraphincrementallyforthequery,
-usespath-based semantic matchingtoidentify corresponding evidence,and incorporates graph
-features when selecting cached states for recomputation [4]. Structure influences both retrieval
-andtheprocessingoftheretrievedcontext.
-Thecommonquestionishowexplicitrelationshipsshouldconstraintheevidenceusedfora
-task. KGLink selects descriptions for a supervised representation; GORAG selects labels from
-an evolving index; AGRAG selects connected facts and source context; and MGRAG matches
-query relations and allocates computation over the selected evidence. Across these studies, the
-thesisexamineswherestructureisobtained,whenitisadapted,andwhichdownstreamdecision
-itcontrols.
+to select a connected subgraph using query-dependent node influence and semantic edge costs.
+Hybridpassageretrievalsuppliescontextbeyondtheselectedgraph[3].
+Ourfourthproblemismultimodalquestionanswering. Arelationstateddirectlyinaquestion
+may correspond to several relations in the evidence, and a graph constructed before seeing the
+query can omit relevant visual details. We propose MGRAG to build query-specific evidence
+graphsandmatchqueryrelationstosemanticpaths. Graphfeaturesalsoguidetherecomputation
+ofcachedmodelstateswhentheretrievedcontentisusedforanswering[4].
+Theseproblemsleadtoacommonresearchquestion. Howcanexplicitrelationshipsimprove
+the selection and processing of evidence for language models? We investigate external knowl-
+edge selection, online index maintenance, connected textual retrieval, and semantic matching
+overmultimodalevidence.
 1.2 Research Scope and Structural Augmentation
 1.2.1 Evidence, structure, and model roles
-Inthisthesis,structuralaugmentationmeansusingexplicitrelationshipsamongevidenceitems
-inalanguage-modelpipeline. Theitemsincludeentities,types,keywords,labels,passages,and
-query components. The relationships include knowledge-graph edges, keyword–label associa-
-tions, passage-to-entity links, and paths that express a query requirement. The term describes
-wherestructureparticipatesinthepipeline;theconcreterepresentationisdefinedseparatelyfor
-eachstudy.
-There are three distinctions that organize the scope. First, a graph representation and a
-learned representation serve different purposes. A graph records named items and their con-
+Structuralaugmentationusesexplicitrelationshipsamongentities,types,keywords,labels,pas-
+sages, or query components. We study knowledge-graph edges, keyword–label associations,
+passagelinks,andpathsthatexpresstherelationshipsrequestedbyaquery.
+Graphs record entities and their connections, while embeddings provide similarity scores
+or contextual features. We combine them by serializing graph descriptions for a table encoder,
+weighting connections for label retrieval, scoring nodes and edges for subgraph selection, and
+comparingpathsemanticsformultimodalmatching.
+Externalevidencesuppliesinformation,whilesupervisiondetermineshowthatinformation
+isusedforprediction. KGLinklearnscolumnlabelsfromannotatedtablesandretrievesdescrip-
+tions from an external graph. GORAG initializes its index from labeled examples and updates
+it using subsequent predictions. AGRAG and MGRAG construct their evidence graphs from
+sourcedocuments.
+KGLink fine-tunes a pre-trained encoder for column annotation. GORAG, AGRAG, and
+MGRAGusegenerativemodelsforclassification,extraction,filtering,oranswergeneration. The
+thesisthuscoversbothsupervisedrepresentationlearningandretrieval-augmentedgeneration.
 2

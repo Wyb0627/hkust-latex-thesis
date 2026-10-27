@@ -1,30 +1,35 @@
-Table3.4: Reportedcomparisonbetweenlinkage-rankedrowselectionandselectioninoriginal
-tableorder.
-SemTab VizNet
-Selection Accuracy WeightedF1 Accuracy WeightedF1
-Top-𝑘rowfilter 87.12 85.78 96.28 96.07
-Originaltop-𝑘rows 85.93 84.39 96.14 95.97
-the desired annotation label. The contextual representation task uses the dataset label during
-training to learn how the retrieved descriptions and cell values jointly relate to that label. It
-thereforeaddressesacorrespondencebetweenevidenceandtaskvocabularythatcandidate-type
-retrievalaloneleavesunresolved.
-The Athlete example makes the same issue visible at a broader semantic level. Graph evi-
-dence can identify that the values denote athletes even when the dataset expects another level
-of description. KGLink preserves that evidence as language-model input and lets supervised
-annotationdeterminetheoutputcategory.
-3.6.6 Row Selection and Input Budgets
-Table3.4evaluatesrowordering. Thelinkage-rankedfiltergiveshigherreportedscoresthantak-
-ingtheoriginaltoprowsonbothdatasets. ThechangeislargeronSemTab. Sincethefilteralso
-determinesthecellusedforfeature-sequencegeneration,thiscomparisonconcernsthemethod’s
-complete linkage-based selection rule. It provides evidence that the ordering of available table
-evidencemattersunderthefixedinputconstraints.
-The parameter study considers 𝑘 = 10,25,50, and a condition labeled all. The source de-
-scribesallasretainingatmost64rowsunderitsencodingconfiguration. Thereporteddefaultis
-𝑘 = 25,selectedfromthisstudy. TheoriginalcurvescompareweightedF1andtimecostasthe
-retained row budget changes. Figure 3.6 shows the measured relation between input selection,
-weightedF1,andtimecost.
-The training-data study uses proportions 𝑝 = 0.2,0.4,0.6,0.8,1.0 while keeping the test set
-unchanged. It compares KGLink with the version without the representation-generation task.
-The experiment measures data eﬀiciency by varying available supervision against a fixed eval-
-uationset.
+Herecount(𝑣,𝑡)istheoccurrencecountof𝑣in𝑡,and|𝑡|istextlength. Theexpressioncombines
+frequency within the text with frequency across the observed corpus. Its corpus term changes
+when additional texts are observed. Terms with 𝐶𝑆(𝑣,𝑡) > 𝜏 are retained, with 𝜏 = 0.5 in the
+original study. The method uses the score both to select keywords and to calculate association
+costs.
+Short phrases preserve lexical combinations that unigram extraction would split. Only ex-
+tracted terms can become retrieval terminals, although the classifier still receives the full query
+text.
+4.2.2 Keyword–label edge costs
+For keyword 𝑣 and label 𝑦, let 𝒯𝑟,𝑣,𝑦 be the seen texts that contain 𝑣 and are associated with 𝑦.
+GORAGassignstheedgecost
+∑ (1−𝐶𝑆(𝑣,𝑡 ))
+𝑡 ∈𝒯𝑟,𝑣,𝑦 𝑗
+𝑤𝑟 = 𝑗 . (4.3)
+𝑣,𝑦 |𝒯𝑟,𝑣,𝑦|
+The complement converts a larger correlation score into a smaller contribution to connection
+cost. Averaging makes the edge depend on all contributing observations rather than on one
+occurrence. Offline observations use the supplied class of a support text; online observations
+useapredictedclasswhennewquerykeywordsareinserted.
+Thesamekeywordcanhavedifferentedgecostsfordifferentlabels. Theunit-weightablation
+replacesallcostswithonewhilepreservingadjacency,testingwhethertheseassociation-specific
+costshelpretrieval.
+Eachobservedtextcontributesacorrelationvaluetoitskeyword–labelpair. Averagingthese
+valuessummarizesrepeatedassociationswithoutconcatenatingeverysupporttextintotheclas-
+sificationprompt.
+4.2.3 Merging label rounds
+At each round, we merge the new graph with the accumulated index by taking the unions of
+their node and edge sets. Earlier labels and their associations remain available for subsequent
+retrieval.
+GORAG also introduces edges between newly introduced and earlier label nodes. These
+bridges support connections between parts of the graph indexed in different rounds. Let ℳ𝑟
+𝑦
+denote the keyword neighbors of label 𝑦. For a new label 𝑦 and an earlier label 𝑦 , GORAG
+𝑛 𝑜
 35

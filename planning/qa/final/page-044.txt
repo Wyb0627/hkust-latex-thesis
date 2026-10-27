@@ -1,50 +1,47 @@
-𝑌 and𝑌 . Themainpaperwritestheauxiliaryobjectiveas
-msk gt
-𝑉
-𝑗 𝑗
-ℒ (𝑌 ,𝑌 ) = − 𝑦 log𝑦 , (3.6)
-DMLM msk gt ∑ msk gt
-𝑗=1
-with vocabulary size 𝑉. The objective uses the contextualized representations produced from
-thetwotableinputs.
-Trainingusesthetrue-typeandmaskedinputs,whileevaluationusesthemaskedinput. The
-auxiliary objective therefore learns from labels available in training and generates a type repre-
-sentation from the ordinary table and retrieved evidence at prediction time. This pathway also
-servesnumericcolumnsandcolumnswithoutaretrievedKGcandidate.
-The classifier and the auxiliary task also use different output spaces. Classification predicts
-one of the dataset’s column labels. The auxiliary representation is projected into the language
-model’s vocabulary space. Their relationship is learned through the shared encoder and joint
-training. Thefinaldecisionusesthedataset-specificclassificationhead.
-3.4.3 Classification and Adaptive Task Weighting
-Let 𝑧 be the classification logits obtained from the combined column and feature representa-
-𝑐
-tions. Foratargetlabel𝑙 ,theclassificationlossiscross-entropy,
-𝑐
-exp 𝑧
-( 𝑐,𝑙 )
-𝑐
-ℒ (𝑧 ,𝑙 ) = −log . (3.7)
-CE 𝑐 𝑐
-∑
-𝑗∈𝐷
-exp(𝑧 𝑐,𝑗)
-KGLink jointly optimizes this loss and the auxiliary representation objective using uncertainty
-weighting[29]. Withtrainabletaskparameters𝜎 and𝜎 ,thecombinedobjectiveis
-0 1
-ℒ ℒ
-DMLM CE
-ℒ
-total
-=
-2𝜎2
-+
-2𝜎2
-+log(𝜎
-0
-𝜎 1). (3.8)
-0 1
-Thetemperatureusedintherepresentationobjectiveissettotwointhereportedexperiments.
-The trainable weights allow the two objectives to contribute at different scales during opti-
-mization. They weight the training objectives, while row linking scores govern input selection.
-Thesemechanismsconnectgraphevidencetopredictionatdifferentstagesofthepipeline.
+95.0
+92.5
+90.0
+87.5
+85.0
+82.5
+80.0
+10 25 50 all
+k
+1F
+20.0
+17.5
+15.0
+12.5
+10.0
+7.5
+5.0
+Semtab
+Viznet 2.5
+10 25 50 all
+k
+(a)WeightedF1
+sruoH
+Semtab
+Viznet
+(b)Timecost
+Figure 3.6: Reported effect of the retained row budget 𝑘. The original two subfigures compare
+annotationqualityandtimecostonSemTabandVizNet. ReproducedfromKGLink[1],Fig.10.
+scribesallasretainingatmost64rowsunderitsencodingconfiguration. Thereporteddefaultis
+𝑘 = 25,selectedfromthisstudy. TheoriginalcurvescompareweightedF1andtimecostasthe
+retained row budget changes. Figure 3.6 shows the measured relation between input selection,
+weightedF1,andtimecost.
+The training-data study uses proportions 𝑝 = 0.2,0.4,0.6,0.8,1.0 while keeping the test set
+unchanged. It compares KGLink with the version without the representation-generation task.
+The experiment measures data eﬀiciency by varying available supervision against a fixed eval-
+uationset.
+3.6.7 Runtime in the Evaluated Configuration
+Figure3.7reproducesthe original VizNetruntime chart. KGLink’sreported training and infer-
+encetimesare16.50and1.53hours. ThecorrespondingRECAvaluesare80.00and9.00hours.
+Thefigurealsoshowsmethodswithshortermeasuredtimes,includingDoduoat1.96hoursfor
+training and 0.07 hours for inference. These measurements locate KGLink’s annotation results
+within the costs of the evaluated implementations. Its use of external retrieval and a second
+trainingobjectivecarriescomputationbeyondthetableencoderalone.
+The chart labels MTab’s inference entry as N/A. Training and inference times describe dif-
+ferent preparation and prediction procedures. The comparison uses VizNet and the original
+experimentalhardware.
 30

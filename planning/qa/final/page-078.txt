@@ -1,32 +1,30 @@
-5.7 Experimental Evaluation
-5.7.1 Tasks, corpora, and model settings
-The main experiment uses Novel and Medical from GraphRAG-bench [45], together with
-WOS [40] and IFS-Rel [36] for classification. Novel contains 5,140 chunks, 63,887 graph
-entities, and 163,169 graph relations. Medical contains 1,030 chunks, 12,426 entities, and
-52,054 relations. The reported classification indexes contain 24 chunks for WOS and 11 for
-IFS-Rel,with9,396and2,560evaluatedtextsand133and64labels,respectively.
-The Novel evaluation contains 67 creative-generation queries, 362 contextual-
-summarization queries, 610 complex-reasoning queries, and 971 fact-retrieval queries.
-ThecorrespondingMedicalcountsare166,289,509,and1,098.
-The main backbone is Qwen2.5-14B-Instruct [46], deployed through vLLM [47]. The ma-
-chine has an Intel Xeon Gold 5220R CPU and one NVIDIA A100 GPU with 80 GB memory.
-Contriever[48]suppliesdenserepresentationsforAGRAGandHippoRAG2;theotherbaselines
-usebge-large-en-v1.5accordingtothereportedconfiguration. Qwen3-Reranker-0.6Bperforms
-raw-triplet filtering. The retrieval top-𝑘 setting is 5; AGRAG’s raw mapped triple count and
-hybridchunkcountarealso5.
-GraphRAG uses local search. LightRAG uses hybrid search for the QA tasks, with its
-classification-specific configuration retained where applicable. The comparison includes
-NaiveRAG, LongLLMLingua [41], RAPTOR [49], SiReRAG [50], G-Retriever [51],
-MIXRAG [52], GraphRAG [17], LightRAG [19], HippoRAG2 [42], and Fast-GraphRAG [53].
-These methods represent passage retrieval, compression, hierarchical organization, connected
-subgraph selection, neighborhood retrieval, and graph propagation. The source experiments
-comparetheircompleteconfigurationsunderthestatedmodelsettings.
-5.7.2 Metric interpretation
-Classificationaccuracyistheproportionofpredictedlabelsmatchinggoldlabels. Classification
-recallismacrorecall. Fortheothertasks,thereportedaccuracyisamodel-assessedscorewith
-values0,0.5,or1forinaccurate,partiallyaccurate,oraccurateanswers. Thesequantitiesappear
-underthesameACCheadinginthepaperbutevaluatedifferentoutputs.
-Complex reasoning and fact retrieval additionally report the source’s ROUGE-L mea-
-sure [54]. Contextual summarization and creative generation report coverage, the fraction
-of required reference evidence represented in the answer. Creative generation also reports
+Table 5.13: Creative generation in the low-resource setting. Qwen3-4B-Instruct-2507 on two
+2080TiGPUs;valuesandemphasispreserved.
+Method NovelFS NovelACC NovelCOV MedicalFS MedicalACC MedicalCOV
+SiReRAG-L 0.324 0.412 0.299 0.421 0.758 0.475
+HippoRAG2-L 0.433 0.481 0.335 0.425 0.755 0.433
+AGRAG-L 0.441 0.519 0.354 0.436 0.777 0.490
+Table5.14: Contextualsummarizationinthelow-resourcesetting. Qwen3-4B-Instruct-2507on
+two2080TiGPUs;valuesandemphasispreserved.
+Method Novel COV Novel ACC Medical COV Medical ACC
+SiReRAG-L 0.647 0.673 0.536 0.738
+HippoRAG2-L 0.696 0.657 0.522 0.731
+AGRAG-L 0.745 0.706 0.545 0.751
+Table 5.15: Complex reasoning in the low-resource setting. Qwen3-4B-Instruct-2507 on two
+2080TiGPUs;valuesandemphasispreserved.
+Method Novel ROG Novel ACC Medical ROG Medical ACC
+SiReRAG-L 0.260 0.426 0.308 0.698
+HippoRAG2-L 0.280 0.507 0.298 0.681
+AGRAG-L 0.293 0.552 0.312 0.739
+Table 5.16: Fact retrieval in the low-resource setting. Qwen3-4B-Instruct-2507 on two 2080 Ti
+GPUs;valuesandemphasispreserved.
+Method Novel ROG Novel ACC Medical ROG Medical ACC
+SiReRAG-L 0.271 0.416 0.343 0.661
+HippoRAG2-L 0.288 0.513 0.338 0.654
+AGRAG-L 0.297 0.560 0.351 0.701
+Table5.17: Novellow-resourceeﬀiciency. Qwen3-4B-Instruct-2507ontwo2080TiGPUs.
+Method Index min Query min Input tokens Output tokens
+SiReRAG-L 52.0 183.5 7,898 1,003
+HippoRAG2-L 55.7 131.2 7,964 1,354
+AGRAG-L 44.7 132.1 6,625 1,172
 64

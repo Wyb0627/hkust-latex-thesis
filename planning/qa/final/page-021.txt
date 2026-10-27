@@ -1,35 +1,25 @@
-Table 1.1: Research questions, structural operations, and evidence locations. Each row corre-
-spondstoaseparatestudy.
-RQ Structuraloperation Methodlocation Publishedevaluation
-RQ1 KG-derivedcandidate Chapter3,graphprocessing SemTabandVizNet
-typesandfeatures andmodelintegration annotation,ablations,
-eﬀiciency
-RQ2 Weightedonline Chapter4,indexingand CAD,WOS,IFS-Rel;
-keyword–labelretrieval connectedretrieval rounds,shots,andcosts
-RQ3 Influenceandcost-guided Sections5.2–5.5 Section5.7;QAand
-evidencesubgraph classification
-RQ4 Query-awareconstruction, Chapter6,matchingand MMQAandsixMRAMG
-semanticpaths,andKV recomputation subsets,matchingandcache
-scores studies
-The published measurements provide quantitative answers to these research questions. On
-VizNet,KGLinkobtainsaweightedF1of96.07comparedwith95.06forDoduo,usingtheper-
-centagescaleoftheannotationexperiment. InGORAG’sfourthWOSround,accuracywithten
-support examples per label is 0.4929 using Qwen2.5-7B; the one-shot result in the same round
-is 0.4420. AGRAG obtains Medical contextual-summarization coverage of 0.690 and accuracy
-of 0.604 with Qwen2.5-14B-Instruct. Its hybrid-retrieval ablation reduces coverage in that task
-to 0.420, linking the answer’s information coverage to the passage channel. MGRAG reaches
-MMQAaccuracyof0.7442withQwen2.5-VL-7B-Instruct. Theassociatedservingcomparison
-reports4.3hoursforMGRAGand8.8hoursforvLLMwithHippoRAG2.
-Theaccompanyinghyper-relationalstudycontributesaseparateanalysisofstructuralinfor-
-mation preservation and the FormerGNN design. It provides a representation-level perspective
-onthethesistheme.
-TheauthorledtheresearchpresentedinthisthesisunderthesupervisionofProf. LeiChen.
-TheworkbenefitedfromdiscussionsandcollaborationwithDr. HaoyangLi,Dr. HaoXin,and
-Dr. ShiminDi. Eachresearchchapteridentifiesitscoauthoredpublicationsource.
+Table 1.2: Publications incorporated into the thesis. The hyper-relational study provides a sep-
+aratebackgroundsection;thefourotherstudiesformthecoreresearchchapters.
+Publication Venue Thesislocation
+KGLink[1] ICDE2024 Chapter3
+Understanding the Embedding Models on CIKM2025 Chapter 2, structural infor-
+Hyper-relationalKnowledgeGraph[5] mationsection
+GORAG[2] WWW2026 Chapter4
+AGRAG[3] ICDE2026 Chapter5
+MGRAG[4] PVLDB2026 Chapter6
 1.5 Publications and Thesis Organization
 The thesis draws on five publications. KGLink was published at ICDE 2024. Understanding
 the Embedding Models on Hyper-relational Knowledge Graph was published at CIKM 2025.
 GORAG was published at WWW 2026, AGRAG at ICDE 2026, and MGRAG in Volume 19
 of the Proceedings of the VLDB Endowment. Table 1.2 records their roles in the thesis. Each
 researchchapterbeginswithitsownpublicationstatement.
+Chapter2establishesthesharedconceptsandcomparesrelatedworkaccordingtoevidence
+representation,retrieval,updates,matching,andcontextserving. Itincludesthehyper-relational
+study as an information-preservation perspective. Chapters 3–6 then develop the four research
+questions in sequence. Each chapter gives its problem, method, evaluation protocol, published
+evidence,anddiscussion.
+Chapter 7 compares the points at which structure enters these pipelines. It examines static
+andquery-dependentevidence,therelationshipbetweenqualityandcomputationalcost,andthe
+conditions affecting interpretation. Chapter 8 returns to the research questions and identifies
+directionsforfuturework.
 7

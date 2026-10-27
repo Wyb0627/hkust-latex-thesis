@@ -1,69 +1,50 @@
-summarizationaccuracy0.706. ItsNovelindex/querytotalsare44.7and132.1minutes. Medical
-totalsare14.4and167.3minutes. HippoRAG2-Lhasshorterquerytotalsinbothcorpora,while
-AGRAG-Lhasshorterindexingtotals.
-The parameter study varies the maximum n-gram length over {1,3,5,7} and the extraction
-threshold over {0.1,0.3,0.5,0.7}. The original heatmaps are reproduced in Figure 5.3. They
-show accuracy across the tested combinations for Novel and Medical. The main experiment
-uses𝑏 = 3and𝜏 = 0.5.
-0.1 0.3 0.5 0.7
-Threshold
-b
-marg-N
-xaM
-7
-5
-3
-1
-Creative Gen. Contextual Sum. Complex Rea. Fact Retrieval
-0.42
-0.34
-0.1 0.3 0.5 0.7 0.1 0.3 0.5 0.7 0.1 0.3 0.5 0.7
-Threshold Threshold Threshold
-CCA
-0.68
-0.64
-CCA
-0.49
-0.47
-CCA
-0.51
-0.48
-CCA
-0.1 0.3 0.5 0.7
-Threshold
-b
-marg-N
-xaM
-7
-5
-3
-1
-Creative Gen. Contextual Sum. Complex Rea. Fact Retrieval
-0.63
-0.58
-0.1 0.3 0.5 0.7 0.1 0.3 0.5 0.7 0.1 0.3 0.5 0.7
-Threshold Threshold Threshold
-CCA
-0.61
-0.58
-CCA
-0.67
-0.64
-CCA
-0.63
-0.61
-CCA
-Figure 5.3: AGRAG parameter sensitivity on Novel (top) and Medical (bottom). The original
-panels vary the extraction threshold and maximum n-gram length and display task accuracy.
-ReproducedfromFigure3ofthesourcepaper[3].
-5.8 Discussion and Chapter Summary
-AGRAGplacesstructureattwopointsintheevidencepipeline. Graphconstructiondetermines
-which entities, relations, and passage links are available. Query-time selection determines how
-thoseitemsareconnectedinthecontextsuppliedtothegenerator. Thehybridretrieverpreserves
-aroutetopassageinformationoutsidetheselectedgraph. Themethodconsequentlytreatsgraph
-evidenceandtextualcontextascomplementaryrepresentationsoftheindexedcorpus.
-Theexperimentaldistinctionbetweenfaithfulnessandcoverageisespeciallyrelevantto the
-thesis. Removinghybridcontextcanretainorimproveonegroundingmeasurewhiledecreasing
-theamountofrequiredevidenceexpressedinananswer. Replacingtheexpandedsubgraphwith
-atreeaffectstheevaluatedtasksdifferently.
+Algorithm1Path-basedsemanticmatchinginMGRAG
+Require: Querygraph𝒬𝒢 ,queryanchor𝛾,evidencegraph𝒦𝒢 ,threshold 𝜃
+𝑞 𝑞
+1: Initializevalidresultsℛ ← ∅
+2: foreach𝑣 ∈ 𝒱 withcos 𝐡 ,𝐡 > 𝜃 do
+𝑎 𝑞 ( 𝑣 𝛾)
+𝑎
+3: Enumeratecandidatemappingsconsistentwith𝐼(𝛾) = 𝑣
+𝑎
+4: foreachcandidatemapping𝐼 do
+5: Initializethesubgraphwithmappedqueryentities;set𝑠 ← 0
+6: foreachqueryedge(𝑢,𝑟,̂ 𝑣)do
+7: Searchgreedilyforasemanticallyvalidpathfrom𝐼(𝑢)to𝐼(𝑣)
+8: if thepathsearchfailsthen
+9: Reject𝐼 andstopvalidatingthismapping
+10: else
+11: Addthepath’snodesandedgestothecandidatesubgraph
+12: Additscosinesimilarityto𝑠
+13: endif
+14: endfor
+15: if everyqueryedgehasavalidpaththen
+16:
+Addthesubgraphandscore𝑠/|ℰ̂|toℛ
+𝑞
+17: endif
+18: endfor
+19: endfor
+20: Returnthehighest-scoringresult,or∅ifℛ isempty
+pathsearch. Acandidateentitycorrespondencecanconsequentlyberejectedbecauseoneofits
+requiredrelationslacksanacceptableevidencepath.
+Foreachacceptedmapping,thealgorithmtakestheunionofthepathsthatsupportitsquery
+edges. It averages the edge-wise semantic similarities to obtain a score 𝑠. The highest-scoring
+accepted subgraph is returned. Dividing by the number of query edges does not change the
+rankingofcandidatemappingsforthesamequery. Itprovidesanaveragesemanticscorewitha
+commonrangeacrossquerieswhosegraphsizesdiffer.
+6.5.3 Greedy semantic path growth
+Thepathsearchbeginsatthemappedsourceentityandmaintainsitscurrentendpoint𝑥. Foreach
+neighboring entity 𝑦 and connecting edge (𝑥,𝑟,𝑦), MGRAG evaluates the candidate extension
+using
+cos(𝐡
+𝑃
+⊕𝐡
+𝑒(𝑥,𝑟,𝑦)
+⊕𝐡
+𝑦
+,𝐡 𝑒(̂𝑢,𝑟,̂𝑣)). (6.10)
+Amongextensionsexceeding𝜃,itselectsthehighest-scoringone,appendsthatedgetothepath,
+andupdatestheendpointto𝑦. Thisrepeatsuntilthepathreachesthemappedtarget. Thesearch
+fails when no qualifying extension is available. The experiments also impose a maximum path
 74

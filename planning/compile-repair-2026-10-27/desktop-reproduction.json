@@ -1,0 +1,129 @@
+{
+  "attemptedBundledTectonic": true,
+  "attempts": [
+    {
+      "command": [
+        "/Library/TeX/texbin/latexmk",
+        "-norc",
+        "-xelatex",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-synctex=1",
+        "-outdir=/private/tmp/thesis-desktop-repro",
+        "-no-shell-escape",
+        "-recorder",
+        "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/main.tex"
+      ],
+      "compiler": "texlive",
+      "exitCode": 12,
+      "log": "main-summary.tex)\n(./chapter/tables/agrag-main-complex.tex) (./chapter/tables/agrag-main-fact.tex\n) (./chapter/tables/agrag-main-class.tex)\n\nLaTeX Warning: Reference `tab:agrag:main-creative' on page 55 undefined on inpu\nt line 245.\n\n\nLaTeX Warning: Reference `tab:agrag:main-class' on page 55 undefined on input l\nine 245.\n\n[55] [56] [57] (./chapter/tables/agrag-efficiency.tex [58])\n\nLaTeX Warning: Reference `tab:agrag:efficiency' on page 59 undefined on input l\nine 257.\n\n(./chapter/tables/agrag-ablation.tex) [59] [60] [61]\nUnderfull \\hbox (badness 1424) in paragraph at lines 273--274\n[]\\TU/texgyretermes(0)/m/n/12 The variant without MCMI expansion uses a Steiner\n-tree representation. Its Novel\n(./chapter/tables/agrag-low-resource.tex)\n(./chapter/tables/agrag-low-resource-efficiency.tex) [62] [63]\n\nLaTeX Warning: Reference `fig:agrag:sensitivity' on page 64 undefined on input \nline 286.\n\n[64]\n\nLaTeX Warning: Reference `ch:mgrag' on page 65 undefined on input line 307.\n\n) (./chapter/ch06-mgrag.tex [65]\nChapter 6.\n\nLaTeX Warning: Reference `fig:mgrag:motivation' on page 66 undefined on input l\nine 15.\n\n[66]\n\nLaTeX Warning: Reference `fig:mgrag:pipeline' on page 67 undefined on input lin\ne 29.\n\n[67] [68]\n\nLaTeX Warning: Reference `eq:mgrag:query-embedding' on page 69 undefined on inp\nut line 59.\n\n\nLaTeX Warning: Reference `eq:mgrag:distance' on page 69 undefined on input line\n 59.\n\n\nLaTeX Warning: Reference `sec:mgrag:ablations' on page 69 undefined on input li\nne 63.\n\n\nLaTeX Warning: Reference `fig:mgrag:query-graph' on page 69 undefined on input \nline 72.\n\n[69] [70] [71]\n\nLaTeX Warning: Reference `eq:mgrag:matching-objective' on page 72 undefined on \ninput line 149.\n\n\nLaTeX Warning: Reference `alg:mgrag:matching' on page 72 undefined on input lin\ne 157.\n\n[72] [73]\n\nLaTeX Warning: Reference `eq:mgrag:matching-constraints' on page 74 undefined o\nn input line 209.\n\n\nLaTeX Warning: Reference `sec:mgrag:results' on page 74 undefined on input line\n 211.\n\n[74]\n\nLaTeX Warning: Reference `fig:mgrag:cache' on page 75 undefined on input line 2\n28.\n\n[75] [76]\n\nLaTeX Warning: Reference `sec:mgrag:cost-results' on page 77 undefined on input\n line 280.\n\n\nLaTeX Warning: Reference `tab:mgrag:datasets' on page 77 undefined on input lin\ne 285.\n\n(./chapter/tables/mgrag-datasets.tex) [77]\n\nLaTeX Warning: Reference `tab:mgrag:main' on page 78 undefined on input line 30\n6.\n\n(./chapter/tables/mgrag-main.tex [78]\n\nPackage longtable Warning: Column widths have changed\n(longtable)                in table 6.2 on input line 41.\n\n) [79]\n\nLaTeX Warning: Reference `tab:mgrag:matching' on page 80 undefined on input lin\ne 316.\n\n(./chapter/tables/mgrag-matching.tex\n\nPackage longtable Warning: Column widths have changed\n(longtable)                in table 6.3 on input line 104.\n\n[80] [81] [82])\n\nLaTeX Warning: Reference `tab:mgrag:hops' on page 83 undefined on input line 32\n6.\n\n(./chapter/tables/mgrag-hops.tex\n\nPackage longtable Warning: Column widths have changed\n(longtable)                in table 6.4 on input line 25.\n\n[83])\n\nLaTeX Warning: Reference `tab:mgrag:cache' on page 84 undefined on input line 3\n35.\n\n(./chapter/tables/mgrag-cache.tex\nUnderfull \\hbox (badness 1831) in paragraph at lines 4--4\n [][]\\TU/texgyretermes(0)/m/n/12 Table 6.5: Cache-system comparison on MMQA, re\nproduced from published Table 6, \n\nPackage longtable Warning: Column widths have changed\n(longtable)                in table 6.5 on input line 20.\n\n) [84]\n\nLaTeX Warning: Reference `sec:mgrag:ablations' on page 85 undefined on input li\nne 343.\n\n\nLaTeX Warning: Reference `tab:mgrag:breakdown' on page 85 undefined on input li\nne 345.\n\n(./chapter/tables/mgrag-breakdown.tex\n\nPackage longtable Warning: Column widths have changed\n(longtable)                in table 6.6 on input line 20.\n\n)\n\nLaTeX Warning: Reference `tab:mgrag:ablation' on page 85 undefined on input lin\ne 358.\n\n[85] (./chapter/tables/mgrag-ablation.tex\n\nPackage longtable Warning: Column widths have changed\n(longtable)                in table 6.7 on input line 17.\n\n)\n\nLaTeX Warning: Reference `tab:mgrag:inverse' on page 86 undefined on input line\n 366.\n\n(./chapter/tables/mgrag-inverse.tex)\n\nLaTeX Warning: Reference `fig:mgrag:sensitivity' on page 86 undefined on input \nline 374.\n\n[86]\nUnderfull \\hbox (badness 1571) in paragraph at lines 388--388\n [][]\\TU/texgyretermes(0)/m/n/12 Figure 6.5: MGRAG matching-parameter sensitivi\nty. Original subfigures of Figure 5, \n[87]) (./chapter/ch07-discussion.tex [88]\nChapter 7.\n[89]\n\nLaTeX Warning: Reference `tab:discussion:controls' on page 90 undefined on inpu\nt line 52.\n\n[90]\n\nLaTeX Warning: Reference `ch:background' on page 91 undefined on input line 82.\n\n\n[91]\n\nLaTeX Warning: Reference `ch:conclusion' on page 92 undefined on input line 94.\n\n\n[92]) (./chapter/ch08-conclusion.tex\nUnderfull \\hbox (badness 3128) in paragraph at lines 104--1\n[]\\TU/texgyretermes(0)/m/n/12 AGRAG\u2019s 2-approximation statement applies to its \ninitial terminal-connecting tree.\n[93]\nChapter 8.\n[94]) [95] [96] [97] [98]\nUnderfull \\hbox (badness 1117) in paragraph at lines 36--36\n[][]\\TU/texgyretermes(0)/m/n/10.95 S. Fankhauser \\TU/texgyretermes(0)/m/it/10.9\n5 et al.\\TU/texgyretermes(0)/m/n/10.95 , \u201cSpeeding up graph edit distance compu\ntation through fast bipartite\n[99]\n\nPackage longtable Warning: Table widths have changed. Rerun LaTeX.\n\n[100] \nenddocument/afterlastpage: lastpage setting LastPage.\n(/private/tmp/thesis-desktop-repro/main.aux)\n\nLaTeX Warning: There were undefined references.\n\n\nLaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.\n\n\nPackage lastpage Warning: Rerun to get the references right on input line 37.\n\n\nPackage biblatex Warning: Please (re)run Biber on the file:\n(biblatex)                main\n(biblatex)                and rerun LaTeX afterwards.\n\n )\n(see the transcript file for additional information)\nOutput written on /private/tmp/thesis-desktop-repro/main.xdv (114 pages, 235589\n6 bytes).\nSyncTeX written on /private/tmp/thesis-desktop-repro/main.synctex.gz.\nTranscript written on /private/tmp/thesis-desktop-repro/main.log.\nLatexmk: Getting log file '/private/tmp/thesis-desktop-repro/main.log'\nLatexmk: Examining '/private/tmp/thesis-desktop-repro/main.fls'\nLatexmk: Examining '/private/tmp/thesis-desktop-repro/main.log'\nLatexmk: References changed.\nLatexmk: Found input bbl file 'main.bbl'\nLatexmk: References changed.\nLatexmk: References changed.\nLatexmk: Log file says output to '/private/tmp/thesis-desktop-repro/main.xdv'\nLatexmk: No .bib files listed in .aux file 'main.aux'\nLatexmk: applying rule 'bibtex main'...\nRule 'bibtex main':  Reasons for rerun\nCategory 'other':\n  Rerun of 'bibtex main' forced or previously required\n\n------------\nRun number 1 of rule 'bibtex main'\n------------\n------------\nRunning 'bibtex  \"main.aux\"'\n------------\nThis is BibTeX, Version 0.99d (TeX Live 2023)\nThe top-level auxiliary file: main.aux\nI found no \\citation commands---while reading file main.aux\nI found no \\bibdata command---while reading file main.aux\nI found no \\bibstyle command---while reading file main.aux\n(There were 3 error messages)\nLatexmk: ====List of undefined refs and citations:\n  Reference `ch:kglink' on page 3 undefined on input line 49\n  Reference `ch:gorag' on page 4 undefined on input line 56\n  Reference `ch:agrag' on page 4 undefined on input line 63\n  Reference `ch:mgrag' on page 5 undefined on input line 70\n  Reference `tab:introduction:questions' on page 5 undefined on input line 74\n  Reference `ch:kglink' on page 6 undefined on input line 91\n  Reference `ch:gorag' on page 6 undefined on input line 92\n And 72 more --- see log file.\nLatexmk: If appropriate, the -f option can be used to get latexmk\n  to try to force complete processing.\nLatexmk: Summary of warnings from last run of *latex:\n  Latex failed to resolve 79 reference(s)\nLatexmk: Errors, so I did not complete making targets\nCollected error summary (may duplicate other messages):\n  bibtex main: Bibtex errors: See file 'main.blg'\n\n",
+      "pdfExists": false,
+      "pdfPath": "/private/tmp/thesis-desktop-repro/main.pdf",
+      "processStarted": true
+    },
+    {
+      "command": [
+        "/Applications/ChatGPT.app/Contents/Resources/tectonic/tectonic",
+        "-X",
+        "compile",
+        "--outdir",
+        "/private/tmp/thesis-desktop-repro",
+        "--outfmt",
+        "pdf",
+        "--print",
+        "--untrusted",
+        "--synctex",
+        "--makefile-rules",
+        "/private/tmp/thesis-desktop-repro/inputs.d",
+        "--",
+        "main.tex"
+      ],
+      "compiler": "tectonic",
+      "exitCode": 101,
+      "log": "note: \"version 2\" Tectonic command-line interface activated\n\nthread 'main' (4166055) panicked at src/config.rs:154:18:\ncalled `Result::unwrap()` on an `Err` value: failed to create directory `/Users/ybwang/Library/Caches/TectonicProject.Tectonic/bundles/hashes` or one of its parents\n\nCaused by:\n    Operation not permitted (os error 1)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n",
+      "pdfExists": false,
+      "pdfPath": "/private/tmp/thesis-desktop-repro/main.pdf",
+      "processStarted": true
+    }
+  ],
+  "command": null,
+  "compiler": null,
+  "engine": "xelatex",
+  "exitCode": 1,
+  "log": "[texlive] failed (exit 12)\n[tectonic] failed (exit 101)\nter/tables/agrag-ablation.tex) [59] [60] [61]\nUnderfull \\hbox (badness 1424) in paragraph at lines 273--274\n[]\\TU/texgyretermes(0)/m/n/12 The variant without MCMI expansion uses a Steiner\n-tree representation. Its Novel\n(./chapter/tables/agrag-low-resource.tex)\n(./chapter/tables/agrag-low-resource-efficiency.tex) [62] [63]\n\nLaTeX Warning: Reference `fig:agrag:sensitivity' on page 64 undefined on input \nline 286.\n\n[64]\n\nLaTeX Warning: Reference `ch:mgrag' on page 65 undefined on input line 307.\n\n) (./chapter/ch06-mgrag.tex [65]\nChapter 6.\n\nLaTeX Warning: Reference `fig:mgrag:motivation' on page 66 undefined on input l\nine 15.\n\n[66]\n\nLaTeX Warning: Reference `fig:mgrag:pipeline' on page 67 undefined on input lin\ne 29.\n\n[67] [68]\n\nLaTeX Warning: Reference `eq:mgrag:query-embedding' on page 69 undefined on inp\nut line 59.\n\n\nLaTeX Warning: Reference `eq:mgrag:distance' on page 69 undefined on input line\n 59.\n\n\nLaTeX Warning: Reference `sec:mgrag:ablations' on page 69 undefined on input li\nne 63.\n\n\nLaTeX Warning: Reference `fig:mgrag:query-graph' on page 69 undefined on input \nline 72.\n\n[69] [70] [71]\n\nLaTeX Warning: Reference `eq:mgrag:matching-objective' on page 72 undefined on \ninput line 149.\n\n\nLaTeX Warning: Reference `alg:mgrag:matching' on page 72 undefined on input lin\ne 157.\n\n[72] [73]\n\nLaTeX Warning: Reference `eq:mgrag:matching-constraints' on page 74 undefined o\nn input line 209.\n\n\nLaTeX Warning: Reference `sec:mgrag:results' on page 74 undefined on input line\n 211.\n\n[74]\n\nLaTeX Warning: Reference `fig:mgrag:cache' on page 75 undefined on input line 2\n28.\n\n[75] [76]\n\nLaTeX Warning: Reference `sec:mgrag:cost-results' on page 77 undefined on input\n line 280.\n\n\nLaTeX Warning: Reference `tab:mgrag:datasets' on page 77 undefined on input lin\ne 285.\n\n(./chapter/tables/mgrag-datasets.tex) [77]\n\nLaTeX Warning: Reference `tab:mgrag:main' on page 78 undefined on input line 30\n6.\n\n(./chapter/tables/mgrag-main.tex [78]\n\nPackage longtable Warning: Column widths have changed\n(longtable)                in table 6.2 on input line 41.\n\n) [79]\n\nLaTeX Warning: Reference `tab:mgrag:matching' on page 80 undefined on input lin\ne 316.\n\n(./chapter/tables/mgrag-matching.tex\n\nPackage longtable Warning: Column widths have changed\n(longtable)                in table 6.3 on input line 104.\n\n[80] [81] [82])\n\nLaTeX Warning: Reference `tab:mgrag:hops' on page 83 undefined on input line 32\n6.\n\n(./chapter/tables/mgrag-hops.tex\n\nPackage longtable Warning: Column widths have changed\n(longtable)                in table 6.4 on input line 25.\n\n[83])\n\nLaTeX Warning: Reference `tab:mgrag:cache' on page 84 undefined on input line 3\n35.\n\n(./chapter/tables/mgrag-cache.tex\nUnderfull \\hbox (badness 1831) in paragraph at lines 4--4\n [][]\\TU/texgyretermes(0)/m/n/12 Table 6.5: Cache-system comparison on MMQA, re\nproduced from published Table 6, \n\nPackage longtable Warning: Column widths have changed\n(longtable)                in table 6.5 on input line 20.\n\n) [84]\n\nLaTeX Warning: Reference `sec:mgrag:ablations' on page 85 undefined on input li\nne 343.\n\n\nLaTeX Warning: Reference `tab:mgrag:breakdown' on page 85 undefined on input li\nne 345.\n\n(./chapter/tables/mgrag-breakdown.tex\n\nPackage longtable Warning: Column widths have changed\n(longtable)                in table 6.6 on input line 20.\n\n)\n\nLaTeX Warning: Reference `tab:mgrag:ablation' on page 85 undefined on input lin\ne 358.\n\n[85] (./chapter/tables/mgrag-ablation.tex\n\nPackage longtable Warning: Column widths have changed\n(longtable)                in table 6.7 on input line 17.\n\n)\n\nLaTeX Warning: Reference `tab:mgrag:inverse' on page 86 undefined on input line\n 366.\n\n(./chapter/tables/mgrag-inverse.tex)\n\nLaTeX Warning: Reference `fig:mgrag:sensitivity' on page 86 undefined on input \nline 374.\n\n[86]\nUnderfull \\hbox (badness 1571) in paragraph at lines 388--388\n [][]\\TU/texgyretermes(0)/m/n/12 Figure 6.5: MGRAG matching-parameter sensitivi\nty. Original subfigures of Figure 5, \n[87]) (./chapter/ch07-discussion.tex [88]\nChapter 7.\n[89]\n\nLaTeX Warning: Reference `tab:discussion:controls' on page 90 undefined on inpu\nt line 52.\n\n[90]\n\nLaTeX Warning: Reference `ch:background' on page 91 undefined on input line 82.\n\n\n[91]\n\nLaTeX Warning: Reference `ch:conclusion' on page 92 undefined on input line 94.\n\n\n[92]) (./chapter/ch08-conclusion.tex\nUnderfull \\hbox (badness 3128) in paragraph at lines 104--1\n[]\\TU/texgyretermes(0)/m/n/12 AGRAG\u2019s 2-approximation statement applies to its \ninitial terminal-connecting tree.\n[93]\nChapter 8.\n[94]) [95] [96] [97] [98]\nUnderfull \\hbox (badness 1117) in paragraph at lines 36--36\n[][]\\TU/texgyretermes(0)/m/n/10.95 S. Fankhauser \\TU/texgyretermes(0)/m/it/10.9\n5 et al.\\TU/texgyretermes(0)/m/n/10.95 , \u201cSpeeding up graph edit distance compu\ntation through fast bipartite\n[99]\n\nPackage longtable Warning: Table widths have changed. Rerun LaTeX.\n\n[100] \nenddocument/afterlastpage: lastpage setting LastPage.\n(/private/tmp/thesis-desktop-repro/main.aux)\n\nLaTeX Warning: There were undefined references.\n\n\nLaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.\n\n\nPackage lastpage Warning: Rerun to get the references right on input line 37.\n\n\nPackage biblatex Warning: Please (re)run Biber on the file:\n(biblatex)                main\n(biblatex)                and rerun LaTeX afterwards.\n\n )\n(see the transcript file for additional information)\nOutput written on /private/tmp/thesis-desktop-repro/main.xdv (114 pages, 235589\n6 bytes).\nSyncTeX written on /private/tmp/thesis-desktop-repro/main.synctex.gz.\nTranscript written on /private/tmp/thesis-desktop-repro/main.log.\nLatexmk: Getting log file '/private/tmp/thesis-desktop-repro/main.log'\nLatexmk: Examining '/private/tmp/thesis-desktop-repro/main.fls'\nLatexmk: Examining '/private/tmp/thesis-desktop-repro/main.log'\nLatexmk: References changed.\nLatexmk: Found input bbl file 'main.bbl'\nLatexmk: References changed.\nLatexmk: References changed.\nLatexmk: Log file says output to '/private/tmp/thesis-desktop-repro/main.xdv'\nLatexmk: No .bib files listed in .aux file 'main.aux'\nLatexmk: applying rule 'bibtex main'...\nRule 'bibtex main':  Reasons for rerun\nCategory 'other':\n  Rerun of 'bibtex main' forced or previously required\n\n------------\nRun number 1 of rule 'bibtex main'\n------------\n------------\nRunning 'bibtex  \"main.aux\"'\n------------\nThis is BibTeX, Version 0.99d (TeX Live 2023)\nThe top-level auxiliary file: main.aux\nI found no \\citation commands---while reading file main.aux\nI found no \\bibdata command---while reading file main.aux\nI found no \\bibstyle command---while reading file main.aux\n(There were 3 error messages)\nLatexmk: ====List of undefined refs and citations:\n  Reference `ch:kglink' on page 3 undefined on input line 49\n  Reference `ch:gorag' on page 4 undefined on input line 56\n  Reference `ch:agrag' on page 4 undefined on input line 63\n  Reference `ch:mgrag' on page 5 undefined on input line 70\n  Reference `tab:introduction:questions' on page 5 undefined on input line 74\n  Reference `ch:kglink' on page 6 undefined on input line 91\n  Reference `ch:gorag' on page 6 undefined on input line 92\n And 72 more --- see log file.\nLatexmk: If appropriate, the -f option can be used to get latexmk\n  to try to force complete processing.\nLatexmk: Summary of warnings from last run of *latex:\n  Latex failed to resolve 79 reference(s)\nLatexmk: Errors, so I did not complete making targets\nCollected error summary (may duplicate other messages):\n  bibtex main: Bibtex errors: See file 'main.blg'\n\n\n[tectonic] note: \"version 2\" Tectonic command-line interface activated\n\nthread 'main' (4166055) panicked at src/config.rs:154:18:\ncalled `Result::unwrap()` on an `Err` value: failed to create directory `/Users/ybwang/Library/Caches/TectonicProject.Tectonic/bundles/hashes` or one of its parents\n\nCaused by:\n    Operation not permitted (os error 1)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n",
+  "pdfExists": false,
+  "pdfPath": "/private/tmp/thesis-desktop-repro/main.pdf",
+  "rootFile": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/main.tex",
+  "tectonic": {
+    "checked": [
+      {
+        "path": "/Applications/ChatGPT.app/Contents/Resources/tectonic/tectonic",
+        "source": "app"
+      }
+    ],
+    "path": "/Applications/ChatGPT.app/Contents/Resources/tectonic/tectonic",
+    "reason": "Tectonic executable is available.",
+    "source": "app",
+    "status": "available",
+    "version": "Tectonic 0.17.0"
+  },
+  "tectonicSuitability": {
+    "reasons": [
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/main.tex: bibliography tooling"
+    ],
+    "scannedFiles": [
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/main.tex",
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/chapter/ch08-conclusion.tex",
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/chapter/ch07-discussion.tex",
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/chapter/ch06-mgrag.tex",
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/chapter/ch05-agrag.tex",
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/chapter/ch04-gorag.tex",
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/chapter/ch03-kglink.tex",
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/chapter/ch02-background.tex",
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/chapter/ch01-introduction.tex",
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/chapter/front-acknowledgements.tex",
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/chapter/front-abstract.tex"
+    ],
+    "suitable": false
+  },
+  "texliveDetection": {
+    "activeBinDir": "/Library/TeX/texbin",
+    "commands": {
+      "biber": {
+        "path": "/Library/TeX/texbin/biber",
+        "version": "present"
+      },
+      "kpsewhich": {
+        "path": "/Library/TeX/texbin/kpsewhich",
+        "version": "kpathsea version 6.3.5"
+      },
+      "latexmk": {
+        "path": "/Library/TeX/texbin/latexmk",
+        "version": "Latexmk, John Collins, 7 Jan. 2023. Version 4.79"
+      },
+      "lualatex": {
+        "path": "/Library/TeX/texbin/lualatex",
+        "version": "This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)"
+      },
+      "pdflatex": {
+        "path": "/Library/TeX/texbin/pdflatex",
+        "version": "pdfTeX 3.141592653-2.6-1.40.25 (TeX Live 2023)"
+      },
+      "xelatex": {
+        "path": "/Library/TeX/texbin/xelatex",
+        "version": "XeTeX 3.141592653-2.6-0.999995 (TeX Live 2023)"
+      }
+    },
+    "knownTexBinDirs": [
+      "/Library/TeX/texbin",
+      "/usr/local/texlive/2025/bin/universal-darwin",
+      "/usr/local/texlive/2023/bin/universal-darwin"
+    ],
+    "missingRecommended": [],
+    "missingRequired": [],
+    "reason": "Required TeX tools are available.",
+    "searchPath": "/Library/TeX/texbin:/usr/local/texlive/2025/bin/universal-darwin:/usr/local/texlive/2023/bin/universal-darwin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Library/Frameworks/Python.framework/Versions/3.14/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.9/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/usr/local/share/dotnet:/Users/ybwang/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/ybwang/.codex/tmp/arg0-macos/codex-arg0t2VtmK:/Users/ybwang/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/ybwang/anaconda3/bin:/Users/ybwang/anaconda3/condabin:/Users/ybwang/.local/bin:/Users/ybwang/.docker/bin:/Users/ybwang/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS",
+    "status": "existing-usable",
+    "texmfroot": "/usr/local/texlive/2023"
+  }
+}

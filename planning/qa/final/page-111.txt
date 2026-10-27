@@ -1,32 +1,42 @@
-3,085and1,431,withend-to-endtokenentry4,516. Thelistedmoduletimesdonotsumtothe
-reportedend-to-endtotal;thepublicationdoesnotreconcilethedifferenceinthisbreakdown.
-Table 6.6: Module costs reproduced from published Table 5, p. 2489 [4]. Time is in minutes.
-KGC,QA,andE2Ecellsretainthepublishedtime/tokenpairsforgraphconstruction,answering,
-and end-to-end processing. Match denotes matching time. Token counts and E2E totals are
-preservedasreported.
-Dataset Queries KGC Match QA E2E
-MMQA 951 193.0/3,085 0.14 8.9/1,431 248.1/4,516
-Arxiv 200 61.9/3,946 0.23 16.2/2,944 83.9/6,890
-Manual 390 76.1/4,285 0.04 23.9/2,556 109.7/6,841
-Web 750 143.8/4,623 0.27 42.9/3,101 196.5/7,723
-Wiki 500 164.2/6,629 0.30 52.1/6,267 241.5/12,896
-Wit 600 140.6/7,660 0.21 42.6/6,539 196.5/14,199
-Recipe 2,360 525.7/4,351 1.74 191.3/3,173 808.7/7,525
-Graphconstructionisthelargestlistedtimecomponentonallsevendatasets. Recipereports
-525.7 minutes for construction, 1.74 for matching, and 191.3 for answering, with end-to-end
-time 808.7 minutes. On the smaller Arxiv query set, the corresponding values are 61.9, 0.23,
-and 16.2 minutes, with end-to-end time 83.9. These measurements locate repeated extraction
-calls as a substantial cost within the evaluated pipeline, even though graph matching has an
-exponentialworst-casebound.
-The distinction between computational bounds and measured module costs is useful here.
-The graphs are built from query-selected evidence, so the matcher processes small instances in
-these experiments. Construction invokes the multimodal model on the selected chunks. Re-
-ducing the number of extracted chunks or the cost of each extraction could therefore affect the
-observedruntimesubstantially.
-6.11 Ablations and Parameter Sensitivity
-6.11.1 Component ablations
-The MMQA ablations in Table 6.7 change matching, coarse encoding, and pipeline composi-
-tion. Removing graph matching constructs the query-specific graph from a fixed number of
-chunks and reports accuracy 0.7260, compared with 0.7442 for MGRAG. Replacing caption-
-based coarse ranking with direct CLIP encoding [72] reports accuracy 0.7376. The Vanilla
+REFERENCES
+[1] Y.Wangetal.,“KGLink:Acolumntypeannotationmethodthatcombinesknowledgegraphand
+pre-trained language model,” in 2024 IEEE 40th International Conference on Data Engineering
+(ICDE), IEEE, 2024, pp. 1023–1035. DOI: 10.1109/ICDE60146.2024.00083 (cit. on
+pp.1,7,9,17–21,24,30,31).
+[2] Y. Wang et al., “GORAG: Graph-based online retrieval augmented generation for dynamic few-
+shotsocialmediatextclassification,”inProceedingsoftheACMWebConference2026,Associa-
+tionforComputingMachinery,2026,pp.9148–9159.DOI:10.1145/3774904.3793011
+(cit.onpp.1,7,11,12,32–34,43–45).
+[3] Y. Wang et al., “AGRAG: Advanced graph-based retrieval-augmented generation for LLMs,” in
+2026 IEEE 42nd International Conference on Data Engineering (ICDE), IEEE, 2026. DOI: 10.
+1109/ICDE65706.2026.00110(cit.onpp.2,7,12,47,48,53,57–59,65).
+[4] Y.Wangetal.,“MGRAG:Semanticsubgraphmatchingandgraph-awarecachingformultimodal
+retrieval-augmentedgeneration,”ProceedingsoftheVLDBEndowment,vol.19,no.9,pp.2480–
+2493, 2026. DOI: 10.14778/3819518.3819565 (cit. on pp. 2, 7, 12, 13, 67–69, 71, 76,
+78,80,81,84–88).
+[5] Y. Wang et al., “Understanding the embedding models on hyper-relational knowledge graph,” in
+Proceedingsofthe34thACMInternationalConferenceonInformationandKnowledgeManage-
+ment,2025,pp.3177–3187.DOI:10.1145/3746252.3761370(cit.onpp.7,13,14).
+[6] D. Vrandečić et al., “Wikidata,” Communications of the ACM, vol. 57, no. 10, pp. 78–85, 2014.
+DOI:10.1145/2629489(cit.onp.8).
+[7] A.Vaswanietal.,“Attentionisallyouneed,”inAdvancesinNeuralInformationProcessingSys-
+tems,vol.30,2017(cit.onpp.8,13).
+[8] J. Devlin et al., “BERT: Pre-training of deep bidirectional transformers for language understand-
+ing,”inProceedingsofNAACL-HLT2019,2019,pp.4171–4186.DOI:10.18653/v1/N19-
+1423(cit.onpp.9,23).
+[9] M.Hulsebosetal.,“Sherlock:Adeeplearningapproachtosemanticdatatypedetection,”inPro-
+ceedings of the 25th ACM SIGKDD International Conference on Knowledge Discovery & Data
+Mining,2019,pp.1500–1508(cit.onp.9).
+[10] D.Zhangetal.,“Sato:Contextualsemantictypedetectionintables,”Proc.VLDBEndow.,vol.13,
+no.12,pp.1835–1848,2020(cit.onpp.9,26).
+[11] Y. Suhara et al., “Annotating columns with pre-trained language models,” in Proceedings of the
+2022 International Conference on Management of Data, 2022, pp. 1493–1503 (cit. on pp. 9, 23,
+27).
+[12] J.Chenetal.,“Learningsemanticannotationsfortabulardata,”inProceedingsofthe28thInter-
+nationalJointConferenceonArtificialIntelligence,2019,pp.2088–2094(cit.onpp.9,27).
+[13] Y.Sunetal.,“Reca:Relatedtablesenhancedcolumnsemantictypeannotationframework,”Pro-
+ceedings of the VLDB Endowment, vol. 16, no. 6, pp. 1319–1331, 2023. DOI: 10.14778/
+3583140.3583149(cit.onpp.9,27).
+[14] P.Lewisetal.,“Retrieval-augmentedgenerationforknowledge-intensivenlptasks,”Advancesin
+neuralinformationprocessingsystems,vol.33,pp.9459–9474,2020(cit.onp.10).
 97

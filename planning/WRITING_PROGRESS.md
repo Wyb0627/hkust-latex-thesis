@@ -12,10 +12,10 @@ Updated 2026-10-27 (Asia/Shanghai). The reference-led full-thesis prose revision
 
 ## Compilation state
 
-The built-in editor compiler recognizes `main.tex`, but its Biber invocation fails with program-not-found. Source parsing reports no remaining overfull box or LaTeX error after correcting the identified Discussion line. The terminal can locate Biber, so the app compiler invocation needs repair before a successful final compile can be certified. No alternate compiler was run and no separate PDF was generated.
+The existing MacTeX installation is usable. The project build now resolves required program paths even with a restricted PATH and retains XeLaTeX/Biber. A full XeLaTeX rebuild and explicit Biber pass completed. `main.pdf` and `thesis.pdf` are identical updated 115-page files. Log checks, PDF geometry/font checks, all-page contact-sheet review and detailed abstract/algorithm review passed. See `compile-repair-2026-10-27/REPORT.md` and `FINAL_QA.md`.
 
-The current `thesis.pdf` remains the prior 128-page abstract-revision export. It does not contain these new body edits. The editor stays open on the existing abstract file. The preceding successful PDF checkpoint and progress report are archived under `review-sun-style-2026-10-27/previous-*.md`.
+The app’s independent preview still fails at its TeX Live/Biber stages. This does not prevent `make` or the repaired project build script from producing the updated PDF. The existing editor remains open.
 
 ## Remaining items
 
-Resolve the built-in compiler's Biber invocation, compile the saved sources, then check the new pagination before exporting a new reading PDF. Real department-head identity, signatures/dates, title-page numeral clarification and fixed MGRAG b metadata remain author/institutional items listed in `AUTHOR_ACTIONS.md`.
+Real department-head identity, signatures/dates, title-page numeral clarification and fixed MGRAG b metadata remain author/institutional items listed in `AUTHOR_ACTIONS.md`.

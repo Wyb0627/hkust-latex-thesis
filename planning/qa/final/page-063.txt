@@ -1,35 +1,41 @@
-Table4.8: AblationexperimentsonWOSforGORAG’svariants.
-Round
-Dataset Model
-R1 R2 R3 R4
-GORAGoffline&unit 0.2979 0.2287 0.2645 0.2249
-GORAGoffline 0.3063 0.2302 0.2455 0.2156
-WOS GORAGunit 0.4706 0.4394 0.4407 0.3899
-GORAGkeyword 0.4746 0.4606 0.4455 0.4030
-GORAG 0.4862 0.4649 0.4814 0.4210
-and 0.1641. These comparisons locate the result in a setting where the number of candidate
-labelsincreasessubstantiallyovertheevaluation.
-Additional support examples improve GORAG’s WOS accuracy in the main table. At the
-fourth round, its one-, five-, and ten-shot values are 0.4420, 0.4717, and 0.4929. At the first
-roundtheyare0.4866,0.4990,and0.5134.
-IFS-Rel uses GPT-4o. In its first round, GORAG reports 0.9688 for all three support sizes,
-whilethefourth-roundscoresare0.6165,0.4988,and0.5469. Thefive-shotfourth-roundvalue
-is below the one-shot value, so increasing support size does not produce a monotonic improve-
-ment in every setting. LongLLMLingua reports 0.5819, 0.4903, and 0.5038 in these fourth-
-round columns. HippoRAG2 reports 0.4984, 0.5008, and 0.4953; its five-shot result exceeds
-GORAG’sfive-shotresultinthatcolumn.
-CAD uses Qwen2.5-7B. Its GORAG first-round accuracy is 0.6125 in all three support set-
-tings. The fourth-round one- and five-shot accuracies are 0.3133 and 0.3146. Accuracy de-
-creasesinlaterroundsasthecumulativelabelsetgrows.
-WOS improves with additional support in the displayed rounds, whereas IFS-Rel is non-
-monotonicacrosssupportsizesandCADlosesaccuracyaslabelsaccumulate.
-4.7 Ablations and Resource Use
-TheWOSablationstudyusesaone-shotQwen2.5-7Bsetting. Theofflinevariantdisablesonline
-indexing. The unit variant assigns cost one to every graph edge. The offline-and-unit variant
-removesbothfeatures. Thekeywordvariantusestheextractedkeywordsinplaceofthecomplete
-query text for classification. These variants change specific inputs or index operations while
-retainingGORAG’soverallclassificationtask.
-In the ablation table, the full method reports 0.4862, 0.4649, 0.4814, and 0.4210 across
-rounds. Theofflinevariantreports0.3063,0.2302,0.2455,and0.2156. Theunitvariantreports
-0.4706,0.4394,0.4407,and0.3899. Underthisablationprotocol,removingonlineinsertionhas
+dense and sparse indexing. Query processing maps the question to facts, computes influence
+scoresandedgecosts,expandstheevidencesubgraph,andretrieveshybridpassages.
+The statistical component replaces the entity extraction step used in the compared graph
+pipelines. Languagemodelsremaininvolvedinrelationextraction,filteringrawmappedtriples,
+andgeneratinganswers. Theentity-extractionablationchangesthenodessuppliedtosubsequent
+relationextractionandretrieval.
+5.2.2 Chunking and statistical entity extraction
+Thecorpusissplitintooverlappingtextchunks,
+𝒯 = Split(𝒯,𝑙 ,𝑙 ), (5.1)
+𝑐 𝑡 𝑜
+where 𝑙 is the chunk length and 𝑙 is the overlap. The reported main setting uses 256 tokens
+𝑡 𝑜
+per chunk and an overlap of 32 tokens. Overlap allows adjacent chunks to share text at their
+boundaries;thegraphsubsequentlyconnectschunksthroughtheentitiestheycontain.
+AGRAG considers words and phrases up to a maximum n-gram length 𝑏. For a candidate
+term𝑣inchunk𝑡,theextractionrulemodifiesTF–IDF[37]todefinethescore
+count(𝑣,𝑡) |𝒯 |+1
+𝑐
+ER(𝑣,𝑡) = log . (5.2)
+|𝑡|log(|𝒯
+𝑐
+|+1) |{𝑡
+𝑗
+∈ 𝒯
+𝑐
+∶ 𝑣 ∈ 𝑡
+𝑗
+}|+1
+Thefirstfactordependsonwithin-chunkfrequencyandlength. Theseconddistinguishesterms
+accordingtotheirdistributionacrosschunks. Theextractedsetis
+𝒱 = {𝑣 ∶ ER(𝑣,𝑡) > 𝜏}, (5.3)
+𝑡
+withmaximumn-gramlength𝑏andthreshold𝜏 controllingcandidateboundariesandselection.
+Themainpaperreports𝑏 = 3and𝜏 = 0.5.
+Statistical extraction selects strings present in the corpus. Term frequency does not directly
+measurefactualimportance,soagenericexpressioncanscoredifferentlyfromararebutrelevant
+phrase. Weexaminethen-gramboundaryandthresholdinthesensitivitystudy.
+Shared entities connect passages in the graph. These links are useful when the extracted
+strings identify compatible entities across their occurrences; ambiguous mentions can instead
+createmisleadingconnections.
 49

@@ -1,35 +1,33 @@
-Table 3.1: Column-type annotation results reported for KGLink. Scores and missing entries
-reproducetheoriginalmain-resulttable.
-SemTab VizNet
-Model Accuracy WeightedF1 Accuracy WeightedF1
-MTab 89.10 - 38.21 -
-TaBERT 72.69 71.21 94.68 94.07
-Doduo 84.06 82.43 95.40 95.06
-HNN 66.54 65.12 66.89 68.82
-Sudowoodo 79.34 79.24 91.57 91.08
-RECA 86.12 84.91 93.25 93.18
-KGLink 87.12 85.78 96.28 96.07
-Table 3.2: Reported KGLink variant scores. The table reproduces the numeric columns and
-variantnamesoftheoriginalablationtable.
-SemTab VizNet
-Variant Accuracy WeightedF1 Accuracy WeightedF1
-KGLink𝑤/𝑜𝑚𝑠𝑘 86.14 84.54 95.95 95.67
-KGLink𝑤/𝑜𝑐𝑡 86.27 84.56 95.83 95.48
-KGLink𝑤/𝑜𝑓𝑣 87.02 85.68 95.98 95.70
-KGLinkDeBERTa 87.24 85.81 96.98 96.37
-KGLink 87.12 85.78 96.28 96.07
-Doduo provides a useful comparison for the language-model pathway because KGLink
-adaptsitsserializationandusesBERTinthemainconfiguration. Doduoobtains84.06accuracy
-on SemTab and 95.40 on VizNet. KGLink’s higher scores under the reported experiment
-indicatethatthefullgraph-augmentedandjointlytrainedmodelimprovesonthatbaseline.
-The dataset dependence is also visible in MTab’s results. Its accuracy is 89.10 on SemTab
-and 38.21 on VizNet under the label translation used in the experiment. These measurements
-motivateseparatinggraphknowledgefromthefinalannotationvocabulary.
-3.6.3 Representation Learning and KG Evidence
-Table3.2comparesKGLinkvariants. The𝑤/𝑜𝑚𝑠𝑘variantremovesthemaskedrepresentation-
-generation task. Its scores are lower than the BERT-based full model on both datasets. The
-𝑤/𝑜 𝑐𝑡 variant removes the KG-derived information, including candidate types and the feature
-vector, while keeping the multitask language-model pathway. Its accuracy is 86.27 on SemTab
-and95.83onVizNet. TheresultsupportsthecontributionofKGevidenceintheevaluatedjoint
-architecture.
+Round 1 Labels
+Round 2 Labels
+esaercnI
+dnuoR
+⚠
+⚠
+✅
+⚠
+⚠
+⚠
+Figure 4.1: Two rounds of the dynamic classification task. New abuse categories extend the
+availablelabels. ReproducedfromFigure1ofGORAG[2].
+andresourcecosts.
+4.1.1 Rounds and information availability
+Let𝒴𝑟 denotethelabelsintroducedatround𝑟. Thecurrentlabeluniverseis
+new
+𝑟
+𝒴𝑟 = 𝒴𝑖 . (4.1)
+⋃ new
+𝑖=1
+The few-shot support data provide 𝑘 annotated texts per class, with 𝑘 equal to 1, 5, or 10 in the
+mainexperiments. Aquerytext𝑡mustbeassignedalabelfrom𝒴𝑟. Thesuperscript𝑟identifies
+thecurrentclassificationround.
+Support texts carry supplied labels. Query texts become visible as the system processes
+them, and their predictions can be used for subsequent index updates. Corpus statistics used in
+keywordscoringrefertotrainingandquerytextsseensofar. Theonlineassociationnevertheless
+inheritspredictionerrorswhentheclassifierchoosesanincorrectlabel.
+Semantic label names supply another source of information. Where names are available,
+GORAG uses a language model to generate representative descriptions or keywords for labels.
+Thesedescriptionsentertheclassificationcontext,andlabel-derivedkeywordscansupportgraph
+initialization. Thezero-shotexperimentlaterinthischapterusesthissourcewithoutanylabeled
+examples.
 33

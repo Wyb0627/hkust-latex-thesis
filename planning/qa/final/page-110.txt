@@ -1,32 +1,26 @@
-alongside additional processing time. It supplies a direct account of the quality-cost trade-off
-forquestionswithdifferentrelationaldemands.
-6.10 Cache Quality and End-to-end Costs
-Table 6.5 preserves the MMQA cache-system comparison. MGRAG reports accuracy 0.7442
-and total time 4.3 hours. The vLLM and CacheBlend variants paired with VanillaRAG report
-accuracies0.6593and0.6601,withtotaltime4.5hoursforboth. PairedwithHippoRAG2,they
-report accuracies 0.6335 and 0.6267, with total times of 8.8 and 8.3 hours. These are distinct
-retrieval-and-cachecompositions,eachidentifiedinthetable.
-Table 6.5: Cache-system comparison on MMQA, reproduced from published Table 6,
-p. 2489 [4]. V. and H. identify VanillaRAG and HippoRAG2 retrieval pipelines. TTFT is in
-secondsandtotaltimeisinhours.
-System SIM. ACC. ROG. BLEU TTFT Time
-vLLM(V.) 0.8315 0.6593 0.6277 0.5867 3.2s 4.5h
-CacheBlend(V.) 0.8315 0.6601 0.6417 0.5964 3.1s 4.5h
-vLLM(H.) 0.8381 0.6335 0.6659 0.5917 4.6s 8.8h
-CacheBlend(H.) 0.8415 0.6267 0.6636 0.5917 4.4s 8.3h
-MGRAG 0.8533 0.7442 0.6763 0.7215 3.2s 4.3h
-Time to first token (TTFT) gives a different view from total time. CacheBlend with Vanil-
-laRAG reports 3.1 seconds, while MGRAG and vLLM with VanillaRAG report 3.2 seconds.
-MGRAGcombinesthehighestanswer-qualityvalueswithatotaltimeof4.3hours;CacheBlend
-withVanillaRAGhastheshortestTTFT.
-Theinverse-ablation table also measures qualitywhen graph-awarerecomputation is added
-after path matching. Within the HippoRAG2 composition, accuracy changes from 0.7372 with
-path matching to 0.7442 with both components, while the total time changes from 4.1 to 4.3
-hours. The additional computation is accompanied by changesin answerquality. Its purpose is
-toallocaterepeatedcomputationtotokenstatesselectedbythecombinedscore.
-Section6.11comparesthesecomponentadditionswithintheHippoRAG2andVanillaRAG
-pipelines.
-Table6.6reportstimeandtokencostsbymodule. OnMMQA,graphconstructionaccounts
-for 193.0 minutes, matching for 0.14 minutes, and answer generation for 8.9 minutes; the re-
-ported end-to-end time is 248.1 minutes. The construction and generation token entries are
+8.2 Future Directions
+8.2.1 Feedback for structure maintenance
+Future work can use feedback to maintain evidence structures. A retrieved relation may prove
+irrelevant, its source passage may be insuﬀicient, or a prediction inserted into an index may
+later be corrected. These observations could guide which associations are retained, revised, or
+removed.
+Feedback timing determines which updates are possible. An online correction becomes
+available after the original prediction, and an answer assessment can guide only subsequent
+retrieval. Recording this timing and the feedback source would allow correction and retention
+policiestobeevaluatedunderexplicitsupervisionconditions.
+8.2.2 Multimodal structure and provenance
+Multimodal graph construction could retain a link from each extracted fact to its supporting
+textspanorimageregion. Caption-basedrankingandquery-awareextractionbothselectvisual
+information,andsourcelinkswouldmaketheiromissionseasiertoidentify.
+Source links would help distinguish missing visual evidence from extraction, relation-
+representation, and path-search errors. They would also support checking whether an accepted
+pathisgroundedintheoriginalsourceatthegranularityrequiredbytheanswer.
+8.2.3 Joint retrieval and context computation
+Retrieval and context computation can be optimized jointly. Retrieved evidence determines in-
+put length, modality, and relationships; cache availability and recomputation policy determine
+processingcost. MGRAGusesgraphfeaturesforonesuchdecision.
+Further work could compare evidence structures under a fixed serving budget, measuring
+answer quality alongside construction, matching, cache reuse, and generation costs. Keeping
+thequeryworkloadandhardwarefixedwouldshowwhichstructuresprovideusefulinformation
+atanacceptableprocessingcost.
 96

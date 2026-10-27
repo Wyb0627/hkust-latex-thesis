@@ -1,43 +1,45 @@
-0.5
-0.4
-0.3
-0.2
-1 2 3 4 5 6 7 8
-Round
-ccA
-0.5
-0.4
-0.3
-0.2
-1 2 3 4 5 6 7 8
-Round
-(a)One-shot.
-ccA
-Entailment
-Naïve RAG
-GraphRAG
-HippoRAG2
-GORAG
-(b)Five-shot.
-Figure 4.4: WOS classification across the reported round splits. Points 1–4 use the four-round
-split, 5–6 the six-round split, and 7–8 the eight-round split. The legend in panel (b) applies to
-bothpanels. ReproducedfromFigure4ofGORAG[2].
-formthetrajectoryofoneindexupdatedthrougheightconsecutiverounds.
-4.8.1 A retrieved classification case
-Figure 4.5 reproduces a contextual-abuse example from the original study. The query contains
-the terms highlighted in red. These terms map to keyword nodes, and the selected connecting
-structure passes through an insult label. The classifier outputs the abuse category shown in
-the figure. This example exposes the relationship between the extracted query evidence, the
-intermediatelabelnode,andthefinalclassification.
-The useful property of the example is that candidate selection has a visible provenance.
-The label is connected to more than one term in the indexed representation. The displayed
-nonterminal neighbor also shows that a keyword neighborhood can contain more information
-thantheconnectionchosenforthecurrenttext. Selectingastructuredistinguishestheevidence
-usedtoconnectthequerytermsfromotherassociationspresentaroundthesamelabel.
-4.9 Discussion and Chapter Summary
-GORAG places structure between the observation of text and the construction of a language
-model’s classification instruction. Keywords connect the current text to an accumulated graph.
-Edgecostsandterminalconnectionsselectasubsetoflabelalternatives. Themodelthenclassi-
-fiestheoriginaltextwiththesealternativesandtheirrepresentativeinformation. Structureserves
-asatask-specificevidence-selectionmechanism.
+Foranedge𝑒 = (𝑢,𝑣)associatedwithfact𝑓 ,AGRAGdefines
+𝑒
+1−MS(𝐪,𝐟 )
+𝑒
+𝑐 = . (5.9)
+𝑒
+2
+Highersimilaritygivesalowerfactualedgecost. Subgraphselectioncombinestheseedgecosts
+withnodeinfluencescores.
+Pseudo edges retain their assigned penalty, providing an expensive route when factual con-
+nectionsalonecannotconnecttheanchors.
+5.4 MCMI Formulation and Evidence Expansion
+Let𝒱 containthenodesparticipatinginthemappedfacts. Afeasiblesubgraphcontainsthese
+term
+terminalsandconnectseachterminaltoadesignatedrootterminal. Themainpaperdefinesthe
+MinimumCostMaximumInfluence(MCMI)objectiveas
+𝑐
+𝑟(𝒢′) = 𝑒 . (5.10)
+∑ 𝑠 +𝑠
+𝑒=(𝑢,𝑣)∈ℰ′ 𝑢 𝑣
+The objective scales each included edge cost by the influence of its endpoints. We construct
+an initial terminal-connecting tree, then expand its neighborhood using marginal cost-to-score
+comparisons.
+Theinitialstructureconnectsthequery-mappedinformation. Thesourceconstructsanauxil-
+iarygraphontheterminals,usesshortest-pathcostsbetweenthem,selectsatreeonthatauxiliary
+structure,andexpandsitsedgesbacktopathsintheevidencegraph. Thisstagesuppliesconnec-
+tionsamonganchorsinsteadofreturningtheanchorsasanunorderedset. Thedetailedtheorem
+inthemainpaperassignsits2-approximationstatementtothisMCSTconstructionstage.
+Subsequent expansion examines neighboring candidates. A candidate node 𝑣 connected by
+anedgeofcost𝑐 isconsideredthroughtheratio
+(MCMI,𝑣)
+𝑐
+(MCMI,𝑣)
+. (5.11)
+𝑠
+𝑣
+Theprocedureselectsthelowestsuchratioandcomparesitwiththecurrentsubgraph’sreported
+cost-scorequantity. Theacceptanceconditionis
+𝑐
+(MCMI,𝑣)
+< 𝑟(𝒢 ). (5.12)
+MCMI
+𝑠
+𝑣
 52

@@ -1,41 +1,32 @@
-5.3.2 Node influence and edge costs
-AGRAG uses a personalized PageRank-style propagation [44] to assign query-dependent influ-
-encescores,
-𝐬 = lim 𝐬(𝑖), 𝐬(𝑖) = (1−𝑑)𝐩+𝑑𝐏𝐬(𝑖−1). (5.7)
-𝑖→∞
-Here 𝐩 is determined by nodes associated with the filtered mapped facts, and 𝐏 is the graph
-propagation matrix specified in the source. The reported setting uses 𝑑 = 0.5 and stops the
-iteration when the change is below 10−7. The score of a node 𝑣 is 𝑠 = 𝐬[𝑣]. Passage-node
-𝑣
-scoresaremultipliedby0.05tobalancetheircontributionrelativetoentitynodes.
-The personalization vector assigns one to nodes participating in the mapped facts and zero
-totheothernodes. Thegraphoperatorisspecifiedby
-⎧1/|𝒩(𝑢)|, (𝑢,𝑣) ∈ ℰ,
-⎪
-𝐏[𝑢][𝑣] = (5.8)
-⎨
-⎪1/|𝒱|, otherwise.
-⎩
-Nonadjacent node pairs receive the constant term in this operator. The recurrence uses this
-matrixwiththedampingvalueinEquation5.7,followedbypassage-nodescaling.
-The node score is computed before neighborhood expansion. Consequently, a candidate’s
-influence refers to its position in the indexed graph under the query anchors. The subgraph
-selectionprocedureusestheseassignedscoresasitchangeswhichedgesandnodesareincluded.
-This distinction separates propagation over the evidence source from expansion of the context
-returned to the model. The former establishes a score landscape; the latter selects an evidence
-structureusingthatlandscapeandthesemanticedgecosts.
-Influence and direct similarity answer different retrieval questions. Similarity asks how
-closely a triple’s wording corresponds to the query. Influence additionally depends on graph
-connectivity to query anchors. A node can receive influence through connections to several
-mapped facts. The subgraph selection stage uses these scores alongside edge costs so that the
-retrievaldecisionreflectsbothkindsofinformation.
-Foranedge𝑒 = (𝑢,𝑣)associatedwithfact𝑓 ,AGRAGdefines
-𝑒
-1−MS(𝐪,𝐟 )
-𝑒
-𝑐 = . (5.9)
-𝑒
-2
-Higher semantic similarity gives a lower factual edge cost. The influence score is attached to
-nodes,whilethesimilaritycostisattachedtoedges. Keepingthesequantitiesseparateallowsthe
+Table 5.5: Text classification with Qwen2.5-14B-Instruct. Results from the AGRAG main ex-
+periment[3].
+Method WOS ACC WOS REC IFS-Rel ACC IFS-Rel REC
+NaiveRAG 0.237 0.257 0.351 0.197
+L.LLMLingua 0.274 0.231 0.378 0.220
+RAPTOR 0.409 0.290 0.293 0.212
+SiReRAG 0.430 0.294 0.325 0.220
+G-retriever 0.188 0.129 0.311 0.185
+MIXRAG 0.244 0.235 0.362 0.203
+GraphRAG 0.253 0.201 0.279 0.202
+LightRAG 0.273 0.224 0.265 0.220
+HippoRAG2 0.424 0.270 0.389 0.246
+F.GraphRAG 0.283 0.245 0.307 0.221
+AGRAG 0.438 0.307 0.403 0.251
+5.7.3 Answer quality across tasks
+The main results are split by task in Tables 5.1–5.5. On Novel creative generation, AGRAG
+reportsfaithfulness0.513,accuracy0.339,andcoverage0.386. HippoRAG2reportsfaithfulness
+0.496,whileRAPTORreportsaccuracy0.333andNaiveRAGcoverage0.384.
+On Medical creative generation, AGRAG reports faithfulness 0.356, accuracy 0.598, and
+coverage 0.589. NaiveRAG has accuracy 0.577 and coverage 0.554. HippoRAG2 has faithful-
+ness0.347.
+For contextual summarization, AGRAG obtains coverage and accuracy of 0.778 and 0.643
+on Novel, and 0.690 and 0.604 on Medical. Graph facts and passage context jointly supply
+informationdistributedacrossthecorpus.
+Forcomplexreasoning,thereportedROUGE-Landaccuracyvaluesare0.319and0.467on
+Noveland0.343and0.665onMedical. Forfactretrievaltheyare0.324and0.490onNoveland
+0.357and0.628onMedical. Thetasksusedifferentquerycollectionsandanswerformats.
+Classification accuracy and recall are 0.438 and 0.307 on WOS and 0.403 and 0.251 on
+IFS-Rel. SiReRAG reports WOS accuracy 0.430 and recall 0.294, while HippoRAG2 reports
+IFS-Relaccuracy0.389andrecall0.246. AGRAG’sclassifierreceivesgraph-derivedcandidate
+labelsunderthesourceprotocol.
 59

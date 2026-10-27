@@ -1,35 +1,43 @@
-Table5.11: FactretrievalablationwithQwen2.5-14B-Instruct. Valuesretaintheoriginalsource
-ablationprecision.
-Method Novel ROG Novel ACC Medical ROG Medical ACC
-AGRAG w. HR Only 0.323 0.487 0.355 0.619
-AGRAG w. LLM ER 0.322 0.480 0.353 0.613
-AGRAG w.o. HR 0.314 0.487 0.344 0.615
-AGRAG w.o. MCMI 0.322 0.470 0.359 0.621
-AGRAG w.o. Cle. 0.313 0.478 0.354 0.620
-AGRAG 0.324 0.490 0.357 0.628
-Table5.12: Ablationtimeandtokencosts. Timeisinminutes. Pairedtokencolumnsretainthe
-sourceI/Gheadings;itscaptiondescribesinput/outputtokencounts.
-Method NoveltimeI/Q NoveltokensI/G MedicaltimeI/Q MedicaltokensI/G
-AGRAGw. HROnly 11.7/137.9 5,117/193 11.4/117.9 5,215/199
-AGRAGw. LLMER 83.3/161.2 8,030/887 31.9/148.8 5,457/414
-AGRAGw.o. HR 61.7/138.9 6,986/741 9.4/114.4 4,820/315
-AGRAGw.o. MCMI 63.9/130.4 6,710/757 9.5/125.0 5,230/331
-AGRAGw.o. Cle. 65.6/140.1 6,988/154 9.1/142.9 5,252/158
-AGRAG 65.6/142.0 6,988/639 9.1/145.3 5,252/306
-marization, hybrid-only coverage and accuracy are 0.739 and 0.522, compared with 0.778 and
-0.643forthecompletesystem. Thegraph-containingconfigurationprovidesanobservedbenefit
-underthesesettings,particularlyforthesummarizationaccuracyscore.
-Removing hybrid retrieval produces a different pattern. Novel creative-generation faithful-
-ness is 0.519, exceeding the complete system’s 0.513, while accuracy and coverage decrease to
-0.306 and 0.343. Medical contextual-summarization coverage decreases from 0.690 to 0.420.
-The graph-only variant can produce well-grounded claims while supplying less of the required
-information.
-Replacing statistical entity extraction with model-based extraction gives Novel creative-
-generation faithfulness 0.428 and accuracy 0.302, with indexing time 83.3 minutes in the ab-
-lation setting. The complete configuration reports 65.6 minutes in that table. This experiment
-changesentityextractionwhileretainingtherestofthemethod.
-The variant without MCMI expansion uses a Steiner-tree representation. Its Novel
-contextual-summarization accuracy is 0.592, compared with 0.643 for full AGRAG, and its
-Medical creative-generation accuracy is 0.530, compared with 0.598. Some fact-retrieval
-metrics are close or favor the tree variant. Expansion improves these summarization and
+Query: The Irandhir Santos film whose poster has people doing martial arts was
+released in what year?
+: Pseudo Relation : PlaceholderEntity
+Query Graph
+Has Has Has Do
+Irandhir Santos Film Poster Person MartialArts
+Releasein
+Year
+Knowledge Graph
+IrandhirSantosactsin
+OnTop Martial
+TheAssailant…
+ArtsKick
+Display
+Do
+Actin
+Irandhir Santos TheAssailant
+MidAir
+Actin Releasein In
+Releasein
+BlueEyes 2009 Man
+Figure 6.3: Query and evidence graphs in path-based semantic matching. Placeholder entities
+express unknown query information; pseudo-relations connect passage nodes to extracted enti-
+ties. OriginalFigure3,p.2485[4].
+requestedreleasevalue. Pathmatchingcheckstherelationshipsconnectingthoseentities.
+Extractionerrorsinqueryplaceholdersorrelationscanchangetheevidenceacceptedbythe
+matcher.
+6.4.2 Extracting facts from ranked chunks
+For a chunk 𝑐, the extraction model receives the chunk, query, and extraction prompt 𝑝 . Its
+ext
+outputcontainsquery-relatedentitiesandrelations,
+(𝒱𝑐,ℰ𝑐) = LLM(𝑐,𝑞,𝑝 ). (6.3)
+𝑞 𝑞 ext
+Including 𝑞 makes the extraction selective. The model is asked to identify events and relations
+relevant to the current question, rather than to enumerate every describable fact in the chunk.
+For an image, this permits attention to query-related visual events; for text, it permits selection
+oftheentitiesandrelationshipsneededtodescribetherequestedevidence.
+The chunk is also added as a passage node. MGRAG connects this node to the entities
+extracted from it using the pseudo-relation consists_in, retaining the published relation
+(𝑖)
+nameandorientationfromchunktoentity. If𝒞 istheprefixofrankedchunksconsumedafter
+𝑞
 71

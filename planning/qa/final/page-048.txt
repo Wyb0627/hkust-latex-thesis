@@ -1,33 +1,79 @@
-Table 3.3: Reported accuracy on the VizNet test subset whose tables have no extracted KG
-information.
-Model Numericaccuracy Non-numericaccuracy
-KGLink 97.04 90.92
-HNN 44.05 18.37
-TaBERT 96.57 90.27
-Doduo 96.28 89.50
-RECA 96.89 61.54
-Sudowoodo 96.21 67.72
-The 𝑤/𝑜 𝑓𝑣 variant removes the KG-derived feature vector, following the original method
-description. It obtains 87.02 accuracy and 85.68 weighted F1 on SemTab, and 95.98 accuracy
-and 95.70 weighted F1 on VizNet. Candidate types provide the remaining KG input in this
-configuration. Thefullmodelreportshigherscoresonbothdatasets.
-ReplacingBERTwithDeBERTaproducesthefourthvariant[35]. Itobtains87.24/85.81on
-SemTab and 96.98/96.37 on VizNet. The architecture uses the same graph-processing design
-withadifferentencoderinthisexperiment.
-3.6.4 Annotation without Retrieved Knowledge
-The original study constructs a test subset from VizNet in which the entire table has no KG
-linkage. This condition is stricter than requiring only the target column to lack a link. With
-multi-columnencoding,atargetcolumncanotherwisebenefitfromgraphinformationretrieved
-foritsneighbors. Thesubsetcontains315tablesand612columnsacross26labels,comprising
-556numericcolumnsand56non-numericcolumns.
-Table 3.3 shows that KGLink still performs the annotation task in this condition. It obtains
-97.04 numeric accuracy and 90.92 non-numeric accuracy. TaBERT and Doduo also achieve
-highvaluesonthissubset. Theobservationisconsistentwiththearchitectureretaininga table-
-encodingpathwaywhenexternalevidenceisabsent.
-3.6.5 Type Granularity in the Reported Cases
-Among SemTab classes with more than ten test samples, Athlete, Protein, and Film have the
-threelargestreportedaccuracyincreaseswhentherepresentation-generationtaskisadded.
-The examples distinguish relevance from exact label identity. Protein columns can receive
-KGcandidatessuchasGeneorEnzymes. FilmcolumnscanreceiveTelevisionseries,Scholarly
-article,orBook. Thesedescriptionscontainrelatedsemanticinformationbutaredifferentfrom
+OfflineGraphIndexing&Retrieval
+Few-shotTrainingTexts Facts
+WeightedGraph MinSpanningTree
+𝑦 𝑡: : J F o r in a u o d ur new Cryptoand Extract 𝑦 𝑣: : C Fr r a y u p d to, Index
+become a billionairein no Billionaire,… Crypto 0.3 Fraud Fraud
+time!…
+UnlabeledQueryTexts Keywords 0.2 0.6 Retrieve 0.6 0.2
+Innotime Billionaire Innotime
+𝑡 fr : o I m ’m E a l i b te ill G io lo n b a a ir l e F i u n n v d e stor Extract 𝑣:E B l i i l t l e i , onaire Map Billionaire
+who’ll make you one in no Innotime,…
+time!…
+Classification&OnlineGraphIndexing Keywords
+WeightedGraph
+MinSpanningTree 𝑣:Elite,
+CandidateLabels LLM Billionaire Billionaire 0.6 Fraud
+0.6
+Fraud
+0.2
+Fr
+…
+aud Classify
+Res
+In
+u
+n
+l
+o
+ti
+t
+n
+im
+g
+e,
+L
+…
+a bel
+O
+In
+n
+d
+li
+e
+n
+x
+e
+0.2 0.3 E
+0
+l
+.4
+ite
+Billionaire Innotime Fraud Innotime Crypto
+Figure 4.2: GORAG’s offline indexing, query-dependent retrieval, classification, and online
+update. Newquerykeywordsareassociatedwiththepredictedclassafterclassification. Repro-
+ducedfromFigure2ofGORAG[2].
+4.2 Weighted Graph Indexing
+GORAG maintains an undirected weighted graph 𝒢𝑟 = (𝒱𝑟,ℰ𝑟,𝒲𝑟). Its node set contains
+keyword nodes and label nodes. A keyword node represents an extracted word or short phrase.
+A label node represents a target class. The representation places label alternatives inside the
+same structure that stores their lexical associations. Support documents contribute keyword–
+labelassociationstothisrepresentation.
+A keyword–label edge is introduced when a keyword occurs in a text associated with that
+label. Repeatedoccurrencesacrosstextscontributetotheedgeweight. Akeywordsharedbysev-
+eralclassescanthereforehaveseverallabelneighbors,withadifferentcostforeachassociation.
+Queryretrievalwillusethesecostswhenchoosingconnectionsbetweenmappedkeywords.
+Thegraphstoreskeyword–labelassociations,whiletheclassifierreceivestheoriginalquery,
+retrievedlabels,andtheirdescriptions. Thefullqueryretainssyntax,wordorder,anddiscourse
+omittedbykeywordextraction. Thekeyword-onlyablationremovesthisfull-textinput.
+4.2.1 Keyword extraction and correlation scores
+GORAGscorestermsusingnormalizedTF–IDF[37]. Itsextractionvocabularyincludeswords
+and phrases of fewer than three words. Let 𝒯 denote the corpus seen so far, and let df(𝑣) be
+≤𝑟
+thenumberofitstextscontainingterm𝑣. Thereportedcorrelationscoreis
+count(𝑣,𝑡) |𝒯 |+1
+≤𝑟
+𝐶𝑆(𝑣,𝑡) = log . (4.2)
+|𝑡|log(|𝒯
+≤𝑟
+|+1) df(𝑣)+1
 34

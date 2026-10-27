@@ -1,30 +1,30 @@
 CHAPTER 1
 INTRODUCTION
 1.1 Motivation
-Language-model pipelines use text, table cells, and images as evidence for prediction or gen-
-eration. The usefulness of that context depends on which evidence was selected and how its
-parts relate to one another. A table column may contain names while omitting the occupations
-neededtoidentifyitssemantictype. Aclassificationquerymayrefertoalabelintroducedafter
-theinitialindexwasconstructed. Ananswermaydependonfactsdistributedacrosspassages. A
-multimodalquestionmayexpressarelationshipthatcorrespondstoseveralfactsintheevidence.
-Thesesettingsrequiredecisionsaboutevidencebeforethemodelproducesitsprediction.
-This thesis studies explicit structure as a means of making those decisions. A knowledge
-graph connects an entity to descriptions and relations beyond a table. A task graph connects
-keywords to labels and can be updated as classification proceeds. An evidence graph supports
-the selection of connected facts for text generation. A query graph specifies relationships to
-be matched against multimodal evidence. The central question is how these structures should
-participateinthecomputationthatsuppliescontexttoalanguagemodel.
-Thefirstsettingiscolumntypeannotation. Consideracolumnofpeopleaccompaniedonly
-bybirthanddeathdates. Amodelthatencodesthetablecanusethedatesascontext,butthetable
-may not identify a common occupation. Linking the names to a knowledge graph can supply
-that information. Conversely, the knowledge graph may associate a person with several valid
-types, while a dataset expects a particular label vocabulary. KGLink combines external graph
-information with a pre-trained language model and supervision from the annotation task [1].
-Thestructuresuppliesevidence;thetaskdeterminesthelabeltopredict.
-Thesecondsettingconcernsdynamicfew-shottextclassification. Alabelsetcangrowover
-rounds,withonlyafewexamplesavailableforeachlabel. Theretrievalindexmustrepresentthe
-available supervision and provide candidates for the current text. Adding every observed word
-uniformlydoesnotdistinguishusefulassociationsfromincidentalones. Returningafixednum-
-ber of semantically similar passages also leaves the candidate label decision implicit. GORAG
-constructs and updates weighted keyword–label relations and retrieves labels through connec-
+Language models use tables, text, and images to make predictions and generate answers. The
+required information is often incomplete or distributed across sources. A table may list people
+without identifying their occupations. A classification task may introduce labels absent from
+its initial training examples. A question may require facts from several passages or a relation-
+ship expressed jointly by text and images. Selecting the relevant evidence and preserving its
+connectionsarethereforepartofthepredictionproblem.
+We study how explicit knowledge structures can support evidence selection for language
+models. Knowledge graphs provide descriptions absent from a table. Task graphs maintain as-
+sociations between keywords and classification labels. Evidence graphs connect facts across
+passages, while query graphs specify the relationships needed to answer a multimodal ques-
+tion. Wedevelopmethodsthatusetheserelationshipstoretrieveevidenceandcontrolhowitis
+processed.
+Our first problem is column type annotation. A column of people accompanied by birth
+anddeathdatesmaylacktheinformationneededtoidentifytheircommonoccupation. Linking
+the names to a knowledge graph can supply that information, but the graph may assign several
+valid types to each person. These types may also differ from the annotation vocabulary. We
+proposeKGLinktoselectrelevantgraphdescriptionsandlearntheircorrespondencetothetarget
+labels[1].
+Our second problem is dynamic few-shot text classification. New labels arrive over succes-
+siverounds,withonlyafewexamplesforeachclass. Afixedretrievalbudgetdoesnotdetermine
+which labels are relevant to the current text, and uniformly indexing observed words can retain
+incidentalassociations. WeproposeGORAGtomaintainweightedkeyword–labelrelationsand
+retrievecandidatelabelsbyconnectingquerykeywords[2].
+Our third problem is evidence retrieval for textual question answering and generation. In-
+dividually relevant passages can repeat facts or leave their connections implicit. A short path
+between query anchors can also omit information needed for a summary. We propose AGRAG
 1

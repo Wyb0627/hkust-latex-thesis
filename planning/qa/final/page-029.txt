@@ -1,33 +1,32 @@
-extracted from a passage can provide a relational account of that passage, while passage nodes
-retainaroutetoitsoriginalwording. Combininggraphserializationwithsourcechunksletsthe
-generator receive both relational organization and textual context. AGRAG uses such a combi-
-nation in its hybrid retrieval pipeline. This connection between the selected structure and the
-originalmaterialisalsorelevanttomultimodalevidence,whereagraphdescriptioncanidentify
-relationshipswhiletheoriginalimagesuppliesvisualdetails.
-2.5 Multimodal Retrieval and Context Serving
-Multimodalquestionansweringrequiresevidencerepresentedinmorethanonemodality. Multi-
-ModalQAincludesquestionsovertext,tables,andimagesandstudiescombinationsofevidence
-across them [20]. The evidence needed for a question can occur in different source objects.
-A relationship stated in text may identify the image whose visual content contains the answer.
-Retrieval must therefore consider both the relevance of individual objects and the relationship
-connectingthemtothequestion.
-Multimodalindexingintroducesarepresentationdecisionbeforegraphretrieval. Imagescan
-bedescribedthroughcaptionsandindexedastext,orencodedwithamodelthatproducesvisual
-or shared representations. These choices expose different information to the retrieval score. A
-captionprovideslanguagedescribingselectedvisualcontent;theoriginalimagepreservesvisual
-details available to a multimodal generator. MGRAG uses caption-based representations in its
-coarse-rankingpathwayandlatersuppliesselectedoriginalchunkstogeneration[4]. Itsmethod
-chapterspecifiestheinterfaceateachstage.
-MRAMG-Benchstudiesretrieval-augmentedgenerationinwhichanswerscancombinetext
-and images [21]. Its multimodal output requirement adds another distinction between finding
-supporting evidence and presenting the response. The MGRAG evaluation uses six MRAMG
-subsetstogetherwithMMQA.Chapter6specifiestheretrievalandanswer-assessmentprotocol
-usedforthesedatasets.
-Onceevidenceisretrieved,thesystemmustprocessitasmodelcontext. Inanautoregressive
-Transformer, the prefill stage computes representations for the supplied input, and decoding
-generatesanswertokens. Keyandvaluetensorsfromprocessedinputpositionscanbecachedfor
-later attention computation [7, 22]. Reusing these tensors concerns the computation associated
-with selected evidence. It is a separate decision from choosing which evidence belongs in the
-context.
-CacheGen addresses the storage and transfer of context caches through compression and
+is represented. Hyper adds connections intended to preserve these associations. A qualifier
+integratorinsteadreceivesthemainfactanditsqualifierpairstogether.
+WecompareconventionalKGEmodelsunderthesetransformationswithspecializedHKGE
+models. Some GNN-based configurations obtain comparable scores on Cleaned JF17k and
+WD50k. Adding qualifier-derived edges changes the graph paths available to an encoder, so
+informationpreservationdependsonboththetransformeddataandthemodelthatprocessesit.
+2.6.2 Qualifier Capture and Graph Reception
+The analysis separates qualifier capture from graph reception. Qualifier capture concerns how
+themodelrepresentsqualifierpairsandtheirassociationwiththemainstatement. Graphrecep-
+tionconcernshowitreceivesinformationfromthewidergraph,includingdependenciesbeyond
+one fact. Models operating on a fact in isolation have a different receptive field from graph
+encoders that propagate information across several hops. These properties are visible in the
+operationsusedtoconstructrepresentations.
+CompGCNjointlymodelsentityandrelationrepresentationsinamulti-relationalgraph[25].
+NBFNet aggregates path information for link prediction [26]. Their graph computations offer
+different ways to receive neighborhood and path information after decomposition. The CIKM
+analysis also identifies an information-compression issue when qualifier information is aggre-
+gatedintofixed-sizemain-triplerepresentations. Widergraphreceptionandqualifierintegration
+consequentlyconcerncomplementarypartsofthearchitecture. Thestudyevaluatesdesignsthat
+retainbothsourcesforprediction.
+FormerGNN combines a Transformer-based qualifier integrator operating on the original
+hyper-relational facts with a graph encoder operating on the pruned main-triple graph. The
+graphencodergeneratesatopologyrepresentationforthesubject. Themodelconcatenatesthis
+representation with representations of the main triple and qualifier pairs and passes them to a
+Transformer decoder. This organization supplies qualifier and graph information jointly to the
+prediction stage. In the reported configuration, HyperFormer provides the qualifier integrator
+andNBFNetprovidesthegraphencoder[26,27].
+2.6.3 Representative Published Evidence
+Table 2.2 reproduces the Cleaned JF17k and WD50k columns of the study’s Table 6. MRR
+measuresmeanreciprocalrank,andH@1andH@10measurewhetherthetargetentityappears
+within the corresponding rank cutoff. These are link-prediction measures, distinct from the an-
 15

@@ -1,33 +1,33 @@
-Neighborhoodaggregationcanenrichanentityrepresentation,apathcanprovideevidencecon-
-necting two mentioned entities, and a subgraph can organize several facts relevant to a ques-
-tion. Their usefulness depends on the interpretation of the edges. A factual relation, a lexical-
-similarityedge,andakeyword–labelassociationimposedifferentmeaningsonatraversedcon-
-nection.
-Languagemodelsprovideacomplementaryrepresentation. TheTransformerusesattention
-to compute token representations from their context [7]. BERT pre-trains bidirectional con-
-textual representations and can be fine-tuned with a task-specific output layer [8]. In column
-annotation, contextual token vectors can represent a column and feed a classifier. Generative
-language models instead produce an answer sequence conditioned on the query and supplied
-context. This thesis uses the term language model for both roles and specifies the relevant pre-
-dictioninterfaceineachresearchchapter.
-Knowledgestoredinlearnedparametersandevidencesuppliedatpredictiontimeenterthese
-interfacesdifferently. Fine-tuningmodifiesmodelparametersusinglabeledexamples. Retrieval
-selectsmaterialfromanexternalindexandplacesitinthemodel’sinput. Amodelcancombine
-both, as in KGLink’s learned annotation model with graph-derived features. The later RAG
-systemsemphasizetheselectionofexternalevidenceforagenerator. Comparingthesemethods
-thereforerequiresidentifyingthesourceofevidence,theoperationthatselectsit,andthemodel
-componentthatusestheselectedrepresentation.
-2.2 Knowledge-enhanced Table Understanding
-Column-type annotation assigns semantic labels to table columns. A column of names, num-
-bers,ordatesmaysupportseveralplausibleinterpretations,andsurroundingcolumnscandisam-
-biguate them. The target vocabulary is part of the task definition. Predicting a broad category
-such as Name and predicting a narrower occupation category require different decisions even
-whentheunderlyingvaluesareidentical. Thismakestableannotationausefulsettingforexam-
-ininghowexternalfactsandlearnedrepresentationsinteract.
-Sherlockrepresentscolumnvaluesusingstatisticalproperties,characterdistributions,word
-embeddings,andparagraphvectors,thentrainsaneuraltypedetector[9]. Theapproachmakes
-distributional properties of a column available to the classifier. Its prediction unit is the col-
-umn, so the available features differ from a representation that encodes the whole table jointly.
-Sato adds table context through topic modeling and structured prediction [10]. It combines
-evidence about the values with contextual signals about which semantic types occur together.
+knowledge-based methods retrieve external facts. Their coverage determines which ambigui-
+tiestheycanresolve.
+2.3 Retrieval-augmented Generation
+Retrieval-augmentedgenerationconditionsagenerativemodeloninformationselectedfroman
+externalcollection[14]. Aretrievalstagemapsthequerytoindexedevidence,andageneration
+stage uses the evidence to produce an answer. The distinction makes the external collection an
+explicit part of the prediction system. Changing its contents or its selection rule changes the
+contextreceivedbythegeneratorevenwhenthegenerator’sparametersstayfixed.
+Apassage-basedRAGpipelinedividesacorpusintochunks,indexesthem,andconcatenates
+the retrieved chunks with the query. Small chunks can separate a fact from its explanation.
+Largechunkspreservemorecontextbutconsumemoreinputtokens. Overlapretainsinformation
+acrosschunkboundariesatthecostofrepeatingsometext.
+Sparse retrieval scores lexical evidence. BM25 combines within-document term frequency
+with corpus frequency and document-length normalization [15]. It distinguishes a query term
+thatoccurswidelyfromonethatisconcentratedinfewerindexeditems. Denseretrievalinstead
+represents queries and passages as vectors and scores their correspondence in a learned space.
+Dense Passage Retrieval uses a dual-encoder framework with separate question and passage
+encoders [16]. The two representations provide different signals, so hybrid retrieval can select
+contextusingbothlexicaloverlapandembeddingsimilarity.
+For a query 𝑞 and indexed evidence item 𝑒, write the retrieval score abstractly as 𝑠(𝑞,𝑒).
+A conventional fixed-budget result contains the highest-scoring 𝑘 items. Evidence is scored at
+the chosen item granularity, and the retrieval cutoff controls how many items are returned. A
+graph-based system can alter either assumption. It can score relationships as well as items, or
+determinethecontextbyastructuralconditionsuchasconnectingqueryanchors. Theresulting
+contextisthenaselectedrelationalobjectwithaserializationforthelanguagemodel.
+Retrieval evaluation measures whether the selected context contains supporting evidence.
+Generation evaluation measures the resulting answer through correctness, reference overlap, or
+model-based assessment. An answer improvement can arise from selecting better evidence,
+organizingthecontext,orusingitmoreeffectively.
+Anevolvingcollectionaddsamaintenanceproblem. Newlyavailabledocuments,examples,
+or labels must enter the index before retrieval can use them. Updating stored evidence can in-
+volve new embeddings, new graph nodes, changed edge weights, or derived summaries. The
 10

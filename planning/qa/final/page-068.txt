@@ -1,29 +1,33 @@
-CHAPTER 5
-CONNECTED EVIDENCE SELECTION FOR LANGUAGE
-MODELS WITH AGRAG
-ThischapterisbasedonAGRAG:AdvancedGraph-basedRetrieval-AugmentedGeneration
-for LLMs, published at ICDE 2026 [3]. It studies how a retrieval system can select connected
-evidence and communicate the relationships among retrieved facts to a language model. The
-task extends beyond retrieving a relevant label. An answer may require several facts, their con-
-nections,andthesurroundingpassagesthatexplainthem.
-5.1 Research Problem and Evidence Requirements
-A retrieval system can locate passages relevant to a question while still leaving the generator
-with the task of discovering how those passages fit together. This distinction matters when a
-question asks for a summary, an explanation, or a response that combines information from
-different parts of a corpus. Similar passages may repeat one fact. Passages containing different
-parts of an answer may share few words. A graph provides an explicit representation of these
-connections,butthesystemmuststilldecidewhichpartofthegraphtosupplytothegenerator.
-Theresearchquestioninthischapterishowtoselectevidencethatcombinesqueryrelevance
-with connectivity. There are two related decisions. The first concerns the construction of the
-graph from text. Extracted entities establish the vocabulary over which subsequent retrieval
-operates. Thesecondconcernsthesubgraphreturnedforaquery. Arankingofindividualnodes
-assigns relevance scores, whereas a connected subgraph also specifies relationships among the
-selecteditems. AGRAGaddressesthesedecisionsthroughstatisticalentityextraction,influence-
-awaregraphretrieval,andaseparatehybridpassageretrievalchannel.
-Consider a corpus containing statements about an illness, the organ that it affects, and the
-routesthroughwhichitspreads. Aquerymaymatchfactsmentioningtheillnessandtheorgan.
-Connecting those facts can identify a small initial structure, but answering the question may
-require a neighboring fact that specifies another anatomical component. The original example
-in Figure 5.2 illustrates this distinction. The example motivates expansion beyond an initial
-terminal-connectingstructure.
+stated subgraph optimization problem and a 2-approximation result for the initial terminal-
+connecting stage. The expansion procedure adds further evidence after that stage. The ablation
+replacestheexpandedsubgraphwiththeinitialSteiner-treerepresentation.
+The graph returned by retrieval is serialized as 𝑔 = StrConcat(𝒱 ,ℰ ). This repre-
+MCMI MCMI
+sentationcontainstheselectedentitiesandrelations. Itmakestheselectedrelationshipsavailable
+withinthemodel’sinputsequence.
+5.5 Hybrid Retrieval and Generation
+Agraphindexcapturesextractedrelationships,whereasmanydetailsremainintheoriginaltext.
+AGRAGthereforealsoretrieveschunksthroughahybridscore,
+MS(𝐪,𝐭)+BM25(𝑞,𝑡)
+HS(𝑞,𝑡) = , (5.13)
+2
+where 𝐭 is the dense representation of chunk 𝑡. The top 𝑘 chunks according to this score form
+𝑟
+𝒯 . Thesourcereports𝑘 = 5inthemainsetting.
+HR 𝑟
+Dense retrieval scores semantic similarity, while BM25 scores lexical overlap [15]. We
+averagethemandcombinetheselectedpassageswiththegraphserialization.
+Thefinalanswerisgeneratedthrough
+𝐴 = LLM(𝑞,𝑔,𝒯 ,𝑝 ). (5.14)
+𝑞 HR gen
+The generator receives the question, selected graph facts, and hybrid passages. Graph-only and
+hybrid-onlyablationstestthecontributionsofthetwoevidencechannels.
+Forclassification,theretrievalinterfaceisadaptedtoreturncandidatelabelsassociatedwith
+passages. One training passage per label supplies the indexed corpus. The generator selects
+a label from the retrieved candidate set. This classification index is fixed, whereas GORAG
+updatesitsindexonlineoverlabelroundsinChapter4.
+5.6 Computational Properties
+AGRAG’s work is distributed across corpus indexing and query processing. Statistical extrac-
+tion and passage-link construction operate over the corpus. Query processing includes triple
+mapping, filtering, graph propagation, subgraph selection, hybrid retrieval, and generation.
 54

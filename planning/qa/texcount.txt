@@ -30,7 +30,7 @@ Number of math displayed: 0
 
 Included file: ./chapter/ch01-introduction.tex
 Encoding: ascii
-Words in text: 2345
+Words in text: 1909
 Words in headers: 58
 Words outside text (captions, etc.): 36
 Number of headers: 13
@@ -40,7 +40,7 @@ Number of math displayed: 0
 
 Included file: ./chapter/ch02-background.tex
 Encoding: ascii
-Words in text: 3620
+Words in text: 2698
 Words in headers: 46
 Words outside text (captions, etc.): 83
 Number of headers: 11
@@ -50,7 +50,7 @@ Number of math displayed: 1
 
 Included file: ./chapter/ch03-kglink.tex
 Encoding: utf8
-Words in text: 4034
+Words in text: 3252
 Words in headers: 88
 Words outside text (captions, etc.): 234
 Number of headers: 22
@@ -60,7 +60,7 @@ Number of math displayed: 9
 
 Included file: ./chapter/ch04-gorag.tex
 Encoding: ascii
-Words in text: 3790
+Words in text: 2905
 Words in headers: 73
 Words outside text (captions, etc.): 129
 Number of headers: 19
@@ -70,7 +70,7 @@ Number of math displayed: 8
 
 Included file: ./chapter/ch05-agrag.tex
 Encoding: utf8
-Words in text: 4148
+Words in text: 3324
 Words in headers: 90
 Words outside text (captions, etc.): 85
 Number of headers: 21
@@ -80,7 +80,7 @@ Number of math displayed: 17
 
 Included file: ./chapter/ch06-mgrag.tex
 Encoding: ascii
-Words in text: 5315
+Words in text: 4306
 Words in headers: 116
 Words outside text (captions, etc.): 116
 Number of headers: 30
@@ -90,7 +90,7 @@ Number of math displayed: 12
 
 Included file: ./chapter/ch07-discussion.tex
 Encoding: ascii
-Words in text: 1670
+Words in text: 1090
 Words in headers: 30
 Words outside text (captions, etc.): 47
 Number of headers: 7
@@ -100,7 +100,7 @@ Number of math displayed: 0
 
 Included file: ./chapter/ch08-conclusion.tex
 Encoding: ascii
-Words in text: 682
+Words in text: 491
 Words in headers: 20
 Words outside text (captions, etc.): 0
 Number of headers: 6
@@ -330,7 +330,7 @@ Number of math displayed: 0
 
 Sum of files: main.tex
 File(s) total: main.tex
-Words in text: 26919
+Words in text: 21290
 Words in headers: 522
 Words outside text (captions, etc.): 1421
 Number of headers: 130
@@ -343,14 +343,14 @@ Subcounts:
   0+1+0 (1/0/0/0) File: main.tex
   206+0+0 (0/0/0/0) Included file: ./chapter/front-abstract.tex
   42+0+0 (0/0/0/0) Included file: ./chapter/front-acknowledgements.tex
-  2345+58+36 (13/2/0/0) Included file: ./chapter/ch01-introduction.tex
-  3620+46+83 (11/3/10/1) Included file: ./chapter/ch02-background.tex
-  4034+88+234 (22/11/43/9) Included file: ./chapter/ch03-kglink.tex
-  3790+73+129 (19/5/41/8) Included file: ./chapter/ch04-gorag.tex
-  4148+90+85 (21/3/56/17) Included file: ./chapter/ch05-agrag.tex
-  5315+116+116 (30/5/89/12) Included file: ./chapter/ch06-mgrag.tex
-  1670+30+47 (7/2/0/0) Included file: ./chapter/ch07-discussion.tex
-  682+20+0 (6/0/0/0) Included file: ./chapter/ch08-conclusion.tex
+  1909+58+36 (13/2/0/0) Included file: ./chapter/ch01-introduction.tex
+  2698+46+83 (11/3/10/1) Included file: ./chapter/ch02-background.tex
+  3252+88+234 (22/11/43/9) Included file: ./chapter/ch03-kglink.tex
+  2905+73+129 (19/5/41/8) Included file: ./chapter/ch04-gorag.tex
+  3324+90+85 (21/3/56/17) Included file: ./chapter/ch05-agrag.tex
+  4306+116+116 (30/5/89/12) Included file: ./chapter/ch06-mgrag.tex
+  1090+30+47 (7/2/0/0) Included file: ./chapter/ch07-discussion.tex
+  491+20+0 (6/0/0/0) Included file: ./chapter/ch08-conclusion.tex
   0+0+26 (0/1/0/0) Included file: ./chapter/tables/gorag-dataset-table.tex
   0+0+150 (0/6/0/0) Included file: ./chapter/tables/gorag-main-tables.tex
   0+0+7 (0/1/0/0) Included file: ./chapter/tables/gorag-ablation-table.tex

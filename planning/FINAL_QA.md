@@ -1,19 +1,23 @@
 # Current source QA and PDF checkpoint
 
-Updated 2026-10-27 (Asia/Shanghai), following the Sun-reference full-thesis style pass.
+Updated 2026-10-27 (Asia/Shanghai), after repairing the project compilation entry point.
 
-## Current sources
+## Sources and compilation
 
-All eight chapters were edited in place. The abstract remains 206 words. Current narrative word count is 19,975, or 21,917 including headings/captions. See `CHAPTER_COUNTS.md`. Source checks confirm identical displayed equations, algorithm, inline and external tables, figure environments, labels, citations and ordered numeric tokens. The original research graphics, bibliography and main document also retain their hashes. Detailed checks: `review-sun-style-2026-10-27/verification.json`.
+The 198 prose edits across Chapters 1–8 are included in the updated PDF. Narrative words: 19,975; including headings/captions: 21,917; abstract: 206. Source-preservation checks remain at `review-sun-style-2026-10-27/verification.json`. This repair changed the build script, not the manuscript or experimental content.
 
-## Built-in compilation
+The installed TeX Live 2023 provides XeLaTeX, latexmk 4.79 and Biber 2.19. Environment diagnosis and a TeX Live smoke test passed. An explicit Biber pass and full XeLaTeX rebuild succeeded. The repaired build script was verified with PATH restricted to `/usr/bin:/bin`; it explicitly locates the active MacTeX tools and logs their paths. Logs: `compile-repair-2026-10-27/terminal-build.txt`, `biber-rebuild.txt`, `repaired-build.txt`.
 
-The requested `compile_latex_document` was called with the saved `chapter/front-abstract.tex` and the project root; it selected `main.tex`. The initial 0.18-point Discussion overflow was repaired. The latest diagnostics contain no overfull box or LaTeX source error, but compilation failed at the external Biber stage with `No such file or directory (os error 2)`. The app also records its initial TeX Live exit -6 and later Tectonic exit 1. Terminal Biber exists at `/Library/TeX/texbin/biber`; the app's invocation issue remains unresolved. Final log: `review-sun-style-2026-10-27/compile-final-diagnostics.json`.
+Final logs contain no undefined citations/references, missing characters, duplicate labels/destinations, Biber warning/error, LaTeX error or overfull box. Existing non-fatal warnings concern the vendored document-class path/name, an unused global option, and siunitx/physics integration.
 
-No successful final compile, updated PDF export or current-PDF visual QA is claimed. The source editor remains open, and no other tab or replacement document was opened.
+## Updated exported PDF
 
-## Previous exported reading PDF
+`main.pdf` and `thesis.pdf` have identical SHA-256 `2e0fa332ed7ffd94111d25b45640d4fcf60e24baa97b90d277ae13c9f3941a87`. Total 115 pages: 14 preliminary, 96 body, 5 references. All pages are A4 and unrotated; all 95 fonts are embedded. No empty text page or body-margin violation was detected. All 115 pages were rendered and reviewed in six contact sheets; the abstract and algorithm were also inspected at higher resolution. Tables, figures, contents, bibliography and page numbers render without clipping or overlap. Question marks in the KGLink example figure are intentional missing-value placeholders, not unresolved references.
 
-`thesis.pdf` and the data under `qa/final/` describe the preceding abstract revision, not the latest full-thesis source edits. That export has 128 pages and SHA-256 `08d701b5b070ec8ec9c226d632882a0e9f80c44edbc370618bc763244559e8fc`. Its successful compilation and PDF inspection records are preserved in `review-sun-style-2026-10-27/previous-final_qa.md`. The older ZIP also predates this pass.
+Original figure limitations remain recorded in `qa/final/typography-summary.json`: some raster instances are 224–257 ppi, and 18 embedded fonts from source graphics have no Unicode map. No graphics were replaced or upsampled. Chapter page ranges are regenerated in `CHAPTER_COUNTS.md`.
 
-The manuscript's scientific and institutional items remain in the existing evidence ledgers and `AUTHOR_ACTIONS.md`; this pass did not run new experiments or re-verify publisher sources.
+## App preview
+
+The built-in compiler was retried after the successful project build. It still reports TeX Live exit -6 and Tectonic’s external Biber program-not-found error. This independent preview is not certified as repaired. The app helper also defaults to pdfLaTeX in a direct reproduction, which fails on this thesis’s unicode-math package. Details and bounded conclusions: `compile-repair-2026-10-27/REPORT.md`; retry: `built-in-retry.json` in that directory. No signed app bundle or system-wide environment was modified.
+
+The previous 128-page PDF checkpoint is historical. The October 25 portable ZIP also predates the latest manuscript. Institutional and scientific author items remain in `AUTHOR_ACTIONS.md` and the existing evidence ledgers.

@@ -1,40 +1,31 @@
-Event User Query
-TokenSequence
-IrandhirSantos acts inThe Assailant ... Cross Attention
-IrandhirSantos acts
-In
-Man MidAir
-𝜙 𝑡 not in top 𝑏% Output
-Do
-KV Reuse
-MartialArtsKick LLMGraph Construction
-Query-awareKG |(!|
-!𝑎
-X !'
-Graph Sequence 𝑆 ! "%&
-|$|
-!𝑎
-X !"
-User Query
-"%&
-"
-𝐺𝐹 + 𝜙 𝑡
-!
-Figure 6.4: Graph features supplement attention in token recomputation scoring. The diagram
-retainstheoriginalgraphicalcontent. OriginalFigure4,p.2487[4].
-proposedpolicyconcernstherankingoftokenstatesforselectiverecomputation. Thebudgetis
-representedby𝑏;thenumericalexperimenttablesdonotspecifyafixedvalueforthatbudget.
-Figure6.4showshowthegraphcontributes. Query-relatedeventsarerepresentedbyentities
-andrelations. Thescorecombinesattentiontothequery,attentiontothegraphsequence,anda
-feature derived from the topology of the associated fact. The goal of the added term is to give
-tokensaccesstoanevent-levelstructuralsignalalongsidetoken-levelattention.
-6.6.2 Topological features of facts
-MGRAGusesdegree,betweenness,eigenvector,andclosenesscentralitytocharacterizeanode.
-Degree centrality measures its normalized number of adjacent connections. Betweenness char-
-acterizes its participation in paths connecting other nodes. Eigenvector centrality weights con-
-nectionsbythecentralityoftheirneighbors. Closenessusesdistancestoothergraphnodes. The
-publishedmethodaveragesthesefourquantities,
-𝑑𝑐(𝑢)+𝑏𝑐(𝑢)+𝑒𝑐(𝑢)+𝑐𝑐(𝑢)
-𝑓(𝑢) = . (6.11)
-4
+6.11 Ablations and Parameter Sensitivity
+6.11.1 Component ablations
+The MMQA ablations in Table 6.7 change matching, coarse encoding, and pipeline composi-
+tion. Removing graph matching constructs the query-specific graph from a fixed number of
+chunks and reports accuracy 0.7260, compared with 0.7442 for MGRAG. Replacing caption-
+based coarse ranking with direct CLIP encoding [72] reports accuracy 0.7376. The Vanilla
+MGRAGvariantappliespathmatchingandgraph-awarecachingwithintheVanillaRAGpipeline
+with𝑘 = 5;itreportsaccuracy0.6887.
+Table6.7: MMQAcomponentablations,reproducedfrompublishedTable9,p.2490[4]. Time
+isinhours.
+Model SIM. ACC. ROG. BLEU Time
+Withoutgraphmatching 0.8362 0.7260 0.6657 0.5774 4.4h
+WithCLIPencoder 0.8513 0.7376 0.6744 0.7008 4.5h
+VanillaMGRAG,𝑘 = 5 0.8260 0.6887 0.6266 0.5773 4.7h
+MGRAG 0.8533 0.7442 0.6763 0.7215 4.3h
+The full system also has the largest SIM., ROUGE-L, and BLEU-1 entries in this table. Its
+reported time is 4.3 hours, compared with 4.4 hours without graph matching, 4.5 hours with
+CLIP,and4.7hoursforVanillaMGRAG.Caption-basedrankingperformsbetterthantheCLIP
+substitutiononMMQAwiththispipelineandbackbone.
+6.11.2 Adding components to other pipelines
+Table 6.8 retains the inverse ablations. Adding graph-aware KV recomputation to HippoRAG2
+changes accuracy from 0.6335 to 0.6855 and time from 7.5 to 7.6 hours. Adding path-based
+semantic matching gives accuracy 0.7372 and time 4.1 hours. Combining both gives accuracy
+0.7442 and time 4.3 hours. The latter configuration shares MGRAG’s reported values because
+thepublicationidentifiesitsretrievalandgenerationsettingwiththefullmethodoncebothcom-
+ponentsareincorporated.
+For VanillaRAG, the base accuracy is 0.7053 at 2.6 hours. Adding path matching gives
+0.7175 at 4.7 hours, and adding graph-aware recomputation as well gives 0.7232 at 4.8 hours.
+Thus,thecomponentadditionsincreasequalityinthesemeasuredcompositions,whiletheirtime
+changesdependonthehostpipeline.
 87

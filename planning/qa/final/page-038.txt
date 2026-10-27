@@ -1,51 +1,21 @@
-Part1:Knowledge graph for candidate-type extraction
-Step1:
-𝒎𝟎 𝟎 𝒎𝟏 𝟎 𝒎𝟐 𝟎
-I
-T
-n
-a
-p
-b
-u
-le
-t … … … Entitysets𝑬 𝒎𝒄𝒓with
-linkingscore𝒍𝒔
-𝒎𝟎 𝒓 𝒎𝟏 𝒓 𝒎𝟐 𝒓 𝒆
-Step2:
-Rowlinking 𝑙𝑠% 𝒎𝟎 𝟎 𝒎𝟏 𝟎 𝒎𝟐 𝟎
-scores … … … …
-Candidateentitysets𝑬$
-𝒎𝒄𝒓
-withoverlappingscore𝐨𝒔
-𝑙𝑠& 𝒎𝟎 𝒓 𝒎𝟏 𝒓 𝒎𝟐 𝒓 𝒆
-Extractonehopneighbor𝓝(𝒆)
-Step3: forentity𝒆 andgeneratethe
-featuresequence𝑺(𝒆)
-𝒎𝟎 𝟎 𝒎𝟏 𝟎 𝒎𝟐 𝟎
-FilteredTable
-… … …
-Candidateentity𝑬$ 𝒎𝒄∗forcolumn
-with𝒌rows 𝒄,andcandidatetypescore
-𝒎𝟎 𝒌 𝒎𝟏 𝒌 𝒎𝟐 𝒌 𝒄𝒕𝒔 𝒄𝒕𝒄 for𝒄𝒕 𝒄 ∈𝑬$ 𝒎𝒄∗
-Figure3.3: TheoriginalKG-processingpipeline. Celllinkingisfollowedbyentityfiltering,row
-selection,andcandidate-typegeneration. ReproducedfromKGLink[1],Fig.4.
-Thefilteredsetforacellis
-𝐸̂ 𝑚𝑟 𝑐1 = ⋃ ( 𝐸 𝑚𝑟 𝑐1 ∩𝒩(𝐸 𝑚𝑟 𝑐2 ) ) . (3.1)
-𝑐 ∈𝐶⧵{𝑐 }
-2 1
-The union allows support from any other column. The intersection retains entities retrieved for
-thetargetmentionthatalsohavetherequiredneighborhoodsupport.
-Figure3.4usesRust andPeterSteele. Agraphconnectionbetweenanalbumcandidateand
-the musician candidate supports their interpretation as the entities intended by the row. The
-role of the edge is to constrain which external facts are relevant to the table. KGLink subse-
-quently associates each retained entity with an overlapping score that counts its neighborhood
-supportfromothercolumns. Entitieswithmoresuchsupportcontributemoretocandidate-type
-selection.
-Neighborhoodsupportisastructuralselectionsignal. Itdependsontherelationsrecordedin
-theexternalgraphandontheinitialentitycandidates. Amissinggraphrelationcanremoveuse-
-fulevidence,whileanincorrectlexicalcandidatecansurviveifithasmatchingcontextuallinks.
-Themodelthereforealsousestheoriginaltablesequenceandaseparatefeaturerepresentation.
-The filter uses inter-column information within a row, whereas candidate-type generation
-aggregates across rows within a column. These are different structural assumptions. The first
+Figure 3.5: Contextual type-representation training with masked and ground-truth table inputs.
+Thetrue-typetableisconstructedduringtraining. OriginalimagereproducedfromKGLink[1],
+Fig.6.
+coding the two sequences produces contextual representations for the true type and its masked
+counterpart.
+Figure3.5illustratesthetwoinputsandtheircontextualoutputs.
+This arrangement supplies supervision about the label’s meaning in context. A label such
+as Musician is encoded together with the column values and graph-derived descriptions, rather
+than as an isolated word. The masked input must produce its type representation from the evi-
+dencethatwillbeavailableatpredictiontime. Distilledmaskedlanguagemodelingprovidesthe
+auxiliary objective [28]. The model projects contextual representations into vocabulary space
+with a temperature parameter, then uses the ground-truth and masked outputs in the reported
+trainingloss.
+Withcontextualvector𝐻 andtemperature𝒯,vocabularyprojectiongives
+𝐻
+𝑌 = Softmax 𝑊 , (3.5)
+( 𝑜 )
+𝒯
+where 𝑊 projects into the vocabulary space. Denote the masked and ground-truth outputs by
+𝑜
 24

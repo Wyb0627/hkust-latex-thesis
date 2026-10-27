@@ -1,19 +1,29 @@
-Table 1.2: Publications incorporated into the thesis. The hyper-relational study provides a sep-
-aratebackgroundsection;thefourotherstudiesformthecoreresearchchapters.
-Publication Venue Thesislocation
-KGLink[1] ICDE2024 Chapter3
-Understanding the Embedding Models on CIKM2025 Chapter 2, structural infor-
-Hyper-relationalKnowledgeGraph[5] mationsection
-GORAG[2] WWW2026 Chapter4
-AGRAG[3] ICDE2026 Chapter5
-MGRAG[4] PVLDB2026 Chapter6
-Chapter2establishesthesharedconceptsandcomparesrelatedworkaccordingtoevidence
-representation,retrieval,updates,matching,andcontextserving. Itincludesthehyper-relational
-study as an information-preservation perspective. Chapters 3–6 then develop the four research
-questions in sequence. Each chapter gives its problem, method, evaluation protocol, published
-evidence,anddiscussion.
-Chapter 7 compares the points at which structure enters these pipelines. It examines static
-andquery-dependentevidence,therelationshipbetweenqualityandcomputationalcost,andthe
-conditions affecting interpretation. Chapter 8 returns to the research questions and identifies
-directionsforfuturework.
+CHAPTER 2
+BACKGROUND AND RELATED WORK
+This chapter reviews the foundations of knowledge graphs, language models, table annota-
+tion, graph retrieval, and multimodal context processing. We compare the information repre-
+sented by each method and the operations used to retrieve it. Section 2.6 presents our study of
+informationpreservationinhyper-relationalknowledgegraphs.
+2.1 Knowledge Graphs and Language Models
+A knowledge graph represents entities and their relationships explicitly. In a conventional rela-
+tional representation, a fact is a triple (𝑠,𝑟,𝑜), where 𝑠 is a subject entity, 𝑟 a relation, and 𝑜 an
+object entity. A set of these facts forms a directed graph whose edge labels identify relations.
+Wikidata provides a collaborative knowledge resource in which structured statements and their
+qualifierscandescribeentitiesbeyondthecontentofasingledocument[6]. Amodelaccessing
+thisgraphcanretrieverelationsassociatedwithamentionedentity,includinginformationabsent
+fromitsimmediateinput.
+The graph representation separates an entity’s identity from the strings used to mention it.
+Atablecellorquerycontainsamention,whileanentitynodereferstoanindexedobject. Entity
+linking establishes a correspondence between the two. A short name may match several enti-
+ties,soaretrievalscoreandacontextualdisambiguationrulecaninfluencewhichfactsbecome
+available. When a graph is extracted from text, repeated strings, aliases, and synonyms affect
+whetherdifferentpassagesshareanode. Theseindexingchoicesdeterminepossiblepathsbefore
+aquery-specificselectionalgorithmbegins.
+Graph neighborhoods, paths, and subgraphs support different retrieval operations. Neigh-
+borhoodaggregationenrichesentityrepresentations. Pathsconnectentitiesmentionedinaques-
+tion. Subgraphs collect several relevant facts and their relationships. The edge type determines
+how a connection should be interpreted, whether it represents a fact, lexical similarity, or a
+keyword–labelassociation.
+Languagemodelsprovideacomplementaryrepresentation. TheTransformerusesattention
+to compute token representations from their context [7]. BERT pre-trains bidirectional con-
 8

@@ -1,17 +1,42 @@
-Table 5.16: Fact retrieval in the low-resource setting. Qwen3-4B-Instruct-2507 on two 2080 Ti
-GPUs;valuesandemphasispreserved.
-Method Novel ROG Novel ACC Medical ROG Medical ACC
-SiReRAG-L 0.271 0.416 0.343 0.661
-HippoRAG2-L 0.288 0.513 0.338 0.654
-AGRAG-L 0.297 0.560 0.351 0.701
-Table5.17: Novellow-resourceeﬀiciency. Qwen3-4B-Instruct-2507ontwo2080TiGPUs.
-Method Index min Query min Input tokens Output tokens
-SiReRAG-L 52.0 183.5 7,898 1,003
-HippoRAG2-L 55.7 131.2 7,964 1,354
-AGRAG-L 44.7 132.1 6,625 1,172
-Table5.18: Medicallow-resourceeﬀiciency. Qwen3-4B-Instruct-2507ontwo2080TiGPUs.
-Method Index min Query min Input tokens Output tokens
-SiReRAG-L 18.1 182.3 5,113 827
-HippoRAG2-L 21.8 162.4 5,577 584
-AGRAG-L 14.4 167.3 5,282 534
+relation.
+Let 𝐼 ∶ 𝒱̂ → 𝒱 be a candidate entity mapping. For a query edge (𝑢,𝑟,̂ 𝑣), the candidate
+𝑞 𝑞
+evidence paths run from 𝐼(𝑢) to 𝐼(𝑣). Denote this collection by 𝒫(𝐼(𝑢),𝐼(𝑣)). The matching
+objectiveis
+max
+∑
+max cos(𝐡
+𝑟
+,
+̂
+𝐡 𝑃). (6.7)
+𝐼 𝑃∈𝒫(𝐼(𝑢),𝐼(𝑣))
+(𝑢,𝑟,̂𝑣)∈ℰ̂
+𝑞
+Candidatemappingsmustsatisfythesemanticthreshold𝜃 forthemappedentitiesandforevery
+queryrelation’ssupportingpath,
+cos(𝐡 𝑢 ,𝐡 𝐼(𝑢)) > 𝜃 forall𝑢 ∈ 𝒱̂ 𝑞 , (6.8)
+max cos(𝐡 𝑟 , ̂ 𝐡 𝑃) > 𝜃 forall(𝑢,𝑟,̂ 𝑣) ∈ ℰ̂ 𝑞 . (6.9)
+𝑃∈𝒫(𝐼(𝑢),𝐼(𝑣))
+The constraints validate each query edge against an associated evidence path. The selected
+evidenceisthesubgraphformedfromthemappedentitiesandacceptedpaths,whichcaninclude
+intermediateentitiesabsentfromthequerygraph.
+For a fixed entity mapping, the inner maximization in Equation 6.7 selects a path for each
+queryrelation. Theoutersearchcomparesmappingsusingthesepathscores. Similarendpoints
+can therefore produce different matching scores when their connecting paths express different
+relations.
+Thereturnedsubgraphistheunionoftheacceptedpaths,whichcansharenodesandedges.
+Intermediateentitiesallowarelationstatedcompactlyinthequestiontomatchalongerdescrip-
+tionintheevidence.
+In the family-relation example, two father relations support one grandfather relation. The
+pathsimilaritymustpassvalidation,anditsendpointsmustalsoalignwiththequeryentities.
+6.5.2 Anchor selection and candidate mappings
+MGRAGfirstcomputespairwisecosinesimilaritiesbetweenqueryentitiesandevidenceentities.
+Thehighest-similaritypairsuppliesananchorentityinthequerygraphanditscandidatecoun-
+terpart in the evidence graph. If no valid match is obtained from that anchor, the method tries
+other anchors. For the selected query anchor, Algorithm 1 considers each evidence counterpart
+exceedingthethresholdandenumeratesmappingsconsistentwiththatcorrespondence.
+Candidatemappingsareenumeratedusingasimilarity-basedmodificationofVF2[58]. VF2
+supplies a graph-matching search procedure; the MGRAG adaptation uses the threshold 𝜃 in
+semanticfeasibilitychecks. Eachcandidateisthenvalidatedrelationbyrelationthroughgreedy
 73

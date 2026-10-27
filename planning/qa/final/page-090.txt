@@ -1,30 +1,39 @@
-CHAPTER 6
-SEMANTIC GRAPH MATCHING FOR MULTIMODAL
-REASONING WITH MGRAG
-ThischapterisbasedonMGRAG:SemanticSubgraphMatchingandGraph-AwareCaching
-for Multimodal Retrieval-Augmented Generation, published in the Proceedings of the VLDB
-Endowment, volume 19, number 9, pages 2480–2493, 2026 [4]. It studies how a query can
-determine the evidence graph to construct, how paths can express semantic correspondences
-acrossdifferentgraphtopologies,andhowtheresultingstructurecanguidecontextcomputation.
-6.1 Multimodal Evidence and Query Requirements
-An answer to a multimodal query may depend on a relation that is distributed across text and
-images. A document can name a person, an image can show an action, and another passage
-canconnectthatpersontoanevent. Retrievingeachitembyitssimilaritytothequerysupplies
-candidate evidence, but the relation needed for the answer can remain implicit. A graph makes
-theentitiesandtheirconnectionsavailableasaretrievalobject. Itsusefulnessdependsonwhich
-facts are extracted and on whether its representation can express the relation requested by the
-query.
-This chapter considers a corpus 𝒟 = 𝒟 ∪ 𝒟 and a query 𝑞 that can contain text, an
-txt img
-image,orboth. Aretrievalmoduleselectsevidencefromthecorpus,andamultimodallanguage
-model generates an answer using that evidence. The research question is how to construct and
-retrieve a query-relevant relational representation while controlling the cost of preparing and
-processingthecontext. Theanswer-generationtaskremainsgroundedintheoriginaldocuments
-andimages. Thegraphsuppliesanadditionalrepresentationoftheirquery-relatedcontent.
-Threedecisionsgovernthisprocess. Thefirstconcernswhentoconstructagraph. Acorpus-
-widegraphrequiresextractionbeforethequeryisknown. Itsentitiesandrelationsconsequently
-reflecttheextractionprompt’sgeneraldescriptionofthecorpus. Whenanimagecontainsseveral
-people, objects, and actions, the details relevant to one query can differ from those relevant
-to another. MGRAG places the query inside the extraction process and constructs the graph
-incrementallyfromrankedevidence. Thegraphisspecifictothecurrentquery.
+Event User Query
+TokenSequence
+IrandhirSantos acts inThe Assailant ... Cross Attention
+IrandhirSantos acts
+In
+Man MidAir
+𝜙 𝑡 not in top 𝑏% Output
+Do
+KV Reuse
+MartialArtsKick LLMGraph Construction
+Query-awareKG |(!|
+!𝑎
+X !'
+Graph Sequence 𝑆 ! "%&
+|$|
+!𝑎
+X !"
+User Query
+"%&
+"
+𝐺𝐹 + 𝜙 𝑡
+!
+Figure 6.4: Graph features supplement attention in token recomputation scoring. The diagram
+retainstheoriginalgraphicalcontent. OriginalFigure4,p.2487[4].
+6.6 Graph-aware KV Recomputation
+6.6.1 Reuse and selective updates
+MGRAGreuseskeyandvaluestatesfromgraphconstructionwhentheircontentappearsinthe
+answering context. Because the assembled context differs from the earlier extraction input, it
+recomputesselectedtokenstatesandreusestherest.
+Let 𝜙(𝑡) be the recomputation score of token 𝑡. At each transformer layer, MGRAG re-
+computes the tokens in the highest 𝑏% of scores and reuses the cached states for the remaining
+tokens. The published description uses a fixed-size cache with least-recently-used eviction. Its
+proposedpolicyconcernstherankingoftokenstatesforselectiverecomputation. Thebudgetis
+representedby𝑏;thenumericalexperimenttablesdonotspecifyafixedvalueforthatbudget.
+Figure6.4showshowthegraphcontributes. Query-relatedeventsarerepresentedbyentities
+andrelations. Thescorecombinesattentiontothequery,attentiontothegraphsequence,anda
+feature derived from the topology of the associated fact. The goal of the added term is to give
+tokensaccesstoanevent-levelstructuralsignalalongsidetoken-levelattention.
 76

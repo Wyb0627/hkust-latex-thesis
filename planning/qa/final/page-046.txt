@@ -1,32 +1,29 @@
-3.6 Experimental Evaluation
-3.6.1 Datasets and Protocol
-The evaluation uses SemTab 2019 and a modified VizNet subset [10, 30]. SemTab includes ta-
-blesderivedfromWikipedia,DBpedia,andtheT2Dv2GoldStandardsources. Theexperiment
-uses rounds 1, 3, and 4, with 3,048 tables, 7,587 columns, and 275 column types. Round 2 has
-columns with multiple ground-truth labels and is excluded from this single-label comparison.
-Thereportedaveragesare69rowsand4.5columnspertable.
-The modified VizNet corpus targets column annotation rather than the full range of visu-
-alization tasks in the original repository [31]. The experiment uses its multi-column portion
-so that methods can exploit relations between columns. Its annotation scheme is coarser than
-SemTab’s and includes numeric types. The evaluated portion contains 32,265 tables, 73,034
-annotatedcolumns,and77types.
-Thedataaresplitintotraining,validation,andtestingportionsintheratio7:1:2whilemain-
-taining each class’s original sample proportion. The original study averages each experiment
-over three runs. It reports accuracy and weighted F1; these assess exact prediction of the target
-annotationlabelandclass-frequency-weightedclassificationperformance.
-Training uses AdamW, an initial learning rate of 3 × 10−5, and 𝜖 = 10−6. The learning
-rate decays linearly without warm-up. The reported maximum training lengths are 50 epochs
-on SemTab and 20 on VizNet, with early stopping. Batch size is 16 for both datasets; dropout
-is 0.1 for SemTab and 0.2 for VizNet. The implementation uses PyTorch and the Transformers
-libraryonanNVIDIATeslaV100GPU.
-The baseline set includes MTab, TaBERT, Doduo, HNN, Sudowoodo, and RECA [11–13,
-32–34]. TaBERT and Doduo use KGLink’s experimental settings. HNN and RECA follow
-their original settings. Sudowoodo receives the full labeled training set in this comparison.
-VizNetlabelsaretranslatedtoWikidataentitiesforMTab,andMTab’sweightedF1isunreported
-becauseofthedifferenceinproblemdefinition.
-3.6.2 Main Annotation Results
-Table3.1reportsthemaincomparison. KGLinkobtainsaccuracy87.12andweightedF185.78
-on SemTab, and accuracy 96.28 and weighted F1 96.07 on VizNet. MTab has the highest
-SemTab accuracy, 89.10. KGLink has the highest reported weighted F1 on SemTab and the
-highestvaluesofbothreportedmetricsonVizNet.
+CHAPTER 4
+ADAPTIVE GRAPH RETRIEVAL FOR DYNAMIC
+CLASSIFICATION WITH GORAG
+This chapter is based on GORAG: Graph-based Online Retrieval Augmented Generation
+for Dynamic Few-shot Social Media Text Classification, published in the Proceedings of the
+ACM Web Conference 2026 [2]. We propose GORAG to retrieve candidate labels for dynamic
+few-shot classification. It maintains a weighted graph of keyword–label associations, selects
+candidatesbyconnectingquerykeywords,andinsertsunseentermsafterclassification.
+4.1 Dynamic Few-shot Classification
+Dynamic classification must distinguish new categories from those introduced earlier. For ex-
+ample, an abuse classifier may initially recognize threatening language and later add identity
+insults. With few examples per class, the model must learn the new category while retaining
+accesstoearlierlabels.
+Few-shot classification provides a small labeled support set for each class. In the dynamic
+setting,newclassesarriveinsuccessiverounds[36]. Theindexmustincorporatetheirexamples
+whilepreservingevidenceforthecumulativelabelset.
+Addingmoreexamplestothepromptcanintroduceirrelevantcontextasthelabelsetgrows.
+Passageretrievalalonealsoleavesthegeneratortochooseamongalllabels. Weinsteadretrieve
+acandidatelabelsetforeachquery.
+We represent keywords and labels in a weighted graph. A keyword can connect to several
+labels,withanedgecostforeachassociation. Connectingseveralquerykeywordsselectslabels
+jointlyfromtheirneighborhoods.
+GORAG also updates its index after classifying an unlabeled query. Keywords that were
+absentfromtheindexcanthenbecomeavailabletolaterqueries. Thepredictedlabelassociates
+the newly observed keywords with a class for subsequent retrieval. Support examples initialize
+thegraphusingtheirsuppliedlabels.
+GORAGcombinesweightedindexing,connectedcandidate-labelretrieval,andonlineinser-
+tion. The following sections define these operations and evaluate their classification accuracy
 32

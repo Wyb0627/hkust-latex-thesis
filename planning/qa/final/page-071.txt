@@ -1,34 +1,29 @@
-accordingtotheirdistributionacrosschunks. Theextractedsetis
-𝒱 = {𝑣 ∶ ER(𝑣,𝑡) > 𝜏}, (5.3)
-𝑡
-withmaximumn-gramlength𝑏andthreshold𝜏 controllingcandidateboundariesandselection.
-Themainpaperreports𝑏 = 3and𝜏 = 0.5.
-The extraction rule uses terms appearing in the corpus. This constrains the origin of en-
-tity strings and makes their relationship to the indexed text explicit. Its decisions are based on
-term statistics, so linguistic salience and factual importance need not coincide. A frequently
-mentioned generic term and a rare but relevant phrase have different statistical profiles. The
-sensitivity experiment therefore examines both the phrase boundary and the extraction thresh-
-old.
-Anentitystringidentifiesagraphnode,whileitsoccurrencesconnectthatnodetopassages.
-This provides a path from fine-grained graph retrieval back to textual evidence. A shared en-
-tity can also connect information across chunks. The utility of these connections depends on
-whethertheextractedstringcapturestheintendedentityandwhetheroccurrenceshavecompat-
-iblemeanings.
-5.2.3 Relations, passage nodes, and synonyms
-For each chunk, the language model receives the selected entity set and the chunk text, and
-extractsrelations,
-ℰ = LLM(𝒱 ,𝑡,𝑝 ). (5.4)
-𝑡 𝑡 re
-The prompt 𝑝 asks for relations between the extracted entities in the chunk. The resulting
-re
-entity–relation–entity triples provide the graph’s factual edges. Statistical extraction selects en-
-tity candidates from observed terms. The model then extracts relations conditioned on those
-candidatesandtheircontext.
-Chunksarealsoinsertedaspassagenodes. AContainsedgeconnectsapassagetoanentity
-extractedfromit. Theselinkspreservetheassociationbetweenthesymbolicrepresentationand
-the source chunk. They also allow paths to cross passages through shared entities. A passage
-contributescontextualevidencetographretrievalwithoutbeingreducedtoasingleisolatedfact.
-The graph includes synonym edges between entity nodes whose embedding similarity ex-
-ceeds a threshold 𝜑. Such an edge expresses an embedding-based correspondence between
-strings. It permits retrieval to connect different expressions that would otherwise form sepa-
+Table 5.1: Creative generation with Qwen2.5-14B-Instruct. Results from the AGRAG main
+experiment[3].
+Method NovelFS NovelACC NovelCOV MedicalFS MedicalACC MedicalCOV
+NaiveRAG 0.205 0.307 0.384 0.176 0.577 0.554
+L.LLMLingua 0.213 0.316 0.377 0.225 0.575 0.496
+RAPTOR 0.365 0.333 0.373 0.314 0.526 0.553
+SiReRAG 0.324 0.328 0.365 0.295 0.544 0.456
+G-retriever 0.294 0.167 0.200 0.169 0.371 0.468
+MIXRAG 0.200 0.286 0.337 0.255 0.351 0.306
+GraphRAG 0.427 0.310 0.339 0.345 0.475 0.325
+LightRAG 0.201 0.314 0.329 0.189 0.567 0.549
+HippoRAG2 0.496 0.295 0.325 0.347 0.563 0.451
+F.GraphRAG 0.286 0.287 0.376 0.217 0.500 0.396
+AGRAG 0.513 0.339 0.386 0.356 0.598 0.589
+Table 5.2: Contextual summarization with Qwen2.5-14B-Instruct. Results from the AGRAG
+mainexperiment[3].
+Method Novel COV Novel ACC Medical COV Medical ACC
+NaiveRAG 0.745 0.621 0.677 0.576
+L.LLMLingua 0.687 0.627 0.657 0.583
+RAPTOR 0.760 0.626 0.633 0.583
+SiReRAG 0.754 0.617 0.592 0.560
+G-retriever 0.594 0.404 0.302 0.395
+MIXRAG 0.695 0.538 0.409 0.464
+GraphRAG 0.758 0.620 0.625 0.506
+LightRAG 0.753 0.628 0.625 0.585
+HippoRAG2 0.735 0.586 0.496 0.560
+F.GraphRAG 0.706 0.528 0.507 0.587
+AGRAG 0.778 0.643 0.690 0.604
 57

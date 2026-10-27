@@ -1,35 +1,34 @@
-Round 1 Labels
-Round 2 Labels
-esaercnI
-dnuoR
-⚠
-⚠
-✅
-⚠
-⚠
-⚠
-Figure 4.1: Two rounds of the dynamic classification task. New abuse categories extend the
-availablelabels. ReproducedfromFigure1ofGORAG[2].
-The index used in this chapter is a weighted graph of keywords and labels. A keyword can
-occur in examples from several classes. Its incident edges record these associations, and their
-costs distinguish how the term is represented in the indexed corpus. The graph allows several
-query keywords to be considered jointly. A label can participate in the connection between
-querykeywordsevenwhenexaminingonekeywordinisolationwouldgiveanambiguoussetof
-alternatives. Theretrievedlabelsetdependsonthequeryterminalsandthecurrentgraph.
-GORAG also updates its index after classifying an unlabeled query. Keywords that were
-absentfromtheindexcanthenbecomeavailabletolaterqueries. Thepredictedlabelassociates
-the newly observed keywords with a class for subsequent retrieval. Support examples initialize
-thegraphusingtheirsuppliedlabels.
-The research question has three connected parts. First, how should a small support set be-
-come a graph whose edges distinguish keyword–label associations? Second, how should the
-graphselectadifferentcandidatesetforeachtextasthelabeluniverseexpands? Third,howcan
-observationsfrompreviouslyclassifiedtextsenlargetheindex? Thefollowingsectionsdevelop
-theseoperationsandthenexaminetheirreportedclassificationandresourceresults.
-4.1.1 Rounds and information availability
-Let𝒴𝑟 denotethelabelsintroducedatround𝑟. Thecurrentlabeluniverseis
-new
-𝑟
-𝒴𝑟 = 𝒴𝑖 . (4.1)
-⋃ new
-𝑖=1
+Table 4.1: Dataset statistics for the four-round experiments, transposed from the original table.
+IFS-Relhas40testsamplesperlabel. Roundlabelcountsrefertonewlyintroducedlabels.
+Statistic CAD WOS IFS-Rel
+Averagetexttokens 154 200 105
+Round1testtexts 240 2,417 640
+Round1newlabels 4 32 16
+Round2testtexts 60 2,842 640
+Round2newlabels 3 53 16
+Round3testtexts 286 2,251 640
+Round3newlabels 3 30 16
+Round4testtexts 231 1,886 640
+Round4newlabels 3 18 16
+Totaltesttexts 817 9,396 2,560
+experiments. IFS-RelinferenceusestheGPT-4oservice.
+Classification accuracy requires an exact match between the model output and the ground-
+truthlabelnameornumber. Anoutputthatcannotbematchedtotherequiredclassisnotcounted
+ascorrect.
+4.5.1 Compared methods and controls
+The study compares six baselines. Entailment constructs text–label entailment pairs and fine-
+tunes a classifier [36]. NaiveRAG retrieves text chunks from the indexed support information.
+Retrieved context is compressed by LongLLMLingua before classification [41]. GraphRAG,
+LightRAG, and HippoRAG2 supply graph-based retrieval alternatives [17, 19, 42]. The graph
+retrievalsystemsareadaptedtoreturnclassificationevidence.
+Entailment uses RoBERTa-large for five training epochs, a batch size of 16, a learning rate
+of 10−6, and Adam. LongLLMLingua is evaluated with compression rates of 0.75, 0.8, and
+0.85,with0.8selectedinthereportedcomparison. GraphRAGandLightRAGuselocalsearch.
+Thesourceusesthenano-graphragimplementationforGraphRAGandNaiveRAGandtheother
+baselines’oﬀicialimplementations.
+4.6 Classification Results
+The tables beginning with Tables 4.2 and 4.5 preserve the WOS and IFS-Rel portions of the
+main accuracy table. Each dataset is split into one-, five-, and ten-shot tables, with rounds as
+columns. Eachvalueisafractionalaccuracy,andthelabelsavailabletothemodelexpandwith
+theround.
 39

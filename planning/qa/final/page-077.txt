@@ -1,28 +1,33 @@
-Forclassification,theretrievalinterfaceisadaptedtoreturncandidatelabelsassociatedwith
-passages. One training passage per label supplies the indexed corpus. The generator selects
-a label from the retrieved candidate set. This classification index is fixed, whereas GORAG
-updatesitsindexonlineoverlabelroundsinChapter4.
-5.6 Computational Properties
-AGRAG’s work is distributed across corpus indexing and query processing. Statistical extrac-
-tion and passage-link construction operate over the corpus. Query processing includes triple
-mapping, filtering, graph propagation, subgraph selection, hybrid retrieval, and generation.
-Language-model calls contribute to relation extraction during indexing and to filtering and
-answergenerationonline.
-Thesource’sgraph-operationanalysisassigns𝑂(|𝒱||𝒯 |)timetoentityextractionandpas-
-𝑐
-sageassociation. Graphpropagationisexpressedintermsofnodeandedgecounts,andsemantic
-edge weighting visits the indexed edges. The Mehlhorn-based initial tree stage [38] is reported
-with 𝑂(|ℰ| + |𝒱|log|𝒱|) complexity. Expansion additionally depends on the selected sub-
-graph and its neighborhood. These expressions characterize graph operations; the measured
-end-to-endresultsincludemodelinferenceundertheexperimentalconfiguration.
-The distinction between indexing and querying is useful in deployment. An index is pre-
-pared once for a fixed corpus, while query filtering and generation recur for each query. An
-application with many queries can amortize index preparation, but its response latency still de-
-pends on online graph processing and the amount of generated text. Token counts and separate
-indexing/queryingtimesarethereforeretainedintheevaluation.
-The evidence graph also requires storage for entity strings, relations, and passage associa-
-tions. The source gives storage in terms of graph nodes, edges, and text chunks. These objects
-contribute to the index storage. Practical storage depends on how embeddings, text, and adja-
-cencystructuresarerepresented,whiletheexperimentaleﬀiciencytablereportstimeandtoken
-useratherthanameasuredmemorycomparison.
+5.7.5 Component ablations
+Theablation compares hybrid retrievalalone, language-modelentity extraction, graph retrieval
+without hybrid context, an initial tree without MCMI expansion, and retrieval without the raw-
+tripletfilteringstep.
+The hybrid-only variant has Novel creative-generation faithfulness 0.491, accuracy 0.322,
+and coverage 0.378. Full AGRAG reports 0.513, 0.339, and 0.386. For Novel contextual sum-
+marization, hybrid-only coverage and accuracy are 0.739 and 0.522, compared with 0.778 and
+0.643 for the complete system. Adding graph retrieval improves creative-generation scores and
+summarizationaccuracy.
+Removing hybrid retrieval produces a different pattern. Novel creative-generation faithful-
+ness is 0.519, exceeding the complete system’s 0.513, while accuracy and coverage decrease to
+0.306 and 0.343. Medical contextual-summarization coverage decreases from 0.690 to 0.420.
+The graph-only variant can produce well-grounded claims while supplying less of the required
+information.
+Replacing statistical entity extraction with model-based extraction gives Novel creative-
+generation faithfulness 0.428 and accuracy 0.302, with indexing time 83.3 minutes in the ab-
+lation setting. The complete configuration reports 65.6 minutes in that table. This experiment
+changesentityextractionwhileretainingtherestofthemethod.
+The variant without MCMI expansion uses a Steiner-tree representation. Its Novel
+contextual-summarization accuracy is 0.592, compared with 0.643 for full AGRAG, and its
+Medical creative-generation accuracy is 0.530, compared with 0.598. Some fact-retrieval
+metrics are close or favor the tree variant. Expansion improves these summarization and
+creative-generationscores,whiletheinitialtreeremainscompetitiveonfactretrieval.
+Removing raw-triplet filtering gives Novel contextual-summarization coverage 0.712 and
+accuracy0.597. Thesearebelow0.778and0.643forfullAGRAG.Filteringthemappedtriples
+improvescoverageandaccuracy.
+ThemaineﬀiciencyandablationtablesreportdifferentMedicalindexingandqueryingtotals.
+Componentcomparisonsusethemeasurementsintheablationtable.
+5.7.6 Additional resource setting and parameter study
+The low-resource experiment uses Qwen3-4B-Instruct-2507 on two NVIDIA 2080 Ti GPUs.
+Both the backbone and accelerators differ from the main experiment, so their individual effects
+arenotisolated.
 63

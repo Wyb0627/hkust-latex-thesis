@@ -1,49 +1,37 @@
-95.0
-92.5
-90.0
-87.5
-85.0
-82.5
-80.0
-10 25 50 all
-k
-1F
-20.0
-17.5
-15.0
-12.5
-10.0
-7.5
-5.0
-Semtab
-Viznet 2.5
-10 25 50 all
-k
-(a)WeightedF1
-sruoH
-Semtab
-Viznet
-(b)Timecost
-Figure 3.6: Reported effect of the retained row budget 𝑘. The original two subfigures compare
-annotationqualityandtimecostonSemTabandVizNet. ReproducedfromKGLink[1],Fig.10.
-3.6.7 Runtime in the Evaluated Configuration
-Figure3.7reproducesthe original VizNetruntime chart. KGLink’sreported training and infer-
-encetimesare16.50and1.53hours. ThecorrespondingRECAvaluesare80.00and9.00hours.
-Thefigurealsoshowsmethodswithshortermeasuredtimes,includingDoduoat1.96hoursfor
-training and 0.07 hours for inference. These measurements locate KGLink’s annotation results
-within the costs of the evaluated implementations. Its use of external retrieval and a second
-trainingobjectivecarriescomputationbeyondthetableencoderalone.
-The chart labels MTab’s inference entry as N/A. Training and inference times describe dif-
-ferent preparation and prediction procedures. The comparison uses VizNet and the original
-experimentalhardware.
-3.7 Discussion and Chapter Summary
-KGLink uses explicit structure at two levels. Within a table row, graph neighborhood connec-
-tionsfilterambiguousentitycandidates. Acrosstherowsofacolumn,recurringgraphneighbors
-supportcandidate-typeselection. Theseoperationsdeterminewhatexternaltexttheencoderre-
-ceives. Theclassifierthenlearnstherelationbetweenthatevidenceandadataset’slabelvocab-
-ulary. The auxiliary representation task supplies an additional supervised connection between
-contextualevidenceandtheintendedtypedescription.
-Theempirical results support this divisionof responsibilities. The full BERTconfiguration
-improves on the version without the masked representation task and on the version without KG
-information. The row-selection comparison shows that choosing which table values enter the
+reports
+∑ 𝑤𝑟 ∑ 𝑤𝑟
+𝑤𝑟 = 1 𝑣∈ℳ 𝑦 𝑟 𝑛 𝑣,𝑦 𝑛 + 𝑣∈ℳ 𝑦 𝑟 𝑜 𝑣,𝑦 𝑜 . (4.4)
+𝑦 𝑛 ,𝑦 𝑜 2 ( 2|ℳ𝑟 | 2|ℳ𝑟 | )
+𝑦 𝑦
+𝑛 𝑜
+The formula uses costs incident to both labels. These factors determine the relative cost of
+traversingalabelbridgeratherthanakeywordassociation.
+Label bridges connect graph regions introduced in different rounds. Unlike keyword edges,
+whichrecordobservedterm–classassociations,theyarecreatedduringgraphmerging.
+4.3 Adaptive Candidate Label Retrieval
+For a query 𝑡, GORAG extracts keywords using the indexing procedure and partitions them
+according to whether they already occur in 𝒱𝑟. Write these sets as 𝒱𝑡 and 𝒱𝑡 . The
+exist notexist
+existingkeywordsbecometheterminalsforcurrentretrieval. Theunseenkeywordsareheldfor
+online insertion after classification. The partition prevents the retrieval operation from treating
+anunindexedtermasifitalreadyhadaknownlabelneighborhood.
+Retrieval seeks a low-cost connected structure that contains the mapped terminals. Label
+nodes encountered in this structure form the candidate set 𝒴̂𝑟. Connecting several terminals
+𝑡
+can select intermediate labels and keywords. The graph therefore determines the number of
+candidatelabelsthroughthereturnedstructure,ratherthanrequiringthesamenumberoflabels
+forallqueries. Ashortqueryandaquerycontainingseveralmutuallydistantindexedtermscan
+producedifferentretrievalstructures.
+This terminal-connecting objective is related to the Steiner tree problem. In that problem,
+the required terminals are a subset of graph vertices, and the solution may use additional ver-
+ticestoconnectthem. Anordinaryminimumspanningtreeinsteadspansallverticesofitsinput
+graph. TheseobjectsplaydistinctrolesinGORAG’sprocedure. GORAGusestheseintermedi-
+atestructurestoconstructaheuristicconnectionamongthequeryterminals.
+4.3.1 Tree and auxiliary-graph operations
+GORAGusesagreedyterminal-connectingprocedurebasedonMehlhorn’salgorithm[38]. The
+mapped keywords serve as terminals. An auxiliary graph 𝐻 represents connections between
+terminals, with edge weights given by path costs. A minimum spanning tree of 𝐻 selects a
+collection of terminal connections. Expanding these connections into their underlying paths
+producesthegraphstructureusedforcandidateselection. Thelanguagemodelthenreceivesthe
+labelsencounteredinthisstructure.
 36

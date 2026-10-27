@@ -1,29 +1,33 @@
-CHAPTER 2
-BACKGROUND AND RELATED WORK
-The methods in this thesis use structure to determine which information a language model
-receives and how that information enters prediction. Their structures have different origins. A
-knowledgegraphrecordsexternalentitiesandrelations;aclassificationindexconnectskeywords
-with labels; an evidence graph links facts and passages; and a query graph expresses the rela-
-tionshipsrequestedbyaquestion. Thischapterestablishestheconceptsneededtocomparethese
-representationsandreviewsworkontableunderstanding,retrieval-augmentedgeneration,graph
-retrieval, and multimodal context processing. Section 2.6 presents the author’s published study
-ofinformationpreservationinhyper-relationalknowledgegraphs.
-2.1 Knowledge Graphs and Language Models
-A knowledge graph represents entities and their relationships explicitly. In a conventional rela-
-tional representation, a fact is a triple (𝑠,𝑟,𝑜), where 𝑠 is a subject entity, 𝑟 a relation, and 𝑜 an
-object entity. A set of these facts forms a directed graph whose edge labels identify relations.
-Wikidata provides a collaborative knowledge resource in which structured statements and their
-qualifierscandescribeentitiesbeyondthecontentofasingledocument[6]. Amodelaccessing
-thisgraphcanretrieverelationsassociatedwithamentionedentity,includinginformationabsent
-fromitsimmediateinput.
-The graph representation separates an entity’s identity from the strings used to mention it.
-Atablecellorquerycontainsamention,whileanentitynodereferstoanindexedobject. Entity
-linking establishes a correspondence between the two. A short name may match several enti-
-ties,soaretrievalscoreandacontextualdisambiguationrulecaninfluencewhichfactsbecome
-available. When a graph is extracted from text, repeated strings, aliases, and synonyms affect
-whetherdifferentpassagesshareanode. Theseindexingchoicesdeterminepossiblepathsbefore
-aquery-specificselectionalgorithmbegins.
-Graph topology records the connections available to a computation. A neighborhood iden-
-tifies adjacent entities and relations; a path composes a sequence of such connections; and a
-subgraph retains a selected set of nodes and edges. These objects support different operations.
+textual representations and can be fine-tuned with a task-specific output layer [8]. In column
+annotation, contextual token vectors can represent a column and feed a classifier. Generative
+language models instead produce an answer sequence conditioned on the query and supplied
+context. This thesis uses the term language model for both roles and specifies the relevant pre-
+dictioninterfaceineachresearchchapter.
+Fine-tuningmodifiesmodelparametersusinglabeledexamples. Retrievalsuppliesevidence
+fromanexternalindexatpredictiontime. KGLinkcombinesthetwobyfine-tuninganannotation
+modelwithgraph-derivedinputs. ThelaterRAGsystemsretrieveevidenceforagenerator.
+2.2 Knowledge-enhanced Table Understanding
+Column-type annotation assigns semantic labels to table columns. Similar values can require
+different labels under different annotation vocabularies. A column of people may be labeled
+Name or assigned an occupation category. Surrounding columns and external facts can help
+determinetheintendedtype.
+Sherlocktrainsaneuraltypedetectorfromstatisticalproperties,characterdistributions,word
+embeddings, and paragraph vectors [9]. Sato adds topic features and structured prediction to
+model which column types occur together [10]. The two approaches differ in whether table
+contextcontributestotheprediction.
+Doduoserializesmultiplecolumnsforapre-trainedlanguagemodelandlearnscolumn-type
+and column-property annotations from their contextual representations [11]. Self-attention lets
+acolumnrepresentationdependonvaluesinothercolumns,subjecttotheinput-lengthlimit.
+Knowledge-based methods obtain evidence through a different route. HNN combines
+learned table features with knowledge-base lookup and inter-column semantics [12]. A
+knowledgeresourcecanidentifyarelationbetweenmentionedobjectsthatthetable’sstringsdo
+notexplain. RECAusesrelatedtablesasanadditionalcontextualsource[13]. Theseapproaches
+extend the information available within the target table through external semantic facts or
+evidencefromothertables. Theirretrievalunitsandpreparationcostsdifferaccordingly.
+KGLink retrieves candidate entities for cell mentions and filters them through connections
+betweencolumns[1]. Candidate-typetextandaseparateKGfeaturesequenceenrichthecolumn
+representation. A contextual type-representation objective learns the correspondence between
+graphdescriptionsandannotationlabels. Chapter3presentsthemethodandexperiments.
+These methods obtain context from different sources. Statistical features summarize col-
+umn contents, contextual encoders model values jointly, RECA retrieves related tables, and
 9

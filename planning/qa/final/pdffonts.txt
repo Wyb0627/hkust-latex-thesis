@@ -1,97 +1,97 @@
 name                                 type              encoding         emb sub uni object ID
 ------------------------------------ ----------------- ---------------- --- --- --- ---------
-TWXUYS+TeXGyreTermes-Bold-Identity-H CID Type 0C       Identity-H       yes yes yes      5  0
-UNLVYF+TeXGyreTermes-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      7  0
-DPGVUA+XITSMath-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes    197  0
-YRGFHB+TeXGyreCursor-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes    233  0
-EPHMTD+TeXGyreTermes-Italic-Identity-H CID Type 0C       Identity-H       yes yes yes    411  0
-AAAAAC+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes    499  0
-AAAAAE+CambriaMath                   TrueType          WinAnsi          yes yes yes    503  0
-AAAAAG+CambriaMath                   TrueType          WinAnsi          yes yes yes    507  0
-AAAAAC+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes    534  0
-AAAAAE+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes    538  0
-AAAAAC+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes    545  0
-AAAAAC+CambriaMath                   TrueType          WinAnsi          yes yes yes    569  0
-AAAAAE+CambriaMath                   TrueType          WinAnsi          yes yes yes    573  0
-AAAAAG+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes    577  0
-AAAAAI+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes    581  0
-AAAAAK+CambriaMath                   TrueType          WinAnsi          yes yes yes    585  0
-AAAAAM+CambriaMath                   TrueType          WinAnsi          yes yes yes    589  0
-AAAAAO+CambriaMath                   TrueType          WinAnsi          yes yes yes    593  0
-AAAAAQ+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes    597  0
-DejaVuSans-Bold                      Type 3            Custom           yes no  no     666  0
-DejaVuSans                           Type 3            Custom           yes no  no     682  0
-DejaVuSans-Bold                      Type 3            Custom           yes no  no     704  0
-DejaVuSans                           Type 3            Custom           yes no  no     722  0
-DejaVuSans-Bold                      Type 3            Custom           yes no  no     749  0
-AAAAAC+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes    815  0
-AAAAAE+AppleColorEmoji               TrueType          WinAnsi          yes yes yes    819  0
-AAAAAC+CambriaMath                   TrueType          WinAnsi          yes yes yes    845  0
-AAAAAE+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes    849  0
-AAAAAG+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes    853  0
-AAAAAI+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes    857  0
-AAAAAK+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes    861  0
-AAAAAM+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes    865  0
-AAAAAO+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes    869  0
-GOFYPY+Arial-BoldMT                  Type 3            Custom           yes yes no     922  0
-GOFYPY+Arial-BoldMT                  Type 3            Custom           yes yes no     966  0
-EVICAO+DejaVuSans-Bold               Type 3            Custom           yes yes no    1015  0
-EVICAO+DejaVuSans-Bold               Type 3            Custom           yes yes no    1042  0
-AAAAAC+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1092  0
-AAAAAE+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes   1096  0
-AAAAAG+TimesNewRomanPS-BoldItalicMT  TrueType          WinAnsi          yes yes yes   1100  0
-AAAAAC+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes   1122  0
-AAAAAE+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1126  0
-AAAAAG+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1130  0
-AAAAAI+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes   1134  0
-AAAAAK+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes   1138  0
-AAAAAM+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes   1142  0
-AAAAAC+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes   1176  0
-AAAAAE+CambriaMath                   TrueType          WinAnsi          yes yes yes   1180  0
-AAAAAG+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1184  0
-GOFYPY+Arial-BoldMT                  Type 3            Custom           yes yes no    1263  0
-GCWXDV+DejaVuSans-Oblique            Type 3            Custom           yes yes no    1307  0
-GOFYPY+Arial-BoldMT                  Type 3            Custom           yes yes no    1327  0
-GCWXDV+DejaVuSans-Oblique            Type 3            Custom           yes yes no    1369  0
-AAAAAC+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1402  0
-AAAAAE+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes   1406  0
-AAAAAG+CambriaMath                   TrueType          WinAnsi          yes yes yes   1410  0
-AAAAAI+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes   1414  0
-AAAAAK+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes   1418  0
-AAAAAM+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1422  0
-AAAAAO+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1426  0
-AAAAAQ+CambriaMath                   TrueType          WinAnsi          yes yes yes   1430  0
-AAAAAS+CambriaMath                   TrueType          WinAnsi          yes yes yes   1434  0
-AAAAAU+SegoeUISymbol                 TrueType          WinAnsi          yes yes yes   1438  0
-AAAAAW+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1442  0
-AAAAAY+SegoeUISymbol                 TrueType          WinAnsi          yes yes yes   1446  0
-AAAABA+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1450  0
-AAAAAC+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1463  0
-AAAAAE+CambriaMath                   TrueType          WinAnsi          yes yes yes   1467  0
-AAAAAG+CambriaMath                   TrueType          WinAnsi          yes yes yes   1472  0
-AAAAAI+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1476  0
-AAAAAK+DengXian-Regular              TrueType          WinAnsi          yes yes yes   1480  0
-AAAAAC+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1512  0
-AAAAAE+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1516  0
-AAAAAG+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1520  0
-AAAAAI+TimesNewRomanPS-BoldItalicMT  TrueType          WinAnsi          yes yes yes   1524  0
-AAAAAK+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1528  0
-AAAAAC+CambriaMath                   TrueType          WinAnsi          yes yes yes   1565  0
-AAAAAE+CambriaMath                   TrueType          WinAnsi          yes yes yes   1569  0
-AAAAAG+CambriaMath                   TrueType          WinAnsi          yes yes yes   1573  0
-AAAAAI+CambriaMath                   TrueType          WinAnsi          yes yes yes   1577  0
-AAAAAK+CambriaMath                   TrueType          WinAnsi          yes yes yes   1581  0
-AAAAAM+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1585  0
-AAAAAO+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1589  0
-AAAAAQ+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1593  0
-AAAAAS+DengXian-Regular              TrueType          WinAnsi          yes yes yes   1597  0
-AAAAAU+CambriaMath                   TrueType          WinAnsi          yes yes yes   1601  0
-AAAAAW+CambriaMath                   TrueType          WinAnsi          yes yes yes   1605  0
-AAAAAY+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes   1609  0
-AAAABA+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1613  0
-AAAABC+DengXian-Regular              TrueType          WinAnsi          yes yes yes   1617  0
-EVICAO+DejaVuSans-Bold               Type 3            Custom           yes yes no    1702  0
-GCWXDV+DejaVuSans-Oblique            Type 3            Custom           yes yes no    1743  0
-EVICAO+DejaVuSans-Bold               Type 3            Custom           yes yes no    1756  0
-GCWXDV+DejaVuSans-Oblique            Type 3            Custom           yes yes no    1793  0
-BMQQDV+DejaVuSans                    Type 3            Custom           yes yes no    1799  0
+ARWQYN+TeXGyreTermes-Bold-Identity-H CID Type 0C       Identity-H       yes yes yes      5  0
+NZGUYP+TeXGyreTermes-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      7  0
+AUEWOX+XITSMath-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes    197  0
+OHYRPN+TeXGyreCursor-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes    233  0
+XEJPMT+TeXGyreTermes-Italic-Identity-H CID Type 0C       Identity-H       yes yes yes    421  0
+AAAAAC+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes    489  0
+AAAAAE+CambriaMath                   TrueType          WinAnsi          yes yes yes    493  0
+AAAAAG+CambriaMath                   TrueType          WinAnsi          yes yes yes    497  0
+AAAAAC+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes    525  0
+AAAAAE+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes    529  0
+AAAAAC+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes    536  0
+AAAAAC+CambriaMath                   TrueType          WinAnsi          yes yes yes    557  0
+AAAAAE+CambriaMath                   TrueType          WinAnsi          yes yes yes    561  0
+AAAAAG+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes    565  0
+AAAAAI+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes    569  0
+AAAAAK+CambriaMath                   TrueType          WinAnsi          yes yes yes    573  0
+AAAAAM+CambriaMath                   TrueType          WinAnsi          yes yes yes    577  0
+AAAAAO+CambriaMath                   TrueType          WinAnsi          yes yes yes    581  0
+AAAAAQ+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes    585  0
+DejaVuSans-Bold                      Type 3            Custom           yes no  no     647  0
+DejaVuSans                           Type 3            Custom           yes no  no     663  0
+DejaVuSans-Bold                      Type 3            Custom           yes no  no     685  0
+DejaVuSans                           Type 3            Custom           yes no  no     703  0
+DejaVuSans-Bold                      Type 3            Custom           yes no  no     731  0
+AAAAAC+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes    797  0
+AAAAAE+AppleColorEmoji               TrueType          WinAnsi          yes yes yes    801  0
+AAAAAC+CambriaMath                   TrueType          WinAnsi          yes yes yes    823  0
+AAAAAE+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes    827  0
+AAAAAG+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes    831  0
+AAAAAI+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes    835  0
+AAAAAK+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes    839  0
+AAAAAM+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes    843  0
+AAAAAO+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes    847  0
+GOFYPY+Arial-BoldMT                  Type 3            Custom           yes yes no     898  0
+GOFYPY+Arial-BoldMT                  Type 3            Custom           yes yes no     941  0
+EVICAO+DejaVuSans-Bold               Type 3            Custom           yes yes no     991  0
+EVICAO+DejaVuSans-Bold               Type 3            Custom           yes yes no    1018  0
+AAAAAC+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1067  0
+AAAAAE+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes   1071  0
+AAAAAG+TimesNewRomanPS-BoldItalicMT  TrueType          WinAnsi          yes yes yes   1075  0
+AAAAAC+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes   1098  0
+AAAAAE+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1102  0
+AAAAAG+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1106  0
+AAAAAI+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes   1110  0
+AAAAAK+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes   1114  0
+AAAAAM+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes   1118  0
+AAAAAC+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes   1153  0
+AAAAAE+CambriaMath                   TrueType          WinAnsi          yes yes yes   1157  0
+AAAAAG+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1161  0
+GOFYPY+Arial-BoldMT                  Type 3            Custom           yes yes no    1237  0
+GCWXDV+DejaVuSans-Oblique            Type 3            Custom           yes yes no    1281  0
+GOFYPY+Arial-BoldMT                  Type 3            Custom           yes yes no    1301  0
+GCWXDV+DejaVuSans-Oblique            Type 3            Custom           yes yes no    1343  0
+AAAAAC+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1376  0
+AAAAAE+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes   1380  0
+AAAAAG+CambriaMath                   TrueType          WinAnsi          yes yes yes   1384  0
+AAAAAI+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes   1388  0
+AAAAAK+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes   1392  0
+AAAAAM+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1396  0
+AAAAAO+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1400  0
+AAAAAQ+CambriaMath                   TrueType          WinAnsi          yes yes yes   1404  0
+AAAAAS+CambriaMath                   TrueType          WinAnsi          yes yes yes   1408  0
+AAAAAU+SegoeUISymbol                 TrueType          WinAnsi          yes yes yes   1412  0
+AAAAAW+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1416  0
+AAAAAY+SegoeUISymbol                 TrueType          WinAnsi          yes yes yes   1420  0
+AAAABA+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1424  0
+AAAAAC+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1437  0
+AAAAAE+CambriaMath                   TrueType          WinAnsi          yes yes yes   1441  0
+AAAAAG+CambriaMath                   TrueType          WinAnsi          yes yes yes   1445  0
+AAAAAI+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1449  0
+AAAAAK+DengXian-Regular              TrueType          WinAnsi          yes yes yes   1453  0
+AAAAAC+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1487  0
+AAAAAE+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1491  0
+AAAAAG+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1495  0
+AAAAAI+TimesNewRomanPS-BoldItalicMT  TrueType          WinAnsi          yes yes yes   1499  0
+AAAAAK+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1503  0
+AAAAAC+CambriaMath                   TrueType          WinAnsi          yes yes yes   1533  0
+AAAAAE+CambriaMath                   TrueType          WinAnsi          yes yes yes   1537  0
+AAAAAG+CambriaMath                   TrueType          WinAnsi          yes yes yes   1541  0
+AAAAAI+CambriaMath                   TrueType          WinAnsi          yes yes yes   1545  0
+AAAAAK+CambriaMath                   TrueType          WinAnsi          yes yes yes   1549  0
+AAAAAM+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1553  0
+AAAAAO+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1557  0
+AAAAAQ+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1561  0
+AAAAAS+DengXian-Regular              TrueType          WinAnsi          yes yes yes   1565  0
+AAAAAU+CambriaMath                   TrueType          WinAnsi          yes yes yes   1569  0
+AAAAAW+CambriaMath                   TrueType          WinAnsi          yes yes yes   1573  0
+AAAAAY+TimesNewRomanPSMT             TrueType          WinAnsi          yes yes yes   1577  0
+AAAABA+TimesNewRomanPS-BoldMT        TrueType          WinAnsi          yes yes yes   1581  0
+AAAABC+DengXian-Regular              TrueType          WinAnsi          yes yes yes   1585  0
+EVICAO+DejaVuSans-Bold               Type 3            Custom           yes yes no    1670  0
+GCWXDV+DejaVuSans-Oblique            Type 3            Custom           yes yes no    1711  0
+EVICAO+DejaVuSans-Bold               Type 3            Custom           yes yes no    1724  0
+GCWXDV+DejaVuSans-Oblique            Type 3            Custom           yes yes no    1761  0
+BMQQDV+DejaVuSans                    Type 3            Custom           yes yes no    1767  0

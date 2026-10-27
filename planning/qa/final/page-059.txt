@@ -1,34 +1,38 @@
-sociations. Theofflineablationsuppressesonlineexpansion,measuringitscontributionrelative
-toanindexthatreceivesnosuchquery-dependentadditions.
-4.4.1 Computational organization
-Thegraphseparatesworkperformedatalabelupdatefromworkperformedforeachquery. Of-
-fline indexing processes the supplied texts, creates or updates keyword associations, generates
-label information when available,and mergesthe round’sgraph. The cross-round label bridges
-introduce interactions between the newly indexed and earlier label regions. In the source’s ab-
-stractoperationcount,constructionisexpressedas
-𝑂(|𝒴𝑟||𝒴𝑟−1|+|𝒱
+Text: Male feminists always Output:
+end up as sexual predators. Insulting Content
+I
 n
-𝑟
-ew
-||𝒟𝑟|). (4.9)
-The two terms account for label merging and keyword–text processing. This count treats the
-associated text-processing and graph operations at the granularity used in that analysis. The
-number of tokens processed by a language-model call depends on the prompt and generated
-output,sotheempiricaltokenstudysuppliesaseparatemeasurementofmodel-facingwork.
-Per-query processing maps the extracted terms to the existing graph, obtains a connecting
-structure, builds the classification prompt, and inserts new terms after prediction. The index
-state can therefore grow during one round as well as between label rounds. Graph memory
-and prompt length measure different consequences of that growth. A larger stored index can
-provide more candidate associations while a query still receives only the labels selected by its
-ownretrievalstructure. Theresourceexperimentsreportthesetwoquantitiesseparately.
-4.5 Experimental Design
-The published study evaluates CAD, WOS, and IFS-Rel. CAD contains social media posts an-
-notated for contextual abuse [39]. WOS contains academic texts associated with research-area
-labels[40]. IFS-Relsuppliesrelation-classificationexamplesderivedfromnewstextinanincre-
-mental few-shot benchmark [36]. These datasets exercise different label vocabularies and text
-lengthswithinthedynamicclassificationsetting.
-The four-round split introduces 13 labels across CAD’s rounds, 133 across WOS, and 64
-across IFS-Rel. The testcollections contain 817, 9,396, and 2,560 examples,respectively. IFS-
-Rel uses 40 test examples per label. Its balanced test allocation differs from the changing class
-frequenciesintheothercollections.
+p
+u
+t
+Steiner Tree
+Feminists
+Generated
+t
+u
+n p LLM
+sexual I
+Insult
+predators
+idiot
+Figure 4.5: A contextual-abuse example and its selected graph connections. Reproduced from
+Figure5ofGORAG[2].
+4.8.1 A retrieved classification case
+Figure 4.5 reproduces a contextual-abuse example from the original study. The query contains
+the terms highlighted in red. These terms map to keyword nodes, and the selected connecting
+structure passes through an insult label. The classifier outputs the abuse category shown in
+the figure. This example exposes the relationship between the extracted query evidence, the
+intermediatelabelnode,andthefinalclassification.
+The insult label connects more than one highlighted query term. Other keyword neighbors
+remain outside the selected structure, showing how connected retrieval narrows the available
+labelevidence.
+4.9 Discussion and Chapter Summary
+We proposed GORAG for dynamic few-shot classification. Weighted keyword–label connec-
+tions determine the candidate set for each query, and the language model classifies the original
+textusingthoselabelsandtheirdescriptions.
+Theofflineablationshowsthecontributionofexpandingtheindexbeyondthesupportsam-
+ple. Because these additions carry predicted labels, the method couples current classification
+withtheevidenceavailabletolaterqueries.
+Keywordextractionrestrictsthequerytermsavailableasretrievalterminals. Sparsesupport
+dataandlimitedlabeldescriptionsconstraininitialgraphcoverage.
 45

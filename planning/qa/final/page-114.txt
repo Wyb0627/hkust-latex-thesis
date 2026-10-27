@@ -1,15 +1,45 @@
-highestvaluesacrossthesevendatasets’fouranswermetrics. Constructionandmatchingsubsti-
-tutions evaluate the evidence representation and correspondence choices. The hop-group com-
-parison shows additional quality gains for questions requiring more relational steps, together
-with added time. Cache comparisons and inverse ablations retain the context-serving contribu-
-tionandexposeitsdependenceonthesurroundingretrievalpipeline.
-Caption omissions and extraction errors can exclude relevant facts before matching. An
-accepted match ends construction, so an incorrect correspondence can prevent examination of
-laterchunks. Theconstructionandpath-lengthcapsfurtherrestrictthesearch.
-Forthethesis’scentralquestion,thechapterestablishesaconcreteextensionfromconnected
-textual evidence to query-dependent multimodal evidence. Semantic paths allow relations to
-be represented at different granularities across the query and evidence graphs. Selective KV
-recomputationshowsafurtheruseoftheretrievedstructureincontextprocessing. Thefollowing
-discussioncomparestheseroleswiththerepresentationsandretrievalobjectsstudiedinKGLink,
-GORAG,andAGRAG,usingtheirrespectivetasksandpublishedevidence.
+[47] W.Kwonetal.,“Eﬀicientmemorymanagementforlargelanguagemodelservingwithpagedatten-
+tion,”inProceedingsofthe29thsymposiumonoperatingsystemsprinciples,2023,pp.611–626
+(cit.onpp.55,77).
+[48] G. Izacard et al., “Unsupervised dense information retrieval with contrastive learning,” Transac-
+tionsonMachineLearningResearch,2022(cit.onpp.55,78).
+[49] P. Sarthi et al., “Raptor: Recursive abstractive processing for tree-organized retrieval,” arXiv
+preprintarXiv:2401.18059,2024(cit.onp.56).
+[50] N.Zhangetal.,“Sirerag:Indexingsimilarandrelatedinformationformultihopreasoning,”inThe
+ThirteenthInternationalConferenceonLearningRepresentations,2025(cit.onp.56).
+[51] X. He et al., “G-retriever: Retrieval-augmented generation for textual graph understanding and
+question answering,” Advances in Neural Information Processing Systems, vol. 37, pp. 132876–
+132907,2024(cit.onp.56).
+[52] L.Liuetal.,“Mixrag:Mixture-of-expertsretrieval-augmentedgenerationfortextualgraphunder-
+standingandquestionanswering,”arXivpreprintarXiv:2509.21391,2025(cit.onp.56).
+[53] circlemind-ai. “Fast-graphrag.” (2025), [Online]. Available: https://github.com/
+circlemind-ai/fast-graphrag(cit.onp.56).
+[54] C.-Y. Lin, “Rouge: A package for automatic evaluation of summaries,” in Text Summarization
+BranchesOut,Barcelona,Spain:AssociationforComputationalLinguistics,2004,pp.74–81(cit.
+onpp.56,79).
+[55] VibrantLabs, Ragas: Supercharge your llm application evaluations, https://github.
+com/vibrantlabsai/ragas,2024(cit.onp.56).
+[56] S. Es et al., “RAGAs: Automated evaluation of retrieval augmented generation,” in Proceedings
+ofthe18thConferenceoftheEuropeanChapteroftheAssociationforComputationalLinguistics:
+SystemDemonstrations,2024,pp.150–158.DOI:10.18653/v1/2024.eacl-demo.16
+(cit.onpp.56,79).
+[57] S. Xiao et al., C-pack: Packaged resources to advance general chinese embedding, 2023 (cit. on
+pp.69,81).
+[58] L. P. Cordella et al., “A (sub) graph isomorphism algorithm for matching large graphs,” IEEE
+transactions on pattern analysis and machine intelligence, vol. 26, no. 10, pp. 1367–1372, 2004
+(cit.onpp.73,81).
+[59] Y. Wang et al., MGRAG: Semantic subgraph matching and graph-aware caching for multimodal
+retrieval-augmented generation [technical report]. [Online]. Available: https://github.
+com/Wyb0627/MGRAG/blob/main/tech_report.pdf(cit.onp.75).
+[60] S.Baietal.,“Qwen2.5-VLtechnicalreport,”arXivpreprintarXiv:2502.13923,2025(cit.onp.78).
+[61] M.Douzeetal.,“Thefaisslibrary,”2024(cit.onp.79).
+[62] “nano-graphrag: A simple, easy-to-hack GraphRAG implementation.” (), [Online]. Available:
+https://github.com/gusye1234/nano-graphrag(cit.onp.79).
+[63] K.Papinenietal.,“Bleu:Amethodforautomaticevaluationofmachinetranslation,”inProceed-
+ingsofthe40thannualmeetingoftheAssociationforComputationalLinguistics,2002,pp.311–
+318(cit.onp.79).
+[64] G.Angelietal.,“Leveraginglinguisticstructureforopendomaininformationextraction,”inPro-
+ceedingsofthe53rdAnnualMeetingoftheAssociationforComputationalLinguisticsandthe7th
+InternationalJointConferenceonNaturalLanguageProcessing(Volume1:LongPapers),2015,
+pp.344–354(cit.onp.81).
 100

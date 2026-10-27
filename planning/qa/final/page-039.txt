@@ -1,4 +1,51 @@
-Figure 3.4: Cross-column evidence in the original album-and-musician example. Graph links
-connect candidate interpretations of cell mentions in the same row. Original image reproduced
-fromKGLink[1],Fig.5.
+𝑌 and𝑌 . Themainpaperwritestheauxiliaryobjectiveas
+msk gt
+𝑉
+𝑗 𝑗
+ℒ (𝑌 ,𝑌 ) = − 𝑦 log𝑦 , (3.6)
+DMLM msk gt ∑ msk gt
+𝑗=1
+with vocabulary size 𝑉. The objective uses the contextualized representations produced from
+thetwotableinputs.
+Training uses both true-type and masked inputs; evaluation uses the masked input. The
+model thus learns from annotated types during training and predicts from table values and re-
+trieved descriptions at inference, including for numeric columns and columns without KG can-
+didates.
+The shared encoder is trained jointly for dataset-label classification and vocabulary-space
+typerepresentation. Theclassificationheadproducesthefinalcolumnlabel.
+3.4.3 Classification and Adaptive Task Weighting
+Let 𝑧 be the classification logits obtained from the combined column and feature representa-
+𝑐
+tions. Foratargetlabel𝑙 ,theclassificationlossiscross-entropy,
+𝑐
+exp 𝑧
+( 𝑐,𝑙 )
+𝑐
+ℒ (𝑧 ,𝑙 ) = −log . (3.7)
+CE 𝑐 𝑐
+∑
+𝑗∈𝐷
+exp(𝑧 𝑐,𝑗)
+KGLink jointly optimizes this loss and the auxiliary representation objective using uncertainty
+weighting[29]. Withtrainabletaskparameters𝜎 and𝜎 ,thecombinedobjectiveis
+0 1
+ℒ ℒ
+DMLM CE
+ℒ
+total
+=
+2𝜎2
++
+2𝜎2
++log(𝜎
+0
+𝜎 1). (3.8)
+0 1
+Thetemperatureusedintherepresentationobjectiveissettotwointhereportedexperiments.
+The trainable task weights balance the representation and classification losses during opti-
+mization.
+3.5 Computational Structure
+Thegraph-processingcostdependsontabledimensions,candidate-setsizes,andneighborhood
+sizes. Linking traverses table cells. Cross-column filtering compares candidate information
+between columns within a row. Candidate-type scoring visits neighborhoods and aggregates
 25

@@ -1,0 +1,87 @@
+{
+  "pdf_sha256": "2e0fa332ed7ffd94111d25b45640d4fcf60e24baa97b90d277ae13c9f3941a87",
+  "pages": 115,
+  "all_A4": true,
+  "all_unrotated": true,
+  "embedded_font_count": 95,
+  "all_fonts_embedded": true,
+  "all_fonts_subset": false,
+  "fonts_without_unicode": 18,
+  "raster_min_ppi": 224,
+  "raster_instances_below_300ppi": [
+    {
+      "page": 85,
+      "type": "image",
+      "width": 220,
+      "height": 293,
+      "ppi": [
+        224,
+        224
+      ]
+    },
+    {
+      "page": 90,
+      "type": "image",
+      "width": 220,
+      "height": 293,
+      "ppi": [
+        257,
+        257
+      ]
+    },
+    {
+      "page": 90,
+      "type": "image",
+      "width": 220,
+      "height": 293,
+      "ppi": [
+        256,
+        257
+      ]
+    },
+    {
+      "page": 90,
+      "type": "image",
+      "width": 220,
+      "height": 293,
+      "ppi": [
+        256,
+        257
+      ]
+    },
+    {
+      "page": 90,
+      "type": "image",
+      "width": 220,
+      "height": 293,
+      "ppi": [
+        257,
+        255
+      ]
+    },
+    {
+      "page": 90,
+      "type": "image",
+      "width": 220,
+      "height": 293,
+      "ppi": [
+        256,
+        257
+      ]
+    },
+    {
+      "page": 90,
+      "type": "image",
+      "width": 220,
+      "height": 293,
+      "ppi": [
+        256,
+        257
+      ]
+    }
+  ],
+  "body_baseline_median_pdf_points": 20.66,
+  "body_size_pdf_points": 11.955,
+  "margin_violations_excluding_centered_page_numbers": [],
+  "empty_text_pages": []
+}

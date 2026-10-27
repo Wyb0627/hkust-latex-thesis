@@ -1,28 +1,80 @@
-Table 5.6: Indexing / querying time in minutes. Qwen2.5-14B-Instruct; original paired mea-
-surementsarepreserved.
-Method Novel Medical WOS IFS-Rel
-NaiveRAG 13 / 371 7 / 245 2 / 292 2 / 225
-L.LLMLingua 51 / 360 37 / 305 4 / 358 3 / 315
-RAPTOR 464 / 250 117 / 319 30 / 162 24 / 121
-SiReRAG 85 / 233 40 / 207 26 / 139 18 / 117
-G-Retriever 19 / 119 12 / 145 8 / 158 3 / 164
-MIXRAG 17 / 388 11 / 453 5 / 257 2 / 193
-GraphRAG 347 / 205 194 / 158 85 / 240 64 / 217
-LightRAG 166 / 221 116 / 164 42 / 211 31 / 197
-HippoRAG2 95 / 134 46 / 130 19 / 140 15 / 127
-F.GraphRAG 106 / 198 48 / 173 29 / 186 27 / 164
-AGRAG 65 / 142 16 / 138 16 / 132 14 / 124
-Table5.7: Input/outputtokensperquery. Samesourceexperimentastheprecedingtimetable.
-Method Novel Medical WOS IFS-Rel
-NaiveRAG 9,437 / 1,708 7,473 / 379 7,292 / 29 4,521 / 16
-L.LLMLingua 8,466 / 1,750 5,686 / 390 5,861 / 31 2,757 / 14
-RAPTOR 7,243 / 777 4,817 / 695 6,007 / 41 3,807 / 33
-SiReRAG 7,759 / 800 4,918 / 701 6,012 / 47 3,821 / 36
-G-Retriever 6,344 / 116 6,290 / 157 6,762 / 12 4,002 / 21
-MIXRAG 6,083 / 237 4,238 / 230 4,193 / 31 3,597 / 29
-GraphRAG 12,686 / 2,109 8,385 / 1,017 11,809 / 351 9,009 / 287
-LightRAG 13,145 / 1,233 9,535 / 426 11,510 / 227 7,667 / 199
-HippoRAG2 8,138 / 1,073 6,264 / 595 5,066 / 93 2,440 / 102
-F.GraphRAG 7,490 / 1,252 6,475 / 384 4,957 / 35 2,217 / 20
-AGRAG 6,487 / 1,140 5,145 / 413 3,970 / 101 1,890 / 93
+Step1:Coarse-grainedRanking Step2:Fine-grainedRetrieval Step3:Graph-Aware KV Caching
+c
+𝜙𝑡 =∑|
+$
+&
+'
+|
+(
+𝑎#$+∑|
+)
+*
+'
+|
+(
+𝑎#)+𝐺𝐹#
+a KVCache
+Source b h
+MMDocs. ImageCaptions g 𝜙𝑡 notintop𝑏%,
+f
+Iterative&Adaptive a Serialization KVreuse
+GraphConstruction b
+E
+C
+nc
+h
+o
+u
+d
+n
+i
+k
+ng
+Rank RankedMMChunks Query K S G pecific
+M
+c
+atched
+h GraphSeq.𝑆+
+Subgraph𝑟 LLM
+c
+a
+b d Path-basedSubgraph
+]
+e Matching
+MMChunks
+QueryGraph
+⊕ 𝑃!" →{ℎ}
+InputQuery𝑞
+Figure6.2: TheMGRAGpipeline. Rankedchunkssupportincrementalquery-awaregraphcon-
+struction and path-based matching. The matched graph also supplies features for selective KV
+recomputation. OriginalFigure2,p.2484[4].
+plycandidateevidenceforthequeryrelations.
+Forgeneration,MGRAGcombinesthegraphsequence𝑆 ,theoriginalchunks𝒞 consumed
+𝑟 𝑞
+duringconstruction,andthequery𝑞. Thechunksretainsourcetextandoriginalimages,includ-
+ingdetailsomittedfromtheextractedtriples.
+6.3 Coarse-grained Ranking
+MGRAG first divides textual documents into overlapping chunks. The published setting uses a
+chunk length 𝑙 = 256 tokens and overlap 𝑙 = 32 tokens. Images form the other members of
+𝑐 𝑜
+the chunk collection, giving 𝒞 = 𝒯 ∪𝒟 , where 𝒯 denotes the text chunks. This collection
+img
+is the input to the coarse retrieval stage. Ranking identifies the order in which content will be
+examined,ratherthandirectlydefiningthefinalgraphcontext.
+The implementation uses the text encoder bge-base-en-v1.5 [57]. Text chunks are encoded
+directly. Animageisrepresentedforrankingbyitscaption,whichcanbesuppliedbythedataset
+orgeneratedbyalanguagemodel. Bothtypesofevidencecanthereforebecomparedinthetext
+embedding space. Let ℳ denote that encoder and 𝐡 the representation of a candidate chunk.
+𝑐
+For an image chunk, the input to ℳ is its caption. This detail matters because the ranking
+representationexpressestheimagethroughlanguage,whereasthelaterextractionandanswering
+stagescanuseitsvisualcontent.
+Foraquerycontainingtext𝑞 andanimagecaption𝑞 ,MGRAGaveragesthetworepre-
+txt cap
+sentations,
+ℳ(𝑞 )+ℳ(𝑞 )
+txt cap
+𝐡 = . (6.1)
+𝑞
+2
 69

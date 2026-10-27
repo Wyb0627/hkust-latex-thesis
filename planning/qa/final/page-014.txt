@@ -3,32 +3,32 @@ published Table 4, p. 2489 [4]. Vanilla., R1., Graph., Light., and
 Hippo. denote VanillaRAG, R1-Searcher, GraphRAG, LightRAG, and
 HippoRAG2. A dash means that the experiment exceeded three days;
 it is not a zero score. Bold and underlining retain the publication’s
-highlighting. 90
+highlighting. 80
 Table6.3 Graph-construction and graph-matching substitutions, transposed from
 published Table 7, p. 2490 [4]. All twelve method columns and all four
 metricvaluesperdatasetareretained. O.IEandSTATreplacegraphcon-
 struction; the other alternatives replace matching. The shared backbone
-isQwen2.5-VL-7B-Instruct. 92
+isQwen2.5-VL-7B-Instruct. 81
 Table6.4 Results by query hop count, reorganized from published Table 8,
 p.2490[4]. Timeisinminutes,asreported. Eachoriginalrowisshown
-astwomethodrows,withthequerycountrepeated. 95
+astwomethodrows,withthequerycountrepeated. 84
 Table6.5 Cache-systemcomparisononMMQA,reproducedfrompublishedTable
 6,p.2489[4]. V.andH.identifyVanillaRAGandHippoRAG2retrieval
-pipelines. TTFTisinsecondsandtotaltimeisinhours. 96
+pipelines. TTFTisinsecondsandtotaltimeisinhours. 85
 Table6.6 ModulecostsreproducedfrompublishedTable5,p.2489[4]. Timeisin
 minutes. KGC, QA, and E2E cells retain the published time/token pairs
 for graph construction, answering, and end-to-end processing. Match
 denotes matching time. Token counts and E2E totals are preserved as
-reported. 97
+reported. 86
 Table6.7 MMQA component ablations, reproduced from published Table 9,
-p.2490[4]. Timeisinhours. 98
+p.2490[4]. Timeisinhours. 87
 Table6.8 MMQA inverse ablations, reproduced from published Table 10,
 p. 2491 [4]. PSGM and GKV denote path-based semantic graph
-matchingandgraph-awareKVrecomputation. Timeisinhours. 98
+matchingandgraph-awareKVrecomputation. Timeisinhours. 88
 Table7.1 Therolesofstructureacrossthefourstudies. Theentriessummarizethe
-methodsintheirrespectiveresearchchapters. 102
+methodsintheirrespectiveresearchchapters. 91
 Table7.2 Mainexperimentalconditionsacrossthefourstudies. Hardwaredenotes
 thereportedlocalsetup;GORAG’sIFS-RelgenerationusestheGPT-4o
 service. Fulltask-specific controls appear in the corresponding research
-chapters. 104
+chapters. 92
 xiv

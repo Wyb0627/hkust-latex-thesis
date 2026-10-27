@@ -1,33 +1,33 @@
-These methods establish that table context and column contents supply distinct information for
-typeinference.
-Pre-trained language models offer another way to compute contextual representations. Do-
-duo serializes multiple columns for a language model and learns column annotations from the
-resultingrepresentations[11]. Itscolumn-typeandcolumn-propertytasksrelateindividualcat-
-egories to relationships between columns. The input organization determines which values can
-interact through the encoder. A multi-column sequence lets the representation of one column
-depend on another, subject to the model’s sequence-length constraints. This differs from ap-
-pendingatable-levelfeatureafterindependentlyencodingeachcolumn.
-Knowledge-based methods obtain evidence through a different route. HNN combines
-learned table features with knowledge-base lookup and inter-column semantics [12]. A
-knowledgeresourcecanidentifyarelationbetweenmentionedobjectsthatthetable’sstringsdo
-notexplain. RECAusesrelatedtablesasanadditionalcontextualsource[13]. Theseapproaches
-extend the information available within the target table through external semantic facts or
-evidencefromothertables. Theirretrievalunitsandpreparationcostsdifferaccordingly.
-KGLinkexaminesthecorrespondencebetweenKG-deriveddescriptionsandadataset’star-
-getlabels[1]. Itretrievescandidatesforcellmentions,usesgraphconnectionsbetweencolumns
-to filter them, and learns from candidate-type text and a separate KG feature sequence. A con-
-textual type-representation task helps the model use graph descriptions when their granularity
-differs from the dataset’s labels. Chapter 3 develops this method and its evidence. The contri-
-butionislocatedattheinterfacebetweenevidenceselectionandrepresentationlearning,where
-graphfactsbecomeinputstoasupervisedannotationdecision.
-These lines of work differ in what makes two values mutually informative. Statistical fea-
-turessummarizeadistribution,topicfeaturesdescribeatable,contextualencodingallowstoken
-interactions, related-table retrieval supplies other examples, and graph lookup exposes explicit
-relations. The differences are relevant even when all methods predict the same label set. They
-determine which information can resolve an ambiguous cell and what happens when one evi-
-dencesourcehaslittlecoverage.
-2.3 Retrieval-augmented Generation
-Retrieval-augmentedgenerationconditionsagenerativemodeloninformationselectedfroman
-externalcollection[14]. Aretrievalstagemapsthequerytoindexedevidence,andageneration
-stage uses the evidence to produce an answer. The distinction makes the external collection an
+information supplied by an update also matters. A labeled support example carries a provided
+class, while a query processed online may carry only a model prediction. GORAG makes this
+distinction part of its dynamic classification protocol [2]. Its index expands as observations
+arrive,andretrievalusesthegraphstateavailableatthecurrentprediction.
+Retrieving more passages can increase both answer coverage and model-processing cost.
+The retrieval budget therefore affects the information available to the generator even when the
+corpusandmodelremainfixed.
+Theindexedobjectcandifferfromtheretrievedcontext. Adocumentcancontributeseveral
+graphfacts,atraversalcanreturncandidatelabels,andapromptcancombineselectedrelation-
+ships with source passages. Graph retrieval makes these connections available during evidence
+selection.
+2.4 Graph-based Evidence Retrieval
+Graph indexes connect entities, passages, labels, and other evidence items through extracted
+facts,sharedmentions,orsemanticsimilarity. Retrievalselectsthenodesandconnectionsrele-
+vanttothecurrentquery.
+GraphRAGbuildsanentitygraphandcommunitysummariesforquery-focusedsummariza-
+tion[17]. Communitysummariesprovidearetrievalunitaboveindividualpassagesandsupport
+questionsaboutbroadercorpusthemes.
+HippoRAG combines language-model extraction, a knowledge graph, and personalized
+PageRank [18]. Query entities seed propagation through the graph, producing a ranking
+of related evidence. This ranking does not require all selected nodes to belong to one
+terminal-connectingstructure.
+LightRAG combines graph and vector representations, low- and high-level retrieval, and
+incrementalindexupdates[19]. Itsretrievalmodesselectspecificentityinformationandbroader
+relationalorconceptualinformation.
+Table2.1comparestheevidenceorganizationoftheseapproacheswithpassageretrieval. It
+identifiestheevidenceobjectmadeavailabletoeachretrievalcomputation.
+Personalized propagation ranks evidence by influence from query anchors. Terminal-
+connecting retrieval instead selects paths that include a specified set of nodes, admitting
+intermediate nodes when needed. The former locates relevant graph regions; the latter
+constructsconnectionsamongrequiredevidenceitems.
+A graph result must be converted into model input. Entity retrieval requires finding asso-
 11

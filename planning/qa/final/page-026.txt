@@ -1,35 +1,34 @@
-explicit part of the prediction system. Changing its contents or its selection rule changes the
-contextreceivedbythegeneratorevenwhenthegenerator’sparametersstayfixed.
-A basic passage pipeline divides a corpus into chunks, indexes them, scores the chunks for
-a query, and concatenates selected text with the query. The chunk boundary establishes the
-retrievable unit. Small chunks can isolate a relevant statement but split its explanation from
-necessary context. Large chunks can retain more context while using a larger part of the gen-
-eration budget. Overlap changes how adjacent chunks share information. These choices affect
-boththematerialavailabletoretrievalandtheamountofrepeatedcontentpassedtothemodel.
-Sparse retrieval scores lexical evidence. BM25 combines within-document term frequency
-with corpus frequency and document-length normalization [15]. It distinguishes a query term
-thatoccurswidelyfromonethatisconcentratedinfewerindexeditems. Denseretrievalinstead
-represents queries and passages as vectors and scores their correspondence in a learned space.
-Dense Passage Retrieval uses a dual-encoder framework with separate question and passage
-encoders [16]. The two representations provide different signals, so hybrid retrieval can select
-contextusingbothlexicaloverlapandembeddingsimilarity.
-For a query 𝑞 and indexed evidence item 𝑒, write the retrieval score abstractly as 𝑠(𝑞,𝑒).
-A conventional fixed-budget result contains the highest-scoring 𝑘 items. Evidence is scored at
-the chosen item granularity, and the retrieval cutoff controls how many items are returned. A
-graph-based system can alter either assumption. It can score relationships as well as items, or
-determinethecontextbyastructuralconditionsuchasconnectingqueryanchors. Theresulting
-contextisthenaselectedrelationalobjectwithaserializationforthelanguagemodel.
-Retrievalandgenerationalsohavedifferentevaluationtargets. Retrievalcanbeassessedby
-whethersupportingevidenceisincludedintheselectedcontext. Generationisassessedthrough
-the answer, such as its exact correctness, overlap with a reference, or an evaluation protocol
-for open-ended content. A better answer score can reflect improvements in evidence selection,
-contextorganization,orthegenerator’suseofthatcontext.
-Anevolvingcollectionaddsamaintenanceproblem. Newlyavailabledocuments,examples,
-or labels must enter the index before retrieval can use them. Updating stored evidence can in-
-volve new embeddings, new graph nodes, changed edge weights, or derived summaries. The
-information supplied by an update also matters. A labeled support example carries a provided
-class, while a query processed online may carry only a model prediction. GORAG makes this
-distinction part of its dynamic classification protocol [2]. Its index expands as observations
-arrive,andretrievalusesthegraphstateavailableatthecurrentprediction.
-Context budgets also affect comparison between retrieval procedures. Returning more pas-
+Table2.1: Representativeretrievalorganizationsandtheevidencestructurestheyexpose. Each
+rowreferstothecitedmethod’sdesign.
+Method Indexedrepresentation Query-relatedretrievaloperation
+DPR[16] Densepassagerepresentations Question–passagesimilarityscoring
+GraphRAG[17] Entity graph and community Use of graph-derived summaries for
+summaries query-focusedsummarization
+HippoRAG[18] Knowledge graph linked to pas- Personalized PageRank from query-
+sages relatedentities
+LightRAG[19] Graphandvectorrepresentations Dual-level retrieval of specific and
+broaderinformation
+ciated source passages. Path retrieval requires serializing entities and relations. Community
+retrieval can return derived summaries. These choices determine which original details and
+relationshipsremainavailabletogeneration.
+The thesis examines several structural retrieval questions within this landscape. GORAG
+retrieves labels by connecting keywords extracted from the query [2]. AGRAG selects a con-
+nected evidence subgraph while considering node influence and edge cost [3]. MGRAG tests
+semantic correspondence between query paths and evidence paths [4]. These operations have
+different output conditions. A set of highly ranked nodes need not contain paths that connect
+the query’s requested facts. Conversely, a connecting path can introduce intermediate evidence
+whosedirectquerysimilarityislower.
+Passage nodes link extracted relations to their original wording. Combining graph serial-
+ization with source chunks gives the generator both connected facts and surrounding context.
+AGRAGusesthiscombinationfortext,andMGRAGretainssourcechunkscontainingtheorig-
+inalimages.
+2.5 Multimodal Retrieval and Context Serving
+Multimodalquestionansweringrequiresevidencerepresentedinmorethanonemodality. Multi-
+ModalQAincludesquestionsovertext,tables,andimagesandstudiescombinationsofevidence
+across them [20]. The evidence needed for a question can occur in different source objects.
+A relationship stated in text may identify the image whose visual content contains the answer.
+Retrieval must therefore consider both the relevance of individual objects and the relationship
+connectingthemtothequestion.
+Images can be ranked through captions or visual embeddings. Captions expose selected vi-
+sualcontentinatextembeddingspace,whiletheoriginalimagespreservedetailsformultimodal
 12

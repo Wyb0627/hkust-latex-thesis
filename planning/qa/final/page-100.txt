@@ -1,32 +1,31 @@
-The published Theorem 2 gives a threshold-based quality condition for a valid returned
-match. Every matched query relation has a supporting path with cosine similarity at least 𝜃.
-Under the strict acceptance test in Equation 6.9, the average score of an accepted mapping ex-
-ceeds 𝜃 as well. This condition describes the semantic validation of returned evidence. It is
-conditionalonfindingavalidmatchanddoesnotrequirethealgorithmtorecoveronewhenever
-suchasubgraphexists.
-Thetechnicalreportdiscussesthethresholdintermsofabottlenecktransportcost[59]. With
-aper-edgecostofoneminuscosinesimilarity,thethresholdlimitsthelargestacceptedlocalcost.
-Section6.9evaluatesgraph-matchingsubstitutionsandanswerquality.
-6.5.5 Serializing selected evidence
-After matching, MGRAG serializes the selected triples into 𝑆 , separating facts with [SEP].
-𝑟
-This sequence is combined with 𝑞 and the original chunks consumed during construction. The
-serializationsuppliesanexplicitlistofentitiesandrelationshipstotheansweringmodel. Orig-
-inal chunks remain available because extraction is a selective description of the evidence, and
-somelinguisticorvisualdetailsmaylieoutsidethetriples.
-The same entities and relations were involved in the earlier graph-construction calls. Their
-tokens can therefore overlap with tokens in the answering context. MGRAG uses this relation-
-shiptoreusecachedcomputationfromconstructionwhileupdatingstatesimportanttothenew
-answering context. The graph produced during retrieval thus becomes an input to the context-
-computationpolicyaswellastothelanguagemodel’sprompt.
-6.6 Graph-aware KV Recomputation
-6.6.1 Reuse and selective updates
-A transformer caches key and value projections so that earlier token states can be reused. In
-MGRAG, content processed during graph construction appears again in the query-answering
-context. Recomputing every state repeats part of this work. Reusing every state can retain
-representations calculated under a different surrounding sequence. The cache policy chooses a
-subsetforrecomputationandreusestheothers.
-Let 𝜙(𝑡) be the recomputation score of token 𝑡. At each transformer layer, MGRAG re-
-computes the tokens in the highest 𝑏% of scores and reuses the cached states for the remaining
-tokens. The published description uses a fixed-size cache with least-recently-used eviction. Its
+hours. Selectiverecomputationimprovesanswerqualityinthiscompositionwithanincreasein
+totaltime.
+Section6.11comparesthesecomponentadditionswithintheHippoRAG2andVanillaRAG
+pipelines.
+Table6.6reportstimeandtokencostsbymodule. OnMMQA,graphconstructionaccounts
+for 193.0 minutes, matching for 0.14 minutes, and answer generation for 8.9 minutes; the re-
+ported end-to-end time is 248.1 minutes. The construction and generation token entries are
+3,085and1,431,withend-to-endtokenentry4,516. Thelistedmoduletimesdonotsumtothe
+reportedend-to-endtotal;thepublicationdoesnotreconcilethedifferenceinthisbreakdown.
+Table 6.6: Module costs reproduced from published Table 5, p. 2489 [4]. Time is in minutes.
+KGC,QA,andE2Ecellsretainthepublishedtime/tokenpairsforgraphconstruction,answering,
+and end-to-end processing. Match denotes matching time. Token counts and E2E totals are
+preservedasreported.
+Dataset Queries KGC Match QA E2E
+MMQA 951 193.0/3,085 0.14 8.9/1,431 248.1/4,516
+Arxiv 200 61.9/3,946 0.23 16.2/2,944 83.9/6,890
+Manual 390 76.1/4,285 0.04 23.9/2,556 109.7/6,841
+Web 750 143.8/4,623 0.27 42.9/3,101 196.5/7,723
+Wiki 500 164.2/6,629 0.30 52.1/6,267 241.5/12,896
+Wit 600 140.6/7,660 0.21 42.6/6,539 196.5/14,199
+Recipe 2,360 525.7/4,351 1.74 191.3/3,173 808.7/7,525
+Graphconstructionisthelargestlistedtimecomponentonallsevendatasets. Recipereports
+525.7 minutes for construction, 1.74 for matching, and 191.3 for answering, with end-to-end
+time 808.7 minutes. On the smaller Arxiv query set, the corresponding values are 61.9, 0.23,
+and16.2minutes,withend-to-endtime83.9. Repeatedextractionaccountsformostofthelisted
+computationtimedespitethematcher’sexponentialworst-casebound.
+Althoughmappingenumerationhasanexponentialbound,matchingprocessessmallquery-
+specific graphs in these experiments. The measured bottleneck is repeated multimodal extrac-
+tion. Reducing the number of processed chunks or the cost per extraction is therefore a target
+forruntimeimprovement.
 86

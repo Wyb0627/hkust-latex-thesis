@@ -1,59 +1,37 @@
-Stage1:Data Stage3:HybridRetrieval
-Preparation TextChunks
-Corpus
-Cryptocurrency
-Fraudsrequirenew
-lawsto… LLM OutputAnswer
-User Query
-Toprevent Howtoprevent
-cryptocurrency
-cryptocurrencyfraud?
-fraud…
-Triplet Facts
-Stage2:GraphRetrieval MCMISubgraph
-( … fraud,require,law) KG cryptocurrency WeightedKG cryptocurrency cryptocurrency
-s=0.6
-law require target s l = a 0 w .4 re c q = u 0. i 9 re target fraud IPverification
-c=0.3 Law
-fraud fraud enforcement
-s=0.7
-AIdetection
-Extraction Ent./Rel.
-BM25Encoding HRChunks
-Chunking TextStore Hybrid
-Encode
-Retrieval
-VectorEncoding
-TextStore
-Generate Construct Weighting
-MCMI
-Figure 5.1: The AGRAG pipeline. The original figure separates corpus preparation, query-
-conditioned graph retrieval, and hybrid passage retrieval. Reproduced from Figure 1 of the
-sourcepaper[3].
-pipelines. Languagemodelsremaininvolvedinrelationextraction,filteringrawmappedtriples,
-andgeneratinganswers. Theentity-extractionablationchangesthenodessuppliedtosubsequent
-relationextractionandretrieval.
-5.2.2 Chunking and statistical entity extraction
-Thecorpusissplitintooverlappingtextchunks,
-𝒯 = Split(𝒯,𝑙 ,𝑙 ), (5.1)
-𝑐 𝑡 𝑜
-where 𝑙 is the chunk length and 𝑙 is the overlap. The reported main setting uses 256 tokens
-𝑡 𝑜
-per chunk and an overlap of 32 tokens. Overlap allows adjacent chunks to share text at their
-boundaries;thegraphsubsequentlyconnectschunksthroughtheentitiestheycontain.
-AGRAG considers words and phrases up to a maximum n-gram length 𝑏. For a candidate
-term𝑣inchunk𝑡,theextractionrulemodifiesTF–IDF[37]todefinethescore
-count(𝑣,𝑡) |𝒯 |+1
-𝑐
-ER(𝑣,𝑡) = log . (5.2)
-|𝑡|log(|𝒯
-𝑐
-|+1) |{𝑡
-𝑗
-∈ 𝒯
-𝑐
-∶ 𝑣 ∈ 𝑡
-𝑗
-}|+1
-Thefirstfactordependsonwithin-chunkfrequencyandlength. Theseconddistinguishesterms
+classification-specific configuration retained where applicable. The comparison includes
+NaiveRAG, LongLLMLingua [41], RAPTOR [49], SiReRAG [50], G-Retriever [51],
+MIXRAG [52], GraphRAG [17], LightRAG [19], HippoRAG2 [42], and Fast-GraphRAG [53].
+These methods represent passage retrieval, compression, hierarchical organization, connected
+subgraphselection,neighborhoodretrieval,andgraphpropagation.
+5.7.2 Metric interpretation
+Classificationaccuracyistheproportionofpredictedlabelsmatchinggoldlabels. Classification
+recallismacrorecall. Fortheothertasks,thereportedaccuracyisamodel-assessedscorewith
+values0,0.5,or1forinaccurate,partiallyaccurate,oraccurateanswers. Thesequantitiesappear
+underthesameACCheadinginthepaperbutevaluatedifferentoutputs.
+Complex reasoning and fact retrieval additionally report the source’s ROUGE-L mea-
+sure [54]. Contextual summarization and creative generation report coverage, the fraction
+of required reference evidence represented in the answer. Creative generation also reports
+faithfulness, the fraction of answer claims supported by retrieved context. The evaluation uses
+the RAGAS framework [55, 56] and the task-specific protocol. Coverage concerns inclusion of
+requiredinformation,whereasfaithfulnessconcernssupportforgeneratedclaims.
+Forgeneratedanswersequence𝐺 andreferencesequence𝑌,the source defines itsreported
+lexicalscoreas
+LCS(𝐺,𝑌)
+ROG(𝐺,𝑌) = . (5.15)
+|𝐺|
+Thedenominatoristhegeneratedanswerlength. Thisisthesource’sreportedROUGE-Lquan-
+tity,ratherthananF1combinationoflongest-common-subsequenceprecisionandrecall.
+Let 𝐸 denote the reference evidence items and let 𝑀(𝑒,𝑅) indicate whether response 𝑅
+coversitem𝑒. Coverageis
+|{𝑒 ∈ 𝐸 ∶ 𝑀(𝑒,𝑅)}|
+COV(𝑅,𝐸) = . (5.16)
+|𝐸|
+For the answer’s claim set 𝐴 and retrieved context 𝐶, let 𝑆(𝑎,𝐶) indicate that claim 𝑎 is sup-
+ported. Faithfulnessis
+|{𝑎 ∈ 𝐴 ∶ 𝑆(𝑎,𝐶)}|
+FS(𝐴,𝐶) = . (5.17)
+|𝐴|
+Coverage measures required reference information, while faithfulness measures support for the
+claims actually generated. Omitting a required fact lowers coverage; adding an unsupported
+claimlowersfaithfulness. Thesejudgmentsusethemodel-basedassessmentprocedure.
 56

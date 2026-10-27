@@ -1,0 +1,129 @@
+{
+  "attemptedBundledTectonic": true,
+  "attempts": [
+    {
+      "command": [
+        "/Library/TeX/texbin/latexmk",
+        "-norc",
+        "-pdf",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-synctex=1",
+        "-outdir=/private/tmp/thesis-desktop-default-engine",
+        "-no-shell-escape",
+        "-recorder",
+        "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/main.tex"
+      ],
+      "compiler": "texlive",
+      "exitCode": 12,
+      "log": "Rc files read:\n  NONE\nLatexmk: This is Latexmk, John Collins, 7 Jan. 2023. Version 4.79.\nNo existing .aux file, so I'll make a simple one, and require run of *latex.\nLatexmk: applying rule 'pdflatex'...\nRule 'pdflatex':  Reasons for rerun\nCategory 'other':\n  Rerun of 'pdflatex' forced or previously required\n\n------------\nRun number 1 of rule 'pdflatex'\n------------\n------------\nRunning 'pdflatex  -interaction=nonstopmode -halt-on-error -synctex=1 -no-shell-escape -recorder -output-directory=\"/private/tmp/thesis-desktop-default-engine\"  \"/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/main.tex\"'\n------------\nThis is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex)\nentering extended mode\n\n(/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-la\ntex-thesis/main.tex\nLaTeX2e <2022-11-01> patch level 1\nL3 programming layer <2023-02-22>\n(./template/hkust-thesis-v0.11.6/hkustthesis.cls\n(/usr/local/texlive/2023/texmf-dist/tex/latex/l3kernel/expl3.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def))\n\nLaTeX Warning: You have requested document class `template/hkust-thesis-v0.11.6\n/hkustthesis',\n               but the document class provides `hkustthesis'.\n\nDocument Class: hkustthesis 2025/11/04 v0.11.5  Thesis template for HKUST \n(/usr/local/texlive/2023/texmf-dist/tex/latex/l3packages/xparse/xparse.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.st\ny)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty)\n (/usr/local/texlive/2023/texmf-dist/tex/latex/base/book.cls\nDocument Class: book 2022/07/02 v1.4n Standard LaTeX document class\n(/usr/local/texlive/2023/texmf-dist/tex/latex/base/bk12.clo))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/geometry/geometry.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/graphics/keyval.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/generic/iftex/ifvtex.sty\n(/usr/local/texlive/2023/texmf-dist/tex/generic/iftex/iftex.sty)))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/caption/caption.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/caption/caption3.sty))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/float/float.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/setspace/setspace.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/lastpage/lastpage.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/lastpage/lastpage2e.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/lastpage/lastpagemodern.sty) \n)) (/usr/local/texlive/2023/texmf-dist/tex/latex/emptypage/emptypage.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/makecell/makecell.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/tools/array.sty))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/titlesec/titlesec.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/tocloft/tocloft.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/url/url.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/siunitx/siunitx.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/translations/translations.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/etoolbox/etoolbox.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty\n(/usr/local/texlive/2023/texmf-dist/tex/generic/infwarerr/infwarerr.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amstext.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amsgen.sty)))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/mhchem/mhchem.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/tools/calc.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amsmath.sty\nFor additional information on amsmath, use the `?' option.\n(/usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amsbsy.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amsopn.sty))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/chemgreek/chemgreek.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/graphics/graphics.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/graphics/trig.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/graphics-def/pdftex.def)))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/physics/physics.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/braket/braket.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/generic/hologo/hologo.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty))\n (/usr/local/texlive/2023/texmf-dist/tex/latex/amscls/amsthm.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mathtools.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mhsetup.sty))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/thmtools/thmtools.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/thmtools/thm-patch.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/thmtools/parseargs.sty))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/thmtools/thm-kv.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/thmtools/thm-autoref.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/thmtools/aliasctr.sty))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/thmtools/thm-listof.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/thmtools/thm-restate.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/thmtools/thm-amsthm.sty))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/unicode-math/unicode-math.sty\n\n! Package unicode-math Error: Cannot be run with pdftex!\n(unicode-math)                Use XeLaTeX or LuaLaTeX instead.\n\nType <return> to continue.\n ...                                              \n                                                  \nl.40 ...ror:nn {unicode-math} {unsupported-engine}\n                                                  \n!  ==> Fatal error occurred, no output PDF file produced!\nTranscript written on /private/tmp/thesis-desktop-default-engine/main.log.\nLatexmk: If appropriate, the -f option can be used to get latexmk\n  to try to force complete processing.\nLatexmk: Getting log file '/private/tmp/thesis-desktop-default-engine/main.log'\nLatexmk: Examining '/private/tmp/thesis-desktop-default-engine/main.fls'\nLatexmk: Examining '/private/tmp/thesis-desktop-default-engine/main.log'\nLatexmk: Errors, so I did not complete making targets\nCollected error summary (may duplicate other messages):\n  pdflatex: Command for 'pdflatex' gave return code 1\n      Refer to '/private/tmp/thesis-desktop-default-engine/main.log' and/or above output for details\n\n",
+      "pdfExists": false,
+      "pdfPath": "/private/tmp/thesis-desktop-default-engine/main.pdf",
+      "processStarted": true
+    },
+    {
+      "command": [
+        "/Applications/ChatGPT.app/Contents/Resources/tectonic/tectonic",
+        "-X",
+        "compile",
+        "--outdir",
+        "/private/tmp/thesis-desktop-default-engine",
+        "--outfmt",
+        "pdf",
+        "--print",
+        "--untrusted",
+        "--synctex",
+        "--makefile-rules",
+        "/private/tmp/thesis-desktop-default-engine/inputs.d",
+        "--",
+        "main.tex"
+      ],
+      "compiler": "tectonic",
+      "exitCode": 101,
+      "log": "note: \"version 2\" Tectonic command-line interface activated\n\nthread 'main' (4171203) panicked at src/config.rs:154:18:\ncalled `Result::unwrap()` on an `Err` value: failed to create directory `/Users/ybwang/Library/Caches/TectonicProject.Tectonic/bundles/hashes` or one of its parents\n\nCaused by:\n    Operation not permitted (os error 1)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n",
+      "pdfExists": false,
+      "pdfPath": "/private/tmp/thesis-desktop-default-engine/main.pdf",
+      "processStarted": true
+    }
+  ],
+  "command": null,
+  "compiler": null,
+  "engine": "pdflatex",
+  "exitCode": 1,
+  "log": "[texlive] failed (exit 12)\n[tectonic] failed (exit 101)\n[texlive] Rc files read:\n  NONE\nLatexmk: This is Latexmk, John Collins, 7 Jan. 2023. Version 4.79.\nNo existing .aux file, so I'll make a simple one, and require run of *latex.\nLatexmk: applying rule 'pdflatex'...\nRule 'pdflatex':  Reasons for rerun\nCategory 'other':\n  Rerun of 'pdflatex' forced or previously required\n\n------------\nRun number 1 of rule 'pdflatex'\n------------\n------------\nRunning 'pdflatex  -interaction=nonstopmode -halt-on-error -synctex=1 -no-shell-escape -recorder -output-directory=\"/private/tmp/thesis-desktop-default-engine\"  \"/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/main.tex\"'\n------------\nThis is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex)\nentering extended mode\n\n(/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-la\ntex-thesis/main.tex\nLaTeX2e <2022-11-01> patch level 1\nL3 programming layer <2023-02-22>\n(./template/hkust-thesis-v0.11.6/hkustthesis.cls\n(/usr/local/texlive/2023/texmf-dist/tex/latex/l3kernel/expl3.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def))\n\nLaTeX Warning: You have requested document class `template/hkust-thesis-v0.11.6\n/hkustthesis',\n               but the document class provides `hkustthesis'.\n\nDocument Class: hkustthesis 2025/11/04 v0.11.5  Thesis template for HKUST \n(/usr/local/texlive/2023/texmf-dist/tex/latex/l3packages/xparse/xparse.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.st\ny)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty)\n (/usr/local/texlive/2023/texmf-dist/tex/latex/base/book.cls\nDocument Class: book 2022/07/02 v1.4n Standard LaTeX document class\n(/usr/local/texlive/2023/texmf-dist/tex/latex/base/bk12.clo))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/geometry/geometry.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/graphics/keyval.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/generic/iftex/ifvtex.sty\n(/usr/local/texlive/2023/texmf-dist/tex/generic/iftex/iftex.sty)))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/caption/caption.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/caption/caption3.sty))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/float/float.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/setspace/setspace.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/lastpage/lastpage.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/lastpage/lastpage2e.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/lastpage/lastpagemodern.sty) \n)) (/usr/local/texlive/2023/texmf-dist/tex/latex/emptypage/emptypage.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/makecell/makecell.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/tools/array.sty))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/titlesec/titlesec.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/tocloft/tocloft.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/url/url.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/siunitx/siunitx.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/translations/translations.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/etoolbox/etoolbox.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty\n(/usr/local/texlive/2023/texmf-dist/tex/generic/infwarerr/infwarerr.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amstext.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amsgen.sty)))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/mhchem/mhchem.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/tools/calc.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amsmath.sty\nFor additional information on amsmath, use the `?' option.\n(/usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amsbsy.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amsopn.sty))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/chemgreek/chemgreek.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/graphics/graphics.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/graphics/trig.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/graphics-def/pdftex.def)))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/physics/physics.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/braket/braket.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/generic/hologo/hologo.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty))\n (/usr/local/texlive/2023/texmf-dist/tex/latex/amscls/amsthm.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mathtools.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mhsetup.sty))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/thmtools/thmtools.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/thmtools/thm-patch.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/thmtools/parseargs.sty))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/thmtools/thm-kv.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/thmtools/thm-autoref.sty\n(/usr/local/texlive/2023/texmf-dist/tex/latex/thmtools/aliasctr.sty))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/thmtools/thm-listof.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/thmtools/thm-restate.sty)\n(/usr/local/texlive/2023/texmf-dist/tex/latex/thmtools/thm-amsthm.sty))\n(/usr/local/texlive/2023/texmf-dist/tex/latex/unicode-math/unicode-math.sty\n\n! Package unicode-math Error: Cannot be run with pdftex!\n(unicode-math)                Use XeLaTeX or LuaLaTeX instead.\n\nType <return> to continue.\n ...                                              \n                                                  \nl.40 ...ror:nn {unicode-math} {unsupported-engine}\n                                                  \n!  ==> Fatal error occurred, no output PDF file produced!\nTranscript written on /private/tmp/thesis-desktop-default-engine/main.log.\nLatexmk: If appropriate, the -f option can be used to get latexmk\n  to try to force complete processing.\nLatexmk: Getting log file '/private/tmp/thesis-desktop-default-engine/main.log'\nLatexmk: Examining '/private/tmp/thesis-desktop-default-engine/main.fls'\nLatexmk: Examining '/private/tmp/thesis-desktop-default-engine/main.log'\nLatexmk: Errors, so I did not complete making targets\nCollected error summary (may duplicate other messages):\n  pdflatex: Command for 'pdflatex' gave return code 1\n      Refer to '/private/tmp/thesis-desktop-default-engine/main.log' and/or above output for details\n\n\n[tectonic] note: \"version 2\" Tectonic command-line interface activated\n\nthread 'main' (4171203) panicked at src/config.rs:154:18:\ncalled `Result::unwrap()` on an `Err` value: failed to create directory `/Users/ybwang/Library/Caches/TectonicProject.Tectonic/bundles/hashes` or one of its parents\n\nCaused by:\n    Operation not permitted (os error 1)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n",
+  "pdfExists": false,
+  "pdfPath": "/private/tmp/thesis-desktop-default-engine/main.pdf",
+  "rootFile": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/main.tex",
+  "tectonic": {
+    "checked": [
+      {
+        "path": "/Applications/ChatGPT.app/Contents/Resources/tectonic/tectonic",
+        "source": "app"
+      }
+    ],
+    "path": "/Applications/ChatGPT.app/Contents/Resources/tectonic/tectonic",
+    "reason": "Tectonic executable is available.",
+    "source": "app",
+    "status": "available",
+    "version": "Tectonic 0.17.0"
+  },
+  "tectonicSuitability": {
+    "reasons": [
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/main.tex: bibliography tooling"
+    ],
+    "scannedFiles": [
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/main.tex",
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/chapter/ch08-conclusion.tex",
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/chapter/ch07-discussion.tex",
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/chapter/ch06-mgrag.tex",
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/chapter/ch05-agrag.tex",
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/chapter/ch04-gorag.tex",
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/chapter/ch03-kglink.tex",
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/chapter/ch02-background.tex",
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/chapter/ch01-introduction.tex",
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/chapter/front-acknowledgements.tex",
+      "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/chapter/front-abstract.tex"
+    ],
+    "suitable": false
+  },
+  "texliveDetection": {
+    "activeBinDir": "/Library/TeX/texbin",
+    "commands": {
+      "biber": {
+        "path": "/Library/TeX/texbin/biber",
+        "version": "present"
+      },
+      "kpsewhich": {
+        "path": "/Library/TeX/texbin/kpsewhich",
+        "version": "kpathsea version 6.3.5"
+      },
+      "latexmk": {
+        "path": "/Library/TeX/texbin/latexmk",
+        "version": "Latexmk, John Collins, 7 Jan. 2023. Version 4.79"
+      },
+      "lualatex": {
+        "path": "/Library/TeX/texbin/lualatex",
+        "version": "This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)"
+      },
+      "pdflatex": {
+        "path": "/Library/TeX/texbin/pdflatex",
+        "version": "pdfTeX 3.141592653-2.6-1.40.25 (TeX Live 2023)"
+      },
+      "xelatex": {
+        "path": "/Library/TeX/texbin/xelatex",
+        "version": "XeTeX 3.141592653-2.6-0.999995 (TeX Live 2023)"
+      }
+    },
+    "knownTexBinDirs": [
+      "/Library/TeX/texbin",
+      "/usr/local/texlive/2025/bin/universal-darwin",
+      "/usr/local/texlive/2023/bin/universal-darwin"
+    ],
+    "missingRecommended": [],
+    "missingRequired": [],
+    "reason": "Required TeX tools are available.",
+    "searchPath": "/Library/TeX/texbin:/usr/local/texlive/2025/bin/universal-darwin:/usr/local/texlive/2023/bin/universal-darwin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Library/Frameworks/Python.framework/Versions/3.14/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.9/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/usr/local/share/dotnet:/Users/ybwang/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/ybwang/.codex/tmp/arg0-macos/codex-arg0t2VtmK:/Users/ybwang/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/ybwang/anaconda3/bin:/Users/ybwang/anaconda3/condabin:/Users/ybwang/.local/bin:/Users/ybwang/.docker/bin:/Users/ybwang/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS",
+    "status": "existing-usable",
+    "texmfroot": "/usr/local/texlive/2023"
+  }
+}

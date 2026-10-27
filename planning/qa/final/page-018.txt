@@ -1,24 +1,3 @@
-1.2.3 The evidence interface as a design choice
-The methods can also be understood by asking what information is available at each decision
-point. Before prediction, KGLink observes the table and linked knowledge but uses a masked
-type position in the inference sequence. GORAG observes the supervision available in a round
-andthegraphstateproducedbyearlierpermittedupdates. AGRAGobservestheindexedcorpus
-andthecurrentquery. MGRAGobservesrankedmultimodalchunksandprogressivelyextracts
-facts relevant to its query graph. These information boundaries determine which structural op-
-erationsarepossible.
-1.3 Research Questions
-1.3.1 RQ1: External knowledge for table understanding
-Thefirstresearchquestionaskshowgraph-derivedinformationandapre-trainedlanguagemodel
-canbecombinedwhenatablelacksinformativecontextandthegraph’stypevocabularydiffers
-fromtheannotationtask. Theinputconsistsofatable,anexternalknowledgegraph,andlabeled
-columnsfromthetargettask. Theoutputisasemantictypeforeachtargetcolumn.
-Two diﬀiculties motivate the question. Knowledge-graph linking can return multiple candi-
-date descriptions at different granularities. The target task may require a different abstraction
-fromagraph’savailabletypes. Meanwhile,atableencodercanonlydirectlyreadthecontentin
-its input sequence. Surrounding dates or numeric values may provide little evidence about an
-entity’soccupationorrole. Themethodmustexposeexternalinformationwhilelearninghowit
-relatestothetask’slabels.
-KGLinkanswersthequestionthroughcelllinking,cross-columnneighborhoodfiltering,row
 selection,candidate-typeconstruction,andgraph-derivedfeaturesequences. Thesecomponents
 supply evidence to the table encoder. Contextual masked-type representation training relates
 thatevidencetothetargetannotationvocabulary. Chapter3explainsthemethodandreportsthe
@@ -27,4 +6,27 @@ SemTabandVizNetexperiments,ablations,no-linkagecases,andeﬀiciencyevidence.
 Thesecondquestionaskshowaretrievalindexcanmaintaintask-specificrelationshipsandselect
 relevantlabelsasafew-shotclassificationproblemevolves. Theinputincludestheexamplesand
 labels available at the current round, an existing graph index, and an unseen text. The output is
+alabelpredictionandtheprescribedindexupdateforsubsequentprocessing.
+Aslabelsarrive,theindexmustretainearlierclassesandincorporatenewexamples. Query
+predictionscanalsosupplyassociationsforlaterretrieval. Theorderofpredictionandinsertion
+determineswhichinformationisavailabletoeachquery.
+GORAG answers this question through weighted keyword–label indexing, terminal-based
+connected retrieval, and online updates after classification. Its candidate set is selected for the
+currentinputratherthanspecifiedonlybyafixedretrievalcount. Chapter4describestheround
+andshotsettings,theretrievalconstruction,andtheCAD,WOS,andIFS-Relresults. Thechap-
+teralsoexaminesthecostofindexingandretrievalandtheeffectoftheproposedcomponents.
+1.3.3 RQ3: Connected evidence for textual generation
+Thethirdquestionaskshowtoselectevidencethatreflectsbothitsrelevancetoaqueryandthe
+connections among its facts. The input is a text corpus and a query whose answer can involve
+several information items. The output includes an evidence subgraph, passage context, and the
+generatedanswer.
+A graph-ranking score identifies relevant nodes but does not by itself specify an evidence
+structure. Conversely, a small structure connecting query anchors may omit additional facts
+neededforasummary. Thesystemmustalsoaccountforinformationthatremainsintheoriginal
+text after graph extraction. These requirements motivate a combination of graph selection and
+passageretrieval.
+AGRAG answers the question by constructing a graph with statistically selected entities,
+extractedrelations,passagenodes,andsynonymlinks. Query-mappedfactsconditiontheinflu-
+encescores;semanticsimilaritysuppliesedgecosts. Themethodconstructsaninitialterminal-
+connecting structure and expands it according to the reported cost-score rule. A hybrid dense
 4

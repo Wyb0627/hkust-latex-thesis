@@ -1,15 +1,15 @@
-Chapter7 Discussion 101
-7.1 WhereStructureEntersthePipeline 101
-7.2 Static,Online,andQuery-dependentStructures 102
-7.3 EvidenceQualityandComputationalCost 103
-7.4 InformationPreservationandSemanticGranularity 105
-7.5 ErrorPropagationAcrossStructuralDecisions 105
-7.6 LimitationsandOpenQuestions 106
-Chapter8 ConclusionandFutureDirections 107
-8.1 Conclusion 107
-8.2 FutureDirections 108
-8.2.1 Feedbackforstructuremaintenance 108
-8.2.2 Multimodalstructureandprovenance 108
-8.2.3 Jointretrievalandcontextcomputation 109
-References 110
+Chapter7 Discussion 90
+7.1 WhereStructureEntersthePipeline 90
+7.2 Static,Online,andQuery-dependentStructures 90
+7.3 EvidenceQualityandComputationalCost 91
+7.4 InformationPreservationandSemanticGranularity 93
+7.5 ErrorPropagationAcrossStructuralDecisions 93
+7.6 LimitationsandOpenQuestions 94
+Chapter8 ConclusionandFutureDirections 95
+8.1 Conclusion 95
+8.2 FutureDirections 96
+8.2.1 Feedbackforstructuremaintenance 96
+8.2.2 Multimodalstructureandprovenance 96
+8.2.3 Jointretrievalandcontextcomputation 96
+References 97
 ix
