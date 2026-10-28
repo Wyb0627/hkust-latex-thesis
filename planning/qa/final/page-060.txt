@@ -1,4 +1,0 @@
-GORAGmaintainsclassificationevidenceaslabelsandobservedvocabularyevolve. Chap-
-ter 5 turns to open-ended answers, where retrieval must select connected facts and the passage
-contextneededtoexplainthem.
-46

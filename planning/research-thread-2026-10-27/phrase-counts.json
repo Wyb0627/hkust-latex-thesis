@@ -1,0 +1,58 @@
+{
+  "task-related": {
+    "before": 0,
+    "after": 11
+  },
+  "reported": {
+    "before": 54,
+    "after": 54
+  },
+  "rather than": {
+    "before": 11,
+    "after": 10
+  },
+  "does not": {
+    "before": 12,
+    "after": 10
+  },
+  "do not": {
+    "before": 9,
+    "after": 9
+  },
+  "not claim": {
+    "before": 0,
+    "after": 0
+  },
+  "it should be noted": {
+    "before": 0,
+    "after": 0
+  },
+  "we emphasize": {
+    "before": 0,
+    "after": 0
+  },
+  "for a fair comparison": {
+    "before": 0,
+    "after": 0
+  },
+  "together,": {
+    "before": 0,
+    "after": 0
+  },
+  "taken together": {
+    "before": 0,
+    "after": 0
+  },
+  "within the evaluated": {
+    "before": 0,
+    "after": 0
+  },
+  "robust": {
+    "before": 1,
+    "after": 1
+  },
+  "promising": {
+    "before": 0,
+    "after": 0
+  }
+}

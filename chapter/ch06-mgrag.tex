@@ -6,13 +6,13 @@ This chapter is based on \emph{MGRAG: Semantic Subgraph Matching and Graph-Aware
 \section{Multimodal Evidence and Query Requirements}
 \label{sec:mgrag:problem}
 
-Multimodal questions can require relationships distributed across text and images. A passage may name a person, an image may show an action, and another passage may link that person to an event. Retrieving the items independently can leave the required connection unresolved. We construct query-related graphs and match their paths to the relationships requested by the question.
+Constructing graphs from task data removes the need for a predefined external knowledge graph, as explored in GORAG. AGRAG further studies how connected textual facts support answer generation. For multimodal question answering, the facts to extract can depend on the question, and connectivity alone leaves their semantic correspondence to the query unresolved. A passage may name a person, an image may show an action, and another passage may link that person to an event. To meet these requirements, we construct query-related graphs and match their paths to the relationships requested by the question.
 
-This chapter considers a corpus $\mathcal D=\mathcal D_{\mathrm{txt}}\cup\mathcal D_{\mathrm{img}}$ and a query $q$ that can contain text, an image, or both. A retrieval module selects evidence from the corpus, and a multimodal language model generates an answer using that evidence. The research question is how to construct and retrieve a query-relevant relational representation while controlling the cost of preparing and processing the context. The answer-generation task remains grounded in the original documents and images. The graph supplies an additional representation of their query-related content.
+This chapter considers a corpus $\mathcal D=\mathcal D_{\mathrm{txt}}\cup\mathcal D_{\mathrm{img}}$, comprising text documents $\mathcal D_{\mathrm{txt}}$ and images $\mathcal D_{\mathrm{img}}$, and a query $q$ that can contain text, an image, or both. A retrieval module selects evidence from the corpus, and a multimodal language model generates an answer using that evidence. The research question is how to construct and retrieve a query-relevant relational representation while controlling the cost of preparing and processing the context. The answer-generation task remains grounded in the original documents and images. The graph supplies an additional representation of their query-related content.
 
 The first challenge is extracting the right facts. A corpus-wide graph is constructed before the question is known, and its extraction prompt may omit a visual detail needed later. We instead include the query in extraction and incrementally construct an evidence graph from ranked chunks.
 
-The second decision concerns what constitutes a match. A query and its supporting documents need not use the same decomposition of a fact. The published motivating example describes a data graph containing two \texttt{father\_of} edges and a query containing one \texttt{grandfather\_of} edge. The requested relation is represented by a two-hop path in the data. Requiring the same edge topology would exclude this correspondence. Figure~\ref{fig:mgrag:motivation} reproduces the example. MGRAG evaluates semantic representations of paths so that a query relation can be supported by a sequence of evidence relations.
+The second challenge is matching the relations requested by the query to those expressed by the evidence. A query and its supporting documents need not use the same decomposition of a fact. The published motivating example describes a data graph containing two \texttt{father\_of} edges and a query containing one \texttt{grandfather\_of} edge. The requested relation is represented by a two-hop path in the data. Requiring the same edge topology would exclude this correspondence. Figure~\ref{fig:mgrag:motivation} reproduces the example. MGRAG evaluates semantic representations of paths so that a query relation can be supported by a sequence of evidence relations.
 
 \begin{figure}[tbp]
 \centering
@@ -21,7 +21,7 @@ The second decision concerns what constitutes a match. A query and its supportin
 \label{fig:mgrag:motivation}
 \end{figure}
 
-The third decision concerns the cost of processing retrieved evidence. Graph construction already sends evidence to a language model to extract entities and relations. Some of that content appears again when the matched graph and its source chunks are used for answering. Reusing the earlier key-value (KV) states can reduce repeated computation. Their suitability depends on the new query and context, so MGRAG selectively recomputes token states. It combines attention scores with topological features of the facts associated with those tokens. Structure thus enters both evidence selection and the subsequent use of the selected context.
+The third challenge is reducing repeated computation when processing retrieved evidence. Graph construction already sends evidence to a language model to extract entities and relations. Some of that content appears again when the matched graph and its source chunks are used for answering. Reusing the earlier key-value (KV) states can reduce repeated computation. Their suitability depends on the new query and context, so MGRAG selectively recomputes token states. It combines attention scores with topological features of the facts associated with those tokens. Structure thus enters both evidence selection and the subsequent use of the selected context.
 
 \section{Framework and Evidence Representations}
 \label{sec:mgrag:overview}
@@ -35,7 +35,7 @@ Figure~\ref{fig:mgrag:pipeline} shows three stages. Coarse-grained ranking order
 \label{fig:mgrag:pipeline}
 \end{figure}
 
-Two graphs serve different purposes. The query graph $\mathcal{QG}_q=(\widehat{\mathcal V}_q,\widehat{\mathcal E}_q)$ describes the entities and relations requested by $q$, including placeholders for unknown information. The evidence graph $\mathcal{KG}_q=(\mathcal V_q,\mathcal E_q)$ contains facts extracted from the chunks considered for that query. A mapping connects query entities to evidence entities. Paths between the mapped endpoints supply candidate evidence for the query relations.
+Two graphs serve different purposes. The query graph $\mathcal{QG}_q=(\widehat{\mathcal V}_q,\widehat{\mathcal E}_q)$ describes the entities and relations requested by query $q$, including placeholders for unknown information. Its node and edge sets are $\widehat{\mathcal V}_q$ and $\widehat{\mathcal E}_q$. The evidence graph $\mathcal{KG}_q=(\mathcal V_q,\mathcal E_q)$ contains facts extracted from the chunks considered for that query, with node set $\mathcal V_q$ and edge set $\mathcal E_q$. A mapping connects query entities to evidence entities. Paths between the mapped endpoints supply candidate evidence for the query relations.
 
 For generation, MGRAG combines the graph sequence $S_r$, the original chunks $\mathcal C_q$ consumed during construction, and the query $q$. The chunks retain source text and original images, including details omitted from the extracted triples.
 
@@ -44,19 +44,19 @@ For generation, MGRAG combines the graph sequence $S_r$, the original chunks $\m
 
 MGRAG first divides textual documents into overlapping chunks. The published setting uses a chunk length $l_c=256$ tokens and overlap $l_o=32$ tokens. Images form the other members of the chunk collection, giving $\mathcal C=\mathcal T\cup\mathcal D_{\mathrm{img}}$, where $\mathcal T$ denotes the text chunks. This collection is the input to the coarse retrieval stage. Ranking identifies the order in which content will be examined, rather than directly defining the final graph context.
 
-The implementation uses the text encoder bge-base-en-v1.5~\cite{mgrag-bge_embedding}. Text chunks are encoded directly. An image is represented for ranking by its caption, which can be supplied by the dataset or generated by a language model. Both types of evidence can therefore be compared in the text embedding space. Let $\mathcal M$ denote that encoder and $\mathbf h_c$ the representation of a candidate chunk. For an image chunk, the input to $\mathcal M$ is its caption. This detail matters because the ranking representation expresses the image through language, whereas the later extraction and answering stages can use its visual content.
+The implementation uses the text encoder bge-base-en-v1.5~\cite{mgrag-bge_embedding}. Text chunks are encoded directly. An image is represented for ranking by its caption, which can be supplied by the dataset or generated by a language model. Both types of evidence can therefore be compared in the text embedding space. Let $\mathcal M$ denote that encoder and $\mathbf h_c$ the representation of a candidate chunk. For an image chunk, the input to $\mathcal M$ is its caption. Ranking therefore depends on the caption, while extraction and answering can use the original image.
 
 For a query containing text $q_{\mathrm{txt}}$ and an image caption $q_{\mathrm{cap}}$, MGRAG averages the two representations,
 \begin{equation}
 \mathbf h_q=\frac{\mathcal M(q_{\mathrm{txt}})+\mathcal M(q_{\mathrm{cap}})}{2}.
 \label{eq:mgrag:query-embedding}
 \end{equation}
-A query with one modality uses its corresponding textual representation. The distance to a candidate is
+Here $\mathbf h_q$ is the query embedding, $\mathcal M$ is the text encoder, and $q_{\mathrm{txt}}$ and $q_{\mathrm{cap}}$ are the query text and image caption. A query with one modality uses its corresponding textual representation. The distance to a candidate is
 \begin{equation}
  d(q,c)=\lVert\mathbf h_q-\mathbf h_c\rVert_2,
 \label{eq:mgrag:distance}
 \end{equation}
-and the chunks are ordered by increasing distance. Equations~\ref{eq:mgrag:query-embedding} and~\ref{eq:mgrag:distance} define the query representation and ranking distance.
+where $d(q,c)$ is the Euclidean distance between query embedding $\mathbf h_q$ and candidate chunk embedding $\mathbf h_c$; the chunks are ordered by increasing distance. Equations~\ref{eq:mgrag:query-embedding} and~\ref{eq:mgrag:distance} define the query representation and ranking distance.
 
 Fine-grained retrieval processes chunks in coarse-ranking order. Each chunk can add facts needed for a match, and construction stops when matching succeeds or the iteration budget is exhausted.
 
@@ -94,7 +94,7 @@ For a chunk $c$, the extraction model receives the chunk, query, and extraction 
  =\operatorname{LLM}(c,q,p_{\mathrm{ext}}).
 \label{eq:mgrag:extraction}
 \end{equation}
-Including $q$ makes the extraction selective. The model is asked to identify events and relations relevant to the current question, rather than to enumerate every describable fact in the chunk. For an image, this permits attention to query-related visual events; for text, it permits selection of the entities and relationships needed to describe the requested evidence.
+Here $\mathcal V_q^c$ and $\mathcal E_q^c$ are the entities and relations extracted from chunk $c$ for query $q$, and $p_{\mathrm{ext}}$ is the extraction prompt. Including $q$ makes the extraction selective. The model is asked to identify events and relations relevant to the current question, rather than to enumerate every describable fact in the chunk. For an image, this permits attention to query-related visual events; for text, it permits selection of the entities and relationships needed to describe the requested evidence.
 
 The chunk is also added as a passage node. MGRAG connects this node to the entities extracted from it using the pseudo-relation \texttt{consists\_in}, retaining the published relation name and orientation from chunk to entity. If $\mathcal C_q^{(i)}$ is the prefix of ranked chunks consumed after iteration $i$, the cumulative graph contains
 \begin{align}
@@ -105,7 +105,7 @@ The chunk is also added as a passage node. MGRAG connects this node to the entit
  \{(c,\texttt{consists\_in},v):v\in\mathcal V_q^c\}\right).
 \label{eq:mgrag:graph-union}
 \end{align}
-The iteration-indexed notation makes explicit that the unions range over the chunks already processed.
+Here $\mathcal V_q^{(i)}$ and $\mathcal E_q^{(i)}$ are the cumulative nodes and edges after iteration $i$, $\mathcal C_q^{(i)}$ is the processed chunk prefix, and $\mathcal V_q^c,\mathcal E_q^c$ are the entities and relations extracted from chunk $c$. The added edges connect each chunk $c$ to an extracted entity $v$.
 
 Passage nodes connect extracted facts to their source chunks and can link facts from the same source item.
 
@@ -127,24 +127,24 @@ A relation in the query graph can be expressed by several relations in the evide
  \mathbf h_{P(u,v)}=\bigoplus_{j=1}^{k}\mathbf h_{r_j}.
 \label{eq:mgrag:path-embedding}
 \end{equation}
-The aggregation can use mean pooling to represent an evidence path. Greedy extension additionally compares the current path, candidate edge, and candidate endpoint with the query relation.
+Here $\mathbf h_{r_j}$ is the embedding of relation $r_j$, $\mathbf h_{P(u,v)}$ represents the path from $u$ to $v$, and $\bigoplus$ is an aggregation function, such as mean pooling, over its $k$ relation embeddings. Greedy extension additionally compares the current path, candidate edge, and candidate endpoint with the query relation.
 
-Let $I:\widehat{\mathcal V}_q\rightarrow\mathcal V_q$ be a candidate entity mapping. For a query edge $(u,\widehat r,v)$, the candidate evidence paths run from $I(u)$ to $I(v)$. Denote this collection by $\mathcal P(I(u),I(v))$. The matching objective is
+Let $I:\widehat{\mathcal V}_q\rightarrow\mathcal V_q$ map query entities to evidence entities. For a query edge $(\widehat u,\widehat r,\widehat v)$, let $\mathcal P(I(\widehat u),I(\widehat v))$ be the evidence paths between its mapped endpoints. The matching objective is
 \begin{equation}
-\max_I\ \sum_{(u,\widehat r,v)\in\widehat{\mathcal E}_q}
- \max_{P\in\mathcal P(I(u),I(v))}
+\max_I\ \sum_{(\widehat u,\widehat r,\widehat v)\in\widehat{\mathcal E}_q}
+ \max_{P\in\mathcal P(I(\widehat u),I(\widehat v))}
  \cos(\mathbf h_{\widehat r},\mathbf h_P).
 \label{eq:mgrag:matching-objective}
 \end{equation}
-Candidate mappings must satisfy the semantic threshold $\theta$ for the mapped entities and for every query relation's supporting path,
+Here $\widehat{\mathcal E}_q$ is the query edge set, $\mathbf h_{\widehat r}$ and $\mathbf h_P$ represent the query relation and evidence path, and $\cos$ measures their cosine similarity. Candidate mappings must satisfy the semantic threshold $\theta$ for the mapped entities and for every query relation's supporting path,
 \begin{align}
- \cos(\mathbf h_u,\mathbf h_{I(u)})&>\theta
- &&\text{for all }u\in\widehat{\mathcal V}_q,\\
- \max_{P\in\mathcal P(I(u),I(v))}\cos(\mathbf h_{\widehat r},\mathbf h_P)&>\theta
- &&\text{for all }(u,\widehat r,v)\in\widehat{\mathcal E}_q.
+ \cos(\mathbf h_{\widehat u},\mathbf h_{I(\widehat u)})&>\theta
+ &&\text{for all }\widehat u\in\widehat{\mathcal V}_q,\\
+ \max_{P\in\mathcal P(I(\widehat u),I(\widehat v))}\cos(\mathbf h_{\widehat r},\mathbf h_P)&>\theta
+ &&\text{for all }(\widehat u,\widehat r,\widehat v)\in\widehat{\mathcal E}_q.
 \label{eq:mgrag:matching-constraints}
 \end{align}
-The constraints validate each query edge against an associated evidence path. The selected evidence is the subgraph formed from the mapped entities and accepted paths, which can include intermediate entities absent from the query graph.
+Here $\widehat u,\widehat v$ are query entities, $I(\widehat u),I(\widehat v)$ are their evidence counterparts, and $\theta$ is the cosine-similarity threshold. The constraints validate each query edge against an associated evidence path. The selected evidence is the subgraph formed from the mapped entities and accepted paths, which can include intermediate entities absent from the query graph.
 
 For a fixed entity mapping, the inner maximization in Equation~\ref{eq:mgrag:matching-objective} selects a path for each query relation. The outer search compares mappings using these path scores. Similar endpoints can therefore produce different matching scores when their connecting paths express different relations.
 
@@ -154,11 +154,11 @@ In the family-relation example, two father relations support one grandfather rel
 
 \subsection{Anchor selection and candidate mappings}
 
-MGRAG first computes pairwise cosine similarities between query entities and evidence entities. The highest-similarity pair supplies an anchor entity in the query graph and its candidate counterpart in the evidence graph. If no valid match is obtained from that anchor, the method tries other anchors. For the selected query anchor, Algorithm~\ref{alg:mgrag:matching} considers each evidence counterpart exceeding the threshold and enumerates mappings consistent with that correspondence.
+MGRAG first computes pairwise cosine similarities between query entities and evidence entities. The highest-similarity pair supplies an anchor entity in the query graph and its candidate counterpart in the evidence graph. If no valid match is obtained from that anchor, the method tries other anchors. For the selected query anchor $\gamma$, Algorithm~\ref{alg:mgrag:matching} considers each evidence counterpart $v_a$ exceeding the similarity threshold and enumerates mappings consistent with that correspondence.
 
-Candidate mappings are enumerated using a similarity-based modification of VF2~\cite{mgrag-cordella2004sub}. VF2 supplies a graph-matching search procedure; the MGRAG adaptation uses the threshold $\theta$ in semantic feasibility checks. Each candidate is then validated relation by relation through greedy path search. A candidate entity correspondence can consequently be rejected because one of its required relations lacks an acceptable evidence path.
+Candidate mappings are enumerated using a similarity-based modification of VF2~\cite{mgrag-cordella2004sub}. VF2 supplies a graph-matching search procedure; the MGRAG adaptation uses the cosine-similarity threshold $\theta$ in semantic feasibility checks. Each candidate is then validated relation by relation through greedy path search. A candidate entity correspondence can consequently be rejected because one of its required relations lacks an acceptable evidence path.
 
-For each accepted mapping, the algorithm takes the union of the paths that support its query edges. It averages the edge-wise semantic similarities to obtain a score $s$. The highest-scoring accepted subgraph is returned. Dividing by the number of query edges does not change the ranking of candidate mappings for the same query. It provides an average semantic score with a common range across queries whose graph sizes differ.
+For each accepted mapping, the algorithm takes the union of the paths that support its query edges. It accumulates their semantic similarities in $s$ and divides by the number of query edges to obtain the average score. The highest-scoring accepted subgraph is returned. Dividing by the number of query edges does not change the ranking of candidate mappings for the same query. It provides an average semantic score with a common range across queries whose graph sizes differ.
 
 \begin{algorithm}[tbp]
 \caption{Path-based semantic matching in MGRAG}
@@ -170,8 +170,8 @@ For each accepted mapping, the algorithm takes the union of the paths that suppo
 \STATE Enumerate candidate mappings consistent with $I(\gamma)=v_a$
 \FOR{each candidate mapping $I$}
 \STATE Initialize the subgraph with mapped query entities; set $s\gets0$
-\FOR{each query edge $(u,\widehat r,v)$}
-\STATE Search greedily for a semantically valid path from $I(u)$ to $I(v)$
+\FOR{each query edge $(\widehat u,\widehat r,\widehat v)$}
+\STATE Search greedily for a semantically valid path from $I(\widehat u)$ to $I(\widehat v)$
 \IF{the path search fails}
 \STATE Reject $I$ and stop validating this mapping
 \ELSE
@@ -193,10 +193,10 @@ For each accepted mapping, the algorithm takes the union of the paths that suppo
 The path search begins at the mapped source entity and maintains its current endpoint $x$. For each neighboring entity $y$ and connecting edge $(x,r,y)$, MGRAG evaluates the candidate extension using
 \begin{equation}
  \cos\!\left(\mathbf h_P\oplus\mathbf h_{e(x,r,y)}\oplus\mathbf h_y,
- \mathbf h_{\widehat e(u,\widehat r,v)}\right).
+ \mathbf h_{\widehat e(\widehat u,\widehat r,\widehat v)}\right).
 \label{eq:mgrag:greedy-score}
 \end{equation}
-Among extensions exceeding $\theta$, it selects the highest-scoring one, appends that edge to the path, and updates the endpoint to $y$. This repeats until the path reaches the mapped target. The search fails when no qualifying extension is available. The experiments also impose a maximum path length $l_p$ to bound expansion.
+Here $\mathbf h_P$ represents the current path, $\mathbf h_{e(x,r,y)}$ the candidate edge, $\mathbf h_y$ its endpoint, and $\mathbf h_{\widehat e(\widehat u,\widehat r,\widehat v)}$ the query edge. The operator $\oplus$ aggregates these representations and $\cos$ compares the resulting extension with the query edge. Among extensions exceeding the similarity threshold $\theta$, it selects the highest-scoring one, appends that edge to the path, and updates the endpoint to $y$. This repeats until the path reaches the mapped target. The search fails when no qualifying extension is available. The experiments also impose a maximum path length $l_p$ to bound expansion.
 
 A path must reach the mapped target and pass the semantic checks. Greedy selection can follow a locally attractive extension that blocks a valid route, so search failure does not imply that no valid path exists. The algorithm returns the best accepted candidate it finds.
 
@@ -206,13 +206,13 @@ A mapping is accepted only when every query edge has a valid path. Accepted path
 
 The publication states that path-based semantic subgraph matching is NP-hard. Its proof sketch reduces subgraph isomorphism to a restricted instance with uniform embeddings and unit path lengths. The result motivates the use of semantic path growth and constrained mapping enumeration. The complexity of enumerating mappings remains relevant even when each individual extension is selected greedily.
 
-The published Theorem 2 gives a threshold-based quality condition for a valid returned match. Every matched query relation has a supporting path with cosine similarity at least $\theta$. Under the strict acceptance test in Equation~\ref{eq:mgrag:matching-constraints}, the average score of an accepted mapping exceeds $\theta$ as well. This condition describes the semantic validation of returned evidence. It is conditional on finding a valid match and does not require the algorithm to recover one whenever such a subgraph exists.
+The published Theorem 2 gives a threshold-based quality condition for a valid returned match. Every matched query relation has a supporting path with cosine similarity at least the threshold $\theta$. Under the strict acceptance test in Equation~\ref{eq:mgrag:matching-constraints}, the average score of an accepted mapping exceeds $\theta$ as well. This condition describes the semantic validation of returned evidence. It is conditional on finding a valid match and does not require the algorithm to recover one whenever such a subgraph exists.
 
 The technical report discusses the threshold in terms of a bottleneck transport cost~\cite{mgrag-tech-report}. With a per-edge cost of one minus cosine similarity, the threshold limits the largest accepted local cost. Section~\ref{sec:mgrag:results} evaluates graph-matching substitutions and answer quality.
 
 \subsection{Serializing selected evidence}
 
-After matching, MGRAG serializes the selected triples into $S_r$, separating facts with \texttt{[SEP]}. This sequence is combined with $q$ and the original chunks consumed during construction. The serialization supplies an explicit list of entities and relationships to the answering model. Original chunks remain available because extraction is a selective description of the evidence, and some linguistic or visual details may lie outside the triples.
+After matching, MGRAG serializes the selected triples into $S_r$, separating facts with \texttt{[SEP]}. This sequence is combined with the query $q$ and the original chunks consumed during construction. The serialization supplies an explicit list of entities and relationships to the answering model. Original chunks remain available because extraction is a selective description of the evidence, and some linguistic or visual details may lie outside the triples.
 
 Construction and answering process overlapping content. We reuse cached states from construction and recompute selected tokens for the answering context.
 
@@ -241,12 +241,12 @@ MGRAG uses degree, betweenness, eigenvector, and closeness centrality to charact
  f(u)=\frac{dc(u)+bc(u)+ec(u)+cc(u)}{4}.
 \label{eq:mgrag:node-feature}
 \end{equation}
-For a token associated with a triple $(u,r,v)$, its graph feature is the mean of the endpoint scores,
+Here $f(u)$ is the feature of node $u$, and $dc$, $bc$, $ec$, and $cc$ denote degree, betweenness, eigenvector, and closeness centrality, respectively. For a token associated with a triple $(u,r,v)$, its graph feature is the mean of the endpoint scores,
 \begin{equation}
  GF_t^q=\frac{f(u)+f(v)}{2}.
 \label{eq:mgrag:token-feature}
 \end{equation}
-The token-to-fact association follows the entity and relation token spans in the serialized representation. Tokens referring to the same fact therefore receive a shared structural component.
+Here $GF_t^q$ is the graph feature of token $t$ for query $q$, and $f(u)$ and $f(v)$ are the features of the triple endpoints. The token-to-fact association follows the entity and relation token spans in the serialized representation. Tokens referring to the same fact therefore receive a shared structural component.
 
 The structural feature measures an entity's position in the query-specific graph. Nodes connecting several extracted facts can receive different scores from isolated endpoints.
 
@@ -260,14 +260,14 @@ Let $a_{tj}$ denote attention between token $t$ and token $j$, and let $|q|$ and
        +\sum_{k=1}^{|S_r|}a_{tk}+GF_t^q.
 \label{eq:mgrag:cache-score}
 \end{equation}
-The score adds attention to the question, attention to the serialized graph, and the token's graph feature. Tokens with higher combined scores receive priority for recomputation.
+Here $\phi(t)$ is the score for token $t$, $a_{tj}$ and $a_{tk}$ are its attention scores to query token $j$ and graph-sequence token $k$, and $GF_t^q$ is its graph feature for query $q$. The score adds attention to the question, attention to the serialized graph, and the token's graph feature. Tokens with higher combined scores receive priority for recomputation.
 
-The publication compares the policy with vLLM prefix caching~\cite{mgrag-kwon2023efficient} and CacheBlend~\cite{mgrag-yao2025cacheblend}. Their retrieval pipelines and cache variants are identified separately in the evaluation. The inverse ablations also evaluate graph-aware recomputation within an existing retrieval pipeline. These comparisons expose answer-quality and time changes under several compositions of retrieval and caching.
+The publication compares the policy with vLLM prefix caching~\cite{mgrag-kwon2023efficient} and CacheBlend~\cite{mgrag-yao2025cacheblend}. Their retrieval pipelines and cache variants are identified separately in the evaluation. The inverse ablations also evaluate graph-aware recomputation within an existing retrieval pipeline. These comparisons measure how combining retrieval and caching changes answer quality and processing time.
 
 \section{Computational Cost}
 \label{sec:mgrag:complexity}
 
-The published offline encoding cost is $O(|\mathcal C|d_{\mathrm{emb}}l_c^2)$, with embedding dimension $d_{\mathrm{emb}}$. Using $k$ processed chunks, query-graph vertex and edge sets $\widehat{\mathcal V}$ and $\widehat{\mathcal E}$, evidence-graph sets $\mathcal V$ and $\mathcal E$, maximum path length $l_p$, and language-model hidden dimension $d_{\mathrm{LLM}}$, its reported online bound is
+The published offline encoding cost is $O(|\mathcal C|d_{\mathrm{emb}}l_c^2)$, where $\mathcal C$ is the chunk collection, $d_{\mathrm{emb}}$ is the embedding dimension, and $l_c$ is the text chunk length. Using $k$ processed chunks, query-graph vertex and edge sets $\widehat{\mathcal V}$ and $\widehat{\mathcal E}$, evidence-graph sets $\mathcal V$ and $\mathcal E$, maximum path length $l_p$, and language-model hidden dimension $d_{\mathrm{LLM}}$, its reported online bound is
 \begin{equation}
 \begin{split}
  O\bigl(&d_{\mathrm{emb}}kl_c^2
@@ -277,7 +277,7 @@ The published offline encoding cost is $O(|\mathcal C|d_{\mathrm{emb}}l_c^2)$, w
 \end{split}
 \label{eq:mgrag:complexity}
 \end{equation}
-The mapping-enumeration term is exponential in query-graph size. Query-specific construction and a bounded path length restrict the graphs processed in the evaluated setting. Actual module costs provide the complementary evidence about where runtime is spent. In particular, graph construction calls the language model repeatedly, whereas matching operates on the extracted graph. Section~\ref{sec:mgrag:cost-results} reports these costs individually.
+Here $k$ is the number of processed chunks, $l_c$ their text token length, $l_p$ the path-length bound, $d_{\mathrm{emb}}$ and $d_{\mathrm{LLM}}$ are embedding and model hidden dimensions, and $|S_r|$ and $|q|$ are graph-sequence and query lengths. The sets $\widehat{\mathcal V},\widehat{\mathcal E}$ and $\mathcal V,\mathcal E$ contain query-graph and evidence-graph nodes and edges, respectively. The mapping-enumeration term is exponential in query-graph size. Query-specific construction and a bounded path length restrict the graphs processed in the evaluated setting. Module-level runtime measurements show where the computation is spent. In particular, graph construction calls the language model repeatedly, whereas matching operates on the extracted graph. Section~\ref{sec:mgrag:cost-results} reports these costs individually.
 
 \section{Experimental Protocol}
 \label{sec:mgrag:protocol}
@@ -355,7 +355,7 @@ Although mapping enumeration has an exponential bound, matching processes small 
 
 \subsection{Component ablations}
 
-The MMQA ablations in Table~\ref{tab:mgrag:ablation} change matching, coarse encoding, and pipeline composition. Removing graph matching constructs the query-specific graph from a fixed number of chunks and reports accuracy 0.7260, compared with 0.7442 for MGRAG. Replacing caption-based coarse ranking with direct CLIP encoding~\cite{mgrag-radford2021learning} reports accuracy 0.7376. The Vanilla MGRAG variant applies path matching and graph-aware caching within the VanillaRAG pipeline with $k=5$; it reports accuracy 0.6887.
+The MMQA ablations in Table~\ref{tab:mgrag:ablation} change matching, coarse encoding, and pipeline composition. Removing graph matching constructs the query-specific graph from a fixed number of chunks and reports accuracy 0.7260, compared with 0.7442 for MGRAG. Replacing caption-based coarse ranking with direct CLIP encoding~\cite{mgrag-radford2021learning} reports accuracy 0.7376. The Vanilla MGRAG variant applies path matching and graph-aware caching within the VanillaRAG pipeline with retrieval amount $k=5$; it reports accuracy 0.6887.
 
 \input{chapter/tables/mgrag-ablation}
 
@@ -371,7 +371,7 @@ For VanillaRAG, the base accuracy is 0.7053 at 2.6 hours. Adding path matching g
 
 \subsection{Matching threshold and path length}
 
-Figure~\ref{fig:mgrag:sensitivity} reproduces the published parameter curves. The experiments vary the semantic threshold $\theta$ and maximum path length $l_p$, including lengths $1,2,3$, and unrestricted length. The reported discussion identifies $\theta=0.6$ and $l_p=3$ as effective choices in these tests.
+Figure~\ref{fig:mgrag:sensitivity} reproduces the published parameter curves. The experiments vary the semantic threshold $\theta$ and maximum path length $l_p$, including lengths $1,2,3$, and unrestricted length. The reported discussion identifies similarity threshold $\theta=0.6$ and maximum path length $l_p=3$ as effective choices in these tests.
 
 \begin{figure}[tbp]
 \centering
@@ -400,4 +400,4 @@ MGRAG obtains the highest values across the seven datasets' four answer metrics.
 
 Caption omissions and extraction errors can exclude relevant facts before matching. An accepted match ends construction, so an incorrect correspondence can prevent examination of later chunks. The construction and path-length caps further restrict the search.
 
-Semantic paths allow a query relation to match evidence expressed through several intermediate facts. The same graph can guide which cached token states are recomputed. The next chapter compares these uses of structure with external knowledge selection, online indexing, and connected textual retrieval.
+MGRAG makes the query part of graph construction and matches its requirements to semantic paths across multimodal evidence. The same graph guides which cached token states are recomputed for answering. The next chapter discusses the progression from existing knowledge graphs and supervised representation learning to task-related graph retrieval, connected evidence selection, and query-aware multimodal reasoning.

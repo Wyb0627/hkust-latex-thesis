@@ -1,0 +1,187 @@
+{
+  "baseline_cited_unique": 73,
+  "current_cited_unique": 129,
+  "new_cited_unique": 56,
+  "independent_paper_count": 123,
+  "excluded_from_paper_count": {
+    "agrag-tfidf": "Encyclopedia entry, not a research paper",
+    "agrag-ragas2024": "Software repository; the separate RAGAs paper is counted",
+    "agrag-fastgraphrag": "Software repository",
+    "kglink-hassanzadeh_oktie_2019_3518539": "Dataset release",
+    "mgrag-tech-report": "Supplementary report for the already counted MGRAG paper",
+    "mgrag-nanographrag": "Software repository"
+  },
+  "merged_database_entries": 131,
+  "uncited_database_entries": [
+    "mgrag-gao2023retrieval",
+    "mgrag-song2025r1"
+  ],
+  "chapter_counts": {
+    "chapter/ch01-introduction.tex": {
+      "before": 12,
+      "after": 22
+    },
+    "chapter/ch02-background.tex": {
+      "before": 27,
+      "after": 84
+    },
+    "chapter/ch03-kglink.tex": {
+      "before": 15,
+      "after": 15
+    },
+    "chapter/ch04-gorag.tex": {
+      "before": 10,
+      "after": 10
+    },
+    "chapter/ch05-agrag.tex": {
+      "before": 23,
+      "after": 23
+    },
+    "chapter/ch06-mgrag.tex": {
+      "before": 24,
+      "after": 24
+    },
+    "chapter/ch07-discussion.tex": {
+      "before": 0,
+      "after": 0
+    },
+    "chapter/ch08-conclusion.tex": {
+      "before": 0,
+      "after": 0
+    },
+    "chapter/front-abstract.tex": {
+      "before": 0,
+      "after": 0
+    }
+  },
+  "checks": {
+    "chapter/ch01-introduction.tex": {
+      "original_citations_retained": true,
+      "original_labels_retained": true,
+      "no_duplicate_labels": true,
+      "equation_unchanged": true,
+      "align_unchanged": true,
+      "algorithm_unchanged": true,
+      "figure_unchanged": true,
+      "table_unchanged": true,
+      "tabular_unchanged": true,
+      "longtable_unchanged": true,
+      "inline_math_unchanged": true
+    },
+    "chapter/ch02-background.tex": {
+      "original_citations_retained": true,
+      "original_labels_retained": true,
+      "no_duplicate_labels": true,
+      "equation_unchanged": true,
+      "align_unchanged": true,
+      "algorithm_unchanged": true,
+      "figure_unchanged": true,
+      "table_unchanged": true,
+      "tabular_unchanged": true,
+      "longtable_unchanged": true,
+      "inline_math_unchanged": true
+    },
+    "chapter/ch03-kglink.tex": {
+      "original_citations_retained": true,
+      "original_labels_retained": true,
+      "no_duplicate_labels": true,
+      "equation_unchanged": true,
+      "align_unchanged": true,
+      "algorithm_unchanged": true,
+      "figure_unchanged": true,
+      "table_unchanged": true,
+      "tabular_unchanged": true,
+      "longtable_unchanged": true,
+      "inline_math_unchanged": true,
+      "byte_identical": true
+    },
+    "chapter/ch04-gorag.tex": {
+      "original_citations_retained": true,
+      "original_labels_retained": true,
+      "no_duplicate_labels": true,
+      "equation_unchanged": true,
+      "align_unchanged": true,
+      "algorithm_unchanged": true,
+      "figure_unchanged": true,
+      "table_unchanged": true,
+      "tabular_unchanged": true,
+      "longtable_unchanged": true,
+      "inline_math_unchanged": true,
+      "byte_identical": true
+    },
+    "chapter/ch05-agrag.tex": {
+      "original_citations_retained": true,
+      "original_labels_retained": true,
+      "no_duplicate_labels": true,
+      "equation_unchanged": true,
+      "align_unchanged": true,
+      "algorithm_unchanged": true,
+      "figure_unchanged": true,
+      "table_unchanged": true,
+      "tabular_unchanged": true,
+      "longtable_unchanged": true,
+      "inline_math_unchanged": true,
+      "byte_identical": true
+    },
+    "chapter/ch06-mgrag.tex": {
+      "original_citations_retained": true,
+      "original_labels_retained": true,
+      "no_duplicate_labels": true,
+      "equation_unchanged": true,
+      "align_unchanged": true,
+      "algorithm_unchanged": true,
+      "figure_unchanged": true,
+      "table_unchanged": true,
+      "tabular_unchanged": true,
+      "longtable_unchanged": true,
+      "inline_math_unchanged": true,
+      "byte_identical": true
+    },
+    "chapter/ch07-discussion.tex": {
+      "original_citations_retained": true,
+      "original_labels_retained": true,
+      "no_duplicate_labels": true,
+      "equation_unchanged": true,
+      "align_unchanged": true,
+      "algorithm_unchanged": true,
+      "figure_unchanged": true,
+      "table_unchanged": true,
+      "tabular_unchanged": true,
+      "longtable_unchanged": true,
+      "inline_math_unchanged": true,
+      "byte_identical": true
+    },
+    "chapter/ch08-conclusion.tex": {
+      "original_citations_retained": true,
+      "original_labels_retained": true,
+      "no_duplicate_labels": true,
+      "equation_unchanged": true,
+      "align_unchanged": true,
+      "algorithm_unchanged": true,
+      "figure_unchanged": true,
+      "table_unchanged": true,
+      "tabular_unchanged": true,
+      "longtable_unchanged": true,
+      "inline_math_unchanged": true,
+      "byte_identical": true
+    },
+    "chapter/front-abstract.tex": {
+      "original_citations_retained": true,
+      "original_labels_retained": true,
+      "no_duplicate_labels": true,
+      "equation_unchanged": true,
+      "align_unchanged": true,
+      "algorithm_unchanged": true,
+      "figure_unchanged": true,
+      "table_unchanged": true,
+      "tabular_unchanged": true,
+      "longtable_unchanged": true,
+      "inline_math_unchanged": true,
+      "byte_identical": true
+    }
+  },
+  "new_sources": {
+    "original_libraries": 36,
+    "external_primary_search": 20
+  }
+}

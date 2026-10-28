@@ -1,0 +1,33 @@
+\chapter{Conclusion and Future Directions}
+\label{ch:conclusion}
+
+\section{Conclusion}
+\label{sec:conclusion:findings}
+In this thesis, we investigated how explicit knowledge structures support language-model prediction and reasoning. Our research progressed from enrichment with an existing knowledge graph to graph construction from task data and retrieval without model fine-tuning. We further studied answers requiring connected textual facts or relationships distributed across text and images.
+
+We first proposed KGLink to enrich column representations with external graph descriptions. Cross-column filtering selects relevant descriptions, and contextual type-representation training learns their correspondence to annotation labels. The trained encoder also predicts from table values when KG evidence is unavailable.
+
+To remove the dependence on existing knowledge graphs and model fine-tuning, we proposed GORAG for dynamic few-shot classification. GORAG constructs a keyword--label graph from task data and retrieves candidate classes for a large language model. Online insertion incorporates newly observed vocabulary without updating model parameters. Experiments show the benefit of connected retrieval and online updates as labels accumulate.
+
+We then studied the evidence requirements of question answering and generation. AGRAG constructs a graph from a text corpus and selects connected facts using query-dependent node influence and semantic edge costs. Expanding the initial tree supplies additional answer components, while hybrid passages retain context beyond the selected graph. The ablations show how these evidence channels contribute to information coverage and answer faithfulness.
+
+For multimodal question answering, we proposed MGRAG to construct query-specific graphs and match requested relations to semantic paths. Graph-aware recomputation extends the use of structure to context processing. The experiments relate answer quality to query-aware extraction and matching, and measure cache reuse quality and cost.
+
+Our hyper-relational knowledge-graph study examined how graph transformations preserve fact information. Qualifier capture and graph reception explain how the representation and the model jointly determine which relationships remain available for prediction.
+
+\section{Future Directions}
+\label{sec:conclusion:future}
+\subsection{Feedback for structure maintenance}
+Future work can use feedback to maintain evidence structures. A retrieved relation may prove irrelevant, its source passage may be insufficient, or a prediction inserted into an index may later be corrected. These observations could guide which associations are retained, revised, or removed.
+
+Feedback timing determines which updates are possible. An online correction becomes available after the original prediction, and an answer assessment can guide only subsequent retrieval. Recording this timing and the feedback source would allow correction and retention policies to be evaluated under explicit supervision conditions.
+
+\subsection{Multimodal structure and provenance}
+Multimodal graph construction could retain a link from each extracted fact to its supporting text span or image region. Caption-based ranking and query-aware extraction both select visual information, and source links would make their omissions easier to identify.
+
+Source links would help distinguish missing visual evidence from extraction, relation-representation, and path-search errors. They would also support checking whether an accepted path is grounded in the original source at the granularity required by the answer.
+
+\subsection{Joint retrieval and context computation}
+Retrieval and context computation can be optimized jointly. Retrieved evidence determines input length, modality, and relationships; cache availability and recomputation policy determine processing cost. MGRAG uses graph features for one such decision.
+
+Further work could compare evidence structures under a fixed serving budget, measuring answer quality alongside construction, matching, cache reuse, and generation costs. Keeping the query workload and hardware fixed would show which structures provide useful information at an acceptable processing cost.

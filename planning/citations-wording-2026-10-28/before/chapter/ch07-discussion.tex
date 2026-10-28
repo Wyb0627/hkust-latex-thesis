@@ -1,0 +1,104 @@
+\chapter{Discussion}
+\label{ch:discussion}
+
+Our research progressed from knowledge-enriched representations to graph construction from task data and prediction without model fine-tuning. Extending retrieval beyond classification introduced requirements for evidence coverage, multimodal correspondence, and context-processing efficiency. This chapter discusses how these requirements shape the construction and use of knowledge structures.
+
+\section{From Knowledge Enrichment to Task-driven Retrieval}
+\label{sec:discussion:pipeline}
+KGLink uses the semantic information already represented in an external knowledge graph. Graph processing filters linked entities and selects candidate types and feature descriptions before the encoder reads the table. Supervised training learns how these descriptions correspond to annotation labels. This separates obtaining external information from learning the output vocabulary, but both the available graph and the annotated training set determine the method's application.
+
+GORAG changes the source of the structure and the way the system adapts. Support examples supply keyword--label associations, and later observations expand the index. A large language model uses retrieved labels and their descriptions for classification without task-specific parameter updates. New knowledge enters the graph, allowing the system to incorporate evolving labels and vocabulary without relying on a predefined external knowledge graph.
+
+The required retrieval output becomes richer when moving from classification to generation. Candidate labels constrain a classification decision, while an answer can require several facts and their explanations. AGRAG selects connected facts from a reusable corpus graph and adds source passages to improve information coverage. This makes both the relationships among facts and their original context available to the generator.
+
+\begin{samepage}
+MGRAG investigates another requirement of evidence retrieval. The question determines which details to extract from text and images, and semantic matching checks whether evidence paths express the requested relations. Matching controls whether another chunk is processed, while graph features guide the recomputation of cached token states for answering.\par
+\end{samepage}
+
+\begin{table}[tbp]
+\centering\small
+\caption{The roles of structure across the four studies. The entries summarize the methods in their respective research chapters.}
+\label{tab:discussion:roles}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.27\textwidth}>{\raggedright\arraybackslash}p{0.25\textwidth}}
+\toprule
+Study & Structure source & Selected or represented evidence & Model role\\
+\midrule
+KGLink & Existing knowledge graph and table links & Candidate types and graph-derived column features & Fine-tuned table encoding and type prediction\\
+GORAG & Labeled examples and prescribed online updates & Connected keyword--label evidence and candidate labels & Label-description generation and classification\\
+AGRAG & Corpus terms, extracted relations, and passage links & Query-conditioned connected subgraph and hybrid passages & Relation extraction, filtering, and generation\\
+MGRAG & Query and ranked multimodal chunks & Semantic path matches, original chunks, and graph features & Query-aware extraction, QA, and selective KV recomputation\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:discussion:roles} summarizes how the representation changes with the output requirements. Graph descriptions enrich column representations, keyword--label connections constrain candidate classes, and fact paths support generated answers. In MGRAG, the structure also allocates computation when the retrieved context is processed.
+
+\section{Static, Online, and Query-dependent Structures}
+\label{sec:discussion:adaptation}
+The transition away from a predefined knowledge graph introduces a choice about when to construct and update the replacement structure. KGLink reuses an external graph and adapts evidence selection to each table. Its supervised encoder learns how to use the selected descriptions.
+
+GORAG updates a task index as labels and text arrive. Associations from earlier predictions become available to later queries, so classification performance depends on the sequence of index states.
+
+AGRAG prepares the corpus graph once, then changes query anchors, node influence, edge costs, and subgraph selection for each question. This amortizes graph preparation across repeated queries.
+
+MGRAG extracts facts for each query as it consumes ranked chunks. Matching can stop construction before the full list is processed. Query-aware extraction targets the relationships needed by the current question and adds construction and matching costs to query processing.
+
+GORAG's online updates respond to changes in the task's data, while AGRAG's query-conditioned selection responds to different questions over a shared corpus. MGRAG moves query dependence into extraction itself. The choice therefore depends on how often the source data change, how many queries share the corpus, and whether relevant facts can be extracted before the question is known.
+
+\section{Evidence Quality and Computational Cost}
+\label{sec:discussion:cost}
+The relevant quality criterion follows the task. A column representation must support the expected type label. Classification retrieval must retain the correct candidate label. Generation requires both sufficient answer coverage and support for the claims produced. Cache reuse must preserve answer quality while reducing processing cost.
+
+Table~\ref{tab:discussion:controls} compares the main experimental conditions. KGLink evaluates a trained encoder; the other studies evaluate generative pipelines with different backbones. Shared datasets also have different supervision and update protocols. GORAG's WOS and IFS-Rel experiments accumulate labels and prediction-derived keyword--label associations over rounds, whereas AGRAG indexes one training passage per label for classification.
+
+\begin{table}[tbp]
+\centering\small
+\caption{Main experimental conditions across the four studies. Hardware denotes the reported local setup; GORAG's IFS-Rel generation uses the GPT-4o service. Full task-specific controls appear in the corresponding research chapters.}
+\label{tab:discussion:controls}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.11\textwidth}>{\raggedright\arraybackslash}p{0.26\textwidth}>{\raggedright\arraybackslash}p{0.28\textwidth}>{\raggedright\arraybackslash}p{0.23\textwidth}}
+\toprule
+Study & Main model and hardware & Supervision and evidence state & Reported outcome\\
+\midrule
+KGLink & BERT; Tesla V100 & 7:1:2 train/validation/test; external KG; three-run averages & Annotation accuracy and weighted F1 on a percentage scale\\
+GORAG & Qwen2.5-7B on CAD/WOS; GPT-4o on IFS-Rel; A100 40 GB & 1/5/10 support texts per label; cumulative labels; prediction-dependent index updates & Exact-label accuracy by round and support size\\
+AGRAG & Qwen2.5-14B-Instruct; A100 80 GB & Fixed corpus graph; query-conditioned scores and subgraph; one training passage per label for classification & Task-specific QA assessment/overlap, coverage, faithfulness, and classification metrics\\
+MGRAG & Qwen2.5-VL-7B-Instruct; A100 40 GB & Query-specific multimodal graph; semantic matching; selective KV recomputation & Answer quality, TTFT, and complete-system/module costs\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{samepage}
+The assessment rule follows the output being evaluated. GORAG's accuracy requires the predicted class to match the gold label. AGRAG's QA accuracy uses model judgments scored 0, 0.5, or 1, while its classification accuracy uses label correctness. Its source-defined ROUGE-L quantity divides longest-common-subsequence length by generated-answer length. MGRAG reports answer accuracy alongside semantic similarity and lexical overlap.\par
+\end{samepage}
+
+The AGRAG ablations show why coverage and faithfulness must be considered together. Without hybrid passages, the generator can produce supported claims while omitting required information. Graph connectivity helps organize facts, while passages preserve context that extraction or subgraph selection can omit.
+
+MGRAG separates evidence retrieval from reuse of its computation. Cache comparisons measure combined retrieval and serving choices. Inverse ablations test additions within one retrieval pipeline, where improved answer quality can require extra runtime.
+
+Graph preparation and query processing contribute to total cost in different ways. KGLink reports preprocessing and model-processing costs for annotation. GORAG measures the resource demands of its evolving index and retrieval. AGRAG separates corpus indexing from querying. MGRAG reports construction, matching, answer-generation, and end-to-end costs.
+
+\section{Information Preservation and Semantic Granularity}
+\label{sec:discussion:preservation}
+The hyper-relational study in Chapter~\ref{ch:background} supplies another perspective on structural representations. A main triple and its qualifiers express different aspects of a fact. Decomposing that representation can retain some relationships while losing the association that gives them their meaning. The study examines this issue through decomposition methods, qualifier capture, graph reception, and link-prediction results.
+
+A related design question appears in each core chapter. KGLink must translate graph-derived type descriptions into the annotation task's vocabulary. GORAG associates words with labels whose relevance depends on the classification task. AGRAG selects a graph serialization while retaining a passage channel for information absent from that serialization. MGRAG matches relations to paths that can express a corresponding meaning through a different topology. Each method specifies an evidence unit and a way to relate that unit to the task.
+
+A column vector, candidate label, graph fact, path, and source passage preserve different information. Paths expose intermediate relations, while passages and images retain details that may disappear during extraction. Moving between these representations changes what the next stage must infer.
+
+A useful structure must preserve the relationships needed for the task. Connectivity identifies available links, semantic matching checks their correspondence to a query, and supervision determines the required annotation category. The hyper-relational study examines how graph transformation can alter these relationships before prediction.
+
+\section{Error Propagation Across Structural Decisions}
+\label{sec:discussion:unit}
+The location of a structural decision affects how an error can propagate. An incorrect KGLink entity link changes the descriptions offered to the encoder for a table. In GORAG, an incorrect predicted label can become an association available to later queries. AGRAG reuses a corpus graph, so an extracted relation can influence several query-specific selections. MGRAG constructs a new graph for each query, but a mistaken accepted match can end construction before later chunks are examined.
+
+Feedback can target these error sources directly. Entity disambiguation can revise cell links, online correction can revise inserted associations, source verification can check extracted relations, and matching diagnosis can inspect entity alignment and path choices. Chapter~\ref{ch:conclusion} develops these directions.
+
+\section{Limitations and Open Questions}
+\label{sec:discussion:limitations}
+KGLink's knowledge source is limited by external graph coverage, while its supervised predictor learns the label vocabulary represented in training. Its no-linkage analysis examines how the encoder performs when graph evidence is unavailable.
+
+Constructing a graph from task data shifts the coverage problem to the examples and sources supplied to the system. GORAG starts from sparse support data and can retain errors through prediction-derived updates. Longer streams and different patterns of label evolution remain open evaluation settings.
+
+AGRAG and MGRAG rely on relation extraction, and MGRAG also uses captions to rank images. A useful fact must first survive these preparation steps before structural retrieval can select it. Improving extraction coverage and correcting stored relationships are therefore important for extending the methods to new corpora. Model-assessed QA results additionally depend on the evaluator and its assessment rules.
+
+AGRAG's 2-approximation statement concerns the cost of its initial terminal-connecting tree, and MGRAG's threshold condition concerns accepted path similarities.

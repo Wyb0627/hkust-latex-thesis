@@ -1,0 +1,286 @@
+% Working chapter, 2026-10-24. Author-confirmed publication-equivalent arXiv v4 compared; see evidence ledger.
+% Evidence ledger: planning/verification-gorag.md. Do not designate this chapter final.
+\chapter{Adaptive Graph Retrieval for Dynamic Classification with GORAG}
+\label{ch:gorag}
+
+This chapter is based on \emph{GORAG: Graph-based Online Retrieval Augmented Generation for Dynamic Few-shot Social Media Text Classification}, published in the Proceedings of the ACM Web Conference 2026~\cite{gorag-paper}. We propose GORAG to construct and maintain a weighted graph of keyword--label associations from task data. Connected retrieval selects candidate labels for a large language model, and online insertion adds unseen terms after classification.
+
+\section{Dynamic Few-shot Classification}
+\label{sec:gorag:task}
+
+KGLink uses an existing knowledge graph to enrich representations through supervised fine-tuning. For applications without a suitable graph or sufficient training data, we instead build a graph from the task's own examples and use a large language model for prediction. Retrieved labels and descriptions supply context, allowing new information to be incorporated without parameter fine-tuning. We study this approach in dynamic few-shot classification, where the target categories evolve as new examples arrive.
+
+Dynamic classification must distinguish new categories from those introduced earlier. For example, an abuse classifier may initially recognize threatening language and later add identity insults. With few examples per class, the system must recognize the new category while retaining access to earlier labels.
+
+Few-shot classification provides a small labeled support set for each class. In the dynamic setting, new classes arrive in successive rounds~\cite{gorag-xia-etal-2021-incremental}. The index must incorporate their examples while preserving evidence for the cumulative label set.
+
+Adding more examples to the prompt can introduce irrelevant context as the label set grows. Passage retrieval alone also leaves the generator to choose among all labels. We instead retrieve a candidate label set for each query.
+
+We represent keywords and labels in a weighted graph. A keyword can connect to several labels, with an edge cost for each association. Connecting several query keywords selects labels jointly from their neighborhoods.
+
+GORAG also updates its index after classifying an unlabeled query. Keywords that were absent from the index can then become available to later queries. The predicted label associates the newly observed keywords with a class for subsequent retrieval. Support examples initialize the graph using their supplied labels.
+
+GORAG combines weighted indexing, connected candidate-label retrieval, and online insertion. The following sections define these operations and evaluate their classification accuracy and resource costs.
+
+\begin{figure}[tbp]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/gorag/DFSTC_task.pdf}
+\caption{Two rounds of the dynamic classification task. New abuse categories extend the available labels. Reproduced from Figure 1 of GORAG~\cite{gorag-paper}.}
+\label{fig:gorag:task}
+\end{figure}
+
+\subsection{Rounds and information availability}
+\label{sec:gorag:rounds}
+
+Let $\mathcal{Y}_{\mathrm{new}}^r$ denote the labels introduced at round $r$. The current label universe is
+\begin{equation}
+\mathcal{Y}^r=\bigcup_{i=1}^{r}\mathcal{Y}_{\mathrm{new}}^i.
+\label{eq:gorag:labels}
+\end{equation}
+The few-shot support data provide $k$ annotated texts per class, with $k$ equal to 1, 5, or 10 in the main experiments. A query text $t$ must be assigned a label from $\mathcal{Y}^r$. The superscript $r$ identifies the current classification round.
+
+Support texts carry supplied labels. Query texts become visible as the system processes them, and their predictions can be used for subsequent index updates. Corpus statistics used in keyword scoring refer to training and query texts seen so far. The online association nevertheless inherits prediction errors when the classifier chooses an incorrect label.
+
+Semantic label names supply another source of information. Where names are available, GORAG uses a language model to generate representative descriptions or keywords for labels. These descriptions enter the classification context, and label-derived keywords can support graph initialization. The zero-shot experiment later in this chapter uses this source without any labeled examples.
+
+\section{Weighted Graph Indexing}
+\label{sec:gorag:indexing}
+
+GORAG maintains an undirected weighted graph $\mathcal{G}^r=(\mathcal{V}^r,\mathcal{E}^r,\mathcal{W}^r)$. Its node set contains keyword nodes and label nodes. A keyword node represents an extracted word or short phrase. A label node represents a target class. The representation places label alternatives inside the same structure that stores their lexical associations. Support documents contribute keyword--label associations to this representation.
+
+A keyword--label edge is introduced when a keyword occurs in a text associated with that label. Repeated occurrences across texts contribute to the edge weight. A keyword shared by several classes can therefore have several label neighbors, with a different cost for each association. Query retrieval will use these costs when choosing connections between mapped keywords.
+
+The graph stores keyword--label associations, while the classifier receives the original query, retrieved labels, and their descriptions. The full query retains syntax, word order, and discourse omitted by keyword extraction. The keyword-only ablation removes this full-text input.
+
+\begin{figure}[tbp]
+\centering
+\includegraphics[width=\linewidth]{figures/gorag/GORAG_pipeline_example_new.pdf}
+\caption{GORAG's offline indexing, query-dependent retrieval, classification, and online update. New query keywords are associated with the predicted class after classification. Reproduced from Figure 2 of GORAG~\cite{gorag-paper}.}
+\label{fig:gorag:pipeline}
+\end{figure}
+
+\subsection{Keyword extraction and correlation scores}
+\label{sec:gorag:keywords}
+
+GORAG scores terms using normalized TF--IDF~\cite{gorag-tfidf}. Its extraction vocabulary includes words and phrases of fewer than three words. Let $\mathcal{T}_{\leq r}$ denote the corpus seen so far, and let $\operatorname{df}(v)$ be the number of its texts containing term $v$. The reported correlation score is
+\begin{equation}
+CS(v,t)=\frac{\operatorname{count}(v,t)}{|t|\log(|\mathcal{T}_{\leq r}|+1)}
+\log\frac{|\mathcal{T}_{\leq r}|+1}{\operatorname{df}(v)+1}.
+\label{eq:gorag:correlation}
+\end{equation}
+Here $\operatorname{count}(v,t)$ is the occurrence count of $v$ in $t$, and $|t|$ is text length. The expression combines frequency within the text with frequency across the observed corpus. Its corpus term changes when additional texts are observed. Terms with $CS(v,t)>\tau$ are retained, with $\tau=0.5$ in the original study. The method uses the score both to select keywords and to calculate association costs.
+% Verification issue G5: source reports CS>tau with tau=0.5; normalization/threshold needs author/publication confirmation. Do not silently rescale.
+
+Short phrases preserve lexical combinations that unigram extraction would split. Only extracted terms can become retrieval terminals, although the classifier still receives the full query text.
+
+\subsection{Keyword--label edge costs}
+\label{sec:gorag:weights}
+
+For keyword $v$ and label $y$, let $\mathcal{T}^{r,v,y}$ be the seen texts that contain $v$ and are associated with $y$. GORAG assigns the edge cost
+\begin{equation}
+w_{v,y}^r=\frac{\sum_{t_j\in\mathcal{T}^{r,v,y}}(1-CS(v,t_j))}{|\mathcal{T}^{r,v,y}|}.
+\label{eq:gorag:weights}
+\end{equation}
+The complement converts a larger correlation score into a smaller contribution to connection cost. Averaging makes the edge depend on all contributing observations rather than on one occurrence. Offline observations use the supplied class of a support text; online observations use a predicted class when new query keywords are inserted.
+
+The same keyword can have different edge costs for different labels. The unit-weight ablation replaces all costs with one while preserving adjacency, testing whether these association-specific costs help retrieval.
+
+Each observed text contributes a correlation value to its keyword--label pair. Averaging these values summarizes repeated associations without concatenating every support text into the classification prompt.
+
+\subsection{Merging label rounds}
+\label{sec:gorag:merge}
+
+At each round, we merge the new graph with the accumulated index by taking the unions of their node and edge sets. Earlier labels and their associations remain available for subsequent retrieval.
+
+GORAG also introduces edges between newly introduced and earlier label nodes. These bridges support connections between parts of the graph indexed in different rounds. Let $\mathcal{M}_y^r$ denote the keyword neighbors of label $y$. For a new label $y_n$ and an earlier label $y_o$, GORAG reports
+\begin{equation}
+w_{y_n,y_o}^r=\frac{1}{2}\left(
+\frac{\sum_{v\in\mathcal{M}_{y_n}^r}w_{v,y_n}^r}{2|\mathcal{M}_{y_n}^r|}
++\frac{\sum_{v\in\mathcal{M}_{y_o}^r}w_{v,y_o}^r}{2|\mathcal{M}_{y_o}^r|}
+\right).
+\label{eq:gorag:labelbridge}
+\end{equation}
+The formula uses costs incident to both labels. These factors determine the relative cost of traversing a label bridge rather than a keyword association.
+% Verification issue G6: preserve exact reported factors; source wording says weighted average.
+
+Label bridges connect graph regions introduced in different rounds. Unlike keyword edges, which record observed term--class associations, they are created during graph merging.
+
+\section{Adaptive Candidate Label Retrieval}
+\label{sec:gorag:retrieval}
+
+For a query $t$, GORAG extracts keywords using the indexing procedure and partitions them according to whether they already occur in $\mathcal{V}^r$. Write these sets as $\mathcal{V}_{\mathrm{exist}}^t$ and $\mathcal{V}_{\mathrm{notexist}}^t$. The existing keywords become the terminals for current retrieval. The unseen keywords are held for online insertion after classification. The partition prevents the retrieval operation from treating an unindexed term as if it already had a known label neighborhood.
+
+Retrieval seeks a low-cost connected structure that contains the mapped terminals. Label nodes encountered in this structure form the candidate set $\widehat{\mathcal{Y}}_t^r$. Connecting several terminals can select intermediate labels and keywords. The graph therefore determines the number of candidate labels through the returned structure, rather than requiring the same number of labels for all queries. A short query and a query containing several mutually distant indexed terms can produce different retrieval structures.
+
+This terminal-connecting objective is related to the Steiner tree problem. In that problem, the required terminals are a subset of graph vertices, and the solution may use additional vertices to connect them. An ordinary minimum spanning tree instead spans all vertices of its input graph. These objects play distinct roles in GORAG's procedure. GORAG uses these intermediate structures to construct a heuristic connection among the query terminals.
+
+\subsection{Tree and auxiliary-graph operations}
+\label{sec:gorag:algorithm}
+
+GORAG uses a greedy terminal-connecting procedure based on Mehlhorn's algorithm~\cite{gorag-mehlhorn1988faster}. The mapped keywords serve as terminals. An auxiliary graph $H$ represents connections between terminals, with edge weights given by path costs. A minimum spanning tree of $H$ selects a collection of terminal connections. Expanding these connections into their underlying paths produces the graph structure used for candidate selection. The language model then receives the labels encountered in this structure.
+
+Once the expanded structure $S_t^r$ is obtained, the candidate set is
+\begin{equation}
+\widehat{\mathcal{Y}}_t^r=\mathcal{V}(S_t^r)\cap\mathcal{Y}^r.
+\label{eq:gorag:candidates}
+\end{equation}
+Representative keywords and label descriptions are added to the classification prompt for the labels selected by this intersection.
+
+\section{Classification and Online Indexing}
+\label{sec:gorag:online}
+
+GORAG constructs a classification input by concatenating the query text, extracted query keywords, retrieved candidate labels, and representative keywords associated with those labels. With $\mathcal{K}^t$ denoting query keywords and $\mathcal{K}_{\widehat{\mathcal{Y}}_t^r}$ the representative label information, the input is
+\begin{equation}
+c_t=\operatorname{Concat}\left(t,\mathcal{K}^t,\widehat{\mathcal{Y}}_t^r,\mathcal{K}_{\widehat{\mathcal{Y}}_t^r}\right).
+\label{eq:gorag:context}
+\end{equation}
+A language model applies the classification instruction $p_{\mathrm{classify}}$ to this input and produces $y_t^*$. The graph narrows and describes the alternatives; the language model performs the final text classification.
+
+After the prediction, each keyword in $\mathcal{V}_{\mathrm{notexist}}^t$ is inserted into the graph and connected to $y_t^*$. The update can be written as
+\begin{align}
+\mathcal{V}^r&\leftarrow\mathcal{V}^r\cup\mathcal{V}_{\mathrm{notexist}}^t,\\
+\mathcal{E}^r&\leftarrow\mathcal{E}^r\cup\{(v,y_t^*):v\in\mathcal{V}_{\mathrm{notexist}}^t\}.
+\label{eq:gorag:update}
+\end{align}
+New associations receive weights through the reported weighting mechanism. Later queries can then map terms that were previously absent from the index. The update changes the retrieval source without fine-tuning the language model's parameters.
+
+The prediction precedes insertion, so a new keyword's association can affect later queries but not the prediction that created it. Incorrect predicted labels can propagate through those associations. The offline ablation suppresses online expansion, measuring its contribution relative to an index that receives no such query-dependent additions.
+
+\subsection{Computational organization}
+\label{sec:gorag:computation}
+
+The graph separates work performed at a label update from work performed for each query. Offline indexing processes the supplied texts, creates or updates keyword associations, generates label information when available, and merges the round's graph. The cross-round label bridges introduce interactions between the newly indexed and earlier label regions. In the source's abstract operation count, construction is expressed as
+\begin{equation}
+O\!\left(|\mathcal{Y}^r||\mathcal{Y}^{r-1}|+|\mathcal{V}_{\mathrm{new}}^r||\mathcal{D}^r|\right).
+\label{eq:gorag:constructioncost}
+\end{equation}
+The two terms count label merging and keyword--text processing. Language-model token costs additionally depend on prompt and output lengths and are measured in the token study.
+
+Each query maps its keywords to the index, retrieves a connecting structure, and constructs a classification prompt. New terms are inserted after prediction, so the index can grow within a round. The prompt contains only the labels selected for the current query.
+
+\section{Experimental Design}
+\label{sec:gorag:experiments}
+
+We evaluate GORAG on CAD, WOS, and IFS-Rel. CAD contains social media posts annotated for contextual abuse~\cite{gorag-vidgen2021introducing}. WOS contains academic texts associated with research-area labels~\cite{gorag-kowsari2017hdltex}. IFS-Rel supplies relation-classification examples derived from news text in an incremental few-shot benchmark~\cite{gorag-xia-etal-2021-incremental}. These datasets exercise different label vocabularies and text lengths within the dynamic classification setting.
+
+The four-round split introduces 13 labels across CAD's rounds, 133 across WOS, and 64 across IFS-Rel. The test collections contain 817, 9,396, and 2,560 examples, respectively. IFS-Rel uses 40 test examples per label. Its balanced test allocation differs from the changing class frequencies in the other collections.
+
+\input{chapter/tables/gorag-dataset-table.tex}
+
+The label counts in Table~\ref{tab:gorag:dataset} describe labels introduced in each round. The classifier operates over their cumulative union. Thus the second WOS round adds 53 labels to the 32 labels already introduced, rather than replacing the earlier set by a new 53-label task. This distinction matters when relating the dataset statistics to the size of the classification instruction and to the graph state retained from earlier rounds.
+
+The main few-shot study uses 1, 5, and 10 labeled examples per class. CAD and WOS RAG experiments use Qwen2.5-7B, while IFS-Rel uses GPT-4o. The source reports an Intel Xeon Gold 5220R CPU at 2.20GHz and a single NVIDIA A100-SXM4-40GB GPU for the experiments. IFS-Rel inference uses the GPT-4o service.
+
+Classification accuracy requires an exact match between the model output and the ground-truth label name or number. An output that cannot be matched to the required class is not counted as correct.
+
+\subsection{Compared methods and controls}
+\label{sec:gorag:baselines}
+
+The study compares six baselines. Entailment constructs text--label entailment pairs and fine-tunes a classifier~\cite{gorag-xia-etal-2021-incremental}. NaiveRAG retrieves text chunks from the indexed support information. Retrieved context is compressed by LongLLMLingua before classification~\cite{gorag-jiang-etal-2024-longllmlingua}. GraphRAG, LightRAG, and HippoRAG2 supply graph-based retrieval alternatives~\cite{gorag-edge2024local,gorag-guo2024lightrag,gorag-gutierrez2025memory}. The graph retrieval systems are adapted to return classification evidence.
+
+Entailment uses RoBERTa-large for five training epochs, a batch size of 16, a learning rate of $10^{-6}$, and Adam. LongLLMLingua is evaluated with compression rates of 0.75, 0.8, and 0.85, with 0.8 selected in the reported comparison. GraphRAG and LightRAG use local search. The source uses the nano-graphrag implementation for GraphRAG and NaiveRAG and the other baselines' official implementations.
+
+\section{Classification Results}
+\label{sec:gorag:results}
+
+The tables beginning with Tables~\ref{tab:gorag:main-wos} and~\ref{tab:gorag:main-ifs} preserve the WOS and IFS-Rel portions of the main accuracy table. Each dataset is split into one-, five-, and ten-shot tables, with rounds as columns. Each value is a fractional accuracy, and the labels available to the model expand with the round.
+
+\input{chapter/tables/gorag-main-tables.tex}
+
+On WOS with one support example per label, GORAG reports accuracies of 0.4866, 0.4790, 0.4736, and 0.4420 across the four rounds. Entailment reports 0.3695, 0.3994, 0.4510, and 0.4030 in the same columns. The corresponding GraphRAG values are 0.3852, 0.2213, 0.1816, and 0.1641. GORAG maintains higher accuracy than these baselines as the label set grows.
+
+Additional support examples improve GORAG's WOS accuracy in the main table. At the fourth round, its one-, five-, and ten-shot values are 0.4420, 0.4717, and 0.4929. At the first round they are 0.4866, 0.4990, and 0.5134.
+
+IFS-Rel uses GPT-4o. In its first round, GORAG reports 0.9688 for all three support sizes, while the fourth-round scores are 0.6165, 0.4988, and 0.5469. The five-shot fourth-round value is below the one-shot value, so increasing support size does not produce a monotonic improvement in every setting. LongLLMLingua reports 0.5819, 0.4903, and 0.5038 in these fourth-round columns. HippoRAG2 reports 0.4984, 0.5008, and 0.4953; its five-shot result exceeds GORAG's five-shot result in that column.
+
+CAD uses Qwen2.5-7B. Its GORAG first-round accuracy is 0.6125 in all three support settings. The fourth-round one- and five-shot accuracies are 0.3133 and 0.3146. Accuracy decreases in later rounds as the cumulative label set grows.
+% G2: full CAD table withheld from integrated chapter because source CAD/R4/10-shot is literal 03139. Exact working transcription in planning/gorag-working-cad-table.tex.
+
+WOS improves with additional support in the displayed rounds, whereas IFS-Rel is non-monotonic across support sizes and CAD loses accuracy as labels accumulate.
+
+\section{Ablations and Resource Use}
+\label{sec:gorag:ablations}
+
+The WOS ablation study uses a one-shot Qwen2.5-7B setting. The offline variant disables online indexing. The unit variant assigns cost one to every graph edge. The offline-and-unit variant removes both features. The keyword variant uses the extracted keywords in place of the complete query text for classification.
+
+\input{chapter/tables/gorag-ablation-table.tex}
+
+In the ablation table, the full method reports 0.4862, 0.4649, 0.4814, and 0.4210 across rounds. The offline variant reports 0.3063, 0.2302, 0.2455, and 0.2156. The unit variant reports 0.4706, 0.4394, 0.4407, and 0.3899. Disabling online insertion causes a larger accuracy drop than replacing weighted edges with unit costs.
+
+The offline-and-unit variant reports 0.2979, 0.2287, 0.2645, and 0.2249. Its third- and fourth-round values exceed those of the offline variant. The effects of removing these components are therefore not strictly additive across rounds. The keyword variant reports 0.4746, 0.4606, 0.4455, and 0.4030, below the full method in each displayed column. The full query provides information useful to the classifier in these experiments even though keywords determine the retrieval terminals.
+
+The publication gives different full-method values in the main and ablation WOS tables without explaining their provenance. Component comparisons here use the full-method row from the ablation table.
+
+\subsection{Prompt tokens and graph growth}
+\label{sec:gorag:resources}
+
+The IFS-Rel one-shot token study reports average tokens per query and the corresponding US-dollar costs under the original study's pricing conditions. GORAG uses 557.5 tokens per query and reports a cost of \$0.004. The direct GPT-4o comparison uses 634.6 tokens and reports \$0.005. LongLLMLingua uses 2,771.3 tokens, NaiveRAG 4,537.4, LightRAG 7,866.3, and GraphRAG 9,296.3. Their reported costs are \$0.021, \$0.034, \$0.059, and \$0.070, respectively.
+
+\input{chapter/tables/gorag-token-table.tex}
+
+GORAG's candidate-label context uses fewer tokens than the retrieval baselines in this one-shot experiment.
+
+Graph growth is measured separately during the first IFS-Rel round with GPT-4o. The reported index contains 1,644 nodes and 1,771 edges at the 25-percent checkpoint, and 5,299 nodes and 5,503 edges at the final checkpoint. The corresponding reported memory values are 13.3 KB and 46.4 KB. These memory values cover the graph index alone.
+% G3: original intermediate node-count increment annotation is inconsistent; complete graph-growth table withheld pending clarification.
+
+The original runtime study compares total time on WOS and CAD under the one-shot setting, using Qwen2.5-7B. Online insertion adds work after each prediction, while statistical keyword indexing and smaller model inputs can change other parts of the pipeline.
+
+\begin{figure}[tbp]
+\centering
+\begin{minipage}{0.48\linewidth}\centering
+\includegraphics[width=\linewidth]{figures/gorag/runtime_wos.pdf}\par (a) WOS.
+\end{minipage}\hfill
+\begin{minipage}{0.48\linewidth}\centering
+\includegraphics[width=\linewidth]{figures/gorag/runtime_cad.pdf}\par (b) CAD.
+\end{minipage}
+\caption{Total time in minutes for the one-shot four-round experiments with Qwen2.5-7B. The original R1--R4 legend in panel (b) applies to both panels. Reproduced from Figure 3 of GORAG~\cite{gorag-paper}.}
+\label{fig:gorag:runtime}
+\end{figure}
+
+\section{Zero-shot and Round Generalization}
+\label{sec:gorag:generalization}
+
+The zero-shot IFS-Rel experiment supplies label names and language-model-generated descriptions without annotated support texts. GORAG extracts keywords from these descriptions to initialize its graph. The experiment consequently tests whether description-derived associations can support candidate selection and subsequent classification.
+
+\input{chapter/tables/gorag-zero-table.tex}
+
+GORAG reports zero-shot accuracies of 0.9328, 0.5406, 0.4375, and 0.6063. The direct GPT-4o comparison reports 0.9219, 0.5109, 0.4063, and 0.5936. LongLLMLingua reports 0.9281, 0.5297, 0.4234, and 0.5806. The graph-based comparisons in the same table are lower under this initialization protocol. These values support the use of label descriptions as an initial retrieval source for this experiment.
+
+The round-generalization study uses WOS split into four, six, and eight rounds under one- and five-shot settings. The displayed curve combines rounds one to four from the four-round split, rounds five and six from the six-round split, and rounds seven and eight from the eight-round split. These points represent results from different partitions of the label set. They do not form the trajectory of one index updated through eight consecutive rounds.
+
+\begin{figure}[tbp]
+\centering
+\begin{minipage}{0.48\linewidth}\centering
+\includegraphics[width=\linewidth]{figures/gorag/wos_4_round_1.pdf}\par (a) One-shot.
+\end{minipage}\hfill
+\begin{minipage}{0.48\linewidth}\centering
+\includegraphics[width=\linewidth]{figures/gorag/wos_4_round_5.pdf}\par (b) Five-shot.
+\end{minipage}
+\caption{WOS classification across the reported round splits. Points 1--4 use the four-round split, 5--6 the six-round split, and 7--8 the eight-round split. The legend in panel (b) applies to both panels. Reproduced from Figure 4 of GORAG~\cite{gorag-paper}.}
+\label{fig:gorag:rounds}
+\end{figure}
+
+\subsection{A retrieved classification case}
+\label{sec:gorag:case}
+
+Figure~\ref{fig:gorag:case} reproduces a contextual-abuse example from the original study. The query contains the terms highlighted in red. These terms map to keyword nodes, and the selected connecting structure passes through an insult label. The classifier outputs the abuse category shown in the figure. This example exposes the relationship between the extracted query evidence, the intermediate label node, and the final classification.
+
+The insult label connects more than one highlighted query term. Other keyword neighbors remain outside the selected structure, showing how connected retrieval narrows the available label evidence.
+
+\begin{figure}[tbp]
+\centering
+\includegraphics[width=0.75\linewidth]{figures/gorag/new_case.pdf}
+\caption{A contextual-abuse example and its selected graph connections. Reproduced from Figure 5 of GORAG~\cite{gorag-paper}.}
+\label{fig:gorag:case}
+\end{figure}
+
+\section{Discussion and Chapter Summary}
+\label{sec:gorag:discussion}
+
+We proposed GORAG for dynamic few-shot classification. Weighted keyword--label connections determine the candidate set for each query, and the language model classifies the original text using those labels and their descriptions.
+
+The offline ablation shows the contribution of expanding the index beyond the support sample. Because these additions carry predicted labels, the method couples current classification with the evidence available to later queries.
+
+Keyword extraction restricts the query terms available as retrieval terminals. Sparse support data and limited label descriptions constrain initial graph coverage.
+
+GORAG constructs and updates task-related knowledge without requiring a predefined external graph or model fine-tuning. This supports classification as labels and vocabulary evolve. For question answering and generation, the output requires facts and explanations beyond a candidate label set. The following chapters investigate two extensions of task-related graph retrieval. Chapter~\ref{ch:agrag} studies connected textual evidence and answer coverage, while Chapter~\ref{ch:mgrag} studies query-aware construction and semantic matching across text and images.

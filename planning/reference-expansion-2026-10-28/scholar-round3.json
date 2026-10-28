@@ -1,0 +1,1124 @@
+[
+  {
+    "title": "XLNet: generalized autoregressive pretraining for language understanding",
+    "url": "https://scholar.google.com/scholar?q=%22XLNet%3A%20generalized%20autoregressive%20pretraining%20for%20language%20understanding%22",
+    "text": "Articles\nMy profile\nMy library\nAny time\nSince 2026\nSince 2025\nSince 2022\nCustom range...\nSort by relevance\nSort by date\nAny type\nReview articles\ninclude patents\ninclude citations\n\t\n[PDF] neurips.cc\nQuick read\nXlnet: Generalized autoregressive pretraining for language understanding\nZ Yang, Z Dai, Y Yang, J Carbonell, RR Salakhutdinov, QV Le\nAdvances in neural information processing systems, 2019•proceedings.neurips.cc\nAbstract\nWith the capability of modeling bidirectional contexts, denoising autoencoding based pretraining like BERT achieves better performance than pretraining approaches based on autoregressive language modeling. However, relying on corrupting the input with masks, BERT neglects dependency between the masked positions and suffers from a pretrain-finetune discrepancy. In light of these pros and cons, we propose XLNet, a generalized autoregressive pretraining method that (1) enables learning bidirectional contexts by maximizing the expected likelihood over all permutations of the factorization order and (2) overcomes the limitations of BERT thanks to its autoregressive formulation. Furthermore, XLNet integrates ideas from Transformer-XL, the state-of-the-art autoregressive model, into pretraining. Empirically, under comparable experiment setting, XLNet outperforms BERT on 20 tasks, often by a large margin, including question answering, natural language inference, sentiment analysis, and document ranking.\nproceedings.neurips.cc\nSHOW MORE\nSave Cite Cited by 13374 Related articles All 19 versions \nShowing the best result for this search. See all results\nPrivacyTermsHelp",
+    "results": [
+      {
+        "title": "Xlnet: Generalized autoregressive pretraining for language understanding",
+        "text": "Xlnet: Generalized autoregressive pretraining for language understanding\nZ Yang, Z Dai, Y Yang, J Carbonell, RR Salakhutdinov, QV Le\nAdvances in neural information processing systems, 2019•proceedings.neurips.cc\nAbstract\nWith the capability of modeling bidirectional contexts, denoising autoencoding based pretraining like BERT achieves better performance than pretraining approaches based on autoregressive language modeling. However, relying on corrupting the input with masks, BERT neglects dependency between the masked positions and suffers from a pretrain-finetune discrepancy. In light of these pros and cons, we propose XLNet, a generalized autoregressive pretraining method that (1) enables learning bidirectional contexts by maximizing the expected likelihood over all permutations of the factorization order and (2) overcomes the limitations of BERT thanks to its autoregressive formulation. Furthermore, XLNet integrates ideas from Transformer-XL, the state-of-the-art autoregressive model, into pretraining. Empirically, under comparable experiment setting, XLNet outperforms BERT on 20 tasks, often by a large margin, including question answering, natural language inference, sentiment analysis, and document ranking.\nproceedings.neurips.cc\nSHOW MORE\nSave Cite Cited by 13374 Related articles All 19 versions ",
+        "links": [
+          {
+            "text": "Xlnet: Generalized autoregressive pretraining for language understanding",
+            "href": "https://proceedings.neurips.cc/paper_files/paper/2019/hash/dc6a7e655d7e5840e66733e9ee67cc69-Abstract.html"
+          },
+          {
+            "text": "Z Yang",
+            "href": "https://scholar.google.com/citations?user=7qXxyJkAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Y Yang",
+            "href": "https://scholar.google.com/citations?user=MlZq4XwAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Z Yang",
+            "href": "https://scholar.google.com/citations?user=7qXxyJkAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Y Yang",
+            "href": "https://scholar.google.com/citations?user=MlZq4XwAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "RR Salakhutdinov",
+            "href": "https://scholar.google.com/citations?user=ITZ1e7MAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "QV Le",
+            "href": "https://scholar.google.com/citations?user=vfT6-XIAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "SHOW MORE",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 13374",
+            "href": "https://scholar.google.com/scholar?cites=14487406216105917109&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:tXrHKzKbDckJ:scholar.google.com/&scioq=%22XLNet:+generalized+autoregressive+pretraining+for+language+understanding%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 19 versions",
+            "href": "https://scholar.google.com/scholar?cluster=14487406216105917109&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:tXrHKzKbDckJ:scholar.google.com/+%22XLNet:+generalized+autoregressive+pretraining+for+language+understanding%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "LLMLingua-2: Data Distillation for Efficient and Faithful Task-Agnostic Prompt Compression",
+    "url": "https://scholar.google.com/scholar?q=%22LLMLingua-2%3A%20Data%20Distillation%20for%20Efficient%20and%20Faithful%20Task-Agnostic%20Prompt%20Compression%22",
+    "text": "Articles\nMy profile\nMy library\nAny time\nSince 2026\nSince 2025\nSince 2022\nCustom range...\nSort by relevance\nSort by date\nAny type\nReview articles\ninclude patents\ninclude citations\n\t\n[PDF] aclanthology.org\nQuick read\nLlmlingua-2: Data distillation for efficient and faithful task-agnostic prompt compression\nZ Pan, Q Wu, H Jiang, M Xia, X Luo, J Zhang, Q Lin, V Rühle, Y Yang, CY Lin, HV Zhao…\nFindings of the Association for Computational Linguistics: ACL 2024, 2024•aclanthology.org\nAbstract\nThis paper focuses on task-agnostic prompt compression for better generalizability and efficiency. Considering the redundancy in natural language, existing approaches compress prompts by removing tokens or lexical units according to their information entropy obtained from a causal language model such as LLaMa-7B. The challenge is that information entropy may be a suboptimal compression metric:(i) it only leverages unidirectional context and may fail to capture all essential information needed for prompt compression;(ii) it is not aligned with the prompt compression objective. To address these issues, we propose a data distillation procedure to derive knowledge from an LLM to compress prompts without losing crucial information, and meantime, introduce an extractive text compression dataset. We formulate prompt compression as a token classification problem to guarantee the faithfulness of the compressed prompt to the original one, and use a Transformer encoder as the base architecture to capture all essential information for prompt compression from the full bidirectional context. Our approach leads to lower latency by explicitly learning the compression objective with smaller models such as XLM-RoBERTa-large and mBERT. We evaluate our method on both in-domain and out-of-domain datasets, including MeetingBank, LongBench, ZeroScrolls, GSM8K, and BBH. Despite its small size, our model shows significant performance gains over strong baselines and demonstrates robust generalization ability across different LLMs. Additionally, our model is 3x-6x faster than existing prompt compression methods, while accelerating the end-to-end latency by 1.6 x-2.9 x with compression ratios of 2x-5x.\naclanthology.org\nSHOW MORE\nSave Cite Cited by 522 Related articles All 4 versions \nShowing the best result for this search. See all results\nPrivacyTermsHelp",
+    "results": [
+      {
+        "title": "Llmlingua-2: Data distillation for efficient and faithful task-agnostic prompt compression",
+        "text": "Llmlingua-2: Data distillation for efficient and faithful task-agnostic prompt compression\nZ Pan, Q Wu, H Jiang, M Xia, X Luo, J Zhang, Q Lin, V Rühle, Y Yang, CY Lin, HV Zhao…\nFindings of the Association for Computational Linguistics: ACL 2024, 2024•aclanthology.org\nAbstract\nThis paper focuses on task-agnostic prompt compression for better generalizability and efficiency. Considering the redundancy in natural language, existing approaches compress prompts by removing tokens or lexical units according to their information entropy obtained from a causal language model such as LLaMa-7B. The challenge is that information entropy may be a suboptimal compression metric:(i) it only leverages unidirectional context and may fail to capture all essential information needed for prompt compression;(ii) it is not aligned with the prompt compression objective. To address these issues, we propose a data distillation procedure to derive knowledge from an LLM to compress prompts without losing crucial information, and meantime, introduce an extractive text compression dataset. We formulate prompt compression as a token classification problem to guarantee the faithfulness of the compressed prompt to the original one, and use a Transformer encoder as the base architecture to capture all essential information for prompt compression from the full bidirectional context. Our approach leads to lower latency by explicitly learning the compression objective with smaller models such as XLM-RoBERTa-large and mBERT. We evaluate our method on both in-domain and out-of-domain datasets, including MeetingBank, LongBench, ZeroScrolls, GSM8K, and BBH. Despite its small size, our model shows significant performance gains over strong baselines and demonstrates robust generalization ability across different LLMs. Additionally, our model is 3x-6x faster than existing prompt compression methods, while accelerating the end-to-end latency by 1.6 x-2.9 x with compression ratios of 2x-5x.\naclanthology.org\nSHOW MORE\nSave Cite Cited by 522 Related articles All 4 versions ",
+        "links": [
+          {
+            "text": "Llmlingua-2: Data distillation for efficient and faithful task-agnostic prompt compression",
+            "href": "https://aclanthology.org/2024.findings-acl.57/"
+          },
+          {
+            "text": "Z Pan",
+            "href": "https://scholar.google.com/citations?user=RuASc_IAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Q Wu",
+            "href": "https://scholar.google.com/citations?user=BLZieokAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "H Jiang",
+            "href": "https://scholar.google.com/citations?user=99KtvpYAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "M Xia",
+            "href": "https://scholar.google.com/citations?user=0_NzsskAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "X Luo",
+            "href": "https://scholar.google.com/citations?user=c5OaSsUAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Z Pan",
+            "href": "https://scholar.google.com/citations?user=RuASc_IAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Q Wu",
+            "href": "https://scholar.google.com/citations?user=BLZieokAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "H Jiang",
+            "href": "https://scholar.google.com/citations?user=99KtvpYAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "M Xia",
+            "href": "https://scholar.google.com/citations?user=0_NzsskAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "X Luo",
+            "href": "https://scholar.google.com/citations?user=c5OaSsUAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "J Zhang",
+            "href": "https://scholar.google.com/citations?user=_2XCa_QAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Q Lin",
+            "href": "https://scholar.google.com/citations?user=W9fdsxMAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "V Rühle",
+            "href": "https://scholar.google.com/citations?user=sLvjebEAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Y Yang",
+            "href": "https://scholar.google.com/citations?user=4BtNQAEAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "CY Lin",
+            "href": "https://scholar.google.com/citations?user=cDF07aYAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "HV Zhao",
+            "href": "https://scholar.google.com/citations?user=SDYVImmfQs8C&hl=en&oi=sra"
+          },
+          {
+            "text": "SHOW MORE",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 522",
+            "href": "https://scholar.google.com/scholar?cites=2247665184193052395&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:6_7WjZNPMR8J:scholar.google.com/&scioq=%22LLMLingua-2:+Data+Distillation+for+Efficient+and+Faithful+Task-Agnostic+Prompt+Compression%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 4 versions",
+            "href": "https://scholar.google.com/scholar?cluster=2247665184193052395&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:6_7WjZNPMR8J:scholar.google.com/+%22LLMLingua-2:+Data+Distillation+for+Efficient+and+Faithful+Task-Agnostic+Prompt+Compression%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Improving language models by retrieving from trillions of tokens",
+    "url": "https://scholar.google.com/scholar?q=%22Improving%20language%20models%20by%20retrieving%20from%20trillions%20of%20tokens%22",
+    "text": "Articles\nMy profile\nMy library\nAny time\nSince 2026\nSince 2025\nSince 2022\nCustom range...\nSort by relevance\nSort by date\nAny type\nReview articles\ninclude patents\ninclude citations\n\t\n[PDF] mlr.press\nQuick read\nImproving language models by retrieving from trillions of tokens\nS Borgeaud, A Mensch, J Hoffmann, T Cai, E Rutherford, K Millican, GB Van Den Driessche…\nInternational conference on machine learning, 2022•proceedings.mlr.press\nAbstract\nWe enhance auto-regressive language models by conditioning on document chunks retrieved from a large corpus, based on local similarity with preceding tokens. With a 2 trillion token database, our Retrieval-Enhanced Transformer (RETRO) obtains comparable performance to GPT-3 and Jurassic-1 on the Pile, despite using 25 {\\texttimes} fewer parameters. After fine-tuning, RETRO performance translates to downstream knowledge-intensive tasks such as question answering. RETRO combines a frozen Bert retriever, a differentiable encoder and a chunked cross-attention mechanism to predict tokens based on an order of magnitude more data than what is typically consumed during training. We typically train RETRO from scratch, yet can also rapidly RETROfit pre-trained transformers with retrieval and still achieve good performance. Our work opens up new avenues for improving language models through explicit memory at unprecedented scale.\nproceedings.mlr.press\nSHOW MORE\nSave Cite Cited by 2795 Related articles All 5 versions \nShowing the best result for this search. See all results\nPrivacyTermsHelp",
+    "results": [
+      {
+        "title": "Improving language models by retrieving from trillions of tokens",
+        "text": "Improving language models by retrieving from trillions of tokens\nS Borgeaud, A Mensch, J Hoffmann, T Cai, E Rutherford, K Millican, GB Van Den Driessche…\nInternational conference on machine learning, 2022•proceedings.mlr.press\nAbstract\nWe enhance auto-regressive language models by conditioning on document chunks retrieved from a large corpus, based on local similarity with preceding tokens. With a 2 trillion token database, our Retrieval-Enhanced Transformer (RETRO) obtains comparable performance to GPT-3 and Jurassic-1 on the Pile, despite using 25 {\\texttimes} fewer parameters. After fine-tuning, RETRO performance translates to downstream knowledge-intensive tasks such as question answering. RETRO combines a frozen Bert retriever, a differentiable encoder and a chunked cross-attention mechanism to predict tokens based on an order of magnitude more data than what is typically consumed during training. We typically train RETRO from scratch, yet can also rapidly RETROfit pre-trained transformers with retrieval and still achieve good performance. Our work opens up new avenues for improving language models through explicit memory at unprecedented scale.\nproceedings.mlr.press\nSHOW MORE\nSave Cite Cited by 2795 Related articles All 5 versions ",
+        "links": [
+          {
+            "text": "Improving language models by retrieving from trillions of tokens",
+            "href": "https://proceedings.mlr.press/v162/borgeaud22a.html?utm_c"
+          },
+          {
+            "text": "S Borgeaud",
+            "href": "https://scholar.google.com/citations?user=-KzSL30AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "A Mensch",
+            "href": "https://scholar.google.com/citations?user=F8riAN8AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "J Hoffmann",
+            "href": "https://scholar.google.com/citations?user=4A91qjAAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "S Borgeaud",
+            "href": "https://scholar.google.com/citations?user=-KzSL30AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "A Mensch",
+            "href": "https://scholar.google.com/citations?user=F8riAN8AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "J Hoffmann",
+            "href": "https://scholar.google.com/citations?user=4A91qjAAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "T Cai",
+            "href": "https://scholar.google.com/citations?user=li9aM1MAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "GB Van Den Driessche",
+            "href": "https://scholar.google.com/citations?user=2XfigMEAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "SHOW MORE",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 2795",
+            "href": "https://scholar.google.com/scholar?cites=14088618064924644056&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:2BL8P3zThMMJ:scholar.google.com/&scioq=%22Improving+language+models+by+retrieving+from+trillions+of+tokens%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 5 versions",
+            "href": "https://scholar.google.com/scholar?cluster=14088618064924644056&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:2BL8P3zThMMJ:scholar.google.com/+%22Improving+language+models+by+retrieving+from+trillions+of+tokens%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "H2o: Heavy-hitter oracle for efficient generative inference of large language models",
+    "url": "https://scholar.google.com/scholar?q=%22H2o%3A%20Heavy-hitter%20oracle%20for%20efficient%20generative%20inference%20of%20large%20language%20models%22",
+    "text": "Articles\nMy profile\nMy library\nAny time\nSince 2026\nSince 2025\nSince 2022\nCustom range...\nSort by relevance\nSort by date\nAny type\nReview articles\ninclude patents\ninclude citations\n\t\n[PDF] neurips.cc\nQuick read\nH2o: Heavy-hitter oracle for efficient generative inference of large language models\nZ Zhang, Y Sheng, T Zhou, T Chen, L Zheng, R Cai, Z Song, Y Tian, C Ré, C Barrett, Z Wang…\nAdvances in neural information processing systems, 2023•proceedings.neurips.cc\nAbstract\nLarge Language Models (LLMs), despite their recent impressive accomplishments, are notably cost-prohibitive to deploy, particularly for applications involving long-content generation, such as dialogue systems and story writing. Often, a large amount of transient state information, referred to as the , is stored in GPU memory in addition to model parameters, scaling linearly with the sequence length and batch size. In this paper, we introduce a novel approach for implementing the  which significantly reduces its memory footprint. Our approach is based on the noteworthy observation that a small portion of tokens contributes most of the value when computing attention scores. We call these tokens Heavy Hitters (). Through a comprehensive investigation, we find that () the emergence of  is natural and strongly correlates with the frequent co-occurrence of tokens in the text, and () removing them results in significant performance degradation. Based on these insights, we propose Heavy Hitter Oracle (), a  eviction policy that dynamically retains a balance of recent and  tokens. We formulate the  eviction as a dynamic submodular problem and prove (under mild assumptions) a theoretical guarantee for our novel eviction algorithm which could help guide future work. We validate the accuracy of our algorithm with OPT, LLaMA, and GPT-NeoX across a wide range of tasks. Our implementation of  with 20\\% heavy hitters improves the throughput over three leading inference systems DeepSpeed Zero-Inference, Hugging Face Accelerate, and FlexGen by up to , , and  on OPT-6.7 B and OPT-30B. With the same batch size,  can reduce the latency by up to .\nproceedings.neurips.cc\nSHOW MORE\nSave Cite Cited by 1902 Related articles All 9 versions \nShowing the best result for this search. See all results\nPrivacyTermsHelp",
+    "results": [
+      {
+        "title": "H2o: Heavy-hitter oracle for efficient generative inference of large language models",
+        "text": "H2o: Heavy-hitter oracle for efficient generative inference of large language models\nZ Zhang, Y Sheng, T Zhou, T Chen, L Zheng, R Cai, Z Song, Y Tian, C Ré, C Barrett, Z Wang…\nAdvances in neural information processing systems, 2023•proceedings.neurips.cc\nAbstract\nLarge Language Models (LLMs), despite their recent impressive accomplishments, are notably cost-prohibitive to deploy, particularly for applications involving long-content generation, such as dialogue systems and story writing. Often, a large amount of transient state information, referred to as the , is stored in GPU memory in addition to model parameters, scaling linearly with the sequence length and batch size. In this paper, we introduce a novel approach for implementing the  which significantly reduces its memory footprint. Our approach is based on the noteworthy observation that a small portion of tokens contributes most of the value when computing attention scores. We call these tokens Heavy Hitters (). Through a comprehensive investigation, we find that () the emergence of  is natural and strongly correlates with the frequent co-occurrence of tokens in the text, and () removing them results in significant performance degradation. Based on these insights, we propose Heavy Hitter Oracle (), a  eviction policy that dynamically retains a balance of recent and  tokens. We formulate the  eviction as a dynamic submodular problem and prove (under mild assumptions) a theoretical guarantee for our novel eviction algorithm which could help guide future work. We validate the accuracy of our algorithm with OPT, LLaMA, and GPT-NeoX across a wide range of tasks. Our implementation of  with 20\\% heavy hitters improves the throughput over three leading inference systems DeepSpeed Zero-Inference, Hugging Face Accelerate, and FlexGen by up to , , and  on OPT-6.7 B and OPT-30B. With the same batch size,  can reduce the latency by up to .\nproceedings.neurips.cc\nSHOW MORE\nSave Cite Cited by 1902 Related articles All 9 versions ",
+        "links": [
+          {
+            "text": "H2o: Heavy-hitter oracle for efficient generative inference of large language models",
+            "href": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/6ceefa7b15572587b78ecfcebb2827f8-Abstract-Conference.html"
+          },
+          {
+            "text": "Z Zhang",
+            "href": "https://scholar.google.com/citations?user=ZLyJRxoAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Y Sheng",
+            "href": "https://scholar.google.com/citations?user=xMhGYpgAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "T Zhou",
+            "href": "https://scholar.google.com/citations?user=_use1UAAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "T Chen",
+            "href": "https://scholar.google.com/citations?user=LE3ctn0AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Z Zhang",
+            "href": "https://scholar.google.com/citations?user=ZLyJRxoAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Y Sheng",
+            "href": "https://scholar.google.com/citations?user=xMhGYpgAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "T Zhou",
+            "href": "https://scholar.google.com/citations?user=_use1UAAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "T Chen",
+            "href": "https://scholar.google.com/citations?user=LE3ctn0AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "L Zheng",
+            "href": "https://scholar.google.com/citations?user=_7Q8uIYAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "R Cai",
+            "href": "https://scholar.google.com/citations?user=B0chY1AAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Z Song",
+            "href": "https://scholar.google.com/citations?user=yDZct7UAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Y Tian",
+            "href": "https://scholar.google.com/citations?user=0mgEF28AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "C Ré",
+            "href": "https://scholar.google.com/citations?user=DnnCWN0AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "C Barrett",
+            "href": "https://scholar.google.com/citations?user=BtwmZfQAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Z Wang",
+            "href": "https://scholar.google.com/citations?user=pxFyKAIAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "SHOW MORE",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 1902",
+            "href": "https://scholar.google.com/scholar?cites=18236068363807432702&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:_h973I6HE_0J:scholar.google.com/&scioq=%22H2o:+Heavy-hitter+oracle+for+efficient+generative+inference+of+large+language+models%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 9 versions",
+            "href": "https://scholar.google.com/scholar?cluster=18236068363807432702&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:_h973I6HE_0J:scholar.google.com/+%22H2o:+Heavy-hitter+oracle+for+efficient+generative+inference+of+large+language+models%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Role-aware modeling for n-ary relational knowledge bases",
+    "url": "https://scholar.google.com/scholar?q=%22Role-aware%20modeling%20for%20n-ary%20relational%20knowledge%20bases%22",
+    "text": "Articles\nMy profile\nMy library\nAny time\nSince 2026\nSince 2025\nSince 2022\nCustom range...\nSort by relevance\nSort by date\nAny type\nReview articles\ninclude patents\ninclude citations\n\t\n[PDF] acm.org\nQuick read - arxiv.org\nRole-aware modeling for n-ary relational knowledge bases\nY Liu, Q Yao, Y Li\nProceedings of the web conference 2021, 2021•dl.acm.org\nN-ary relational knowledge bases (KBs) represent knowledge with binary and beyond-binary relational facts. Especially, in an n-ary relational fact, the involved entities play different roles, e.g., the ternary relation PlayCharacterIn consists of three roles, Actor, Character and Movie. However, existing approaches are often directly extended from binary relational KBs, i.e., knowledge graphs, while missing the important semantic property of role. Therefore, we start from the role level, and propose a Role-Aware Modeling, RAM for short, for facts in n-ary relational KBs. RAM explores a latent space that contains basis vectors, and represents roles by linear combinations of these vectors. This way encourages semantically related roles to have close representations. RAM further introduces a pattern matrix that captures the compatibility between the role and all involved entities. To this end, it presents a multilinear scoring function to measure the plausibility of a fact composed by certain roles and entities. We show that RAM achieves both theoretical full expressiveness and computation efficiency, which also provides an elegant generalization for approaches in binary relational KBs. Experiments demonstrate that RAM outperforms representative baselines on both n-ary and binary relational datasets.\nACM Digital Library\nSHOW MORE\nSave Cite Cited by 104 Related articles All 6 versions\nShowing the best result for this search. See all results\nPrivacyTermsHelp",
+    "results": [
+      {
+        "title": "Role-aware modeling for n-ary relational knowledge bases",
+        "text": "Role-aware modeling for n-ary relational knowledge bases\nY Liu, Q Yao, Y Li\nProceedings of the web conference 2021, 2021•dl.acm.org\nN-ary relational knowledge bases (KBs) represent knowledge with binary and beyond-binary relational facts. Especially, in an n-ary relational fact, the involved entities play different roles, e.g., the ternary relation PlayCharacterIn consists of three roles, Actor, Character and Movie. However, existing approaches are often directly extended from binary relational KBs, i.e., knowledge graphs, while missing the important semantic property of role. Therefore, we start from the role level, and propose a Role-Aware Modeling, RAM for short, for facts in n-ary relational KBs. RAM explores a latent space that contains basis vectors, and represents roles by linear combinations of these vectors. This way encourages semantically related roles to have close representations. RAM further introduces a pattern matrix that captures the compatibility between the role and all involved entities. To this end, it presents a multilinear scoring function to measure the plausibility of a fact composed by certain roles and entities. We show that RAM achieves both theoretical full expressiveness and computation efficiency, which also provides an elegant generalization for approaches in binary relational KBs. Experiments demonstrate that RAM outperforms representative baselines on both n-ary and binary relational datasets.\nACM Digital Library\nSHOW MORE\nSave Cite Cited by 104 Related articles All 6 versions",
+        "links": [
+          {
+            "text": "Role-aware modeling for n-ary relational knowledge bases",
+            "href": "https://dl.acm.org/doi/abs/10.1145/3442381.3449874"
+          },
+          {
+            "text": "Y Liu",
+            "href": "https://scholar.google.com/citations?user=vL9MnfQAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Q Yao",
+            "href": "https://scholar.google.com/citations?user=6PEbAiYAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Y Li",
+            "href": "https://scholar.google.com/citations?user=kmgzPeQAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Y Liu",
+            "href": "https://scholar.google.com/citations?user=vL9MnfQAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Q Yao",
+            "href": "https://scholar.google.com/citations?user=6PEbAiYAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Y Li",
+            "href": "https://scholar.google.com/citations?user=kmgzPeQAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "SHOW MORE",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 104",
+            "href": "https://scholar.google.com/scholar?cites=6716550916404983400&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:aLYkAHn7NV0J:scholar.google.com/&scioq=%22Role-aware+modeling+for+n-ary+relational+knowledge+bases%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 6 versions",
+            "href": "https://scholar.google.com/scholar?cluster=6716550916404983400&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Link prediction on n-ary relational data",
+    "url": "https://scholar.google.com/scholar?q=%22Link%20prediction%20on%20n-ary%20relational%20data%22",
+    "text": "Articles\nAbout 165 results (0.14 sec)\nMy profile\nMy library\nAny time\nSince 2026\nSince 2025\nSince 2022\nCustom range...\nSort by relevance\nSort by date\nAny type\nReview articles\ninclude patents\ninclude citations\nCreate alert\n\t\n[PDF] acm.org\nQuick read - researchgate.net\nLink prediction on n-ary relational data\nS Guan, X Jin, Y Wang, X Cheng - The world wide web conference, 2019 - dl.acm.org\nWith the overwhelming popularity of Knowledge Graphs (KGs), researchers have poured\nattention to link prediction to complete KGs for a long time. However, they mainly focus on …\nSave Cite Cited by 195 Related articles All 3 versions\n[PDF] arxiv.org\nQuick read\nLink prediction on n-ary relational data based on relatedness evaluation\nS Guan, X Jin, J Guo, Y Wang… - IEEE Transactions on …, 2021 - ieeexplore.ieee.org\n… in the complexity of carrying out link prediction on n-ary relational data. It has even proven\n… We then propose a method called NaLP to conduct link prediction on n-ary relational data, …\nSave Cite Cited by 68 Related articles All 5 versions\n[PDF] aclanthology.org\nQuick read\n[PDF] Link prediction on n-ary relational facts: A graph-based approach\nQ Wang, H Wang, Y Lyu, Y Zhu - Findings of the Association for …, 2021 - aclanthology.org\n… Link prediction on n-ary relational data Since binary relations oversimplify the complex\nnature of the data stored in KGs, a few recent studies have started to explore learning and …\nSave Cite Cited by 86 Related articles All 5 versions \n[PDF] acm.org\nQuick read - arxiv.org\nInductive link prediction on n-ary relational facts via semantic hypergraph reasoning\nG Yin, H Zhang, Y Yang, Y Luo - Proceedings of the 31st ACM SIGKDD …, 2025 - dl.acm.org\nN-ary relational facts represent semantic correlations among more than two entities. While\nrecent studies have developed link prediction (LP) methods to infer missing relations for …\nSave Cite Cited by 8 Related articles All 4 versions\n[PDF] aclanthology.org\nQuick read\nA survey of link prediction in n-ary knowledge graphs\nJ Wei, S Guan, D Li, Z Hou, M Su, Y Guo… - Proceedings of the …, 2025 - aclanthology.org\nN-ary Knowledge Graphs (NKGs) are a specialized type of knowledge graph designed to\nefficiently represent complex real-world facts. Unlike traditional knowledge graphs, where a …\nSave Cite Cited by 16 Related articles All 4 versions \n[PDF] nature.com\nQuick read\nGraph transformer for link prediction on N-ary facts\nB Hu, X Tao, H Guo, J Li, G Pang, D Xie - Scientific Reports, 2025 - nature.com\nHyper-relational knowledge graphs build upon traditional knowledge graphs to enhance the\ndiversity and complexity of information representation. They achieve this by integrating multi…\nSave Cite Related articles All 6 versions\n[PDF] acm.org\nQuick read - sonar.ch\nBeyond triplets: hyper-relational knowledge graph embedding for link prediction\nP Rosso, D Yang, P Cudré-Mauroux - Proceedings of the web …, 2020 - dl.acm.org\nKnowledge Graph (KG) embeddings are a powerful tool for predicting missing links in KGs.\nExisting techniques typically represent a KG as a set of triplets, where each triplet (h, r, t) links …\nSave Cite Cited by 256 Related articles All 9 versions\n[PDF] acm.org\nQuick read - openreview.net\nRHKH: Relational hypergraph neural network for link prediction on n-ary knowledge hypergraph\nY Wang, J He, H Wang - Proceedings of the 32nd ACM International …, 2024 - dl.acm.org\nAll along, KG completion relied on link prediction has always been the focus of researchers.\nHowever, overwhelming majority of them can only serve 2-ary KGs. While in practice, …\nSave Cite Cited by 9 Related articles All 3 versions\n[PDF] acm.org\nQuick read - arxiv.org\nGeneralizing tensor decomposition for n-ary relational knowledge bases\nY Liu, Q Yao, Y Li - Proceedings of the web conference 2020, 2020 - dl.acm.org\nWith the rapid development of knowledge bases (KBs), link prediction task, which completes\nKBs with missing facts, has been broadly studied in especially binary relational KBs (aka …\nSave Cite Cited by 133 Related articles All 10 versions\n[PDF] arxiv.org\nQuick read\nFew-shot link prediction on n-ary facts\nJ Wei, S Guan, X Jin, J Guo, X Cheng - arXiv preprint arXiv:2305.06104, 2023 - arxiv.org\nHyper-relational facts, which consist of a primary triple (head entity, relation, tail entity) and\nauxiliary attribute-value pairs, are widely present in real-world Knowledge Graphs (KGs). Link …\nSave Cite Cited by 2 Related articles All 2 versions \n\nScholar PDF Reader\n\nTry now\nNo thanks\nSkim AI Outline\nFollow references\nCite and save\n\t1\t2\t3\t4\t5\t6\t7\t8\t9\t10\t\nNext\nPrivacyTermsHelp",
+    "results": [
+      {
+        "title": "Link prediction on n-ary relational data",
+        "text": "Link prediction on n-ary relational data\nS Guan, X Jin, Y Wang, X Cheng - The world wide web conference, 2019 - dl.acm.org\nWith the overwhelming popularity of Knowledge Graphs (KGs), researchers have poured\nattention to link prediction to complete KGs for a long time. However, they mainly focus on …\nSave Cite Cited by 195 Related articles All 3 versions",
+        "links": [
+          {
+            "text": "Link prediction on n-ary relational data",
+            "href": "https://dl.acm.org/doi/abs/10.1145/3308558.3313414"
+          },
+          {
+            "text": "S Guan",
+            "href": "https://scholar.google.com/citations?user=mS2QCewAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "X Jin",
+            "href": "https://scholar.google.com/citations?user=5TRLpyIAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Y Wang",
+            "href": "https://scholar.google.com/citations?user=v1KzwYEAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "X Cheng",
+            "href": "https://scholar.google.com/citations?user=hY8aLqAAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 195",
+            "href": "https://scholar.google.com/scholar?cites=13841252371350295640&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:WBTemLIBFsAJ:scholar.google.com/&scioq=%22Link+prediction+on+n-ary+relational+data%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 3 versions",
+            "href": "https://scholar.google.com/scholar?cluster=13841252371350295640&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "Link prediction on n-ary relational data based on relatedness evaluation",
+        "text": "Link prediction on n-ary relational data based on relatedness evaluation\nS Guan, X Jin, J Guo, Y Wang… - IEEE Transactions on …, 2021 - ieeexplore.ieee.org\n… in the complexity of carrying out link prediction on n-ary relational data. It has even proven\n… We then propose a method called NaLP to conduct link prediction on n-ary relational data, …\nSave Cite Cited by 68 Related articles All 5 versions",
+        "links": [
+          {
+            "text": "Link prediction on n-ary relational data based on relatedness evaluation",
+            "href": "https://ieeexplore.ieee.org/abstract/document/9405412/"
+          },
+          {
+            "text": "S Guan",
+            "href": "https://scholar.google.com/citations?user=mS2QCewAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "X Jin",
+            "href": "https://scholar.google.com/citations?user=5TRLpyIAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "J Guo",
+            "href": "https://scholar.google.com/citations?user=nD0I3PUAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Y Wang",
+            "href": "https://scholar.google.com/citations?user=v1KzwYEAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 68",
+            "href": "https://scholar.google.com/scholar?cites=8399889420141511955&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:E8UYUOxmknQJ:scholar.google.com/&scioq=%22Link+prediction+on+n-ary+relational+data%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 5 versions",
+            "href": "https://scholar.google.com/scholar?cluster=8399889420141511955&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "[PDF] Link prediction on n-ary relational facts: A graph-based approach",
+        "text": "[PDF] Link prediction on n-ary relational facts: A graph-based approach\nQ Wang, H Wang, Y Lyu, Y Zhu - Findings of the Association for …, 2021 - aclanthology.org\n… Link prediction on n-ary relational data Since binary relations oversimplify the complex\nnature of the data stored in KGs, a few recent studies have started to explore learning and …\nSave Cite Cited by 86 Related articles All 5 versions ",
+        "links": [
+          {
+            "text": "Link prediction on n-ary relational facts: A graph-based approach",
+            "href": "https://aclanthology.org/2021.findings-acl.35.pdf"
+          },
+          {
+            "text": "Q Wang",
+            "href": "https://scholar.google.com/citations?user=l2yEbhAAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "H Wang",
+            "href": "https://scholar.google.com/citations?user=jgy4jCAAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Y Lyu",
+            "href": "https://scholar.google.com/citations?user=vLT3OXgAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Y Zhu",
+            "href": "https://scholar.google.com/citations?user=0to6KnMAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 86",
+            "href": "https://scholar.google.com/scholar?cites=16909137310475226719&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:Xw4uoctSqeoJ:scholar.google.com/&scioq=%22Link+prediction+on+n-ary+relational+data%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 5 versions",
+            "href": "https://scholar.google.com/scholar?cluster=16909137310475226719&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:Xw4uoctSqeoJ:scholar.google.com/+%22Link+prediction+on+n-ary+relational+data%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "Inductive link prediction on n-ary relational facts via semantic hypergraph reasoning",
+        "text": "Inductive link prediction on n-ary relational facts via semantic hypergraph reasoning\nG Yin, H Zhang, Y Yang, Y Luo - Proceedings of the 31st ACM SIGKDD …, 2025 - dl.acm.org\nN-ary relational facts represent semantic correlations among more than two entities. While\nrecent studies have developed link prediction (LP) methods to infer missing relations for …\nSave Cite Cited by 8 Related articles All 4 versions",
+        "links": [
+          {
+            "text": "Inductive link prediction on n-ary relational facts via semantic hypergraph reasoning",
+            "href": "https://dl.acm.org/doi/abs/10.1145/3690624.3709195"
+          },
+          {
+            "text": "G Yin",
+            "href": "https://scholar.google.com/citations?user=jZiaotUAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 8",
+            "href": "https://scholar.google.com/scholar?cites=5788811510753128157&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:3e4hCmb9VVAJ:scholar.google.com/&scioq=%22Link+prediction+on+n-ary+relational+data%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 4 versions",
+            "href": "https://scholar.google.com/scholar?cluster=5788811510753128157&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "A survey of link prediction in n-ary knowledge graphs",
+        "text": "A survey of link prediction in n-ary knowledge graphs\nJ Wei, S Guan, D Li, Z Hou, M Su, Y Guo… - Proceedings of the …, 2025 - aclanthology.org\nN-ary Knowledge Graphs (NKGs) are a specialized type of knowledge graph designed to\nefficiently represent complex real-world facts. Unlike traditional knowledge graphs, where a …\nSave Cite Cited by 16 Related articles All 4 versions ",
+        "links": [
+          {
+            "text": "A survey of link prediction in n-ary knowledge graphs",
+            "href": "https://aclanthology.org/2025.emnlp-main.1451/"
+          },
+          {
+            "text": "J Wei",
+            "href": "https://scholar.google.com/citations?user=C1603KkAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "S Guan",
+            "href": "https://scholar.google.com/citations?user=mS2QCewAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "M Su",
+            "href": "https://scholar.google.com/citations?user=VCxXjQUAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Y Guo",
+            "href": "https://scholar.google.com/citations?user=df0Olf4AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 16",
+            "href": "https://scholar.google.com/scholar?cites=3903826615269106877&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:vaTUi58tLTYJ:scholar.google.com/&scioq=%22Link+prediction+on+n-ary+relational+data%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 4 versions",
+            "href": "https://scholar.google.com/scholar?cluster=3903826615269106877&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:vaTUi58tLTYJ:scholar.google.com/+%22Link+prediction+on+n-ary+relational+data%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "Graph transformer for link prediction on N-ary facts",
+        "text": "Graph transformer for link prediction on N-ary facts\nB Hu, X Tao, H Guo, J Li, G Pang, D Xie - Scientific Reports, 2025 - nature.com\nHyper-relational knowledge graphs build upon traditional knowledge graphs to enhance the\ndiversity and complexity of information representation. They achieve this by integrating multi…\nSave Cite Related articles All 6 versions",
+        "links": [
+          {
+            "text": "Graph transformer for link prediction on N-ary facts",
+            "href": "https://www.nature.com/articles/s41598-025-32952-5"
+          },
+          {
+            "text": "H Guo",
+            "href": "https://scholar.google.com/citations?user=sygqLYYAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:nl-cnoDillIJ:scholar.google.com/&scioq=%22Link+prediction+on+n-ary+relational+data%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 6 versions",
+            "href": "https://scholar.google.com/scholar?cluster=5951192999661428638&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "Beyond triplets: hyper-relational knowledge graph embedding for link prediction",
+        "text": "Beyond triplets: hyper-relational knowledge graph embedding for link prediction\nP Rosso, D Yang, P Cudré-Mauroux - Proceedings of the web …, 2020 - dl.acm.org\nKnowledge Graph (KG) embeddings are a powerful tool for predicting missing links in KGs.\nExisting techniques typically represent a KG as a set of triplets, where each triplet (h, r, t) links …\nSave Cite Cited by 256 Related articles All 9 versions",
+        "links": [
+          {
+            "text": "Beyond triplets: hyper-relational knowledge graph embedding for link prediction",
+            "href": "https://dl.acm.org/doi/abs/10.1145/3366423.3380257"
+          },
+          {
+            "text": "P Rosso",
+            "href": "https://scholar.google.com/citations?user=BaXx0zgAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "D Yang",
+            "href": "https://scholar.google.com/citations?user=fnfg9S0AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "P Cudré-Mauroux",
+            "href": "https://scholar.google.com/citations?user=NpccCXwAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 256",
+            "href": "https://scholar.google.com/scholar?cites=5384749555989497971&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:c0gyCTF5ukoJ:scholar.google.com/&scioq=%22Link+prediction+on+n-ary+relational+data%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 9 versions",
+            "href": "https://scholar.google.com/scholar?cluster=5384749555989497971&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "RHKH: Relational hypergraph neural network for link prediction on n-ary knowledge hypergraph",
+        "text": "RHKH: Relational hypergraph neural network for link prediction on n-ary knowledge hypergraph\nY Wang, J He, H Wang - Proceedings of the 32nd ACM International …, 2024 - dl.acm.org\nAll along, KG completion relied on link prediction has always been the focus of researchers.\nHowever, overwhelming majority of them can only serve 2-ary KGs. While in practice, …\nSave Cite Cited by 9 Related articles All 3 versions",
+        "links": [
+          {
+            "text": "RHKH: Relational hypergraph neural network for link prediction on n-ary knowledge hypergraph",
+            "href": "https://dl.acm.org/doi/abs/10.1145/3664647.3681706"
+          },
+          {
+            "text": "J He",
+            "href": "https://scholar.google.com/citations?user=gjLPqSQAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 9",
+            "href": "https://scholar.google.com/scholar?cites=6143884915286360142&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:TkCGXMd2Q1UJ:scholar.google.com/&scioq=%22Link+prediction+on+n-ary+relational+data%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 3 versions",
+            "href": "https://scholar.google.com/scholar?cluster=6143884915286360142&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "Generalizing tensor decomposition for n-ary relational knowledge bases",
+        "text": "Generalizing tensor decomposition for n-ary relational knowledge bases\nY Liu, Q Yao, Y Li - Proceedings of the web conference 2020, 2020 - dl.acm.org\nWith the rapid development of knowledge bases (KBs), link prediction task, which completes\nKBs with missing facts, has been broadly studied in especially binary relational KBs (aka …\nSave Cite Cited by 133 Related articles All 10 versions",
+        "links": [
+          {
+            "text": "Generalizing tensor decomposition for n-ary relational knowledge bases",
+            "href": "https://dl.acm.org/doi/abs/10.1145/3366423.3380188"
+          },
+          {
+            "text": "Y Liu",
+            "href": "https://scholar.google.com/citations?user=vL9MnfQAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Q Yao",
+            "href": "https://scholar.google.com/citations?user=6PEbAiYAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Y Li",
+            "href": "https://scholar.google.com/citations?user=kmgzPeQAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 133",
+            "href": "https://scholar.google.com/scholar?cites=16393090747755015270&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:ZiyuRi71f-MJ:scholar.google.com/&scioq=%22Link+prediction+on+n-ary+relational+data%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 10 versions",
+            "href": "https://scholar.google.com/scholar?cluster=16393090747755015270&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "Few-shot link prediction on n-ary facts",
+        "text": "Few-shot link prediction on n-ary facts\nJ Wei, S Guan, X Jin, J Guo, X Cheng - arXiv preprint arXiv:2305.06104, 2023 - arxiv.org\nHyper-relational facts, which consist of a primary triple (head entity, relation, tail entity) and\nauxiliary attribute-value pairs, are widely present in real-world Knowledge Graphs (KGs). Link …\nSave Cite Cited by 2 Related articles All 2 versions ",
+        "links": [
+          {
+            "text": "Few-shot link prediction on n-ary facts",
+            "href": "https://arxiv.org/abs/2305.06104"
+          },
+          {
+            "text": "J Wei",
+            "href": "https://scholar.google.com/citations?user=C1603KkAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "S Guan",
+            "href": "https://scholar.google.com/citations?user=mS2QCewAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "X Jin",
+            "href": "https://scholar.google.com/citations?user=5TRLpyIAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "J Guo",
+            "href": "https://scholar.google.com/citations?user=nD0I3PUAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "X Cheng",
+            "href": "https://scholar.google.com/citations?user=hY8aLqAAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 2",
+            "href": "https://scholar.google.com/scholar?cites=10207235074792515336&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:CGfqYzhip40J:scholar.google.com/&scioq=%22Link+prediction+on+n-ary+relational+data%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 2 versions",
+            "href": "https://scholar.google.com/scholar?cluster=10207235074792515336&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:CGfqYzhip40J:scholar.google.com/+%22Link+prediction+on+n-ary+relational+data%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Generalizing tensor decomposition for n-ary relational knowledge bases",
+    "url": "https://scholar.google.com/scholar?q=%22Generalizing%20tensor%20decomposition%20for%20n-ary%20relational%20knowledge%20bases%22",
+    "text": "Articles\nMy profile\nMy library\nAny time\nSince 2026\nSince 2025\nSince 2022\nCustom range...\nSort by relevance\nSort by date\nAny type\nReview articles\ninclude patents\ninclude citations\n\t\n[PDF] acm.org\nQuick read - arxiv.org\nGeneralizing tensor decomposition for n-ary relational knowledge bases\nY Liu, Q Yao, Y Li\nProceedings of the web conference 2020, 2020•dl.acm.org\nWith the rapid development of knowledge bases (KBs), link prediction task, which completes KBs with missing facts, has been broadly studied in especially binary relational KBs (a.k.a knowledge graph) with powerful tensor decomposition related methods. However, the ubiquitous n-ary relational KBs with higher-arity relational facts are paid less attention, in which existing translation based and neural network based approaches have weak expressiveness and high complexity in modeling various relations. Tensor decomposition has not been considered for n-ary relational KBs, while directly extending tensor decomposition related methods of binary relational KBs to the n-ary case does not yield satisfactory results due to exponential model complexity and their strong assumptions on binary relations. To generalize tensor decomposition for n-ary relational KBs, in this work, we propose GETD, a generalized model based on Tucker decomposition and Tensor Ring decomposition. The existing negative sampling technique is also generalized to the n-ary case for GETD. In addition, we theoretically prove that GETD is fully expressive to completely represent any KBs. Extensive evaluations on two representative n-ary relational KB datasets demonstrate the superior performance of GETD, significantly improving the state-of-the-art methods by over 15%. Moreover, GETD further obtains the state-of-the-art results on the benchmark binary relational KB datasets.\nACM Digital Library\nSHOW MORE\nSave Cite Cited by 133 Related articles All 10 versions\nShowing the best result for this search. See all results\nPrivacyTermsHelp",
+    "results": [
+      {
+        "title": "Generalizing tensor decomposition for n-ary relational knowledge bases",
+        "text": "Generalizing tensor decomposition for n-ary relational knowledge bases\nY Liu, Q Yao, Y Li\nProceedings of the web conference 2020, 2020•dl.acm.org\nWith the rapid development of knowledge bases (KBs), link prediction task, which completes KBs with missing facts, has been broadly studied in especially binary relational KBs (a.k.a knowledge graph) with powerful tensor decomposition related methods. However, the ubiquitous n-ary relational KBs with higher-arity relational facts are paid less attention, in which existing translation based and neural network based approaches have weak expressiveness and high complexity in modeling various relations. Tensor decomposition has not been considered for n-ary relational KBs, while directly extending tensor decomposition related methods of binary relational KBs to the n-ary case does not yield satisfactory results due to exponential model complexity and their strong assumptions on binary relations. To generalize tensor decomposition for n-ary relational KBs, in this work, we propose GETD, a generalized model based on Tucker decomposition and Tensor Ring decomposition. The existing negative sampling technique is also generalized to the n-ary case for GETD. In addition, we theoretically prove that GETD is fully expressive to completely represent any KBs. Extensive evaluations on two representative n-ary relational KB datasets demonstrate the superior performance of GETD, significantly improving the state-of-the-art methods by over 15%. Moreover, GETD further obtains the state-of-the-art results on the benchmark binary relational KB datasets.\nACM Digital Library\nSHOW MORE\nSave Cite Cited by 133 Related articles All 10 versions",
+        "links": [
+          {
+            "text": "Generalizing tensor decomposition for n-ary relational knowledge bases",
+            "href": "https://dl.acm.org/doi/abs/10.1145/3366423.3380188"
+          },
+          {
+            "text": "Y Liu",
+            "href": "https://scholar.google.com/citations?user=vL9MnfQAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Q Yao",
+            "href": "https://scholar.google.com/citations?user=6PEbAiYAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Y Li",
+            "href": "https://scholar.google.com/citations?user=kmgzPeQAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Y Liu",
+            "href": "https://scholar.google.com/citations?user=vL9MnfQAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Q Yao",
+            "href": "https://scholar.google.com/citations?user=6PEbAiYAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Y Li",
+            "href": "https://scholar.google.com/citations?user=kmgzPeQAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "SHOW MORE",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 133",
+            "href": "https://scholar.google.com/scholar?cites=16393090747755015270&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:ZiyuRi71f-MJ:scholar.google.com/&scioq=%22Generalizing+tensor+decomposition+for+n-ary+relational+knowledge+bases%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 10 versions",
+            "href": "https://scholar.google.com/scholar?cluster=16393090747755015270&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Simple embedding for link prediction in knowledge graphs",
+    "url": "https://scholar.google.com/scholar?q=%22Simple%20embedding%20for%20link%20prediction%20in%20knowledge%20graphs%22",
+    "text": "Articles\nMy profile\nMy library\nAny time\nSince 2026\nSince 2025\nSince 2022\nCustom range...\nSort by relevance\nSort by date\nAny type\nReview articles\ninclude patents\ninclude citations\n\t\n[PDF] neurips.cc\nQuick read\nSimple embedding for link prediction in knowledge graphs\nSM Kazemi, D Poole\nAdvances in neural information processing systems, 2018•proceedings.neurips.cc\nAbstract\nKnowledge graphs contain knowledge about the world and provide a structured representation of this knowledge. Current knowledge graphs contain only a small subset of what is true in the world. Link prediction approaches aim at predicting new links for a knowledge graph given the existing links among the entities. Tensor factorization approaches have proved promising for such link prediction problems. Proposed in 1927, Canonical Polyadic (CP) decomposition is among the first tensor factorization approaches. CP generally performs poorly for link prediction as it learns two independent embedding vectors for each entity, whereas they are really tied. We present a simple enhancement of CP (which we call SimplE) to allow the two embeddings of each entity to be learned dependently. The complexity of SimplE grows linearly with the size of embeddings. The embeddings learned through SimplE are interpretable, and certain types of background knowledge can be incorporated into these embeddings through weight tying. We prove SimplE is fully expressive and derive a bound on the size of its embeddings for full expressivity. We show empirically that, despite its simplicity, SimplE outperforms several state-of-the-art tensor factorization techniques. SimplE's code is available on GitHub at https://github. com/Mehran-k/SimplE.\nproceedings.neurips.cc\nSHOW MORE\nSave Cite Cited by 1263 Related articles All 8 versions \nShowing the best result for this search. See all results\nPrivacyTermsHelp",
+    "results": [
+      {
+        "title": "Simple embedding for link prediction in knowledge graphs",
+        "text": "Simple embedding for link prediction in knowledge graphs\nSM Kazemi, D Poole\nAdvances in neural information processing systems, 2018•proceedings.neurips.cc\nAbstract\nKnowledge graphs contain knowledge about the world and provide a structured representation of this knowledge. Current knowledge graphs contain only a small subset of what is true in the world. Link prediction approaches aim at predicting new links for a knowledge graph given the existing links among the entities. Tensor factorization approaches have proved promising for such link prediction problems. Proposed in 1927, Canonical Polyadic (CP) decomposition is among the first tensor factorization approaches. CP generally performs poorly for link prediction as it learns two independent embedding vectors for each entity, whereas they are really tied. We present a simple enhancement of CP (which we call SimplE) to allow the two embeddings of each entity to be learned dependently. The complexity of SimplE grows linearly with the size of embeddings. The embeddings learned through SimplE are interpretable, and certain types of background knowledge can be incorporated into these embeddings through weight tying. We prove SimplE is fully expressive and derive a bound on the size of its embeddings for full expressivity. We show empirically that, despite its simplicity, SimplE outperforms several state-of-the-art tensor factorization techniques. SimplE's code is available on GitHub at https://github. com/Mehran-k/SimplE.\nproceedings.neurips.cc\nSHOW MORE\nSave Cite Cited by 1263 Related articles All 8 versions ",
+        "links": [
+          {
+            "text": "Simple embedding for link prediction in knowledge graphs",
+            "href": "https://proceedings.neurips.cc/paper_files/paper/2018/hash/b2ab001909a8a6f04b51920306046ce5-Abstract.html"
+          },
+          {
+            "text": "SM Kazemi",
+            "href": "https://scholar.google.com/citations?user=L79ecZkAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "D Poole",
+            "href": "https://scholar.google.com/citations?user=CeWswygAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "SM Kazemi",
+            "href": "https://scholar.google.com/citations?user=L79ecZkAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "D Poole",
+            "href": "https://scholar.google.com/citations?user=CeWswygAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "SHOW MORE",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 1263",
+            "href": "https://scholar.google.com/scholar?cites=1390081697322675650&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:wq2wUfCPShMJ:scholar.google.com/&scioq=%22Simple+embedding+for+link+prediction+in+knowledge+graphs%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 8 versions",
+            "href": "https://scholar.google.com/scholar?cluster=1390081697322675650&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:wq2wUfCPShMJ:scholar.google.com/+%22Simple+embedding+for+link+prediction+in+knowledge+graphs%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      }
+    ]
+  }
+]

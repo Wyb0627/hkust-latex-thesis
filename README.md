@@ -1,6 +1,6 @@
 # Structural Augmented Reasoning for Language Models
 
-English HKUST CSE PhD thesis by Yubo Wang. The complete manuscript contains Introduction, Background (including the separate CIKM hyper-relational study), KGLink, GORAG, AGRAG, MGRAG, Discussion, and Conclusion. Main entry: `main.tex`. The reading copy `thesis.pdf` includes the latest full-thesis prose revision and has 115 pages.
+English HKUST CSE PhD thesis by Yubo Wang. The complete manuscript contains Introduction, Background (including the separate CIKM hyper-relational study), KGLink, GORAG, AGRAG, MGRAG, Discussion, and Conclusion. Main entry: `main.tex`. The reading copy `thesis.pdf` includes citation completion, the author-led wording revision, the ch01/ch02 literature expansion, and the Section 2.1 knowledge-structures rewrite and has 125 pages.
 
 ## Build
 
@@ -28,7 +28,11 @@ The adopted class is HKFoggyU v0.11.6, pinned to release commit `1a9230d`, under
 - `planning/EVIDENCE_SUMMARY.md`: version authority, source checks and known source discrepancies.
 - `planning/verification-{kglink,gorag,agrag,mgrag,background}.md`: detailed evidence records.
 - `planning/STYLE_AUDIT.md`: current whole-manuscript writing audit.
-- `planning/review-sun-style-2026-10-27/REVIEW.md`: latest reference-led style revision, exact edits and compiler diagnostics.
+- `planning/background-structure-2026-10-28/REVIEW.md`: current Section 2.1 structure and style revision, seven directly related additions, 121-paper / 127-reference count, and source/PDF checks.
+- `planning/reference-expansion-2026-10-28/REVIEW.md`: preceding literature expansion, original-bib provenance, primary verification, and partial Scholar crosschecks.
+- `planning/citations-wording-2026-10-28/REVIEW.md`: preceding seven-position citation completion and full-manuscript author-led wording pass.
+- `planning/research-thread-2026-10-27/REVIEW.md`: preceding research narrative, style references, exact edits, and source/PDF checks.
+- `planning/review-sun-style-2026-10-27/REVIEW.md`: preceding reference-led style revision and compiler diagnostics.
 - `planning/FINAL_QA.md`: final compilation, typography and actual-PDF checks.
 - `planning/review-round2/REVIEW_SUMMARY.md`: earlier independent full-manuscript review and source corrections.
 - `planning/review-style-2026-10-27/REVIEW.md`: defensive-writing and punctuation review with exact edits.
@@ -39,4 +43,8 @@ Twenty-seven research graphics are original source files with recorded hashes. T
 
 The manuscript is complete for author and supervisor review. The unfilled signature date and department-head field must be completed from real information; signatures and institutional approval are outside the manuscript build. The title-page numeral follows the visible official sample pending departmental clarification. Source-internal theory discrepancies and an unreported MGRAG experimental recomputation budget are documented rather than silently repaired.
 
-The latest Sun-reference style pass applies 198 prose edits across all eight chapters. Current sources have 19,975 narrative words, 21,917 words including headings/captions, and a 206-word abstract. The XeLaTeX/Biber build completed and `thesis.pdf` is updated to 115 pages. Reference, glyph, overflow, font embedding and page geometry checks passed. The app’s independent built-in preview still fails; diagnosis and build repair are recorded in `planning/compile-repair-2026-10-27/REPORT.md`. Exact changes and checks are in `planning/review-sun-style-2026-10-27/REVIEW.md`; the October 25 portable ZIP is an older snapshot.
+The manuscript follows the author-approved progression from KGLink's use of an existing KG and supervised fine-tuning to GORAG's graph construction from task data and prediction without model fine-tuning. AGRAG and MGRAG extend this direction to connected textual evidence and query-aware multimodal matching. The preceding wording pass completed seven empty citation positions and extended the author's problem-to-method transitions across the manuscript.
+
+The preceding literature expansion added 56 published papers, including 36 from the author's original bib libraries and 20 externally found works. Section 2.1 has since been rewritten around explicit knowledge structures, model inputs and task adaptation. Nine no-longer-relevant introductory citations were replaced by seven directly related papers, three from original bib libraries and four from formal external publications. The current manuscript cites 127 unique reference entries, comprising 121 independent research papers under the existing conservative count. ch01 and ch02 cite 22 and 82 distinct works respectively. Primary-source and paragraph-level evidence is in the current review; Scholar verification remains limited to the preceding review's documented coverage.
+
+Current sources have 22,276 narrative words, 24,218 words including headings/captions, and a 213-word abstract. Source-preservation checks and the clean XeLaTeX/Biber build passed. All 125 PDF pages were rendered and automatically checked; the rewritten section, chapter transitions, contents and relevant bibliography pages were visually reviewed. See `planning/background-structure-2026-10-28/REVIEW.md` and `planning/FINAL_QA.md`. The app's earlier independent preview issue remains documented in `planning/compile-repair-2026-10-27/REPORT.md`; the October 25 portable ZIP is an older snapshot.

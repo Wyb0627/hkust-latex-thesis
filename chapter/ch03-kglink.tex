@@ -6,16 +6,16 @@
 \chapter{Knowledge-enriched Table Understanding with KGLink}
 \label{ch:kglink}
 
-This chapter is based on the published paper \emph{KGLink: A Column Type Annotation Method that Combines Knowledge Graph and Pre-Trained Language Model}~\cite{kglink-publication}. We propose KGLink to annotate table columns using external graph knowledge. The method selects candidate types and graph-derived feature sequences, then learns their correspondence to the annotation labels through a contextual representation objective.
+This chapter is based on the published paper \emph{KGLink: A Column Type Annotation Method that Combines Knowledge Graph and Pre-Trained Language Model}~\cite{kglink-publication}. We begin our study of structural augmentation by investigating how an existing knowledge graph can supply information missing from a table. We propose KGLink to select candidate types and graph-derived feature sequences, then learn their correspondence to annotation labels through a contextual representation objective.
 
 \section{Motivation and Task}
 \label{sec:kglink:motivation}
 
 A table may contain too little context to determine a column type. For example, names of cricket players accompanied by birth and death dates do not reveal their occupation. Linking those names to a knowledge graph can supply occupation and sport relations that are absent from the table.
 
-External knowledge introduces a second difficulty. The type expected by an annotation dataset need not coincide with a type attached to an entity in the graph. A column of basketball players can plausibly be described as \emph{Basketball player}, \emph{Athlete}, or \emph{Name}. An annotation benchmark may use only the last of these labels. Retrieving a factually relevant graph type is consequently insufficient to determine the required output label. The model must learn which description the task expects. KGLink refers to this mismatch as the type granularity gap. The gap includes cases where the desired dataset label does not occupy a convenient ancestor position in the retrieved graph's type hierarchy.
+External knowledge introduces a second difficulty. The type expected by an annotation dataset need not coincide with a type attached to an entity in the graph. A column of basketball players can plausibly be described as \emph{Basketball player}, \emph{Athlete}, or \emph{Name}. An annotation benchmark may use only the last of these labels. A factually relevant graph type alone may therefore leave the required output label ambiguous. The model must learn which description the task expects. KGLink refers to this mismatch as the type granularity gap. The gap includes cases where the desired dataset label does not occupy a convenient ancestor position in the retrieved graph's type hierarchy.
 
-We address missing context and type granularity through separate steps. Graph processing selects relevant external descriptions, while a supervised classifier learns the dataset labels. An auxiliary task trains a contextual representation of the target type so that the classifier can use graph descriptions even when their wording differs from the annotation vocabulary.
+To address these two difficulties, KGLink combines graph processing with supervised representation learning. Graph processing selects relevant external descriptions, while a supervised classifier learns the dataset labels. An auxiliary task trains a contextual representation of the target type so that the classifier can use graph descriptions even when their wording differs from the annotation vocabulary.
 
 We evaluate single-label column annotation on SemTab and modified VizNet. The encoder predicts a dataset label from the cells, table context, and selected graph descriptions.
 
@@ -61,7 +61,7 @@ Graph descriptions and cell values share the encoder input budget. We therefore 
 \subsection{Cell Mention Linking}
 \label{sec:kglink:linking}
 
-The first step retrieves a candidate entity set $E_{m_c^r}$ for each suitable cell mention. KGLink uses BM25 to score the relation between the mention's words and indexed entity labels~\cite{kglink-robertson2009probabilistic}. The implementation indexes Wikidata with Elasticsearch. The score incorporates query-term frequency, inverse document frequency, and label-length normalization. Multiple entities can match the same mention, so the retrieval output is a candidate set rather than a single disambiguated entity.
+The first step retrieves a candidate entity set $E_{m_c^r}$ for each suitable cell mention $m_c^r$ in row $r$ and column $c$. KGLink uses BM25 to score lexical matches between the mention's words and indexed entity labels~\cite{kglink-robertson2009probabilistic}. The implementation indexes Wikidata with Elasticsearch. The score incorporates query-term frequency, inverse document frequency, and label-length normalization. Multiple entities can match the same mention, so the retrieval output is a candidate set rather than a single disambiguated entity.
 
 Short strings are often ambiguous. An album title can match an ordinary word, and a name can refer to several people. We use relationships between cells in the same row to filter these lexical candidates.
 
@@ -86,7 +86,7 @@ Cells in the same row describe related objects. An album title beside a musician
  \left(E_{m_{c_1}^{r}}\cap\mathcal{N}(E_{m_{c_2}^{r}})\right).
 \label{eq:kglink:entity-filter}
 \end{equation}
-The union allows support from any other column. The intersection retains entities retrieved for the target mention that also have the required neighborhood support.
+Here $\widehat E_{m_{c_1}^r}$ is the filtered candidate set for the mention in row $r$ and target column $c_1$; $E_{m_{c_2}^r}$ contains the candidates for another column $c_2$, and $\mathcal N$ returns their one-hop neighbors. The union allows support from any other column. The intersection retains entities retrieved for the target mention that also have the required neighborhood support.
 
 Figure~\ref{fig:kglink:overlap} uses \emph{Rust} and \emph{Peter Steele}. A graph connection between an album candidate and the musician candidate supports their interpretation as the entities intended by the row. The role of the edge is to constrain which external facts are relevant to the table. KGLink subsequently associates each retained entity with an overlapping score that counts its neighborhood support from other columns. Entities with more such support contribute more to candidate-type selection.
 
@@ -109,14 +109,14 @@ KGLink derives a cell score from the best-scoring retained entity. For a nonempt
 ls_{m_c^r}=\max_{e\in\widehat{E}_{m_c^r}}ls_e,
 \label{eq:kglink:cell-score}
 \end{equation}
-where $ls_e$ is the entity's BM25 linking score. Unlinked cells use zero as described in the evaluation protocol. A row's score sums the scores of its cells,
+where $ls_{m_c^r}$ is the score of the mention in row $r$ and column $c$, $\widehat E_{m_c^r}$ is its filtered entity set, and $ls_e$ is the BM25 linking score of candidate entity $e$. Unlinked cells use zero as described in the evaluation protocol. A row's score sums the scores of its cells,
 \begin{equation}
 ls_r=\sum_{c\in C}ls_{m_c^r}.
 \label{eq:kglink:row-score}
 \end{equation}
-Rows are sorted by this quantity, and only the top $k$ rows are retained for prediction.
+Here $ls_r$ is the linking score of row $r$, $C$ is the column set, and $ls_{m_c^r}$ is the score of its cell in column $c$. Rows are sorted by this quantity, and only the top $k$ rows are retained for prediction.
 
-Linkage ranking favors rows with graph-supported candidates, while taking the first $k$ rows follows the source order. The row-filter experiment compares these rules under the same input budget.
+Linkage ranking favors rows with graph-supported candidates, while taking the first $k$ rows, with the same row budget $k$, follows the source order. The row-filter experiment compares these rules under the same input budget.
 
 The highest-ranked row also supplies the selected cell used for feature-sequence generation. Row ranking therefore changes both the table values and the KG entity passed to the encoder.
 
@@ -141,17 +141,17 @@ The feature sequence provides a second representation of the retrieved knowledge
 
 KGLink adapts the multi-column serialization used by Doduo~\cite{kglink-suhara2022annotating}. A special \texttt{[CLS]} token begins each column's segment. The segments are concatenated into one input sequence, followed by a \texttt{[SEP]} token. The contextual representation at each column's \texttt{[CLS]} position provides that column's vector. Because the sequence contains multiple columns, self-attention can use information outside the predicted column.
 
-Writing the tokenized contents of column $i$ as $\mathrm{tok}_i^1,\ldots,\mathrm{tok}_i^{m}$, the original multi-column serialization has the form
+For table $T$ with column set $C$, write the tokenized contents of column $i$ as $\mathrm{tok}_i^1,\ldots,\mathrm{tok}_i^{m_i}$, where $m_i$ is its token count. The serialized sequence $S(T)$ has the form
 \begin{equation}
 \begin{split}
-S(T)={}&[\mathrm{CLS}]\ \mathrm{tok}_1^1\cdots\mathrm{tok}_1^m\ 
+S(T)={}&[\mathrm{CLS}]\ \mathrm{tok}_1^1\cdots\mathrm{tok}_1^{m_1}\quad
 [\mathrm{CLS}]\ \mathrm{tok}_2^1\cdots\\
-&[\mathrm{CLS}]\ \mathrm{tok}_{|C|}^1\cdots\mathrm{tok}_{|C|}^m\ 
+&[\mathrm{CLS}]\ \mathrm{tok}_{|C|}^1\cdots\mathrm{tok}_{|C|}^{m_{|C|}}\quad
 [\mathrm{SEP}].
 \end{split}
 \label{eq:kglink:serialization}
 \end{equation}
-Each column's \texttt{[CLS]} position produces a contextual vector using the serialized columns. Candidate-type text precedes the corresponding cell values, allowing both to interact with neighboring columns through self-attention. KGLink separately encodes the feature sequence into a column-specific vector and combines it with the contextual column vector through the composition function $\phi$. The resulting representation is mapped into the dataset's classification space.
+Each column's \texttt{[CLS]} position produces a contextual vector using the serialized columns. Candidate-type text precedes the corresponding cell values, allowing both to interact with neighboring columns through self-attention. KGLink separately encodes the feature sequence into a column-specific vector and combines it with the contextual column vector through the composition function $\phi_{\mathrm{comp}}$, shown as $\phi$ in Figure~\ref{fig:kglink:framework}. The resulting representation is mapped into the dataset's classification space.
 
 The principal experiments fine-tune BERT~\cite{kglink-devlin2018bert}. The model has a sequence limit of 512 tokens; the reported implementation limits each column to 64 tokens and each encoded table to eight columns. Tables with more columns are divided after candidate-type generation and are encoded separately. These limits define the context available to the classifier. In particular, retaining 25 table rows does not imply that every token in those rows survives serialization, since tokenization and the column limit also constrain the final sequence.
 
@@ -169,20 +169,20 @@ Figure~\ref{fig:kglink:representation} illustrates the two inputs and their cont
 \label{fig:kglink:representation}
 \end{figure}
 
-This arrangement supplies supervision about the label's meaning in context. A label such as \emph{Musician} is encoded together with the column values and graph-derived descriptions, rather than as an isolated word. The masked input must produce its type representation from the evidence that will be available at prediction time. Distilled masked language modeling provides the auxiliary objective~\cite{kglink-wang2020learning}. The model projects contextual representations into vocabulary space with a temperature parameter, then uses the ground-truth and masked outputs in the reported training loss.
+The paired inputs teach the encoder how the label relates to the table context. A label such as \emph{Musician} is encoded together with the column values and graph-derived descriptions, rather than as an isolated word. The masked input must produce its type representation from the evidence that will be available at prediction time. Distilled masked language modeling provides the auxiliary objective~\cite{kglink-wang2020learning}. The model projects contextual representations into vocabulary space with a temperature parameter, then uses the ground-truth and masked outputs in the reported training loss.
 
 With contextual vector $H$ and temperature $\mathcal{T}$, vocabulary projection gives
 \begin{equation}
 Y=\operatorname{Softmax}\!\left(W_o\frac{H}{\mathcal{T}}\right),
 \label{eq:kglink:vocabulary-projection}
 \end{equation}
-where $W_o$ projects into the vocabulary space. Denote the masked and ground-truth outputs by $Y_{\mathrm{msk}}$ and $Y_{\mathrm{gt}}$. The main paper writes the auxiliary objective as
+where $W_o$ projects the contextual vector $H$ into vocabulary space, $\mathcal T$ is the temperature, and $Y$ is the resulting probability vector. Denote the masked and ground-truth outputs by $Y_{\mathrm{msk}}$ and $Y_{\mathrm{gt}}$. The main paper writes the auxiliary objective as
 \begin{equation}
 \mathcal{L}_{\mathrm{DMLM}}(Y_{\mathrm{msk}},Y_{\mathrm{gt}})
 =-\sum_{j=1}^{V}y_{\mathrm{msk}}^{j}\log y_{\mathrm{gt}}^{j},
 \label{eq:kglink:dmlm}
 \end{equation}
-with vocabulary size $V$. The objective uses the contextualized representations produced from the two table inputs.
+where $V$ is the vocabulary size and $y_{\mathrm{msk}}^j$ and $y_{\mathrm{gt}}^j$ are the $j$th components of the masked and ground-truth output vectors, respectively. The objective uses the contextualized representations produced from the two table inputs.
 
 Training uses both true-type and masked inputs; evaluation uses the masked input. The model thus learns from annotated types during training and predicts from table values and retrieved descriptions at inference, including for numeric columns and columns without KG candidates.
 
@@ -198,15 +198,15 @@ Let $z_c$ be the classification logits obtained from the combined column and fea
  =-\log\frac{\exp(z_{c,l_c})}{\sum_{j\in D}\exp(z_{c,j})}.
 \label{eq:kglink:classification}
 \end{equation}
-KGLink jointly optimizes this loss and the auxiliary representation objective using uncertainty weighting~\cite{kglink-kendall2018multi}. With trainable task parameters $\sigma_0$ and $\sigma_1$, the combined objective is
+Here $z_{c,j}$ is the logit for label $j$ in the dataset label set $D$, and $z_{c,l_c}$ is the logit for the target label $l_c$ of column $c$. KGLink jointly optimizes this loss and the auxiliary representation objective using uncertainty weighting~\cite{kglink-kendall2018multi}. With trainable task parameters $\sigma_0$ and $\sigma_1$, the combined objective is
 \begin{equation}
 \mathcal{L}_{\mathrm{total}}
- =\frac{\mathcal{L}_{\mathrm{DMLM}}}{2\sigma_0^2}
-  +\frac{\mathcal{L}_{\mathrm{CE}}}{2\sigma_1^2}
+ =\frac{\mathcal{L}_{\mathrm{CE}}}{2\sigma_0^2}
+  +\frac{\mathcal{L}_{\mathrm{DMLM}}}{2\sigma_1^2}
   +\log(\sigma_0\sigma_1).
 \label{eq:kglink:joint-loss}
 \end{equation}
-The temperature used in the representation objective is set to two in the reported experiments.
+Here $\mathcal L_{\mathrm{total}}$ combines classification loss $\mathcal L_{\mathrm{CE}}$ and representation loss $\mathcal L_{\mathrm{DMLM}}$, with trainable parameters $\sigma_0$ and $\sigma_1$, respectively. This indexing follows Figure~\ref{fig:kglink:framework}; the source equation assigns the two indices in the opposite order. The temperature used in the representation objective is set to two in the reported experiments.
 
 The trainable task weights balance the representation and classification losses during optimization.
 
@@ -215,9 +215,9 @@ The trainable task weights balance the representation and classification losses 
 
 The graph-processing cost depends on table dimensions, candidate-set sizes, and neighborhood sizes. Linking traverses table cells. Cross-column filtering compares candidate information between columns within a row. Candidate-type scoring visits neighborhoods and aggregates support across rows. The implementation's limits on retrieved entities and serialized columns constrain these operations in the evaluated setting. The external Wikidata index is prepared with Elasticsearch and supplies lexical retrieval scores.
 
-The original analysis denotes maximum table rows and columns by $R$ and $C$, the number of tables by $T$, the maximum retrieved entities by $E$, and their maximum one-hop neighborhood size by $N$. It reports the preprocessing expression
+Let $n_R$ and $n_C$ be the maximum numbers of rows and columns per table, $n_T$ the number of tables, $n_E$ the maximum number of retrieved entities per mention, and $n_N$ their maximum one-hop neighborhood size. In these count symbols, the original analysis reports the preprocessing expression
 \begin{equation}
-O\!\left(RCE(N+CET)\right).
+O\!\left(n_R n_C n_E(n_N+n_C n_E n_T)\right).
 \label{eq:kglink:preprocessing}
 \end{equation}
 Neighborhood aggregation and cross-column candidate filtering contribute to preprocessing. Increasing the candidate-set limit adds graph work even when the encoder input remains capped.
@@ -240,7 +240,7 @@ The modified VizNet corpus targets column annotation rather than the full range 
 
 The data are split into training, validation, and testing portions in the ratio 7:1:2 while maintaining each class's original sample proportion. Each experiment is averaged over three runs. Accuracy measures exact label prediction, and weighted F1 weights class-level performance by sample frequency.
 
-Training uses AdamW, an initial learning rate of $3\times10^{-5}$, and $\epsilon=10^{-6}$. The learning rate decays linearly without warm-up. The reported maximum training lengths are 50 epochs on SemTab and 20 on VizNet, with early stopping. Batch size is 16 for both datasets; dropout is 0.1 for SemTab and 0.2 for VizNet. The implementation uses PyTorch and the Transformers library on an NVIDIA Tesla V100 GPU.
+Training uses AdamW with optimizer parameter $\epsilon=10^{-6}$ and an initial learning rate of $3\times10^{-5}$. The learning rate decays linearly without warm-up. The reported maximum training lengths are 50 epochs on SemTab and 20 on VizNet, with early stopping. Batch size is 16 for both datasets; dropout is 0.1 for SemTab and 0.2 for VizNet. The implementation uses PyTorch and the Transformers library on an NVIDIA Tesla V100 GPU.
 
 The baseline set includes MTab, TaBERT, Doduo, HNN, Sudowoodo, and RECA~\cite{kglink-2021_mtab4wikidata,kglink-yin2020tabert,kglink-suhara2022annotating,kglink-chen2019learning,kglink-wang2022sudowoodo,kglink-sun2023reca}. TaBERT and Doduo use KGLink's experimental settings. HNN and RECA follow their original settings. Sudowoodo receives the full labeled training set in this comparison. VizNet labels are translated to Wikidata entities for MTab, and MTab's weighted F1 is unreported because of the difference in problem definition.
 
@@ -279,7 +279,7 @@ The dataset dependence is also visible in MTab's results. Its accuracy is 89.10 
 
 \begin{table}[tbp]
 \centering
-\caption{Reported KGLink variant scores. The table reproduces the numeric columns and variant names of the original ablation table.}
+\caption{Reported KGLink variant scores. The abbreviations $w/o\ msk$, $w/o\ ct$, and $w/o\ fv$ denote variants without masked representation generation, KG-derived information, and the feature vector, respectively. The table reproduces the numeric columns and variant names of the original ablation table.}
 \label{tab:kglink:ablation}
 \begin{tabular}{lrrrr}
 \toprule
@@ -327,7 +327,7 @@ Sudowoodo&96.21&67.72\\
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:kglink:no-kg} compares annotation accuracy without retrieved KG evidence. It obtains 97.04 numeric accuracy and 90.92 non-numeric accuracy. TaBERT and Doduo also achieve high values on this subset. The table encoder supports annotation when external graph evidence is absent.
+Table~\ref{tab:kglink:no-kg} compares annotation accuracy without retrieved KG evidence. KGLink obtains 97.04 numeric accuracy and 90.92 non-numeric accuracy. TaBERT and Doduo also achieve high values on this subset. The table encoder supports annotation when external graph evidence is absent.
 
 \subsection{Type Granularity in the Reported Cases}
 \label{sec:kglink:qualitative}
@@ -343,7 +343,7 @@ The Athlete example shows the same granularity gap. KGLink retains the graph des
 
 \begin{table}[tbp]
 \centering
-\caption{Reported comparison between linkage-ranked row selection and selection in original table order.}
+\caption{Reported comparison between linkage-ranked row selection and selection in original table order. The row budget $k$ is the number of retained rows.}
 \label{tab:kglink:row-filter}
 \begin{tabular}{lrrrr}
 \toprule
@@ -359,7 +359,7 @@ Original top-$k$ rows&85.93&84.39&96.14&95.97\\
 
 Table~\ref{tab:kglink:row-filter} shows that linkage-ranked rows improve annotation over taking the first rows on both datasets, with a larger change on SemTab. The filter also selects the cell used for the feature sequence, so the comparison measures both effects of row ranking.
 
-The parameter study considers $k=10,25,50$, and a condition labeled \emph{all}. The source describes \emph{all} as retaining at most 64 rows under its encoding configuration. The reported default is $k=25$, selected from this study. The original curves compare weighted F1 and time cost as the retained row budget changes. Figure~\ref{fig:kglink:row-budget} shows the measured relation between input selection, weighted F1, and time cost.
+The parameter study considers row budgets $k=10,25,50$, and a condition labeled \emph{all}. The source describes \emph{all} as retaining at most 64 rows under its encoding configuration. The reported default row budget is $k=25$, selected from this study. The original curves compare weighted F1 and time cost as the retained row budget changes. Figure~\ref{fig:kglink:row-budget} shows the measured relation between input selection, weighted F1, and time cost.
 
 \begin{figure}[tbp]
 \centering
@@ -380,7 +380,7 @@ The training-data study uses proportions $p=0.2,0.4,0.6,0.8,1.0$ while keeping t
 \subsection{Runtime in the Evaluated Configuration}
 \label{sec:kglink:runtime}
 
-Figure~\ref{fig:kglink:runtime} reproduces the original VizNet runtime chart. KGLink's reported training and inference times are 16.50 and 1.53 hours. The corresponding RECA values are 80.00 and 9.00 hours. The figure also shows methods with shorter measured times, including Doduo at 1.96 hours for training and 0.07 hours for inference. These measurements locate KGLink's annotation results within the costs of the evaluated implementations. Its use of external retrieval and a second training objective carries computation beyond the table encoder alone.
+Figure~\ref{fig:kglink:runtime} reproduces the original VizNet runtime chart. KGLink's reported training and inference times are 16.50 and 1.53 hours. The corresponding RECA values are 80.00 and 9.00 hours. The figure also shows methods with shorter measured times, including Doduo at 1.96 hours for training and 0.07 hours for inference. These results show the cost of KGLink's graph-augmented annotation. External retrieval and the auxiliary training objective add computation beyond the table encoder alone.
 
 The chart labels MTab's inference entry as N/A. Training and inference times describe different preparation and prediction procedures. The comparison uses VizNet and the original experimental hardware.
 
@@ -398,6 +398,6 @@ We proposed KGLink to supply missing table context and learn the correspondence 
 
 Removing either the masked representation task or KG information lowers the full BERT configuration's annotation scores. Linkage-based row selection also improves the results. On tables without retrieved KG evidence, the trained encoder continues to annotate from the table values.
 
-Knowledge coverage and annotation vocabulary remain material conditions. The graph-processing stage can use only entities and relations available to its linker and neighborhood retrieval. The supervised predictor learns the type set represented in training. The evaluated datasets use single-label column annotation and bounded table inputs.
+KGLink's external evidence is limited to the entities and relations available through linking and neighborhood retrieval. Its supervised predictor learns the training label set, and the experiments use single-label annotation with bounded table inputs.
 
-The next chapter studies a different classification problem, in which labels and examples arrive over successive rounds. It develops a task-specific graph that retrieves candidate labels and updates the index after each prediction.
+To support tasks without a suitable knowledge graph or sufficient fine-tuning data, we next investigate constructing a graph from task examples and retrieving candidate labels for a large language model. Chapter~\ref{ch:gorag} develops this approach for dynamic few-shot classification.

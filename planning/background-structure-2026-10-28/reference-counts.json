@@ -1,0 +1,14 @@
+{
+  "scope": "current eight chapters, abstract, and chapter tables",
+  "unique_entries": 127,
+  "independent_papers": 121,
+  "excluded_nonpapers": [
+    "agrag-tfidf",
+    "agrag-ragas2024",
+    "agrag-fastgraphrag",
+    "kglink-hassanzadeh_oktie_2019_3518539",
+    "mgrag-tech-report",
+    "mgrag-nanographrag"
+  ],
+  "missing_keys": []
+}

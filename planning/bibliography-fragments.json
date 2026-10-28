@@ -9,7 +9,7 @@
   },
   {
     "path": "bibliography/background.bib",
-    "sha256": "2b7e094bc1bda86660f36aa952577a9f5c49091c9de1c3c873b1211e1d771ffd"
+    "sha256": "6b495dd74b21eca17bd5aa589ade68ad1dbf090b8951714ea8f5516e79184683"
   },
   {
     "path": "bibliography/gorag.bib",
@@ -20,7 +20,11 @@
     "sha256": "b3598f8b6608bcabab1bb35ed40c80575aac1299c21c63944d40eb501e033214"
   },
   {
+    "path": "bibliography/literature-expansion.bib",
+    "sha256": "0d0163b5e203d48c26f8993127ca8d28c00926507a8f4bde6758a99411f73ce8"
+  },
+  {
     "path": "bibliography/mgrag.bib",
-    "sha256": "a19a1d4695059881c7d55cb49da37ce0188fb2610ec894806b714c5c237f7609"
+    "sha256": "492e489507fe828eee5f09e19db811d50862e4eeec79378ea186ddc2e07e6f96"
   }
 ]

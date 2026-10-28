@@ -1,0 +1,179 @@
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131826476-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-131826476-1');
+    </script>
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+  <!-- favicon -->
+  <link rel="icon" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon-16x16.png">
+  <link rel="icon" type="image/png" href="/img/favicon-32x32.png">
+
+<title>Atlas: Few-shot Learning with Retrieval Augmented Language Models</title>
+
+
+<link rel="alternate" type="application/rss+xml" href="/jmlr.xml" title="JMLR RSS">
+<link rel="stylesheet" type="text/css" href="/style.css">
+<style type="text/css">
+. {font-family:verdana,helvetica,sans-serif}
+a {text-decoration:none;color:#3030a0}
+
+#fixed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8em;
+    height: 100%;
+}
+body > #fixed {
+    position: fixed;
+}
+#content {
+    margin-top: 1em;
+    margin-left: 10em;
+    margin-right: 0.5em;
+}
+img.jmlr {
+    width: 7em;
+}
+img.rss {
+    width: 2em;
+}
+
+ul li {
+    margin-bottom: 0.5em;
+}
+</style>
+
+
+ <!-- MathJax -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Google Scholar Meta -->
+<meta name="citation_title" content="Atlas: Few-shot Learning with Retrieval Augmented Language Models">
+<meta name="citation_author" content="Gautier Izacard">
+<meta name="citation_author" content="Patrick Lewis">
+<meta name="citation_author" content="Maria Lomeli">
+<meta name="citation_author" content="Lucas Hosseini">
+<meta name="citation_author" content="Fabio Petroni">
+<meta name="citation_author" content="Timo Schick">
+<meta name="citation_author" content="Jane Dwivedi-Yu">
+<meta name="citation_author" content="Armand Joulin">
+<meta name="citation_author" content="Sebastian Riedel">
+<meta name="citation_author" content="Edouard Grave">
+<meta name="citation_journal_title" content="Journal of Machine Learning Research">
+<meta name="citation_volume" content="24">
+<meta name="citation_issue" content="251">
+<meta name="citation_firstpage" content="1">
+<meta name="citation_lastpage" content="43">
+<meta name="citation_pdf_url" content="http://jmlr.org/papers/volume24/23-0037/23-0037.pdf">
+<meta name="citation_publication_date" content="2023">
+<meta name="citation_public_url" content="http://jmlr.org/papers/v24/23-0037.html">
+<meta name="citation_abstract_html_url" content="http://jmlr.org/papers/v24/23-0037.html">
+<meta name="citation_issn" content="1533-7928">
+
+
+
+
+</head>
+<body>
+
+  <div id="fixed">
+  <br>
+  <a align="right" href="/" target=_top><img align="right" class="jmlr" src="/img/jmlr.jpg" border="0"></a> 
+  <p><br><br>
+  <p align="right"> <A href="/"> Home Page </A> 
+
+  <p align="right"> <A href="/papers"> Papers </A> 
+
+  <p align="right" > <A href="/author-info.html">  Submissions  </A> 
+    
+
+  <p align="right"> <A href="/news.html"> News </A> 
+
+  <!--<p align="right"> <A href="/scope.html"> Scope </A>-->
+
+  <p align="right" > <A href="/editorial-board.html"> Editorial Board </A> 
+
+    
+
+    <p align="right" > <A href="/special_issues/"> Special Issues </A> 
+
+        
+    
+  <p align="right"> <A href="/mloss">Open Source Software</A>
+
+  <p align="right"> <A href="https://proceedings.mlr.press/"> Proceedings (PMLR)</A>
+
+  <p align="right"> <A href="https://data.mlr.press/"> Data (DMLR) </A>
+      
+  <p align="right"> <A href="/tmlr"> Transactions (TMLR) </A>
+
+  <p align="right"> <A href="/search-jmlr.html"> Search </A>
+
+  <p align="right"> <A href="/stats.html">Statistics</A>
+
+  <p align="right"> <A href="/manudb"> Login </A></p>
+
+   <p align="right"> <A href="/faq.html">Frequently Asked Questions </A></p>
+                                     
+  <p align="right"> <A href="/contact.html"> Contact Us </A></p>
+
+  <br><br>
+  <p align="right"> <A href="/jmlr.xml"> 
+  <img src="/img/RSS.gif" class="rss" alt="RSS Feed">
+  </A>
+
+
+
+  </div>
+
+<div id="content">
+    
+<h2> Atlas: Few-shot Learning with Retrieval Augmented Language Models </h2>
+
+<p><b><i>Gautier Izacard, Patrick Lewis, Maria Lomeli, Lucas Hosseini, Fabio Petroni, Timo Schick, Jane Dwivedi-Yu, Armand Joulin, Sebastian Riedel, Edouard Grave</i></b>; 24(251):1&minus;43, 2023.</p>
+
+
+<h3>Abstract</h3>
+<p class="abstract">
+
+Large language models have shown impressive few-shot results on a wide range of tasks. However, when knowledge is key for such results, as is the case for tasks such as question answering and fact checking, massive parameter counts to store knowledge seem to be needed. Retrieval-augmented models are known to excel at knowledge intensive tasks without the need for as many parameters, but it is unclear whether they work in few-shot settings. In this work we present Atlas, a carefully designed and pre-trained retrieval-augmented language model able to learn knowledge intensive tasks with very few training examples. We perform evaluations on a wide range of tasks, including MMLU, KILT and Natural Questions, and study the impact of the content of the document index, showing that it can easily be updated. Notably, Atlas reaches over 42% accuracy on Natural Questions using only 64 examples, outperforming a 540B parameter model by 3% despite having 50x fewer parameters.
+
+</p>
+
+
+
+<font color="gray"><p>[abs]</font>[<a id="pdf" target="_blank" href="/papers/volume24/23-0037/23-0037.pdf">pdf</a>][<a id="bib" href="/papers/v24/23-0037.bib">bib</a>]
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    [<a href="https://github.com/facebookresearch/atlas">code</a>]
+    
+
+
+
+                      
+    <table width="100%"> <tr>
+    <td
+    align="right"><font size="-1">&copy <a target="_top"
+    href="https://www.jmlr.org">JMLR</a> 2023. 
+(<a href="https://github.com/JmlrOrg/v24/tree/main/23-0037">edit</a>, <a href="http://jmlr.org/beta/papers/v24/23-0037.html">beta</a>)
+</td> </tr> </table>
+    
+
+</div>
+<!-- for mastodon verification -->
+<a style="font-size: 0" rel="me" href="https://sigmoid.social/@jmlr">Mastodon</a>
+</body>
+</html>

@@ -1,21 +1,25 @@
 # Thesis writing progress
 
-Updated 2026-10-27 (Asia/Shanghai). The reference-led full-thesis prose revision is complete in the existing source files. Reference: `sample_thesis/yushi_sun.pdf`, Yushi Sun's 2025 CSE doctoral thesis supervised by Lei Chen.
+Updated 2026-10-28 (Asia/Shanghai), after the Section 2.1 knowledge-structures rewrite.
 
-## Current source state
+## Current manuscript
 
-- Main entry `main.tex`; Chapters 1–8 revised in place.
-- 198 applied prose edits. Narrative words 25,604 to 19,975; headings/captions included total 21,917.
-- Abstract remains 206 words without metric values or backbone configurations; acknowledgments remain unchanged.
-- No sentence-level dashes or rhetorical colons. Necessary scientific assumptions, update timing, metric definitions, source discrepancies and missing b metadata remain.
-- All source-preservation checks passed. See `review-sun-style-2026-10-27/verification.json` and the [full edit review](review-sun-style-2026-10-27/REVIEW.md).
+The research progression remains existing-KG enrichment and supervised adaptation in KGLink, task-data graph construction and prediction without fine-tuning in GORAG, then connected textual evidence in AGRAG and query-aware multimodal matching in MGRAG.
 
-## Compilation state
+Section 2.1 is now *Knowledge Structures for Language Models*. It introduces information sources, graph organization, entity linking, evidence selection, model inputs and task adaptation. The chapter opening and transition to table annotation follow this organization. Sections 2.2 onward, the abstract, and chapters 1 and 3–8 are unchanged in this revision.
 
-The existing MacTeX installation is usable. The project build now resolves required program paths even with a restricted PATH and retains XeLaTeX/Biber. A full XeLaTeX rebuild and explicit Biber pass completed. `main.pdf` and `thesis.pdf` are identical updated 115-page files. Log checks, PDF geometry/font checks, all-page contact-sheet review and detailed abstract/algorithm review passed. See `compile-repair-2026-10-27/REPORT.md` and `FINAL_QA.md`.
+The rewrite removes nine introductory citations and adds seven directly related publications, three from original paper libraries and four externally sourced. The current manuscript cites **127 unique entries**, including **121 independent research papers** under the same six-entry exclusion rule. ch01/ch02 cite 22/82 distinct works. All seven additions have primary-source verification and paragraph-level support. No new Scholar coverage is claimed.
 
-The app’s independent preview still fails at its TeX Live/Biber stages. This does not prevent `make` or the repaired project build script from producing the updated PDF. The existing editor remains open.
+The latest review, source checks and citation provenance are in [the current review](background-structure-2026-10-28/REVIEW.md). The preceding [literature expansion](reference-expansion-2026-10-28/REVIEW.md) and [wording review](citations-wording-2026-10-28/REVIEW.md) remain historical checkpoints.
 
-## Remaining items
+Narrative words: **22,276**. Including headings/captions: **24,218**. Abstract: **213 words**. Labels, math, figures, tables, algorithms, methods and experiments are preserved.
 
-Real department-head identity, signatures/dates, title-page numeral clarification and fixed MGRAG b metadata remain author/institutional items listed in `AUTHOR_ACTIONS.md`.
+## Compilation and review
+
+`main.pdf` and `thesis.pdf` are identical 125-page files. The clean XeLaTeX/Biber build and final layout build passed the project log checks. All pages were rendered and automatically inspected. Visual review covered the rewritten section, chapter transitions, contents and relevant bibliography pages. Section 2.1 occupies printed pp. 9–10 and Section 2.2 starts on p. 11. Chapter starts remain unchanged. See `CHAPTER_COUNTS.md` and `FINAL_QA.md`.
+
+The app's independent preview remains outside this revision; its earlier failure is documented in `compile-repair-2026-10-27/REPORT.md`.
+
+## Author review
+
+The manuscript is ready for author review, especially the information-source and model-input explanations in Section 2.1. Real department-head identity, signatures/dates, title-page numeral clarification and source-specific items remain in `AUTHOR_ACTIONS.md`.

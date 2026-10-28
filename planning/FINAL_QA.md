@@ -1,23 +1,29 @@
 # Current source QA and PDF checkpoint
 
-Updated 2026-10-27 (Asia/Shanghai), after repairing the project compilation entry point.
+Updated 2026-10-28 (Asia/Shanghai), after the Section 2.1 knowledge-structures rewrite.
 
-## Sources and compilation
+## Source and citation verification
 
-The 198 prose edits across Chapters 1–8 are included in the updated PDF. Narrative words: 19,975; including headings/captions: 21,917; abstract: 206. Source-preservation checks remain at `review-sun-style-2026-10-27/verification.json`. This repair changed the build script, not the manuscript or experimental content.
+Section 2.1 and the chapter opening were rewritten; Sections 2.2 onward and all other narrative files remain byte-identical to this revision's baseline. All labels, inline math, displayed formulas, algorithms, figures and tables are preserved. See `background-structure-2026-10-28/source-checks.json`.
 
-The installed TeX Live 2023 provides XeLaTeX, latexmk 4.79 and Biber 2.19. Environment diagnosis and a TeX Live smoke test passed. An explicit Biber pass and full XeLaTeX rebuild succeeded. The repaired build script was verified with PATH restricted to `/usr/bin:/bin`; it explicitly locates the active MacTeX tools and logs their paths. Logs: `compile-repair-2026-10-27/terminal-build.txt`, `biber-rebuild.txt`, `repaired-build.txt`.
+The current manuscript cites **127 unique entries**, comprising **121 independent research papers** after the same six software/data/encyclopedia/duplicate-report exclusions. The Biber bibliography contains 127 entries, matching the final PDF reference [127]. ch01/ch02 cite 22/82 distinct works. The merged database contains 138 works and 31 retained aliases; uncited entries do not inflate the count.
 
-Final logs contain no undefined citations/references, missing characters, duplicate labels/destinations, Biber warning/error, LaTeX error or overfull box. Existing non-fatal warnings concern the vendored document-class path/name, an unused global option, and siunitx/physics integration.
+Seven directly related publications replace nine removed introductory citations. Three additions come from original author bib libraries; four come from official EMNLP, AAAI and TACL records. The survey and graph prompting sources were also checked against primary records. See [the current review](background-structure-2026-10-28/REVIEW.md) and its citation ledger. Scholar coverage remains limited to the preceding literature expansion's documented partial check.
 
-## Updated exported PDF
+## Compilation
 
-`main.pdf` and `thesis.pdf` have identical SHA-256 `2e0fa332ed7ffd94111d25b45640d4fcf60e24baa97b90d277ae13c9f3941a87`. Total 115 pages: 14 preliminary, 96 body, 5 references. All pages are A4 and unrotated; all 95 fonts are embedded. No empty text page or body-margin violation was detected. All 115 pages were rendered and reviewed in six contact sheets; the abstract and algorithm were also inspected at higher resolution. Tables, figures, contents, bibliography and page numbers render without clipping or overlap. Question marks in the KGLink example figure are intentional missing-value placeholders, not unresolved references.
+The initial incremental build retained a stale BibLaTeX rerun flag. A clean rebuild through the `latex-paper-en` skill's `compile.py` resolved it. The final layout build passed with shell escape disabled. The final log has no undefined references/citations, missing characters, duplicate labels/destinations, overfull boxes or LaTeX errors. Biber has no warnings or errors. Existing non-fatal class/package notices remain. Logs: `background-structure-2026-10-28/compile-clean.log` and `compile-layout.log`.
 
-Original figure limitations remain recorded in `qa/final/typography-summary.json`: some raster instances are 224–257 ppi, and 18 embedded fonts from source graphics have no Unicode map. No graphics were replaced or upsampled. Chapter page ranges are regenerated in `CHAPTER_COUNTS.md`.
+## Reading copy and visual inspection
 
-## App preview
+`main.pdf` and `thesis.pdf` are identical. SHA-256: `11951828b2f94db09b2b8ceefb5c0b61c3bb30ab4a388a20b86ecec2ac556d82`.
 
-The built-in compiler was retried after the successful project build. It still reports TeX Live exit -6 and Tectonic’s external Biber program-not-found error. This independent preview is not certified as repaired. The app helper also defaults to pdfLaTeX in a direct reproduction, which fails on this thesis’s unicode-math package. Details and bounded conclusions: `compile-repair-2026-10-27/REPORT.md`; retry: `built-in-retry.json` in that directory. No signed app bundle or system-wide environment was modified.
+The PDF has **125 A4 pages**, comprising 14 preliminary, 102 body and 9 reference pages. All 95 font records are embedded. All pages were rendered and automatically inspected; the approximate margin check reported no flags with the current explicitly provisioned PDF dependencies.
 
-The previous 128-page PDF checkpoint is historical. The October 25 portable ZIP also predates the latest manuscript. Institutional and scientific author items remain in `AUTHOR_ACTIONS.md` and the existing evidence ledgers.
+Enlarged visual review covered physical pp. 6, 23–25, 117–119 and 125, with chapter-level review of the second contact sheet. The Section 2.1 heading fits on one line. Its closing transition stays on printed p. 10; Section 2.2 starts on p. 11. No clipping, overlap or broken citations was observed in these reviewed pages. Actual chapter start pages remain unchanged.
+
+Current counts are **22,276 narrative words**, **24,218 including headings/captions**, and **213 abstract words**. Renders and page maps are in `planning/qa/final/`; the current revision's `final-validation.json` and `chapter-counts.json` preserve the checkpoint.
+
+## Historical checkpoints and author items
+
+The preceding QA is preserved in `background-structure-2026-10-28/before/planning/FINAL_QA.md`. Earlier literature and wording records remain historical checkpoints. Institutional fields and source-specific items remain in `AUTHOR_ACTIONS.md` and evidence ledgers. The app's earlier independent preview issue remains documented in `compile-repair-2026-10-27/REPORT.md`; this checkpoint verifies the local compiled PDF.

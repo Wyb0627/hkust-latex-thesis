@@ -1,0 +1,1116 @@
+[
+  {
+    "key": "lit-deng2022turl",
+    "title": "TURL: table understanding through representation learning",
+    "year": "2020",
+    "venue": "VLDB",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/KGLink.bib",
+    "original_key": "deng2022turl",
+    "primary_url": "https://api.crossref.org/works/10.14778/3430915.3430921",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/deng2022turl.json",
+    "metadata_source": "Publisher-deposited Crossref record",
+    "locations": [
+      {
+        "file": "chapter/ch01-introduction.tex",
+        "line": 4,
+        "paragraph": "\\section{Motivation}\n\\label{sec:introduction:motivation}\nLanguage models utilize information in tables, text, and images to make predictions and respond to queries. Table pre-training and visual instruction tuning have extended their applications beyond plain text~\\cite{lit-deng2022turl,lit-liu2023llava}. \nHowever, the required information is often incomplete or distributed across sources~\\cite{bg-reca,bg-mmqa}. A table may list people without identifying their occupations. A classification task may introduce labels absent from its initial training examples. A question may require facts from several passages or a relationship expressed jointly by text and images. \nHence, selecting relevant evidence and preserving the relationships among facts are crucial real-world problems~\\cite{bg-hipporag}."
+      },
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 42,
+        "paragraph": "Table pre-training can encode additional structural information. TURL learns contextual representations of relational tables through self-supervised pre-training~\\cite{lit-deng2022turl}. TAPAS augments a language model with table-aware inputs and learns to answer questions through cell selection and aggregation~\\cite{lit-herzig2020tapas}. TableFormer introduces learned attention biases for table structure and table--text alignment while addressing sensitivity to row and column order~\\cite{lit-yang2022tableformer}. These designs show how serialization, structural biases, and pre-training tasks affect the table information available to a predictor."
+      }
+    ]
+  },
+  {
+    "key": "lit-cafarella2008webtables",
+    "title": "WebTables: exploring the power of tables on the web",
+    "year": "2008",
+    "venue": "VLDB",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/KGLink.bib",
+    "original_key": "cafarella2008webtables",
+    "primary_url": "https://api.crossref.org/works/10.14778/1453856.1453916",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/cafarella2008webtables.json",
+    "metadata_source": "Publisher-deposited Crossref record",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 36,
+        "paragraph": "WebTables demonstrated that relational tables extracted from the Web form a large collection of small databases and that corpus-wide schema statistics support table search and schema applications~\\cite{lit-cafarella2008webtables}. This setting motivates methods that recover semantics from cell values, surrounding columns, and other tables when a target table has limited metadata."
+      }
+    ]
+  },
+  {
+    "key": "lit-chen2019colnet",
+    "title": "ColNet: Embedding the Semantics of Web Tables for Column Type Prediction",
+    "year": "2019",
+    "venue": "AAAI",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/KGLink.bib",
+    "original_key": "chen2019colnet",
+    "primary_url": "https://ojs.aaai.org/index.php/AAAI/article/view/3765",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/chen2019colnet.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 46,
+        "paragraph": "ColNet combines knowledge-base-derived supervision with convolutional representations of cell and column semantics~\\cite{lit-chen2019colnet}. TCN models contextual information within and across Web tables through a table convolutional network~\\cite{lit-wang2021tcn}. Together with RECA, these approaches illustrate different uses of external context, from knowledge-base concepts to relationships among tables. KGLink instead selects graph-derived descriptions for an encoder that learns the target annotation vocabulary."
+      }
+    ]
+  },
+  {
+    "key": "lit-wang2021tcn",
+    "title": "TCN: Table Convolutional Network for Web Table Interpretation",
+    "year": "2021",
+    "venue": "WWW",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/KGLink.bib",
+    "original_key": "wang2021tcn",
+    "primary_url": "https://api.crossref.org/works/10.1145/3442381.3450090",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/wang2021tcn.json",
+    "metadata_source": "Publisher-deposited Crossref record",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 46,
+        "paragraph": "ColNet combines knowledge-base-derived supervision with convolutional representations of cell and column semantics~\\cite{lit-chen2019colnet}. TCN models contextual information within and across Web tables through a table convolutional network~\\cite{lit-wang2021tcn}. Together with RECA, these approaches illustrate different uses of external context, from knowledge-base concepts to relationships among tables. KGLink instead selects graph-derived descriptions for an encoder that learns the target annotation vocabulary."
+      }
+    ]
+  },
+  {
+    "key": "lit-raffel2020exploring",
+    "title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer",
+    "year": "2020",
+    "venue": "JMLR",
+    "qualification": "Published journal article",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/KGLink.bib",
+    "original_key": "raffel2020exploring",
+    "primary_url": "https://jmlr.org/papers/v21/20-074.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/raffel2020exploring.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 25,
+        "paragraph": "Pre-training objectives shape how these representations are learned. XLNet uses a permutation-based autoregressive objective to capture context beyond a fixed left-to-right factorization~\\cite{lit-yang2019xlnet}. T5 formulates diverse language tasks through a shared text-to-text interface and studies pre-training objectives and transfer learning~\\cite{lit-raffel2020exploring}. These objectives determine the model's initial capabilities, while the downstream task determines the additional supervision and evidence it receives."
+      }
+    ]
+  },
+  {
+    "key": "lit-wang2020generalizing",
+    "title": "Generalizing from a Few Examples: A Survey on Few-shot Learning",
+    "year": "2020",
+    "venue": "CSUR",
+    "qualification": "Published journal article",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/GraphRAG_FSCIL.bib",
+    "original_key": "wang2020generalizing",
+    "primary_url": "https://api.crossref.org/works/10.1145/3386252",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/wang2020generalizing.json",
+    "metadata_source": "Publisher-deposited Crossref record",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 55,
+        "paragraph": "Few-shot learning studies prediction from limited labeled examples, often using experience from related tasks to support adaptation~\\cite{lit-wang2020generalizing}. The support set provides examples of the current classes, while the query set tests the resulting decisions. A method must specify which information is learned beforehand and which information becomes available for a new task."
+      }
+    ]
+  },
+  {
+    "key": "lit-wei2022chain",
+    "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+    "year": "2022",
+    "venue": "NeurIPS",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/GraphRAG_FSCIL.bib",
+    "original_key": "wei2022chain",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/9d5609613524ecf4f15af0f7b31abca4-Abstract-Conference.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/wei2022chain.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 134,
+        "paragraph": "Explicit structure also appears in generated reasoning. Chain-of-thought prompting supplies intermediate reasoning demonstrations, and Zero-shot-CoT uses a reasoning instruction without task-specific demonstrations~\\cite{lit-wei2022chain,lit-kojima2022large}. Plan-and-Solve prompting first develops a plan and then carries out its subtasks~\\cite{lit-wang2023plan}. These approaches organize how a model produces intermediate steps."
+      }
+    ]
+  },
+  {
+    "key": "lit-brown2020language",
+    "title": "Language Models are Few-Shot Learners",
+    "year": "2020",
+    "venue": "NeurIPS",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/GraphRAG_FSCIL.bib",
+    "original_key": "brown2020language",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2020/hash/1457c0d6bfcb4967418bfb8ac142f64a-Abstract.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/brown2020language.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch01-introduction.tex",
+        "line": 14,
+        "paragraph": "KGLink's use of external knowledge depends on the coverage of the existing graph and the labeled data available for fine-tuning. When a suitable graph is unavailable or new labels arrive with few examples~\\cite{gorag-xia-etal-2021-incremental}, the system needs another way to obtain and use knowledge. Few-shot prompting shows that a language model can adapt its predictions through input examples~\\cite{lit-brown2020language}, while meta-learning studies adaptation from limited supervision~\\cite{lit-finn2017model}. These approaches motivate us to explore using a large language model's semantic capabilities with a graph constructed from task data. To support this setting, we propose GORAG for dynamic few-shot text classification. GORAG constructs weighted keyword--label relations, retrieves candidate labels by connecting query keywords, and updates the graph as new labels and texts arrive~\\cite{gorag-paper}. The system incorporates new information through index updates without requiring a predefined knowledge graph or model fine-tuning."
+      },
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 61,
+        "paragraph": "Large language models introduce another adaptation interface. GPT-3 demonstrates prediction from task descriptions and examples supplied in the prompt, without gradient updates for the demonstrated task~\\cite{lit-brown2020language}. GORAG uses a language model for this prediction role, but maintains keyword--label associations in an external graph. Its online updates change which label evidence is retrieved for subsequent queries."
+      }
+    ]
+  },
+  {
+    "key": "lit-liu2024lost",
+    "title": "Lost in the Middle: How Language Models Use Long Contexts",
+    "year": "2024",
+    "venue": "TACL",
+    "qualification": "Published journal article",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/GraphRAG_FSCIL.bib",
+    "original_key": "liu2024lost",
+    "primary_url": "https://aclanthology.org/2024.tacl-1.9/",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/liu2024lost.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 88,
+        "paragraph": "A larger context window does not ensure that all supplied evidence is used equally well. Lost in the Middle shows that answer performance can depend strongly on where relevant information occurs in a long input~\\cite{lit-liu2024lost}. Evidence selection and organization therefore remain relevant even when the model can accept additional passages."
+      }
+    ]
+  },
+  {
+    "key": "lit-finn2017model",
+    "title": "Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks",
+    "year": "2017",
+    "venue": "ICML",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/GraphRAG_FSCIL.bib",
+    "original_key": "finn2017model",
+    "primary_url": "https://proceedings.mlr.press/v70/finn17a.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/finn2017model.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch01-introduction.tex",
+        "line": 14,
+        "paragraph": "KGLink's use of external knowledge depends on the coverage of the existing graph and the labeled data available for fine-tuning. When a suitable graph is unavailable or new labels arrive with few examples~\\cite{gorag-xia-etal-2021-incremental}, the system needs another way to obtain and use knowledge. Few-shot prompting shows that a language model can adapt its predictions through input examples~\\cite{lit-brown2020language}, while meta-learning studies adaptation from limited supervision~\\cite{lit-finn2017model}. These approaches motivate us to explore using a large language model's semantic capabilities with a graph constructed from task data. To support this setting, we propose GORAG for dynamic few-shot text classification. GORAG constructs weighted keyword--label relations, retrieves candidate labels by connecting query keywords, and updates the graph as new labels and texts arrive~\\cite{gorag-paper}. The system incorporates new information through index updates without requiring a predefined knowledge graph or model fine-tuning."
+      },
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 57,
+        "paragraph": "Metric-based methods organize support information in a learned representation space. Matching Networks use an attention-based prediction over support examples, while Prototypical Networks compare query representations with class prototypes~\\cite{lit-vinyals2016matching,lit-snell2017prototypical}. Relation Networks learn a comparison function between examples~\\cite{lit-sung2018learning}. Model-agnostic meta-learning instead learns an initialization that supports adaptation through a small number of gradient updates~\\cite{lit-finn2017model}. The learned metric, comparison function, and initialization provide different mechanisms for using a small support set."
+      }
+    ]
+  },
+  {
+    "key": "lit-gidaris2018dynamic",
+    "title": "Dynamic Few-Shot Visual Learning Without Forgetting",
+    "year": "2018",
+    "venue": "CVPR",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/GraphRAG_FSCIL.bib",
+    "original_key": "gidaris2018dynamic",
+    "primary_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Gidaris_Dynamic_Few-Shot_Visual_CVPR_2018_paper.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/gidaris2018dynamic.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 59,
+        "paragraph": "An expanding label set adds the need to retain earlier categories. Dynamic Few-Shot Visual Learning studies recognizing novel categories while preserving base categories, and Attention Attractor Networks regularize the addition of new classifier weights in incremental few-shot learning~\\cite{lit-gidaris2018dynamic,lit-ren2019incremental}. These visual-learning settings establish related adaptation problems; incremental few-shot text classification introduces successive rounds of text labels and limited examples~\\cite{gorag-xia-etal-2021-incremental}."
+      }
+    ]
+  },
+  {
+    "key": "lit-ren2019incremental",
+    "title": "Incremental Few-Shot Learning with Attention Attractor Networks",
+    "year": "2019",
+    "venue": "NeurIPS",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/GraphRAG_FSCIL.bib",
+    "original_key": "ren2019incremental",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2019/hash/e833e042f509c996b1b25324d56659fb-Abstract.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/ren2019incremental.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 59,
+        "paragraph": "An expanding label set adds the need to retain earlier categories. Dynamic Few-Shot Visual Learning studies recognizing novel categories while preserving base categories, and Attention Attractor Networks regularize the addition of new classifier weights in incremental few-shot learning~\\cite{lit-gidaris2018dynamic,lit-ren2019incremental}. These visual-learning settings establish related adaptation problems; incremental few-shot text classification introduces successive rounds of text labels and limited examples~\\cite{gorag-xia-etal-2021-incremental}."
+      }
+    ]
+  },
+  {
+    "key": "lit-zhang2024knowgpt",
+    "title": "KnowGPT: Knowledge Graph based Prompting for Large Language Models",
+    "year": "2024",
+    "venue": "NeurIPS",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/GraphRAG_FSCIL.bib",
+    "original_key": "zhang2024knowgpt",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/0b8705a611ed1ce19cdb759031078705-Abstract-Conference.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/zhang2024knowgpt.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch01-introduction.tex",
+        "line": 10,
+        "paragraph": "The usefulness of external information depends on how it relates to the current task~\\cite{bg-reca,bg-dpr}. A person's occupation can help identify a table column, while a keyword's association with a label can help classify a text. For question answering, several facts may need to be combined to answer the query~\\cite{lit-trivedi2022interleaving}. Explicit knowledge structures represent these relationships and make them searchable when selecting information for a language model~\\cite{lit-zhang2024knowgpt}. This motivates our study of structural augmentation, from enriching model representations with existing knowledge graphs to constructing task-related graphs for retrieval and reasoning."
+      },
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 103,
+        "paragraph": "KnowGPT studies knowledge-graph-based prompting by extracting useful knowledge and constructing context-aware prompts~\\cite{lit-zhang2024knowgpt}. It makes graph knowledge available through the prompt supplied to a language model. This connects the retrieval decision to how the selected information is presented, complementing methods that rank nodes, return source passages, or summarize graph communities."
+      }
+    ]
+  },
+  {
+    "key": "lit-yang2019xlnet",
+    "title": "XLNet: Generalized Autoregressive Pretraining for Language Understanding",
+    "year": "2019",
+    "venue": "NeurIPS",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/GraphRAG_FSCIL.bib",
+    "original_key": "yang2019xlnet",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2019/hash/dc6a7e655d7e5840e66733e9ee67cc69-Abstract.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/yang2019xlnet.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 25,
+        "paragraph": "Pre-training objectives shape how these representations are learned. XLNet uses a permutation-based autoregressive objective to capture context beyond a fixed left-to-right factorization~\\cite{lit-yang2019xlnet}. T5 formulates diverse language tasks through a shared text-to-text interface and studies pre-training objectives and transfer learning~\\cite{lit-raffel2020exploring}. These objectives determine the model's initial capabilities, while the downstream task determines the additional supervision and evidence it receives."
+      }
+    ]
+  },
+  {
+    "key": "lit-borgeaud2022improving",
+    "title": "Improving Language Models by Retrieving from Trillions of Tokens",
+    "year": "2022",
+    "venue": "ICML",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/VLDB_MGRAG/pvldbstyle-master/anyrag.bib",
+    "original_key": "borgeaud2022improving",
+    "primary_url": "https://proceedings.mlr.press/v162/borgeaud22a.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/borgeaud2022improving.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 68,
+        "paragraph": "Retrieval can also participate in model training. REALM trains a language model with a latent knowledge retriever, RETRO conditions generation on chunks retrieved from a large text collection, and Atlas studies few-shot knowledge-intensive tasks with a pre-trained retrieval-augmented model~\\cite{lit-guu2020retrieval,lit-borgeaud2022improving,lit-izacard2023atlas}. These systems make the retrieval source part of the model's information supply, while differing in their training objectives and task adaptation."
+      }
+    ]
+  },
+  {
+    "key": "lit-zhang2023h2o",
+    "title": "H2O: Heavy-Hitter Oracle for Efficient Generative Inference of Large Language Models",
+    "year": "2023",
+    "venue": "NeurIPS",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/VLDB_MGRAG/pvldbstyle-master/anyrag.bib",
+    "original_key": "zhang2023h2o",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/6ceefa7b15572587b78ecfcebb2827f8-Abstract-Conference.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/zhang2023h2o.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch01-introduction.tex",
+        "line": 18,
+        "paragraph": "On the other hand, multimodal question answering requires joint reasoning over evidence from text and images~\\cite{bg-mmqa}. Different questions about the same image can require different visual details~\\cite{bg-stacked-attention,lit-antol2015vqa}. Instruction-aware visual extraction further makes the selected features depend on the requested task~\\cite{lit-dai2023instructblip}. A relation stated directly in a question may also correspond to several relations in the evidence.\nTo address these issues, we propose MGRAG to build query-specific evidence graphs and match query relations to semantic paths~\\cite{mgrag-paper}. Query-aware construction selects relevant facts, while path matching checks their correspondence to the requested relationships. The selected structure also guides the reuse and selective recomputation of the LLM's key-value (KV) cache when the evidence is processed for answering. Attention-based cache retention provides related approaches to limiting context-processing resources~\\cite{lit-zhang2023h2o,lit-liu2023scissorhands}."
+      },
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 157,
+        "paragraph": "Attention computation, cache retention, and cache recomputation address different costs. FlashAttention reduces memory traffic through an IO-aware implementation of exact attention~\\cite{lit-dao2022flashattention}. H2O retains a combination of recent and heavily attended tokens, while Scissorhands exploits persistent token importance to compress the KV cache~\\cite{lit-zhang2023h2o,lit-liu2023scissorhands}. These retention policies decide which states remain available; selective recomputation decides which available states to refresh when the context changes."
+      }
+    ]
+  },
+  {
+    "key": "lit-liu2021role",
+    "title": "Role-Aware Modeling for N-ary Relational Knowledge Bases",
+    "year": "2021",
+    "venue": "WWW",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/reference.bib",
+    "original_key": "liu2021role",
+    "primary_url": "https://api.crossref.org/works/10.1145/3442381.3449874",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/liu2021role.json",
+    "metadata_source": "Publisher-deposited Crossref record",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 178,
+        "paragraph": "Related work represents facts with more than two participating entities in several ways. NaLP models the relatedness among role--value pairs, GETD extends tensor decomposition to n-ary relational knowledge bases, and RAM learns role-aware representations~\\cite{lit-guan2019link,lit-liu2020generalizing,lit-liu2021role}. These representations expose the roles occupied by entities within a fact."
+      }
+    ]
+  },
+  {
+    "key": "lit-guan2019link",
+    "title": "Link Prediction on N-ary Relational Data",
+    "year": "2019",
+    "venue": "WWW",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/reference.bib",
+    "original_key": "guan2019link",
+    "primary_url": "https://api.crossref.org/works/10.1145/3308558.3313414",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/guan2019link.json",
+    "metadata_source": "Publisher-deposited Crossref record",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 178,
+        "paragraph": "Related work represents facts with more than two participating entities in several ways. NaLP models the relatedness among role--value pairs, GETD extends tensor decomposition to n-ary relational knowledge bases, and RAM learns role-aware representations~\\cite{lit-guan2019link,lit-liu2020generalizing,lit-liu2021role}. These representations expose the roles occupied by entities within a fact."
+      }
+    ]
+  },
+  {
+    "key": "lit-liu2020generalizing",
+    "title": "Generalizing Tensor Decomposition for N-ary Relational Knowledge Bases",
+    "year": "2020",
+    "venue": "WWW",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/reference.bib",
+    "original_key": "liu2020generalizing",
+    "primary_url": "https://api.crossref.org/works/10.1145/3366423.3380188",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/liu2020generalizing.json",
+    "metadata_source": "Publisher-deposited Crossref record",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 178,
+        "paragraph": "Related work represents facts with more than two participating entities in several ways. NaLP models the relatedness among role--value pairs, GETD extends tensor decomposition to n-ary relational knowledge bases, and RAM learns role-aware representations~\\cite{lit-guan2019link,lit-liu2020generalizing,lit-liu2021role}. These representations expose the roles occupied by entities within a fact."
+      }
+    ]
+  },
+  {
+    "key": "lit-kazemi2018simple",
+    "title": "SimplE Embedding for Link Prediction in Knowledge Graphs",
+    "year": "2018",
+    "venue": "NeurIPS",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/reference.bib",
+    "original_key": "kazemi2018simple",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2018/hash/b2ab001909a8a6f04b51920306046ce5-Abstract.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/kazemi2018simple.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 15,
+        "paragraph": "Other scoring functions capture different relational patterns. ComplEx uses complex-valued factorization to model symmetric and antisymmetric relations, and SimplE uses paired head and tail representations with inverse relations~\\cite{lit-trouillon2016complex,lit-kazemi2018simple}. ConvE introduces convolutional interactions for link prediction~\\cite{lit-dettmers2018convolutional}. Their embedding scores predict graph facts; later retrieval stages must still decide which facts are useful for a language-model task."
+      }
+    ]
+  },
+  {
+    "key": "lit-guan2020neuinfer",
+    "title": "NeuInfer: Knowledge Inference on N-ary Facts",
+    "year": "2020",
+    "venue": "ACL",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/reference.bib",
+    "original_key": "guan2020neuinfer",
+    "primary_url": "https://aclanthology.org/2020.acl-main.546/",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/guan2020neuinfer.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 180,
+        "paragraph": "NeuInfer represents a primary triple together with auxiliary attribute--value descriptions and studies inference from complete or partial facts~\\cite{lit-guan2020neuinfer}. HAHE combines global hypergraph structure with local sequential representations of hyper-relational facts~\\cite{lit-luo2023hahe}. These designs motivate examining both information within a fact and information received from the wider graph, the two aspects studied below."
+      }
+    ]
+  },
+  {
+    "key": "lit-wang2014knowledge",
+    "title": "Knowledge Graph Embedding by Translating on Hyperplanes",
+    "year": "2014",
+    "venue": "AAAI",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/reference.bib",
+    "original_key": "wang2014knowledge",
+    "primary_url": "https://ojs.aaai.org/index.php/AAAI/article/view/8870",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/wang2014knowledge.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 13,
+        "paragraph": "Knowledge-graph embedding models learn vector representations for predicting missing relations. TransE represents a relation as a translation between entity embeddings, while TransH applies translation after projection onto a relation-specific hyperplane~\\cite{lit-bordes2013translating,lit-wang2014knowledge}. These models make different assumptions about how one relation can connect multiple entities."
+      }
+    ]
+  },
+  {
+    "key": "lit-bordes2013translating",
+    "title": "Translating Embeddings for Modeling Multi-relational Data",
+    "year": "2013",
+    "venue": "NeurIPS",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/reference.bib",
+    "original_key": "bordes2013translating",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2013/hash/1cecc7a77928ca8133fa24680a88d2f9-Abstract.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/bordes2013translating.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 13,
+        "paragraph": "Knowledge-graph embedding models learn vector representations for predicting missing relations. TransE represents a relation as a translation between entity embeddings, while TransH applies translation after projection onto a relation-specific hyperplane~\\cite{lit-bordes2013translating,lit-wang2014knowledge}. These models make different assumptions about how one relation can connect multiple entities."
+      }
+    ]
+  },
+  {
+    "key": "lit-dettmers2018convolutional",
+    "title": "Convolutional 2D Knowledge Graph Embeddings",
+    "year": "2018",
+    "venue": "AAAI",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/reference.bib",
+    "original_key": "dettmers2018convolutional",
+    "primary_url": "https://ojs.aaai.org/index.php/AAAI/article/view/11573",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/dettmers2018convolutional.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 15,
+        "paragraph": "Other scoring functions capture different relational patterns. ComplEx uses complex-valued factorization to model symmetric and antisymmetric relations, and SimplE uses paired head and tail representations with inverse relations~\\cite{lit-trouillon2016complex,lit-kazemi2018simple}. ConvE introduces convolutional interactions for link prediction~\\cite{lit-dettmers2018convolutional}. Their embedding scores predict graph facts; later retrieval stages must still decide which facts are useful for a language-model task."
+      }
+    ]
+  },
+  {
+    "key": "lit-luo2023hahe",
+    "title": "HAHE: Hierarchical Attention for Hyper-Relational Knowledge Graphs in Global and Local Level",
+    "year": "2023",
+    "venue": "ACL",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/reference.bib",
+    "original_key": "luo2023hahe",
+    "primary_url": "https://aclanthology.org/2023.acl-long.450/",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/luo2023hahe.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 180,
+        "paragraph": "NeuInfer represents a primary triple together with auxiliary attribute--value descriptions and studies inference from complete or partial facts~\\cite{lit-guan2020neuinfer}. HAHE combines global hypergraph structure with local sequential representations of hyper-relational facts~\\cite{lit-luo2023hahe}. These designs motivate examining both information within a fact and information received from the wider graph, the two aspects studied below."
+      }
+    ]
+  },
+  {
+    "key": "lit-trouillon2016complex",
+    "title": "Complex Embeddings for Simple Link Prediction",
+    "year": "2016",
+    "venue": "ICML",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/reference.bib",
+    "original_key": "trouillon2016complex",
+    "primary_url": "https://proceedings.mlr.press/v48/trouillon16.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/trouillon2016complex.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 15,
+        "paragraph": "Other scoring functions capture different relational patterns. ComplEx uses complex-valued factorization to model symmetric and antisymmetric relations, and SimplE uses paired head and tail representations with inverse relations~\\cite{lit-trouillon2016complex,lit-kazemi2018simple}. ConvE introduces convolutional interactions for link prediction~\\cite{lit-dettmers2018convolutional}. Their embedding scores predict graph facts; later retrieval stages must still decide which facts are useful for a language-model task."
+      }
+    ]
+  },
+  {
+    "key": "lit-hamilton2017inductive",
+    "title": "Inductive Representation Learning on Large Graphs",
+    "year": "2017",
+    "venue": "NeurIPS",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/GFM4Graph/GFM.bib",
+    "original_key": "hamilton2017inductive",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2017/hash/5dd9db5e033da9c6fb5ba83c7a7ebea9-Abstract.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/hamilton2017inductive.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 21,
+        "paragraph": "Graph encoders can also learn how to aggregate neighborhood information. GraphSAGE samples and aggregates node features to generate representations for previously unseen nodes~\\cite{lit-hamilton2017inductive}. This inductive computation differs from storing a separately trained embedding for every indexed entity. The choice affects how an encoder can receive information when a graph grows."
+      }
+    ]
+  },
+  {
+    "key": "lit-wang2023can",
+    "title": "Can Language Models Solve Graph Problems in Natural Language?",
+    "year": "2023",
+    "venue": "NeurIPS",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/GFM4Graph/GFM.bib",
+    "original_key": "wang2023can",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/622afc4edf2824a1b6aaf5afe153fa93-Abstract-Conference.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/wang2023can.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 138,
+        "paragraph": "The NLGraph study evaluates graph problems expressed in natural language and finds that language-model performance depends on problem complexity and graph presentation~\\cite{lit-wang2023can}. This motivates specifying which structural operations are performed by graph algorithms and which decisions are left to a language model. In our retrieval pipelines, graph construction and selection define the evidence passed to the final predictor."
+      }
+    ]
+  },
+  {
+    "key": "lit-kojima2022large",
+    "title": "Large Language Models are Zero-Shot Reasoners",
+    "year": "2022",
+    "venue": "NeurIPS",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CoT Survey/sample-base.bib",
+    "original_key": "kojima2022large",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/8bb0d291acd4acf06ef112099c16f326-Abstract-Conference.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/kojima2022large.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 134,
+        "paragraph": "Explicit structure also appears in generated reasoning. Chain-of-thought prompting supplies intermediate reasoning demonstrations, and Zero-shot-CoT uses a reasoning instruction without task-specific demonstrations~\\cite{lit-wei2022chain,lit-kojima2022large}. Plan-and-Solve prompting first develops a plan and then carries out its subtasks~\\cite{lit-wang2023plan}. These approaches organize how a model produces intermediate steps."
+      }
+    ]
+  },
+  {
+    "key": "lit-wang2023plan",
+    "title": "Plan-and-Solve Prompting: Improving Zero-Shot Chain-of-Thought Reasoning by Large Language Models",
+    "year": "2023",
+    "venue": "ACL",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CoT Survey/sample-base.bib",
+    "original_key": "wang2023plan",
+    "primary_url": "https://aclanthology.org/2023.acl-long.147/",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/wang2023plan.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 134,
+        "paragraph": "Explicit structure also appears in generated reasoning. Chain-of-thought prompting supplies intermediate reasoning demonstrations, and Zero-shot-CoT uses a reasoning instruction without task-specific demonstrations~\\cite{lit-wei2022chain,lit-kojima2022large}. Plan-and-Solve prompting first develops a plan and then carries out its subtasks~\\cite{lit-wang2023plan}. These approaches organize how a model produces intermediate steps."
+      }
+    ]
+  },
+  {
+    "key": "lit-yao2024tree",
+    "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+    "year": "2023",
+    "venue": "NeurIPS",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CoT Survey/sample-base.bib",
+    "original_key": "yao2024tree",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/271db9922b8d1f4dd7aaef84ed5ac703-Abstract-Conference.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/yao2024tree.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 136,
+        "paragraph": "Tree of Thoughts searches over alternative intermediate thoughts, while Graph of Thoughts allows dependencies and combinations among generated information units~\\cite{lit-yao2024tree,lit-besta2024graph}. Their nodes represent model-generated reasoning states. In an evidence graph, nodes and edges instead describe information extracted or indexed from task data. Combining a reasoning structure with retrieved facts therefore requires tracking the source of each information item."
+      }
+    ]
+  },
+  {
+    "key": "lit-besta2024graph",
+    "title": "Graph of Thoughts: Solving Elaborate Problems with Large Language Models",
+    "year": "2024",
+    "venue": "AAAI",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CoT Survey/sample-base.bib",
+    "original_key": "besta2024graph",
+    "primary_url": "https://ojs.aaai.org/index.php/AAAI/article/view/29720",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/besta2024graph.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 136,
+        "paragraph": "Tree of Thoughts searches over alternative intermediate thoughts, while Graph of Thoughts allows dependencies and combinations among generated information units~\\cite{lit-yao2024tree,lit-besta2024graph}. Their nodes represent model-generated reasoning states. In an evidence graph, nodes and edges instead describe information extracted or indexed from task data. Combining a reasoning structure with retrieved facts therefore requires tracking the source of each information item."
+      }
+    ]
+  },
+  {
+    "key": "lit-guu2020retrieval",
+    "title": "Retrieval Augmented Language Model Pre-Training",
+    "year": "2020",
+    "venue": "ICML",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/LLM_NER/entity.bib",
+    "original_key": "guu2020retrieval",
+    "primary_url": "https://proceedings.mlr.press/v119/guu20a.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/guu2020retrieval.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 68,
+        "paragraph": "Retrieval can also participate in model training. REALM trains a language model with a latent knowledge retriever, RETRO conditions generation on chunks retrieved from a large text collection, and Atlas studies few-shot knowledge-intensive tasks with a pre-trained retrieval-augmented model~\\cite{lit-guu2020retrieval,lit-borgeaud2022improving,lit-izacard2023atlas}. These systems make the retrieval source part of the model's information supply, while differing in their training objectives and task adaptation."
+      }
+    ]
+  },
+  {
+    "key": "lit-izacard2023atlas",
+    "title": "Atlas: Few-shot Learning with Retrieval Augmented Language Models",
+    "year": "2023",
+    "venue": "JMLR",
+    "qualification": "Published journal article",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/LLM_NER/entity.bib",
+    "original_key": "izacard2023atlas",
+    "primary_url": "https://jmlr.org/papers/v24/23-0037.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/izacard2023atlas.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 68,
+        "paragraph": "Retrieval can also participate in model training. REALM trains a language model with a latent knowledge retriever, RETRO conditions generation on chunks retrieved from a large text collection, and Atlas studies few-shot knowledge-intensive tasks with a pre-trained retrieval-augmented model~\\cite{lit-guu2020retrieval,lit-borgeaud2022improving,lit-izacard2023atlas}. These systems make the retrieval source part of the model's information supply, while differing in their training objectives and task adaptation."
+      }
+    ]
+  },
+  {
+    "key": "lit-trivedi2022interleaving",
+    "title": "Interleaving Retrieval with Chain-of-Thought Reasoning for Knowledge-Intensive Multi-Step Questions",
+    "year": "2023",
+    "venue": "ACL",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/LLM_NER/entity.bib",
+    "original_key": "trivedi2022interleaving",
+    "primary_url": "https://aclanthology.org/2023.acl-long.557/",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/trivedi2022interleaving.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch01-introduction.tex",
+        "line": 10,
+        "paragraph": "The usefulness of external information depends on how it relates to the current task~\\cite{bg-reca,bg-dpr}. A person's occupation can help identify a table column, while a keyword's association with a label can help classify a text. For question answering, several facts may need to be combined to answer the query~\\cite{lit-trivedi2022interleaving}. Explicit knowledge structures represent these relationships and make them searchable when selecting information for a language model~\\cite{lit-zhang2024knowgpt}. This motivates our study of structural augmentation, from enriching model representations with existing knowledge graphs to constructing task-related graphs for retrieval and reasoning."
+      },
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 82,
+        "paragraph": "Complex questions can require retrieval to change as reasoning proceeds. IRCoT interleaves retrieval with generated intermediate reasoning steps, using those steps to search for further evidence~\\cite{lit-trivedi2022interleaving}. This iterative approach obtains additional context through successive retrieval decisions. Graph-based retrieval instead makes extracted relationships available within the index, where several supporting facts can be selected through connected paths or propagation."
+      }
+    ]
+  },
+  {
+    "key": "lit-liu2023llava",
+    "title": "Visual Instruction Tuning",
+    "year": "2023",
+    "venue": "NeurIPS",
+    "qualification": "CCF A conference full paper",
+    "original_source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/LLM_NER/entity.bib",
+    "original_key": "liu2023llava",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/6dcf277ea32ce3288914faf369fe6de0-Abstract-Conference.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/liu2023llava.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch01-introduction.tex",
+        "line": 4,
+        "paragraph": "\\section{Motivation}\n\\label{sec:introduction:motivation}\nLanguage models utilize information in tables, text, and images to make predictions and respond to queries. Table pre-training and visual instruction tuning have extended their applications beyond plain text~\\cite{lit-deng2022turl,lit-liu2023llava}. \nHowever, the required information is often incomplete or distributed across sources~\\cite{bg-reca,bg-mmqa}. A table may list people without identifying their occupations. A classification task may introduce labels absent from its initial training examples. A question may require facts from several passages or a relationship expressed jointly by text and images. \nHence, selecting relevant evidence and preserving the relationships among facts are crucial real-world problems~\\cite{bg-hipporag}."
+      },
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 149,
+        "paragraph": "Flamingo supports few-shot prediction with interleaved visual and textual inputs~\\cite{lit-alayrac2022flamingo}. LLaVA studies visual instruction tuning, and InstructBLIP introduces instruction-aware visual feature extraction~\\cite{lit-liu2023llava,lit-dai2023instructblip}. Such models can condition their processing on a task instruction, but a retrieval pipeline must additionally identify which source objects contain the supporting evidence. MGRAG uses query-aware graph construction to organize relationships among those objects."
+      }
+    ]
+  },
+  {
+    "key": "lit-snell2017prototypical",
+    "title": "Prototypical Networks for Few-shot Learning",
+    "year": "2017",
+    "venue": "NeurIPS",
+    "qualification": "CCF A conference full paper",
+    "original_source": "external-primary-search",
+    "original_key": "snell2017prototypical",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2017/hash/cb8da6767461f2812ae4290eac7cbc42-Abstract.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/snell2017prototypical.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 57,
+        "paragraph": "Metric-based methods organize support information in a learned representation space. Matching Networks use an attention-based prediction over support examples, while Prototypical Networks compare query representations with class prototypes~\\cite{lit-vinyals2016matching,lit-snell2017prototypical}. Relation Networks learn a comparison function between examples~\\cite{lit-sung2018learning}. Model-agnostic meta-learning instead learns an initialization that supports adaptation through a small number of gradient updates~\\cite{lit-finn2017model}. The learned metric, comparison function, and initialization provide different mechanisms for using a small support set."
+      }
+    ]
+  },
+  {
+    "key": "lit-vinyals2016matching",
+    "title": "Matching Networks for One Shot Learning",
+    "year": "2016",
+    "venue": "NeurIPS",
+    "qualification": "CCF A conference full paper",
+    "original_source": "external-primary-search",
+    "original_key": "vinyals2016matching",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2016/hash/90e1357833654983612fb05e3ec9148c-Abstract.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/vinyals2016matching.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 57,
+        "paragraph": "Metric-based methods organize support information in a learned representation space. Matching Networks use an attention-based prediction over support examples, while Prototypical Networks compare query representations with class prototypes~\\cite{lit-vinyals2016matching,lit-snell2017prototypical}. Relation Networks learn a comparison function between examples~\\cite{lit-sung2018learning}. Model-agnostic meta-learning instead learns an initialization that supports adaptation through a small number of gradient updates~\\cite{lit-finn2017model}. The learned metric, comparison function, and initialization provide different mechanisms for using a small support set."
+      }
+    ]
+  },
+  {
+    "key": "lit-sung2018learning",
+    "title": "Learning to Compare: Relation Network for Few-Shot Learning",
+    "year": "2018",
+    "venue": "CVPR",
+    "qualification": "CCF A conference full paper",
+    "original_source": "external-primary-search",
+    "original_key": "sung2018learning",
+    "primary_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Sung_Learning_to_Compare_CVPR_2018_paper.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/sung2018learning.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 57,
+        "paragraph": "Metric-based methods organize support information in a learned representation space. Matching Networks use an attention-based prediction over support examples, while Prototypical Networks compare query representations with class prototypes~\\cite{lit-vinyals2016matching,lit-snell2017prototypical}. Relation Networks learn a comparison function between examples~\\cite{lit-sung2018learning}. Model-agnostic meta-learning instead learns an initialization that supports adaptation through a small number of gradient updates~\\cite{lit-finn2017model}. The learned metric, comparison function, and initialization provide different mechanisms for using a small support set."
+      }
+    ]
+  },
+  {
+    "key": "lit-khattab2020colbert",
+    "title": "ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT",
+    "year": "2020",
+    "venue": "SIGIR",
+    "qualification": "CCF A conference full paper",
+    "original_source": "external-primary-search",
+    "original_key": "khattab2020colbert",
+    "primary_url": "https://api.crossref.org/works/10.1145/3397271.3401075",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/khattab2020colbert.json",
+    "metadata_source": "Publisher-deposited Crossref record",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 74,
+        "paragraph": "Retrieval need not compress each passage into a single vector. ColBERT independently encodes query and passage tokens, then uses a late-interaction operation to score fine-grained matches~\\cite{lit-khattab2020colbert}. HyDE addresses retrieval without relevance labels by generating a hypothetical document and encoding it as a search representation~\\cite{lit-gao2023hyde}. The generated document guides retrieval; the retrieved source documents supply the evidence used downstream. These methods change the representation used to find context without requiring a graph index."
+      }
+    ]
+  },
+  {
+    "key": "lit-gao2023hyde",
+    "title": "Precise Zero-Shot Dense Retrieval without Relevance Labels",
+    "year": "2023",
+    "venue": "ACL",
+    "qualification": "CCF A conference full paper",
+    "original_source": "external-primary-search",
+    "original_key": "gao2023hyde",
+    "primary_url": "https://aclanthology.org/2023.acl-long.99/",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/gao2023hyde.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 74,
+        "paragraph": "Retrieval need not compress each passage into a single vector. ColBERT independently encodes query and passage tokens, then uses a late-interaction operation to score fine-grained matches~\\cite{lit-khattab2020colbert}. HyDE addresses retrieval without relevance labels by generating a hypothetical document and encoding it as a search representation~\\cite{lit-gao2023hyde}. The generated document guides retrieval; the retrieved source documents supply the evidence used downstream. These methods change the representation used to find context without requiring a graph index."
+      }
+    ]
+  },
+  {
+    "key": "lit-dao2022flashattention",
+    "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+    "year": "2022",
+    "venue": "NeurIPS",
+    "qualification": "CCF A conference full paper",
+    "original_source": "external-primary-search",
+    "original_key": "dao2022flashattention",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/67d57c32e20fd0a7a302cb81d36e40d5-Abstract-Conference.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/dao2022flashattention.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 157,
+        "paragraph": "Attention computation, cache retention, and cache recomputation address different costs. FlashAttention reduces memory traffic through an IO-aware implementation of exact attention~\\cite{lit-dao2022flashattention}. H2O retains a combination of recent and heavily attended tokens, while Scissorhands exploits persistent token importance to compress the KV cache~\\cite{lit-zhang2023h2o,lit-liu2023scissorhands}. These retention policies decide which states remain available; selective recomputation decides which available states to refresh when the context changes."
+      }
+    ]
+  },
+  {
+    "key": "lit-liu2023scissorhands",
+    "title": "Scissorhands: Exploiting the Persistence of Importance Hypothesis for LLM KV Cache Compression at Test Time",
+    "year": "2023",
+    "venue": "NeurIPS",
+    "qualification": "CCF A conference full paper",
+    "original_source": "external-primary-search",
+    "original_key": "liu2023scissorhands",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/a452a7c6c463e4ae8fbdc614c6e983e6-Abstract-Conference.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/liu2023scissorhands.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch01-introduction.tex",
+        "line": 18,
+        "paragraph": "On the other hand, multimodal question answering requires joint reasoning over evidence from text and images~\\cite{bg-mmqa}. Different questions about the same image can require different visual details~\\cite{bg-stacked-attention,lit-antol2015vqa}. Instruction-aware visual extraction further makes the selected features depend on the requested task~\\cite{lit-dai2023instructblip}. A relation stated directly in a question may also correspond to several relations in the evidence.\nTo address these issues, we propose MGRAG to build query-specific evidence graphs and match query relations to semantic paths~\\cite{mgrag-paper}. Query-aware construction selects relevant facts, while path matching checks their correspondence to the requested relationships. The selected structure also guides the reuse and selective recomputation of the LLM's key-value (KV) cache when the evidence is processed for answering. Attention-based cache retention provides related approaches to limiting context-processing resources~\\cite{lit-zhang2023h2o,lit-liu2023scissorhands}."
+      },
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 157,
+        "paragraph": "Attention computation, cache retention, and cache recomputation address different costs. FlashAttention reduces memory traffic through an IO-aware implementation of exact attention~\\cite{lit-dao2022flashattention}. H2O retains a combination of recent and heavily attended tokens, while Scissorhands exploits persistent token importance to compress the KV cache~\\cite{lit-zhang2023h2o,lit-liu2023scissorhands}. These retention policies decide which states remain available; selective recomputation decides which available states to refresh when the context changes."
+      }
+    ]
+  },
+  {
+    "key": "lit-antol2015vqa",
+    "title": "VQA: Visual Question Answering",
+    "year": "2015",
+    "venue": "ICCV",
+    "qualification": "CCF A conference full paper",
+    "original_source": "external-primary-search",
+    "original_key": "antol2015vqa",
+    "primary_url": "https://openaccess.thecvf.com/content_iccv_2015/html/Antol_VQA_Visual_Question_ICCV_2015_paper.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/antol2015vqa.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch01-introduction.tex",
+        "line": 18,
+        "paragraph": "On the other hand, multimodal question answering requires joint reasoning over evidence from text and images~\\cite{bg-mmqa}. Different questions about the same image can require different visual details~\\cite{bg-stacked-attention,lit-antol2015vqa}. Instruction-aware visual extraction further makes the selected features depend on the requested task~\\cite{lit-dai2023instructblip}. A relation stated directly in a question may also correspond to several relations in the evidence.\nTo address these issues, we propose MGRAG to build query-specific evidence graphs and match query relations to semantic paths~\\cite{mgrag-paper}. Query-aware construction selects relevant facts, while path matching checks their correspondence to the requested relationships. The selected structure also guides the reuse and selective recomputation of the LLM's key-value (KV) cache when the evidence is processed for answering. Attention-based cache retention provides related approaches to limiting context-processing resources~\\cite{lit-zhang2023h2o,lit-liu2023scissorhands}."
+      },
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 145,
+        "paragraph": "The VQA task asks for an answer to a natural-language question about an image, making visual relevance depend on the question~\\cite{lit-antol2015vqa}. OK-VQA adds questions that require knowledge beyond the image content~\\cite{lit-marino2019okvqa}. MultiModalQA extends the evidence requirement to reasoning across source modalities. The distinction matters for retrieval because a visually informative image can still lack the particular detail or relationship requested by the question."
+      }
+    ]
+  },
+  {
+    "key": "lit-li2022blip",
+    "title": "BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation",
+    "year": "2022",
+    "venue": "ICML",
+    "qualification": "CCF A conference full paper",
+    "original_source": "external-primary-search",
+    "original_key": "li2022blip",
+    "primary_url": "https://proceedings.mlr.press/v162/li22n.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/li2022blip.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 147,
+        "paragraph": "Vision--language pre-training supplies several ways to align the modalities. ViLBERT uses interacting visual and textual streams, while BLIP combines understanding and generation objectives with caption bootstrapping~\\cite{lit-lu2019vilbert,lit-li2022blip}. BLIP-2 connects frozen image and language models through a trainable querying component~\\cite{lit-li2023blip2}. These architectures determine how visual content becomes accessible to language-based prediction."
+      }
+    ]
+  },
+  {
+    "key": "lit-li2023blip2",
+    "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+    "year": "2023",
+    "venue": "ICML",
+    "qualification": "CCF A conference full paper",
+    "original_source": "external-primary-search",
+    "original_key": "li2023blip2",
+    "primary_url": "https://proceedings.mlr.press/v202/li23q.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/li2023blip2.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 147,
+        "paragraph": "Vision--language pre-training supplies several ways to align the modalities. ViLBERT uses interacting visual and textual streams, while BLIP combines understanding and generation objectives with caption bootstrapping~\\cite{lit-lu2019vilbert,lit-li2022blip}. BLIP-2 connects frozen image and language models through a trainable querying component~\\cite{lit-li2023blip2}. These architectures determine how visual content becomes accessible to language-based prediction."
+      }
+    ]
+  },
+  {
+    "key": "lit-alayrac2022flamingo",
+    "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+    "year": "2022",
+    "venue": "NeurIPS",
+    "qualification": "CCF A conference full paper",
+    "original_source": "external-primary-search",
+    "original_key": "alayrac2022flamingo",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/960a172bc7fbf0177ccccbb411a7d800-Abstract-Conference.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/alayrac2022flamingo.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 149,
+        "paragraph": "Flamingo supports few-shot prediction with interleaved visual and textual inputs~\\cite{lit-alayrac2022flamingo}. LLaVA studies visual instruction tuning, and InstructBLIP introduces instruction-aware visual feature extraction~\\cite{lit-liu2023llava,lit-dai2023instructblip}. Such models can condition their processing on a task instruction, but a retrieval pipeline must additionally identify which source objects contain the supporting evidence. MGRAG uses query-aware graph construction to organize relationships among those objects."
+      }
+    ]
+  },
+  {
+    "key": "lit-lu2019vilbert",
+    "title": "ViLBERT: Pretraining Task-Agnostic Visiolinguistic Representations for Vision-and-Language Tasks",
+    "year": "2019",
+    "venue": "NeurIPS",
+    "qualification": "CCF A conference full paper",
+    "original_source": "external-primary-search",
+    "original_key": "lu2019vilbert",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2019/hash/c74d97b01eae257e44aa9d5bade97baf-Abstract.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/lu2019vilbert.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 147,
+        "paragraph": "Vision--language pre-training supplies several ways to align the modalities. ViLBERT uses interacting visual and textual streams, while BLIP combines understanding and generation objectives with caption bootstrapping~\\cite{lit-lu2019vilbert,lit-li2022blip}. BLIP-2 connects frozen image and language models through a trainable querying component~\\cite{lit-li2023blip2}. These architectures determine how visual content becomes accessible to language-based prediction."
+      }
+    ]
+  },
+  {
+    "key": "lit-dai2023instructblip",
+    "title": "InstructBLIP: Towards General-purpose Vision-Language Models with Instruction Tuning",
+    "year": "2023",
+    "venue": "NeurIPS",
+    "qualification": "CCF A conference full paper",
+    "original_source": "external-primary-search",
+    "original_key": "dai2023instructblip",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/9a6a435e75419a836fe47ab6793623e6-Abstract-Conference.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/dai2023instructblip.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch01-introduction.tex",
+        "line": 18,
+        "paragraph": "On the other hand, multimodal question answering requires joint reasoning over evidence from text and images~\\cite{bg-mmqa}. Different questions about the same image can require different visual details~\\cite{bg-stacked-attention,lit-antol2015vqa}. Instruction-aware visual extraction further makes the selected features depend on the requested task~\\cite{lit-dai2023instructblip}. A relation stated directly in a question may also correspond to several relations in the evidence.\nTo address these issues, we propose MGRAG to build query-specific evidence graphs and match query relations to semantic paths~\\cite{mgrag-paper}. Query-aware construction selects relevant facts, while path matching checks their correspondence to the requested relationships. The selected structure also guides the reuse and selective recomputation of the LLM's key-value (KV) cache when the evidence is processed for answering. Attention-based cache retention provides related approaches to limiting context-processing resources~\\cite{lit-zhang2023h2o,lit-liu2023scissorhands}."
+      },
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 149,
+        "paragraph": "Flamingo supports few-shot prediction with interleaved visual and textual inputs~\\cite{lit-alayrac2022flamingo}. LLaVA studies visual instruction tuning, and InstructBLIP introduces instruction-aware visual feature extraction~\\cite{lit-liu2023llava,lit-dai2023instructblip}. Such models can condition their processing on a task instruction, but a retrieval pipeline must additionally identify which source objects contain the supporting evidence. MGRAG uses query-aware graph construction to organize relationships among those objects."
+      }
+    ]
+  },
+  {
+    "key": "lit-kwiatkowski2019natural",
+    "title": "Natural Questions: A Benchmark for Question Answering Research",
+    "year": "2019",
+    "venue": "TACL",
+    "qualification": "Published journal article",
+    "original_source": "external-primary-search",
+    "original_key": "kwiatkowski2019natural",
+    "primary_url": "https://aclanthology.org/Q19-1026/",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/kwiatkowski2019natural.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 80,
+        "paragraph": "Question-answering benchmarks expose different evidence requirements. Natural Questions contains naturally occurring search queries with long and short answer annotations on Wikipedia pages, while TriviaQA pairs trivia questions with independently gathered evidence documents~\\cite{lit-kwiatkowski2019natural,lit-joshi2017triviaqa}. MuSiQue constructs multihop questions by composing connected single-hop questions so that one reasoning step depends on information from another~\\cite{lit-trivedi2022musique}. These collections help distinguish locating supporting text from reading or generating an answer from it."
+      }
+    ]
+  },
+  {
+    "key": "lit-joshi2017triviaqa",
+    "title": "TriviaQA: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension",
+    "year": "2017",
+    "venue": "ACL",
+    "qualification": "CCF A conference full paper",
+    "original_source": "external-primary-search",
+    "original_key": "joshi2017triviaqa",
+    "primary_url": "https://aclanthology.org/P17-1147/",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/joshi2017triviaqa.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 80,
+        "paragraph": "Question-answering benchmarks expose different evidence requirements. Natural Questions contains naturally occurring search queries with long and short answer annotations on Wikipedia pages, while TriviaQA pairs trivia questions with independently gathered evidence documents~\\cite{lit-kwiatkowski2019natural,lit-joshi2017triviaqa}. MuSiQue constructs multihop questions by composing connected single-hop questions so that one reasoning step depends on information from another~\\cite{lit-trivedi2022musique}. These collections help distinguish locating supporting text from reading or generating an answer from it."
+      }
+    ]
+  },
+  {
+    "key": "lit-herzig2020tapas",
+    "title": "TaPas: Weakly Supervised Table Parsing via Pre-training",
+    "year": "2020",
+    "venue": "ACL",
+    "qualification": "CCF A conference full paper",
+    "original_source": "external-primary-search",
+    "original_key": "herzig2020tapas",
+    "primary_url": "https://aclanthology.org/2020.acl-main.398/",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/herzig2020tapas.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 42,
+        "paragraph": "Table pre-training can encode additional structural information. TURL learns contextual representations of relational tables through self-supervised pre-training~\\cite{lit-deng2022turl}. TAPAS augments a language model with table-aware inputs and learns to answer questions through cell selection and aggregation~\\cite{lit-herzig2020tapas}. TableFormer introduces learned attention biases for table structure and table--text alignment while addressing sensitivity to row and column order~\\cite{lit-yang2022tableformer}. These designs show how serialization, structural biases, and pre-training tasks affect the table information available to a predictor."
+      }
+    ]
+  },
+  {
+    "key": "lit-yang2022tableformer",
+    "title": "TableFormer: Robust Transformer Modeling for Table-Text Encoding",
+    "year": "2022",
+    "venue": "ACL",
+    "qualification": "CCF A conference full paper",
+    "original_source": "external-primary-search",
+    "original_key": "yang2022tableformer",
+    "primary_url": "https://aclanthology.org/2022.acl-long.40/",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/yang2022tableformer.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 42,
+        "paragraph": "Table pre-training can encode additional structural information. TURL learns contextual representations of relational tables through self-supervised pre-training~\\cite{lit-deng2022turl}. TAPAS augments a language model with table-aware inputs and learns to answer questions through cell selection and aggregation~\\cite{lit-herzig2020tapas}. TableFormer introduces learned attention biases for table structure and table--text alignment while addressing sensitivity to row and column order~\\cite{lit-yang2022tableformer}. These designs show how serialization, structural biases, and pre-training tasks affect the table information available to a predictor."
+      }
+    ]
+  },
+  {
+    "key": "lit-trivedi2022musique",
+    "title": "MuSiQue: Multihop Questions via Single-hop Question Composition",
+    "year": "2022",
+    "venue": "TACL",
+    "qualification": "Published journal article",
+    "original_source": "external-primary-search",
+    "original_key": "trivedi2022musique",
+    "primary_url": "https://aclanthology.org/2022.tacl-1.31/",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/trivedi2022musique.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 80,
+        "paragraph": "Question-answering benchmarks expose different evidence requirements. Natural Questions contains naturally occurring search queries with long and short answer annotations on Wikipedia pages, while TriviaQA pairs trivia questions with independently gathered evidence documents~\\cite{lit-kwiatkowski2019natural,lit-joshi2017triviaqa}. MuSiQue constructs multihop questions by composing connected single-hop questions so that one reasoning step depends on information from another~\\cite{lit-trivedi2022musique}. These collections help distinguish locating supporting text from reading or generating an answer from it."
+      }
+    ]
+  },
+  {
+    "key": "lit-marino2019okvqa",
+    "title": "OK-VQA: A Visual Question Answering Benchmark Requiring External Knowledge",
+    "year": "2019",
+    "venue": "CVPR",
+    "qualification": "CCF A conference full paper",
+    "original_source": "external-primary-search",
+    "original_key": "marino2019okvqa",
+    "primary_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Marino_OK-VQA_A_Visual_Question_Answering_Benchmark_Requiring_External_Knowledge_CVPR_2019_paper.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/marino2019okvqa.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 145,
+        "paragraph": "The VQA task asks for an answer to a natural-language question about an image, making visual relevance depend on the question~\\cite{lit-antol2015vqa}. OK-VQA adds questions that require knowledge beyond the image content~\\cite{lit-marino2019okvqa}. MultiModalQA extends the evidence requirement to reasoning across source modalities. The distinction matters for retrieval because a visually informative image can still lack the particular detail or relationship requested by the question."
+      }
+    ]
+  },
+  {
+    "key": "lit-ouyang2022training",
+    "title": "Training language models to follow instructions with human feedback",
+    "year": "2022",
+    "venue": "NeurIPS",
+    "qualification": "CCF A conference full paper",
+    "original_source": "external-primary-search",
+    "original_key": "ouyang2022training",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/b1efde53be364a73914f58805a001731-Abstract-Conference.html",
+    "primary_record": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/thesis/hkust-latex-thesis/planning/reference-expansion-2026-10-28/primary-records/ouyang2022training.html",
+    "metadata_source": "Publisher citation meta tags",
+    "locations": [
+      {
+        "file": "chapter/ch02-background.tex",
+        "line": 27,
+        "paragraph": "Instruction following can itself be learned through additional training. InstructGPT combines supervised demonstrations with reinforcement learning from human feedback to align model outputs with user instructions~\\cite{lit-ouyang2022training}. A model used with fixed parameters at prediction time can therefore draw on instruction-following behavior learned before the downstream task."
+      }
+    ]
+  }
+]

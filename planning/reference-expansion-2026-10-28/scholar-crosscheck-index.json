@@ -1,0 +1,142 @@
+{
+  "successful_saved_queries": 27,
+  "selected_papers_crosschecked": 24,
+  "blocked_queries": 2,
+  "records": [
+    {
+      "query_title": "XLNet: generalized autoregressive pretraining for language understanding",
+      "selected_key": "lit-yang2019xlnet",
+      "url": "https://scholar.google.com/scholar?q=%22XLNet%3A%20generalized%20autoregressive%20pretraining%20for%20language%20understanding%22"
+    },
+    {
+      "query_title": "LLMLingua-2: Data Distillation for Efficient and Faithful Task-Agnostic Prompt Compression",
+      "selected_key": null,
+      "url": "https://scholar.google.com/scholar?q=%22LLMLingua-2%3A%20Data%20Distillation%20for%20Efficient%20and%20Faithful%20Task-Agnostic%20Prompt%20Compression%22"
+    },
+    {
+      "query_title": "Improving language models by retrieving from trillions of tokens",
+      "selected_key": "lit-borgeaud2022improving",
+      "url": "https://scholar.google.com/scholar?q=%22Improving%20language%20models%20by%20retrieving%20from%20trillions%20of%20tokens%22"
+    },
+    {
+      "query_title": "H2o: Heavy-hitter oracle for efficient generative inference of large language models",
+      "selected_key": "lit-zhang2023h2o",
+      "url": "https://scholar.google.com/scholar?q=%22H2o%3A%20Heavy-hitter%20oracle%20for%20efficient%20generative%20inference%20of%20large%20language%20models%22"
+    },
+    {
+      "query_title": "Role-aware modeling for n-ary relational knowledge bases",
+      "selected_key": "lit-liu2021role",
+      "url": "https://scholar.google.com/scholar?q=%22Role-aware%20modeling%20for%20n-ary%20relational%20knowledge%20bases%22"
+    },
+    {
+      "query_title": "Link prediction on n-ary relational data",
+      "selected_key": "lit-guan2019link",
+      "url": "https://scholar.google.com/scholar?q=%22Link%20prediction%20on%20n-ary%20relational%20data%22"
+    },
+    {
+      "query_title": "Generalizing tensor decomposition for n-ary relational knowledge bases",
+      "selected_key": "lit-liu2020generalizing",
+      "url": "https://scholar.google.com/scholar?q=%22Generalizing%20tensor%20decomposition%20for%20n-ary%20relational%20knowledge%20bases%22"
+    },
+    {
+      "query_title": "Simple embedding for link prediction in knowledge graphs",
+      "selected_key": "lit-kazemi2018simple",
+      "url": "https://scholar.google.com/scholar?q=%22Simple%20embedding%20for%20link%20prediction%20in%20knowledge%20graphs%22"
+    },
+    {
+      "query_title": "Colnet: Embedding the semantics of web tables for column type prediction",
+      "selected_key": "lit-chen2019colnet",
+      "url": "https://scholar.google.com/scholar?q=%22Colnet%3A%20Embedding%20the%20semantics%20of%20web%20tables%20for%20column%20type%20prediction%22"
+    },
+    {
+      "query_title": "Tcn: Table convolutional network for web table interpretation",
+      "selected_key": "lit-wang2021tcn",
+      "url": "https://scholar.google.com/scholar?q=%22Tcn%3A%20Table%20convolutional%20network%20for%20web%20table%20interpretation%22"
+    },
+    {
+      "query_title": "Exploring the limits of transfer learning with a unified text-to-text transformer",
+      "selected_key": "lit-raffel2020exploring",
+      "url": "https://scholar.google.com/scholar?q=%22Exploring%20the%20limits%20of%20transfer%20learning%20with%20a%20unified%20text-to-text%20transformer%22"
+    },
+    {
+      "query_title": "Generalizing from a few examples: A survey on few-shot learning",
+      "selected_key": "lit-wang2020generalizing",
+      "url": "https://scholar.google.com/scholar?q=%22Generalizing%20from%20a%20few%20examples%3A%20A%20survey%20on%20few-shot%20learning%22"
+    },
+    {
+      "query_title": "Chain-of-thought prompting elicits reasoning in large language models",
+      "selected_key": "lit-wei2022chain",
+      "url": "https://scholar.google.com/scholar?q=%22Chain-of-thought%20prompting%20elicits%20reasoning%20in%20large%20language%20models%22"
+    },
+    {
+      "query_title": "Dynamic few-shot visual learning without forgetting",
+      "selected_key": "lit-gidaris2018dynamic",
+      "url": "https://scholar.google.com/scholar?q=%22Dynamic%20few-shot%20visual%20learning%20without%20forgetting%22"
+    },
+    {
+      "query_title": "Incremental few-shot learning with attention attractor networks",
+      "selected_key": "lit-ren2019incremental",
+      "url": "https://scholar.google.com/scholar?q=%22Incremental%20few-shot%20learning%20with%20attention%20attractor%20networks%22"
+    },
+    {
+      "query_title": "KnowGPT: Knowledge Graph based Prompting for Large Language Models",
+      "selected_key": "lit-zhang2024knowgpt",
+      "url": "https://scholar.google.com/scholar?q=%22KnowGPT%3A%20Knowledge%20Graph%20based%20Prompting%20for%20Large%20Language%20Models%22"
+    },
+    {
+      "query_title": "Neuinfer: Knowledge inference on n-ary facts",
+      "selected_key": "lit-guan2020neuinfer",
+      "url": "https://scholar.google.com/scholar?q=%22Neuinfer%3A%20Knowledge%20inference%20on%20n-ary%20facts%22"
+    },
+    {
+      "query_title": "Knowledge graph embedding by translating on hyperplanes",
+      "selected_key": "lit-wang2014knowledge",
+      "url": "https://scholar.google.com/scholar?q=%22Knowledge%20graph%20embedding%20by%20translating%20on%20hyperplanes%22"
+    },
+    {
+      "query_title": "Convolutional 2d knowledge graph embeddings",
+      "selected_key": "lit-dettmers2018convolutional",
+      "url": "https://scholar.google.com/scholar?q=%22Convolutional%202d%20knowledge%20graph%20embeddings%22"
+    },
+    {
+      "query_title": "TURL: Table Understanding through Representation Learning",
+      "selected_key": "lit-deng2022turl",
+      "url": "https://scholar.google.com/scholar?q=%22TURL%3A%20Table%20Understanding%20through%20Representation%20Learning%22"
+    },
+    {
+      "query_title": "WebTables: Exploring the Power of Tables on the Web",
+      "selected_key": "lit-cafarella2008webtables",
+      "url": "https://scholar.google.com/scholar?q=%22WebTables%3A%20Exploring%20the%20Power%20of%20Tables%20on%20the%20Web%22"
+    },
+    {
+      "query_title": "Learning semantic annotations for tabular data",
+      "selected_key": null,
+      "url": "https://scholar.google.com/scholar?q=%22Learning%20semantic%20annotations%20for%20tabular%20data%22"
+    },
+    {
+      "query_title": "Language Models are Few-Shot Learners",
+      "selected_key": "lit-brown2020language",
+      "url": "https://scholar.google.com/scholar?q=%22Language%20Models%20are%20Few-Shot%20Learners%22"
+    },
+    {
+      "query_title": "Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks",
+      "selected_key": "lit-finn2017model",
+      "url": "https://scholar.google.com/scholar?q=%22Model-Agnostic%20Meta-Learning%20for%20Fast%20Adaptation%20of%20Deep%20Networks%22"
+    },
+    {
+      "query_title": "Translating Embeddings for Modeling Multi-relational Data",
+      "selected_key": "lit-bordes2013translating",
+      "url": "https://scholar.google.com/scholar?q=%22Translating%20Embeddings%20for%20Modeling%20Multi-relational%20Data%22"
+    },
+    {
+      "query_title": "Improving Hyper-relational Knowledge Graph Completion",
+      "selected_key": null,
+      "url": "https://scholar.google.com/scholar?q=%22Improving%20Hyper-relational%20Knowledge%20Graph%20Completion%22"
+    },
+    {
+      "query_title": "Lost in the Middle: How Language Models Use Long Contexts",
+      "selected_key": "lit-liu2024lost",
+      "url": "https://scholar.google.com/scholar?q=%22Lost%20in%20the%20Middle%3A%20How%20Language%20Models%20Use%20Long%20Contexts%22"
+    }
+  ]
+}

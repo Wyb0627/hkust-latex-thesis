@@ -1,0 +1,314 @@
+[
+  {
+    "key": "alayrac2022flamingo",
+    "requested_url": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/960a172bc7fbf0177ccccbb411a7d800-Abstract-Conference.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  },
+  {
+    "key": "antol2015vqa",
+    "requested_url": "https://openaccess.thecvf.com/content_iccv_2015/html/Antol_VQA_Visual_Question_ICCV_2015_paper.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  },
+  {
+    "key": "besta2024graph",
+    "requested_url": "https://ojs.aaai.org/index.php/AAAI/article/view/29720",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "bordes2013translating",
+    "requested_url": "https://proceedings.neurips.cc/paper_files/paper/2013/hash/1cecc7a77928ca8133fa24680a88d2f9-Abstract.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  },
+  {
+    "key": "borgeaud2022improving",
+    "requested_url": "https://proceedings.mlr.press/v162/borgeaud22a.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "brown2020language",
+    "requested_url": "https://proceedings.neurips.cc/paper_files/paper/2020/hash/1457c0d6bfcb4967418bfb8ac142f64a-Abstract.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  },
+  {
+    "key": "cafarella2008webtables",
+    "requested_url": "https://api.crossref.org/works/10.14778/1453856.1453916",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "chen2019colnet",
+    "requested_url": "https://ojs.aaai.org/index.php/AAAI/article/view/3765",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "dai2023instructblip",
+    "requested_url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/9a6a435e75419a836fe47ab6793623e6-Abstract-Conference.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  },
+  {
+    "key": "dao2022flashattention",
+    "requested_url": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/67d57c32e20fd0a7a302cb81d36e40d5-Abstract-Conference.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  },
+  {
+    "key": "deng2022turl",
+    "requested_url": "https://api.crossref.org/works/10.14778/3430915.3430921",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "dettmers2018convolutional",
+    "requested_url": "https://ojs.aaai.org/index.php/AAAI/article/view/11573",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "finn2017model",
+    "requested_url": "https://proceedings.mlr.press/v70/finn17a.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "gao2023hyde",
+    "requested_url": "https://aclanthology.org/2023.acl-long.99/",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "gidaris2018dynamic",
+    "requested_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Gidaris_Dynamic_Few-Shot_Visual_CVPR_2018_paper.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  },
+  {
+    "key": "guan2019link",
+    "requested_url": "https://api.crossref.org/works/10.1145/3308558.3313414",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "guan2020neuinfer",
+    "requested_url": "https://aclanthology.org/2020.acl-main.546/",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "guu2020retrieval",
+    "requested_url": "https://proceedings.mlr.press/v119/guu20a.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "hamilton2017inductive",
+    "requested_url": "https://proceedings.neurips.cc/paper_files/paper/2017/hash/5dd9db5e033da9c6fb5ba83c7a7ebea9-Abstract.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  },
+  {
+    "key": "herzig2020tapas",
+    "requested_url": "https://aclanthology.org/2020.acl-main.398/",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "izacard2023atlas",
+    "requested_url": "https://jmlr.org/papers/v24/23-0037.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "joshi2017triviaqa",
+    "requested_url": "https://aclanthology.org/P17-1147/",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "kazemi2018simple",
+    "requested_url": "https://proceedings.neurips.cc/paper_files/paper/2018/hash/b2ab001909a8a6f04b51920306046ce5-Abstract.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  },
+  {
+    "key": "khattab2020colbert",
+    "requested_url": "https://api.crossref.org/works/10.1145/3397271.3401075",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "kojima2022large",
+    "requested_url": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/8bb0d291acd4acf06ef112099c16f326-Abstract-Conference.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  },
+  {
+    "key": "kwiatkowski2019natural",
+    "requested_url": "https://aclanthology.org/Q19-1026/",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "li2022blip",
+    "requested_url": "https://proceedings.mlr.press/v162/li22n.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "li2023blip2",
+    "requested_url": "https://proceedings.mlr.press/v202/li23q.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "liu2020generalizing",
+    "requested_url": "https://api.crossref.org/works/10.1145/3366423.3380188",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "liu2021role",
+    "requested_url": "https://api.crossref.org/works/10.1145/3442381.3449874",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "liu2023llava",
+    "requested_url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/6dcf277ea32ce3288914faf369fe6de0-Abstract-Conference.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  },
+  {
+    "key": "liu2023scissorhands",
+    "requested_url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/a452a7c6c463e4ae8fbdc614c6e983e6-Abstract-Conference.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  },
+  {
+    "key": "liu2024lost",
+    "requested_url": "https://aclanthology.org/2024.tacl-1.9/",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "lu2019vilbert",
+    "requested_url": "https://proceedings.neurips.cc/paper_files/paper/2019/hash/c74d97b01eae257e44aa9d5bade97baf-Abstract.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  },
+  {
+    "key": "luo2023hahe",
+    "requested_url": "https://aclanthology.org/2023.acl-long.450/",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "raffel2020exploring",
+    "requested_url": "https://jmlr.org/papers/v21/20-074.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "ren2019incremental",
+    "requested_url": "https://proceedings.neurips.cc/paper_files/paper/2019/hash/e833e042f509c996b1b25324d56659fb-Abstract.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  },
+  {
+    "key": "snell2017prototypical",
+    "requested_url": "https://proceedings.neurips.cc/paper_files/paper/2017/hash/cb8da6767461f2812ae4290eac7cbc42-Abstract.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  },
+  {
+    "key": "sung2018learning",
+    "requested_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Sung_Learning_to_Compare_CVPR_2018_paper.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  },
+  {
+    "key": "trivedi2022interleaving",
+    "requested_url": "https://aclanthology.org/2023.acl-long.557/",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "trouillon2016complex",
+    "requested_url": "https://proceedings.mlr.press/v48/trouillon16.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "vinyals2016matching",
+    "requested_url": "https://proceedings.neurips.cc/paper_files/paper/2016/hash/90e1357833654983612fb05e3ec9148c-Abstract.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  },
+  {
+    "key": "wang2014knowledge",
+    "requested_url": "https://ojs.aaai.org/index.php/AAAI/article/view/8870",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "wang2020generalizing",
+    "requested_url": "https://api.crossref.org/works/10.1145/3386252",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "wang2021tcn",
+    "requested_url": "https://api.crossref.org/works/10.1145/3442381.3450090",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "wang2023plan",
+    "requested_url": "https://aclanthology.org/2023.acl-long.147/",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "wei2022chain",
+    "requested_url": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/9d5609613524ecf4f15af0f7b31abca4-Abstract-Conference.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  },
+  {
+    "key": "yang2019xlnet",
+    "requested_url": "https://proceedings.neurips.cc/paper_files/paper/2019/hash/dc6a7e655d7e5840e66733e9ee67cc69-Abstract.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  },
+  {
+    "key": "yang2022tableformer",
+    "requested_url": "https://aclanthology.org/2022.acl-long.40/",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)'))"
+  },
+  {
+    "key": "yao2024tree",
+    "requested_url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/271db9922b8d1f4dd7aaef84ed5ac703-Abstract-Conference.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  },
+  {
+    "key": "zhang2023h2o",
+    "requested_url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/6ceefa7b15572587b78ecfcebb2827f8-Abstract-Conference.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  },
+  {
+    "key": "zhang2024knowgpt",
+    "requested_url": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/0b8705a611ed1ce19cdb759031078705-Abstract-Conference.html",
+    "status": "FETCH_ERROR",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)'))"
+  }
+]

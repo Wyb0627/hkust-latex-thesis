@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "pdf_sha256": "6e2a743fe4d42b94340c4958dc000e39840978c057727eb86f7c91bfc980dbb5",
+  "pages": 125,
+  "embedded_fonts": 95,
+  "bbl_printed_entries": 129,
+  "independent_papers": 123,
+  "all_pages_rendered": true,
+  "contact_sheets_reviewed": 7,
+  "detailed_pages_reviewed": [
+    15,
+    26,
+    31,
+    117,
+    125
+  ],
+  "original_figure_margin_flags": [
+    {
+      "physical_page": 50,
+      "label": "36",
+      "words": [
+        "F1"
+      ]
+    },
+    {
+      "physical_page": 64,
+      "label": "50",
+      "words": [
+        "Mins",
+        "80.0"
+      ]
+    },
+    {
+      "physical_page": 65,
+      "label": "51",
+      "words": [
+        "Acc",
+        "0.5"
+      ]
+    },
+    {
+      "physical_page": 108,
+      "label": "94",
+      "words": [
+        "Accuracy",
+        "(ACC.)"
+      ]
+    }
+  ]
+}

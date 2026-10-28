@@ -1,0 +1,89 @@
+[
+  {
+    "key": "bg-peters2019knowbert",
+    "provenance": "external official bibliography",
+    "source": "https://aclanthology.org/D19-1005/",
+    "evidence": "planning/background-structure-2026-10-28/primary/D19-1005.html",
+    "paragraphs": [
+      "Selected knowledge can enter a language model through learned representations. Transformer attention computes contextual token representations, which BERT learns through bidirectional pre-training~\\cite{bg-transformer,bg-bert}. KnowBERT retrieves entity embeddings through an integrated entity linker and combines them with contextual word representations through word-to-entity attention~\\cite{bg-peters2019knowbert}. KEPLER jointly optimizes knowledge-embedding and language-modeling objectives using encoded entity descriptions~\\cite{bg-wang2021kepler}. These approaches incorporate knowledge during representation learning. Graph structure can also enter through a learned graph encoder and projection module, as in Graph Neural Prompting~\\cite{bg-tian2024gnp}."
+    ],
+    "support_scope": "integrated entity linking and word-to-entity attention",
+    "status": "supported by accessed primary source",
+    "claim_exclusions": "No comparative performance or generalization claim introduced."
+  },
+  {
+    "key": "bg-wu2020blink",
+    "provenance": "external official bibliography",
+    "source": "https://aclanthology.org/2020.emnlp-main.519/",
+    "evidence": "planning/background-structure-2026-10-28/primary/2020.emnlp-main.519.html",
+    "paragraphs": [
+      "Accessing an existing graph requires identifying which nodes correspond to the input. Entity linking maps a mention in a table cell or passage to an indexed entity. Since a name can refer to several entities, its surrounding context helps disambiguate the candidates. BLINK retrieves candidate entities using dense representations of mention contexts and entity descriptions, then reranks them with a cross-encoder~\\cite{bg-wu2020blink}. KGLink uses connections between table columns to filter linked candidates~\\cite{bg-kglink}. When a graph is built from source documents, entity resolution also determines whether mentions in different passages share a node. AGRAG adds synonym edges between similar entity strings to connect expressions indexed as separate nodes~\\cite{bg-agrag}."
+    ],
+    "support_scope": "dense mention/entity candidate retrieval followed by cross-encoder reranking",
+    "status": "supported by accessed primary source",
+    "claim_exclusions": "No comparative performance or generalization claim introduced."
+  },
+  {
+    "key": "bg-wang2021kepler",
+    "provenance": "external official bibliography",
+    "source": "https://aclanthology.org/2021.tacl-1.11/",
+    "evidence": "planning/background-structure-2026-10-28/primary/2021.tacl-1.11.html",
+    "paragraphs": [
+      "Selected knowledge can enter a language model through learned representations. Transformer attention computes contextual token representations, which BERT learns through bidirectional pre-training~\\cite{bg-transformer,bg-bert}. KnowBERT retrieves entity embeddings through an integrated entity linker and combines them with contextual word representations through word-to-entity attention~\\cite{bg-peters2019knowbert}. KEPLER jointly optimizes knowledge-embedding and language-modeling objectives using encoded entity descriptions~\\cite{bg-wang2021kepler}. These approaches incorporate knowledge during representation learning. Graph structure can also enter through a learned graph encoder and projection module, as in Graph Neural Prompting~\\cite{bg-tian2024gnp}."
+    ],
+    "support_scope": "joint knowledge-embedding and language-modeling training using textual entity descriptions",
+    "status": "supported by accessed primary source",
+    "claim_exclusions": "No comparative performance or generalization claim introduced."
+  },
+  {
+    "key": "bg-liu2020kbert",
+    "provenance": "external official publication",
+    "source": "https://ojs.aaai.org/index.php/AAAI/article/view/5681",
+    "evidence": "planning/background-structure-2026-10-28/primary/kbert.txt",
+    "paragraphs": [
+      "Knowledge can also be expressed as additional input text. K-BERT injects KG triples into sentences and controls their interaction through soft positions and an attention visibility matrix~\\cite{bg-liu2020kbert}. In a prompting pipeline, selected graph facts become context for a generative language model, as studied by KnowGPT~\\cite{lit-zhang2024knowgpt}. The graph used for selection can therefore differ from the input received by the model. A graph may index entities and relations, while the model reads their descriptions, serialized triples, or associated source passages. This conversion determines which relationships and source details are available for prediction."
+    ],
+    "support_scope": "triple injection into input sentences, soft positions and attention visibility",
+    "status": "supported by accessed primary source",
+    "claim_exclusions": "No comparative performance or generalization claim introduced."
+  },
+  {
+    "key": "bg-ji2022kg",
+    "provenance": "author original bibliography",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/GFM4Graph/GFM.bib",
+    "original_key": "ji2021survey",
+    "evidence": "planning/background-structure-2026-10-28/primary/ji-survey.txt",
+    "paragraphs": [
+      "A knowledge graph represents entities and their relationships explicitly~\\cite{bg-ji2022kg}. A conventional relational fact is a triple $(s,r,o)$, where $s$ is a subject entity, $r$ a relation, and $o$ an object entity. These triples form a directed graph with entities as nodes and relations as labeled edges. For example, an occupation relation can connect a person to a profession, supplying information absent from a table that contains only names. Resources such as Wikidata make these statements accessible beyond the document in which an entity is mentioned~\\cite{bg-wikidata}."
+    ],
+    "support_scope": "entity-relation knowledge graph representation",
+    "status": "supported by accessed primary source",
+    "claim_exclusions": "No comparative performance or generalization claim introduced."
+  },
+  {
+    "key": "bg-tian2024gnp",
+    "provenance": "author original bibliography",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/GFM4Graph/GFM.bib",
+    "original_key": "10.1609/aaai.v38i17.29875",
+    "evidence": "planning/background-structure-2026-10-28/primary/gnp.txt",
+    "paragraphs": [
+      "Selected knowledge can enter a language model through learned representations. Transformer attention computes contextual token representations, which BERT learns through bidirectional pre-training~\\cite{bg-transformer,bg-bert}. KnowBERT retrieves entity embeddings through an integrated entity linker and combines them with contextual word representations through word-to-entity attention~\\cite{bg-peters2019knowbert}. KEPLER jointly optimizes knowledge-embedding and language-modeling objectives using encoded entity descriptions~\\cite{bg-wang2021kepler}. These approaches incorporate knowledge during representation learning. Graph structure can also enter through a learned graph encoder and projection module, as in Graph Neural Prompting~\\cite{bg-tian2024gnp}."
+    ],
+    "support_scope": "graph encoder and projection for graph knowledge supplied to a language model",
+    "status": "supported by accessed primary source",
+    "claim_exclusions": "No comparative performance or generalization claim introduced."
+  },
+  {
+    "key": "bg-sun2024tog",
+    "provenance": "author original bibliography",
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CoT Survey/sample-base.bib",
+    "original_key": "sun2024think",
+    "evidence": "planning/background-structure-2026-10-28/primary/think-on-graph-iclr.txt",
+    "paragraphs": [
+      "Once the input is mapped to the graph, neighborhoods, paths, and subgraphs provide different ways to select information. A neighborhood supplies facts around a linked entity. A path can connect several facts through intermediate entities, while a subgraph can collect multiple related paths. Think-on-Graph uses a language model to explore entities and relations iteratively and select reasoning paths from an existing KG~\\cite{bg-sun2024tog}. For tasks requiring several supporting facts, the retrieval decision must account for their connections as well as their individual relevance. Source links provide access to details that remain in the original passages after relation extraction~\\cite{bg-agrag}."
+    ],
+    "support_scope": "iterative LLM-guided entity/relation exploration and reasoning-path selection",
+    "status": "supported by accessed primary source",
+    "claim_exclusions": "No comparative performance or generalization claim introduced."
+  }
+]

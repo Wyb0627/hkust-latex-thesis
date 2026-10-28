@@ -1,0 +1,162 @@
+{
+  "chapter/ch01-introduction.tex": {
+    "checks": {
+      "numeric_tokens": true,
+      "labels": true,
+      "references": true,
+      "inline_math": true,
+      "equation": true,
+      "align": true,
+      "algorithm": true,
+      "figure": true,
+      "table": true,
+      "tabular": true,
+      "longtable": true
+    },
+    "added_citations": {
+      "bg-reca": 2,
+      "bg-mmqa": 2,
+      "bg-hipporag": 2,
+      "bg-dpr": 1,
+      "gorag-xia-etal-2021-incremental": 1,
+      "bg-graphrag": 1,
+      "bg-stacked-attention": 1
+    }
+  },
+  "chapter/ch02-background.tex": {
+    "checks": {
+      "numeric_tokens": true,
+      "labels": true,
+      "references": true,
+      "inline_math": true,
+      "equation": true,
+      "align": true,
+      "algorithm": true,
+      "figure": true,
+      "table": true,
+      "tabular": true,
+      "longtable": true
+    },
+    "added_citations": {}
+  },
+  "chapter/ch03-kglink.tex": {
+    "checks": {
+      "numeric_tokens": true,
+      "labels": true,
+      "references": true,
+      "inline_math": true,
+      "equation": true,
+      "align": true,
+      "algorithm": true,
+      "figure": true,
+      "table": true,
+      "tabular": true,
+      "longtable": true
+    },
+    "added_citations": {}
+  },
+  "chapter/ch04-gorag.tex": {
+    "checks": {
+      "numeric_tokens": true,
+      "labels": true,
+      "references": true,
+      "inline_math": true,
+      "equation": true,
+      "align": true,
+      "algorithm": true,
+      "figure": true,
+      "table": true,
+      "tabular": true,
+      "longtable": true
+    },
+    "added_citations": {}
+  },
+  "chapter/ch05-agrag.tex": {
+    "checks": {
+      "numeric_tokens": true,
+      "labels": true,
+      "references": true,
+      "inline_math": true,
+      "equation": true,
+      "align": true,
+      "algorithm": true,
+      "figure": true,
+      "table": true,
+      "tabular": true,
+      "longtable": true
+    },
+    "added_citations": {}
+  },
+  "chapter/ch06-mgrag.tex": {
+    "checks": {
+      "numeric_tokens": true,
+      "labels": true,
+      "references": true,
+      "inline_math": true,
+      "equation": true,
+      "align": true,
+      "algorithm": true,
+      "figure": true,
+      "table": true,
+      "tabular": true,
+      "longtable": true
+    },
+    "added_citations": {}
+  },
+  "chapter/ch07-discussion.tex": {
+    "checks": {
+      "numeric_tokens": true,
+      "labels": true,
+      "references": true,
+      "inline_math": true,
+      "equation": true,
+      "align": true,
+      "algorithm": true,
+      "figure": true,
+      "table": true,
+      "tabular": true,
+      "longtable": true
+    },
+    "added_citations": {}
+  },
+  "chapter/ch08-conclusion.tex": {
+    "checks": {
+      "numeric_tokens": true,
+      "labels": true,
+      "references": true,
+      "inline_math": true,
+      "equation": true,
+      "align": true,
+      "algorithm": true,
+      "figure": true,
+      "table": true,
+      "tabular": true,
+      "longtable": true
+    },
+    "added_citations": {}
+  },
+  "chapter/front-abstract.tex": {
+    "checks": {
+      "numeric_tokens": true,
+      "labels": true,
+      "references": true,
+      "inline_math": true,
+      "equation": true,
+      "align": true,
+      "algorithm": true,
+      "figure": true,
+      "table": true,
+      "tabular": true,
+      "longtable": true
+    },
+    "added_citations": {}
+  },
+  "bibliography": {
+    "unique_works": 75,
+    "aliases": 31,
+    "cited_keys": 100,
+    "missing_keys": [],
+    "required_fields": "PASS",
+    "parser": "scripts/bib_utils.py; brace-aware; BibLaTeX ids supported"
+  }
+}

@@ -1,17 +1,17 @@
 \chapter{Connected Evidence Selection for Language Models with AGRAG}
 \label{ch:agrag}
 
-This chapter is based on \emph{AGRAG: Advanced Graph-based Retrieval-Augmented Generation for LLMs}, published at ICDE 2026~\cite{agrag-paper}. We propose AGRAG to retrieve connected facts and supporting passages for language-model generation. It combines query-conditioned graph influence, semantic edge costs, and neighborhood expansion to collect evidence beyond the initially mapped facts.
+This chapter is based on \emph{AGRAG: Advanced Graph-based Retrieval-Augmented Generation for LLMs}, published at ICDE 2026~\cite{agrag-paper}. We propose AGRAG to construct a graph from a text corpus and retrieve connected facts with supporting passages. Query-conditioned graph influence, semantic edge costs, and neighborhood expansion collect evidence beyond the initially mapped facts.
 
 \section{Research Problem and Evidence Requirements}
 \label{sec:agrag:problem}
-A question can require facts from several parts of a corpus. Independently retrieved passages may repeat one fact or leave the relationships between different facts implicit. A graph records these relationships, but retrieval must still select a subgraph that contains enough information for the answer.
+GORAG uses relationships extracted from task data to retrieve candidate classes. For question answering and generation, the retrieved structure must provide facts that jointly support the answer. A question can require information from several parts of a corpus, and a summary can need multiple complementary facts. Independently retrieved passages may repeat one fact or leave the relationships between different facts implicit. A graph records these relationships, but retrieval must still select a subgraph that contains enough information for the answer.
 
-We propose AGRAG to select connected evidence using query relevance and graph influence. Statistical extraction determines the entity vocabulary, semantic costs rank connections, and neighborhood expansion adds facts around the query anchors. A hybrid passage channel supplies context omitted by the graph representation.
+To address these evidence requirements, we propose AGRAG to select connected facts using query relevance and graph influence. Statistical extraction determines the entity vocabulary, semantic costs rank connections, and neighborhood expansion adds facts around the query anchors. A hybrid passage channel supplies context omitted by the graph representation.
 
-Consider a corpus containing statements about an illness, the organ that it affects, and the routes through which it spreads. A query may match facts mentioning the illness and the organ. Connecting those facts can identify a small initial structure, but answering the question may require a neighboring fact that specifies another anatomical component. The original example in Figure~\ref{fig:agrag:example} illustrates this distinction. The example motivates expansion beyond an initial terminal-connecting structure.
+Consider a corpus containing statements about an illness, the organ that it affects, and the routes through which it spreads. A query may match facts mentioning the illness and the organ. Connecting those facts can identify a small initial structure, but answering the question may require a neighboring fact that specifies another anatomical component. Figure~\ref{fig:agrag:example} illustrates why evidence retrieval may need to expand beyond an initial terminal-connecting structure.
 
-The input is a text corpus $\mathcal{T}$ and a natural-language query $q$. The corpus is divided into chunks $\mathcal{T}_c$. The indexed graph $\mathcal{G}=(\mathcal{V},\mathcal{E})$ contains entity nodes, passage nodes, and several kinds of edges. Query processing identifies an initial set of relevant triple facts, assigns node influence scores and edge costs, and produces a subgraph for generation. A hybrid retriever supplies additional passages from the same corpus. The output is an answer conditioned on the query, a textual serialization of the retrieved graph, and the hybrid passages.
+The input is a text corpus $\mathcal{T}$ and a natural-language query $q$. The corpus is divided into chunks $\mathcal{T}_c$. The indexed graph $\mathcal{G}=(\mathcal{V},\mathcal{E})$ has node set $\mathcal V$ containing entities and passages and edge set $\mathcal E$ containing several kinds of relations. Query processing identifies an initial set of relevant triple facts, assigns node influence scores and edge costs, and produces a subgraph for generation. A hybrid retriever supplies additional passages from the same corpus. The output is an answer conditioned on the query, a textual serialization of the retrieved graph, and the hybrid passages.
 
 Entity--relation edges represent facts, while passage nodes link those facts to source text. We supply both the selected graph and retrieved passages to the generator so that it can use relational connections alongside their surrounding explanations.
 
@@ -39,7 +39,7 @@ The corpus is split into overlapping text chunks,
 \mathcal{T}_c=\operatorname{Split}(\mathcal{T},l_t,l_o),
 \label{eq:agrag:chunking}
 \end{equation}
-where $l_t$ is the chunk length and $l_o$ is the overlap. The reported main setting uses 256 tokens per chunk and an overlap of 32 tokens. Overlap allows adjacent chunks to share text at their boundaries; the graph subsequently connects chunks through the entities they contain.
+where $\mathcal T$ is the source corpus, $\mathcal T_c$ is its collection of chunks, $l_t$ is the chunk length, and $l_o$ is the overlap. The reported main setting uses 256 tokens per chunk and an overlap of 32 tokens. Overlap allows adjacent chunks to share text at their boundaries; the graph subsequently connects chunks through the entities they contain.
 
 AGRAG considers words and phrases up to a maximum n-gram length $b$. For a candidate term $v$ in chunk $t$, the extraction rule modifies TF--IDF~\cite{agrag-tfidf} to define the score
 \begin{equation}
@@ -48,12 +48,12 @@ AGRAG considers words and phrases up to a maximum n-gram length $b$. For a candi
 \log\frac{|\mathcal{T}_c|+1}{|\{t_j\in\mathcal{T}_c:v\in t_j\}|+1}.
 \label{eq:agrag:extraction-score}
 \end{equation}
-The first factor depends on within-chunk frequency and length. The second distinguishes terms according to their distribution across chunks. The extracted set is
+Here $\operatorname{ER}(v,t)$ scores candidate term $v$ in chunk $t$, $\operatorname{count}(v,t)$ counts its occurrences, $|t|$ is the chunk length, and $\mathcal T_c$ is the chunk collection. The set in the denominator contains the chunks $t_j$ that include $v$. The first factor depends on within-chunk frequency and length. The second distinguishes terms according to their distribution across chunks. The extracted set is
 \begin{equation}
 \mathcal{V}_t=\{v:\operatorname{ER}(v,t)>\tau\},
 \label{eq:agrag:entities}
 \end{equation}
-with maximum n-gram length $b$ and threshold $\tau$ controlling candidate boundaries and selection. The main paper reports $b=3$ and $\tau=0.5$.
+where $\mathcal V_t$ is the extracted entity set for chunk $t$, $v$ ranges over candidate terms up to n-gram length $b$, and $\tau$ is the selection threshold. The main paper reports $b=3$ and $\tau=0.5$.
 
 Statistical extraction selects strings present in the corpus. Term frequency does not directly measure factual importance, so a generic expression can score differently from a rare but relevant phrase. We examine the n-gram boundary and threshold in the sensitivity study.
 
@@ -65,9 +65,9 @@ For each chunk, the language model receives the selected entity set and the chun
 \mathcal{E}_t=\operatorname{LLM}(\mathcal{V}_t,t,p_{\mathrm{re}}).
 \label{eq:agrag:relations}
 \end{equation}
-The prompt $p_{\mathrm{re}}$ asks for relations between the extracted entities in the chunk. The resulting entity--relation--entity triples provide the graph's factual edges. Statistical extraction selects entity candidates from observed terms. The model then extracts relations conditioned on those candidates and their context.
+Here $\mathcal E_t$ is the set of relations extracted from chunk $t$, $\mathcal V_t$ is its entity set, and prompt $p_{\mathrm{re}}$ asks the language model for relations between those entities. The resulting entity--relation--entity triples provide the graph's factual edges. Statistical extraction selects entity candidates from observed terms. The model then extracts relations conditioned on those candidates and their context.
 
-Chunks are also inserted as passage nodes. A \textit{Contains} edge connects a passage to an entity extracted from it. These links preserve the association between the symbolic representation and the source chunk. They also allow paths to cross passages through shared entities. A passage contributes contextual evidence to graph retrieval without being reduced to a single isolated fact.
+Chunks are also inserted as passage nodes. A \textit{Contains} edge connects a passage to an entity extracted from it. These links preserve the association between the symbolic representation and the source chunk. They also allow paths to cross passages through shared entities. Passage nodes retain context shared by several extracted facts.
 
 The graph includes synonym edges between entity nodes whose embedding similarity exceeds a threshold $\varphi$. Such an edge expresses an embedding-based correspondence between strings. It permits retrieval to connect different expressions that would otherwise form separate nodes. Extracted relations come from the language model's reading of a chunk, whereas synonym edges come from a similarity test.
 
@@ -82,14 +82,14 @@ At query time, AGRAG first identifies facts that are semantically close to the q
 \cos(\mathbf{q},\mathbf{f}).
 \label{eq:agrag:mapping}
 \end{equation}
-The highest-scoring $k_a$ facts form the raw mapped set $\mathcal{F}_{\mathrm{raw}}$. The main setting uses $k_a=5$. This stage locates candidate facts in the indexed graph before graph propagation begins.
+Here $\operatorname{MS}$ is cosine similarity, $\mathbf q$ is the encoded query $q$, and $\mathbf f$ is the encoded triple fact $f$. The highest-scoring $k_a$ facts form the raw mapped set $\mathcal{F}_{\mathrm{raw}}$. The main setting uses $k_a=5$. This stage locates candidate facts in the indexed graph before graph propagation begins.
 
 A model-based filtering step then evaluates the raw facts with respect to the query,
 \begin{equation}
 \mathcal{F}=\operatorname{LLM}(\mathcal{F}_{\mathrm{raw}},q,p_{\mathrm{tf}}).
 \label{eq:agrag:filter}
 \end{equation}
-The filtered set $\mathcal{F}$ supplies query anchors. Dense mapping produces the candidate list, and the model checks its relevance to the question. The filtering ablation removes this second step.
+Here $\mathcal F_{\mathrm{raw}}$ is the set of candidate facts, $q$ is the query, and $p_{\mathrm{tf}}$ is the filtering prompt. The filtered set $\mathcal{F}$ supplies query anchors. Dense mapping produces the candidate list, and the model checks its relevance to the question. The filtering ablation removes this second step.
 
 Facts around the anchors can contribute to an answer even when their direct query similarity is lower. We propagate influence from the mapped facts to score this surrounding evidence and use semantic edge costs when selecting its connections.
 
@@ -100,7 +100,7 @@ AGRAG uses a personalized PageRank-style propagation~\cite{agrag-haveliwala2002t
 \mathbf{s}^{(i)}=(1-d)\mathbf{p}+d\mathbf{P}\mathbf{s}^{(i-1)}.
 \label{eq:agrag:propagation}
 \end{equation}
-Here $\mathbf{p}$ is determined by nodes associated with the filtered mapped facts, and $\mathbf{P}$ is the graph propagation matrix specified in the source. The reported setting uses $d=0.5$ and stops the iteration when the change is below $10^{-7}$. The score of a node $v$ is $s_v=\mathbf{s}[v]$. Passage-node scores are multiplied by 0.05 to balance their contribution relative to entity nodes.
+Here $\mathbf s^{(i)}$ is the influence vector at iteration $i$, $\mathbf s$ its limiting value, $\mathbf p$ the personalization vector determined by the filtered mapped facts, $\mathbf P$ the graph propagation matrix, and $d$ the damping factor. The reported setting uses $d=0.5$ and stops the iteration when the change is below $10^{-7}$. The score of a node $v$ is $s_v=\mathbf{s}[v]$. Passage-node scores are multiplied by 0.05 to balance their contribution relative to entity nodes.
 
 The personalization vector assigns one to nodes participating in the mapped facts and zero to the other nodes. The graph operator is specified by
 \begin{equation}
@@ -111,7 +111,7 @@ The personalization vector assigns one to nodes participating in the mapped fact
 \end{cases}
 \label{eq:agrag:graph-operator}
 \end{equation}
-Nonadjacent node pairs receive the constant term in this operator. The recurrence uses this matrix with the damping value in Equation~\ref{eq:agrag:propagation}, followed by passage-node scaling.
+Here $\mathbf P[u][v]$ is the entry for nodes $u$ and $v$, $\mathcal N(u)$ is the one-hop neighbor set of $u$, and $\mathcal E$ and $\mathcal V$ are the graph edge and node sets. Nonadjacent node pairs receive the constant term in this operator. The recurrence uses this matrix with the damping value in Equation~\ref{eq:agrag:propagation}, followed by passage-node scaling.
 
 We compute node influence on the indexed graph before expansion. These scores remain assigned to the nodes while the retrieval procedure selects which nodes and edges to include.
 
@@ -122,7 +122,7 @@ For an edge $e=(u,v)$ associated with fact $f_e$, AGRAG defines
 c_e=\frac{1-\operatorname{MS}(\mathbf{q},\mathbf{f}_e)}{2}.
 \label{eq:agrag:edge-cost}
 \end{equation}
-Higher similarity gives a lower factual edge cost. Subgraph selection combines these edge costs with node influence scores.
+Here $c_e$ is the cost of edge $e$, and $\operatorname{MS}(\mathbf q,\mathbf f_e)$ is the cosine similarity between the encoded query and the encoded fact associated with that edge. Higher similarity gives a lower factual edge cost. Subgraph selection combines these edge costs with node influence scores.
 
 Pseudo edges retain their assigned penalty, providing an expensive route when factual connections alone cannot connect the anchors.
 
@@ -134,7 +134,7 @@ r(\mathcal{G}')=\sum_{e=(u,v)\in\mathcal{E}'}
 \frac{c_e}{s_u+s_v}.
 \label{eq:agrag:mcmi-objective}
 \end{equation}
-The objective scales each included edge cost by the influence of its endpoints. We construct an initial terminal-connecting tree, then expand its neighborhood using marginal cost-to-score comparisons.
+Here $\mathcal G'=(\mathcal V',\mathcal E')$ is a feasible subgraph, $c_e$ is the cost of edge $e=(u,v)$, and $s_u,s_v$ are the endpoint influence scores. The objective $r(\mathcal G')$ scales each included edge cost by the influence of its endpoints. We construct an initial terminal-connecting tree, then expand its neighborhood using marginal cost-to-score comparisons.
 
 The initial structure connects the query-mapped information. The source constructs an auxiliary graph on the terminals, uses shortest-path costs between them, selects a tree on that auxiliary structure, and expands its edges back to paths in the evidence graph. This stage supplies connections among anchors instead of returning the anchors as an unordered set. The detailed theorem in the main paper assigns its 2-approximation statement to this MCST construction stage.
 
@@ -143,12 +143,12 @@ Subsequent expansion examines neighboring candidates. A candidate node $v$ conne
 \frac{c_{(\mathrm{MCMI},v)}}{s_v}.
 \label{eq:agrag:marginal}
 \end{equation}
-The procedure selects the lowest such ratio and compares it with the current subgraph's reported cost-score quantity. The acceptance condition is
+Here $c_{(\mathrm{MCMI},v)}$ is the cost of the candidate connection and $s_v$ is the influence score of the candidate node $v$. The procedure selects the lowest such ratio and compares it with the current subgraph's reported cost-score quantity. The acceptance condition is
 \begin{equation}
 \frac{c_{(\mathrm{MCMI},v)}}{s_v}<r(\mathcal{G}_{\mathrm{MCMI}}).
 \label{eq:agrag:acceptance}
 \end{equation}
-The candidate and its connecting edge are added when this condition holds. The subgraph quantity is recalculated and the procedure considers the updated neighborhood. Expansion stops when the lowest candidate ratio is greater than or equal to the current subgraph quantity. The comparison uses the node score of the prospective addition, whereas Equation~\ref{eq:agrag:mcmi-objective} uses the two endpoints of each included edge. The candidate ratio therefore ranks possible additions using their assigned node scores, while the current subgraph is evaluated by Equation~\ref{eq:agrag:mcmi-objective}.
+Here $\mathcal G_{\mathrm{MCMI}}$ is the current subgraph, $r(\mathcal G_{\mathrm{MCMI}})$ is its cost-score quantity, and $c_{(\mathrm{MCMI},v)}/s_v$ is the candidate connection cost divided by node influence. The candidate and its connecting edge are added when this condition holds. The subgraph quantity is recalculated and the procedure considers the updated neighborhood. Expansion stops when the lowest candidate ratio is greater than or equal to the current subgraph quantity. The comparison uses the node score of the prospective addition, whereas Equation~\ref{eq:agrag:mcmi-objective} uses the two endpoints of each included edge. The candidate ratio therefore ranks possible additions using their assigned node scores, while the current subgraph is evaluated by Equation~\ref{eq:agrag:mcmi-objective}.
 
 Expansion adds neighboring facts that can supply answer components absent from the initial tree. The resulting structure can contain cycles, as shown in the MCMI example, and its selected relations are serialized for generation.
 
@@ -160,14 +160,14 @@ Expansion adds neighboring facts that can supply answer components absent from t
 \end{figure}
 
 \subsection{The original connected-evidence example}
-The running example in Figure~\ref{fig:agrag:example} makes the difference between connecting anchors and collecting an answer visible. Its mapped triples include \emph{(Kidney, Work, Kidney cancer)} and \emph{(Kidney, Spread, Tumors)}, using the relation strings printed in the original illustration. Those triples locate the query's subject region. The expanded structure additionally contains relations involving blood vessels, neighboring tissues, and other entities shown in the graph. The original illustrated answer identifies blood vessels as the requested component.
+The running example in Figure~\ref{fig:agrag:example} shows why connecting the query anchors may leave required answer facts outside the retrieved structure. Its mapped triples include \emph{(Kidney, Work, Kidney cancer)} and \emph{(Kidney, Spread, Tumors)}, using the relation strings printed in the original illustration. Those triples locate the query's subject region. The expanded structure additionally contains relations involving blood vessels, neighboring tissues, and other entities shown in the graph. The original illustrated answer identifies blood vessels as the requested component.
 
 In this example, the added relation supplies an answer component absent from the mapped facts. Influence scores and edge costs determine whether expansion includes that neighboring evidence.
 
 The theoretical claims have distinct scopes. The main paper reports NP-hardness for the stated subgraph optimization problem and a 2-approximation result for the initial terminal-connecting stage. The expansion procedure adds further evidence after that stage. The ablation replaces the expanded subgraph with the initial Steiner-tree representation.
 % Editorial record: the supplementary monotonic-decrease argument conflicts with the sum objective; see planning/verification-agrag.md. Do not promote it to a new theorem.
 
-The graph returned by retrieval is serialized as $g=\operatorname{StrConcat}(\mathcal{V}_{\mathrm{MCMI}},\mathcal{E}_{\mathrm{MCMI}})$. This representation contains the selected entities and relations. It makes the selected relationships available within the model's input sequence.
+The graph returned by retrieval is serialized as $g=\operatorname{StrConcat}(\mathcal{V}_{\mathrm{MCMI}},\mathcal{E}_{\mathrm{MCMI}})$, where $\mathcal V_{\mathrm{MCMI}}$ and $\mathcal E_{\mathrm{MCMI}}$ are its node and edge sets and $\operatorname{StrConcat}$ serializes them as text. This representation contains the selected entities and relations. It makes the selected relationships available within the model's input sequence.
 
 \section{Hybrid Retrieval and Generation}
 \label{sec:agrag:hybrid}
@@ -177,7 +177,7 @@ A graph index captures extracted relationships, whereas many details remain in t
 \operatorname{BM25}(q,t)}{2},
 \label{eq:agrag:hybrid}
 \end{equation}
-where $\mathbf{t}$ is the dense representation of chunk $t$. The top $k_r$ chunks according to this score form $\mathcal{T}_{\mathrm{HR}}$. The source reports $k_r=5$ in the main setting.
+where $q$ is the query, $t$ a chunk, $\mathbf q$ and $\mathbf t$ their dense representations, $\operatorname{MS}$ their cosine similarity, and $\operatorname{BM25}$ the lexical score. The top $k_r$ chunks according to this hybrid score form $\mathcal{T}_{\mathrm{HR}}$. The source reports $k_r=5$ in the main setting.
 
 Dense retrieval scores semantic similarity, while BM25 scores lexical overlap~\cite{agrag-robertson2009probabilistic}. We average them and combine the selected passages with the graph serialization.
 
@@ -186,7 +186,7 @@ The final answer is generated through
 A_q=\operatorname{LLM}(q,g,\mathcal{T}_{\mathrm{HR}},p_{\mathrm{gen}}).
 \label{eq:agrag:generation}
 \end{equation}
-The generator receives the question, selected graph facts, and hybrid passages. Graph-only and hybrid-only ablations test the contributions of the two evidence channels.
+Here $A_q$ is the generated answer, $q$ the query, $g$ the serialized selected graph, $\mathcal T_{\mathrm{HR}}$ the hybrid passages, and $p_{\mathrm{gen}}$ the generation prompt. The generator receives the question, selected graph facts, and hybrid passages. Graph-only and hybrid-only ablations test the contributions of the two evidence channels.
 
 For classification, the retrieval interface is adapted to return candidate labels associated with passages. One training passage per label supplies the indexed corpus. The generator selects a label from the retrieved candidate set. This classification index is fixed, whereas GORAG updates its index online over label rounds in Chapter~\ref{ch:gorag}.
 
@@ -194,7 +194,7 @@ For classification, the retrieval interface is adapted to return candidate label
 \label{sec:agrag:complexity}
 AGRAG's work is distributed across corpus indexing and query processing. Statistical extraction and passage-link construction operate over the corpus. Query processing includes triple mapping, filtering, graph propagation, subgraph selection, hybrid retrieval, and generation. Language-model calls contribute to relation extraction during indexing and to filtering and answer generation online.
 
-The source's graph-operation analysis assigns $O(|\mathcal{V}||\mathcal{T}_c|)$ time to entity extraction and passage association. Graph propagation is expressed in terms of node and edge counts, and semantic edge weighting visits the indexed edges. The Mehlhorn-based initial tree stage~\cite{agrag-mehlhorn1988faster} is reported with $O(|\mathcal{E}|+|\mathcal{V}|\log|\mathcal{V}|)$ complexity. Expansion additionally depends on the selected subgraph and its neighborhood. These expressions characterize graph operations; the measured end-to-end results include model inference under the experimental configuration.
+The source's graph-operation analysis assigns $O(|\mathcal{V}||\mathcal{T}_c|)$ time to entity extraction and passage association, where $\mathcal V$ is the graph node set and $\mathcal T_c$ the chunk collection. Graph propagation is expressed in terms of node and edge counts, and semantic edge weighting visits the indexed edges. The Mehlhorn-based initial tree stage~\cite{agrag-mehlhorn1988faster} is reported with $O(|\mathcal{E}|+|\mathcal{V}|\log|\mathcal{V}|)$ complexity, where $\mathcal E$ is the graph edge set. Expansion additionally depends on the selected subgraph and its neighborhood. These expressions characterize graph operations; the measured end-to-end results include model inference under the experimental configuration.
 
 A fixed corpus index can be reused across queries. Mapping, filtering, graph selection, and generation recur for each question, so index preparation can be amortized while query latency still depends on graph processing and generated output length.
 
@@ -207,7 +207,7 @@ We evaluate AGRAG on Novel and Medical from GraphRAG-bench~\cite{agrag-xiang2025
 
 The Novel evaluation contains 67 creative-generation queries, 362 contextual-summarization queries, 610 complex-reasoning queries, and 971 fact-retrieval queries. The corresponding Medical counts are 166, 289, 509, and 1,098.
 
-The main backbone is Qwen2.5-14B-Instruct~\cite{agrag-qwen2025qwen25technicalreport}, deployed through vLLM~\cite{agrag-kwon2023efficient}. The machine has an Intel Xeon Gold 5220R CPU and one NVIDIA A100 GPU with 80 GB memory. Contriever~\cite{agrag-izacardunsupervised} supplies dense representations for AGRAG and HippoRAG2; the other baselines use bge-large-en-v1.5 according to the reported configuration. Qwen3-Reranker-0.6B performs raw-triplet filtering. The retrieval top-$k$ setting is 5; AGRAG's raw mapped triple count and hybrid chunk count are also 5.
+The main backbone is Qwen2.5-14B-Instruct~\cite{agrag-qwen2025qwen25technicalreport}, deployed through vLLM~\cite{agrag-kwon2023efficient}. The machine has an Intel Xeon Gold 5220R CPU and one NVIDIA A100 GPU with 80 GB memory. Contriever~\cite{agrag-izacardunsupervised} supplies dense representations for AGRAG and HippoRAG2; the other baselines use bge-large-en-v1.5 according to the reported configuration. Qwen3-Reranker-0.6B performs raw-triplet filtering. The retrieval top-$k$ setting, where $k$ is the number of retrieved items, is 5; AGRAG's raw mapped triple count and hybrid chunk count are also 5.
 
 GraphRAG uses local search. LightRAG uses hybrid search for the QA tasks, with its classification-specific configuration retained where applicable. The comparison includes NaiveRAG, LongLLMLingua~\cite{agrag-jiang-etal-2024-longllmlingua}, RAPTOR~\cite{agrag-sarthi2024raptor}, SiReRAG~\cite{agrag-zhang2025sirerag}, G-Retriever~\cite{agrag-he2024g}, MIXRAG~\cite{agrag-liu2025mixrag}, GraphRAG~\cite{agrag-edge2024local}, LightRAG~\cite{agrag-guo2024lightrag}, HippoRAG2~\cite{agrag-gutiérrez2025ragmemory}, and Fast-GraphRAG~\cite{agrag-fastgraphrag}. These methods represent passage retrieval, compression, hierarchical organization, connected subgraph selection, neighborhood retrieval, and graph propagation.
 
@@ -216,24 +216,24 @@ Classification accuracy is the proportion of predicted labels matching gold labe
 
 Complex reasoning and fact retrieval additionally report the source's ROUGE-L measure~\cite{agrag-lin2004rouge}. Contextual summarization and creative generation report coverage, the fraction of required reference evidence represented in the answer. Creative generation also reports faithfulness, the fraction of answer claims supported by retrieved context. The evaluation uses the RAGAS framework~\cite{agrag-ragas2024,mgrag-es2024ragas} and the task-specific protocol. Coverage concerns inclusion of required information, whereas faithfulness concerns support for generated claims.
 
-For generated answer sequence $G$ and reference sequence $Y$, the source defines its reported lexical score as
+For generated answer sequence $A_q$ and reference sequence $A_q^{\mathrm{ref}}$, the source defines its reported lexical score as
 \begin{equation}
-\operatorname{ROG}(G,Y)=\frac{\operatorname{LCS}(G,Y)}{|G|}.
+\operatorname{ROG}(A_q,A_q^{\mathrm{ref}})=\frac{\operatorname{LCS}(A_q,A_q^{\mathrm{ref}})}{|A_q|}.
 \label{eq:agrag:rouge}
 \end{equation}
-The denominator is the generated answer length. This is the source's reported ROUGE-L quantity, rather than an F1 combination of longest-common-subsequence precision and recall.
+Here $A_q$ is the generated answer, $A_q^{\mathrm{ref}}$ the reference answer, and $\operatorname{LCS}(A_q,A_q^{\mathrm{ref}})$ the length of their longest common subsequence. The denominator is the generated answer length. This is the source's reported ROUGE-L quantity, rather than an F1 combination of longest-common-subsequence precision and recall.
 
-Let $E$ denote the reference evidence items and let $M(e,R)$ indicate whether response $R$ covers item $e$. Coverage is
+Let $\mathcal E_{\mathrm{ref}}$ denote the reference evidence items and let $M(e,A_q)$ indicate whether answer $A_q$ covers item $e$. Coverage is
 \begin{equation}
-\operatorname{COV}(R,E)=\frac{|\{e\in E:M(e,R)\}|}{|E|}.
+\operatorname{COV}(A_q,\mathcal E_{\mathrm{ref}})=\frac{|\{e\in\mathcal E_{\mathrm{ref}}:M(e,A_q)\}|}{|\mathcal E_{\mathrm{ref}}|}.
 \label{eq:agrag:coverage}
 \end{equation}
-For the answer's claim set $A$ and retrieved context $C$, let $S(a,C)$ indicate that claim $a$ is supported. Faithfulness is
+Here $A_q$ is the response, $\mathcal E_{\mathrm{ref}}$ the reference evidence set, and $M(e,A_q)$ indicates whether the response covers evidence item $e$. For the answer's claim set $\mathcal A_q$ and retrieved context $C_q$, let $S(a,C_q)$ indicate that claim $a$ is supported. Faithfulness is
 \begin{equation}
-\operatorname{FS}(A,C)=\frac{|\{a\in A:S(a,C)\}|}{|A|}.
+\operatorname{FS}(\mathcal A_q,C_q)=\frac{|\{a\in\mathcal A_q:S(a,C_q)\}|}{|\mathcal A_q|}.
 \label{eq:agrag:faithfulness}
 \end{equation}
-Coverage measures required reference information, while faithfulness measures support for the claims actually generated. Omitting a required fact lowers coverage; adding an unsupported claim lowers faithfulness. These judgments use the model-based assessment procedure.
+Here $\mathcal A_q$ is the answer claim set, $C_q$ the retrieved context, and $S(a,C_q)$ indicates whether claim $a$ is supported by that context. Coverage measures required reference information, while faithfulness measures support for the claims actually generated. Omitting a required fact lowers coverage; adding an unsupported claim lowers faithfulness. These judgments use the model-based assessment procedure.
 
 \input{chapter/tables/agrag-main-creative}
 \input{chapter/tables/agrag-main-summary}
@@ -254,7 +254,7 @@ Classification accuracy and recall are 0.438 and 0.307 on WOS and 0.403 and 0.25
 
 \subsection{Indexing and querying costs}
 \input{chapter/tables/agrag-efficiency}
-Table~\ref{tab:agrag:efficiency} separates indexing time, querying time, input tokens, and output tokens. For Novel, AGRAG reports 65 minutes for indexing and 142 minutes for querying, compared with HippoRAG2's 95 and 134 minutes. For Medical the corresponding values are 16 and 138 minutes for AGRAG and 46 and 130 minutes for HippoRAG2. This comparison shows lower index preparation time alongside a higher reported query total for AGRAG.
+Table~\ref{tab:agrag:efficiency} separates indexing time, querying time, input tokens, and output tokens. For Novel, AGRAG reports 65 minutes for indexing and 142 minutes for querying, compared with HippoRAG2's 95 and 134 minutes. For Medical the corresponding values are 16 and 138 minutes for AGRAG and 46 and 130 minutes for HippoRAG2. AGRAG reduces indexing time in both corpora but takes longer to process their queries.
 
 The table also contains methods with lower costs in particular columns. NaiveRAG has lower indexing times, while G-Retriever has a shorter Novel querying total.
 
@@ -283,7 +283,7 @@ The low-resource experiment uses Qwen3-4B-Instruct-2507 on two NVIDIA 2080 Ti GP
 
 In that setting, AGRAG-L reports Novel creative-generation accuracy 0.519 and contextual-summarization accuracy 0.706. Its Novel index/query totals are 44.7 and 132.1 minutes. Medical totals are 14.4 and 167.3 minutes. HippoRAG2-L has shorter query totals in both corpora, while AGRAG-L has shorter indexing totals.
 
-The parameter study varies the maximum n-gram length over $\{1,3,5,7\}$ and the extraction threshold over $\{0.1,0.3,0.5,0.7\}$. The original heatmaps are reproduced in Figure~\ref{fig:agrag:sensitivity}. They show accuracy across the tested combinations for Novel and Medical. The main experiment uses $b=3$ and $\tau=0.5$.
+The parameter study varies the maximum n-gram length over $\{1,3,5,7\}$ and the extraction threshold over $\{0.1,0.3,0.5,0.7\}$. The original heatmaps are reproduced in Figure~\ref{fig:agrag:sensitivity}. They show accuracy across the tested combinations for Novel and Medical. The main experiment uses maximum n-gram length $b=3$ and extraction threshold $\tau=0.5$.
 
 \begin{figure}[!htbp]
 \centering
@@ -304,4 +304,4 @@ Removing hybrid context can retain high faithfulness while reducing coverage. Gr
 
 Relations are model-extracted, query anchors are model-filtered, and several QA metrics use model assessment. Errors in the extracted relations or filtered anchors can change the evidence supplied to generation.
 
-AGRAG addresses connected evidence selection for textual tasks. Chapter~\ref{ch:mgrag} extends the problem to multimodal evidence, where a query relation may match a path with a different topology.
+AGRAG extends task-related graph retrieval to answers requiring connected facts and broader information coverage. Its corpus graph supports repeated textual queries through query-conditioned evidence selection. Chapter~\ref{ch:mgrag} examines the complementary problem of multimodal evidence, where the query guides graph construction and a requested relation may correspond to a path with a different topology.

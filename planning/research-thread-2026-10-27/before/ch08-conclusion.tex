@@ -1,0 +1,33 @@
+\chapter{Conclusion and Future Directions}
+\label{ch:conclusion}
+
+\section{Conclusion}
+\label{sec:conclusion:findings}
+In this thesis, we developed four methods that use explicit knowledge structures to select and process evidence for language models. The methods address missing table context, evolving classification labels, connected textual evidence, and semantic correspondence across multimodal sources.
+
+We proposed KGLink to enrich column representations with graph descriptions and learn their correspondence to annotation labels. Cross-column filtering selects relevant descriptions, and contextual type-representation training helps the encoder use them. The model also retains a table-encoding pathway for columns without KG evidence.
+
+We proposed GORAG to maintain a keyword--label graph for dynamic few-shot classification. Connected retrieval produces a candidate set for each query, while online insertion expands the index after prediction. The ablations show the benefit of these updates, with dataset-dependent effects as support and label sets grow.
+
+We proposed AGRAG to select connected textual evidence using node influence and semantic edge costs. Expanding the initial tree supplies additional answer components, while hybrid passages retain context beyond the selected graph. The ablations show how these choices affect answer coverage and faithfulness.
+
+We proposed MGRAG to construct query-specific multimodal graphs and match query relations to semantic paths. Graph-aware recomputation extends the use of the retrieved structure to context processing. The experiments show improved answer quality, with runtime effects that depend on the retrieval pipeline.
+
+The accompanying hyper-relational knowledge-graph study examined how structural representations preserve fact information. Its qualifier-capture and graph-reception perspectives help explain why the form of a representation matters. Across the thesis, the common design question is which relationships must remain explicit for the downstream task.
+
+\section{Future Directions}
+\label{sec:conclusion:future}
+\subsection{Feedback for structure maintenance}
+Future work can use feedback to maintain evidence structures. A retrieved relation may prove irrelevant, its source passage may be insufficient, or a prediction inserted into an index may later be corrected. These observations could guide which associations are retained, revised, or removed.
+
+Feedback timing determines which updates are possible. An online correction becomes available after the original prediction, and an answer assessment can guide only subsequent retrieval. Recording this timing and the feedback source would allow correction and retention policies to be evaluated under explicit supervision conditions.
+
+\subsection{Multimodal structure and provenance}
+Multimodal graph construction could retain a link from each extracted fact to its supporting text span or image region. Caption-based ranking and query-aware extraction both select visual information, and source links would make their omissions easier to identify.
+
+Source links would help distinguish missing visual evidence from extraction, relation-representation, and path-search errors. They would also support checking whether an accepted path is grounded in the original source at the granularity required by the answer.
+
+\subsection{Joint retrieval and context computation}
+Retrieval and context computation can be optimized jointly. Retrieved evidence determines input length, modality, and relationships; cache availability and recomputation policy determine processing cost. MGRAG uses graph features for one such decision.
+
+Further work could compare evidence structures under a fixed serving budget, measuring answer quality alongside construction, matching, cache reuse, and generation costs. Keeping the query workload and hardware fixed would show which structures provide useful information at an acceptable processing cost.

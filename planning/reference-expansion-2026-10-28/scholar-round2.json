@@ -1,0 +1,1064 @@
+[
+  {
+    "title": "Colnet: Embedding the semantics of web tables for column type prediction",
+    "url": "https://scholar.google.com/scholar?q=%22Colnet%3A%20Embedding%20the%20semantics%20of%20web%20tables%20for%20column%20type%20prediction%22",
+    "text": "Articles\nMy profile\nMy library\nAny time\nSince 2026\nSince 2025\nSince 2022\nCustom range...\nSort by relevance\nSort by date\nAny type\nReview articles\ninclude patents\ninclude citations\n\t\n[PDF] aaai.org\nQuick read\nColnet: Embedding the semantics of web tables for column type prediction\nJ Chen, E Jiménez-Ruiz, I Horrocks, C Sutton\nProceedings of the AAAI Conference on Artificial Intelligence, 2019•ojs.aaai.org\nAbstract\nAutomatically annotating column types with knowledge base (KB) concepts is a critical task to gain a basic understanding of web tables. Current methods rely on either table metadata like column name or entity correspondences of cells in the KB, and may fail to deal with growing web tables with incomplete meta information. In this paper we propose a neural network based column type annotation framework named ColNet which is able to integrate KB reasoning and lookup with machine learning and can automatically train Convolutional Neural Networks for prediction. The prediction model not only considers the contextual semantics within a cell using word representation, but also embeds the semantics of a column by learning locality features from multiple cells. The method is evaluated with DBPedia and two different web table datasets, T2Dv2 from the general Web and Limaye from Wikipedia pages, and achieves higher performance than the state-of-the-art approaches.\nojs.aaai.org\nSHOW MORE\nSave Cite Cited by 195 Related articles All 14 versions \nShowing the best result for this search. See all results\nPrivacyTermsHelp",
+    "results": [
+      {
+        "title": "Colnet: Embedding the semantics of web tables for column type prediction",
+        "text": "Colnet: Embedding the semantics of web tables for column type prediction\nJ Chen, E Jiménez-Ruiz, I Horrocks, C Sutton\nProceedings of the AAAI Conference on Artificial Intelligence, 2019•ojs.aaai.org\nAbstract\nAutomatically annotating column types with knowledge base (KB) concepts is a critical task to gain a basic understanding of web tables. Current methods rely on either table metadata like column name or entity correspondences of cells in the KB, and may fail to deal with growing web tables with incomplete meta information. In this paper we propose a neural network based column type annotation framework named ColNet which is able to integrate KB reasoning and lookup with machine learning and can automatically train Convolutional Neural Networks for prediction. The prediction model not only considers the contextual semantics within a cell using word representation, but also embeds the semantics of a column by learning locality features from multiple cells. The method is evaluated with DBPedia and two different web table datasets, T2Dv2 from the general Web and Limaye from Wikipedia pages, and achieves higher performance than the state-of-the-art approaches.\nojs.aaai.org\nSHOW MORE\nSave Cite Cited by 195 Related articles All 14 versions ",
+        "links": [
+          {
+            "text": "Colnet: Embedding the semantics of web tables for column type prediction",
+            "href": "https://ojs.aaai.org/index.php/AAAI/article/view/3765"
+          },
+          {
+            "text": "J Chen",
+            "href": "https://scholar.google.com/citations?user=5Cy4z8wAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "E Jiménez-Ruiz",
+            "href": "https://scholar.google.com/citations?user=07ioke0AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "J Chen",
+            "href": "https://scholar.google.com/citations?user=5Cy4z8wAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "E Jiménez-Ruiz",
+            "href": "https://scholar.google.com/citations?user=07ioke0AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "C Sutton",
+            "href": "https://scholar.google.com/citations?user=hYtGXD0AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "SHOW MORE",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 195",
+            "href": "https://scholar.google.com/scholar?cites=17330368951763604757&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:FRVUzL3WgfAJ:scholar.google.com/&scioq=%22Colnet:+Embedding+the+semantics+of+web+tables+for+column+type+prediction%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 14 versions",
+            "href": "https://scholar.google.com/scholar?cluster=17330368951763604757&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:FRVUzL3WgfAJ:scholar.google.com/+%22Colnet:+Embedding+the+semantics+of+web+tables+for+column+type+prediction%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Tcn: Table convolutional network for web table interpretation",
+    "url": "https://scholar.google.com/scholar?q=%22Tcn%3A%20Table%20convolutional%20network%20for%20web%20table%20interpretation%22",
+    "text": "Articles\nMy profile\nMy library\nAny time\nSince 2026\nSince 2025\nSince 2022\nCustom range...\nSort by relevance\nSort by date\nAny type\nReview articles\ninclude patents\ninclude citations\n\t\n[PDF] acm.org\nQuick read - arxiv.org\nTcn: Table convolutional network for web table interpretation\nD Wang, P Shiralkar, C Lockard, B Huang, XL Dong, M Jiang\nProceedings of the web conference 2021, 2021•dl.acm.org\nInformation extraction from semi-structured webpages provides valuable long-tailed facts for augmenting knowledge graph. Relational Web tables are a critical component containing additional entities and attributes of rich and diverse knowledge. However, extracting knowledge from relational tables is challenging because of sparse contextual information. Existing work linearize table cells and heavily rely on modifying deep language models such as BERT which only captures related cells information in the same table. In this work, we propose a novel relational table representation learning approach considering both the intra- and inter-table contextual information. On one hand, the proposed Table Convolutional Network model employs the attention mechanism to adaptively focus on the most informative intra-table cells of the same row or column; and, on the other hand, it aggregates inter-table contextual information from various types of implicit connections between cells across different tables. Specifically, we propose three novel aggregation modules for (i) cells of the same value, (ii) cells of the same schema position, and (iii) cells linked to the same page topic. We further devise a supervised multi-task training objective for jointly predicting column type and pairwise column relation, as well as a table cell recovery objective for pre-training. Experiments on real Web table datasets demonstrate our method can outperform competitive baselines by of F1 for column type prediction and by of F1 for pairwise column relation prediction.\nACM Digital Library\nSHOW MORE\nSave Cite Cited by 94 Related articles All 7 versions\nShowing the best result for this search. See all results\nPrivacyTermsHelp",
+    "results": [
+      {
+        "title": "Tcn: Table convolutional network for web table interpretation",
+        "text": "Tcn: Table convolutional network for web table interpretation\nD Wang, P Shiralkar, C Lockard, B Huang, XL Dong, M Jiang\nProceedings of the web conference 2021, 2021•dl.acm.org\nInformation extraction from semi-structured webpages provides valuable long-tailed facts for augmenting knowledge graph. Relational Web tables are a critical component containing additional entities and attributes of rich and diverse knowledge. However, extracting knowledge from relational tables is challenging because of sparse contextual information. Existing work linearize table cells and heavily rely on modifying deep language models such as BERT which only captures related cells information in the same table. In this work, we propose a novel relational table representation learning approach considering both the intra- and inter-table contextual information. On one hand, the proposed Table Convolutional Network model employs the attention mechanism to adaptively focus on the most informative intra-table cells of the same row or column; and, on the other hand, it aggregates inter-table contextual information from various types of implicit connections between cells across different tables. Specifically, we propose three novel aggregation modules for (i) cells of the same value, (ii) cells of the same schema position, and (iii) cells linked to the same page topic. We further devise a supervised multi-task training objective for jointly predicting column type and pairwise column relation, as well as a table cell recovery objective for pre-training. Experiments on real Web table datasets demonstrate our method can outperform competitive baselines by of F1 for column type prediction and by of F1 for pairwise column relation prediction.\nACM Digital Library\nSHOW MORE\nSave Cite Cited by 94 Related articles All 7 versions",
+        "links": [
+          {
+            "text": "Tcn: Table convolutional network for web table interpretation",
+            "href": "https://dl.acm.org/doi/abs/10.1145/3442381.3450090"
+          },
+          {
+            "text": "D Wang",
+            "href": "https://scholar.google.com/citations?user=KcHNH7kAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "P Shiralkar",
+            "href": "https://scholar.google.com/citations?user=NsMkgfUAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "C Lockard",
+            "href": "https://scholar.google.com/citations?user=NnMFTvUAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "B Huang",
+            "href": "https://scholar.google.com/citations?user=_lCJGisAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "D Wang",
+            "href": "https://scholar.google.com/citations?user=KcHNH7kAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "P Shiralkar",
+            "href": "https://scholar.google.com/citations?user=NsMkgfUAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "C Lockard",
+            "href": "https://scholar.google.com/citations?user=NnMFTvUAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "B Huang",
+            "href": "https://scholar.google.com/citations?user=_lCJGisAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "XL Dong",
+            "href": "https://scholar.google.com/citations?user=uGsKvHoAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "M Jiang",
+            "href": "https://scholar.google.com/citations?user=LZIPfCkAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "SHOW MORE",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 94",
+            "href": "https://scholar.google.com/scholar?cites=4645062788024431107&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:A_KUv_6TdkAJ:scholar.google.com/&scioq=%22Tcn:+Table+convolutional+network+for+web+table+interpretation%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 7 versions",
+            "href": "https://scholar.google.com/scholar?cluster=4645062788024431107&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Exploring the limits of transfer learning with a unified text-to-text transformer",
+    "url": "https://scholar.google.com/scholar?q=%22Exploring%20the%20limits%20of%20transfer%20learning%20with%20a%20unified%20text-to-text%20transformer%22",
+    "text": "Articles\nAbout 27,600 results (0.21 sec)\nMy profile\nMy library\nAny time\nSince 2026\nSince 2025\nSince 2022\nCustom range...\nSort by relevance\nSort by date\nAny type\nReview articles\ninclude patents\ninclude citations\nCreate alert\n\t\n[PDF] jmlr.org\nQuick read\nExploring the limits of transfer learning with a unified text-to-text transformer\nC Raffel, N Shazeer, A Roberts, K Lee, S Narang… - Journal of machine …, 2020 - jmlr.org\nTransfer learning, where a model is first pre-trained on a data-rich task before being fine-tuned\non a downstream task, has emerged as a powerful technique in natural language …\nSave Cite Cited by 35755 Related articles All 22 versions \n[CITATION] Exploring the limits of transfer learning with a unified text-to-text transformer\nR Colin - J. Mach. Learn. Res., 2020 - cir.nii.ac.jp\nExploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer | CiNii\nResearch … Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer …\nSave Cite Cited by 678 Related articles All 2 versions \n[PDF] arxiv.org\nQuick read\nA survey on transfer learning in natural language processing\nZ Alyafeai, MS AlShaibani, I Ahmad - arXiv preprint arXiv:2007.04239, 2020 - arxiv.org\nDeep learning models usually require a huge amount of data. However, these large datasets\nare not always attainable. This is common in many challenging NLP tasks. Consider …\nSave Cite Cited by 138 Related articles All 4 versions \n[PDF] arxiv.org\nQuick read\nExtreme Multi-Domain, Multi-Task Learning With Unified Text-to-Text Transfer Transformers\nA Oshingbesan, C Ekoh, G Atakpa… - arXiv preprint arXiv …, 2022 - arxiv.org\nText-to-text transformers have shown remarkable success in the task of multi-task transfer\nlearning, especially in natural language processing (NLP). However, while there have been …\nSave Cite Cited by 2 Related articles All 3 versions \n[PDF] acm.org\nQuick read - arxiv.org\nFull View\nDeep transfer learning & beyond: Transformer language models in information systems research\nR Gruetzemacher, D Paradice - ACM Computing Surveys (CSUR), 2022 - dl.acm.org\nAI is widely thought to be poised to transform business, yet current perceptions of the scope\nof this transformation may be myopic. Recent progress in natural language processing …\nSave Cite Cited by 106 Related articles All 7 versions\n[PDF] laramartin.net\n[PDF] EXPLORING THE LIMITS OF TRANSFER LEARNING WITH A UNIFIED TEXT-TO-TEXT TRANSFORMER\nRR Mada - laramartin.net\nEXPLORING THE LIMITS OF TRANSFER LEARNING WITH A UNIFIED TEXT-TO-TEXT\nTRANSFORMER … EXPLORING THE LIMITS OF TRANSFER LEARNING WITH A UNIFIED …\nSave Cite Related articles \n[PDF] hal.science\nQuick read\nBridging the gap: Leveraging transfer learning for low-resource NLP tasks\nPK Myakala, P Naayini - International Journal of Computer Techniques, 2023 - hal.science\nNatural Language Processing (NLP) has witnessed transformative progress with the advent\nof Large Language Models (LLMs) such as BERT, GPT-3, and T5. However, their impact …\nSave Cite Cited by 28 Related articles \n[PDF] arxiv.org\nQuick read\nIntroduction to neural transfer learning with transformers for social science text analysis\nS Wankmüller - Sociological Methods & Research, 2024 - journals.sagepub.com\nTransformer-based models for transfer learning have the potential to achieve high prediction\naccuracies on text-based supervised learning tasks with relatively few training data …\nSave Cite Cited by 56 Related articles All 13 versions\n[PDF] arxiv.org\nQuick read\nStudying the usage of text-to-text transfer transformer to support code-related tasks\nA Mastropaolo, S Scalabrino, N Cooper… - 2021 IEEE/ACM …, 2021 - ieeexplore.ieee.org\nDeep learning (DL) techniques are gaining more and more attention in the software\nengineering community. They have been used to support several code-related tasks, such as …\nSave Cite Cited by 416 Related articles All 14 versions\n[PDF] aaai.org\nQuick read\nExploring transfer learning for end-to-end spoken language understanding\nS Rongali, B Liu, L Cai, K Arkoudas, C Su… - Proceedings of the AAAI …, 2021 - ojs.aaai.org\nVoice Assistants such as Alexa, Siri, and Google Assistant typically use a two-stage Spoken\nLanguage Understanding pipeline; first, an Automatic Speech Recognition (ASR) …\nSave Cite Cited by 37 Related articles All 8 versions \n\nScholar PDF Reader\n\nTry now\nNo thanks\nSkim AI Outline\nFollow references\nCite and save\n\t1\t2\t3\t4\t5\t6\t7\t8\t9\t10\t\nNext\nPrivacyTermsHelp",
+    "results": [
+      {
+        "title": "Exploring the limits of transfer learning with a unified text-to-text transformer",
+        "text": "Exploring the limits of transfer learning with a unified text-to-text transformer\nC Raffel, N Shazeer, A Roberts, K Lee, S Narang… - Journal of machine …, 2020 - jmlr.org\nTransfer learning, where a model is first pre-trained on a data-rich task before being fine-tuned\non a downstream task, has emerged as a powerful technique in natural language …\nSave Cite Cited by 35755 Related articles All 22 versions ",
+        "links": [
+          {
+            "text": "Exploring the limits of transfer learning with a unified text-to-text transformer",
+            "href": "http://www.jmlr.org/papers/v21/20-074.html"
+          },
+          {
+            "text": "N Shazeer",
+            "href": "https://scholar.google.com/citations?user=wsGvgA8AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "A Roberts",
+            "href": "https://scholar.google.com/citations?user=U5UpKq8AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "K Lee",
+            "href": "https://scholar.google.com/citations?user=bjdB4K8AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "S Narang",
+            "href": "https://scholar.google.com/citations?user=CWOixywAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 35755",
+            "href": "https://scholar.google.com/scholar?cites=7208240739342522072&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:2JYC9MLQCGQJ:scholar.google.com/&scioq=%22Exploring+the+limits+of+transfer+learning+with+a+unified+text-to-text+transformer%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 22 versions",
+            "href": "https://scholar.google.com/scholar?cluster=7208240739342522072&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "http://scholar.googleusercontent.com/scholar?q=cache:2JYC9MLQCGQJ:scholar.google.com/+%22Exploring+the+limits+of+transfer+learning+with+a+unified+text-to-text+transformer%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "[CITATION] Exploring the limits of transfer learning with a unified text-to-text transformer",
+        "text": "[CITATION] Exploring the limits of transfer learning with a unified text-to-text transformer\nR Colin - J. Mach. Learn. Res., 2020 - cir.nii.ac.jp\nExploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer | CiNii\nResearch … Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer …\nSave Cite Cited by 678 Related articles All 2 versions ",
+        "links": [
+          {
+            "text": "Exploring the limits of transfer learning with a unified text-to-text transformer",
+            "href": "https://cir.nii.ac.jp/crid/1370302865746613383"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 678",
+            "href": "https://scholar.google.com/scholar?cites=15987816323914425170&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:UmMcUT0i4N0J:scholar.google.com/&scioq=%22Exploring+the+limits+of+transfer+learning+with+a+unified+text-to-text+transformer%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 2 versions",
+            "href": "https://scholar.google.com/scholar?cluster=15987816323914425170&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cached",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:UmMcUT0i4N0J:scholar.google.com/+%22Exploring+the+limits+of+transfer+learning+with+a+unified+text-to-text+transformer%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "A survey on transfer learning in natural language processing",
+        "text": "A survey on transfer learning in natural language processing\nZ Alyafeai, MS AlShaibani, I Ahmad - arXiv preprint arXiv:2007.04239, 2020 - arxiv.org\nDeep learning models usually require a huge amount of data. However, these large datasets\nare not always attainable. This is common in many challenging NLP tasks. Consider …\nSave Cite Cited by 138 Related articles All 4 versions ",
+        "links": [
+          {
+            "text": "A survey on transfer learning in natural language processing",
+            "href": "https://arxiv.org/abs/2007.04239"
+          },
+          {
+            "text": "Z Alyafeai",
+            "href": "https://scholar.google.com/citations?user=vb6w6j4AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "MS AlShaibani",
+            "href": "https://scholar.google.com/citations?user=Uo91Tz0AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "I Ahmad",
+            "href": "https://scholar.google.com/citations?user=L75sJxAAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 138",
+            "href": "https://scholar.google.com/scholar?cites=1801536732966376905&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:yVVHGh1YABkJ:scholar.google.com/&scioq=%22Exploring+the+limits+of+transfer+learning+with+a+unified+text-to-text+transformer%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 4 versions",
+            "href": "https://scholar.google.com/scholar?cluster=1801536732966376905&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:yVVHGh1YABkJ:scholar.google.com/+%22Exploring+the+limits+of+transfer+learning+with+a+unified+text-to-text+transformer%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "Extreme Multi-Domain, Multi-Task Learning With Unified Text-to-Text Transfer Transformers",
+        "text": "Extreme Multi-Domain, Multi-Task Learning With Unified Text-to-Text Transfer Transformers\nA Oshingbesan, C Ekoh, G Atakpa… - arXiv preprint arXiv …, 2022 - arxiv.org\nText-to-text transformers have shown remarkable success in the task of multi-task transfer\nlearning, especially in natural language processing (NLP). However, while there have been …\nSave Cite Cited by 2 Related articles All 3 versions ",
+        "links": [
+          {
+            "text": "Extreme Multi-Domain, Multi-Task Learning With Unified Text-to-Text Transfer Transformers",
+            "href": "https://arxiv.org/abs/2209.10106"
+          },
+          {
+            "text": "A Oshingbesan",
+            "href": "https://scholar.google.com/citations?user=XD8n1IgAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "C Ekoh",
+            "href": "https://scholar.google.com/citations?user=CFYxihYAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 2",
+            "href": "https://scholar.google.com/scholar?cites=4807445739576498682&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:-hls4G16t0IJ:scholar.google.com/&scioq=%22Exploring+the+limits+of+transfer+learning+with+a+unified+text-to-text+transformer%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 3 versions",
+            "href": "https://scholar.google.com/scholar?cluster=4807445739576498682&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:-hls4G16t0IJ:scholar.google.com/+%22Exploring+the+limits+of+transfer+learning+with+a+unified+text-to-text+transformer%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "Deep transfer learning & beyond: Transformer language models in information systems research",
+        "text": "Deep transfer learning & beyond: Transformer language models in information systems research\nR Gruetzemacher, D Paradice - ACM Computing Surveys (CSUR), 2022 - dl.acm.org\nAI is widely thought to be poised to transform business, yet current perceptions of the scope\nof this transformation may be myopic. Recent progress in natural language processing …\nSave Cite Cited by 106 Related articles All 7 versions",
+        "links": [
+          {
+            "text": "Deep transfer learning & beyond: Transformer language models in information systems research",
+            "href": "https://dl.acm.org/doi/abs/10.1145/3505245"
+          },
+          {
+            "text": "R Gruetzemacher",
+            "href": "https://scholar.google.com/citations?user=GefwTQcAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "D Paradice",
+            "href": "https://scholar.google.com/citations?user=xvMSU60AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 106",
+            "href": "https://scholar.google.com/scholar?cites=5889705817831446965&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:tRllfzxwvFEJ:scholar.google.com/&scioq=%22Exploring+the+limits+of+transfer+learning+with+a+unified+text-to-text+transformer%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 7 versions",
+            "href": "https://scholar.google.com/scholar?cluster=5889705817831446965&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "[PDF] EXPLORING THE LIMITS OF TRANSFER LEARNING WITH A UNIFIED TEXT-TO-TEXT TRANSFORMER",
+        "text": "[PDF] EXPLORING THE LIMITS OF TRANSFER LEARNING WITH A UNIFIED TEXT-TO-TEXT TRANSFORMER\nRR Mada - laramartin.net\nEXPLORING THE LIMITS OF TRANSFER LEARNING WITH A UNIFIED TEXT-TO-TEXT\nTRANSFORMER … EXPLORING THE LIMITS OF TRANSFER LEARNING WITH A UNIFIED …\nSave Cite Related articles ",
+        "links": [
+          {
+            "text": "EXPLORING THE LIMITS OF TRANSFER LEARNING WITH A UNIFIED TEXT-TO-TEXT TRANSFORMER",
+            "href": "https://laramartin.net/interactive-fiction-class/2024/presentations/Mada_Exploring-the-limits.pdf"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:_B2jS3SApEQJ:scholar.google.com/&scioq=%22Exploring+the+limits+of+transfer+learning+with+a+unified+text-to-text+transformer%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:_B2jS3SApEQJ:scholar.google.com/+%22Exploring+the+limits+of+transfer+learning+with+a+unified+text-to-text+transformer%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "Bridging the gap: Leveraging transfer learning for low-resource NLP tasks",
+        "text": "Bridging the gap: Leveraging transfer learning for low-resource NLP tasks\nPK Myakala, P Naayini - International Journal of Computer Techniques, 2023 - hal.science\nNatural Language Processing (NLP) has witnessed transformative progress with the advent\nof Large Language Models (LLMs) such as BERT, GPT-3, and T5. However, their impact …\nSave Cite Cited by 28 Related articles ",
+        "links": [
+          {
+            "text": "Bridging the gap: Leveraging transfer learning for low-resource NLP tasks",
+            "href": "https://hal.science/hal-05054585/"
+          },
+          {
+            "text": "PK Myakala",
+            "href": "https://scholar.google.com/citations?user=Shx2gIAAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "P Naayini",
+            "href": "https://scholar.google.com/citations?user=OyOZD6wAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 28",
+            "href": "https://scholar.google.com/scholar?cites=6766479815165867468&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:zPXPoopd510J:scholar.google.com/&scioq=%22Exploring+the+limits+of+transfer+learning+with+a+unified+text-to-text+transformer%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:zPXPoopd510J:scholar.google.com/+%22Exploring+the+limits+of+transfer+learning+with+a+unified+text-to-text+transformer%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "Introduction to neural transfer learning with transformers for social science text analysis",
+        "text": "Introduction to neural transfer learning with transformers for social science text analysis\nS Wankmüller - Sociological Methods & Research, 2024 - journals.sagepub.com\nTransformer-based models for transfer learning have the potential to achieve high prediction\naccuracies on text-based supervised learning tasks with relatively few training data …\nSave Cite Cited by 56 Related articles All 13 versions",
+        "links": [
+          {
+            "text": "Introduction to neural transfer learning with transformers for social science text analysis",
+            "href": "https://journals.sagepub.com/doi/abs/10.1177/00491241221134527"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 56",
+            "href": "https://scholar.google.com/scholar?cites=8410794858771592703&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:_zXDm1wluXQJ:scholar.google.com/&scioq=%22Exploring+the+limits+of+transfer+learning+with+a+unified+text-to-text+transformer%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 13 versions",
+            "href": "https://scholar.google.com/scholar?cluster=8410794858771592703&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "Studying the usage of text-to-text transfer transformer to support code-related tasks",
+        "text": "Studying the usage of text-to-text transfer transformer to support code-related tasks\nA Mastropaolo, S Scalabrino, N Cooper… - 2021 IEEE/ACM …, 2021 - ieeexplore.ieee.org\nDeep learning (DL) techniques are gaining more and more attention in the software\nengineering community. They have been used to support several code-related tasks, such as …\nSave Cite Cited by 416 Related articles All 14 versions",
+        "links": [
+          {
+            "text": "Studying the usage of text-to-text transfer transformer to support code-related tasks",
+            "href": "https://ieeexplore.ieee.org/abstract/document/9401982/"
+          },
+          {
+            "text": "A Mastropaolo",
+            "href": "https://scholar.google.com/citations?user=A6E30JkAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "S Scalabrino",
+            "href": "https://scholar.google.com/citations?user=FBP0Z64AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "N Cooper",
+            "href": "https://scholar.google.com/citations?user=JAoIyAQAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 416",
+            "href": "https://scholar.google.com/scholar?cites=4519027896501895080&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:qH8T1e3Ptj4J:scholar.google.com/&scioq=%22Exploring+the+limits+of+transfer+learning+with+a+unified+text-to-text+transformer%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 14 versions",
+            "href": "https://scholar.google.com/scholar?cluster=4519027896501895080&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "Exploring transfer learning for end-to-end spoken language understanding",
+        "text": "Exploring transfer learning for end-to-end spoken language understanding\nS Rongali, B Liu, L Cai, K Arkoudas, C Su… - Proceedings of the AAAI …, 2021 - ojs.aaai.org\nVoice Assistants such as Alexa, Siri, and Google Assistant typically use a two-stage Spoken\nLanguage Understanding pipeline; first, an Automatic Speech Recognition (ASR) …\nSave Cite Cited by 37 Related articles All 8 versions ",
+        "links": [
+          {
+            "text": "Exploring transfer learning for end-to-end spoken language understanding",
+            "href": "https://ojs.aaai.org/index.php/AAAI/article/view/17621"
+          },
+          {
+            "text": "S Rongali",
+            "href": "https://scholar.google.com/citations?user=pKEjWnsAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "B Liu",
+            "href": "https://scholar.google.com/citations?user=V-hs6PYAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "L Cai",
+            "href": "https://scholar.google.com/citations?user=wqWpw4QAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "C Su",
+            "href": "https://scholar.google.com/citations?user=j2x7OzgAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 37",
+            "href": "https://scholar.google.com/scholar?cites=2336502956054425703&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:ZzBGKA_tbCAJ:scholar.google.com/&scioq=%22Exploring+the+limits+of+transfer+learning+with+a+unified+text-to-text+transformer%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 8 versions",
+            "href": "https://scholar.google.com/scholar?cluster=2336502956054425703&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:ZzBGKA_tbCAJ:scholar.google.com/+%22Exploring+the+limits+of+transfer+learning+with+a+unified+text-to-text+transformer%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Generalizing from a few examples: A survey on few-shot learning",
+    "url": "https://scholar.google.com/scholar?q=%22Generalizing%20from%20a%20few%20examples%3A%20A%20survey%20on%20few-shot%20learning%22",
+    "text": "Articles\nMy profile\nMy library\nAny time\nSince 2026\nSince 2025\nSince 2022\nCustom range...\nSort by relevance\nSort by date\nAny type\nReview articles\ninclude patents\ninclude citations\n\t\n[PDF] acm.org\nQuick read - arxiv.org\nFull View\nGeneralizing from a few examples: A survey on few-shot learning\nY Wang, Q Yao, JT Kwok, LM Ni\nACM computing surveys (csur), 2020•dl.acm.org\nMachine learning has been highly successful in data-intensive applications but is often hampered when the data set is small. Recently, Few-shot Learning (FSL) is proposed to tackle this problem. Using prior knowledge, FSL can rapidly generalize to new tasks containing only a few samples with supervised information. In this article, we conduct a thorough survey to fully understand FSL. Starting from a formal definition of FSL, we distinguish FSL from several relevant machine learning problems. We then point out that the core issue in FSL is that the empirical risk minimizer is unreliable. Based on how prior knowledge can be used to handle this core issue, we categorize FSL methods from three perspectives: (i) data, which uses prior knowledge to augment the supervised experience; (ii) model, which uses prior knowledge to reduce the size of the hypothesis space; and (iii) algorithm, which uses prior knowledge to alter the search for the best hypothesis in the given hypothesis space. With this taxonomy, we review and discuss the pros and cons of each category. Promising directions, in the aspects of the FSL problem setups, techniques, applications, and theories, are also proposed to provide insights for future research.1\nACM Digital Library\nSHOW MORE\nSave Cite Cited by 5401 Related articles All 8 versions\nShowing the best result for this search. See all results\nPrivacyTermsHelp",
+    "results": [
+      {
+        "title": "Generalizing from a few examples: A survey on few-shot learning",
+        "text": "Generalizing from a few examples: A survey on few-shot learning\nY Wang, Q Yao, JT Kwok, LM Ni\nACM computing surveys (csur), 2020•dl.acm.org\nMachine learning has been highly successful in data-intensive applications but is often hampered when the data set is small. Recently, Few-shot Learning (FSL) is proposed to tackle this problem. Using prior knowledge, FSL can rapidly generalize to new tasks containing only a few samples with supervised information. In this article, we conduct a thorough survey to fully understand FSL. Starting from a formal definition of FSL, we distinguish FSL from several relevant machine learning problems. We then point out that the core issue in FSL is that the empirical risk minimizer is unreliable. Based on how prior knowledge can be used to handle this core issue, we categorize FSL methods from three perspectives: (i) data, which uses prior knowledge to augment the supervised experience; (ii) model, which uses prior knowledge to reduce the size of the hypothesis space; and (iii) algorithm, which uses prior knowledge to alter the search for the best hypothesis in the given hypothesis space. With this taxonomy, we review and discuss the pros and cons of each category. Promising directions, in the aspects of the FSL problem setups, techniques, applications, and theories, are also proposed to provide insights for future research.1\nACM Digital Library\nSHOW MORE\nSave Cite Cited by 5401 Related articles All 8 versions",
+        "links": [
+          {
+            "text": "Generalizing from a few examples: A survey on few-shot learning",
+            "href": "https://dl.acm.org/doi/abs/10.1145/3386252"
+          },
+          {
+            "text": "Y Wang",
+            "href": "https://scholar.google.com/citations?user=fCi1oMoAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Q Yao",
+            "href": "https://scholar.google.com/citations?user=6PEbAiYAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "JT Kwok",
+            "href": "https://scholar.google.com/citations?user=-oTraZ4AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "LM Ni",
+            "href": "https://scholar.google.com/citations?user=OzMYwDIAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Y Wang",
+            "href": "https://scholar.google.com/citations?user=fCi1oMoAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Q Yao",
+            "href": "https://scholar.google.com/citations?user=6PEbAiYAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "JT Kwok",
+            "href": "https://scholar.google.com/citations?user=-oTraZ4AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "LM Ni",
+            "href": "https://scholar.google.com/citations?user=OzMYwDIAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "SHOW MORE",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 5401",
+            "href": "https://scholar.google.com/scholar?cites=7932202448069313464&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:uMOnkxnYFG4J:scholar.google.com/&scioq=%22Generalizing+from+a+few+examples:+A+survey+on+few-shot+learning%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 8 versions",
+            "href": "https://scholar.google.com/scholar?cluster=7932202448069313464&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Chain-of-thought prompting elicits reasoning in large language models",
+    "url": "https://scholar.google.com/scholar?q=%22Chain-of-thought%20prompting%20elicits%20reasoning%20in%20large%20language%20models%22",
+    "text": "Articles\nMy profile\nMy library\nAny time\nSince 2026\nSince 2025\nSince 2022\nCustom range...\nSort by relevance\nSort by date\nAny type\nReview articles\ninclude patents\ninclude citations\n\t\n[PDF] neurips.cc\nQuick read\nChain-of-thought prompting elicits reasoning in large language models\nJ Wei, X Wang, D Schuurmans, M Bosma, F Xia, E Chi, QV Le, D Zhou\nAdvances in neural information processing systems, 2022•proceedings.neurips.cc\nAbstract\nWe explore how generating a chain of thought---a series of intermediate reasoning steps---significantly improves the ability of large language models to perform complex reasoning. In particular, we show how such reasoning abilities emerge naturally in sufficiently large language models via a simple method called chain of thought prompting, where a few chain of thought demonstrations are provided as exemplars in prompting. Experiments on three large language models show that chain of thought prompting improves performance on a range of arithmetic, commonsense, and symbolic reasoning tasks. The empirical gains can be striking. For instance, prompting a 540B-parameter language model with just eight chain of thought exemplars achieves state of the art accuracy on the GSM8K benchmark of math word problems, surpassing even finetuned GPT-3 with a verifier.\nproceedings.neurips.cc\nSHOW MORE\nSave Cite Cited by 41333 Related articles All 28 versions \nShowing the best result for this search. See all results\nPrivacyTermsHelp",
+    "results": [
+      {
+        "title": "Chain-of-thought prompting elicits reasoning in large language models",
+        "text": "Chain-of-thought prompting elicits reasoning in large language models\nJ Wei, X Wang, D Schuurmans, M Bosma, F Xia, E Chi, QV Le, D Zhou\nAdvances in neural information processing systems, 2022•proceedings.neurips.cc\nAbstract\nWe explore how generating a chain of thought---a series of intermediate reasoning steps---significantly improves the ability of large language models to perform complex reasoning. In particular, we show how such reasoning abilities emerge naturally in sufficiently large language models via a simple method called chain of thought prompting, where a few chain of thought demonstrations are provided as exemplars in prompting. Experiments on three large language models show that chain of thought prompting improves performance on a range of arithmetic, commonsense, and symbolic reasoning tasks. The empirical gains can be striking. For instance, prompting a 540B-parameter language model with just eight chain of thought exemplars achieves state of the art accuracy on the GSM8K benchmark of math word problems, surpassing even finetuned GPT-3 with a verifier.\nproceedings.neurips.cc\nSHOW MORE\nSave Cite Cited by 41333 Related articles All 28 versions ",
+        "links": [
+          {
+            "text": "Chain-of-thought prompting elicits reasoning in large language models",
+            "href": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/9d5609613524ecf4f15af0f7b31abca4-Abstract.html"
+          },
+          {
+            "text": "J Wei",
+            "href": "https://scholar.google.com/citations?user=wA5TK_0AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "X Wang",
+            "href": "https://scholar.google.com/citations?user=ScLUQ-YAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "D Schuurmans",
+            "href": "https://scholar.google.com/citations?user=xaQuPloAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "J Wei",
+            "href": "https://scholar.google.com/citations?user=wA5TK_0AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "X Wang",
+            "href": "https://scholar.google.com/citations?user=ScLUQ-YAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "D Schuurmans",
+            "href": "https://scholar.google.com/citations?user=xaQuPloAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "M Bosma",
+            "href": "https://scholar.google.com/citations?user=wkeFQPgAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "F Xia",
+            "href": "https://scholar.google.com/citations?user=pqP5_PgAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "E Chi",
+            "href": "https://scholar.google.com/citations?user=VuWl-KUAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "QV Le",
+            "href": "https://scholar.google.com/citations?user=vfT6-XIAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "D Zhou",
+            "href": "https://scholar.google.com/citations?user=UwLsYw8AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "SHOW MORE",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 41333",
+            "href": "https://scholar.google.com/scholar?cites=4478103128423899805&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:naJFvRFrJT4J:scholar.google.com/&scioq=%22Chain-of-thought+prompting+elicits+reasoning+in+large+language+models%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 28 versions",
+            "href": "https://scholar.google.com/scholar?cluster=4478103128423899805&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:naJFvRFrJT4J:scholar.google.com/+%22Chain-of-thought+prompting+elicits+reasoning+in+large+language+models%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Dynamic few-shot visual learning without forgetting",
+    "url": "https://scholar.google.com/scholar?q=%22Dynamic%20few-shot%20visual%20learning%20without%20forgetting%22",
+    "text": "Articles\nMy profile\nMy library\nAny time\nSince 2026\nSince 2025\nSince 2022\nCustom range...\nSort by relevance\nSort by date\nAny type\nReview articles\ninclude patents\ninclude citations\n\t\n[PDF] arxiv.org\nQuick read\nDynamic few-shot visual learning without forgetting\nS Gidaris, N Komodakis\n2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition, 2018•ieeexplore.ieee.org\nThe human visual system has the remarkably ability to be able to effortlessly learn novel concepts from only a few examples. Mimicking the same behavior on machine learning vision systems is an interesting and very challenging research problem with many practical advantages on real world vision applications. In this context, the goal of our work is to devise a few-shot visual learning system that during test time it will be able to efficiently learn novel categories from only a few training data while at the same time it will not forget the initial categories on which it was trained (here called base categories). To achieve that goal we propose (a) to extend an object recognition system with an attention based few-shot classification weight generator, and (b) to redesign the classifier of a ConvNet model as the cosine similarity function between feature representations and classification weight vectors. The latter, apart from unifying the recognition of both novel and base categories, it also leads to feature representations that generalize better on \"unseen\" categories. We extensively evaluate our approach on Mini-ImageNet where we manage to improve the prior state-of-the-art on few-shot recognition (i.e., we achieve 56.20% and 73.00% on the 1-shot and 5-shot settings respectively) while at the same time we do not sacrifice any accuracy on the base categories, which is a characteristic that most prior approaches lack. Finally, we apply our approach on the recently introduced few-shot benchmark of Bharath and Girshick [4] where we also achieve state-of-the-art results.\nieeexplore.ieee.org\nSHOW MORE\nSave Cite Cited by 1623 Related articles All 10 versions\nShowing the best result for this search. See all results\nPrivacyTermsHelp",
+    "results": [
+      {
+        "title": "Dynamic few-shot visual learning without forgetting",
+        "text": "Dynamic few-shot visual learning without forgetting\nS Gidaris, N Komodakis\n2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition, 2018•ieeexplore.ieee.org\nThe human visual system has the remarkably ability to be able to effortlessly learn novel concepts from only a few examples. Mimicking the same behavior on machine learning vision systems is an interesting and very challenging research problem with many practical advantages on real world vision applications. In this context, the goal of our work is to devise a few-shot visual learning system that during test time it will be able to efficiently learn novel categories from only a few training data while at the same time it will not forget the initial categories on which it was trained (here called base categories). To achieve that goal we propose (a) to extend an object recognition system with an attention based few-shot classification weight generator, and (b) to redesign the classifier of a ConvNet model as the cosine similarity function between feature representations and classification weight vectors. The latter, apart from unifying the recognition of both novel and base categories, it also leads to feature representations that generalize better on \"unseen\" categories. We extensively evaluate our approach on Mini-ImageNet where we manage to improve the prior state-of-the-art on few-shot recognition (i.e., we achieve 56.20% and 73.00% on the 1-shot and 5-shot settings respectively) while at the same time we do not sacrifice any accuracy on the base categories, which is a characteristic that most prior approaches lack. Finally, we apply our approach on the recently introduced few-shot benchmark of Bharath and Girshick [4] where we also achieve state-of-the-art results.\nieeexplore.ieee.org\nSHOW MORE\nSave Cite Cited by 1623 Related articles All 10 versions",
+        "links": [
+          {
+            "text": "Dynamic few-shot visual learning without forgetting",
+            "href": "https://ieeexplore.ieee.org/abstract/document/8578557/"
+          },
+          {
+            "text": "S Gidaris",
+            "href": "https://scholar.google.com/citations?user=7atfg7EAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "N Komodakis",
+            "href": "https://scholar.google.com/citations?user=xCPoT4EAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "S Gidaris",
+            "href": "https://scholar.google.com/citations?user=7atfg7EAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "N Komodakis",
+            "href": "https://scholar.google.com/citations?user=xCPoT4EAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "SHOW MORE",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 1623",
+            "href": "https://scholar.google.com/scholar?cites=9404727509298354192&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:EJgSYddNhIIJ:scholar.google.com/&scioq=%22Dynamic+few-shot+visual+learning+without+forgetting%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 10 versions",
+            "href": "https://scholar.google.com/scholar?cluster=9404727509298354192&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Incremental few-shot learning with attention attractor networks",
+    "url": "https://scholar.google.com/scholar?q=%22Incremental%20few-shot%20learning%20with%20attention%20attractor%20networks%22",
+    "text": "Articles\nMy profile\nMy library\nAny time\nSince 2026\nSince 2025\nSince 2022\nCustom range...\nSort by relevance\nSort by date\nAny type\nReview articles\ninclude patents\ninclude citations\n\t\n[PDF] neurips.cc\nQuick read\nIncremental few-shot learning with attention attractor networks\nM Ren, R Liao, E Fetaya, R Zemel\nAdvances in neural information processing systems, 2019•proceedings.neurips.cc\nAbstract\nMachine learning classifiers are often trained to recognize a set of pre-defined classes. However, in many applications, it is often desirable to have the flexibility of learning additional concepts, with limited data and without re-training on the full training set. This paper addresses this problem, incremental few-shot learning, where a regular classification network has already been trained to recognize a set of base classes, and several extra novel classes are being considered, each with only a few labeled examples. After learning the novel classes, the model is then evaluated on the overall classification performance on both base and novel classes. To this end, we propose a meta-learning model, the Attention Attractor Network, which regularizes the learning of novel classes. In each episode, we train a set of new weights to recognize novel classes until they converge, and we show that the technique of recurrent back-propagation can back-propagate through the optimization process and facilitate the learning of these parameters. We demonstrate that the learned attractor network can help recognize novel classes while remembering old classes without the need to review the original training set, outperforming various baselines.\nproceedings.neurips.cc\nSHOW MORE\nSave Cite Cited by 238 Related articles All 8 versions \nShowing the best result for this search. See all results\nPrivacyTermsHelp",
+    "results": [
+      {
+        "title": "Incremental few-shot learning with attention attractor networks",
+        "text": "Incremental few-shot learning with attention attractor networks\nM Ren, R Liao, E Fetaya, R Zemel\nAdvances in neural information processing systems, 2019•proceedings.neurips.cc\nAbstract\nMachine learning classifiers are often trained to recognize a set of pre-defined classes. However, in many applications, it is often desirable to have the flexibility of learning additional concepts, with limited data and without re-training on the full training set. This paper addresses this problem, incremental few-shot learning, where a regular classification network has already been trained to recognize a set of base classes, and several extra novel classes are being considered, each with only a few labeled examples. After learning the novel classes, the model is then evaluated on the overall classification performance on both base and novel classes. To this end, we propose a meta-learning model, the Attention Attractor Network, which regularizes the learning of novel classes. In each episode, we train a set of new weights to recognize novel classes until they converge, and we show that the technique of recurrent back-propagation can back-propagate through the optimization process and facilitate the learning of these parameters. We demonstrate that the learned attractor network can help recognize novel classes while remembering old classes without the need to review the original training set, outperforming various baselines.\nproceedings.neurips.cc\nSHOW MORE\nSave Cite Cited by 238 Related articles All 8 versions ",
+        "links": [
+          {
+            "text": "Incremental few-shot learning with attention attractor networks",
+            "href": "https://proceedings.neurips.cc/paper_files/paper/2019/hash/e833e042f509c996b1b25324d56659fb-Abstract.html"
+          },
+          {
+            "text": "M Ren",
+            "href": "https://scholar.google.com/citations?user=XcQ9WqMAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "R Liao",
+            "href": "https://scholar.google.com/citations?user=2wrS35MAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "E Fetaya",
+            "href": "https://scholar.google.com/citations?user=zLuqh-0AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "M Ren",
+            "href": "https://scholar.google.com/citations?user=XcQ9WqMAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "R Liao",
+            "href": "https://scholar.google.com/citations?user=2wrS35MAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "E Fetaya",
+            "href": "https://scholar.google.com/citations?user=zLuqh-0AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "R Zemel",
+            "href": "https://scholar.google.com/citations?user=iBeDoRAAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "SHOW MORE",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 238",
+            "href": "https://scholar.google.com/scholar?cites=13601757233344695275&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:60ucdiMmw7wJ:scholar.google.com/&scioq=%22Incremental+few-shot+learning+with+attention+attractor+networks%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 8 versions",
+            "href": "https://scholar.google.com/scholar?cluster=13601757233344695275&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:60ucdiMmw7wJ:scholar.google.com/+%22Incremental+few-shot+learning+with+attention+attractor+networks%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "KnowGPT: Knowledge Graph based Prompting for Large Language Models",
+    "url": "https://scholar.google.com/scholar?q=%22KnowGPT%3A%20Knowledge%20Graph%20based%20Prompting%20for%20Large%20Language%20Models%22",
+    "text": "Articles\nMy profile\nMy library\nAny time\nSince 2026\nSince 2025\nSince 2022\nCustom range...\nSort by relevance\nSort by date\nAny type\nReview articles\ninclude patents\ninclude citations\n\t\n[PDF] neurips.cc\nQuick read\nKnowgpt: Knowledge graph based prompting for large language models\nQ Zhang, J Dong, H Chen, D Zha, Z Yu, X Huang\nAdvances in neural information processing systems, 2024•proceedings.neurips.cc\nAbstract\nLarge Language Models (LLMs) have demonstrated remarkable capabilities in many real-world applications. Nonetheless, LLMs are often criticized for their tendency to produce hallucinations, wherein the models fabricate incorrect statements on tasks beyond their knowledge and perception. To alleviate this issue, graph retrieval-augmented generation (GraphRAG) has been extensively explored which leverages the factual knowledge in knowledge graphs (KGs) to ground the LLM's responses in established facts and principles. However, most state-of-the-art LLMs are closed-source, making it challenging to develop a prompting framework that can efficiently and effectively integrate KGs into LLMs with hard prompts only. Generally, existing KG-enhanced LLMs usually suffer from three critical issues, including huge search space, high API costs, and laborious prompt engineering, that impede their widespread application in practice. To this end, we introduce a novel Knowledge Graph based PrompTing framework, namely KnowGPT, to enhance LLMs with domain knowledge. KnowGPT contains a knowledge extraction module to extract the most informative knowledge from KGs, and a context-aware prompt construction module to automatically convert extracted knowledge into effective prompts. Experiments on three benchmarks demonstrate that KnowGPT significantly outperforms all competitors. Notably, KnowGPT achieves a 92.6% accuracy on OpenbookQA leaderboard, comparable to human-level performance.\nproceedings.neurips.cc\nSHOW MORE\nSave Cite Cited by 148 Related articles All 6 versions \nShowing the best result for this search. See all results\nPrivacyTermsHelp",
+    "results": [
+      {
+        "title": "Knowgpt: Knowledge graph based prompting for large language models",
+        "text": "Knowgpt: Knowledge graph based prompting for large language models\nQ Zhang, J Dong, H Chen, D Zha, Z Yu, X Huang\nAdvances in neural information processing systems, 2024•proceedings.neurips.cc\nAbstract\nLarge Language Models (LLMs) have demonstrated remarkable capabilities in many real-world applications. Nonetheless, LLMs are often criticized for their tendency to produce hallucinations, wherein the models fabricate incorrect statements on tasks beyond their knowledge and perception. To alleviate this issue, graph retrieval-augmented generation (GraphRAG) has been extensively explored which leverages the factual knowledge in knowledge graphs (KGs) to ground the LLM's responses in established facts and principles. However, most state-of-the-art LLMs are closed-source, making it challenging to develop a prompting framework that can efficiently and effectively integrate KGs into LLMs with hard prompts only. Generally, existing KG-enhanced LLMs usually suffer from three critical issues, including huge search space, high API costs, and laborious prompt engineering, that impede their widespread application in practice. To this end, we introduce a novel Knowledge Graph based PrompTing framework, namely KnowGPT, to enhance LLMs with domain knowledge. KnowGPT contains a knowledge extraction module to extract the most informative knowledge from KGs, and a context-aware prompt construction module to automatically convert extracted knowledge into effective prompts. Experiments on three benchmarks demonstrate that KnowGPT significantly outperforms all competitors. Notably, KnowGPT achieves a 92.6% accuracy on OpenbookQA leaderboard, comparable to human-level performance.\nproceedings.neurips.cc\nSHOW MORE\nSave Cite Cited by 148 Related articles All 6 versions ",
+        "links": [
+          {
+            "text": "Knowgpt: Knowledge graph based prompting for large language models",
+            "href": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/0b8705a611ed1ce19cdb759031078705-Abstract-Conference.html"
+          },
+          {
+            "text": "Q Zhang",
+            "href": "https://scholar.google.com/citations?user=eF8PATI7r3IC&hl=en&oi=sra"
+          },
+          {
+            "text": "J Dong",
+            "href": "https://scholar.google.com/citations?user=m7_ceMcAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "H Chen",
+            "href": "https://scholar.google.com/citations?user=7oeLWT0AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "D Zha",
+            "href": "https://scholar.google.com/citations?user=jK0NgMcAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Q Zhang",
+            "href": "https://scholar.google.com/citations?user=eF8PATI7r3IC&hl=en&oi=sra"
+          },
+          {
+            "text": "J Dong",
+            "href": "https://scholar.google.com/citations?user=m7_ceMcAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "H Chen",
+            "href": "https://scholar.google.com/citations?user=7oeLWT0AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "D Zha",
+            "href": "https://scholar.google.com/citations?user=jK0NgMcAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Z Yu",
+            "href": "https://scholar.google.com/citations?user=s4ygiQQAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "X Huang",
+            "href": "https://scholar.google.com/citations?user=Be21PkYAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "SHOW MORE",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 148",
+            "href": "https://scholar.google.com/scholar?cites=6835363610951189984&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:4IVgJf0W3F4J:scholar.google.com/&scioq=%22KnowGPT:+Knowledge+Graph+based+Prompting+for+Large+Language+Models%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 6 versions",
+            "href": "https://scholar.google.com/scholar?cluster=6835363610951189984&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:4IVgJf0W3F4J:scholar.google.com/+%22KnowGPT:+Knowledge+Graph+based+Prompting+for+Large+Language+Models%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      }
+    ]
+  }
+]

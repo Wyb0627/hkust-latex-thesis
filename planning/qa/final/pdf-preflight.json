@@ -1,6 +1,6 @@
 {
-  "pdf_sha256": "2e0fa332ed7ffd94111d25b45640d4fcf60e24baa97b90d277ae13c9f3941a87",
-  "pages": 115,
+  "pdf_sha256": "11951828b2f94db09b2b8ceefb5c0b61c3bb30ab4a388a20b86ecec2ac556d82",
+  "pages": 125,
   "encrypted": false,
   "page_labels": [
     "i",
@@ -117,7 +117,17 @@
     "98",
     "99",
     "100",
-    "101"
+    "101",
+    "102",
+    "103",
+    "104",
+    "105",
+    "106",
+    "107",
+    "108",
+    "109",
+    "110",
+    "111"
   ],
   "outline": [
     {
@@ -183,50 +193,50 @@
     {
       "level": 1,
       "title": "1.2 Research Scope and Structural Augmentation",
-      "physical_page": 16,
-      "label": "2"
-    },
-    {
-      "level": 2,
-      "title": "1.2.1 Evidence, structure, and model roles",
-      "physical_page": 16,
-      "label": "2"
-    },
-    {
-      "level": 2,
-      "title": "1.2.2 Reasoning through task-specific evidence",
       "physical_page": 17,
       "label": "3"
     },
     {
       "level": 2,
-      "title": "1.2.3 The evidence interface as a design choice",
+      "title": "1.2.1 Evidence, structure, and model roles",
+      "physical_page": 17,
+      "label": "3"
+    },
+    {
+      "level": 2,
+      "title": "1.2.2 Adapting structure to task requirements",
+      "physical_page": 17,
+      "label": "3"
+    },
+    {
+      "level": 2,
+      "title": "1.2.3 Structural information preservation",
       "physical_page": 17,
       "label": "3"
     },
     {
       "level": 1,
       "title": "1.3 Research Questions",
-      "physical_page": 17,
-      "label": "3"
+      "physical_page": 18,
+      "label": "4"
     },
     {
       "level": 2,
       "title": "1.3.1 RQ1: External knowledge for table understanding",
-      "physical_page": 17,
-      "label": "3"
+      "physical_page": 18,
+      "label": "4"
     },
     {
       "level": 2,
-      "title": "1.3.2 RQ2: Evidence maintenance under evolving labels",
+      "title": "1.3.2 RQ2: Task-driven graph retrieval for dynamic classification",
       "physical_page": 18,
       "label": "4"
     },
     {
       "level": 2,
       "title": "1.3.3 RQ3: Connected evidence for textual generation",
-      "physical_page": 18,
-      "label": "4"
+      "physical_page": 19,
+      "label": "5"
     },
     {
       "level": 2,
@@ -236,9 +246,9 @@
     },
     {
       "level": 1,
-      "title": "1.4 Contributions and Evidence",
-      "physical_page": 19,
-      "label": "5"
+      "title": "1.4 Contributions",
+      "physical_page": 20,
+      "label": "6"
     },
     {
       "level": 1,
@@ -249,704 +259,716 @@
     {
       "level": 0,
       "title": "2 Background and Related Work",
-      "physical_page": 22,
-      "label": "8"
-    },
-    {
-      "level": 1,
-      "title": "2.1 Knowledge Graphs and Language Models",
-      "physical_page": 22,
-      "label": "8"
-    },
-    {
-      "level": 1,
-      "title": "2.2 Knowledge-enhanced Table Understanding",
       "physical_page": 23,
       "label": "9"
     },
     {
       "level": 1,
-      "title": "2.3 Retrieval-augmented Generation",
-      "physical_page": 24,
-      "label": "10"
+      "title": "2.1 Knowledge Structures for Language Models",
+      "physical_page": 23,
+      "label": "9"
     },
     {
       "level": 1,
-      "title": "2.4 Graph-based Evidence Retrieval",
+      "title": "2.2 Knowledge-enhanced Table Understanding",
       "physical_page": 25,
       "label": "11"
     },
     {
       "level": 1,
-      "title": "2.5 Multimodal Retrieval and Context Serving",
+      "title": "2.3 Few-shot Adaptation and Evolving Label Sets",
       "physical_page": 26,
       "label": "12"
     },
     {
       "level": 1,
-      "title": "2.6 Structural Information in Hyper-relational Knowledge Graphs",
+      "title": "2.4 Retrieval-augmented Generation",
       "physical_page": 27,
       "label": "13"
     },
     {
-      "level": 2,
-      "title": "2.6.1 Facts, Qualifiers, and Decomposition",
-      "physical_page": 28,
-      "label": "14"
-    },
-    {
-      "level": 2,
-      "title": "2.6.2 Qualifier Capture and Graph Reception",
-      "physical_page": 29,
-      "label": "15"
-    },
-    {
-      "level": 2,
-      "title": "2.6.3 Representative Published Evidence",
-      "physical_page": 29,
-      "label": "15"
-    },
-    {
       "level": 1,
-      "title": "2.7 Research Questions Emerging from the Background",
+      "title": "2.5 Graph-based Evidence Retrieval",
+      "physical_page": 29,
+      "label": "15"
+    },
+    {
+      "level": 2,
+      "title": "2.5.1 Reasoning structures and source evidence",
       "physical_page": 30,
       "label": "16"
     },
     {
-      "level": 0,
-      "title": "3 Knowledge-enriched Table Understanding with KGLink",
+      "level": 1,
+      "title": "2.6 Multimodal Retrieval and Context Serving",
       "physical_page": 31,
       "label": "17"
     },
     {
       "level": 1,
-      "title": "3.1 Motivation and Task",
-      "physical_page": 31,
-      "label": "17"
-    },
-    {
-      "level": 1,
-      "title": "3.2 Problem Formulation and Framework",
+      "title": "2.7 Structural Information in Hyper-relational Knowledge Graphs",
       "physical_page": 32,
       "label": "18"
     },
     {
-      "level": 1,
-      "title": "3.3 KG-derived Candidate Types",
+      "level": 2,
+      "title": "2.7.1 Facts, Qualifiers, and Decomposition",
       "physical_page": 33,
       "label": "19"
     },
     {
       "level": 2,
-      "title": "3.3.1 Cell Mention Linking",
-      "physical_page": 33,
-      "label": "19"
-    },
-    {
-      "level": 2,
-      "title": "3.3.2 Cross-column Neighborhood Filtering",
+      "title": "2.7.2 Qualifier Capture and Graph Reception",
       "physical_page": 34,
       "label": "20"
     },
     {
       "level": 2,
-      "title": "3.3.3 Row Linking Quality and Input Selection",
+      "title": "2.7.3 Representative Published Evidence",
       "physical_page": 35,
       "label": "21"
     },
     {
-      "level": 2,
-      "title": "3.3.4 Candidate Types and Feature Sequences",
+      "level": 1,
+      "title": "2.8 Research Questions Emerging from the Background",
       "physical_page": 36,
       "label": "22"
     },
     {
+      "level": 0,
+      "title": "3 Knowledge-enriched Table Understanding with KGLink",
+      "physical_page": 37,
+      "label": "23"
+    },
+    {
       "level": 1,
-      "title": "3.4 Language Model Integration",
+      "title": "3.1 Motivation and Task",
       "physical_page": 37,
       "label": "23"
     },
     {
-      "level": 2,
-      "title": "3.4.1 Table Serialization and Column Representations",
-      "physical_page": 37,
-      "label": "23"
+      "level": 1,
+      "title": "3.2 Problem Formulation and Framework",
+      "physical_page": 38,
+      "label": "24"
     },
     {
-      "level": 2,
-      "title": "3.4.2 Contextual Type Representation Learning",
-      "physical_page": 37,
-      "label": "23"
-    },
-    {
-      "level": 2,
-      "title": "3.4.3 Classification and Adaptive Task Weighting",
+      "level": 1,
+      "title": "3.3 KG-derived Candidate Types",
       "physical_page": 39,
       "label": "25"
     },
     {
-      "level": 1,
-      "title": "3.5 Computational Structure",
+      "level": 2,
+      "title": "3.3.1 Cell Mention Linking",
       "physical_page": 39,
       "label": "25"
     },
     {
-      "level": 1,
-      "title": "3.6 Experimental Evaluation",
+      "level": 2,
+      "title": "3.3.2 Cross-column Neighborhood Filtering",
       "physical_page": 40,
       "label": "26"
     },
     {
       "level": 2,
-      "title": "3.6.1 Datasets and Protocol",
-      "physical_page": 40,
-      "label": "26"
-    },
-    {
-      "level": 2,
-      "title": "3.6.2 Main Annotation Results",
+      "title": "3.3.3 Row Linking Quality and Input Selection",
       "physical_page": 41,
       "label": "27"
     },
     {
       "level": 2,
-      "title": "3.6.3 Representation Learning and KG Evidence",
+      "title": "3.3.4 Candidate Types and Feature Sequences",
       "physical_page": 42,
       "label": "28"
-    },
-    {
-      "level": 2,
-      "title": "3.6.4 Annotation without Retrieved Knowledge",
-      "physical_page": 42,
-      "label": "28"
-    },
-    {
-      "level": 2,
-      "title": "3.6.5 Type Granularity in the Reported Cases",
-      "physical_page": 43,
-      "label": "29"
-    },
-    {
-      "level": 2,
-      "title": "3.6.6 Row Selection and Input Budgets",
-      "physical_page": 43,
-      "label": "29"
-    },
-    {
-      "level": 2,
-      "title": "3.6.7 Runtime in the Evaluated Configuration",
-      "physical_page": 44,
-      "label": "30"
     },
     {
       "level": 1,
-      "title": "3.7 Discussion and Chapter Summary",
+      "title": "3.4 Language Model Integration",
+      "physical_page": 43,
+      "label": "29"
+    },
+    {
+      "level": 2,
+      "title": "3.4.1 Table Serialization and Column Representations",
+      "physical_page": 43,
+      "label": "29"
+    },
+    {
+      "level": 2,
+      "title": "3.4.2 Contextual Type Representation Learning",
+      "physical_page": 43,
+      "label": "29"
+    },
+    {
+      "level": 2,
+      "title": "3.4.3 Classification and Adaptive Task Weighting",
       "physical_page": 45,
       "label": "31"
     },
     {
-      "level": 0,
-      "title": "4 Adaptive Graph Retrieval for Dynamic Classification with GORAG",
-      "physical_page": 46,
-      "label": "32"
+      "level": 1,
+      "title": "3.5 Computational Structure",
+      "physical_page": 45,
+      "label": "31"
     },
     {
       "level": 1,
-      "title": "4.1 Dynamic Few-shot Classification",
+      "title": "3.6 Experimental Evaluation",
       "physical_page": 46,
       "label": "32"
     },
     {
       "level": 2,
-      "title": "4.1.1 Rounds and information availability",
+      "title": "3.6.1 Datasets and Protocol",
+      "physical_page": 46,
+      "label": "32"
+    },
+    {
+      "level": 2,
+      "title": "3.6.2 Main Annotation Results",
       "physical_page": 47,
       "label": "33"
     },
     {
-      "level": 1,
-      "title": "4.2 Weighted Graph Indexing",
+      "level": 2,
+      "title": "3.6.3 Representation Learning and KG Evidence",
       "physical_page": 48,
       "label": "34"
     },
     {
       "level": 2,
-      "title": "4.2.1 Keyword extraction and correlation scores",
+      "title": "3.6.4 Annotation without Retrieved Knowledge",
       "physical_page": 48,
       "label": "34"
     },
     {
       "level": 2,
-      "title": "4.2.2 Keyword–label edge costs",
+      "title": "3.6.5 Type Granularity in the Reported Cases",
       "physical_page": 49,
       "label": "35"
     },
     {
       "level": 2,
-      "title": "4.2.3 Merging label rounds",
+      "title": "3.6.6 Row Selection and Input Budgets",
       "physical_page": 49,
       "label": "35"
     },
     {
-      "level": 1,
-      "title": "4.3 Adaptive Candidate Label Retrieval",
-      "physical_page": 50,
-      "label": "36"
-    },
-    {
       "level": 2,
-      "title": "4.3.1 Tree and auxiliary-graph operations",
+      "title": "3.6.7 Runtime in the Evaluated Configuration",
       "physical_page": 50,
       "label": "36"
     },
     {
       "level": 1,
-      "title": "4.4 Classification and Online Indexing",
+      "title": "3.7 Discussion and Chapter Summary",
       "physical_page": 51,
       "label": "37"
     },
     {
-      "level": 2,
-      "title": "4.4.1 Computational organization",
+      "level": 0,
+      "title": "4 Adaptive Graph Retrieval for Dynamic Classification with GORAG",
       "physical_page": 52,
       "label": "38"
     },
     {
       "level": 1,
-      "title": "4.5 Experimental Design",
+      "title": "4.1 Dynamic Few-shot Classification",
       "physical_page": 52,
       "label": "38"
     },
     {
       "level": 2,
-      "title": "4.5.1 Compared methods and controls",
+      "title": "4.1.1 Rounds and information availability",
       "physical_page": 53,
       "label": "39"
     },
     {
       "level": 1,
-      "title": "4.6 Classification Results",
-      "physical_page": 53,
-      "label": "39"
+      "title": "4.2 Weighted Graph Indexing",
+      "physical_page": 54,
+      "label": "40"
+    },
+    {
+      "level": 2,
+      "title": "4.2.1 Keyword extraction and correlation scores",
+      "physical_page": 55,
+      "label": "41"
+    },
+    {
+      "level": 2,
+      "title": "4.2.2 Keyword–label edge costs",
+      "physical_page": 55,
+      "label": "41"
+    },
+    {
+      "level": 2,
+      "title": "4.2.3 Merging label rounds",
+      "physical_page": 56,
+      "label": "42"
     },
     {
       "level": 1,
-      "title": "4.7 Ablations and Resource Use",
+      "title": "4.3 Adaptive Candidate Label Retrieval",
       "physical_page": 56,
       "label": "42"
     },
     {
       "level": 2,
-      "title": "4.7.1 Prompt tokens and graph growth",
-      "physical_page": 56,
-      "label": "42"
+      "title": "4.3.1 Tree and auxiliary-graph operations",
+      "physical_page": 57,
+      "label": "43"
     },
     {
       "level": 1,
-      "title": "4.8 Zero-shot and Round Generalization",
+      "title": "4.4 Classification and Online Indexing",
       "physical_page": 57,
       "label": "43"
     },
     {
       "level": 2,
-      "title": "4.8.1 A retrieved classification case",
+      "title": "4.4.1 Computational organization",
+      "physical_page": 58,
+      "label": "44"
+    },
+    {
+      "level": 1,
+      "title": "4.5 Experimental Design",
+      "physical_page": 58,
+      "label": "44"
+    },
+    {
+      "level": 2,
+      "title": "4.5.1 Compared methods and controls",
       "physical_page": 59,
       "label": "45"
     },
     {
       "level": 1,
-      "title": "4.9 Discussion and Chapter Summary",
-      "physical_page": 59,
-      "label": "45"
-    },
-    {
-      "level": 0,
-      "title": "5 Connected Evidence Selection for Language Models with AGRAG",
-      "physical_page": 61,
-      "label": "47"
+      "title": "4.6 Classification Results",
+      "physical_page": 60,
+      "label": "46"
     },
     {
       "level": 1,
-      "title": "5.1 Research Problem and Evidence Requirements",
-      "physical_page": 61,
-      "label": "47"
-    },
-    {
-      "level": 1,
-      "title": "5.2 Framework and Graph Construction",
+      "title": "4.7 Ablations and Resource Use",
       "physical_page": 62,
       "label": "48"
     },
     {
       "level": 2,
-      "title": "5.2.1 The three-stage pipeline",
-      "physical_page": 62,
-      "label": "48"
-    },
-    {
-      "level": 2,
-      "title": "5.2.2 Chunking and statistical entity extraction",
+      "title": "4.7.1 Prompt tokens and graph growth",
       "physical_page": 63,
       "label": "49"
     },
     {
-      "level": 2,
-      "title": "5.2.3 Relations, passage nodes, and synonyms",
-      "physical_page": 64,
-      "label": "50"
-    },
-    {
       "level": 1,
-      "title": "5.3 Query Mapping and Influence-aware Retrieval",
+      "title": "4.8 Zero-shot and Round Generalization",
       "physical_page": 64,
       "label": "50"
     },
     {
       "level": 2,
-      "title": "5.3.1 Mapping a query to triple facts",
-      "physical_page": 64,
-      "label": "50"
-    },
-    {
-      "level": 2,
-      "title": "5.3.2 Node influence and edge costs",
+      "title": "4.8.1 A retrieved classification case",
       "physical_page": 65,
       "label": "51"
     },
     {
       "level": 1,
-      "title": "5.4 MCMI Formulation and Evidence Expansion",
-      "physical_page": 66,
-      "label": "52"
+      "title": "4.9 Discussion and Chapter Summary",
+      "physical_page": 65,
+      "label": "51"
     },
     {
-      "level": 2,
-      "title": "5.4.1 The original connected-evidence example",
+      "level": 0,
+      "title": "5 Connected Evidence Selection for Language Models with AGRAG",
       "physical_page": 67,
       "label": "53"
     },
     {
       "level": 1,
-      "title": "5.5 Hybrid Retrieval and Generation",
+      "title": "5.1 Research Problem and Evidence Requirements",
+      "physical_page": 67,
+      "label": "53"
+    },
+    {
+      "level": 1,
+      "title": "5.2 Framework and Graph Construction",
       "physical_page": 68,
       "label": "54"
     },
     {
-      "level": 1,
-      "title": "5.6 Computational Properties",
+      "level": 2,
+      "title": "5.2.1 The three-stage pipeline",
       "physical_page": 68,
       "label": "54"
     },
     {
-      "level": 1,
-      "title": "5.7 Experimental Evaluation",
+      "level": 2,
+      "title": "5.2.2 Chunking and statistical entity extraction",
       "physical_page": 69,
       "label": "55"
     },
     {
       "level": 2,
-      "title": "5.7.1 Tasks, corpora, and model settings",
-      "physical_page": 69,
-      "label": "55"
+      "title": "5.2.3 Relations, passage nodes, and synonyms",
+      "physical_page": 70,
+      "label": "56"
     },
     {
-      "level": 2,
-      "title": "5.7.2 Metric interpretation",
+      "level": 1,
+      "title": "5.3 Query Mapping and Influence-aware Retrieval",
       "physical_page": 70,
       "label": "56"
     },
     {
       "level": 2,
-      "title": "5.7.3 Answer quality across tasks",
+      "title": "5.3.1 Mapping a query to triple facts",
+      "physical_page": 70,
+      "label": "56"
+    },
+    {
+      "level": 2,
+      "title": "5.3.2 Node influence and edge costs",
+      "physical_page": 71,
+      "label": "57"
+    },
+    {
+      "level": 1,
+      "title": "5.4 MCMI Formulation and Evidence Expansion",
+      "physical_page": 72,
+      "label": "58"
+    },
+    {
+      "level": 2,
+      "title": "5.4.1 The original connected-evidence example",
       "physical_page": 73,
       "label": "59"
     },
     {
-      "level": 2,
-      "title": "5.7.4 Indexing and querying costs",
+      "level": 1,
+      "title": "5.5 Hybrid Retrieval and Generation",
       "physical_page": 74,
       "label": "60"
     },
     {
-      "level": 2,
-      "title": "5.7.5 Component ablations",
-      "physical_page": 77,
-      "label": "63"
-    },
-    {
-      "level": 2,
-      "title": "5.7.6 Additional resource setting and parameter study",
-      "physical_page": 77,
-      "label": "63"
+      "level": 1,
+      "title": "5.6 Computational Properties",
+      "physical_page": 74,
+      "label": "60"
     },
     {
       "level": 1,
-      "title": "5.8 Discussion and Chapter Summary",
+      "title": "5.7 Experimental Evaluation",
+      "physical_page": 75,
+      "label": "61"
+    },
+    {
+      "level": 2,
+      "title": "5.7.1 Tasks, corpora, and model settings",
+      "physical_page": 75,
+      "label": "61"
+    },
+    {
+      "level": 2,
+      "title": "5.7.2 Metric interpretation",
+      "physical_page": 76,
+      "label": "62"
+    },
+    {
+      "level": 2,
+      "title": "5.7.3 Answer quality across tasks",
+      "physical_page": 79,
+      "label": "65"
+    },
+    {
+      "level": 2,
+      "title": "5.7.4 Indexing and querying costs",
       "physical_page": 80,
       "label": "66"
     },
     {
-      "level": 0,
-      "title": "6 Semantic Graph Matching for Multimodal Reasoning with MGRAG",
-      "physical_page": 81,
-      "label": "67"
+      "level": 2,
+      "title": "5.7.5 Component ablations",
+      "physical_page": 83,
+      "label": "69"
     },
     {
-      "level": 1,
-      "title": "6.1 Multimodal Evidence and Query Requirements",
-      "physical_page": 81,
-      "label": "67"
-    },
-    {
-      "level": 1,
-      "title": "6.2 Framework and Evidence Representations",
-      "physical_page": 82,
-      "label": "68"
-    },
-    {
-      "level": 1,
-      "title": "6.3 Coarse-grained Ranking",
+      "level": 2,
+      "title": "5.7.6 Additional resource setting and parameter study",
       "physical_page": 83,
       "label": "69"
     },
     {
       "level": 1,
-      "title": "6.4 Query-aware Graph Construction",
-      "physical_page": 84,
-      "label": "70"
-    },
-    {
-      "level": 2,
-      "title": "6.4.1 Representing the query",
-      "physical_page": 84,
-      "label": "70"
-    },
-    {
-      "level": 2,
-      "title": "6.4.2 Extracting facts from ranked chunks",
-      "physical_page": 85,
-      "label": "71"
-    },
-    {
-      "level": 2,
-      "title": "6.4.3 Matching as a stopping decision",
+      "title": "5.8 Discussion and Chapter Summary",
       "physical_page": 86,
       "label": "72"
     },
     {
-      "level": 1,
-      "title": "6.5 Path-based Semantic Subgraph Matching",
-      "physical_page": 86,
-      "label": "72"
-    },
-    {
-      "level": 2,
-      "title": "6.5.1 From edges to paths",
-      "physical_page": 86,
-      "label": "72"
-    },
-    {
-      "level": 2,
-      "title": "6.5.2 Anchor selection and candidate mappings",
+      "level": 0,
+      "title": "6 Semantic Graph Matching for Multimodal Reasoning with MGRAG",
       "physical_page": 87,
       "label": "73"
     },
     {
-      "level": 2,
-      "title": "6.5.3 Greedy semantic path growth",
+      "level": 1,
+      "title": "6.1 Multimodal Evidence and Query Requirements",
+      "physical_page": 87,
+      "label": "73"
+    },
+    {
+      "level": 1,
+      "title": "6.2 Framework and Evidence Representations",
       "physical_page": 88,
       "label": "74"
     },
     {
+      "level": 1,
+      "title": "6.3 Coarse-grained Ranking",
+      "physical_page": 89,
+      "label": "75"
+    },
+    {
+      "level": 1,
+      "title": "6.4 Query-aware Graph Construction",
+      "physical_page": 90,
+      "label": "76"
+    },
+    {
+      "level": 2,
+      "title": "6.4.1 Representing the query",
+      "physical_page": 90,
+      "label": "76"
+    },
+    {
+      "level": 2,
+      "title": "6.4.2 Extracting facts from ranked chunks",
+      "physical_page": 91,
+      "label": "77"
+    },
+    {
+      "level": 2,
+      "title": "6.4.3 Matching as a stopping decision",
+      "physical_page": 92,
+      "label": "78"
+    },
+    {
+      "level": 1,
+      "title": "6.5 Path-based Semantic Subgraph Matching",
+      "physical_page": 92,
+      "label": "78"
+    },
+    {
+      "level": 2,
+      "title": "6.5.1 From edges to paths",
+      "physical_page": 92,
+      "label": "78"
+    },
+    {
+      "level": 2,
+      "title": "6.5.2 Anchor selection and candidate mappings",
+      "physical_page": 93,
+      "label": "79"
+    },
+    {
+      "level": 2,
+      "title": "6.5.3 Greedy semantic path growth",
+      "physical_page": 94,
+      "label": "80"
+    },
+    {
       "level": 2,
       "title": "6.5.4 Published algorithmic properties",
-      "physical_page": 89,
-      "label": "75"
-    },
-    {
-      "level": 2,
-      "title": "6.5.5 Serializing selected evidence",
-      "physical_page": 89,
-      "label": "75"
-    },
-    {
-      "level": 1,
-      "title": "6.6 Graph-aware KV Recomputation",
-      "physical_page": 90,
-      "label": "76"
-    },
-    {
-      "level": 2,
-      "title": "6.6.1 Reuse and selective updates",
-      "physical_page": 90,
-      "label": "76"
-    },
-    {
-      "level": 2,
-      "title": "6.6.2 Topological features of facts",
-      "physical_page": 91,
-      "label": "77"
-    },
-    {
-      "level": 2,
-      "title": "6.6.3 Combined recomputation score",
-      "physical_page": 91,
-      "label": "77"
-    },
-    {
-      "level": 1,
-      "title": "6.7 Computational Cost",
-      "physical_page": 92,
-      "label": "78"
-    },
-    {
-      "level": 1,
-      "title": "6.8 Experimental Protocol",
-      "physical_page": 92,
-      "label": "78"
-    },
-    {
-      "level": 1,
-      "title": "6.9 Answer Quality and Structural Retrieval",
-      "physical_page": 93,
-      "label": "79"
-    },
-    {
-      "level": 2,
-      "title": "6.9.1 Complete-system comparisons",
-      "physical_page": 93,
-      "label": "79"
-    },
-    {
-      "level": 2,
-      "title": "6.9.2 Construction and matching substitutions",
       "physical_page": 95,
       "label": "81"
     },
     {
       "level": 2,
-      "title": "6.9.3 Queries requiring multiple hops",
+      "title": "6.5.5 Serializing selected evidence",
+      "physical_page": 95,
+      "label": "81"
+    },
+    {
+      "level": 1,
+      "title": "6.6 Graph-aware KV Recomputation",
+      "physical_page": 96,
+      "label": "82"
+    },
+    {
+      "level": 2,
+      "title": "6.6.1 Reuse and selective updates",
+      "physical_page": 96,
+      "label": "82"
+    },
+    {
+      "level": 2,
+      "title": "6.6.2 Topological features of facts",
+      "physical_page": 96,
+      "label": "82"
+    },
+    {
+      "level": 2,
+      "title": "6.6.3 Combined recomputation score",
+      "physical_page": 97,
+      "label": "83"
+    },
+    {
+      "level": 1,
+      "title": "6.7 Computational Cost",
       "physical_page": 98,
       "label": "84"
     },
     {
       "level": 1,
-      "title": "6.10 Cache Quality and End-to-end Costs",
+      "title": "6.8 Experimental Protocol",
+      "physical_page": 98,
+      "label": "84"
+    },
+    {
+      "level": 1,
+      "title": "6.9 Answer Quality and Structural Retrieval",
       "physical_page": 99,
       "label": "85"
     },
     {
-      "level": 1,
-      "title": "6.11 Ablations and Parameter Sensitivity",
+      "level": 2,
+      "title": "6.9.1 Complete-system comparisons",
+      "physical_page": 99,
+      "label": "85"
+    },
+    {
+      "level": 2,
+      "title": "6.9.2 Construction and matching substitutions",
       "physical_page": 101,
       "label": "87"
     },
     {
       "level": 2,
-      "title": "6.11.1 Component ablations",
-      "physical_page": 101,
-      "label": "87"
-    },
-    {
-      "level": 2,
-      "title": "6.11.2 Adding components to other pipelines",
-      "physical_page": 101,
-      "label": "87"
-    },
-    {
-      "level": 2,
-      "title": "6.11.3 Matching threshold and path length",
-      "physical_page": 102,
-      "label": "88"
-    },
-    {
-      "level": 1,
-      "title": "6.12 Discussion and Chapter Summary",
-      "physical_page": 103,
-      "label": "89"
-    },
-    {
-      "level": 0,
-      "title": "7 Discussion",
+      "title": "6.9.3 Queries requiring multiple hops",
       "physical_page": 104,
       "label": "90"
     },
     {
       "level": 1,
-      "title": "7.1 Where Structure Enters the Pipeline",
-      "physical_page": 104,
-      "label": "90"
-    },
-    {
-      "level": 1,
-      "title": "7.2 Static, Online, and Query-dependent Structures",
-      "physical_page": 104,
-      "label": "90"
-    },
-    {
-      "level": 1,
-      "title": "7.3 Evidence Quality and Computational Cost",
+      "title": "6.10 Cache Quality and End-to-end Costs",
       "physical_page": 105,
       "label": "91"
     },
     {
       "level": 1,
-      "title": "7.4 Information Preservation and Semantic Granularity",
+      "title": "6.11 Ablations and Parameter Sensitivity",
       "physical_page": 107,
       "label": "93"
     },
     {
-      "level": 1,
-      "title": "7.5 Error Propagation Across Structural Decisions",
+      "level": 2,
+      "title": "6.11.1 Component ablations",
       "physical_page": 107,
       "label": "93"
     },
     {
-      "level": 1,
-      "title": "7.6 Limitations and Open Questions",
+      "level": 2,
+      "title": "6.11.2 Adding components to other pipelines",
+      "physical_page": 107,
+      "label": "93"
+    },
+    {
+      "level": 2,
+      "title": "6.11.3 Matching threshold and path length",
       "physical_page": 108,
       "label": "94"
     },
     {
-      "level": 0,
-      "title": "8 Conclusion and Future Directions",
+      "level": 1,
+      "title": "6.12 Discussion and Chapter Summary",
       "physical_page": 109,
       "label": "95"
+    },
+    {
+      "level": 0,
+      "title": "7 Discussion",
+      "physical_page": 110,
+      "label": "96"
+    },
+    {
+      "level": 1,
+      "title": "7.1 From Knowledge Enrichment to Task-driven Retrieval",
+      "physical_page": 110,
+      "label": "96"
+    },
+    {
+      "level": 1,
+      "title": "7.2 Static, Online, and Query-dependent Structures",
+      "physical_page": 111,
+      "label": "97"
+    },
+    {
+      "level": 1,
+      "title": "7.3 Evidence Quality and Computational Cost",
+      "physical_page": 112,
+      "label": "98"
+    },
+    {
+      "level": 1,
+      "title": "7.4 Information Preservation and Semantic Granularity",
+      "physical_page": 113,
+      "label": "99"
+    },
+    {
+      "level": 1,
+      "title": "7.5 Error Propagation Across Structural Decisions",
+      "physical_page": 114,
+      "label": "100"
+    },
+    {
+      "level": 1,
+      "title": "7.6 Limitations and Open Questions",
+      "physical_page": 114,
+      "label": "100"
+    },
+    {
+      "level": 0,
+      "title": "8 Conclusion and Future Directions",
+      "physical_page": 115,
+      "label": "101"
     },
     {
       "level": 1,
       "title": "8.1 Conclusion",
-      "physical_page": 109,
-      "label": "95"
+      "physical_page": 115,
+      "label": "101"
     },
     {
       "level": 1,
       "title": "8.2 Future Directions",
-      "physical_page": 110,
-      "label": "96"
+      "physical_page": 116,
+      "label": "102"
     },
     {
       "level": 2,
       "title": "8.2.1 Feedback for structure maintenance",
-      "physical_page": 110,
-      "label": "96"
+      "physical_page": 116,
+      "label": "102"
     },
     {
       "level": 2,
       "title": "8.2.2 Multimodal structure and provenance",
-      "physical_page": 110,
-      "label": "96"
+      "physical_page": 116,
+      "label": "102"
     },
     {
       "level": 2,
       "title": "8.2.3 Joint retrieval and context computation",
-      "physical_page": 110,
-      "label": "96"
+      "physical_page": 116,
+      "label": "102"
     },
     {
       "level": 0,
       "title": "References",
-      "physical_page": 111,
-      "label": "97"
+      "physical_page": 117,
+      "label": "103"
     }
   ],
   "page_map": [
@@ -983,7 +1005,7 @@
       ],
       "figures": [],
       "tables": [],
-      "text_length": 1725,
+      "text_length": 1734,
       "rotation": 0
     },
     {
@@ -1032,12 +1054,12 @@
       "first_lines": [
         "ACKNOWLEDGEMENTS",
         "I thank my supervisor, Prof. Lei Chen, for his guidance during my doctoral research. I am",
-        "gratefultoDr. HaoyangLi,Dr. HaoXin,andDr. ShiminDiforthediscussionsandcollaboration",
-        "thathelpeddeveloptheworkpresentedinthisthesis."
+        "gratefultoDr. HaoyangLi,Dr. ShiminDi,andDr. HaoXinforthediscussionsandcollaboration",
+        "thathelpeddeveloptheworkpresentedinthisthesis. Iamalsothankfultomygroupmatesand"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 239,
+      "text_length": 384,
       "rotation": 0
     },
     {
@@ -1055,7 +1077,7 @@
       ],
       "figures": [],
       "tables": [],
-      "text_length": 1163,
+      "text_length": 1165,
       "rotation": 0
     },
     {
@@ -1066,14 +1088,14 @@
         841.89
       ],
       "first_lines": [
-        "Chapter3 Knowledge-enrichedTableUnderstandingwithKGLink 17",
-        "3.1 MotivationandTask 17",
-        "3.2 ProblemFormulationandFramework 18",
-        "3.3 KG-derivedCandidateTypes 19"
+        "2.7.3 RepresentativePublishedEvidence 21",
+        "2.8 ResearchQuestionsEmergingfromtheBackground 22",
+        "Chapter3 Knowledge-enrichedTableUnderstandingwithKGLink 23",
+        "3.1 MotivationandTask 23"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 1798,
+      "text_length": 1809,
       "rotation": 0
     },
     {
@@ -1084,14 +1106,14 @@
         841.89
       ],
       "first_lines": [
-        "5.2.3 Relations,passagenodes,andsynonyms 50",
-        "5.3 QueryMappingandInfluence-awareRetrieval 50",
-        "5.3.1 Mappingaquerytotriplefacts 50",
-        "5.3.2 Nodeinfluenceandedgecosts 51"
+        "5.2.1 Thethree-stagepipeline 54",
+        "5.2.2 Chunkingandstatisticalentityextraction 55",
+        "5.2.3 Relations,passagenodes,andsynonyms 56",
+        "5.3 QueryMappingandInfluence-awareRetrieval 56"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 1738,
+      "text_length": 1783,
       "rotation": 0
     },
     {
@@ -1102,14 +1124,14 @@
         841.89
       ],
       "first_lines": [
-        "Chapter7 Discussion 90",
-        "7.1 WhereStructureEntersthePipeline 90",
-        "7.2 Static,Online,andQuery-dependentStructures 90",
-        "7.3 EvidenceQualityandComputationalCost 91"
+        "6.12DiscussionandChapterSummary 95",
+        "Chapter7 Discussion 96",
+        "7.1 FromKnowledgeEnrichmenttoTask-drivenRetrieval 96",
+        "7.2 Static,Online,andQuery-dependentStructures 97"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 520,
+      "text_length": 578,
       "rotation": 0
     },
     {
@@ -1127,7 +1149,7 @@
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2528,
+      "text_length": 2534,
       "rotation": 0
     },
     {
@@ -1140,12 +1162,12 @@
       "first_lines": [
         "Figure5.1 TheAGRAGpipeline. Theoriginalfigureseparatescorpuspreparation,",
         "query-conditioned graph retrieval, and hybrid passage retrieval. Repro-",
-        "ducedfromFigure1ofthesourcepaper[3]. 48",
+        "ducedfromFigure1ofthesourcepaper[15]. 54",
         "Figure5.2 The original AGRAG evidence-expansion example. Red triples are"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 1497,
+      "text_length": 1513,
       "rotation": 0
     },
     {
@@ -1157,13 +1179,13 @@
       ],
       "first_lines": [
         "LIST OF TABLES",
-        "Table1.1 Research questions, structural operations, and evidence locations. Each",
-        "rowcorrespondstoaseparatestudy. 6",
-        "Table1.2 Publicationsincorporatedintothethesis. Thehyper-relationalstudypro-"
+        "Table1.1 Researchquestions,structuraloperations,andevaluations. 6",
+        "Table1.2 Publicationsincorporatedintothethesis. Thehyper-relationalstudypro-",
+        "videsaseparatebackgroundsection;thefourotherstudiesformthecore"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2336,
+      "text_length": 2343,
       "rotation": 0
     },
     {
@@ -1174,14 +1196,14 @@
         841.89
       ],
       "first_lines": [
-        "Table4.8 AblationexperimentsonWOSforGORAG’svariants. 42",
-        "Table4.9 TokencostonIFS-Reldatasetwith1-shotsetting. 43",
+        "Table4.9 TokencostonIFS-Reldatasetwith1-shotsetting. 49",
         "Table4.10 0-shot experiments for GORAG and RAG baselines on IFS-Rel dataset",
-        "under0-shotsetting. 44"
+        "under0-shotsetting. 50",
+        "Table5.1 Creative generation with Qwen2.5-14B-Instruct. Results from the"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2388,
+      "text_length": 2329,
       "rotation": 0
     },
     {
@@ -1193,13 +1215,13 @@
       ],
       "first_lines": [
         "Table6.2 Answer quality with Qwen2.5-VL-7B-Instruct, reproduced from",
-        "published Table 4, p. 2489 [4]. Vanilla., R1., Graph., Light., and",
+        "published Table 4, p. 2489 [19]. Vanilla., R1., Graph., Light., and",
         "Hippo. denote VanillaRAG, R1-Searcher, GraphRAG, LightRAG, and",
         "HippoRAG2. A dash means that the experiment exceeded three days;"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 1937,
+      "text_length": 1946,
       "rotation": 0
     },
     {
@@ -1213,11 +1235,11 @@
         "CHAPTER 1",
         "INTRODUCTION",
         "1.1 Motivation",
-        "Language models use tables, text, and images to make predictions and generate answers. The"
+        "Languagemodelsutilizeinformationintables,text,andimagestomakepredictionsandrespond"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2143,
+      "text_length": 2191,
       "rotation": 0
     },
     {
@@ -1228,14 +1250,14 @@
         841.89
       ],
       "first_lines": [
-        "to select a connected subgraph using query-dependent node influence and semantic edge costs.",
-        "Hybridpassageretrievalsuppliescontextbeyondtheselectedgraph[3].",
-        "Ourfourthproblemismultimodalquestionanswering. Arelationstateddirectlyinaquestion",
-        "may correspond to several relations in the evidence, and a graph constructed before seeing the"
+        "prompting shows that a language model can adapt its predictions through input examples [11],",
+        "while meta-learning studies adaptation from limited supervision [12]. These approaches moti-",
+        "vateustoexploreusingalargelanguagemodel’ssemanticcapabilitieswithagraphconstructed",
+        "from task data. To support this setting, we propose GORAG for dynamic few-shot text classifi-"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2135,
+      "text_length": 2707,
       "rotation": 0
     },
     {
@@ -1246,14 +1268,14 @@
         841.89
       ],
       "first_lines": [
-        "1.2.2 Reasoning through task-specific evidence",
-        "We evaluate the structural operations through annotation accuracy and F1, classification accu-",
-        "racyacrosslabelrounds,task-specificanswermeasures,andcontext-processingcosts.",
-        "The four studies have separate implementations and evaluations. They address successive"
+        "1.2 Research Scope and Structural Augmentation",
+        "1.2.1 Evidence, structure, and model roles",
+        "Structuralaugmentationusesexplicitrelationshipsamongentities,types,keywords,labels,pas-",
+        "sages, or query components. We study knowledge-graph edges, keyword–label associations,"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2093,
+      "text_length": 2165,
       "rotation": 0
     },
     {
@@ -1264,14 +1286,14 @@
         841.89
       ],
       "first_lines": [
-        "selection,candidate-typeconstruction,andgraph-derivedfeaturesequences. Thesecomponents",
-        "supply evidence to the table encoder. Contextual masked-type representation training relates",
-        "thatevidencetothetargetannotationvocabulary. Chapter3explainsthemethodandreportsthe",
-        "SemTabandVizNetexperiments,ablations,no-linkagecases,andeﬀiciencyevidence."
+        "1.3 Research Questions",
+        "1.3.1 RQ1: External knowledge for table understanding",
+        "Thefirstresearchquestionaskshowgraph-derivedinformationandapre-trainedlanguagemodel",
+        "canbecombinedwhenatablelacksinformativecontextandthegraph’stypevocabularydiffers"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2453,
+      "text_length": 2409,
       "rotation": 0
     },
     {
@@ -1282,16 +1304,14 @@
         841.89
       ],
       "first_lines": [
-        "andBM25channelsuppliesadditionalpassages. Chapter5evaluatesthesechoicesacrosstextual",
-        "QAtasksandclassification.",
-        "1.3.4 RQ4: Semantic matching and computation over multimodal evi-",
-        "dence"
+        "1.3.3 RQ3: Connected evidence for textual generation",
+        "Thethirdquestionextendstask-relatedgraphretrievalfromcandidatelabelstothefactsneeded",
+        "for an answer. It asks how to select connected textual evidence with suﬀicient information to",
+        "support question answering and generation. The input is a text corpus and a query whose an-"
       ],
       "figures": [],
-      "tables": [
-        "Table 1.1 links each con-"
-      ],
-      "text_length": 2157,
+      "tables": [],
+      "text_length": 2429,
       "rotation": 0
     },
     {
@@ -1302,16 +1322,14 @@
         841.89
       ],
       "first_lines": [
-        "3. Influence-aware connected evidence selection. AGRAG combines statistical entity se-",
-        "lection, query-conditioned influence, semantic edge costs, an expanded evidence sub-",
-        "graph,andhybridpassageretrieval.",
-        "4. Query-aware multimodal matching and recomputation. MGRAG incrementally con-"
+        "awaregraphconstruction,andpath-basedsemanticsubgraphmatching. Itthencombinesquery",
+        "attention,graph-sequenceattention,andgraphtopologicalfeaturestoscoretokensforselective",
+        "KV recomputation. Chapter 6 reports QA results on MMQA and six MRAMG subsets, com-",
+        "parisonsofmatchingmethods,componentablations,andcachequality–costmeasurements."
       ],
       "figures": [],
-      "tables": [
-        "Table 1.1: Research questions, structural operations, and evidence locations. Each row corre-"
-      ],
-      "text_length": 2219,
+      "tables": [],
+      "text_length": 2073,
       "rotation": 0
     },
     {
@@ -1325,14 +1343,14 @@
         "Table 1.2: Publications incorporated into the thesis. The hyper-relational study provides a sep-",
         "aratebackgroundsection;thefourotherstudiesformthecoreresearchchapters.",
         "Publication Venue Thesislocation",
-        "KGLink[1] ICDE2024 Chapter3"
+        "KGLink[9] ICDE2024 Chapter3"
       ],
       "figures": [],
       "tables": [
         "Table 1.2: Publications incorporated into the thesis. The hyper-relational study provides a sep-",
         "Table 1.2 records their roles in the thesis. Each"
       ],
-      "text_length": 1548,
+      "text_length": 2345,
       "rotation": 0
     },
     {
@@ -1343,14 +1361,14 @@
         841.89
       ],
       "first_lines": [
-        "CHAPTER 2",
-        "BACKGROUND AND RELATED WORK",
-        "This chapter reviews the foundations of knowledge graphs, language models, table annota-",
-        "tion, graph retrieval, and multimodal context processing. We compare the information repre-"
+        "Chapter 7 compares the points at which structure enters these pipelines. It examines static",
+        "andquery-dependentevidence,therelationshipbetweenqualityandcomputationalcost,andthe",
+        "conditions affecting interpretation. Chapter 8 returns to the research questions and identifies",
+        "directionsforfuturework."
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2136,
+      "text_length": 298,
       "rotation": 0
     },
     {
@@ -1361,14 +1379,14 @@
         841.89
       ],
       "first_lines": [
-        "textual representations and can be fine-tuned with a task-specific output layer [8]. In column",
-        "annotation, contextual token vectors can represent a column and feed a classifier. Generative",
-        "language models instead produce an answer sequence conditioned on the query and supplied",
-        "context. This thesis uses the term language model for both roles and specifies the relevant pre-"
+        "CHAPTER 2",
+        "BACKGROUND AND RELATED WORK",
+        "This chapter reviews knowledge structures for language-model understanding and reason-",
+        "ing. We first introduce how explicit relationships organize external information and how this"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2594,
+      "text_length": 2240,
       "rotation": 0
     },
     {
@@ -1379,14 +1397,14 @@
         841.89
       ],
       "first_lines": [
-        "knowledge-based methods retrieve external facts. Their coverage determines which ambigui-",
-        "tiestheycanresolve.",
-        "2.3 Retrieval-augmented Generation",
-        "Retrieval-augmentedgenerationconditionsagenerativemodeloninformationselectedfroman"
+        "determineswhether mentions in different passagesshare a node. AGRAGadds synonymedges",
+        "betweensimilarentitystringstoconnectexpressionsindexedasseparatenodes[15].",
+        "Oncetheinputismappedtothegraph,neighborhoods,paths,andsubgraphsprovidedifferent",
+        "ways to select information. A neighborhood supplies facts around a linked entity. A path can"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2596,
+      "text_length": 2862,
       "rotation": 0
     },
     {
@@ -1397,14 +1415,14 @@
         841.89
       ],
       "first_lines": [
-        "information supplied by an update also matters. A labeled support example carries a provided",
-        "class, while a query processed online may carry only a model prediction. GORAG makes this",
-        "distinction part of its dynamic classification protocol [2]. Its index expands as observations",
-        "arrive,andretrievalusesthegraphstateavailableatthecurrentprediction."
+        "2.2 Knowledge-enhanced Table Understanding",
+        "Column-type annotation assigns semantic labels to table columns. Similar values can require",
+        "different labels under different annotation vocabularies. A column of people may be labeled",
+        "Name or assigned an occupation category. Surrounding columns and external facts can help"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2302,
+      "text_length": 2655,
       "rotation": 0
     },
     {
@@ -1415,14 +1433,14 @@
         841.89
       ],
       "first_lines": [
-        "Table2.1: Representativeretrievalorganizationsandtheevidencestructurestheyexpose. Each",
-        "rowreferstothecitedmethod’sdesign.",
-        "Method Indexedrepresentation Query-relatedretrievaloperation",
-        "DPR[16] Densepassagerepresentations Question–passagesimilarityscoring"
+        "tables. KGLink instead selects graph-derived descriptions for an encoder that learns the target",
+        "annotationvocabulary.",
+        "KGLink retrieves candidate entities for cell mentions and filters them through connections",
+        "betweencolumns[9]. Candidate-typetextandaseparateKGfeaturesequenceenrichthecolumn"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2344,
+      "text_length": 2500,
       "rotation": 0
     },
     {
@@ -1433,19 +1451,129 @@
         841.89
       ],
       "first_lines": [
-        "generation. MGRAGranksimagesthroughcaptionsandsuppliesselectedoriginalchunkstothe",
-        "answeringmodel[4].",
-        "MRAMG-Benchstudiesretrieval-augmentedgenerationinwhichanswerscancombinetext",
-        "and images [21]. Its multimodal output requirement adds another distinction between finding"
+        "evidenceisretrievedforsubsequentqueries.",
+        "2.4 Retrieval-augmented Generation",
+        "Retrieval-augmentedgenerationconditionsagenerativemodeloninformationselectedfroman",
+        "externalcollection[33]. Aretrievalstagemapsthequerytoindexedevidence,andageneration"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2201,
+      "text_length": 2611,
       "rotation": 0
     },
     {
       "physical_page": 28,
       "label": "14",
+      "size": [
+        595.28,
+        841.89
+      ],
+      "first_lines": [
+        "graph-based system can alter either assumption. It can score relationships as well as items, or",
+        "determine the context by a structural condition such as connecting query anchors. The selected",
+        "nodesandrelationshipsarethenserializedascontextforthelanguagemodel.",
+        "Retrieval evaluation measures whether the selected context contains supporting evidence."
+      ],
+      "figures": [],
+      "tables": [],
+      "text_length": 2739,
+      "rotation": 0
+    },
+    {
+      "physical_page": 29,
+      "label": "15",
+      "size": [
+        595.28,
+        841.89
+      ],
+      "first_lines": [
+        "graphfacts,atraversalcanreturncandidatelabels,andapromptcancombineselectedrelation-",
+        "ships with source passages. Graph retrieval makes these connections available during evidence",
+        "selection.",
+        "2.5 Graph-based Evidence Retrieval"
+      ],
+      "figures": [],
+      "tables": [],
+      "text_length": 2238,
+      "rotation": 0
+    },
+    {
+      "physical_page": 30,
+      "label": "16",
+      "size": [
+        595.28,
+        841.89
+      ],
+      "first_lines": [
+        "Table2.1: Representativeretrievalorganizationsandtheevidencestructurestheyexpose. Each",
+        "rowreferstothecitedmethod’sdesign.",
+        "Method Indexedrepresentation Query-relatedretrievaloperation",
+        "DPR[6] Densepassagerepresentations Question–passagesimilarityscoring"
+      ],
+      "figures": [],
+      "tables": [],
+      "text_length": 2406,
+      "rotation": 0
+    },
+    {
+      "physical_page": 31,
+      "label": "17",
+      "size": [
+        595.28,
+        841.89
+      ],
+      "first_lines": [
+        "motivatesspecifyingwhichstructuraloperationsareperformedbygraphalgorithmsandwhich",
+        "decisionsarelefttoalanguagemodel. Inourretrievalpipelines,graphconstructionandselection",
+        "definetheevidencepassedtothefinalpredictor.",
+        "2.6 Multimodal Retrieval and Context Serving"
+      ],
+      "figures": [],
+      "tables": [],
+      "text_length": 2473,
+      "rotation": 0
+    },
+    {
+      "physical_page": 32,
+      "label": "18",
+      "size": [
+        595.28,
+        841.89
+      ],
+      "first_lines": [
+        "supporting evidence and presenting the response. The MGRAG evaluation uses six MRAMG",
+        "subsetstogetherwithMMQA.Chapter6specifiestheretrievalandanswer-assessmentprotocol",
+        "usedforthesedatasets.",
+        "Onceevidenceisretrieved,thesystemmustprocessitasmodelcontext. Inanautoregressive"
+      ],
+      "figures": [],
+      "tables": [],
+      "text_length": 2311,
+      "rotation": 0
+    },
+    {
+      "physical_page": 33,
+      "label": "19",
+      "size": [
+        595.28,
+        841.89
+      ],
+      "first_lines": [
+        "study analyzes this representation problem through fact decomposition, qualifier capture, and",
+        "graphreception.",
+        "2.7.1 Facts, Qualifiers, and Decomposition",
+        "Ahyper-relationalfactextendsamaintriplewithasetofqualifierpairs,"
+      ],
+      "figures": [
+        "Figure 2.1 reproduces the original comparison, including database reification. The study"
+      ],
+      "tables": [],
+      "text_length": 2423,
+      "rotation": 0
+    },
+    {
+      "physical_page": 34,
+      "label": "20",
       "size": [
         595.28,
         841.89
@@ -1457,36 +1585,15 @@
         "𝒓"
       ],
       "figures": [
-        "Figure 2.1: Original comparison of hyper-relational decomposition methods. Prune retains the",
-        "Figure 2.1 reproduces the original comparison, including database reification. The study"
+        "Figure 2.1: Original comparison of hyper-relational decomposition methods. Prune retains the"
       ],
       "tables": [],
-      "text_length": 2480,
+      "text_length": 2543,
       "rotation": 0
     },
     {
-      "physical_page": 29,
-      "label": "15",
-      "size": [
-        595.28,
-        841.89
-      ],
-      "first_lines": [
-        "is represented. Hyper adds connections intended to preserve these associations. A qualifier",
-        "integratorinsteadreceivesthemainfactanditsqualifierpairstogether.",
-        "WecompareconventionalKGEmodelsunderthesetransformationswithspecializedHKGE",
-        "models. Some GNN-based configurations obtain comparable scores on Cleaned JF17k and"
-      ],
-      "figures": [],
-      "tables": [
-        "Table 2.2 reproduces the Cleaned JF17k and WD50k columns of the study’s Table 6. MRR"
-      ],
-      "text_length": 2477,
-      "rotation": 0
-    },
-    {
-      "physical_page": 30,
-      "label": "16",
+      "physical_page": 35,
+      "label": "21",
       "size": [
         595.28,
         841.89
@@ -1498,13 +1605,33 @@
         "CleanedJF17k WD50k"
       ],
       "figures": [],
-      "tables": [],
-      "text_length": 1956,
+      "tables": [
+        "Table 2.2 reproduces the Cleaned JF17k and WD50k columns of the study’s Table 6. MRR"
+      ],
+      "text_length": 2150,
       "rotation": 0
     },
     {
-      "physical_page": 31,
-      "label": "17",
+      "physical_page": 36,
+      "label": "22",
+      "size": [
+        595.28,
+        841.89
+      ],
+      "first_lines": [
+        "2.8 Research Questions Emerging from the Background",
+        "Knowledge-enhanced annotation motivates our first question about supplying missing context",
+        "andlearningitscorrespondencetolabels. Dependenceonexistinggraphsandsupervisedtrain-",
+        "ingthenmotivatesgraphconstructionfromtaskdataandadaptationthroughretrieval. Extending"
+      ],
+      "figures": [],
+      "tables": [],
+      "text_length": 538,
+      "rotation": 0
+    },
+    {
+      "physical_page": 37,
+      "label": "23",
       "size": [
         595.28,
         841.89
@@ -1517,12 +1644,12 @@
       ],
       "figures": [],
       "tables": [],
-      "text_length": 1914,
+      "text_length": 1949,
       "rotation": 0
     },
     {
-      "physical_page": 32,
-      "label": "18",
+      "physical_page": 38,
+      "label": "24",
       "size": [
         595.28,
         841.89
@@ -1537,12 +1664,12 @@
         "Figure 3.1: Two annotation diﬀiculties in the original KGLink examples. A graph description"
       ],
       "tables": [],
-      "text_length": 2137,
+      "text_length": 2067,
       "rotation": 0
     },
     {
-      "physical_page": 33,
-      "label": "19",
+      "physical_page": 39,
+      "label": "25",
       "size": [
         595.28,
         841.89
@@ -1550,17 +1677,17 @@
       "first_lines": [
         "Figure3.2: KGLink’s graph-processing and language-model components. Candidate-type text,",
         "column feature vectors, and a contextual type-representation objective connect external knowl-",
-        "edgetoannotation. OriginalimagereproducedfromKGLink[1],Fig.3.",
-        "3.3 KG-derived Candidate Types"
+        "edgetoannotation. OriginalimagereproducedfromKGLink[9],Fig.3.",
+        "Graphdescriptionsandcellvaluessharetheencoderinputbudget. Wethereforeselectrows"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 1338,
+      "text_length": 1443,
       "rotation": 0
     },
     {
-      "physical_page": 34,
-      "label": "20",
+      "physical_page": 40,
+      "label": "26",
       "size": [
         595.28,
         841.89
@@ -1573,12 +1700,12 @@
       ],
       "figures": [],
       "tables": [],
-      "text_length": 1748,
+      "text_length": 1780,
       "rotation": 0
     },
     {
-      "physical_page": 35,
-      "label": "21",
+      "physical_page": 41,
+      "label": "27",
       "size": [
         595.28,
         841.89
@@ -1586,19 +1713,19 @@
       "first_lines": [
         "Figure 3.4: Cross-column evidence in the original album-and-musician example. Graph links",
         "connect candidate interpretations of cell mentions in the same row. Original image reproduced",
-        "fromKGLink[1],Fig.5.",
-        "Filteringdependsonboththeinitialentitycandidatesandtherelationspresentintheknowl-"
+        "fromKGLink[9],Fig.5.",
+        "selection."
       ],
       "figures": [
         "Figure 3.4: Cross-column evidence in the original album-and-musician example. Graph links"
       ],
       "tables": [],
-      "text_length": 842,
+      "text_length": 853,
       "rotation": 0
     },
     {
-      "physical_page": 36,
-      "label": "22",
+      "physical_page": 42,
+      "label": "28",
       "size": [
         595.28,
         841.89
@@ -1615,8 +1742,8 @@
       "rotation": 0
     },
     {
-      "physical_page": 37,
-      "label": "23",
+      "physical_page": 43,
+      "label": "29",
       "size": [
         595.28,
         841.89
@@ -1625,23 +1752,23 @@
         "forthecolumn. Apaddingsequenceisusedwhenthecolumnhasnoretrievedentity.",
         "3.4 Language Model Integration",
         "3.4.1 Table Serialization and Column Representations",
-        "KGLink adapts the multi-column serialization used by Doduo [11]. A special [CLS] token"
+        "KGLink adapts the multi-column serialization used by Doduo [37]. A special [CLS] token"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2118,
+      "text_length": 2115,
       "rotation": 0
     },
     {
-      "physical_page": 38,
-      "label": "24",
+      "physical_page": 44,
+      "label": "30",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
         "Figure 3.5: Contextual type-representation training with masked and ground-truth table inputs.",
-        "Thetrue-typetableisconstructedduringtraining. OriginalimagereproducedfromKGLink[1],",
+        "Thetrue-typetableisconstructedduringtraining. OriginalimagereproducedfromKGLink[9],",
         "Fig.6.",
         "coding the two sequences produces contextual representations for the true type and its masked"
       ],
@@ -1649,12 +1776,12 @@
         "Figure 3.5: Contextual type-representation training with masked and ground-truth table inputs."
       ],
       "tables": [],
-      "text_length": 1104,
+      "text_length": 1108,
       "rotation": 0
     },
     {
-      "physical_page": 39,
-      "label": "25",
+      "physical_page": 45,
+      "label": "31",
       "size": [
         595.28,
         841.89
@@ -1671,8 +1798,8 @@
       "rotation": 0
     },
     {
-      "physical_page": 40,
-      "label": "26",
+      "physical_page": 46,
+      "label": "32",
       "size": [
         595.28,
         841.89
@@ -1689,8 +1816,8 @@
       "rotation": 0
     },
     {
-      "physical_page": 41,
-      "label": "27",
+      "physical_page": 47,
+      "label": "33",
       "size": [
         595.28,
         841.89
@@ -1705,12 +1832,12 @@
       "tables": [
         "Table 3.1: Column-type annotation results reported for KGLink. Scores and missing entries"
       ],
-      "text_length": 2043,
+      "text_length": 2034,
       "rotation": 0
     },
     {
-      "physical_page": 42,
-      "label": "28",
+      "physical_page": 48,
+      "label": "34",
       "size": [
         595.28,
         841.89
@@ -1729,8 +1856,8 @@
       "rotation": 0
     },
     {
-      "physical_page": 43,
-      "label": "29",
+      "physical_page": 49,
+      "label": "35",
       "size": [
         595.28,
         841.89
@@ -1744,14 +1871,15 @@
       "figures": [],
       "tables": [
         "Table 3.3: Reported accuracy on the VizNet test subset whose tables have no extracted KG",
+        "Table 3.3 compares annotation accuracy without retrieved KG evidence. KGLink obtains",
         "Table 3.4 shows that linkage-ranked rows improve annotation over taking the first rows on both"
       ],
-      "text_length": 1778,
+      "text_length": 1713,
       "rotation": 0
     },
     {
-      "physical_page": 44,
-      "label": "30",
+      "physical_page": 50,
+      "label": "36",
       "size": [
         595.28,
         841.89
@@ -1767,12 +1895,12 @@
         "Figure 3.6 shows the measured relation between input selection,"
       ],
       "tables": [],
-      "text_length": 1657,
+      "text_length": 1692,
       "rotation": 0
     },
     {
-      "physical_page": 45,
-      "label": "31",
+      "physical_page": 51,
+      "label": "37",
       "size": [
         595.28,
         841.89
@@ -1787,12 +1915,12 @@
         "Figure 3.7: Training and inference time reported on VizNet. Original image reproduced from"
       ],
       "tables": [],
-      "text_length": 1468,
+      "text_length": 1419,
       "rotation": 0
     },
     {
-      "physical_page": 46,
-      "label": "32",
+      "physical_page": 52,
+      "label": "38",
       "size": [
         595.28,
         841.89
@@ -1801,16 +1929,16 @@
         "CHAPTER 4",
         "ADAPTIVE GRAPH RETRIEVAL FOR DYNAMIC",
         "CLASSIFICATION WITH GORAG",
-        "This chapter is based on GORAG: Graph-based Online Retrieval Augmented Generation"
+        "ThischapterisbasedonGORAG:Graph-basedOnlineRetrievalAugmentedGenerationfor"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 1946,
+      "text_length": 1989,
       "rotation": 0
     },
     {
-      "physical_page": 47,
-      "label": "33",
+      "physical_page": 53,
+      "label": "39",
       "size": [
         595.28,
         841.89
@@ -1825,12 +1953,12 @@
         "Figure 4.1: Two rounds of the dynamic classification task. New abuse categories extend the"
       ],
       "tables": [],
-      "text_length": 1269,
+      "text_length": 1560,
       "rotation": 0
     },
     {
-      "physical_page": 48,
-      "label": "34",
+      "physical_page": 54,
+      "label": "40",
       "size": [
         595.28,
         841.89
@@ -1845,84 +1973,84 @@
         "Figure 4.2: GORAG’s offline indexing, query-dependent retrieval, classification, and online"
       ],
       "tables": [],
-      "text_length": 2382,
+      "text_length": 2190,
       "rotation": 0
     },
     {
-      "physical_page": 49,
-      "label": "35",
+      "physical_page": 55,
+      "label": "41",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
-        "Herecount(𝑣,𝑡)istheoccurrencecountof𝑣in𝑡,and|𝑡|istextlength. Theexpressioncombines",
-        "frequency within the text with frequency across the observed corpus. Its corpus term changes",
-        "when additional texts are observed. Terms with 𝐶𝑆(𝑣,𝑡) > 𝜏 are retained, with 𝜏 = 0.5 in the",
-        "original study. The method uses the score both to select keywords and to calculate association"
+        "4.2.1 Keyword extraction and correlation scores",
+        "GORAGscorestermsusingnormalizedTF–IDF[92]. Itsextractionvocabularyincludeswords",
+        "and phrases of fewer than three words. Let 𝒯 denote the corpus seen so far, and let df(𝑣) be",
+        "≤𝑟"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 1976,
+      "text_length": 1834,
       "rotation": 0
     },
     {
-      "physical_page": 50,
-      "label": "36",
+      "physical_page": 56,
+      "label": "42",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
-        "reports",
-        "∑ 𝑤𝑟 ∑ 𝑤𝑟",
-        "𝑤𝑟 = 1 𝑣∈ℳ 𝑦 𝑟 𝑛 𝑣,𝑦 𝑛 + 𝑣∈ℳ 𝑦 𝑟 𝑜 𝑣,𝑦 𝑜 . (4.4)",
-        "𝑦 𝑛 ,𝑦 𝑜 2 ( 2|ℳ𝑟 | 2|ℳ𝑟 | )"
+        "4.2.3 Merging label rounds",
+        "At each round, we merge the new graph with the accumulated index by taking the unions of",
+        "their node and edge sets. Earlier labels and their associations remain available for subsequent",
+        "retrieval."
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2289,
+      "text_length": 2243,
       "rotation": 0
     },
     {
-      "physical_page": 51,
-      "label": "37",
+      "physical_page": 57,
+      "label": "43",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
-        "Oncetheexpandedstructure𝑆𝑟 isobtained,thecandidatesetis",
-        "𝑡",
-        "𝒴̂𝑟 = 𝒱(𝑆𝑟)∩𝒴𝑟. (4.5)",
-        "𝑡 𝑡"
+        "4.3.1 Tree and auxiliary-graph operations",
+        "GORAGusesagreedyterminal-connectingprocedurebasedonMehlhorn’salgorithm[93]. The",
+        "mapped keywords serve as terminals. An auxiliary graph 𝐻 represents connections between",
+        "terminals, with edge weights given by path costs. A minimum spanning tree of 𝐻 selects a"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 1509,
+      "text_length": 1699,
       "rotation": 0
     },
     {
-      "physical_page": 52,
-      "label": "38",
+      "physical_page": 58,
+      "label": "44",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
-        "4.4.1 Computational organization",
-        "Thegraphseparatesworkperformedatalabelupdatefromworkperformedforeachquery. Of-",
-        "fline indexing processes the supplied texts, creates or updates keyword associations, generates",
-        "label information when available,and mergesthe round’sgraph. The cross-round label bridges"
+        "The prediction precedes insertion, so a new keyword’s association can affect later queries",
+        "butnotthepredictionthatcreatedit. Incorrectpredictedlabelscanpropagatethroughthoseas-",
+        "sociations. Theofflineablationsuppressesonlineexpansion,measuringitscontributionrelative",
+        "toanindexthatreceivesnosuchquery-dependentadditions."
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2272,
+      "text_length": 2212,
       "rotation": 0
     },
     {
-      "physical_page": 53,
-      "label": "39",
+      "physical_page": 59,
+      "label": "45",
       "size": [
         595.28,
         841.89
@@ -1937,12 +2065,12 @@
       "tables": [
         "Table 4.1: Dataset statistics for the four-round experiments, transposed from the original table."
       ],
-      "text_length": 1849,
+      "text_length": 1922,
       "rotation": 0
     },
     {
-      "physical_page": 54,
-      "label": "40",
+      "physical_page": 60,
+      "label": "46",
       "size": [
         595.28,
         841.89
@@ -1955,36 +2083,36 @@
       ],
       "figures": [],
       "tables": [
-        "Table 4.3: WOS classification accuracy with 5 support examples per label. Qwen2.5-7B is the",
-        "Table 4.5: IFS-Rel classification accuracy with one support example per label. GPT-4o is the"
+        "Table 4.3: WOS classification accuracy with 5 support examples per label. Qwen2.5-7B is the"
       ],
-      "text_length": 1879,
+      "text_length": 1874,
       "rotation": 0
     },
     {
-      "physical_page": 55,
-      "label": "41",
+      "physical_page": 61,
+      "label": "47",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
-        "Table 4.6: IFS-Rel classification accuracy with 5 support examples per label. GPT-4o is the",
+        "Table 4.5: IFS-Rel classification accuracy with one support example per label. GPT-4o is the",
         "RAGbackbone. ValuesandemphasisreproducethecorrespondingcolumnsofGORAG’smain",
         "table.",
         "Method Round1 Round2 Round3 Round4"
       ],
       "figures": [],
       "tables": [
+        "Table 4.5: IFS-Rel classification accuracy with one support example per label. GPT-4o is the",
         "Table 4.6: IFS-Rel classification accuracy with 5 support examples per label. GPT-4o is the",
         "Table 4.7: IFS-Rel classification accuracy with 10 support examples per label. GPT-4o is the"
       ],
-      "text_length": 2285,
+      "text_length": 1426,
       "rotation": 0
     },
     {
-      "physical_page": 56,
-      "label": "42",
+      "physical_page": 62,
+      "label": "48",
       "size": [
         595.28,
         841.89
@@ -1997,12 +2125,12 @@
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2022,
+      "text_length": 2156,
       "rotation": 0
     },
     {
-      "physical_page": 57,
-      "label": "43",
+      "physical_page": 63,
+      "label": "49",
       "size": [
         595.28,
         841.89
@@ -2013,36 +2141,55 @@
         "GPT-4o 634.6 $0.005",
         "LongLLMLingua 2771.3 $0.021"
       ],
-      "figures": [
-        "Figure 4.3: Total time in minutes for the one-shot four-round experiments with Qwen2.5-7B."
-      ],
+      "figures": [],
       "tables": [],
-      "text_length": 1576,
+      "text_length": 1999,
       "rotation": 0
     },
     {
-      "physical_page": 58,
-      "label": "44",
+      "physical_page": 64,
+      "label": "50",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
-        "Table4.10: 0-shotexperimentsforGORAGandRAGbaselinesonIFS-Reldatasetunder0-shot",
-        "setting.",
-        "Model R1 R2 R3 R4",
-        "GPT-4o[43] 0.9219 0.5109 0.4063 0.5936"
+        "80.0",
+        "70.0",
+        "60.0",
+        "50.0"
       ],
       "figures": [
-        "Figure 4.4: WOS classification across the reported round splits. Points 1–4 use the four-round"
+        "Figure 4.3: Total time in minutes for the one-shot four-round experiments with Qwen2.5-7B."
       ],
       "tables": [],
-      "text_length": 1663,
+      "text_length": 1817,
       "rotation": 0
     },
     {
-      "physical_page": 59,
-      "label": "45",
+      "physical_page": 65,
+      "label": "51",
+      "size": [
+        595.28,
+        841.89
+      ],
+      "first_lines": [
+        "0.5",
+        "0.4",
+        "0.3",
+        "0.2"
+      ],
+      "figures": [
+        "Figure 4.4: WOS classification across the reported round splits. Points 1–4 use the four-round",
+        "Figure 4.5 reproduces a contextual-abuse example from the original study. The query contains"
+      ],
+      "tables": [],
+      "text_length": 1685,
+      "rotation": 0
+    },
+    {
+      "physical_page": 66,
+      "label": "52",
       "size": [
         595.28,
         841.89
@@ -2054,34 +2201,15 @@
         "n"
       ],
       "figures": [
-        "Figure 4.5: A contextual-abuse example and its selected graph connections. Reproduced from",
-        "Figure 4.5 reproduces a contextual-abuse example from the original study. The query contains"
+        "Figure 4.5: A contextual-abuse example and its selected graph connections. Reproduced from"
       ],
       "tables": [],
-      "text_length": 1553,
+      "text_length": 866,
       "rotation": 0
     },
     {
-      "physical_page": 60,
-      "label": "46",
-      "size": [
-        595.28,
-        841.89
-      ],
-      "first_lines": [
-        "GORAGmaintainsclassificationevidenceaslabelsandobservedvocabularyevolve. Chap-",
-        "ter 5 turns to open-ended answers, where retrieval must select connected facts and the passage",
-        "contextneededtoexplainthem.",
-        "46"
-      ],
-      "figures": [],
-      "tables": [],
-      "text_length": 204,
-      "rotation": 0
-    },
-    {
-      "physical_page": 61,
-      "label": "47",
+      "physical_page": 67,
+      "label": "53",
       "size": [
         595.28,
         841.89
@@ -2093,15 +2221,15 @@
         "ThischapterisbasedonAGRAG:AdvancedGraph-basedRetrieval-AugmentedGeneration"
       ],
       "figures": [
-        "Figure 5.2 illustrates this distinction. The example motivates expansion beyond an initial"
+        "Figure 5.2 illustrates"
       ],
       "tables": [],
-      "text_length": 2030,
+      "text_length": 2161,
       "rotation": 0
     },
     {
-      "physical_page": 62,
-      "label": "48",
+      "physical_page": 68,
+      "label": "54",
       "size": [
         595.28,
         841.89
@@ -2117,30 +2245,30 @@
         "Figure 5.1 reproduces the original"
       ],
       "tables": [],
-      "text_length": 2043,
+      "text_length": 2037,
       "rotation": 0
     },
     {
-      "physical_page": 63,
-      "label": "49",
+      "physical_page": 69,
+      "label": "55",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
+        "Corpus indexing performs chunking, entity and relation extraction, passage linking, and",
         "dense and sparse indexing. Query processing maps the question to facts, computes influence",
         "scoresandedgecosts,expandstheevidencesubgraph,andretrieveshybridpassages.",
-        "The statistical component replaces the entity extraction step used in the compared graph",
-        "pipelines. Languagemodelsremaininvolvedinrelationextraction,filteringrawmappedtriples,"
+        "The statistical component replaces the entity extraction step used in the compared graph"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 1838,
+      "text_length": 1926,
       "rotation": 0
     },
     {
-      "physical_page": 64,
-      "label": "50",
+      "physical_page": 70,
+      "label": "56",
       "size": [
         595.28,
         841.89
@@ -2153,12 +2281,12 @@
       ],
       "figures": [],
       "tables": [],
-      "text_length": 1888,
+      "text_length": 1837,
       "rotation": 0
     },
     {
-      "physical_page": 65,
-      "label": "51",
+      "physical_page": 71,
+      "label": "57",
       "size": [
         595.28,
         841.89
@@ -2175,8 +2303,8 @@
       "rotation": 0
     },
     {
-      "physical_page": 66,
-      "label": "52",
+      "physical_page": 72,
+      "label": "58",
       "size": [
         595.28,
         841.89
@@ -2193,8 +2321,8 @@
       "rotation": 0
     },
     {
-      "physical_page": 67,
-      "label": "53",
+      "physical_page": 73,
+      "label": "59",
       "size": [
         595.28,
         841.89
@@ -2209,12 +2337,12 @@
         "Figure 5.2: The original AGRAG evidence-expansion example. Red triples are query-mapped"
       ],
       "tables": [],
-      "text_length": 2287,
+      "text_length": 2326,
       "rotation": 0
     },
     {
-      "physical_page": 68,
-      "label": "54",
+      "physical_page": 74,
+      "label": "60",
       "size": [
         595.28,
         841.89
@@ -2231,8 +2359,8 @@
       "rotation": 0
     },
     {
-      "physical_page": 69,
-      "label": "55",
+      "physical_page": 75,
+      "label": "61",
       "size": [
         595.28,
         841.89
@@ -2245,37 +2373,37 @@
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2312,
+      "text_length": 2305,
       "rotation": 0
     },
     {
-      "physical_page": 70,
-      "label": "56",
+      "physical_page": 76,
+      "label": "62",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
-        "classification-specific configuration retained where applicable. The comparison includes",
-        "NaiveRAG, LongLLMLingua [41], RAPTOR [49], SiReRAG [50], G-Retriever [51],",
-        "MIXRAG [52], GraphRAG [17], LightRAG [19], HippoRAG2 [42], and Fast-GraphRAG [53].",
-        "These methods represent passage retrieval, compression, hierarchical organization, connected"
+        "with its classification-specific configuration retained where applicable. The compar-",
+        "ison includes NaiveRAG, LongLLMLingua [96], RAPTOR [104], SiReRAG [105],",
+        "G-Retriever [106], MIXRAG [107], GraphRAG [14], LightRAG [59], HippoRAG2 [97], and",
+        "Fast-GraphRAG [108]. These methods represent passage retrieval, compression, hierarchical"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2140,
+      "text_length": 2156,
       "rotation": 0
     },
     {
-      "physical_page": 71,
-      "label": "57",
+      "physical_page": 77,
+      "label": "63",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
         "Table 5.1: Creative generation with Qwen2.5-14B-Instruct. Results from the AGRAG main",
-        "experiment[3].",
+        "experiment[15].",
         "Method NovelFS NovelACC NovelCOV MedicalFS MedicalACC MedicalCOV",
         "NaiveRAG 0.205 0.307 0.384 0.176 0.577 0.554"
       ],
@@ -2284,19 +2412,19 @@
         "Table 5.1: Creative generation with Qwen2.5-14B-Instruct. Results from the AGRAG main",
         "Table 5.2: Contextual summarization with Qwen2.5-14B-Instruct. Results from the AGRAG"
       ],
-      "text_length": 1184,
+      "text_length": 1186,
       "rotation": 0
     },
     {
-      "physical_page": 72,
-      "label": "58",
+      "physical_page": 78,
+      "label": "64",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
         "Table 5.3: Complex reasoning with Qwen2.5-14B-Instruct. Results from the AGRAG main",
-        "experiment[3].",
+        "experiment[15].",
         "Method Novel ROG Novel ACC Medical ROG Medical ACC",
         "NaiveRAG 0.120 0.447 0.117 0.635"
       ],
@@ -2305,19 +2433,19 @@
         "Table 5.3: Complex reasoning with Qwen2.5-14B-Instruct. Results from the AGRAG main",
         "Table 5.4: Fact retrieval with Qwen2.5-14B-Instruct. Results from the AGRAG main experi-"
       ],
-      "text_length": 1029,
+      "text_length": 1031,
       "rotation": 0
     },
     {
-      "physical_page": 73,
-      "label": "59",
+      "physical_page": 79,
+      "label": "65",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
         "Table 5.5: Text classification with Qwen2.5-14B-Instruct. Results from the AGRAG main ex-",
-        "periment[3].",
+        "periment[15].",
         "Method WOS ACC WOS REC IFS-Rel ACC IFS-Rel REC",
         "NaiveRAG 0.237 0.257 0.351 0.197"
       ],
@@ -2325,12 +2453,12 @@
       "tables": [
         "Table 5.5: Text classification with Qwen2.5-14B-Instruct. Results from the AGRAG main ex-"
       ],
-      "text_length": 1703,
+      "text_length": 1704,
       "rotation": 0
     },
     {
-      "physical_page": 74,
-      "label": "60",
+      "physical_page": 80,
+      "label": "66",
       "size": [
         595.28,
         841.89
@@ -2346,12 +2474,12 @@
         "Table 5.6: Indexing / querying time in minutes. Qwen2.5-14B-Instruct; original paired mea-",
         "Table 5.6 separates indexing time, querying time, input tokens, and output tokens. For Novel,"
       ],
-      "text_length": 1456,
+      "text_length": 1443,
       "rotation": 0
     },
     {
-      "physical_page": 75,
-      "label": "61",
+      "physical_page": 81,
+      "label": "67",
       "size": [
         595.28,
         841.89
@@ -2371,8 +2499,8 @@
       "rotation": 0
     },
     {
-      "physical_page": 76,
-      "label": "62",
+      "physical_page": 82,
+      "label": "68",
       "size": [
         595.28,
         841.89
@@ -2389,8 +2517,8 @@
       "rotation": 0
     },
     {
-      "physical_page": 77,
-      "label": "63",
+      "physical_page": 83,
+      "label": "69",
       "size": [
         595.28,
         841.89
@@ -2407,8 +2535,8 @@
       "rotation": 0
     },
     {
-      "physical_page": 78,
-      "label": "64",
+      "physical_page": 84,
+      "label": "70",
       "size": [
         595.28,
         841.89
@@ -2429,8 +2557,8 @@
       "rotation": 0
     },
     {
-      "physical_page": 79,
-      "label": "65",
+      "physical_page": 85,
+      "label": "71",
       "size": [
         595.28,
         841.89
@@ -2446,12 +2574,12 @@
         "Figure 5.3: AGRAG parameter sensitivity on Novel (top) and Medical (bottom). The original"
       ],
       "tables": [],
-      "text_length": 1496,
+      "text_length": 1497,
       "rotation": 0
     },
     {
-      "physical_page": 80,
-      "label": "66",
+      "physical_page": 86,
+      "label": "72",
       "size": [
         595.28,
         841.89
@@ -2464,12 +2592,12 @@
       ],
       "figures": [],
       "tables": [],
-      "text_length": 925,
+      "text_length": 1145,
       "rotation": 0
     },
     {
-      "physical_page": 81,
-      "label": "67",
+      "physical_page": 87,
+      "label": "73",
       "size": [
         595.28,
         841.89
@@ -2482,12 +2610,12 @@
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2000,
+      "text_length": 1999,
       "rotation": 0
     },
     {
-      "physical_page": 82,
-      "label": "68",
+      "physical_page": 88,
+      "label": "74",
       "size": [
         595.28,
         841.89
@@ -2500,16 +2628,16 @@
       ],
       "figures": [
         "Figure 6.1: Path-level correspondence in the MGRAG motivating example. A grandfa-",
-        "Figure 6.1 reproduces the",
+        "Figure 6.1 reproduces the example. MGRAG evaluates semantic representa-",
         "Figure 6.2 shows three stages. Coarse-grained ranking orders text chunks and images accord-"
       ],
       "tables": [],
-      "text_length": 2248,
+      "text_length": 2246,
       "rotation": 0
     },
     {
-      "physical_page": 83,
-      "label": "69",
+      "physical_page": 89,
+      "label": "75",
       "size": [
         595.28,
         841.89
@@ -2522,32 +2650,32 @@
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2039,
+      "text_length": 2184,
       "rotation": 0
     },
     {
-      "physical_page": 84,
-      "label": "70",
+      "physical_page": 90,
+      "label": "76",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
-        "A query with one modality uses its corresponding textual representation. The distance to a",
-        "candidateis",
-        "𝑑(𝑞,𝑐) = ‖𝐡 −𝐡 ‖ , (6.2)",
-        "𝑞 𝑐 2"
+        "sentations,",
+        "ℳ(𝑞 )+ℳ(𝑞 )",
+        "txt cap",
+        "𝐡 = . (6.1)"
       ],
       "figures": [
         "Figure 6.3 shows the query and evidence graph representations. The placeholder boxes de-"
       ],
       "tables": [],
-      "text_length": 2212,
+      "text_length": 2051,
       "rotation": 0
     },
     {
-      "physical_page": 85,
-      "label": "71",
+      "physical_page": 91,
+      "label": "77",
       "size": [
         595.28,
         841.89
@@ -2562,48 +2690,48 @@
         "Figure 6.3: Query and evidence graphs in path-based semantic matching. Placeholder entities"
       ],
       "tables": [],
-      "text_length": 1638,
+      "text_length": 1588,
       "rotation": 0
     },
     {
-      "physical_page": 86,
-      "label": "72",
+      "physical_page": 92,
+      "label": "78",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
-        "iteration𝑖,thecumulativegraphcontains",
-        "𝒱 (𝑖) = (𝒱𝑐 ∪{𝑐}), (6.4)",
-        "𝑞 ⋃ 𝑞",
-        "(𝑖)"
+        "The chunk is also added as a passage node. MGRAG connects this node to the entities",
+        "extracted from it using the pseudo-relation consists_in, retaining the published relation",
+        "(𝑖)",
+        "nameandorientationfromchunktoentity. If𝒞 istheprefixofrankedchunksconsumedafter"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 1631,
+      "text_length": 1667,
       "rotation": 0
     },
     {
-      "physical_page": 87,
-      "label": "73",
+      "physical_page": 93,
+      "label": "79",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
-        "relation.",
-        "Let 𝐼 ∶ 𝒱̂ → 𝒱 be a candidate entity mapping. For a query edge (𝑢,𝑟,̂ 𝑣), the candidate",
-        "𝑞 𝑞",
-        "evidence paths run from 𝐼(𝑢) to 𝐼(𝑣). Denote this collection by 𝒫(𝐼(𝑢),𝐼(𝑣)). The matching"
+        "beddings,",
+        "𝑘",
+        "𝐡 = 𝐡 . (6.6)",
+        "𝑃(𝑢,𝑣) ⨁ 𝑟 𝑗"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2086,
+      "text_length": 1885,
       "rotation": 0
     },
     {
-      "physical_page": 88,
-      "label": "74",
+      "physical_page": 94,
+      "label": "80",
       "size": [
         595.28,
         841.89
@@ -2616,30 +2744,48 @@
       ],
       "figures": [],
       "tables": [],
-      "text_length": 1806,
+      "text_length": 1950,
       "rotation": 0
     },
     {
-      "physical_page": 89,
-      "label": "75",
+      "physical_page": 95,
+      "label": "81",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
-        "length𝑙 toboundexpansion.",
-        "𝑝",
-        "A path must reach the mapped target and pass the semantic checks. Greedy selection can",
-        "follow a locally attractive extension that blocks a valid route, so search failure does not imply"
+        "using",
+        "cos(𝐡",
+        "𝑃",
+        "⊕𝐡"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2199,
+      "text_length": 2251,
       "rotation": 0
     },
     {
-      "physical_page": 90,
-      "label": "76",
+      "physical_page": 96,
+      "label": "82",
+      "size": [
+        595.28,
+        841.89
+      ],
+      "first_lines": [
+        "inal chunks remain available because extraction is a selective description of the evidence, and",
+        "somelinguisticorvisualdetailsmaylieoutsidethetriples.",
+        "Constructionandansweringprocessoverlappingcontent. Wereusecachedstatesfromcon-",
+        "structionandrecomputeselectedtokensfortheansweringcontext."
+      ],
+      "figures": [],
+      "tables": [],
+      "text_length": 1947,
+      "rotation": 0
+    },
+    {
+      "physical_page": 97,
+      "label": "83",
       "size": [
         595.28,
         841.89
@@ -2654,78 +2800,59 @@
         "Figure 6.4: Graph features supplement attention in token recomputation scoring. The diagram"
       ],
       "tables": [],
-      "text_length": 1507,
+      "text_length": 1580,
       "rotation": 0
     },
     {
-      "physical_page": 91,
-      "label": "77",
+      "physical_page": 98,
+      "label": "84",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
-        "6.6.2 Topological features of facts",
-        "MGRAGusesdegree,betweenness,eigenvector,andclosenesscentralitytocharacterizeanode.",
-        "Degree centrality measures its normalized number of adjacent connections. Betweenness char-",
-        "acterizes its participation in paths connecting other nodes. Eigenvector centrality weights con-"
-      ],
-      "figures": [],
-      "tables": [],
-      "text_length": 1852,
-      "rotation": 0
-    },
-    {
-      "physical_page": 92,
-      "label": "78",
-      "size": [
-        595.28,
-        841.89
-      ],
-      "first_lines": [
+        "These comparisons measure how combining retrieval and caching changes answer quality and",
+        "processingtime.",
         "6.7 Computational Cost",
-        "The published offline encoding cost is 𝑂(|𝒞|𝑑 𝑙2), with embedding dimension 𝑑 . Using",
-        "emb 𝑐 emb",
-        "𝑘 processed chunks, query-graph vertex and edge sets 𝒱̂and ℰ̂, evidence-graph sets 𝒱 and"
+        "The published offline encoding cost is 𝑂(|𝒞|𝑑 𝑙2), with embedding dimension 𝑑 . Using"
       ],
       "figures": [],
       "tables": [
-        "Table 6.1 preserves the published dataset statistics. MMQA",
-        "Table 6.1: Evaluation datasets, reproduced from published Table 3, p. 2488 [4]. T and I denote"
+        "Table 6.1 preserves the published dataset statistics. MMQA includes"
       ],
-      "text_length": 1985,
+      "text_length": 1819,
       "rotation": 0
     },
     {
-      "physical_page": 93,
-      "label": "79",
+      "physical_page": 99,
+      "label": "85",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
-        "configurationsusebge-base-en-v1.5. Similarity-basedretrievalrepresentsimagesthroughtheir",
-        "captions.",
-        "VanillaRAG is implemented with LangChain and FAISS [61]. The GraphRAG implemen-",
-        "tationisnano-graphrag[62],andtheremainingbaselinesystemsusetheirreleasedimplementa-"
+        "on an Intel Xeon Gold 5220R CPU at 2.20 GHz and one NVIDIA A100-SXM4 GPU with 40",
+        "GB memory. The retrieval amount is set to five, text chunks use 256 tokens, and overlap is",
+        "32 tokens. HippoRAG2 uses Contriever for dense passage retrieval [103]; the other reported",
+        "embedding configurations use bge-base-en-v1.5. Similarity-based retrieval represents images"
       ],
       "figures": [],
       "tables": [
         "Table 6.2 reproduces the complete-system results. MGRAG has the highest value for all four"
       ],
-      "text_length": 2059,
+      "text_length": 2346,
       "rotation": 0
     },
     {
-      "physical_page": 94,
-      "label": "80",
+      "physical_page": 100,
+      "label": "86",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
         "Table 6.2: Answer quality with Qwen2.5-VL-7B-Instruct, reproduced from published Table",
-        "4, p. 2489 [4]. Vanilla., R1., Graph., Light., and Hippo. denote VanillaRAG, R1-Searcher,",
+        "4, p. 2489 [19]. Vanilla., R1., Graph., Light., and Hippo. denote VanillaRAG, R1-Searcher,",
         "GraphRAG, LightRAG, and HippoRAG2. A dash means that the experiment exceeded three",
         "days;itisnotazeroscore. Boldandunderliningretainthepublication’shighlighting."
       ],
@@ -2733,12 +2860,12 @@
       "tables": [
         "Table 6.2: Answer quality with Qwen2.5-VL-7B-Instruct, reproduced from published Table"
       ],
-      "text_length": 1992,
+      "text_length": 1993,
       "rotation": 0
     },
     {
-      "physical_page": 95,
-      "label": "81",
+      "physical_page": 101,
+      "label": "87",
       "size": [
         595.28,
         841.89
@@ -2750,15 +2877,13 @@
         "example, on Manual, GraphRAG, LightRAG, and HippoRAG2 report accuracies of 0.1436,"
       ],
       "figures": [],
-      "tables": [
-        "Table 6.3 reorganizes every value from the published graph-construction and matching com-"
-      ],
-      "text_length": 1742,
+      "tables": [],
+      "text_length": 1739,
       "rotation": 0
     },
     {
-      "physical_page": 96,
-      "label": "82",
+      "physical_page": 102,
+      "label": "88",
       "size": [
         595.28,
         841.89
@@ -2775,8 +2900,8 @@
       "rotation": 0
     },
     {
-      "physical_page": 97,
-      "label": "83",
+      "physical_page": 103,
+      "label": "89",
       "size": [
         595.28,
         841.89
@@ -2793,8 +2918,8 @@
       "rotation": 0
     },
     {
-      "physical_page": 98,
-      "label": "84",
+      "physical_page": 104,
+      "label": "90",
       "size": [
         595.28,
         841.89
@@ -2807,15 +2932,14 @@
       ],
       "figures": [],
       "tables": [
-        "Table 6.4 reports results grouped by MRAMG query-hop count. For one-hop questions, Vanil-",
-        "Table 6.4: Results by query hop count, reorganized from published Table 8, p. 2490 [4]. Time"
+        "Table 6.4 reports results grouped by MRAMG query-hop count. For one-hop questions, Vanil-"
       ],
-      "text_length": 1661,
+      "text_length": 1649,
       "rotation": 0
     },
     {
-      "physical_page": 99,
-      "label": "85",
+      "physical_page": 105,
+      "label": "91",
       "size": [
         595.28,
         841.89
@@ -2835,8 +2959,8 @@
       "rotation": 0
     },
     {
-      "physical_page": 100,
-      "label": "86",
+      "physical_page": 106,
+      "label": "92",
       "size": [
         595.28,
         841.89
@@ -2849,14 +2973,14 @@
       ],
       "figures": [],
       "tables": [
-        "Table 6.6: Module costs reproduced from published Table 5, p. 2489 [4]. Time is in minutes."
+        "Table 6.6: Module costs reproduced from published Table 5, p. 2489 [19]. Time is in minutes."
       ],
-      "text_length": 1969,
+      "text_length": 1970,
       "rotation": 0
     },
     {
-      "physical_page": 101,
-      "label": "87",
+      "physical_page": 107,
+      "label": "93",
       "size": [
         595.28,
         841.89
@@ -2872,18 +2996,18 @@
         "Table 6.7 change matching, coarse encoding, and pipeline composi-",
         "Table 6.8 retains the inverse ablations. Adding graph-aware KV recomputation to HippoRAG2"
       ],
-      "text_length": 1967,
+      "text_length": 1969,
       "rotation": 0
     },
     {
-      "physical_page": 102,
-      "label": "88",
+      "physical_page": 108,
+      "label": "94",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
-        "Table 6.8: MMQA inverse ablations, reproduced from published Table 10, p. 2491 [4]. PSGM",
+        "Table6.8: MMQAinverseablations,reproducedfrompublishedTable10,p.2491[19]. PSGM",
         "and GKV denote path-based semantic graph matching and graph-aware KV recomputation.",
         "Timeisinhours.",
         "Model SIM. ACC. ROG. BLEU Time"
@@ -2892,15 +3016,13 @@
         "Figure 6.5: MGRAG matching-parameter sensitivity. Original subfigures of Figure 5,",
         "Figure 6.5 reproduces the published parameter curves. The experiments vary the semantic"
       ],
-      "tables": [
-        "Table 6.8: MMQA inverse ablations, reproduced from published Table 10, p. 2491 [4]. PSGM"
-      ],
-      "text_length": 1557,
+      "tables": [],
+      "text_length": 1548,
       "rotation": 0
     },
     {
-      "physical_page": 103,
-      "label": "89",
+      "physical_page": 109,
+      "label": "95",
       "size": [
         595.28,
         841.89
@@ -2913,12 +3035,12 @@
       ],
       "figures": [],
       "tables": [],
-      "text_length": 1278,
+      "text_length": 1390,
       "rotation": 0
     },
     {
-      "physical_page": 104,
-      "label": "90",
+      "physical_page": 110,
+      "label": "96",
       "size": [
         595.28,
         841.89
@@ -2926,17 +3048,17 @@
       "first_lines": [
         "CHAPTER 7",
         "DISCUSSION",
-        "Thefourmethodsuserelationshipstomakedifferentevidencedecisions. KGLinkselectsex-",
-        "ternaldescriptionsfortablecolumns,GORAGretrieveslabelsfromanevolvingindex,AGRAG"
+        "Our research progressed from knowledge-enriched representations to graph construction",
+        "fromtaskdataandpredictionwithoutmodelfine-tuning. Extendingretrievalbeyondclassifica-"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 1763,
+      "text_length": 2135,
       "rotation": 0
     },
     {
-      "physical_page": 105,
-      "label": "91",
+      "physical_page": 111,
+      "label": "97",
       "size": [
         595.28,
         841.89
@@ -2949,14 +3071,15 @@
       ],
       "figures": [],
       "tables": [
-        "Table 7.1: The roles of structure across the four studies. The entries summarize the methods in"
+        "Table 7.1: The roles of structure across the four studies. The entries summarize the methods in",
+        "Table 7.1 summarizes how the representation changes with the output requirements. Graph"
       ],
-      "text_length": 2069,
+      "text_length": 2207,
       "rotation": 0
     },
     {
-      "physical_page": 106,
-      "label": "92",
+      "physical_page": 112,
+      "label": "98",
       "size": [
         595.28,
         841.89
@@ -2969,48 +3092,48 @@
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2502,
+      "text_length": 1955,
       "rotation": 0
     },
     {
-      "physical_page": 107,
-      "label": "93",
+      "physical_page": 113,
+      "label": "99",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
-        "7.4 Information Preservation and Semantic Granularity",
-        "The hyper-relational study in Chapter 2 supplies another perspective on structural representa-",
-        "tions. Amaintripleanditsqualifiersexpressdifferentaspectsofafact. Decomposingthatrepre-",
-        "sentationcanretainsomerelationshipswhilelosingtheassociationthatgivesthemtheirmean-"
+        "The assessment rule follows the output being evaluated. GORAG’s accuracy requires the",
+        "predicted class to match the gold label. AGRAG’s QA accuracy uses model judgments scored",
+        "0,0.5,or1,whileitsclassificationaccuracyuseslabelcorrectness. Itssource-definedROUGE-",
+        "L quantity divides longest-common-subsequence length by generated-answer length. MGRAG"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2400,
+      "text_length": 2564,
       "rotation": 0
     },
     {
-      "physical_page": 108,
-      "label": "94",
+      "physical_page": 114,
+      "label": "100",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
-        "7.6 Limitations and Open Questions",
-        "KGLink depends on the coverage and vocabulary of the external graph. Its no-linkage analysis",
-        "tests tables without retrieved KG evidence, while broader use also depends on graph language,",
-        "updatestate,andalignmentwiththetargetlabels."
+        "A useful structure must preserve the relationships needed for the task. Connectivity identi-",
+        "fiesavailablelinks,semanticmatchingcheckstheircorrespondencetoaquery,andsupervision",
+        "determines the required annotation category. The hyper-relational study examines how graph",
+        "transformationcanaltertheserelationshipsbeforeprediction."
       ],
       "figures": [],
       "tables": [],
-      "text_length": 910,
+      "text_length": 2221,
       "rotation": 0
     },
     {
-      "physical_page": 109,
-      "label": "95",
+      "physical_page": 115,
+      "label": "101",
       "size": [
         595.28,
         841.89
@@ -3019,16 +3142,16 @@
         "CHAPTER 8",
         "CONCLUSION AND FUTURE DIRECTIONS",
         "8.1 Conclusion",
-        "Inthisthesis,wedevelopedfourmethodsthatuseexplicitknowledgestructurestoselectandpro-"
+        "Inthisthesis,weinvestigatedhowexplicitknowledgestructuressupportlanguage-modelpredic-"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 1868,
+      "text_length": 2119,
       "rotation": 0
     },
     {
-      "physical_page": 110,
-      "label": "96",
+      "physical_page": 116,
+      "label": "102",
       "size": [
         595.28,
         841.89
@@ -3041,178 +3164,250 @@
       ],
       "figures": [],
       "tables": [],
-      "text_length": 1803,
+      "text_length": 1804,
       "rotation": 0
     },
     {
-      "physical_page": 111,
-      "label": "97",
+      "physical_page": 117,
+      "label": "103",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
         "REFERENCES",
-        "[1] Y.Wangetal.,“KGLink:Acolumntypeannotationmethodthatcombinesknowledgegraphand",
-        "pre-trained language model,” in 2024 IEEE 40th International Conference on Data Engineering",
-        "(ICDE), IEEE, 2024, pp. 1023–1035. DOI: 10.1109/ICDE60146.2024.00083 (cit. on"
+        "[1] X. Deng et al., “TURL: Table understanding through representation learning,” Proceedings of",
+        "the VLDB Endowment, vol. 14, no. 3, pp. 307–319, 2020. DOI: 10.14778/3430915.",
+        "3430921(cit.onpp.1,11)."
       ],
       "figures": [],
       "tables": [],
-      "text_length": 2853,
+      "text_length": 2799,
       "rotation": 0
     },
     {
-      "physical_page": 112,
-      "label": "98",
+      "physical_page": 118,
+      "label": "104",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
-        "[15] S. Robertson et al., “The probabilistic relevance framework: Bm25 and beyond,” Foundations",
-        "and Trends in Information Retrieval, vol. 3, no. 4, pp. 333–389, 2009. DOI: 10 . 1561 /",
-        "1500000019(cit.onpp.10,19,54).",
-        "[16] V.Karpukhinetal.,“Densepassageretrievalforopen-domainquestionanswering,”inProceedings"
+        "[13] Y.Wangetal.,“GORAG:Graph-basedonlineretrievalaugmentedgenerationfordynamicfew-",
+        "shotsocialmediatextclassification,”inProceedingsoftheACMWebConference2026,Associa-",
+        "tionforComputingMachinery,2026,pp.9148–9159.DOI:10.1145/3774904.3793011",
+        "(cit.onpp.2,7,9,10,14,16,38–40,50–52)."
       ],
       "figures": [],
       "tables": [],
-      "text_length": 3401,
+      "text_length": 3155,
       "rotation": 0
     },
     {
-      "physical_page": 113,
-      "label": "99",
+      "physical_page": 119,
+      "label": "105",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
-        "[31] K.Huetal.,“Viznet:Towardsalarge-scalevisualizationlearningandbenchmarkingrepository,”",
-        "inProceedingsofthe2019CHIConferenceonHumanFactorsinComputingSystems,2019,pp.1–",
-        "12(cit.onp.26).",
-        "[32] P.Nguyenetal.,“Semtab2021:Tabulardataannotationwithmtabtool,”inSemTab@ISWC2021,"
+        "[28] J.Devlinetal.,“BERT:Pre-trainingofdeepbidirectionaltransformersforlanguageunderstand-",
+        "ing,”inProceedingsofNAACL-HLT2019,2019,pp.4171–4186.DOI:10.18653/v1/N19-",
+        "1423(cit.onpp.10,29).",
+        "[29] M. E. Peters et al., “Knowledge enhanced contextual word representations,” in Proceedings of"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 3251,
+      "text_length": 3262,
       "rotation": 0
     },
     {
-      "physical_page": 114,
-      "label": "100",
+      "physical_page": 120,
+      "label": "106",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
-        "[47] W.Kwonetal.,“Eﬀicientmemorymanagementforlargelanguagemodelservingwithpagedatten-",
-        "tion,”inProceedingsofthe29thsymposiumonoperatingsystemsprinciples,2023,pp.611–626",
-        "(cit.onpp.55,77).",
-        "[48] G. Izacard et al., “Unsupervised dense information retrieval with contrastive learning,” Transac-"
+        "[44] O.Vinyalsetal.,“Matchingnetworksforoneshotlearning,”inAdvancesinNeuralInformation",
+        "ProcessingSystems,vol.29,2016(cit.onp.12).",
+        "[45] J.Snelletal.,“Prototypicalnetworksforfew-shotlearning,”inAdvancesinNeuralInformation",
+        "ProcessingSystems,vol.30,2017(cit.onp.12)."
       ],
       "figures": [],
       "tables": [],
-      "text_length": 3099,
+      "text_length": 3350,
       "rotation": 0
     },
     {
-      "physical_page": 115,
-      "label": "101",
+      "physical_page": 121,
+      "label": "107",
       "size": [
         595.28,
         841.89
       ],
       "first_lines": [
-        "[65] M. Houbraken et al., “The index-based subgraph matching algorithm with general symmetries",
-        "(ismags):Exploitingsymmetryforfastersubgraphenumeration,”PloSone,vol.9,no.5,e97896,",
-        "2014(cit.onp.81).",
-        "[66] M. Leordeanu et al., “A spectral technique for correspondence problems using pairwise con-"
+        "[60] J. Wei et al., “Chain-of-thought prompting elicits reasoning in large language models,” in Ad-",
+        "vances in Neural Information Processing Systems, vol. 35, 2022, pp. 24824–24837. DOI: 10.",
+        "52202/068431-1800(cit.onp.16).",
+        "[61] T.Kojimaetal.,“Largelanguagemodelsarezero-shotreasoners,”inAdvancesinNeuralInforma-"
       ],
       "figures": [],
       "tables": [],
-      "text_length": 1501,
+      "text_length": 3177,
+      "rotation": 0
+    },
+    {
+      "physical_page": 122,
+      "label": "108",
+      "size": [
+        595.28,
+        841.89
+      ],
+      "first_lines": [
+        "[74] Y. Liu et al., “Cachegen: Kv cache compression and streaming for fast large language model",
+        "serving,” in Proceedings of the ACM SIGCOMM 2024 Conference, 2024, pp. 38–56. DOI: 10.",
+        "1145/3651890.3672274(cit.onp.18).",
+        "[75] M. Galkin et al., “Message passing for hyper-relational knowledge graphs,” in Proceedings of"
+      ],
+      "figures": [],
+      "tables": [],
+      "text_length": 3225,
+      "rotation": 0
+    },
+    {
+      "physical_page": 123,
+      "label": "109",
+      "size": [
+        595.28,
+        841.89
+      ],
+      "first_lines": [
+        "[90] R. Wang et al., “Sudowoodo: Contrastive self-supervised learning for multi-purpose data inte-",
+        "grationandpreparation,”arXivpreprintarXiv:2207.04122,2022(cit.onp.33).",
+        "[91] P. He et al., “Deberta: Decoding-enhanced bert with disentangled attention,” arXiv preprint",
+        "arXiv:2006.03654,2020(cit.onp.34)."
+      ],
+      "figures": [],
+      "tables": [],
+      "text_length": 3211,
+      "rotation": 0
+    },
+    {
+      "physical_page": 124,
+      "label": "110",
+      "size": [
+        595.28,
+        841.89
+      ],
+      "first_lines": [
+        "[107] L. Liu et al., “Mixrag: Mixture-of-experts retrieval-augmented generation for textual graph un-",
+        "derstandingandquestionanswering,”arXivpreprintarXiv:2509.21391,2025(cit.onp.62).",
+        "[108] circlemind-ai. “Fast-graphrag.” (2025), [Online]. Available: https://github.com/",
+        "circlemind-ai/fast-graphrag(cit.onp.62)."
+      ],
+      "figures": [],
+      "tables": [],
+      "text_length": 3069,
+      "rotation": 0
+    },
+    {
+      "physical_page": 125,
+      "label": "111",
+      "size": [
+        595.28,
+        841.89
+      ],
+      "first_lines": [
+        "[124] M. Leordeanu et al., “An integer projected fixed point method for graph matching and map in-",
+        "ference,”Advancesinneuralinformationprocessingsystems,vol.22,2009(cit.onp.87).",
+        "[125] J.Tangetal.,“Robustattributedgraphalignmentviajointstructurelearningandoptimaltrans-",
+        "port,” in 2023 IEEE 39th International Conference on Data Engineering (ICDE), IEEE, 2023,"
+      ],
+      "figures": [],
+      "tables": [],
+      "text_length": 761,
       "rotation": 0
     }
   ],
   "fonts_by_character_count": [
     {
-      "font": "NZGUYP+TeXGyreTermes-Regular",
+      "font": "OAOLUD+TeXGyreTermes-Regular",
       "size_pdf_points": 11.96,
-      "characters": 147265
+      "characters": 162742
     },
     {
-      "font": "NZGUYP+TeXGyreTermes-Regular",
+      "font": "OAOLUD+TeXGyreTermes-Regular",
       "size_pdf_points": 10.91,
-      "characters": 18322
+      "characters": 24965
     },
     {
-      "font": "XEJPMT+TeXGyreTermes-Italic",
+      "font": "HQWCSM+TeXGyreTermes-Italic",
       "size_pdf_points": 10.91,
-      "characters": 4176
+      "characters": 7653
     },
     {
-      "font": "ARWQYN+TeXGyreTermes-Bold",
+      "font": "GJTDSV+TeXGyreTermes-Bold",
       "size_pdf_points": 14.35,
-      "characters": 2294
+      "characters": 2342
     },
     {
-      "font": "ARWQYN+TeXGyreTermes-Bold",
+      "font": "GJTDSV+TeXGyreTermes-Bold",
       "size_pdf_points": 17.22,
-      "characters": 2185
+      "characters": 2233
     },
     {
-      "font": "AUEWOX+XITSMath-Regular",
+      "font": "DJMMFP+TeXGyreCursor-Regular",
+      "size_pdf_points": 11.77,
+      "characters": 1693
+    },
+    {
+      "font": "UWYOZO+XITSMath-Regular",
       "size_pdf_points": 11.96,
       "characters": 1375
     },
     {
-      "font": "OHYRPN+TeXGyreCursor-Regular",
-      "size_pdf_points": 11.77,
-      "characters": 783
-    },
-    {
-      "font": "ARWQYN+TeXGyreTermes-Bold",
+      "font": "GJTDSV+TeXGyreTermes-Bold",
       "size_pdf_points": 10.91,
       "characters": 731
     },
     {
-      "font": "NZGUYP+TeXGyreTermes-Regular",
+      "font": "OAOLUD+TeXGyreTermes-Regular",
       "size_pdf_points": 15.67,
       "characters": 652
     },
     {
-      "font": "XEJPMT+TeXGyreTermes-Italic",
+      "font": "HQWCSM+TeXGyreTermes-Italic",
       "size_pdf_points": 11.96,
       "characters": 641
     },
     {
-      "font": "NZGUYP+TeXGyreTermes-Regular",
+      "font": "OAOLUD+TeXGyreTermes-Regular",
       "size_pdf_points": 15.56,
       "characters": 512
     },
     {
-      "font": "NZGUYP+TeXGyreTermes-Regular",
+      "font": "OAOLUD+TeXGyreTermes-Regular",
       "size_pdf_points": 14.31,
       "characters": 448
     },
     {
-      "font": "NZGUYP+TeXGyreTermes-Regular",
+      "font": "OAOLUD+TeXGyreTermes-Regular",
       "size_pdf_points": 11.84,
       "characters": 442
     },
     {
-      "font": "AUEWOX+XITSMath-Regular",
+      "font": "UWYOZO+XITSMath-Regular",
       "size_pdf_points": 8.97,
       "characters": 437
     },
     {
-      "font": "NZGUYP+TeXGyreTermes-Regular",
+      "font": "OAOLUD+TeXGyreTermes-Regular",
       "size_pdf_points": 20.02,
       "characters": 374
     },
     {
-      "font": "NZGUYP+TeXGyreTermes-Regular",
+      "font": "OAOLUD+TeXGyreTermes-Regular",
       "size_pdf_points": 11.74,
       "characters": 348
     },
@@ -3222,22 +3417,22 @@
       "characters": 332
     },
     {
-      "font": "NZGUYP+TeXGyreTermes-Regular",
+      "font": "OAOLUD+TeXGyreTermes-Regular",
       "size_pdf_points": 15.71,
       "characters": 326
     },
     {
-      "font": "NZGUYP+TeXGyreTermes-Regular",
+      "font": "OAOLUD+TeXGyreTermes-Regular",
       "size_pdf_points": 16.17,
       "characters": 322
     },
     {
-      "font": "ARWQYN+TeXGyreTermes-Bold",
+      "font": "GJTDSV+TeXGyreTermes-Bold",
       "size_pdf_points": 11.96,
       "characters": 305
     },
     {
-      "font": "NZGUYP+TeXGyreTermes-Regular",
+      "font": "OAOLUD+TeXGyreTermes-Regular",
       "size_pdf_points": 11.04,
       "characters": 300
     },
@@ -3257,7 +3452,7 @@
       "characters": 238
     },
     {
-      "font": "NZGUYP+TeXGyreTermes-Regular",
+      "font": "OAOLUD+TeXGyreTermes-Regular",
       "size_pdf_points": 14.34,
       "characters": 224
     },
@@ -3267,12 +3462,12 @@
       "characters": 213
     },
     {
-      "font": "NZGUYP+TeXGyreTermes-Regular",
+      "font": "OAOLUD+TeXGyreTermes-Regular",
       "size_pdf_points": 15.57,
       "characters": 204
     },
     {
-      "font": "NZGUYP+TeXGyreTermes-Regular",
+      "font": "OAOLUD+TeXGyreTermes-Regular",
       "size_pdf_points": 16.39,
       "characters": 202
     },
@@ -3282,7 +3477,7 @@
       "characters": 187
     },
     {
-      "font": "NZGUYP+TeXGyreTermes-Regular",
+      "font": "OAOLUD+TeXGyreTermes-Regular",
       "size_pdf_points": 8.97,
       "characters": 175
     }

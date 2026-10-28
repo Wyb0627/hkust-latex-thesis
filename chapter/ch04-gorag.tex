@@ -3,18 +3,20 @@
 \chapter{Adaptive Graph Retrieval for Dynamic Classification with GORAG}
 \label{ch:gorag}
 
-This chapter is based on \emph{GORAG: Graph-based Online Retrieval Augmented Generation for Dynamic Few-shot Social Media Text Classification}, published in the Proceedings of the ACM Web Conference 2026~\cite{gorag-paper}. We propose GORAG to retrieve candidate labels for dynamic few-shot classification. It maintains a weighted graph of keyword--label associations, selects candidates by connecting query keywords, and inserts unseen terms after classification.
+This chapter is based on \emph{GORAG: Graph-based Online Retrieval Augmented Generation for Dynamic Few-shot Social Media Text Classification}, published in the Proceedings of the ACM Web Conference 2026~\cite{gorag-paper}. We propose GORAG to construct and maintain a weighted graph of keyword--label associations from task data. Connected retrieval selects candidate labels for a large language model, and online insertion adds unseen terms after classification.
 
 \section{Dynamic Few-shot Classification}
 \label{sec:gorag:task}
 
-Dynamic classification must distinguish new categories from those introduced earlier. For example, an abuse classifier may initially recognize threatening language and later add identity insults. With few examples per class, the model must learn the new category while retaining access to earlier labels.
+KGLink uses an existing knowledge graph to enrich representations through supervised fine-tuning. For applications without a suitable graph or sufficient training data, we instead build a graph from the task's own examples and use a large language model for prediction. Retrieved labels and descriptions supply context, allowing new information to be incorporated without parameter fine-tuning. We study this approach in dynamic few-shot classification, where the target categories evolve as new examples arrive.
+
+Dynamic classification must distinguish new categories from those introduced earlier. For example, an abuse classifier may initially recognize threatening language and later add identity insults. With few examples per class, the system must recognize the new category while retaining access to earlier labels.
 
 Few-shot classification provides a small labeled support set for each class. In the dynamic setting, new classes arrive in successive rounds~\cite{gorag-xia-etal-2021-incremental}. The index must incorporate their examples while preserving evidence for the cumulative label set.
 
 Adding more examples to the prompt can introduce irrelevant context as the label set grows. Passage retrieval alone also leaves the generator to choose among all labels. We instead retrieve a candidate label set for each query.
 
-We represent keywords and labels in a weighted graph. A keyword can connect to several labels, with an edge cost for each association. Connecting several query keywords selects labels jointly from their neighborhoods.
+To select labels jointly from the query keywords, we represent keywords and labels in a weighted graph. A keyword can connect to several labels, with an edge cost for each association. Connecting several query keywords selects labels jointly from their neighborhoods.
 
 GORAG also updates its index after classifying an unlabeled query. Keywords that were absent from the index can then become available to later queries. The predicted label associates the newly observed keywords with a class for subsequent retrieval. Support examples initialize the graph using their supplied labels.
 
@@ -35,7 +37,7 @@ Let $\mathcal{Y}_{\mathrm{new}}^r$ denote the labels introduced at round $r$. Th
 \mathcal{Y}^r=\bigcup_{i=1}^{r}\mathcal{Y}_{\mathrm{new}}^i.
 \label{eq:gorag:labels}
 \end{equation}
-The few-shot support data provide $k$ annotated texts per class, with $k$ equal to 1, 5, or 10 in the main experiments. A query text $t$ must be assigned a label from $\mathcal{Y}^r$. The superscript $r$ identifies the current classification round.
+Here $\mathcal Y^r$ is the union of the label sets $\mathcal Y_{\mathrm{new}}^i$ introduced in rounds $i=1,\ldots,r$. The few-shot support data provide $k$ annotated texts per class, with $k$ equal to 1, 5, or 10 in the main experiments. A query text $t$ must be assigned a label from $\mathcal{Y}^r$. The superscript $r$ identifies the current classification round.
 
 Support texts carry supplied labels. Query texts become visible as the system processes them, and their predictions can be used for subsequent index updates. Corpus statistics used in keyword scoring refer to training and query texts seen so far. The online association nevertheless inherits prediction errors when the classifier chooses an incorrect label.
 
@@ -44,7 +46,7 @@ Semantic label names supply another source of information. Where names are avail
 \section{Weighted Graph Indexing}
 \label{sec:gorag:indexing}
 
-GORAG maintains an undirected weighted graph $\mathcal{G}^r=(\mathcal{V}^r,\mathcal{E}^r,\mathcal{W}^r)$. Its node set contains keyword nodes and label nodes. A keyword node represents an extracted word or short phrase. A label node represents a target class. The representation places label alternatives inside the same structure that stores their lexical associations. Support documents contribute keyword--label associations to this representation.
+GORAG maintains an undirected weighted graph $\mathcal{G}^r=(\mathcal{V}^r,\mathcal{E}^r,\mathcal{W}^r)$. Here $\mathcal V^r$ and $\mathcal E^r$ are the node and edge sets, and $\mathcal W^r$ contains their edge costs. Its node set contains keyword nodes and label nodes. A keyword node represents an extracted word or short phrase. A label node represents a target class. Label nodes make candidate classes directly accessible through their keyword associations. Support documents contribute keyword--label associations to this representation.
 
 A keyword--label edge is introduced when a keyword occurs in a text associated with that label. Repeated occurrences across texts contribute to the edge weight. A keyword shared by several classes can therefore have several label neighbors, with a different cost for each association. Query retrieval will use these costs when choosing connections between mapped keywords.
 
@@ -66,7 +68,7 @@ CS(v,t)=\frac{\operatorname{count}(v,t)}{|t|\log(|\mathcal{T}_{\leq r}|+1)}
 \log\frac{|\mathcal{T}_{\leq r}|+1}{\operatorname{df}(v)+1}.
 \label{eq:gorag:correlation}
 \end{equation}
-Here $\operatorname{count}(v,t)$ is the occurrence count of $v$ in $t$, and $|t|$ is text length. The expression combines frequency within the text with frequency across the observed corpus. Its corpus term changes when additional texts are observed. Terms with $CS(v,t)>\tau$ are retained, with $\tau=0.5$ in the original study. The method uses the score both to select keywords and to calculate association costs.
+Here $CS(v,t)$ is the correlation score of term $v$ in text $t$, $\operatorname{count}(v,t)$ counts its occurrences, $|t|$ is the text length, $\operatorname{df}(v)$ counts the seen texts containing the term, and $\mathcal T_{\leq r}$ is the corpus observed by round $r$. The expression combines frequency within the text with frequency across the observed corpus. Its corpus term changes when additional texts are observed. Terms with $CS(v,t)>\tau$ are retained, with $\tau=0.5$ in the original study. The method uses the score both to select keywords and to calculate association costs.
 % Verification issue G5: source reports CS>tau with tau=0.5; normalization/threshold needs author/publication confirmation. Do not silently rescale.
 
 Short phrases preserve lexical combinations that unigram extraction would split. Only extracted terms can become retrieval terminals, although the classifier still receives the full query text.
@@ -79,7 +81,7 @@ For keyword $v$ and label $y$, let $\mathcal{T}^{r,v,y}$ be the seen texts that 
 w_{v,y}^r=\frac{\sum_{t_j\in\mathcal{T}^{r,v,y}}(1-CS(v,t_j))}{|\mathcal{T}^{r,v,y}|}.
 \label{eq:gorag:weights}
 \end{equation}
-The complement converts a larger correlation score into a smaller contribution to connection cost. Averaging makes the edge depend on all contributing observations rather than on one occurrence. Offline observations use the supplied class of a support text; online observations use a predicted class when new query keywords are inserted.
+Here $w_{v,y}^r$ is the cost of the edge between keyword $v$ and label $y$, $\mathcal T^{r,v,y}$ is their associated set of seen texts, and $CS(v,t_j)$ is the correlation score in text $t_j$. Subtracting the correlation score from one gives stronger keyword associations lower connection costs. Averaging makes the edge depend on all contributing observations rather than on one occurrence. Offline observations use the supplied class of a support text; online observations use a predicted class when new query keywords are inserted.
 
 The same keyword can have different edge costs for different labels. The unit-weight ablation replaces all costs with one while preserving adjacency, testing whether these association-specific costs help retrieval.
 
@@ -98,7 +100,7 @@ w_{y_n,y_o}^r=\frac{1}{2}\left(
 \right).
 \label{eq:gorag:labelbridge}
 \end{equation}
-The formula uses costs incident to both labels. These factors determine the relative cost of traversing a label bridge rather than a keyword association.
+Here $w_{y_n,y_o}^r$ is the bridge cost, $\mathcal M_{y_n}^r$ and $\mathcal M_{y_o}^r$ are the keyword-neighbor sets of the new and earlier labels, and $w_{v,y}^r$ is a keyword--label edge cost. The formula uses costs incident to both labels. These factors determine the relative cost of traversing a label bridge rather than a keyword association.
 % Verification issue G6: preserve exact reported factors; source wording says weighted average.
 
 Label bridges connect graph regions introduced in different rounds. Unlike keyword edges, which record observed term--class associations, they are created during graph merging.
@@ -106,7 +108,7 @@ Label bridges connect graph regions introduced in different rounds. Unlike keywo
 \section{Adaptive Candidate Label Retrieval}
 \label{sec:gorag:retrieval}
 
-For a query $t$, GORAG extracts keywords using the indexing procedure and partitions them according to whether they already occur in $\mathcal{V}^r$. Write these sets as $\mathcal{V}_{\mathrm{exist}}^t$ and $\mathcal{V}_{\mathrm{notexist}}^t$. The existing keywords become the terminals for current retrieval. The unseen keywords are held for online insertion after classification. The partition prevents the retrieval operation from treating an unindexed term as if it already had a known label neighborhood.
+For a query $t$, GORAG extracts keywords using the indexing procedure and partitions them according to whether they already occur in the current graph node set $\mathcal{V}^r$. Write these sets as $\mathcal{V}_{\mathrm{exist}}^t$ and $\mathcal{V}_{\mathrm{notexist}}^t$. The existing keywords become the terminals for current retrieval. The unseen keywords are held for online insertion after classification. This partition restricts current retrieval to keywords with indexed label associations.
 
 Retrieval seeks a low-cost connected structure that contains the mapped terminals. Label nodes encountered in this structure form the candidate set $\widehat{\mathcal{Y}}_t^r$. Connecting several terminals can select intermediate labels and keywords. The graph therefore determines the number of candidate labels through the returned structure, rather than requiring the same number of labels for all queries. A short query and a query containing several mutually distant indexed terms can produce different retrieval structures.
 
@@ -122,7 +124,7 @@ Once the expanded structure $S_t^r$ is obtained, the candidate set is
 \widehat{\mathcal{Y}}_t^r=\mathcal{V}(S_t^r)\cap\mathcal{Y}^r.
 \label{eq:gorag:candidates}
 \end{equation}
-Representative keywords and label descriptions are added to the classification prompt for the labels selected by this intersection.
+Here $S_t^r$ is the retrieved structure, $\mathcal V(S_t^r)$ its node set, $\mathcal Y^r$ the current label set, and $\widehat{\mathcal Y}_t^r$ the resulting candidates. Representative keywords and label descriptions are added to the classification prompt for the labels selected by this intersection.
 
 \section{Classification and Online Indexing}
 \label{sec:gorag:online}
@@ -132,22 +134,22 @@ GORAG constructs a classification input by concatenating the query text, extract
 c_t=\operatorname{Concat}\left(t,\mathcal{K}^t,\widehat{\mathcal{Y}}_t^r,\mathcal{K}_{\widehat{\mathcal{Y}}_t^r}\right).
 \label{eq:gorag:context}
 \end{equation}
-A language model applies the classification instruction $p_{\mathrm{classify}}$ to this input and produces $y_t^*$. The graph narrows and describes the alternatives; the language model performs the final text classification.
+Here $c_t$ concatenates query $t$, its keywords $\mathcal K^t$, candidate labels $\widehat{\mathcal Y}_t^r$, and their representative information $\mathcal K_{\widehat{\mathcal Y}_t^r}$. A language model applies the classification instruction $p_{\mathrm{classify}}$ to this input and produces the predicted label $y_t^*$. The graph narrows and describes the alternatives; the language model performs the final text classification.
 
-After the prediction, each keyword in $\mathcal{V}_{\mathrm{notexist}}^t$ is inserted into the graph and connected to $y_t^*$. The update can be written as
+After the prediction, each keyword in $\mathcal{V}_{\mathrm{notexist}}^t$ is inserted into the graph and connected to the predicted label $y_t^*$. The update can be written as
 \begin{align}
 \mathcal{V}^r&\leftarrow\mathcal{V}^r\cup\mathcal{V}_{\mathrm{notexist}}^t,\\
 \mathcal{E}^r&\leftarrow\mathcal{E}^r\cup\{(v,y_t^*):v\in\mathcal{V}_{\mathrm{notexist}}^t\}.
 \label{eq:gorag:update}
 \end{align}
-New associations receive weights through the reported weighting mechanism. Later queries can then map terms that were previously absent from the index. The update changes the retrieval source without fine-tuning the language model's parameters.
+Here $\mathcal V^r$ and $\mathcal E^r$ are the current node and edge sets, $\mathcal V_{\mathrm{notexist}}^t$ contains the query keywords absent from the index, and $y_t^*$ is the predicted label. New associations receive weights through the reported weighting mechanism. Later queries can then map terms that were previously absent from the index. The update changes the retrieval source without fine-tuning the language model's parameters.
 
 The prediction precedes insertion, so a new keyword's association can affect later queries but not the prediction that created it. Incorrect predicted labels can propagate through those associations. The offline ablation suppresses online expansion, measuring its contribution relative to an index that receives no such query-dependent additions.
 
 \subsection{Computational organization}
 \label{sec:gorag:computation}
 
-The graph separates work performed at a label update from work performed for each query. Offline indexing processes the supplied texts, creates or updates keyword associations, generates label information when available, and merges the round's graph. The cross-round label bridges introduce interactions between the newly indexed and earlier label regions. In the source's abstract operation count, construction is expressed as
+The graph separates work performed at a label update from work performed for each query. Offline indexing processes the supplied texts, creates or updates keyword associations, generates label information when available, and merges the round's graph. The cross-round label bridges introduce interactions between the newly indexed and earlier label regions. In the source's abstract operation count, let $\mathcal V_{\mathrm{new}}^r$ be the nodes in the new round graph, $\mathcal D^r$ its labeled training texts, and $\mathcal Y^r$ and $\mathcal Y^{r-1}$ the current and previous label sets. Construction is expressed as
 \begin{equation}
 O\!\left(|\mathcal{Y}^r||\mathcal{Y}^{r-1}|+|\mathcal{V}_{\mathrm{new}}^r||\mathcal{D}^r|\right).
 \label{eq:gorag:constructioncost}
@@ -277,8 +279,8 @@ The insult label connects more than one highlighted query term. Other keyword ne
 
 We proposed GORAG for dynamic few-shot classification. Weighted keyword--label connections determine the candidate set for each query, and the language model classifies the original text using those labels and their descriptions.
 
-The offline ablation shows the contribution of expanding the index beyond the support sample. Because these additions carry predicted labels, the method couples current classification with the evidence available to later queries.
+Disabling online insertion lowers accuracy, showing the contribution of expanding the index beyond the support sample. Because these additions carry predicted labels, the method couples current classification with the evidence available to later queries.
 
 Keyword extraction restricts the query terms available as retrieval terminals. Sparse support data and limited label descriptions constrain initial graph coverage.
 
-GORAG maintains classification evidence as labels and observed vocabulary evolve. Chapter~\ref{ch:agrag} turns to open-ended answers, where retrieval must select connected facts and the passage context needed to explain them.
+GORAG constructs and updates task-related knowledge without requiring a predefined external graph or model fine-tuning. This supports classification as labels and vocabulary evolve. For question answering and generation, the output requires facts and explanations beyond a candidate label set. The following chapters investigate two extensions of task-related graph retrieval. Chapter~\ref{ch:agrag} studies connected textual evidence and answer coverage, while Chapter~\ref{ch:mgrag} studies query-aware construction and semantic matching across text and images.

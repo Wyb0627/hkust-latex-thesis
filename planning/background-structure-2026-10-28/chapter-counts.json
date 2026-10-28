@@ -1,0 +1,110 @@
+{
+  "pdf_sha256": "11951828b2f94db09b2b8ceefb5c0b61c3bb30ab4a388a20b86ecec2ac556d82",
+  "pdf_total_pages": 125,
+  "front_matter_pages": 14,
+  "body_pages": 102,
+  "reference_pages": 9,
+  "chapters": [
+    {
+      "chapter": 1,
+      "title": "Introduction",
+      "file": "chapter/ch01-introduction.tex",
+      "narrative_words": 2190,
+      "heading_words": 54,
+      "caption_words": 28,
+      "total_non_cell_words": 2272,
+      "printed_pages": "1\u20138",
+      "physical_pages": "15\u201322",
+      "page_count": 8
+    },
+    {
+      "chapter": 2,
+      "title": "Background and Related Work",
+      "file": "chapter/ch02-background.tex",
+      "narrative_words": 4264,
+      "heading_words": 57,
+      "caption_words": 83,
+      "total_non_cell_words": 4404,
+      "printed_pages": "9\u201322",
+      "physical_pages": "23\u201336",
+      "page_count": 14
+    },
+    {
+      "chapter": 3,
+      "title": "Knowledge-enriched Table Understanding with KGLink",
+      "file": "chapter/ch03-kglink.tex",
+      "narrative_words": 3256,
+      "heading_words": 88,
+      "caption_words": 234,
+      "total_non_cell_words": 3578,
+      "printed_pages": "23\u201337",
+      "physical_pages": "37\u201351",
+      "page_count": 15
+    },
+    {
+      "chapter": 4,
+      "title": "Adaptive Graph Retrieval for Dynamic Classification with GORAG",
+      "file": "chapter/ch04-gorag.tex",
+      "narrative_words": 3017,
+      "heading_words": 73,
+      "caption_words": 333,
+      "total_non_cell_words": 3423,
+      "printed_pages": "38\u201352",
+      "physical_pages": "52\u201366",
+      "page_count": 15
+    },
+    {
+      "chapter": 5,
+      "title": "Connected Evidence Selection for Language Models with AGRAG",
+      "file": "chapter/ch05-agrag.tex",
+      "narrative_words": 3384,
+      "heading_words": 90,
+      "caption_words": 314,
+      "total_non_cell_words": 3788,
+      "printed_pages": "53\u201372",
+      "physical_pages": "67\u201386",
+      "page_count": 20
+    },
+    {
+      "chapter": 6,
+      "title": "Semantic Graph Matching for Multimodal Reasoning with MGRAG",
+      "file": "chapter/ch06-mgrag.tex",
+      "narrative_words": 4352,
+      "heading_words": 116,
+      "caption_words": 374,
+      "total_non_cell_words": 4842,
+      "printed_pages": "73\u201395",
+      "physical_pages": "87\u2013109",
+      "page_count": 23
+    },
+    {
+      "chapter": 7,
+      "title": "Discussion",
+      "file": "chapter/ch07-discussion.tex",
+      "narrative_words": 1282,
+      "heading_words": 31,
+      "caption_words": 47,
+      "total_non_cell_words": 1360,
+      "printed_pages": "96\u2013100",
+      "physical_pages": "110\u2013114",
+      "page_count": 5
+    },
+    {
+      "chapter": 8,
+      "title": "Conclusion and Future Directions",
+      "file": "chapter/ch08-conclusion.tex",
+      "narrative_words": 531,
+      "heading_words": 20,
+      "caption_words": 0,
+      "total_non_cell_words": 551,
+      "printed_pages": "101\u2013102",
+      "physical_pages": "115\u2013116",
+      "page_count": 2
+    }
+  ],
+  "total_narrative_words": 22276,
+  "total_heading_words": 529,
+  "total_caption_words": 1413,
+  "total_non_cell_words": 24218,
+  "abstract_words": 213
+}

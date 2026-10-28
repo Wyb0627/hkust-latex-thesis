@@ -1,0 +1,266 @@
+[
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before": "across sources \\cite{}.",
+    "after": "across sources~\\cite{bg-reca,bg-mmqa}.",
+    "reason": "C1: missing table context and evidence distributed across modalities."
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before": "Hence, selecting relevant evidences and preserving their connections are crucial real-world problems \\cite{}.",
+    "after": "Hence, selecting relevant evidence and preserving the relationships among facts are crucial real-world problems~\\cite{bg-hipporag}.",
+    "reason": "C2: relational retrieval; evidence is uncountable."
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before": "current task \\cite{}.",
+    "after": "current task~\\cite{bg-reca,bg-dpr}.",
+    "reason": "C3: task-relevant external context in annotation and QA."
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before": "several facts may need to be jointed before they can answer the query.",
+    "after": "several facts may need to be combined to answer the query.",
+    "reason": "Correct the verb while retaining the author's direct phrasing."
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before": "make them available for search when selecting information for a language model.",
+    "after": "make them searchable when selecting information for a language model.",
+    "reason": "Keep the author's emphasis on search in a shorter construction."
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before": "These types may also differ from the annotation needs.",
+    "after": "These graph types may also differ from the labels required by the annotation task.",
+    "reason": "Make the type-to-label mismatch explicit."
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before": "new labels arrive with few examples, the system needs another way to obtain and use knowledge \\cite{}.",
+    "after": "new labels arrive with few examples~\\cite{gorag-xia-etal-2021-incremental}, the system needs another way to obtain and use knowledge.",
+    "reason": "C4: place the incremental few-shot citation on the condition it supports."
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before": "As a result, we propose GORAG for dynamic few-shot text classification task. GORAG constructs weighted keyword-label relations,",
+    "after": "To support this setting, we propose GORAG for dynamic few-shot text classification. GORAG constructs weighted keyword--label relations,",
+    "reason": "Connect the task to the method, correct the article construction, and retain relation typography."
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before": "The model needs facts that jointly support an answer, and a summary can require several complementary information items \\cite{}.",
+    "after": "The model needs facts that jointly support an answer~\\cite{bg-hipporag}, and a summary can require several complementary facts~\\cite{bg-graphrag}.",
+    "reason": "C5: separate multi-hop QA from summarization coverage."
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before": "On the other hand, multimodal question answering introduces a further requirement for task-related graph construction and retrieval \\cite{}. Relevant facts can be distributed across text and images, and the visual details needed from an image depend on the question \\cite{}. \nIn this scenario, different queries may need different visual evidences given the same image, and a relation stated directly in that query may also correspond to several relations in the evidence. \n",
+    "after": "On the other hand, multimodal question answering requires joint reasoning over evidence from text and images~\\cite{bg-mmqa}. Different questions about the same image can require different visual details~\\cite{bg-stacked-attention}. A relation stated directly in a question may also correspond to several relations in the evidence.\n",
+    "reason": "C6/C7: cross-modal reasoning and question-guided visual selection; combine repeated visual-evidence sentences."
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before": "reuse of the LLM's KV cache",
+    "after": "reuse and selective recomputation of the LLM's key-value (KV) cache",
+    "reason": "Define KV at first use in the chapter and retain both operations."
+  },
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "before": "contributions corresponding to the research questions.",
+    "after": "contributions that address the research questions.",
+    "reason": "Use the author's problem-to-solution phrasing."
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before": "The distinction makes the external collection an explicit part of the prediction system. Changing its contents or its selection rule changes the context received by the generator even when the generator's parameters stay fixed.",
+    "after": "The external collection supplies evidence at prediction time. Updating the collection or its retrieval rule changes the generator's context even when its parameters stay fixed.",
+    "reason": "Replace abstract metadiscourse with the operation and its consequence."
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before": "The resulting context is then a selected relational object with a serialization for the language model.",
+    "after": "The selected nodes and relationships are then serialized as context for the language model.",
+    "reason": "Name the concrete retrieval output."
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before": "A graph result must be converted into model input.",
+    "after": "The retrieved graph must be converted into model input.",
+    "reason": "Use the defined evidence object."
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "before": "Wider graph reception and qualifier integration consequently concern complementary parts of the architecture.",
+    "after": "Graph reception supplies wider context, while qualifier integration preserves information within each fact.",
+    "reason": "Explain how the two components complement each other."
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before": "Retrieving a factually relevant graph type is consequently insufficient to determine the required output label.",
+    "after": "A factually relevant graph type alone may therefore leave the required output label ambiguous.",
+    "reason": "Connect the type example to its annotation difficulty."
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before": "We address missing context and type granularity through separate steps.",
+    "after": "To address these two difficulties, KGLink combines graph processing with supervised representation learning.",
+    "reason": "Extend the author's explicit problem-to-method transition."
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before": "BM25 to score the relation between the mention's words and indexed entity labels",
+    "after": "BM25 to score lexical matches between the mention's words and indexed entity labels",
+    "reason": "Distinguish lexical retrieval from a graph relation."
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before": "This arrangement supplies supervision about the label's meaning in context.",
+    "after": "The paired inputs teach the encoder how the label relates to the table context.",
+    "reason": "Replace an abstract subject with the training inputs and their role."
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before": "These measurements locate KGLink's annotation results within the costs of the evaluated implementations. Its use of external retrieval and a second training objective carries computation beyond the table encoder alone.",
+    "after": "These results show the cost of KGLink's graph-augmented annotation. External retrieval and the auxiliary training objective add computation beyond the table encoder alone.",
+    "reason": "State what the runtime comparison explains."
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "before": "compares annotation accuracy without retrieved KG evidence. It obtains",
+    "after": "compares annotation accuracy without retrieved KG evidence. KGLink obtains",
+    "reason": "Correct an unclear pronoun referring to a table rather than KGLink."
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before": "We represent keywords and labels in a weighted graph.",
+    "after": "To select labels jointly from the query keywords, we represent keywords and labels in a weighted graph.",
+    "reason": "Link the candidate-selection difficulty to the graph design."
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before": "The representation places label alternatives inside the same structure that stores their lexical associations.",
+    "after": "Label nodes make candidate classes directly accessible through their keyword associations.",
+    "reason": "Explain the operational purpose of label nodes."
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before": "The complement converts a larger correlation score into a smaller contribution to connection cost.",
+    "after": "Subtracting the correlation score from one gives stronger keyword associations lower connection costs.",
+    "reason": "Explain the weighting operation directly without changing the equation."
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before": "The partition prevents the retrieval operation from treating an unindexed term as if it already had a known label neighborhood.",
+    "after": "This partition restricts current retrieval to keywords with indexed label associations.",
+    "reason": "State the information available for retrieval directly."
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "before": "The offline ablation shows the contribution of expanding the index beyond the support sample.",
+    "after": "Disabling online insertion lowers accuracy, showing the contribution of expanding the index beyond the support sample.",
+    "reason": "State the observed result before its interpretation."
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before": "We propose AGRAG to select connected evidence using query relevance and graph influence.",
+    "after": "To address these evidence requirements, we propose AGRAG to select connected facts using query relevance and graph influence.",
+    "reason": "Extend the author's task-requirement-to-method transition."
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before": "The original example in Figure~\\ref{fig:agrag:example} illustrates this distinction. The example motivates expansion beyond an initial terminal-connecting structure.",
+    "after": "Figure~\\ref{fig:agrag:example} illustrates why evidence retrieval may need to expand beyond an initial terminal-connecting structure.",
+    "reason": "Combine repeated references to the same motivating example."
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before": "A passage contributes contextual evidence to graph retrieval without being reduced to a single isolated fact.",
+    "after": "Passage nodes retain context shared by several extracted facts.",
+    "reason": "Give the passage node a concrete role."
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before": "The running example in Figure~\\ref{fig:agrag:example} makes the difference between connecting anchors and collecting an answer visible.",
+    "after": "The running example in Figure~\\ref{fig:agrag:example} shows why connecting the query anchors may leave required answer facts outside the retrieved structure.",
+    "reason": "State the unresolved evidence requirement explicitly."
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "before": "This comparison shows lower index preparation time alongside a higher reported query total for AGRAG.",
+    "after": "AGRAG reduces indexing time in both corpora but takes longer to process their queries.",
+    "reason": "State the measured quality-cost comparison directly."
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before": "We construct query-related graphs and match their paths to the relationships requested by the question.",
+    "after": "To meet these requirements, we construct query-related graphs and match their paths to the relationships requested by the question.",
+    "reason": "Link multimodal requirements to construction and matching."
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before": "The second decision concerns what constitutes a match.",
+    "after": "The second challenge is matching the relations requested by the query to those expressed by the evidence.",
+    "reason": "Make the matching problem parallel to the extraction challenge."
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before": "The third decision concerns the cost of processing retrieved evidence.",
+    "after": "The third challenge is reducing repeated computation when processing retrieved evidence.",
+    "reason": "Identify the computation problem before introducing cache reuse."
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before": "This detail matters because the ranking representation expresses the image through language, whereas the later extraction and answering stages can use its visual content.",
+    "after": "Ranking therefore depends on the caption, while extraction and answering can use the original image.",
+    "reason": "Remove editorial metadiscourse and name the available evidence."
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before": "These comparisons expose answer-quality and time changes under several compositions of retrieval and caching.",
+    "after": "These comparisons measure how combining retrieval and caching changes answer quality and processing time.",
+    "reason": "Replace abstract nominal phrasing with the measured behavior."
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "before": "Actual module costs provide the complementary evidence about where runtime is spent.",
+    "after": "Module-level runtime measurements show where the computation is spent.",
+    "reason": "State the purpose of the runtime breakdown directly."
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before": "This separates obtaining external information from learning the output vocabulary, but both the available graph and the annotated training set determine the method's application.",
+    "after": "The method therefore depends on both the coverage of the external graph and the labeled data available for learning the annotation vocabulary.",
+    "reason": "Connect the limitations to the transition toward task-driven retrieval."
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before": "MGRAG investigates another requirement of evidence retrieval.",
+    "after": "For multimodal retrieval, MGRAG addresses the additional need to select and match evidence for each question.",
+    "reason": "Keep the multimodal branch explicit in the cross-chapter synthesis."
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "before": "The location of a structural decision affects how an error can propagate.",
+    "after": "Errors propagate differently depending on where structure enters the pipeline.",
+    "reason": "Introduce the following concrete error examples directly."
+  },
+  {
+    "file": "chapter/ch08-conclusion.tex",
+    "before": "We then studied the evidence requirements of question answering and generation. AGRAG constructs",
+    "after": "We then extended task-driven retrieval to the connected facts needed for question answering and generation. AGRAG constructs",
+    "reason": "State how AGRAG extends the classification research direction."
+  },
+  {
+    "file": "chapter/ch08-conclusion.tex",
+    "before": "For multimodal question answering, we proposed MGRAG to construct query-specific graphs and match requested relations to semantic paths.",
+    "after": "To support answers that combine text and image evidence, we proposed MGRAG to construct query-specific graphs and match requested relations to semantic paths.",
+    "reason": "State the multimodal requirement before the proposed method."
+  },
+  {
+    "file": "chapter/front-abstract.tex",
+    "before": "We further study evidence requirements beyond classification. AGRAG selects",
+    "after": "We then extend retrieval beyond candidate labels to facts that support an answer. AGRAG selects",
+    "reason": "Make the transition beyond classification concrete in the abstract."
+  }
+]

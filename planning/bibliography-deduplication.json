@@ -365,10 +365,12 @@
         "type": "article",
         "key": "bg-graphrag",
         "fields": {
-          "title": "From local to global: A graph rag approach to query-focused summarization",
+          "title": "From Local to Global: A {Graph RAG} Approach to Query-Focused Summarization",
           "author": "Edge, Darren and Trinh, Ha and Cheng, Newman and Bradley, Joshua and Chao, Alex and Mody, Apurva and Truitt, Steven and Larson, Jonathan",
           "journal": "arXiv preprint arXiv:2404.16130",
-          "year": "2024"
+          "year": "2024",
+          "url": "https://arxiv.org/abs/2404.16130v1",
+          "note": "Version 1"
         },
         "source": "bibliography/background.bib"
       },
@@ -641,7 +643,7 @@
         "key": "bg-reca",
         "fields": {
           "author": "Sun, Yushi and Xin, Hao and Chen, Lei",
-          "title": "RECA: Related Tables Enhanced Column Semantic Type Annotation Framework",
+          "title": "{RECA}: Related Tables Enhanced Column Semantic Type Annotation Framework",
           "journal": "Proceedings of the VLDB Endowment",
           "year": "2023",
           "doi": "10.14778/3583140.3583149",
@@ -782,7 +784,7 @@
         "type": "inproceedings",
         "key": "bg-mmqa",
         "fields": {
-          "title": "Multimodalqa: Complex question answering over text, tables and images",
+          "title": "{MultiModalQA}: Complex Question Answering over Text, Tables and Images",
           "author": "Talmor, Alon and Yoran, Ori and Catav, Amnon and Lahav, Dan and Wang, Yizhong and Asai, Akari and Ilharco, Gabriel and Hajishirzi, Hannaneh and Berant, Jonathan",
           "booktitle": "International Conference on Learning Representations",
           "year": "2021",

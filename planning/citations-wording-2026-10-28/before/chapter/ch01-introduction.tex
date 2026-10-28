@@ -1,0 +1,126 @@
+\chapter{Introduction}
+\label{ch:introduction}
+
+\section{Motivation}
+\label{sec:introduction:motivation}
+Language models utilize information in tables, text, and images to make predictions and respond to queries. 
+However, the required information is often incomplete or distributed across sources \cite{}. A table may list people without identifying their occupations. A classification task may introduce labels absent from its initial training examples. A question may require facts from several passages or a relationship expressed jointly by text and images. 
+Hence, selecting relevant evidences and preserving their connections are crucial real-world problems \cite{}.
+
+The usefulness of external information depends on how it relates to the current task \cite{}. A person's occupation can help identify a table column, while a keyword's association with a label can help classify a text. For question answering, several facts may need to be jointed before they can answer the query. Explicit knowledge structures represent these relationships and make them available for search when selecting information for a language model. This motivates our study of structural augmentation, from enriching model representations with existing knowledge graphs to constructing task-related graphs for retrieval and reasoning.
+
+We first investigate how an existing knowledge graph can supply information missing from a model's input. In column type annotation, a column of people accompanied by birth and death dates may lack the information needed to identify their common occupation. Linking the names to a knowledge graph can supply that information, but the graph may assign several valid types to each person. These types may also differ from the annotation needs. To address these issues, we propose KGLink to select relevant graph descriptions and integrate them with a pre-trained table encoder. Through supervised fine-tuning, the encoder learns their correspondence to the target labels~\cite{kglink-publication}.
+
+KGLink's use of external knowledge depends on the coverage of the existing graph and the labeled data available for fine-tuning. When a suitable graph is unavailable or new labels arrive with few examples, the system needs another way to obtain and use knowledge \cite{}. Hence, we explore using a large language model's semantic capabilities with a graph constructed from task data. As a result, we propose GORAG for dynamic few-shot text classification task. GORAG constructs weighted keyword-label relations, retrieves candidate labels by connecting query keywords, and updates the graph as new labels and texts arrive~\cite{gorag-paper}. The system incorporates new information through index updates without requiring a predefined knowledge graph or model fine-tuning.
+
+Building a graph from task data extends structural augmentation to settings without a predefined knowledge graph. However, for question answering and generation, retrieving candidate labels is no longer sufficient. The model needs facts that jointly support an answer, and a summary can require several complementary information items \cite{}. Individually relevant passages can repeat facts or leave their connections implicit, while a short path between query anchors can omit required details. To address these issues, we propose AGRAG to construct a graph from the text corpus and select a connected evidence subgraph using query-dependent node influence and semantic edge costs. Subgraph expansion and hybrid passage retrieval supply additional facts and context for answer generation~\cite{agrag-paper}.
+
+On the other hand, multimodal question answering introduces a further requirement for task-related graph construction and retrieval \cite{}. Relevant facts can be distributed across text and images, and the visual details needed from an image depend on the question \cite{}. 
+In this scenario, different queries may need different visual evidences given the same image, and a relation stated directly in that query may also correspond to several relations in the evidence. 
+To address these issues, we propose MGRAG to build query-specific evidence graphs and match query relations to semantic paths~\cite{mgrag-paper}. Query-aware construction selects relevant facts, while path matching checks their correspondence to the requested relationships. The selected structure also guides the reuse of the LLM's KV cache when the evidence is processed for answering.
+
+In this thesis, we study how explicit knowledge structures can help language models obtain and use the evidence required by a task. We begin with knowledge-enriched representation learning, then reduce the dependence on existing knowledge graphs and task-specific fine-tuning through graph-based retrieval. We further investigate connected textual evidence and query-aware multimodal matching as two extensions to more complex answer requirements.
+
+\section{Research Scope and Structural Augmentation}
+\label{sec:introduction:scope}
+\subsection{Evidence, structure, and model roles}
+Structural augmentation uses explicit relationships among entities, types, keywords, labels, passages, or query components. We study knowledge-graph edges, keyword--label associations, passage links, and paths that express the relationships requested by a query.
+
+Graphs record entities and their connections, while embeddings provide similarity scores or contextual features. We combine them by serializing graph descriptions for a table encoder, weighting connections for label retrieval, scoring nodes and edges for subgraph selection, and comparing path semantics for multimodal matching.
+
+The source of the structure changes with the task. KGLink retrieves descriptions from an existing knowledge graph and fine-tunes a pre-trained encoder using annotated columns. GORAG builds its task graph from labeled examples and updates it using subsequent predictions. AGRAG and MGRAG construct evidence graphs from source documents. GORAG, AGRAG, and MGRAG use large language models for classification, extraction, filtering, or answer generation without task-specific model fine-tuning.
+
+\subsection{Adapting structure to task requirements}
+
+The move from representation learning to retrieval changes how the system adapts to new information. KGLink learns how graph descriptions correspond to annotation labels through model training. GORAG incorporates new labels and vocabulary into its retrieval index. AGRAG and MGRAG organize source content into evidence for individual questions. Adaptation therefore concerns both the relationships stored in a graph and the evidence selected for the current input.
+
+We evaluate these choices through annotation accuracy and F1, classification accuracy across label rounds, task-specific answer measures, and context-processing costs.
+
+\subsection{Structural information preservation}
+Our study of hyper-relational knowledge graphs examines which information is preserved when facts are transformed into graph representations. It distinguishes qualifier capture from graph reception and develops FormerGNN to combine them. The background chapter presents this study to explain how representation choices affect the relationships available to downstream models.
+
+\section{Research Questions}
+\label{sec:introduction:questions}
+\subsection{RQ1: External knowledge for table understanding}
+The first research question asks how graph-derived information and a pre-trained language model can be combined when a table lacks informative context and the graph's type vocabulary differs from the annotation task. The input consists of a table, an external knowledge graph, and labeled columns from the target task. The output is a semantic type for each target column.
+
+Two difficulties motivate the question. Knowledge-graph linking can return multiple candidate descriptions at different granularities. The target task may require a different abstraction from a graph's available types. Meanwhile, a table encoder can only directly read the content in its input sequence. Surrounding dates or numeric values may provide little evidence about an entity's occupation or role. The method must expose external information while learning how it relates to the task's labels.
+
+KGLink answers the question through cell linking, cross-column neighborhood filtering, row selection, candidate-type construction, and graph-derived feature sequences. These components supply evidence to the table encoder. Contextual masked-type representation training relates that evidence to the target annotation vocabulary. Chapter~\ref{ch:kglink} explains the method and reports the SemTab and VizNet experiments, ablations, no-linkage cases, and efficiency evidence.
+
+\subsection{RQ2: Task-driven graph retrieval for dynamic classification}
+The second question asks how to construct and maintain task-related knowledge for dynamic few-shot classification without an existing external knowledge graph or model fine-tuning. The input includes the examples and labels available at the current round, the current graph index, and an unseen text. The output is a label prediction and an index update for subsequent processing.
+
+As labels arrive, the index must retain earlier classes and incorporate new examples. Query predictions can also supply associations for later retrieval. The order of prediction and insertion determines which information is available to each query.
+
+GORAG answers this question through weighted keyword--label indexing, terminal-based connected retrieval, and online updates after classification. The graph selects an input-specific candidate set, and the language model predicts a label using the original text and retrieved label descriptions. Chapter~\ref{ch:gorag} describes the round and shot settings, the retrieval construction, and the CAD, WOS, and IFS-Rel results. The chapter also examines the cost of indexing and retrieval and the effect of the proposed components.
+
+\subsection{RQ3: Connected evidence for textual generation}
+The third question extends task-related graph retrieval from candidate labels to the facts needed for an answer. It asks how to select connected textual evidence with sufficient information to support question answering and generation. The input is a text corpus and a query whose answer can involve several information items. The output includes an evidence subgraph, passage context, and the generated answer.
+
+A graph-ranking score identifies relevant nodes but does not by itself specify an evidence structure. Conversely, a small structure connecting query anchors may omit additional facts needed for a summary. The system must also account for information that remains in the original text after graph extraction. These requirements motivate a combination of graph selection and passage retrieval.
+
+AGRAG answers the question by constructing a graph with statistically selected entities, extracted relations, passage nodes, and synonym links. Query-mapped facts condition the influence scores; semantic similarity supplies edge costs. The method constructs an initial terminal-connecting structure and expands it according to the reported cost-score rule. A hybrid dense and BM25 channel supplies additional passages. Chapter~\ref{ch:agrag} evaluates these choices across textual QA tasks and classification.
+
+\subsection{RQ4: Semantic matching and computation over multimodal evidence}
+The fourth question extends task-related graph retrieval to evidence distributed across text and images. It asks how query-aware construction and semantic path matching can identify the required relationships when the query and evidence express them through different topologies. It also examines how the retrieved structure can guide context recomputation. The input includes a multimodal corpus, a query, and the model states available for reuse. The output is a matched evidence subgraph and an answer generated under the selected recomputation policy.
+
+A query can contain unknown entities, represented by semantically meaningful placeholders. Evidence may express the requested relation through intermediate entities. The relevant details can also depend on the question posed about an image. These conditions make both the construction of the graph and the matching operation query-dependent. Once selected evidence enters the generator, tokens associated with connected events supply information about which computations to refresh.
+
+MGRAG answers the question through caption-based coarse ranking, incremental query-aware graph construction, and path-based semantic subgraph matching. It then combines query attention, graph-sequence attention, and graph topological features to score tokens for selective KV recomputation. Chapter~\ref{ch:mgrag} reports QA results on MMQA and six MRAMG subsets, comparisons of matching methods, component ablations, and cache quality--cost measurements.
+
+\section{Contributions}
+\label{sec:introduction:contributions}
+We make four contributions corresponding to the research questions. Table~\ref{tab:introduction:questions} links each contribution to its method and evaluation.
+
+\begin{enumerate}
+\item \textbf{Knowledge-enriched column representations.} KGLink selects graph-derived evidence using table relationships and integrates that evidence with a pre-trained table encoder. Its contextual representation task connects the graph information to the annotation labels.
+\item \textbf{Online structured label retrieval.} GORAG constructs and maintains weighted associations between keywords and labels from task data, removing the requirement for a predefined external knowledge graph. Connected retrieval generates input-specific candidate labels, and online indexing incorporates new information without fine-tuning the language model.
+\item \textbf{Influence-aware connected evidence selection.} AGRAG combines statistical entity selection, query-conditioned influence, semantic edge costs, an expanded evidence subgraph, and hybrid passage retrieval.
+\item \textbf{Query-aware multimodal matching and recomputation.} MGRAG incrementally constructs evidence graphs for individual queries, matches query relations to semantic paths, and uses graph information in selective KV recomputation.
+\end{enumerate}
+
+\begin{table}[!htbp]
+\centering\small
+\caption{Research questions, structural operations, and evaluations.}
+\label{tab:introduction:questions}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.07\textwidth}>{\raggedright\arraybackslash}p{0.26\textwidth}>{\raggedright\arraybackslash}p{0.27\textwidth}>{\raggedright\arraybackslash}p{0.28\textwidth}}
+\toprule
+RQ & Structural operation & Method location & Published evaluation\\
+\midrule
+RQ1 & KG-derived candidate types and features & Chapter~\ref{ch:kglink}, graph processing and model integration & SemTab and VizNet annotation, ablations, efficiency\\
+RQ2 & Weighted online keyword--label retrieval & Chapter~\ref{ch:gorag}, indexing and connected retrieval & CAD, WOS, IFS-Rel; rounds, shots, and costs\\
+RQ3 & Influence and cost-guided evidence subgraph & Sections~\ref{sec:agrag:construction}--\ref{sec:agrag:hybrid} & Section~\ref{sec:agrag:experiments}; QA and classification\\
+RQ4 & Query-aware construction, semantic paths, and KV scores & Chapter~\ref{ch:mgrag}, matching and recomputation & MMQA and six MRAMG subsets, matching and cache studies\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Experiments evaluate representation quality, adaptation to evolving labels, answer quality, and context-processing cost. On VizNet, KGLink obtains a weighted F1 of 96.07 compared with 95.06 for Doduo. In GORAG's fourth WOS round, accuracy with ten support examples per label is 0.4929 using Qwen2.5-7B; the one-shot result in the same round is 0.4420. AGRAG obtains Medical contextual-summarization coverage of 0.690 and accuracy of 0.604 with Qwen2.5-14B-Instruct. Its hybrid-retrieval ablation reduces coverage in that task to 0.420, showing the contribution of source passages to information coverage. MGRAG reaches MMQA accuracy of 0.7442 with Qwen2.5-VL-7B-Instruct. The associated serving comparison reports 4.3 hours for MGRAG and 8.8 hours for vLLM with HippoRAG2.
+
+The author led the research presented in this thesis under the supervision of Prof. Lei Chen. The work benefited from discussions and collaboration with Dr. Haoyang Li, Dr. Hao Xin, and Dr. Shimin Di. Each research chapter identifies its coauthored publication source.
+
+\section{Publications and Thesis Organization}
+\label{sec:introduction:organization}
+The thesis draws on five publications. KGLink was published at ICDE 2024. \emph{Understanding the Embedding Models on Hyper-relational Knowledge Graph} was published at CIKM 2025. GORAG was published at WWW 2026, AGRAG at ICDE 2026, and MGRAG in Volume 19 of the Proceedings of the VLDB Endowment. Table~\ref{tab:introduction:publications} records their roles in the thesis. Each research chapter begins with its own publication statement.
+
+\begin{table}[tbp]
+\centering\small
+\caption{Publications incorporated into the thesis. The hyper-relational study provides a separate background section; the four other studies form the core research chapters.}
+\label{tab:introduction:publications}
+\begin{tabular}{p{0.45\textwidth}p{0.17\textwidth}p{0.27\textwidth}}
+\toprule
+Publication & Venue & Thesis location\\
+\midrule
+KGLink~\cite{kglink-publication} & ICDE 2024 & Chapter~\ref{ch:kglink}\\
+Understanding the Embedding Models on Hyper-relational Knowledge Graph~\cite{bg-hyperkg} & CIKM 2025 & Chapter~\ref{ch:background}, structural information section\\
+GORAG~\cite{gorag-paper} & WWW 2026 & Chapter~\ref{ch:gorag}\\
+AGRAG~\cite{agrag-paper} & ICDE 2026 & Chapter~\ref{ch:agrag}\\
+MGRAG~\cite{mgrag-paper} & PVLDB 2026 & Chapter~\ref{ch:mgrag}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Chapter~\ref{ch:background} establishes the shared concepts and reviews knowledge-enhanced understanding, graph-based retrieval, and multimodal context processing. It includes the hyper-relational study to examine structural information preservation. Chapter~\ref{ch:kglink} studies representation learning with an existing knowledge graph. Chapter~\ref{ch:gorag} develops task-related graph retrieval without a predefined knowledge graph or model fine-tuning. Chapters~\ref{ch:agrag} and~\ref{ch:mgrag} extend this direction to connected textual evidence and query-aware multimodal matching, respectively.
+
+Chapter~\ref{ch:discussion} compares the points at which structure enters these pipelines. It examines static and query-dependent evidence, the relationship between quality and computational cost, and the conditions affecting interpretation. Chapter~\ref{ch:conclusion} returns to the research questions and identifies directions for future work.

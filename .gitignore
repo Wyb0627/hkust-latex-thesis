@@ -32,3 +32,18 @@
 *.run.xml
 *.xdv
 __pycache__/
+
+# Local system files and reproducible build outputs
+.DS_Store
+/main.pdf
+/template-smoke.pdf
+/planning/gorag-build/chapter-smoke.pdf
+/planning/qa/mgrag-chapter-smoke.pdf
+
+# Generated page-by-page visual review artifacts
+/planning/qa/final/*.png
+/planning/qa/final/page-*.txt
+/planning/*/pdf-qa/
+
+# Historical project archives
+/deliverables/*.zip

@@ -1,0 +1,226 @@
+[
+  {
+    "key": "deng2022turl",
+    "primary_url": "https://api.crossref.org/works/10.14778/3430915.3430921"
+  },
+  {
+    "key": "cafarella2008webtables",
+    "primary_url": "https://api.crossref.org/works/10.14778/1453856.1453916"
+  },
+  {
+    "key": "chen2019colnet",
+    "primary_url": "https://ojs.aaai.org/index.php/AAAI/article/view/3765"
+  },
+  {
+    "key": "wang2021tcn",
+    "primary_url": "https://api.crossref.org/works/10.1145/3442381.3450090"
+  },
+  {
+    "key": "raffel2020exploring",
+    "primary_url": "https://jmlr.org/papers/v21/20-074.html"
+  },
+  {
+    "key": "wang2020generalizing",
+    "primary_url": "https://api.crossref.org/works/10.1145/3386252"
+  },
+  {
+    "key": "wei2022chain",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/9d5609613524ecf4f15af0f7b31abca4-Abstract-Conference.html"
+  },
+  {
+    "key": "brown2020language",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2020/hash/1457c0d6bfcb4967418bfb8ac142f64a-Abstract.html"
+  },
+  {
+    "key": "liu2024lost",
+    "primary_url": "https://aclanthology.org/2024.tacl-1.9/"
+  },
+  {
+    "key": "finn2017model",
+    "primary_url": "https://proceedings.mlr.press/v70/finn17a.html"
+  },
+  {
+    "key": "gidaris2018dynamic",
+    "primary_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Gidaris_Dynamic_Few-Shot_Visual_CVPR_2018_paper.html"
+  },
+  {
+    "key": "ren2019incremental",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2019/hash/e833e042f509c996b1b25324d56659fb-Abstract.html"
+  },
+  {
+    "key": "zhang2024knowgpt",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/0b8705a611ed1ce19cdb759031078705-Abstract-Conference.html"
+  },
+  {
+    "key": "yang2019xlnet",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2019/hash/dc6a7e655d7e5840e66733e9ee67cc69-Abstract.html"
+  },
+  {
+    "key": "borgeaud2022improving",
+    "primary_url": "https://proceedings.mlr.press/v162/borgeaud22a.html"
+  },
+  {
+    "key": "zhang2023h2o",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/6ceefa7b15572587b78ecfcebb2827f8-Abstract-Conference.html"
+  },
+  {
+    "key": "liu2021role",
+    "primary_url": "https://api.crossref.org/works/10.1145/3442381.3449874"
+  },
+  {
+    "key": "guan2019link",
+    "primary_url": "https://api.crossref.org/works/10.1145/3308558.3313414"
+  },
+  {
+    "key": "liu2020generalizing",
+    "primary_url": "https://api.crossref.org/works/10.1145/3366423.3380188"
+  },
+  {
+    "key": "kazemi2018simple",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2018/hash/b2ab001909a8a6f04b51920306046ce5-Abstract.html"
+  },
+  {
+    "key": "guan2020neuinfer",
+    "primary_url": "https://aclanthology.org/2020.acl-main.546/"
+  },
+  {
+    "key": "wang2014knowledge",
+    "primary_url": "https://ojs.aaai.org/index.php/AAAI/article/view/8870"
+  },
+  {
+    "key": "bordes2013translating",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2013/hash/1cecc7a77928ca8133fa24680a88d2f9-Abstract.html"
+  },
+  {
+    "key": "dettmers2018convolutional",
+    "primary_url": "https://ojs.aaai.org/index.php/AAAI/article/view/11573"
+  },
+  {
+    "key": "luo2023hahe",
+    "primary_url": "https://aclanthology.org/2023.acl-long.450/"
+  },
+  {
+    "key": "trouillon2016complex",
+    "primary_url": "https://proceedings.mlr.press/v48/trouillon16.html"
+  },
+  {
+    "key": "hamilton2017inductive",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2017/hash/5dd9db5e033da9c6fb5ba83c7a7ebea9-Abstract.html"
+  },
+  {
+    "key": "kojima2022large",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/8bb0d291acd4acf06ef112099c16f326-Abstract-Conference.html"
+  },
+  {
+    "key": "wang2023plan",
+    "primary_url": "https://aclanthology.org/2023.acl-long.147/"
+  },
+  {
+    "key": "yao2024tree",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/271db9922b8d1f4dd7aaef84ed5ac703-Abstract-Conference.html"
+  },
+  {
+    "key": "besta2024graph",
+    "primary_url": "https://ojs.aaai.org/index.php/AAAI/article/view/29720"
+  },
+  {
+    "key": "guu2020retrieval",
+    "primary_url": "https://proceedings.mlr.press/v119/guu20a.html"
+  },
+  {
+    "key": "izacard2023atlas",
+    "primary_url": "https://jmlr.org/papers/v24/23-0037.html"
+  },
+  {
+    "key": "trivedi2022interleaving",
+    "primary_url": "https://aclanthology.org/2023.acl-long.557/"
+  },
+  {
+    "key": "liu2023llava",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/6dcf277ea32ce3288914faf369fe6de0-Abstract-Conference.html"
+  },
+  {
+    "key": "snell2017prototypical",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2017/hash/cb8da6767461f2812ae4290eac7cbc42-Abstract.html"
+  },
+  {
+    "key": "vinyals2016matching",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2016/hash/90e1357833654983612fb05e3ec9148c-Abstract.html"
+  },
+  {
+    "key": "sung2018learning",
+    "primary_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Sung_Learning_to_Compare_CVPR_2018_paper.html"
+  },
+  {
+    "key": "khattab2020colbert",
+    "primary_url": "https://api.crossref.org/works/10.1145/3397271.3401075"
+  },
+  {
+    "key": "gao2023hyde",
+    "primary_url": "https://aclanthology.org/2023.acl-long.99/"
+  },
+  {
+    "key": "dao2022flashattention",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/67d57c32e20fd0a7a302cb81d36e40d5-Abstract-Conference.html"
+  },
+  {
+    "key": "liu2023scissorhands",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/a452a7c6c463e4ae8fbdc614c6e983e6-Abstract-Conference.html"
+  },
+  {
+    "key": "antol2015vqa",
+    "primary_url": "https://openaccess.thecvf.com/content_iccv_2015/html/Antol_VQA_Visual_Question_ICCV_2015_paper.html"
+  },
+  {
+    "key": "li2022blip",
+    "primary_url": "https://proceedings.mlr.press/v162/li22n.html"
+  },
+  {
+    "key": "li2023blip2",
+    "primary_url": "https://proceedings.mlr.press/v202/li23q.html"
+  },
+  {
+    "key": "alayrac2022flamingo",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/960a172bc7fbf0177ccccbb411a7d800-Abstract-Conference.html"
+  },
+  {
+    "key": "lu2019vilbert",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2019/hash/c74d97b01eae257e44aa9d5bade97baf-Abstract.html"
+  },
+  {
+    "key": "dai2023instructblip",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/9a6a435e75419a836fe47ab6793623e6-Abstract-Conference.html"
+  },
+  {
+    "key": "kwiatkowski2019natural",
+    "primary_url": "https://aclanthology.org/Q19-1026/"
+  },
+  {
+    "key": "joshi2017triviaqa",
+    "primary_url": "https://aclanthology.org/P17-1147/"
+  },
+  {
+    "key": "herzig2020tapas",
+    "primary_url": "https://aclanthology.org/2020.acl-main.398/"
+  },
+  {
+    "key": "yang2022tableformer",
+    "primary_url": "https://aclanthology.org/2022.acl-long.40/"
+  },
+  {
+    "key": "wang2023can",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/622afc4edf2824a1b6aaf5afe153fa93-Abstract-Conference.html"
+  },
+  {
+    "key": "trivedi2022musique",
+    "primary_url": "https://aclanthology.org/2022.tacl-1.31/"
+  },
+  {
+    "key": "marino2019okvqa",
+    "primary_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Marino_OK-VQA_A_Visual_Question_Answering_Benchmark_Requiring_External_Knowledge_CVPR_2019_paper.html"
+  },
+  {
+    "key": "ouyang2022training",
+    "primary_url": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/b1efde53be364a73914f58805a001731-Abstract-Conference.html"
+  }
+]

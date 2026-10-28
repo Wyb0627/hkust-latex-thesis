@@ -1,0 +1,214 @@
+[
+  {
+    "path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/KGLink.bib",
+    "sha256": "db48277c8e19c5fd3cf8f3da2fff024306e83eb7b3065169e96a52d8a1158d35",
+    "entry_count": 44,
+    "matching_entries": [
+      {
+        "thesis_key": "bg-reca",
+        "type": "article",
+        "key": "sun2023reca",
+        "fields": {
+          "title": "RECA: Related Tables Enhanced Column Semantic Type Annotation Framework",
+          "author": "Sun, Yushi and Xin, Hao and Chen, Lei",
+          "journal": "Proceedings of the VLDB Endowment",
+          "volume": "16",
+          "number": "6",
+          "pages": "1319--1331",
+          "year": "2023",
+          "publisher": "VLDB Endowment"
+        }
+      }
+    ]
+  },
+  {
+    "path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/GraphRAG_FSCIL.bib",
+    "sha256": "09f02816e963fce5c8185299c1e5162a9cef855e9b359073f0fba3be79ee1f2d",
+    "entry_count": 214,
+    "matching_entries": [
+      {
+        "thesis_key": "agrag-xia-etal-2021-incremental",
+        "type": "inproceedings",
+        "key": "xia-etal-2021-incremental",
+        "fields": {
+          "author": "Congying Xia and\n\tWenpeng Yin and\n\tYihao Feng and\n\tPhilip S. Yu",
+          "title": "Incremental Few-shot Text Classification with Multi-round New Classes: Formulation, Dataset and System",
+          "booktitle": "NAACL 2021",
+          "publisher": "Association for Computational Linguistics",
+          "year": "2021"
+        }
+      },
+      {
+        "thesis_key": "bg-graphrag",
+        "type": "article",
+        "key": "edge2024local",
+        "fields": {
+          "title": "From local to global: A graph rag approach to query-focused summarization",
+          "author": "Edge, Darren and Trinh, Ha and Cheng, Newman and Bradley, Joshua and Chao, Alex and Mody, Apurva and Truitt, Steven and Larson, Jonathan",
+          "journal": "arXiv preprint arXiv:2404.16130",
+          "year": "2024"
+        }
+      },
+      {
+        "thesis_key": "bg-hipporag",
+        "type": "article",
+        "key": "gutierrez2024hipporag",
+        "fields": {
+          "title": "Hipporag: Neurobiologically inspired long-term memory for large language models",
+          "author": "Jimenez Gutierrez, Bernal and Shu, Yiheng and Gu, Yu and Yasunaga, Michihiro and Su, Yu",
+          "journal": "Advances in Neural Information Processing Systems",
+          "volume": "37",
+          "year": "2024"
+        }
+      }
+    ]
+  },
+  {
+    "path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/ICDE2026.bib",
+    "sha256": "46f60d8d96d15091bb7dab944ec6b09a91cb04171d463e21be37299cc277d300",
+    "entry_count": 200,
+    "matching_entries": [
+      {
+        "thesis_key": "agrag-xia-etal-2021-incremental",
+        "type": "inproceedings",
+        "key": "xia-etal-2021-incremental",
+        "fields": {
+          "author": "Congying Xia and\n\tWenpeng Yin and\n\tYihao Feng and\n\tPhilip S. Yu",
+          "editor": "Kristina Toutanova and\n\tAnna Rumshisky and\n\tLuke Zettlemoyer and\n\tDilek Hakkani{-}T{\\\"{u}}r and\n\tIz Beltagy and\n\tSteven Bethard and\n\tRyan Cotterell and\n\tTanmoy Chakraborty and\n\tYichao Zhou",
+          "title": "Incremental Few-shot Text Classification with Multi-round New Classes:\n\tFormulation, Dataset and System",
+          "booktitle": "Proceedings of the 2021 Conference of the North American Chapter of\n\tthe Association for Computational Linguistics: Human Language Technologies,\n\t{NAACL-HLT} 2021, Online, June 6-11, 2021",
+          "pages": "1351--1360",
+          "publisher": "Association for Computational Linguistics",
+          "year": "2021",
+          "url": "https://doi.org/10.18653/v1/2021.naacl-main.106",
+          "doi": "10.18653/V1/2021.NAACL-MAIN.106",
+          "timestamp": "Sat, 09 Apr 2022 12:40:23 +0200",
+          "biburl": "https://dblp.org/rec/conf/naacl/XiaYFY21.bib",
+          "bibsource": "dblp computer science bibliography, https://dblp.org"
+        }
+      },
+      {
+        "thesis_key": "bg-graphrag",
+        "type": "article",
+        "key": "edge2024local",
+        "fields": {
+          "title": "From local to global: A graph rag approach to query-focused summarization",
+          "author": "Edge, Darren and Trinh, Ha and Cheng, Newman and Bradley, Joshua and Chao, Alex and Mody, Apurva and Truitt, Steven and Larson, Jonathan",
+          "journal": "arXiv preprint arXiv:2404.16130",
+          "year": "2024"
+        }
+      },
+      {
+        "thesis_key": "bg-hipporag",
+        "type": "article",
+        "key": "gutierrez2024hipporag",
+        "fields": {
+          "title": "Hipporag: Neurobiologically inspired long-term memory for large language models",
+          "author": "Jimenez Gutierrez, Bernal and Shu, Yiheng and Gu, Yu and Yasunaga, Michihiro and Su, Yu",
+          "journal": "Advances in Neural Information Processing Systems",
+          "volume": "37",
+          "pages": "59532--59569",
+          "year": "2024"
+        }
+      }
+    ]
+  },
+  {
+    "path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/VLDB_MGRAG/pvldbstyle-master/anyrag.bib",
+    "sha256": "a165e48b5c95fe04995a02553acc9f29cb4cbb5895c8f669c3eeae95148e3e29",
+    "entry_count": 113,
+    "matching_entries": [
+      {
+        "thesis_key": "bg-graphrag",
+        "type": "article",
+        "key": "edge2024local",
+        "fields": {
+          "title": "From local to global: A graph rag approach to query-focused summarization",
+          "author": "Edge, Darren and Trinh, Ha and Cheng, Newman and Bradley, Joshua and Chao, Alex and Mody, Apurva and Truitt, Steven and Larson, Jonathan",
+          "journal": "arXiv preprint arXiv:2404.16130",
+          "year": "2024"
+        }
+      },
+      {
+        "thesis_key": "bg-hipporag",
+        "type": "article",
+        "key": "gutierrez2024hipporag",
+        "fields": {
+          "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+          "author": "Guti{\\'e}rrez, Bernal Jim{\\'e}nez and Shu, Yiheng and Gu, Yu and Yasunaga, Michihiro and Su, Yu",
+          "journal": "arXiv preprint arXiv:2405.14831",
+          "year": "2024"
+        }
+      },
+      {
+        "thesis_key": "bg-mmqa",
+        "type": "article",
+        "key": "talmor2021multimodalqa",
+        "fields": {
+          "title": "Multimodalqa: Complex question answering over text, tables and images",
+          "author": "Talmor, Alon and Yoran, Ori and Catav, Amnon and Lahav, Dan and Wang, Yizhong and Asai, Akari and Ilharco, Gabriel and Hajishirzi, Hannaneh and Berant, Jonathan",
+          "journal": "International Conference on Learning Representations",
+          "year": "2021"
+        }
+      }
+    ]
+  },
+  {
+    "path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/reference.bib",
+    "sha256": "93c9cd020b858b94beca3b85e4c2443905a36816804519ae1d83441230ca1cdc",
+    "entry_count": 78,
+    "matching_entries": []
+  },
+  {
+    "path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/GFM4Graph/GFM.bib",
+    "sha256": "73e5bceefadf7127d5685b526791ec0e65df2ba39b384d50e7939c06d9ca779c",
+    "entry_count": 250,
+    "matching_entries": []
+  },
+  {
+    "path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KBLink.bib",
+    "sha256": "640ed39540689ad923a215c1b50d4386f7bb0e4e0518b1e0c19425fa7a7b993f",
+    "entry_count": 43,
+    "matching_entries": [
+      {
+        "thesis_key": "bg-reca",
+        "type": "article",
+        "key": "sun2023reca",
+        "fields": {
+          "title": "RECA: Related Tables Enhanced Column Semantic Type Annotation Framework",
+          "author": "Sun, Yushi and Xin, Hao and Chen, Lei",
+          "journal": "Proceedings of the VLDB Endowment",
+          "volume": "16",
+          "number": "6",
+          "pages": "1319--1331",
+          "year": "2023",
+          "publisher": "VLDB Endowment"
+        }
+      }
+    ]
+  },
+  {
+    "path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KBLinkcite.bib",
+    "sha256": "b3a8d00d507fed611033ba945b577cb3bb5abb9f1bb2a5dc7f32e4f93842c75d",
+    "entry_count": 39,
+    "matching_entries": []
+  },
+  {
+    "path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CoT Survey/sample-base.bib",
+    "sha256": "ceac34c519909d6c012a9e4dd1562c1e2fd42ad1e0038dfd44a94db2b106d79e",
+    "entry_count": 60,
+    "matching_entries": []
+  },
+  {
+    "path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/NIPS2024_Yubo/reference.bib",
+    "sha256": "3fb49504464a5cca258d0897abe3d2397606727b756b570081143c7050f622f1",
+    "entry_count": 49,
+    "matching_entries": []
+  },
+  {
+    "path": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/LLM_NER/entity.bib",
+    "sha256": "260035ca2db4345d8b60dc23528d5206dbe0bc6e6610effd3415be9e291c8dd4",
+    "entry_count": 47,
+    "matching_entries": []
+  }
+]

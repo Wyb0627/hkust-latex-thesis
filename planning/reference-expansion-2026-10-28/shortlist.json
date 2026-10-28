@@ -1,0 +1,654 @@
+[
+  {
+    "type": "article",
+    "key": "deng2022turl",
+    "fields": {
+      "title": "Turl: Table understanding through representation learning",
+      "author": "Deng, Xiang and Sun, Huan and Lees, Alyssa and Wu, You and Yu, Cong",
+      "journal": "ACM SIGMOD Record",
+      "volume": "51",
+      "number": "1",
+      "pages": "33--40",
+      "year": "2022",
+      "publisher": "ACM New York, NY, USA"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/KGLink.bib",
+    "thesis_key": "lit-deng2022turl"
+  },
+  {
+    "type": "article",
+    "key": "cafarella2008webtables",
+    "fields": {
+      "title": "Webtables: exploring the power of tables on the web",
+      "author": "Cafarella, Michael J and Halevy, Alon and Wang, Daisy Zhe and Wu, Eugene and Zhang, Yang",
+      "journal": "Proceedings of the VLDB Endowment",
+      "volume": "1",
+      "number": "1",
+      "pages": "538--549",
+      "year": "2008",
+      "publisher": "VLDB Endowment"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/KGLink.bib",
+    "thesis_key": "lit-cafarella2008webtables"
+  },
+  {
+    "type": "inproceedings",
+    "key": "chen2019colnet",
+    "fields": {
+      "title": "Colnet: Embedding the semantics of web tables for column type prediction",
+      "author": "Chen, Jiaoyan and Jim{\\'e}nez-Ruiz, Ernesto and Horrocks, Ian and Sutton, Charles",
+      "booktitle": "Proceedings of the AAAI Conference on Artificial Intelligence",
+      "volume": "33",
+      "number": "01",
+      "pages": "29--36",
+      "year": "2019"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/KGLink.bib",
+    "thesis_key": "lit-chen2019colnet"
+  },
+  {
+    "type": "inproceedings",
+    "key": "wang2021tcn",
+    "fields": {
+      "title": "Tcn: Table convolutional network for web table interpretation",
+      "author": "Wang, Daheng and Shiralkar, Prashant and Lockard, Colin and Huang, Binxuan and Dong, Xin Luna and Jiang, Meng",
+      "booktitle": "Proceedings of the Web Conference 2021",
+      "pages": "4020--4032",
+      "year": "2021"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/KGLink.bib",
+    "thesis_key": "lit-wang2021tcn"
+  },
+  {
+    "type": "article",
+    "key": "raffel2020exploring",
+    "fields": {
+      "title": "Exploring the limits of transfer learning with a unified text-to-text transformer",
+      "author": "Raffel, Colin and Shazeer, Noam and Roberts, Adam and Lee, Katherine and Narang, Sharan and Matena, Michael and Zhou, Yanqi and Li, Wei and Liu, Peter J",
+      "journal": "The Journal of Machine Learning Research",
+      "volume": "21",
+      "number": "1",
+      "pages": "5485--5551",
+      "year": "2020",
+      "publisher": "JMLRORG"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/KGLink/KGLink_ICDE_revision/KGLink.bib",
+    "thesis_key": "lit-raffel2020exploring"
+  },
+  {
+    "type": "article",
+    "key": "wang2020generalizing",
+    "fields": {
+      "title": "Generalizing from a few examples: A survey on few-shot learning",
+      "author": "Wang, Yaqing and Yao, Quanming and Kwok, James T and Ni, Lionel M",
+      "journal": "ACM computing surveys (csur)",
+      "volume": "53",
+      "number": "3",
+      "pages": "1--34",
+      "year": "2020",
+      "publisher": "ACM New York, NY, USA"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/GraphRAG_FSCIL.bib",
+    "thesis_key": "lit-wang2020generalizing"
+  },
+  {
+    "type": "article",
+    "key": "wei2022chain",
+    "fields": {
+      "title": "Chain-of-thought prompting elicits reasoning in large language models",
+      "author": "Wei, Jason and Wang, Xuezhi and Schuurmans, Dale and Bosma, Maarten and Xia, Fei and Chi, Ed and Le, Quoc V and Zhou, Denny and others",
+      "journal": "Advances in neural information processing systems",
+      "volume": "35",
+      "pages": "24824--24837",
+      "year": "2022"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/GraphRAG_FSCIL.bib",
+    "thesis_key": "lit-wei2022chain"
+  },
+  {
+    "type": "article",
+    "key": "brown2020language",
+    "fields": {
+      "title": "Language models are few-shot learners",
+      "author": "Brown, Tom B",
+      "journal": "arXiv preprint arXiv:2005.14165",
+      "year": "2020"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/GraphRAG_FSCIL.bib",
+    "thesis_key": "lit-brown2020language"
+  },
+  {
+    "type": "article",
+    "key": "liu2024lost",
+    "fields": {
+      "title": "Lost in the middle: How language models use long contexts",
+      "author": "Liu, Nelson F and Lin, Kevin and Hewitt, John and Paranjape, Ashwin and Bevilacqua, Michele and Petroni, Fabio and Liang, Percy",
+      "journal": "TACL",
+      "volume": "12",
+      "pages": "157--173",
+      "year": "2024",
+      "publisher": "MIT Press One Broadway, 12th Floor, Cambridge, Massachusetts 02142, USA~…"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/GraphRAG_FSCIL.bib",
+    "thesis_key": "lit-liu2024lost"
+  },
+  {
+    "type": "inproceedings",
+    "key": "finn2017model",
+    "fields": {
+      "title": "Model-agnostic meta-learning for fast adaptation of deep networks",
+      "author": "Finn, Chelsea and Abbeel, Pieter and Levine, Sergey",
+      "booktitle": "International conference on machine learning",
+      "pages": "1126--1135",
+      "year": "2017",
+      "organization": "PMLR"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/GraphRAG_FSCIL.bib",
+    "thesis_key": "lit-finn2017model"
+  },
+  {
+    "type": "inproceedings",
+    "key": "gidaris2018dynamic",
+    "fields": {
+      "title": "Dynamic few-shot visual learning without forgetting",
+      "author": "Gidaris, Spyros and Komodakis, Nikos",
+      "booktitle": "Proceedings of the IEEE conference on computer vision and pattern recognition",
+      "pages": "4367--4375",
+      "year": "2018"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/GraphRAG_FSCIL.bib",
+    "thesis_key": "lit-gidaris2018dynamic"
+  },
+  {
+    "type": "article",
+    "key": "ren2019incremental",
+    "fields": {
+      "title": "Incremental few-shot learning with attention attractor networks",
+      "author": "Ren, Mengye and Liao, Renjie and Fetaya, Ethan and Zemel, Richard",
+      "journal": "Advances in neural information processing systems",
+      "volume": "32",
+      "year": "2019"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/GraphRAG_FSCIL.bib",
+    "thesis_key": "lit-ren2019incremental"
+  },
+  {
+    "type": "inproceedings",
+    "key": "zhang2024knowgpt",
+    "fields": {
+      "title": "KnowGPT: Knowledge Graph based Prompting for Large Language Models",
+      "author": "Zhang, Qinggang and Dong, Junnan and Chen, Hao and Zha, Daochen and Yu, Zailiang and Huang, Xiao",
+      "booktitle": "The Thirty-eighth Annual Conference on Neural Information Processing Systems",
+      "year": "2024"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/GraphRAG_FSCIL.bib",
+    "thesis_key": "lit-zhang2024knowgpt"
+  },
+  {
+    "type": "inproceedings",
+    "key": "yang2019xlnet",
+    "fields": {
+      "author": "Yang, Zhilin and Dai, Zihang and Yang, Yiming and Carbonell, Jaime and Salakhutdinov, Ruslan and Le, Quoc V.",
+      "title": "XLNet: generalized autoregressive pretraining for language understanding",
+      "year": "2019",
+      "booktitle": "Proceedings of the 33rd International Conference on Neural Information Processing Systems"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/AGRAG_GORAG/WWW/GraphRAG_FSCIL.bib",
+    "thesis_key": "lit-yang2019xlnet"
+  },
+  {
+    "type": "inproceedings",
+    "key": "borgeaud2022improving",
+    "fields": {
+      "title": "Improving language models by retrieving from trillions of tokens",
+      "author": "Borgeaud, Sebastian and Mensch, Arthur and Hoffmann, Jordan and Cai, Trevor and Rutherford, Eliza and Millican, Katie and Van Den Driessche, George Bm and Lespiau, Jean-Baptiste and Damoc, Bogdan and Clark, Aidan and others",
+      "booktitle": "International conference on machine learning",
+      "pages": "2206--2240",
+      "year": "2022",
+      "organization": "PMLR"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/VLDB_MGRAG/pvldbstyle-master/anyrag.bib",
+    "thesis_key": "lit-borgeaud2022improving"
+  },
+  {
+    "type": "article",
+    "key": "zhang2023h2o",
+    "fields": {
+      "title": "H2o: Heavy-hitter oracle for efficient generative inference of large language models",
+      "author": "Zhang, Zhenyu and Sheng, Ying and Zhou, Tianyi and Chen, Tianlong and Zheng, Lianmin and Cai, Ruisi and Song, Zhao and Tian, Yuandong and R{\\'e}, Christopher and Barrett, Clark and others",
+      "journal": "Advances in Neural Information Processing Systems",
+      "volume": "36",
+      "pages": "34661--34710",
+      "year": "2023"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/VLDB_MGRAG/pvldbstyle-master/anyrag.bib",
+    "thesis_key": "lit-zhang2023h2o"
+  },
+  {
+    "type": "inproceedings",
+    "key": "liu2021role",
+    "fields": {
+      "title": "Role-aware modeling for n-ary relational knowledge bases",
+      "author": "Liu, Yu and Yao, Quanming and Li, Yong",
+      "booktitle": "Proceedings of the Web Conference 2021",
+      "pages": "2660--2671",
+      "year": "2021"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/reference.bib",
+    "thesis_key": "lit-liu2021role"
+  },
+  {
+    "type": "inproceedings",
+    "key": "guan2019link",
+    "fields": {
+      "title": "Link prediction on n-ary relational data",
+      "author": "Guan, Saiping and Jin, Xiaolong and Wang, Yuanzhuo and Cheng, Xueqi",
+      "booktitle": "The world wide web conference",
+      "pages": "583--593",
+      "year": "2019"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/reference.bib",
+    "thesis_key": "lit-guan2019link"
+  },
+  {
+    "type": "inproceedings",
+    "key": "liu2020generalizing",
+    "fields": {
+      "title": "Generalizing tensor decomposition for n-ary relational knowledge bases",
+      "author": "Liu, Yu and Yao, Quanming and Li, Yong",
+      "booktitle": "Proceedings of the web conference 2020",
+      "pages": "1104--1114",
+      "year": "2020"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/reference.bib",
+    "thesis_key": "lit-liu2020generalizing"
+  },
+  {
+    "type": "article",
+    "key": "kazemi2018simple",
+    "fields": {
+      "title": "Simple embedding for link prediction in knowledge graphs",
+      "author": "Kazemi, Seyed Mehran and Poole, David",
+      "journal": "Advances in neural information processing systems",
+      "volume": "31",
+      "year": "2018"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/reference.bib",
+    "thesis_key": "lit-kazemi2018simple"
+  },
+  {
+    "type": "inproceedings",
+    "key": "guan2020neuinfer",
+    "fields": {
+      "title": "Neuinfer: Knowledge inference on n-ary facts",
+      "author": "Guan, Saiping and Jin, Xiaolong and Guo, Jiafeng and Wang, Yuanzhuo and Cheng, Xueqi",
+      "booktitle": "Proceedings of the 58th annual meeting of the association for computational linguistics",
+      "pages": "6141--6151",
+      "year": "2020"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/reference.bib",
+    "thesis_key": "lit-guan2020neuinfer"
+  },
+  {
+    "type": "inproceedings",
+    "key": "wang2014knowledge",
+    "fields": {
+      "title": "Knowledge graph embedding by translating on hyperplanes",
+      "author": "Wang, Zhen and Zhang, Jianwen and Feng, Jianlin and Chen, Zheng",
+      "booktitle": "Proceedings of the AAAI conference on artificial intelligence",
+      "volume": "28",
+      "number": "1",
+      "year": "2014"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/reference.bib",
+    "thesis_key": "lit-wang2014knowledge"
+  },
+  {
+    "type": "article",
+    "key": "bordes2013translating",
+    "fields": {
+      "title": "Translating embeddings for modeling multi-relational data",
+      "author": "Bordes, Antoine and Usunier, Nicolas and Garcia-Duran, Alberto and Weston, Jason and Yakhnenko, Oksana",
+      "journal": "Advances in neural information processing systems",
+      "volume": "26",
+      "year": "2013"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/reference.bib",
+    "thesis_key": "lit-bordes2013translating"
+  },
+  {
+    "type": "inproceedings",
+    "key": "dettmers2018convolutional",
+    "fields": {
+      "title": "Convolutional 2d knowledge graph embeddings",
+      "author": "Dettmers, Tim and Minervini, Pasquale and Stenetorp, Pontus and Riedel, Sebastian",
+      "booktitle": "Proceedings of the AAAI conference on artificial intelligence",
+      "volume": "32",
+      "number": "1",
+      "year": "2018"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/reference.bib",
+    "thesis_key": "lit-dettmers2018convolutional"
+  },
+  {
+    "type": "article",
+    "key": "luo2023hahe",
+    "fields": {
+      "title": "HAHE: Hierarchical Attention for Hyper-Relational Knowledge Graphs in Global and Local Level",
+      "author": "Luo, Haoran and Yang, Yuhao and Guo, Yikai and Sun, Mingzhi and Yao, Tianyu and Tang, Zichen and Wan, Kaiyang and Song, Meina and Lin, Wei and others",
+      "journal": "arXiv preprint arXiv:2305.06588",
+      "year": "2023"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/reference.bib",
+    "thesis_key": "lit-luo2023hahe"
+  },
+  {
+    "type": "inproceedings",
+    "key": "trouillon2016complex",
+    "fields": {
+      "title": "Complex embeddings for simple link prediction",
+      "author": "Trouillon, Th{\\'e}o and Welbl, Johannes and Riedel, Sebastian and Gaussier, {\\'E}ric and Bouchard, Guillaume",
+      "booktitle": "International conference on machine learning",
+      "pages": "2071--2080",
+      "year": "2016",
+      "organization": "PMLR"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CIKM_FormerGNN/reference.bib",
+    "thesis_key": "lit-trouillon2016complex"
+  },
+  {
+    "type": "article",
+    "key": "hamilton2017inductive",
+    "fields": {
+      "title": "Inductive representation learning on large graphs",
+      "author": "Hamilton, Will and Ying, Zhitao and Leskovec, Jure",
+      "journal": "Advances in neural information processing systems",
+      "volume": "30",
+      "year": "2017"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/GFM4Graph/GFM.bib",
+    "thesis_key": "lit-hamilton2017inductive"
+  },
+  {
+    "type": "article",
+    "key": "wang2023can",
+    "fields": {
+      "title": "Can language models solve graph problems in natural language?",
+      "author": "Wang, Heng and Feng, Shangbin and He, Tianxing and Tan, Zhaoxuan and Han, Xiaochuang and Tsvetkov, Yulia",
+      "journal": "Advances in Neural Information Processing Systems",
+      "volume": "36",
+      "pages": "30840--30861",
+      "year": "2023"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/GFM4Graph/GFM.bib",
+    "thesis_key": "lit-wang2023can"
+  },
+  {
+    "type": "article",
+    "key": "kojima2022large",
+    "fields": {
+      "title": "Large language models are zero-shot reasoners",
+      "author": "Kojima, Takeshi and Gu, Shixiang Shane and Reid, Machel and Matsuo, Yutaka and Iwasawa, Yusuke",
+      "journal": "Advances in neural information processing systems",
+      "volume": "35",
+      "pages": "22199--22213",
+      "year": "2022"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CoT Survey/sample-base.bib",
+    "thesis_key": "lit-kojima2022large"
+  },
+  {
+    "type": "inproceedings",
+    "key": "wang2023plan",
+    "fields": {
+      "title": "Plan-and-Solve Prompting: Improving Zero-Shot Chain-of-Thought Reasoning by Large Language Models",
+      "author": "Wang, Lei and Xu, Wanyu and Lan, Yihuai and Hu, Zhiqiang and Lan, Yunshi and Lee, Roy Ka-Wei and Lim, Ee-Peng",
+      "booktitle": "Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+      "pages": "2609--2634",
+      "year": "2023"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CoT Survey/sample-base.bib",
+    "thesis_key": "lit-wang2023plan"
+  },
+  {
+    "type": "article",
+    "key": "yao2024tree",
+    "fields": {
+      "title": "Tree of thoughts: Deliberate problem solving with large language models",
+      "author": "Yao, Shunyu and Yu, Dian and Zhao, Jeffrey and Shafran, Izhak and Griffiths, Tom and Cao, Yuan and Narasimhan, Karthik",
+      "journal": "Advances in Neural Information Processing Systems",
+      "volume": "36",
+      "year": "2024"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CoT Survey/sample-base.bib",
+    "thesis_key": "lit-yao2024tree"
+  },
+  {
+    "type": "inproceedings",
+    "key": "besta2024graph",
+    "fields": {
+      "title": "Graph of thoughts: Solving elaborate problems with large language models",
+      "author": "Besta, Maciej and Blach, Nils and Kubicek, Ales and Gerstenberger, Robert and Podstawski, Michal and Gianinazzi, Lukas and Gajda, Joanna and Lehmann, Tomasz and Niewiadomski, Hubert and Nyczyk, Piotr and others",
+      "booktitle": "Proceedings of the AAAI Conference on Artificial Intelligence",
+      "volume": "38",
+      "number": "16",
+      "pages": "17682--17690",
+      "year": "2024"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/CoT Survey/sample-base.bib",
+    "thesis_key": "lit-besta2024graph"
+  },
+  {
+    "type": "inproceedings",
+    "key": "guu2020retrieval",
+    "fields": {
+      "title": "Retrieval augmented language model pre-training",
+      "author": "Guu, Kelvin and Lee, Kenton and Tung, Zora and Pasupat, Panupong and Chang, Mingwei",
+      "booktitle": "International conference on machine learning",
+      "pages": "3929--3938",
+      "year": "2020",
+      "organization": "PMLR"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/LLM_NER/entity.bib",
+    "thesis_key": "lit-guu2020retrieval"
+  },
+  {
+    "type": "article",
+    "key": "izacard2023atlas",
+    "fields": {
+      "title": "Atlas: Few-shot learning with retrieval augmented language models",
+      "author": "Izacard, Gautier and Lewis, Patrick and Lomeli, Maria and Hosseini, Lucas and Petroni, Fabio and Schick, Timo and Dwivedi-Yu, Jane and Joulin, Armand and Riedel, Sebastian and Grave, Edouard",
+      "journal": "Journal of Machine Learning Research",
+      "volume": "24",
+      "number": "251",
+      "pages": "1--43",
+      "year": "2023"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/LLM_NER/entity.bib",
+    "thesis_key": "lit-izacard2023atlas"
+  },
+  {
+    "type": "article",
+    "key": "trivedi2022interleaving",
+    "fields": {
+      "title": "Interleaving retrieval with chain-of-thought reasoning for knowledge-intensive multi-step questions",
+      "author": "Trivedi, Harsh and Balasubramanian, Niranjan and Khot, Tushar and Sabharwal, Ashish",
+      "journal": "arXiv preprint arXiv:2212.10509",
+      "year": "2022"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/LLM_NER/entity.bib",
+    "thesis_key": "lit-trivedi2022interleaving"
+  },
+  {
+    "type": "misc",
+    "key": "liu2023llava",
+    "fields": {
+      "title": "Visual Instruction Tuning",
+      "author": "Liu, Haotian and Li, Chunyuan and Wu, Qingyang and Lee, Yong Jae",
+      "publisher": "NeurIPS",
+      "year": "2023"
+    },
+    "source": "/Users/ybwang/Library/CloudStorage/OneDrive-HKUSTConnect/paper/LLM_NER/entity.bib",
+    "thesis_key": "lit-liu2023llava"
+  },
+  {
+    "key": "snell2017prototypical",
+    "fields": {
+      "title": "Prototypical Networks for Few-shot Learning"
+    },
+    "source": "external-primary-search",
+    "thesis_key": "lit-snell2017prototypical"
+  },
+  {
+    "key": "vinyals2016matching",
+    "fields": {
+      "title": "Matching Networks for One Shot Learning"
+    },
+    "source": "external-primary-search",
+    "thesis_key": "lit-vinyals2016matching"
+  },
+  {
+    "key": "sung2018learning",
+    "fields": {
+      "title": "Learning to Compare: Relation Network for Few-Shot Learning"
+    },
+    "source": "external-primary-search",
+    "thesis_key": "lit-sung2018learning"
+  },
+  {
+    "key": "khattab2020colbert",
+    "fields": {
+      "title": "ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT"
+    },
+    "source": "external-primary-search",
+    "thesis_key": "lit-khattab2020colbert"
+  },
+  {
+    "key": "gao2023hyde",
+    "fields": {
+      "title": "Precise Zero-Shot Dense Retrieval without Relevance Labels"
+    },
+    "source": "external-primary-search",
+    "thesis_key": "lit-gao2023hyde"
+  },
+  {
+    "key": "dao2022flashattention",
+    "fields": {
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"
+    },
+    "source": "external-primary-search",
+    "thesis_key": "lit-dao2022flashattention"
+  },
+  {
+    "key": "liu2023scissorhands",
+    "fields": {
+      "title": "Scissorhands: Exploiting the Persistence of Importance Hypothesis for LLM KV Cache Compression at Test Time"
+    },
+    "source": "external-primary-search",
+    "thesis_key": "lit-liu2023scissorhands"
+  },
+  {
+    "key": "antol2015vqa",
+    "fields": {
+      "title": "VQA: Visual Question Answering"
+    },
+    "source": "external-primary-search",
+    "thesis_key": "lit-antol2015vqa"
+  },
+  {
+    "key": "li2022blip",
+    "fields": {
+      "title": "BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation"
+    },
+    "source": "external-primary-search",
+    "thesis_key": "lit-li2022blip"
+  },
+  {
+    "key": "li2023blip2",
+    "fields": {
+      "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models"
+    },
+    "source": "external-primary-search",
+    "thesis_key": "lit-li2023blip2"
+  },
+  {
+    "key": "alayrac2022flamingo",
+    "fields": {
+      "title": "Flamingo: a Visual Language Model for Few-Shot Learning"
+    },
+    "source": "external-primary-search",
+    "thesis_key": "lit-alayrac2022flamingo"
+  },
+  {
+    "key": "lu2019vilbert",
+    "fields": {
+      "title": "ViLBERT: Pretraining Task-Agnostic Visiolinguistic Representations for Vision-and-Language Tasks"
+    },
+    "source": "external-primary-search",
+    "thesis_key": "lit-lu2019vilbert"
+  },
+  {
+    "key": "dai2023instructblip",
+    "fields": {
+      "title": "InstructBLIP: Towards General-purpose Vision-Language Models with Instruction Tuning"
+    },
+    "source": "external-primary-search",
+    "thesis_key": "lit-dai2023instructblip"
+  },
+  {
+    "key": "kwiatkowski2019natural",
+    "fields": {
+      "title": "Natural Questions: A Benchmark for Question Answering Research"
+    },
+    "source": "external-primary-search",
+    "thesis_key": "lit-kwiatkowski2019natural"
+  },
+  {
+    "key": "joshi2017triviaqa",
+    "fields": {
+      "title": "TriviaQA: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension"
+    },
+    "source": "external-primary-search",
+    "thesis_key": "lit-joshi2017triviaqa"
+  },
+  {
+    "key": "herzig2020tapas",
+    "fields": {
+      "title": "TAPAS: Weakly Supervised Table Parsing via Pre-training"
+    },
+    "source": "external-primary-search",
+    "thesis_key": "lit-herzig2020tapas"
+  },
+  {
+    "key": "yang2022tableformer",
+    "fields": {
+      "title": "TableFormer: Robust Transformer Modeling for Table-Text Encoding"
+    },
+    "source": "external-primary-search",
+    "thesis_key": "lit-yang2022tableformer"
+  },
+  {
+    "key": "trivedi2022musique",
+    "fields": {
+      "title": "MuSiQue: Multihop Questions via Single-hop Question Composition"
+    },
+    "source": "external-primary-search",
+    "thesis_key": "lit-trivedi2022musique"
+  },
+  {
+    "key": "marino2019okvqa",
+    "fields": {
+      "title": "OK-VQA: A Visual Question Answering Benchmark Requiring External Knowledge"
+    },
+    "source": "external-primary-search",
+    "thesis_key": "lit-marino2019okvqa"
+  },
+  {
+    "key": "ouyang2022training",
+    "fields": {
+      "title": "Training language models to follow instructions with human feedback"
+    },
+    "source": "external-primary-search",
+    "thesis_key": "lit-ouyang2022training"
+  }
+]

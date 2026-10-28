@@ -1,0 +1,173 @@
+[
+  {
+    "file": "chapter/ch01-introduction.tex",
+    "checks": {
+      "equation": true,
+      "equation*": true,
+      "align": true,
+      "align*": true,
+      "algorithm": true,
+      "figure": true,
+      "longtable": true,
+      "tabular": true,
+      "inline_math": true,
+      "labels": true,
+      "numerals": true,
+      "citation_keys": true
+    },
+    "before_sha256": "8144c2ac6665d16d3b47964a35379a11e28006565d9960a6fcff1fc362518431",
+    "after_sha256": "fae988e8c7badf564426a8aff426e49fd95e2f732d95fef364630af0f9bd09cb"
+  },
+  {
+    "file": "chapter/ch02-background.tex",
+    "checks": {
+      "equation": true,
+      "equation*": true,
+      "align": true,
+      "align*": true,
+      "algorithm": true,
+      "figure": true,
+      "longtable": true,
+      "tabular": true,
+      "inline_math": true,
+      "labels": true,
+      "numerals": true,
+      "citation_keys": true
+    },
+    "before_sha256": "83c2916a26fa8e393204f533b0ffd524fb1f2b9fa75b8046d98ca6a31df84ac2",
+    "after_sha256": "96372cf2d960d8084f6cada000774f3ca366277f07c87256d4c9a21d03e780ca"
+  },
+  {
+    "file": "chapter/ch03-kglink.tex",
+    "checks": {
+      "equation": true,
+      "equation*": true,
+      "align": true,
+      "align*": true,
+      "algorithm": true,
+      "figure": true,
+      "longtable": true,
+      "tabular": true,
+      "inline_math": true,
+      "labels": true,
+      "numerals": true,
+      "citation_keys": true
+    },
+    "before_sha256": "584b31b5c72215d179a5cc7cfd5519ecee969bbcfda0ebb8ea74b88ce654524f",
+    "after_sha256": "06dd85e5db8b5f5c69b63b600254bce9d5036eb8150336a125d23d114e63e633"
+  },
+  {
+    "file": "chapter/ch04-gorag.tex",
+    "checks": {
+      "equation": true,
+      "equation*": true,
+      "align": true,
+      "align*": true,
+      "algorithm": true,
+      "figure": true,
+      "longtable": true,
+      "tabular": true,
+      "inline_math": true,
+      "labels": true,
+      "numerals": true,
+      "citation_keys": true
+    },
+    "before_sha256": "042644ab0fcf7316a360a3a5950e7cb01c729013caefa1cc08d450427dfd71ed",
+    "after_sha256": "2f49e79d005981aba136f6d1d901fae1fce61bc5a57dd87fa587d8b0286f5770"
+  },
+  {
+    "file": "chapter/ch05-agrag.tex",
+    "checks": {
+      "equation": true,
+      "equation*": true,
+      "align": true,
+      "align*": true,
+      "algorithm": true,
+      "figure": true,
+      "longtable": true,
+      "tabular": true,
+      "inline_math": true,
+      "labels": true,
+      "numerals": true,
+      "citation_keys": true
+    },
+    "before_sha256": "0c84b49911cef65c02686f91033f07e89ac34d0159ab6bfac627de69e0c6d725",
+    "after_sha256": "e1764032277ada9801fae76ef54535fff757f228da5186d7f1248e5c2e5c206f"
+  },
+  {
+    "file": "chapter/ch06-mgrag.tex",
+    "checks": {
+      "equation": true,
+      "equation*": true,
+      "align": true,
+      "align*": true,
+      "algorithm": true,
+      "figure": true,
+      "longtable": true,
+      "tabular": true,
+      "inline_math": true,
+      "labels": true,
+      "numerals": true,
+      "citation_keys": true
+    },
+    "before_sha256": "d86737db396d012222d36114a6714f1ece33058b1830264cb6b8a23177955134",
+    "after_sha256": "ed5652d0b3c27b39123948d8a5a504afbb8611faed77e3f0c86317b1378eaba2"
+  },
+  {
+    "file": "chapter/ch07-discussion.tex",
+    "checks": {
+      "equation": true,
+      "equation*": true,
+      "align": true,
+      "align*": true,
+      "algorithm": true,
+      "figure": true,
+      "longtable": true,
+      "tabular": true,
+      "inline_math": true,
+      "labels": true,
+      "numerals": true,
+      "citation_keys": true
+    },
+    "before_sha256": "e329621f02b8e3925a1a8e1f8bb45ae067c1efee5990cb385838531e86819a7b",
+    "after_sha256": "1d5633bb2d652192501ac1419a20d70411925aa18a0c473396427b7f31283ee1"
+  },
+  {
+    "file": "chapter/ch08-conclusion.tex",
+    "checks": {
+      "equation": true,
+      "equation*": true,
+      "align": true,
+      "align*": true,
+      "algorithm": true,
+      "figure": true,
+      "longtable": true,
+      "tabular": true,
+      "inline_math": true,
+      "labels": true,
+      "numerals": true,
+      "citation_keys": true
+    },
+    "before_sha256": "2ed5edcaf53e37afdec8ead2443388ce419d3e142512772cd91f190dde3bcfd2",
+    "after_sha256": "c56c2943b34c44a8fec0276a2171f7258f475ed5573f4f121d0bb5892e6bf89d"
+  },
+  {
+    "file": "chapter/front-abstract.tex",
+    "checks": {
+      "equation": true,
+      "equation*": true,
+      "align": true,
+      "align*": true,
+      "algorithm": true,
+      "figure": true,
+      "longtable": true,
+      "tabular": true,
+      "inline_math": true,
+      "labels": true,
+      "numerals": true,
+      "citation_keys": true
+    },
+    "before_sha256": "907babca8d91efcb35dd5d43a87987073020669bba788aff6b26cb20efdf6742",
+    "after_sha256": "4b4751cf5e6cb8f6f6d76e412d351d08a2c1e130a99575b65b8fda46c16d8929"
+  }
+]

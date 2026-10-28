@@ -1,0 +1,860 @@
+{
+  "total_entries": 74,
+  "valid_entries": 60,
+  "issues": [
+    {
+      "key": "agrag-tfidf",
+      "type": "caps",
+      "severity": "warning",
+      "message": "Unprotected uppercase in title"
+    },
+    {
+      "key": "agrag-haveliwala2002topic",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "agrag-izacardunsupervised",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'volume' for article"
+    },
+    {
+      "key": "agrag-izacardunsupervised",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'pages' for article"
+    },
+    {
+      "key": "agrag-izacardunsupervised",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 7 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "agrag-izacardunsupervised",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for article entries."
+    },
+    {
+      "key": "agrag-ragas2024",
+      "type": "caps",
+      "severity": "warning",
+      "message": "Unprotected uppercase in title"
+    },
+    {
+      "key": "agrag-xiang2025use",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'volume' for article"
+    },
+    {
+      "key": "agrag-xiang2025use",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'pages' for article"
+    },
+    {
+      "key": "agrag-xiang2025use",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 7 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "agrag-xiang2025use",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for article entries."
+    },
+    {
+      "key": "agrag-qwen2025qwen25technicalreport",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 43 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "mgrag-kwon2023efficient",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 9 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "mgrag-kwon2023efficient",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "agrag-kowsari2017hdltex",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "agrag-lin2004rouge",
+      "type": "caps",
+      "severity": "warning",
+      "message": "Unprotected uppercase in title"
+    },
+    {
+      "key": "agrag-lin2004rouge",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "bg-graphrag",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'volume' for article"
+    },
+    {
+      "key": "bg-graphrag",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'pages' for article"
+    },
+    {
+      "key": "bg-graphrag",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 8 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "bg-graphrag",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for article entries."
+    },
+    {
+      "key": "gorag-gutierrez2025memory",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "agrag-sarthi2024raptor",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'volume' for article"
+    },
+    {
+      "key": "agrag-sarthi2024raptor",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'pages' for article"
+    },
+    {
+      "key": "agrag-sarthi2024raptor",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for article entries."
+    },
+    {
+      "key": "agrag-zhang2025sirerag",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 8 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "agrag-zhang2025sirerag",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "agrag-he2024g",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 8 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "agrag-he2024g",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for article entries."
+    },
+    {
+      "key": "agrag-liu2025mixrag",
+      "type": "caps",
+      "severity": "warning",
+      "message": "Unprotected uppercase in title"
+    },
+    {
+      "key": "agrag-liu2025mixrag",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'volume' for article"
+    },
+    {
+      "key": "agrag-liu2025mixrag",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'pages' for article"
+    },
+    {
+      "key": "agrag-liu2025mixrag",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for article entries."
+    },
+    {
+      "key": "agrag-jiang-etal-2024-longllmlingua",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 7 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "bg-hyperkg",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 7 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "bg-dpr",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 8 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "bg-cacheblend",
+      "type": "caps",
+      "severity": "warning",
+      "message": "Unprotected uppercase in title"
+    },
+    {
+      "key": "bg-cacheblend",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 9 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "bg-cachegen",
+      "type": "caps",
+      "severity": "warning",
+      "message": "Unprotected uppercase in title"
+    },
+    {
+      "key": "bg-cachegen",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 14 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "bg-reca",
+      "type": "caps",
+      "severity": "warning",
+      "message": "Unprotected uppercase in title"
+    },
+    {
+      "key": "bg-sherlock",
+      "type": "missing_field",
+      "field": "author",
+      "severity": "error",
+      "message": "Missing required field 'author'"
+    },
+    {
+      "key": "bg-sherlock",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "bg-sato",
+      "type": "missing_field",
+      "field": "author",
+      "severity": "error",
+      "message": "Missing required field 'author'"
+    },
+    {
+      "key": "bg-sato",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for article entries."
+    },
+    {
+      "key": "bg-doduo",
+      "type": "missing_field",
+      "field": "author",
+      "severity": "error",
+      "message": "Missing required field 'author'"
+    },
+    {
+      "key": "bg-doduo",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "bg-hnn",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "bg-transformer",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 8 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "bg-transformer",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "bg-compgcn",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "bg-nbfnet",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for article entries."
+    },
+    {
+      "key": "bg-rag",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 11 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "bg-rag",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for article entries."
+    },
+    {
+      "key": "bg-mmqa",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 9 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "bg-mmqa",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "bg-stacked-attention",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "bg-mramg",
+      "type": "caps",
+      "severity": "warning",
+      "message": "Unprotected uppercase in title"
+    },
+    {
+      "key": "bg-mramg",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "bg-hipporag",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "gorag-hurst2024gpt",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'volume' for article"
+    },
+    {
+      "key": "gorag-hurst2024gpt",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'pages' for article"
+    },
+    {
+      "key": "gorag-hurst2024gpt",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 11 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "gorag-hurst2024gpt",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for article entries."
+    },
+    {
+      "key": "kglink-wang2022sudowoodo",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'volume' for article"
+    },
+    {
+      "key": "kglink-wang2022sudowoodo",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'pages' for article"
+    },
+    {
+      "key": "kglink-wang2022sudowoodo",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for article entries."
+    },
+    {
+      "key": "kglink-hu2019viznet",
+      "type": "missing_field",
+      "field": "author",
+      "severity": "error",
+      "message": "Missing required field 'author'"
+    },
+    {
+      "key": "kglink-hu2019viznet",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "kglink-yin2020tabert",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'volume' for article"
+    },
+    {
+      "key": "kglink-yin2020tabert",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'pages' for article"
+    },
+    {
+      "key": "kglink-yin2020tabert",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for article entries."
+    },
+    {
+      "key": "kglink-kendall2018multi",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "kglink-he2020deberta",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'volume' for article"
+    },
+    {
+      "key": "kglink-he2020deberta",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'pages' for article"
+    },
+    {
+      "key": "kglink-he2020deberta",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for article entries."
+    },
+    {
+      "key": "kglink-wang2020learning",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 8 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "kglink-wang2020learning",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "mgrag-bai2025qwen2",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'volume' for article"
+    },
+    {
+      "key": "mgrag-bai2025qwen2",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'pages' for article"
+    },
+    {
+      "key": "mgrag-bai2025qwen2",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 11 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "mgrag-bai2025qwen2",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for article entries."
+    },
+    {
+      "key": "mgrag-cordella2004sub",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for article entries."
+    },
+    {
+      "key": "mgrag-houbraken2014index",
+      "type": "caps",
+      "severity": "warning",
+      "message": "Unprotected uppercase in title"
+    },
+    {
+      "key": "mgrag-houbraken2014index",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for article entries."
+    },
+    {
+      "key": "mgrag-papineni2002bleu",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "mgrag-gao2023retrieval",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'volume' for article"
+    },
+    {
+      "key": "mgrag-gao2023retrieval",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'pages' for article"
+    },
+    {
+      "key": "mgrag-gao2023retrieval",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 10 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "mgrag-gao2023retrieval",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for article entries."
+    },
+    {
+      "key": "mgrag-song2025r1",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'volume' for article"
+    },
+    {
+      "key": "mgrag-song2025r1",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'pages' for article"
+    },
+    {
+      "key": "mgrag-song2025r1",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 8 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "mgrag-song2025r1",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for article entries."
+    },
+    {
+      "key": "mgrag-angeli2015leveraging",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "mgrag-radford2021learning",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 11 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "mgrag-radford2021learning",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "mgrag-douze2024faiss",
+      "type": "missing_field",
+      "field": "journal",
+      "severity": "error",
+      "message": "Missing required field 'journal'"
+    },
+    {
+      "key": "mgrag-douze2024faiss",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'volume' for article"
+    },
+    {
+      "key": "mgrag-douze2024faiss",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'pages' for article"
+    },
+    {
+      "key": "mgrag-douze2024faiss",
+      "type": "author_count",
+      "severity": "info",
+      "message": "[IEEE] 9 authors listed; style uses et al. after 6. Ensure bibliography style handles truncation."
+    },
+    {
+      "key": "mgrag-douze2024faiss",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for article entries."
+    },
+    {
+      "key": "mgrag-leordeanu2005spectral",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "mgrag-fankhauser2011speeding",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "mgrag-cho2010reweighted",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "mgrag-leordeanu2009integer",
+      "type": "style_missing_field",
+      "severity": "warning",
+      "message": "[IEEE] Missing recommended field 'pages' for article"
+    },
+    {
+      "key": "mgrag-leordeanu2009integer",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for article entries."
+    },
+    {
+      "key": "mgrag-tang2023robust",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for inproceedings entries."
+    },
+    {
+      "key": "mgrag-tang2025fused",
+      "type": "doi_missing",
+      "severity": "warning",
+      "message": "[IEEE] DOI recommended for article entries."
+    }
+  ],
+  "status": "FAIL",
+  "needs_online_check": [
+    {
+      "key": "agrag-haveliwala2002topic",
+      "title": "Topic-sensitive pagerank",
+      "author": "Haveliwala, Taher H"
+    },
+    {
+      "key": "agrag-ragas2024",
+      "title": "Ragas: Supercharge Your LLM Application Evaluations",
+      "author": "VibrantLabs"
+    },
+    {
+      "key": "agrag-xiang2025use",
+      "title": "When to use graphs in rag: A comprehensive analysis for graph retrieval-augmented generation",
+      "author": "Xiang, Zhishang and Wu, Chuanjie and Zhang, Qinggang and Chen, Shengyuan and Hong, Zijin and Huang, Xiao and Su, Jinsong"
+    },
+    {
+      "key": "mgrag-kwon2023efficient",
+      "title": "Efficient memory management for large language model serving with pagedattention",
+      "author": "Kwon, Woosuk and Li, Zhuohan and Zhuang, Siyuan and Sheng, Ying and Zheng, Lianmin and Yu, Cody Hao and Gonzalez, Joseph and Zhang, Hao and Stoica, Ion"
+    },
+    {
+      "key": "agrag-bge_embedding",
+      "title": "C-Pack: Packaged Resources To Advance General Chinese Embedding",
+      "author": "Shitao Xiao and Zheng Liu and Peitian Zhang and Niklas Muennighoff"
+    },
+    {
+      "key": "agrag-kowsari2017hdltex",
+      "title": "Hdltex: Hierarchical deep learning for text classification",
+      "author": "Kowsari, Kamran and Brown, Donald E and Heidarysafa, Mojtaba and Meimandi, Kiana Jafari and Gerber, Matthew S and Barnes, Laura E"
+    },
+    {
+      "key": "agrag-sarthi2024raptor",
+      "title": "Raptor: Recursive abstractive processing for tree-organized retrieval",
+      "author": "Sarthi, Parth and Abdullah, Salman and Tuli, Aditi and Khanna, Shubh and Goldie, Anna and Manning, Christopher D"
+    },
+    {
+      "key": "agrag-zhang2025sirerag",
+      "title": "SiReRAG: Indexing Similar and Related Information for Multihop Reasoning",
+      "author": "Zhang, Nan and Choubey, Prafulla Kumar and Fabbri, Alexander and Bernadett-Shapiro, Gabriel and Zhang, Rui and Mitra, Prasenjit and Xiong, Caiming and Wu, Chien-Sheng"
+    },
+    {
+      "key": "agrag-he2024g",
+      "title": "G-retriever: Retrieval-augmented generation for textual graph understanding and question answering",
+      "author": "He, Xiaoxin and Tian, Yijun and Sun, Yifei and Chawla, Nitesh and Laurent, Thomas and LeCun, Yann and Bresson, Xavier and Hooi, Bryan"
+    },
+    {
+      "key": "agrag-liu2025mixrag",
+      "title": "MIXRAG: Mixture-of-Experts Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+      "author": "Liu, Lihui and Yang, Carl J"
+    },
+    {
+      "key": "bg-sherlock",
+      "title": "Sherlock: A deep learning approach to semantic data type detection",
+      "author": "Unknown Author"
+    },
+    {
+      "key": "bg-doduo",
+      "title": "Annotating columns with pre-trained language models",
+      "author": "Unknown Author"
+    },
+    {
+      "key": "bg-hnn",
+      "title": "Learning semantic annotations for tabular data",
+      "author": "Chen, Jiaoyan and Jim{\\'e}nez-Ruiz, Ernesto and Horrocks, Ian and Sutton, Charles"
+    },
+    {
+      "key": "bg-nbfnet",
+      "title": "Neural bellman-ford networks: A general graph neural network framework for link prediction",
+      "author": "Zhu, Zhaocheng and Zhang, Zuobai and Xhonneux, Louis-Pascal and Tang, Jian"
+    },
+    {
+      "key": "bg-rag",
+      "title": "Retrieval-augmented generation for knowledge-intensive nlp tasks",
+      "author": "Lewis, Patrick and Perez, Ethan and Piktus, Aleksandra and Petroni, Fabio and Karpukhin, Vladimir and Goyal, Naman and K{\\\"u}ttler, Heinrich and Lewis, Mike and Yih, Wen-tau and Rockt{\\\"a}schel, Tim and others"
+    },
+    {
+      "key": "bg-mramg",
+      "title": "MRAMG-Bench: A Comprehensive Benchmark for Advancing Multimodal Retrieval-Augmented Multimodal Generation",
+      "author": "Yu, Qinhan and Xiao, Zhiyou and Li, Binghui and Wang, Zhengren and Chen, Chong and Zhang, Wentao"
+    },
+    {
+      "key": "gorag-hurst2024gpt",
+      "title": "Gpt-4o system card",
+      "author": "Hurst, Aaron and Lerer, Adam and Goucher, Adam P and Perelman, Adam and Ramesh, Aditya and Clark, Aidan and Ostrow, AJ and Welihinda, Akila and Hayes, Alan and Radford, Alec and others"
+    },
+    {
+      "key": "kglink-wang2022sudowoodo",
+      "title": "Sudowoodo: Contrastive Self-supervised Learning for Multi-purpose Data Integration and Preparation",
+      "author": "Wang, Runhui and Li, Yuliang and Wang, Jin"
+    },
+    {
+      "key": "kglink-hu2019viznet",
+      "title": "Viznet: Towards a large-scale visualization learning and benchmarking repository",
+      "author": "Unknown Author"
+    },
+    {
+      "key": "kglink-yin2020tabert",
+      "title": "TaBERT: Pretraining for joint understanding of textual and tabular data",
+      "author": "Yin, Pengcheng and Neubig, Graham and Yih, Wen-tau and Riedel, Sebastian"
+    },
+    {
+      "key": "kglink-kendall2018multi",
+      "title": "Multi-task learning using uncertainty to weigh losses for scene geometry and semantics",
+      "author": "Kendall, Alex and Gal, Yarin and Cipolla, Roberto"
+    },
+    {
+      "key": "kglink-he2020deberta",
+      "title": "Deberta: Decoding-enhanced bert with disentangled attention",
+      "author": "He, Pengcheng and Liu, Xiaodong and Gao, Jianfeng and Chen, Weizhu"
+    },
+    {
+      "key": "kglink-wang2020learning",
+      "title": "Learning to extract attribute value from product via question answering: A multi-task approach",
+      "author": "Wang, Qifan and Yang, Li and Kanagal, Bhargav and Sanghai, Sumit and Sivakumar, D and Shu, Bin and Yu, Zac and Elsas, Jon"
+    },
+    {
+      "key": "mgrag-bai2025qwen2",
+      "title": "{Qwen2.5-VL} Technical Report",
+      "author": "Bai, Shuai and Chen, Keqin and Liu, Xuejing and Wang, Jialin and Ge, Wenbin and Song, Sibo and Dang, Kai and Wang, Peng and Wang, Shijie and Tang, Jun and others"
+    },
+    {
+      "key": "mgrag-cordella2004sub",
+      "title": "A (sub) graph isomorphism algorithm for matching large graphs",
+      "author": "Cordella, Luigi P and Foggia, Pasquale and Sansone, Carlo and Vento, Mario"
+    },
+    {
+      "key": "mgrag-houbraken2014index",
+      "title": "The Index-based Subgraph Matching Algorithm with General Symmetries (ISMAGS): exploiting symmetry for faster subgraph enumeration",
+      "author": "Houbraken, Maarten and Demeyer, Sofie and Michoel, Tom and Audenaert, Pieter and Colle, Didier and Pickavet, Mario"
+    },
+    {
+      "key": "mgrag-papineni2002bleu",
+      "title": "Bleu: a method for automatic evaluation of machine translation",
+      "author": "Papineni, Kishore and Roukos, Salim and Ward, Todd and Zhu, Wei-Jing"
+    },
+    {
+      "key": "mgrag-gao2023retrieval",
+      "title": "Retrieval-augmented generation for large language models: A survey",
+      "author": "Gao, Yunfan and Xiong, Yun and Gao, Xinyu and Jia, Kangxiang and Pan, Jinliu and Bi, Yuxi and Dai, Yi and Sun, Jiawei and Wang, Meng and Wang, Haofen"
+    },
+    {
+      "key": "mgrag-song2025r1",
+      "title": "R1-searcher: Incentivizing the search capability in llms via reinforcement learning",
+      "author": "Song, Huatong and Jiang, Jinhao and Min, Yingqian and Chen, Jie and Chen, Zhipeng and Zhao, Wayne Xin and Fang, Lei and Wen, Ji-Rong"
+    },
+    {
+      "key": "mgrag-angeli2015leveraging",
+      "title": "Leveraging linguistic structure for open domain information extraction",
+      "author": "Angeli, Gabor and Premkumar, Melvin Jose Johnson and Manning, Christopher D"
+    },
+    {
+      "key": "mgrag-radford2021learning",
+      "title": "Learning transferable visual models from natural language supervision",
+      "author": "Radford, Alec and Kim, Jong Wook and Hallacy, Chris and Ramesh, Aditya and Goh, Gabriel and Agarwal, Sandhini and Sastry, Girish and Askell, Amanda and Mishkin, Pamela and Clark, Jack and others"
+    },
+    {
+      "key": "mgrag-douze2024faiss",
+      "title": "The Faiss library",
+      "author": "Matthijs Douze and Alexandr Guzhva and Chengqi Deng and Jeff Johnson and Gergely Szilvasy and Pierre-Emmanuel Mazaré and Maria Lomeli and Lucas Hosseini and Hervé Jégou"
+    },
+    {
+      "key": "mgrag-leordeanu2005spectral",
+      "title": "A spectral technique for correspondence problems using pairwise constraints",
+      "author": "Leordeanu, Marius and Hebert, Martial"
+    },
+    {
+      "key": "mgrag-fankhauser2011speeding",
+      "title": "Speeding up graph edit distance computation through fast bipartite matching",
+      "author": "Fankhauser, Stefan and Riesen, Kaspar and Bunke, Horst"
+    },
+    {
+      "key": "mgrag-cho2010reweighted",
+      "title": "Reweighted random walks for graph matching",
+      "author": "Cho, Minsu and Lee, Jungmin and Lee, Kyoung Mu"
+    },
+    {
+      "key": "mgrag-leordeanu2009integer",
+      "title": "An integer projected fixed point method for graph matching and map inference",
+      "author": "Leordeanu, Marius and Hebert, Martial and Sukthankar, Rahul"
+    },
+    {
+      "key": "mgrag-tang2023robust",
+      "title": "Robust attributed graph alignment via joint structure learning and optimal transport",
+      "author": "Tang, Jianheng and Zhang, Weiqi and Li, Jiajin and Zhao, Kangfei and Tsung, Fugee and Li, Jia"
+    },
+    {
+      "key": "mgrag-tang2025fused",
+      "title": "Fused Gromov-Wasserstein Alignment for Graph Edit Distance Computation and Beyond",
+      "author": "Tang, Jianheng and Zhao, Xi and Kong, Lemin and Zhou, Xiaofang and Li, Jia"
+    }
+  ],
+  "missing_in_bib": [],
+  "unused_in_tex": []
+}

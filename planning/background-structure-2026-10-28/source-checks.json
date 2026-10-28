@@ -1,0 +1,11 @@
+{
+  "sections_2_2_onward_unchanged": true,
+  "labels_unchanged": true,
+  "inline_math_unchanged": true,
+  "changed_narrative_files": [
+    "chapter/ch02-background.tex"
+  ],
+  "sentence_dashes": false,
+  "sentence_colons": false,
+  "paragraphs": 8
+}

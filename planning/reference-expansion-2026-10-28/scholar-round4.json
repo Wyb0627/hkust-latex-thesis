@@ -1,0 +1,669 @@
+[
+  {
+    "title": "Neuinfer: Knowledge inference on n-ary facts",
+    "url": "https://scholar.google.com/scholar?q=%22Neuinfer%3A%20Knowledge%20inference%20on%20n-ary%20facts%22",
+    "text": "Articles\nMy profile\nMy library\nAny time\nSince 2026\nSince 2025\nSince 2022\nCustom range...\nSort by relevance\nSort by date\nAny type\nReview articles\ninclude patents\ninclude citations\n\t\n[PDF] aclanthology.org\nQuick read\nNeuinfer: Knowledge inference on n-ary facts\nS Guan, X Jin, J Guo, Y Wang, X Cheng\nProceedings of the 58th annual meeting of the association for …, 2020•aclanthology.org\nAbstract\nKnowledge inference on knowledge graph has attracted extensive attention, which aims to find out connotative valid facts in knowledge graph and is very helpful for improving the performance of many downstream applications. However, researchers have mainly poured attention to knowledge inference on binary facts. The studies on n-ary facts are relatively scarcer, although they are also ubiquitous in the real world. Therefore, this paper addresses knowledge inference on n-ary facts. We represent each n-ary fact as a primary triple coupled with a set of its auxiliary descriptive attribute-value pair (s). We further propose a neural network model, NeuInfer, for knowledge inference on n-ary facts. Besides handling the common task to infer an unknown element in a whole fact, NeuInfer can cope with a new type of task, flexible knowledge inference. It aims to infer an unknown element in a partial fact consisting of the primary triple coupled with any number of its auxiliary description (s). Experimental results demonstrate the remarkable superiority of NeuInfer.\naclanthology.org\nSHOW MORE\nSave Cite Cited by 132 Related articles All 4 versions \nShowing the best result for this search. See all results\nPrivacyTermsHelp",
+    "results": [
+      {
+        "title": "Neuinfer: Knowledge inference on n-ary facts",
+        "text": "Neuinfer: Knowledge inference on n-ary facts\nS Guan, X Jin, J Guo, Y Wang, X Cheng\nProceedings of the 58th annual meeting of the association for …, 2020•aclanthology.org\nAbstract\nKnowledge inference on knowledge graph has attracted extensive attention, which aims to find out connotative valid facts in knowledge graph and is very helpful for improving the performance of many downstream applications. However, researchers have mainly poured attention to knowledge inference on binary facts. The studies on n-ary facts are relatively scarcer, although they are also ubiquitous in the real world. Therefore, this paper addresses knowledge inference on n-ary facts. We represent each n-ary fact as a primary triple coupled with a set of its auxiliary descriptive attribute-value pair (s). We further propose a neural network model, NeuInfer, for knowledge inference on n-ary facts. Besides handling the common task to infer an unknown element in a whole fact, NeuInfer can cope with a new type of task, flexible knowledge inference. It aims to infer an unknown element in a partial fact consisting of the primary triple coupled with any number of its auxiliary description (s). Experimental results demonstrate the remarkable superiority of NeuInfer.\naclanthology.org\nSHOW MORE\nSave Cite Cited by 132 Related articles All 4 versions ",
+        "links": [
+          {
+            "text": "Neuinfer: Knowledge inference on n-ary facts",
+            "href": "https://aclanthology.org/2020.acl-main.546/"
+          },
+          {
+            "text": "S Guan",
+            "href": "https://scholar.google.com/citations?user=mS2QCewAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "X Jin",
+            "href": "https://scholar.google.com/citations?user=5TRLpyIAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "J Guo",
+            "href": "https://scholar.google.com/citations?user=nD0I3PUAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Y Wang",
+            "href": "https://scholar.google.com/citations?user=v1KzwYEAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "S Guan",
+            "href": "https://scholar.google.com/citations?user=mS2QCewAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "X Jin",
+            "href": "https://scholar.google.com/citations?user=5TRLpyIAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "J Guo",
+            "href": "https://scholar.google.com/citations?user=nD0I3PUAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Y Wang",
+            "href": "https://scholar.google.com/citations?user=v1KzwYEAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "X Cheng",
+            "href": "https://scholar.google.com/citations?user=hY8aLqAAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "SHOW MORE",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 132",
+            "href": "https://scholar.google.com/scholar?cites=12424302275372781629&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:PRCsuRf9a6wJ:scholar.google.com/&scioq=%22Neuinfer:+Knowledge+inference+on+n-ary+facts%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 4 versions",
+            "href": "https://scholar.google.com/scholar?cluster=12424302275372781629&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:PRCsuRf9a6wJ:scholar.google.com/+%22Neuinfer:+Knowledge+inference+on+n-ary+facts%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Knowledge graph embedding by translating on hyperplanes",
+    "url": "https://scholar.google.com/scholar?q=%22Knowledge%20graph%20embedding%20by%20translating%20on%20hyperplanes%22",
+    "text": "Articles\nMy profile\nMy library\nAny time\nSince 2026\nSince 2025\nSince 2022\nCustom range...\nSort by relevance\nSort by date\nAny type\nReview articles\ninclude patents\ninclude citations\n\t\n[PDF] aaai.org\nQuick read\nKnowledge graph embedding by translating on hyperplanes\nZ Wang, J Zhang, J Feng, Z Chen\nProceedings of the AAAI conference on artificial intelligence, 2014•ojs.aaai.org\nAbstract\nWe deal with embedding a large scale knowledge graph composed of entities and relations into a continuous vector space. TransE is a promising method proposed recently, which is very efficient while achieving state-of-the-art predictive performance. We discuss some mapping properties of relations which should be considered in embedding, such as reflexive, one-to-many, many-to-one, and many-to-many. We note that TransE does not do well in dealing with these properties. Some complex models are capable of preserving these mapping properties but sacrifice efficiency in the process. To make a good trade-off between model capacity and efficiency, in this paper we propose TransH which models a relation as a hyperplane together with a translation operation on it. In this way, we can well preserve the above mapping properties of relations with almost the same model complexity of TransE. Additionally, as a practical knowledge graph is often far from completed, how to construct negative examples to reduce false negative labels in training is very important. Utilizing the one-to-many/many-to-one mapping property of a relation, we propose a simple trick to reduce the possibility of false negative labeling. We conduct extensive experiments on link prediction, triplet classification and fact extraction on benchmark datasets like WordNet and Freebase. Experiments show TransH delivers significant improvements over TransE on predictive accuracy with comparable capability to scale up.\nojs.aaai.org\nSHOW MORE\nSave Cite Cited by 5785 Related articles All 9 versions \nShowing the best result for this search. See all results\nPrivacyTermsHelp",
+    "results": [
+      {
+        "title": "Knowledge graph embedding by translating on hyperplanes",
+        "text": "Knowledge graph embedding by translating on hyperplanes\nZ Wang, J Zhang, J Feng, Z Chen\nProceedings of the AAAI conference on artificial intelligence, 2014•ojs.aaai.org\nAbstract\nWe deal with embedding a large scale knowledge graph composed of entities and relations into a continuous vector space. TransE is a promising method proposed recently, which is very efficient while achieving state-of-the-art predictive performance. We discuss some mapping properties of relations which should be considered in embedding, such as reflexive, one-to-many, many-to-one, and many-to-many. We note that TransE does not do well in dealing with these properties. Some complex models are capable of preserving these mapping properties but sacrifice efficiency in the process. To make a good trade-off between model capacity and efficiency, in this paper we propose TransH which models a relation as a hyperplane together with a translation operation on it. In this way, we can well preserve the above mapping properties of relations with almost the same model complexity of TransE. Additionally, as a practical knowledge graph is often far from completed, how to construct negative examples to reduce false negative labels in training is very important. Utilizing the one-to-many/many-to-one mapping property of a relation, we propose a simple trick to reduce the possibility of false negative labeling. We conduct extensive experiments on link prediction, triplet classification and fact extraction on benchmark datasets like WordNet and Freebase. Experiments show TransH delivers significant improvements over TransE on predictive accuracy with comparable capability to scale up.\nojs.aaai.org\nSHOW MORE\nSave Cite Cited by 5785 Related articles All 9 versions ",
+        "links": [
+          {
+            "text": "Knowledge graph embedding by translating on hyperplanes",
+            "href": "https://ojs.aaai.org/index.php/AAAI/article/view/8870"
+          },
+          {
+            "text": "Z Wang",
+            "href": "https://scholar.google.com/citations?user=e5CqTBMAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "J Zhang",
+            "href": "https://scholar.google.com/citations?user=DRRArcAAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "J Feng",
+            "href": "https://scholar.google.com/citations?user=67jZ3E8AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Z Chen",
+            "href": "https://scholar.google.com/citations?user=AyZ7A7MAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Z Wang",
+            "href": "https://scholar.google.com/citations?user=e5CqTBMAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "J Zhang",
+            "href": "https://scholar.google.com/citations?user=DRRArcAAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "J Feng",
+            "href": "https://scholar.google.com/citations?user=67jZ3E8AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Z Chen",
+            "href": "https://scholar.google.com/citations?user=AyZ7A7MAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "SHOW MORE",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 5785",
+            "href": "https://scholar.google.com/scholar?cites=14473423230387579969&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:QWwjm77t28gJ:scholar.google.com/&scioq=%22Knowledge+graph+embedding+by+translating+on+hyperplanes%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 9 versions",
+            "href": "https://scholar.google.com/scholar?cluster=14473423230387579969&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:QWwjm77t28gJ:scholar.google.com/+%22Knowledge+graph+embedding+by+translating+on+hyperplanes%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Convolutional 2d knowledge graph embeddings",
+    "url": "https://scholar.google.com/scholar?q=%22Convolutional%202d%20knowledge%20graph%20embeddings%22",
+    "text": "Articles\nAbout 3,000 results (0.18 sec)\nMy profile\nMy library\nAny time\nSince 2026\nSince 2025\nSince 2022\nCustom range...\nSort by relevance\nSort by date\nAny type\nReview articles\ninclude patents\ninclude citations\nCreate alert\n\t\n[PDF] aaai.org\nQuick read\nConvolutional 2d knowledge graph embeddings\nT Dettmers, P Minervini, P Stenetorp… - Proceedings of the AAAI …, 2018 - ojs.aaai.org\nLink prediction for knowledge graphs is the task of predicting missing relationships between\nentities. Previous work on link prediction has focused on shallow, fast models which can …\nSave Cite Cited by 4417 Related articles All 11 versions \n[PDF] arxiv.org\nQuick read\nConvolutional complex knowledge graph embeddings\nC Demir, ACN Ngomo - European Semantic Web Conference, 2021 - Springer\nWe investigate the problem of learning continuous vector representations of knowledge\ngraphs for predicting missing links. Recent results suggest that using a Hermitian inner product …\nSave Cite Cited by 70 Related articles All 9 versions\n[PDF] arxiv.org\nQuick read\nConvd: Attention enhanced dynamic convolutional embeddings for knowledge graph completion\nW Guo, Z Li, X Wang, Z Chen, J Zhao… - IEEE Transactions on …, 2025 - ieeexplore.ieee.org\n… Riedel, “Convolutional 2d knowledge graph embeddings,” in Proceedings of the Thirty-Second …\nRiedel, “Convolutional 2d knowledge graph embeddings,” in Proceedings of the AAAI …\nSave Cite Cited by 24 Related articles All 8 versions\n[PDF] nature.com\nQuick read\nNetwork attack knowledge inference with graph convolutional networks and convolutional 2D KG embeddings\nW Ren, H Zhang, Y Lei - Scientific Reports, 2025 - nature.com\nTo address the challenge of analyzing large-scale penetration attacks under complex multi-relational\nand multi-hop paths, this paper proposes a graph convolutional neural network-…\nSave Cite Cited by 7 Related articles All 8 versions\n[PDF] arxiv.org\nQuick read\nHypernetwork knowledge graph embeddings\nI Balažević, C Allen, TM Hospedales - International conference on artificial …, 2019 - Springer\nAbstract Knowledge graphs are graphical representations of large databases of facts, which\ntypically suffer from incompleteness. Inferring missing relations (links) between entities (…\nSave Cite Cited by 345 Related articles All 6 versions\nResearch on the Application of Knowledge Graph-Driven Two-Dimensional Convolutional Embedding Methods in Recommender Systems\nP Dong - 2025 International Conference on Intelligent Systems …, 2025 - ieeexplore.ieee.org\n… available for knowledge graph embedding, this paper chooses an improved Convolutional\n2D Knowledge Graph Embeddings model to obtain features from the knowledge graph. …\nSave Cite Cited by 11 Related articles All 2 versions\n[HTML] mdpi.com\nQuick read\n[HTML] Complex knowledge graph embeddings based on convolution and translation\nL Shi, Z Yang, Z Ji, I Ganchev - Mathematics, 2023 - mdpi.com\nLink prediction involves the use of entities and relations that already exist in a knowledge\ngraph to reason about missing entities or relations. Different approaches have been proposed …\nSave Cite Cited by 3 Related articles All 6 versions \nEffective knowledge graph embedding with quaternion convolutional networks\nQ Liang, W Wang, J Yu, F Bao - CCF International Conference on Natural …, 2024 - Springer\nConvolutional Neural Networks (CNNs) have demonstrated effectiveness in knowledge\ngraph embedding, but existing CNN-based methods encounter two main challenges. Firstly, …\nSave Cite Cited by 6 Related articles All 2 versions\n[PDF] hal.science\nQuick read\nKnowledge graph embeddings: open challenges and opportunities\nR Biswas, LA Kaffee, M Cochez, S Dumbrava… - Transactions on Graph …, 2023 - hal.science\nWhile Knowledge Graphs (KGs) have long been used as valuable sources of structured\nknowledge, in recent years, KG embeddings have become a popular way of deriving numeric …\nSave Cite Cited by 42 Related articles All 14 versions \n[PDF] google.com\nQuick read\nMulti-scale dynamic convolutional network for knowledge graph embedding\nZ Zhang, Z Li, H Liu, NN Xiong - IEEE Transactions on …, 2020 - ieeexplore.ieee.org\nKnowledge graphs are large graph-structured knowledge bases with incomplete or partial\ninformation. Numerous studies have focused on knowledge graph embedding to identify the …\nSave Cite Cited by 206 Related articles All 3 versions\nRelated searches\nlink prediction knowledge graph embeddingsknowledge graph embedding methodcomplex knowledge graph embeddingstraining knowledge graph embeddingsontological reasoning knowledge graph embeddingsopen challenges knowledge graph embeddingsknowledge graph high orderknowledge graph convolutional networkknowledge graphs embedding modelrobust knowledge graphapt knowledge graph adversarial negative samplingefficient knowledge grapheffective knowledge graphknowledge graph representationspatial transformation knowledge graph completion methodself attention knowledge graph embeddings\n\nScholar PDF Reader\n\nTry now\nNo thanks\nSkim AI Outline\nFollow references\nCite and save\n\t1\t2\t3\t4\t5\t6\t7\t8\t9\t10\t\nNext\nPrivacyTermsHelp",
+    "results": [
+      {
+        "title": "Convolutional 2d knowledge graph embeddings",
+        "text": "Convolutional 2d knowledge graph embeddings\nT Dettmers, P Minervini, P Stenetorp… - Proceedings of the AAAI …, 2018 - ojs.aaai.org\nLink prediction for knowledge graphs is the task of predicting missing relationships between\nentities. Previous work on link prediction has focused on shallow, fast models which can …\nSave Cite Cited by 4417 Related articles All 11 versions ",
+        "links": [
+          {
+            "text": "Convolutional 2d knowledge graph embeddings",
+            "href": "https://ojs.aaai.org/index.php/AAAI/article/view/11573"
+          },
+          {
+            "text": "T Dettmers",
+            "href": "https://scholar.google.com/citations?user=lHI3w5kAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "P Minervini",
+            "href": "https://scholar.google.com/citations?user=9sk6CSgAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 4417",
+            "href": "https://scholar.google.com/scholar?cites=18086027355742564589&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:7XAIYQ56_voJ:scholar.google.com/&scioq=%22Convolutional+2d+knowledge+graph+embeddings%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 11 versions",
+            "href": "https://scholar.google.com/scholar?cluster=18086027355742564589&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:7XAIYQ56_voJ:scholar.google.com/+%22Convolutional+2d+knowledge+graph+embeddings%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "Convolutional complex knowledge graph embeddings",
+        "text": "Convolutional complex knowledge graph embeddings\nC Demir, ACN Ngomo - European Semantic Web Conference, 2021 - Springer\nWe investigate the problem of learning continuous vector representations of knowledge\ngraphs for predicting missing links. Recent results suggest that using a Hermitian inner product …\nSave Cite Cited by 70 Related articles All 9 versions",
+        "links": [
+          {
+            "text": "Convolutional complex knowledge graph embeddings",
+            "href": "https://link.springer.com/chapter/10.1007/978-3-030-77385-4_24"
+          },
+          {
+            "text": "C Demir",
+            "href": "https://scholar.google.com/citations?user=PAZsbbEAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "ACN Ngomo",
+            "href": "https://scholar.google.com/citations?user=ccQhjwkAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 70",
+            "href": "https://scholar.google.com/scholar?cites=6278000920278730390&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:lgbKIJPwH1cJ:scholar.google.com/&scioq=%22Convolutional+2d+knowledge+graph+embeddings%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 9 versions",
+            "href": "https://scholar.google.com/scholar?cluster=6278000920278730390&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "Convd: Attention enhanced dynamic convolutional embeddings for knowledge graph completion",
+        "text": "Convd: Attention enhanced dynamic convolutional embeddings for knowledge graph completion\nW Guo, Z Li, X Wang, Z Chen, J Zhao… - IEEE Transactions on …, 2025 - ieeexplore.ieee.org\n… Riedel, “Convolutional 2d knowledge graph embeddings,” in Proceedings of the Thirty-Second …\nRiedel, “Convolutional 2d knowledge graph embeddings,” in Proceedings of the AAAI …\nSave Cite Cited by 24 Related articles All 8 versions",
+        "links": [
+          {
+            "text": "Convd: Attention enhanced dynamic convolutional embeddings for knowledge graph completion",
+            "href": "https://ieeexplore.ieee.org/abstract/document/11048442/"
+          },
+          {
+            "text": "Z Li",
+            "href": "https://scholar.google.com/citations?user=QEOhVT8AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "X Wang",
+            "href": "https://scholar.google.com/citations?user=S__5nDEAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 24",
+            "href": "https://scholar.google.com/scholar?cites=12868666571675871967&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:3yqv2RCwlrIJ:scholar.google.com/&scioq=%22Convolutional+2d+knowledge+graph+embeddings%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 8 versions",
+            "href": "https://scholar.google.com/scholar?cluster=12868666571675871967&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "Network attack knowledge inference with graph convolutional networks and convolutional 2D KG embeddings",
+        "text": "Network attack knowledge inference with graph convolutional networks and convolutional 2D KG embeddings\nW Ren, H Zhang, Y Lei - Scientific Reports, 2025 - nature.com\nTo address the challenge of analyzing large-scale penetration attacks under complex multi-relational\nand multi-hop paths, this paper proposes a graph convolutional neural network-…\nSave Cite Cited by 7 Related articles All 8 versions",
+        "links": [
+          {
+            "text": "Network attack knowledge inference with graph convolutional networks and convolutional 2D KG embeddings",
+            "href": "https://www.nature.com/articles/s41598-025-17941-y"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 7",
+            "href": "https://scholar.google.com/scholar?cites=6540152481374414356&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:FCY21QdKw1oJ:scholar.google.com/&scioq=%22Convolutional+2d+knowledge+graph+embeddings%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 8 versions",
+            "href": "https://scholar.google.com/scholar?cluster=6540152481374414356&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "Hypernetwork knowledge graph embeddings",
+        "text": "Hypernetwork knowledge graph embeddings\nI Balažević, C Allen, TM Hospedales - International conference on artificial …, 2019 - Springer\nAbstract Knowledge graphs are graphical representations of large databases of facts, which\ntypically suffer from incompleteness. Inferring missing relations (links) between entities (…\nSave Cite Cited by 345 Related articles All 6 versions",
+        "links": [
+          {
+            "text": "Hypernetwork knowledge graph embeddings",
+            "href": "https://link.springer.com/chapter/10.1007/978-3-030-30493-5_52"
+          },
+          {
+            "text": "I Balažević",
+            "href": "https://scholar.google.com/citations?user=CnxZPkkAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "C Allen",
+            "href": "https://scholar.google.com/citations?user=wRcURR8AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "TM Hospedales",
+            "href": "https://scholar.google.com/citations?user=nHhtvqkAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 345",
+            "href": "https://scholar.google.com/scholar?cites=7172885969556801615&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:TwjRJck1i2MJ:scholar.google.com/&scioq=%22Convolutional+2d+knowledge+graph+embeddings%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 6 versions",
+            "href": "https://scholar.google.com/scholar?cluster=7172885969556801615&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "Research on the Application of Knowledge Graph-Driven Two-Dimensional Convolutional Embedding Methods in Recommender Systems",
+        "text": "Research on the Application of Knowledge Graph-Driven Two-Dimensional Convolutional Embedding Methods in Recommender Systems\nP Dong - 2025 International Conference on Intelligent Systems …, 2025 - ieeexplore.ieee.org\n… available for knowledge graph embedding, this paper chooses an improved Convolutional\n2D Knowledge Graph Embeddings model to obtain features from the knowledge graph. …\nSave Cite Cited by 11 Related articles All 2 versions",
+        "links": [
+          {
+            "text": "Research on the Application of Knowledge Graph-Driven Two-Dimensional Convolutional Embedding Methods in Recommender Systems",
+            "href": "https://ieeexplore.ieee.org/iel8/10934114/10934149/10934645.pdf"
+          },
+          {
+            "text": "P Dong",
+            "href": "https://scholar.google.com/citations?user=9lstaOsAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 11",
+            "href": "https://scholar.google.com/scholar?cites=8836895911586783742&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:_mE7_wL2onoJ:scholar.google.com/&scioq=%22Convolutional+2d+knowledge+graph+embeddings%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 2 versions",
+            "href": "https://scholar.google.com/scholar?cluster=8836895911586783742&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "[HTML] Complex knowledge graph embeddings based on convolution and translation",
+        "text": "[HTML] Complex knowledge graph embeddings based on convolution and translation\nL Shi, Z Yang, Z Ji, I Ganchev - Mathematics, 2023 - mdpi.com\nLink prediction involves the use of entities and relations that already exist in a knowledge\ngraph to reason about missing entities or relations. Different approaches have been proposed …\nSave Cite Cited by 3 Related articles All 6 versions ",
+        "links": [
+          {
+            "text": "Complex knowledge graph embeddings based on convolution and translation",
+            "href": "https://www.mdpi.com/2227-7390/11/12/2627"
+          },
+          {
+            "text": "Z Ji",
+            "href": "https://scholar.google.com/citations?user=--7pHRcAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "I Ganchev",
+            "href": "https://scholar.google.com/citations?user=prmT6hkAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 3",
+            "href": "https://scholar.google.com/scholar?cites=13297332873579213084&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:HDHQ1cudibgJ:scholar.google.com/&scioq=%22Convolutional+2d+knowledge+graph+embeddings%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 6 versions",
+            "href": "https://scholar.google.com/scholar?cluster=13297332873579213084&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cached",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:HDHQ1cudibgJ:scholar.google.com/+%22Convolutional+2d+knowledge+graph+embeddings%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "Effective knowledge graph embedding with quaternion convolutional networks",
+        "text": "Effective knowledge graph embedding with quaternion convolutional networks\nQ Liang, W Wang, J Yu, F Bao - CCF International Conference on Natural …, 2024 - Springer\nConvolutional Neural Networks (CNNs) have demonstrated effectiveness in knowledge\ngraph embedding, but existing CNN-based methods encounter two main challenges. Firstly, …\nSave Cite Cited by 6 Related articles All 2 versions",
+        "links": [
+          {
+            "text": "Effective knowledge graph embedding with quaternion convolutional networks",
+            "href": "https://link.springer.com/chapter/10.1007/978-981-97-9437-9_15"
+          },
+          {
+            "text": "Q Liang",
+            "href": "https://scholar.google.com/citations?user=ARW5Q4MAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "W Wang",
+            "href": "https://scholar.google.com/citations?user=2126LRUAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "J Yu",
+            "href": "https://scholar.google.com/citations?user=siFNfiAAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 6",
+            "href": "https://scholar.google.com/scholar?cites=5878051902787607889&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:Ud329A8Jk1EJ:scholar.google.com/&scioq=%22Convolutional+2d+knowledge+graph+embeddings%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 2 versions",
+            "href": "https://scholar.google.com/scholar?cluster=5878051902787607889&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "Knowledge graph embeddings: open challenges and opportunities",
+        "text": "Knowledge graph embeddings: open challenges and opportunities\nR Biswas, LA Kaffee, M Cochez, S Dumbrava… - Transactions on Graph …, 2023 - hal.science\nWhile Knowledge Graphs (KGs) have long been used as valuable sources of structured\nknowledge, in recent years, KG embeddings have become a popular way of deriving numeric …\nSave Cite Cited by 42 Related articles All 14 versions ",
+        "links": [
+          {
+            "text": "Knowledge graph embeddings: open challenges and opportunities",
+            "href": "https://hal.science/hal-04373217/"
+          },
+          {
+            "text": "R Biswas",
+            "href": "https://scholar.google.com/citations?user=kSHWjuoAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "LA Kaffee",
+            "href": "https://scholar.google.com/citations?user=xiuGTq0AAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "M Cochez",
+            "href": "https://scholar.google.com/citations?user=JuZrOtoAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "S Dumbrava",
+            "href": "https://scholar.google.com/citations?user=9ITxKVUAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 42",
+            "href": "https://scholar.google.com/scholar?cites=7344900474891438429&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:XYmAJBFU7mUJ:scholar.google.com/&scioq=%22Convolutional+2d+knowledge+graph+embeddings%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 14 versions",
+            "href": "https://scholar.google.com/scholar?cluster=7344900474891438429&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "View as HTML",
+            "href": "https://scholar.googleusercontent.com/scholar?q=cache:XYmAJBFU7mUJ:scholar.google.com/+%22Convolutional+2d+knowledge+graph+embeddings%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      },
+      {
+        "title": "Multi-scale dynamic convolutional network for knowledge graph embedding",
+        "text": "Multi-scale dynamic convolutional network for knowledge graph embedding\nZ Zhang, Z Li, H Liu, NN Xiong - IEEE Transactions on …, 2020 - ieeexplore.ieee.org\nKnowledge graphs are large graph-structured knowledge bases with incomplete or partial\ninformation. Numerous studies have focused on knowledge graph embedding to identify the …\nSave Cite Cited by 206 Related articles All 3 versions",
+        "links": [
+          {
+            "text": "Multi-scale dynamic convolutional network for knowledge graph embedding",
+            "href": "https://ieeexplore.ieee.org/abstract/document/9130149/"
+          },
+          {
+            "text": "Z Zhang",
+            "href": "https://scholar.google.com/citations?user=l0UyuhQAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Z Li",
+            "href": "https://scholar.google.com/citations?user=aC2qAuEAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "H Liu",
+            "href": "https://scholar.google.com/citations?user=Tjw7zHEAAAAJ&hl=en&oi=sra"
+          },
+          {
+            "text": "Save",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cite",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "Cited by 206",
+            "href": "https://scholar.google.com/scholar?cites=7804140597120158991&as_sdt=2005&sciodt=0,5&hl=en"
+          },
+          {
+            "text": "Related articles",
+            "href": "https://scholar.google.com/scholar?q=related:D02NZIbgTWwJ:scholar.google.com/&scioq=%22Convolutional+2d+knowledge+graph+embeddings%22&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "All 3 versions",
+            "href": "https://scholar.google.com/scholar?cluster=7804140597120158991&hl=en&as_sdt=0,5"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          },
+          {
+            "text": "",
+            "href": "javascript:void(0)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "HAHE: Hierarchical Attention for Hyper-Relational Knowledge Graphs in Global and Local Level",
+    "url": "https://scholar.google.com/scholar?q=%22HAHE%3A%20Hierarchical%20Attention%20for%20Hyper-Relational%20Knowledge%20Graphs%20in%20Global%20and%20Local%20Level%22",
+    "text": "Articles\nMy profile\nMy library\n\t\nPlease show you're not a robot\nPrivacyTermsHelp",
+    "results": []
+  }
+]

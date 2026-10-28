@@ -3,17 +3,17 @@
 
 \section{Conclusion}
 \label{sec:conclusion:findings}
-In this thesis, we developed four methods that use explicit knowledge structures to select and process evidence for language models. The methods address missing table context, evolving classification labels, connected textual evidence, and semantic correspondence across multimodal sources.
+In this thesis, we investigated how explicit knowledge structures support language-model prediction and reasoning. Our research progressed from enrichment with an existing knowledge graph to graph construction from task data and retrieval without model fine-tuning. We further studied answers requiring connected textual facts or relationships distributed across text and images.
 
-We proposed KGLink to enrich column representations with graph descriptions and learn their correspondence to annotation labels. Cross-column filtering selects relevant descriptions, and contextual type-representation training helps the encoder use them. The model also retains a table-encoding pathway for columns without KG evidence.
+We first proposed KGLink to enrich column representations with external graph descriptions. Cross-column filtering selects relevant descriptions, and contextual type-representation training learns their correspondence to annotation labels. The trained encoder also predicts from table values when KG evidence is unavailable.
 
-We proposed GORAG to maintain a keyword--label graph for dynamic few-shot classification. Connected retrieval produces a candidate set for each query, while online insertion expands the index after prediction. The ablations show the benefit of these updates, with dataset-dependent effects as support and label sets grow.
+To remove the dependence on existing knowledge graphs and model fine-tuning, we proposed GORAG for dynamic few-shot classification. GORAG constructs a keyword--label graph from task data and retrieves candidate classes for a large language model. Online insertion incorporates newly observed vocabulary without updating model parameters. Experiments show the benefit of connected retrieval and online updates as labels accumulate.
 
-We proposed AGRAG to select connected textual evidence using node influence and semantic edge costs. Expanding the initial tree supplies additional answer components, while hybrid passages retain context beyond the selected graph. The ablations show how these choices affect answer coverage and faithfulness.
+We then extended task-driven retrieval to the connected facts needed for question answering and generation. AGRAG constructs a graph from a text corpus and selects connected facts using query-dependent node influence and semantic edge costs. Expanding the initial tree supplies additional answer components, while hybrid passages retain context beyond the selected graph. The ablations show how these evidence channels contribute to information coverage and answer faithfulness.
 
-We proposed MGRAG to construct query-specific multimodal graphs and match query relations to semantic paths. Graph-aware recomputation extends the use of the retrieved structure to context processing. The experiments show improved answer quality, with runtime effects that depend on the retrieval pipeline.
+To support answers that combine text and image evidence, we proposed MGRAG to construct query-specific graphs and match requested relations to semantic paths. Graph-aware recomputation extends the use of structure to context processing. The experiments relate answer quality to query-aware extraction and matching, and measure cache reuse quality and cost.
 
-The accompanying hyper-relational knowledge-graph study examined how structural representations preserve fact information. Its qualifier-capture and graph-reception perspectives help explain why the form of a representation matters. Across the thesis, the common design question is which relationships must remain explicit for the downstream task.
+Our hyper-relational knowledge-graph study examined how graph transformations preserve fact information. Qualifier capture and graph reception explain how the representation and the model jointly determine which relationships remain available for prediction.
 
 \section{Future Directions}
 \label{sec:conclusion:future}
